@@ -92,7 +92,7 @@ let CreateSlimPackage projectname projectfolder nuspecfile =
          nuspecfile
 //TODO: change package name here
 Target "CompileApp" (fun _ ->            
-    CreateSlimPackage "JoeyWebClient" @"src\" @"src\\template.nuspec" 
+    CreateSlimPackage "AlgoWinner" @"src\" @"src\\template.nuspec" 
 )
 
 // Create the release (without deployment yet) using OctoPack
@@ -100,7 +100,7 @@ Target "CreateRelease" (fun _->
     let server = { Server = "https://octopus.algomerchant.com"; ApiKey = "API-QFM9YTWOAP7S0JZITQMWNJLRW" }    
     let octoToolsPath = packagesDir @@ "OctopusTools.2.6.1.52" 
     // TODO:change package name here
-    let projects = ["JoeyWebClient"]
+    let projects = ["AlgoWinner"]
 
     for project in projects do
         NuGetPublish (fun p -> 

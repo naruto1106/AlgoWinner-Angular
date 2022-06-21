@@ -1,7 +1,7 @@
 {
   "version": "0.0.1",
   "private": true,
-  "name": "JoeyWebClient",
+  "name": "AlgoWinner",
   "description": "Angular JS project by AlgoMerchant",
   "devDependencies": {
     "chokidar": "^1.0.1",

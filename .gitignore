@@ -1,4 +1,6 @@
 build/*
+test/*
+deploy/*
 node_modules/*
 packages/*
 src/*.html
@@ -6,6 +8,7 @@ src/node_modules/*
 src/dist/*
 src/html-env/*
 src/srcmap/*
+src/logs/*
 src/LocalProduction.config
 src/LocalStaging.config
 src/Pilot.config
