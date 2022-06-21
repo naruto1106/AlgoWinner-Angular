@@ -1,0 +1,70 @@
+﻿.Night {
+    .stx-panel-title {
+        color: #fff;
+    }
+
+    .agm-component-chart .chart-tooltip .box-container .box {
+        color: white;
+        background: mix(black,transparent,50);
+
+
+        table.simple-table {
+            border: 1px solid mix(white,transparent,10);
+            background: mix(black,transparent,20);
+
+            tbody {
+
+                tr:nth-child(odd) {
+                    background-color: transparent;
+                }
+
+                tr:nth-child(even) {
+                    background-color: mix(white,transparent,10);
+                }
+            }
+        }
+    }
+
+    .agm-component-chart {
+        #agmpChartSlider {
+            background: #141720;
+
+            .markers .marker {
+                .text {
+                    color: #65757b;
+                }
+
+                &.minor {
+                    color: #65757b;
+                }
+            }
+
+            .ruler {
+                border-top: 1px solid black;
+            }
+        }
+
+        .legends {
+
+            .strategy {
+
+                h4, h5 {
+                    color: white;
+                }
+            }
+        }
+
+        .loading-volume-profile {
+            color: white;
+            opacity: 0.6;
+        }
+    }
+
+    .stx_line_chart, .stx_bar_chart {
+        color: #f26522;
+    }
+
+    .stx_candle_shadow, .stx_bar_even { /* Candle wick color */
+        color: #888888;
+    }
+}

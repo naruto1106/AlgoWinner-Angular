@@ -1,0 +1,51 @@
+<div class="agms-directives datamart-filter-selector" ng-class="{disabled:vm.isInvalidEventFunc(vm.branch)}">
+    <uib-accordion>
+        <div uib-accordion-group class="panel-default" is-open="vm.opened" tooltip-enable="vm.isInvalidEventFunc(vm.branch)" uib-tooltip="{{vm.isInvalidEventFunc(vm.branch)}}">
+            <uib-accordion-heading>
+                {{::vm.branch.datamartRef.Datamart.AlgoFeedName}}
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.opened, 'glyphicon-chevron-right': !vm.opened}"></i> ﻿
+                <button ng-click="vm.showDescription(vm.branch.datamartRef.Datamart)" class="info-button">
+                    <span class="glyphicon glyphicon-info-sign">
+                    </span>
+                </button>
+            </uib-accordion-heading>
+            <fieldset ng-disabled="vm.isInvalidEventFunc(vm.branch)">
+                <div ng-repeat="item in vm.branch.subCombinations" class="item-list">
+                    <div class="left-item">
+                        <label>
+                            <a ng-if="vm.canBeExpanded(item)" ng-click="vm.toggleExpanded(item)">{{::item.shortLabel}}</a>
+                            <span ng-if="!vm.canBeExpanded(item)">{{::item.shortLabel}}</span>
+                        </label>
+                        <div class="inline-block sub-selection" ng-repeat="(key, mutexSelections) in item.mutuallyExclusiveSelections">
+                            <select ng-model="mutexSelections.selection" ng-options="mutexSelections.getDisplayedValue(val) for val in mutexSelections" ng-change="vm.onCheckboxChanged(item)" ng-disabled="!item.checked"></select>
+                        </div>
+                    </div>
+                    <div uib-btn-checkbox class="switch" ng-class="{checked:item.checked}" ng-model="item.checked" ng-change="vm.onCheckboxChanged(item)"
+                         analytics-on="click" analytics-category="DataMart" analytics-event="CustomScreener" analytics-label="CustomScreenerD" dimension-value="{{item.shortLabel}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div ng-repeat="item2 in item.subCombinations" ng-show="vm.isExpanded(item)" class="item-list">
+                        <div class="left-item">
+                            <label>
+                                <a ng-if="vm.canBeExpanded(item2)" ng-click="vm.toggleExpanded(item2)">{{::item2.shortLabel}}</a>
+                                <span ng-if="!vm.canBeExpanded(item2)">{{::item2.shortLabel}}</span>
+                            </label>
+                            <div class="inline-block sub-selection" ng-repeat="(key, mutexSelections) in item2.mutuallyExclusiveSelections">
+                                <select ng-model="mutexSelections.selection" ng-options="mutexSelections.getDisplayedValue(val) for val in mutexSelections" ng-change="vm.onCheckboxChanged(item2)" ng-disabled="!item2.checked"></select>
+                            </div>
+                        </div>
+                        <div uib-btn-checkbox class="switch" ng-class="{checked:item2.checked}" ng-model="item2.checked" ng-change="vm.onCheckboxChanged(item2)">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </uib-accordion>
+
+    <div class="message-box" ng-show="vm.opened && vm.isInvalidEventFunc(vm.branch)">
+        <div>
+            {{vm.isInvalidEventFunc(vm.branch)}}
+        </div>
+    </div>
+</div>

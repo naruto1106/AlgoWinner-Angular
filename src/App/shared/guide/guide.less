@@ -1,0 +1,202 @@
+﻿.agm-component-guide {
+
+    &.main {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+
+        .dark-screen {
+            background: mix(black,transparent,50);
+            pointer-events: all;
+            position: fixed;
+            z-index: 1000;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+        }
+    }
+}
+
+.agms-guide-highlight {
+    z-index: 1100;
+    box-shadow: 0 0 0px 4px yellow, 0 0 10px 4px black, 0 0 50px 4px black;
+}
+
+.agms-guide-freeze {
+    pointer-events: none;
+}
+
+.agm-component-guide.popup-area {
+    position: absolute;
+    pointer-events: none;
+
+    .popup-anchor {
+        position: absolute;
+
+        .popup {
+            z-index: 1200;
+            pointer-events: all;
+            position: absolute;
+            padding: 10px;
+            background: @caramel;
+            border-radius: 5px;
+            box-shadow: 0 0 10px black;
+            width: 200px;
+
+            .clip, .clip-shade {
+                position: absolute;
+                border: 15px solid transparent;
+            }
+        }
+    }
+
+    &.west .popup-anchor {
+        left: 0;
+
+        .popup {
+            right: 10px;
+
+            .clip {
+                right: -30px;
+                border-left-color: @caramel;
+            }
+
+            .clip-shade {
+                right: -32px;
+                border-left-color: mix(black,transparent,50);
+            }
+        }
+    }
+
+    &.east .popup-anchor {
+        right: 0;
+
+        .popup {
+            left: 10px;
+
+            .clip {
+                left: -30px;
+                border-right-color: @caramel;
+            }
+
+            .clip-shade {
+                left: -32px;
+                border-right-color: mix(black,transparent,50);
+            }
+        }
+    }
+
+    &.north .popup-anchor {
+        top: 0;
+
+        .popup {
+            bottom: 10px;
+
+            .clip {
+                bottom: -30px;
+                border-top-color: @caramel;
+            }
+
+            .clip-shade {
+                bottom: -32px;
+                border-top-color: mix(black,transparent,50);
+            }
+        }
+    }
+
+    &.south .popup-anchor {
+        bottom: 0;
+
+        .popup {
+            top: 10px;
+
+            .clip {
+                top: -30px;
+                border-bottom-color: @caramel;
+            }
+
+            .clip-shade {
+                top: -32px;
+                border-bottom-color: mix(black,transparent,50);
+            }
+        }
+    }
+
+    &.east, &.west {
+        .popup-anchor .popup {
+            .clip, .clip-shade {
+                top: ~'calc(50% - 15px)';
+            }
+        }
+
+        &.top {
+            .popup-anchor {
+                top: 0;
+
+                .popup {
+                    top: 0;
+                }
+            }
+        }
+
+        &.middle .popup-anchor {
+            top: 50%;
+            margin-top: -25%;
+        }
+
+        &.bottom {
+            .popup-anchor {
+                bottom: 0;
+
+                .popup {
+                    bottom: 0;
+                }
+            }
+        }
+    }
+
+    &.north, &.south {
+        .popup-anchor .popup {
+            .clip, .clip-shade {
+                left: ~'calc(50% - 15px)';
+            }
+        }
+
+        &.center .popup-anchor {
+            left: 50%;
+            margin-left: -25%;
+        }
+
+        &.left {
+            .popup-anchor {
+                left: 0;
+
+                .popup {
+                    left: -60px;
+                }
+            }
+        }
+
+        &.right {
+            .popup-anchor {
+                right: 0;
+
+                .popup {
+                    right: 0;
+                }
+            }
+        }
+    }
+
+
+    &.wider {
+        .popup {
+            width: 250px;
+        }
+    }
+}

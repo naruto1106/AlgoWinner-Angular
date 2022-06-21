@@ -1,0 +1,14 @@
+﻿<div>
+    <div class="pull-left">
+        <div ng-switch on="vm.content" class="w-30px h-30px">
+            <div class="w-100pct h-100pct" agmc-svg-loader svg-src="'/App/assets/icons/timehorizon/short.svg'" ng-switch-when="Short"></div>
+            <div class="w-100pct h-100pct" agmc-svg-loader svg-src="'/App/assets/icons/timehorizon/med.svg'" ng-switch-when="Medium"></div>
+            <div class="w-100pct h-100pct" agmc-svg-loader svg-src="'/App/assets/icons/timehorizon/long.svg'" ng-switch-when="Long"></div>
+        </div>
+    </div>
+    <div ng-if="!vm.iconOnly" class="m-left-10px pull-left">
+        <h5 class="no-margin">INVESTMENT HORIZON</h5>
+        <h4 class="no-margin">{{vm.content | uppercase}} TERM</h4>
+    </div>
+    <div class="clearfix"></div>
+</div>

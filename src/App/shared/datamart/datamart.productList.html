@@ -1,0 +1,26 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title ellipsis-nowrap">
+        {{vm.list.WatchlistName}}
+        {{vm.list.Category}}
+    </h4>
+</div>
+<div class="modal-body datamart-product-list">
+    <div class="product-in-list" ng-repeat="product in vm.list.Products">
+        <div class="product-icon" agms-image img-src="product.ImageUrl"></div>
+        <div class="product-name" uib-tooltip="{{product.Name}}">
+            <div class="ellipsis-nowrap name">{{product.Name}}</div>
+            <div class="pull-left">({{product.Symbol}})</div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="product-in-list" ng-repeat="product in vm.list.WatchlistProducts">
+        <div class="product-icon" agms-image img-src="product.ProductModel.ProductIconURL"></div>
+        <div class="product-name" uib-tooltip="{{product.ProductModel.ProductName}}">
+            <div class="ellipsis-nowrap name">{{product.ProductModel.ProductName}}</div>
+            <div class="pull-left">({{product.ProductModel.Symbol}})</div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Token Setter</title>
+    <script>
+        function setToken(event) {
+            if (event.origin.indexOf('localhost') > -1 || event.origin.indexOf('algomerchant') > -1) {
+                var token = event.data;
+                console.log(token);
+                localStorage.setItem('token', token);
+                event.source.postMessage("token_set", "*");
+            }
+        }
+        window.addEventListener("message", setToken, false);
+    </script>
+</head>
+<body>
+</body>
+</html>

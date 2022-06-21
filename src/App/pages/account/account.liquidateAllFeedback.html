@@ -1,0 +1,36 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        Liquidation Results
+    </h4>
+</div>
+<div class="modal-body">
+    <h5>Results of the following transactions:</h5>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Strategy</th>
+                <th>Action</th>
+                <th>Qty</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="portfolio in vm.positionsToLiquidate">
+                <td>{{portfolio.ProductName}} ({{portfolio.ProductSymbol}})</td>
+                <td>{{portfolio.StrategyName}}</td>
+                <td>
+                    <span ng-if="portfolio.PositionType === 'Long'">SELL</span>
+                    <span ng-if="portfolio.PositionType === 'Short'">BUY</span>
+                </td>
+                <td>{{portfolio.QuantityOnHold | number:0}}</td>
+                <td>{{portfolio.orderStatus}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <button class="pull-right filled-blue" ng-click="vm.uibClosePanel()">OK</button>
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,49 @@
+﻿<div class="agm-component-chart compare-panel">
+    <div class="modal-header">
+        <h4 class="modal-title">Compare</h4>
+        <button class="close" ng-click="vm.uibDismissPanel()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>ADD PRODUCTS TO COMPARE:
+            <br/>
+            <small class="label-info">Add up to 2 products</small>
+            </label>
+            <input class="form-control"
+                   ng-disabled="vm.hasReachedMaxCount()"
+                   placeholder="SEARCH"
+                   ng-model="vm.selectedProduct"
+                   ng-model-options="{debounce: 200}"
+                   uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                   typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                   typeahead-wait-ms="200"
+                   typeahead-on-select="vm.addToComparisons(vm.selectedProduct);" />
+        </div>
+        <div>
+            <ul class="list-group product-list">
+                <li ng-repeat="product in vm.comparisons" class="list-group-item">
+                    <span>{{product.ProductName}}</span>
+                    <a class="pull-right" ng-click="vm.removeProductFromComparison(product)">
+                        <span class="glyphicon glyphicon-remove red-loss"></span>
+                    </a>
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div>
+            <input ng-model="vm.isNormalizedChart" type="checkbox" /> <label>Normalize Chart</label>
+        </div>
+        <div class="alert alert-warning" ng-if="vm.errorMessage()">
+           {{vm.errorMessage()}}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="btn btn-primary pull-right" ng-disabled="vm.errorMessage()" ng-click="vm.applyChanges()">
+            APPLY
+        </div>
+        <div class="btn btn-outline-primary pull-right" ng-click="vm.uibDismissPanel()">
+            CANCEL
+        </div>
+    </div>
+</div>

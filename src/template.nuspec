@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">    
+    <id>@project@</id>
+    <version>@build.number@</version>
+    <authors>@authors@</authors>
+    <owners>@authors@</owners>
+    <summary>@summary@</summary>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>@description@</description>
+    <copyright>AlgoMerchant 2022</copyright>    
+  </metadata> 
+  <files>
+    <file src="*.config" />
+    <file src="PreDeploy.ps1" />
+    <file src="*.sh" />
+    <file src="html-env\*" target="html-env" />
+    <file src="srcmap\**\*" target="srcmap" />
+    <file src="dist\*.*" target="dist"/>
+    <file src="App\**\*.html" target="App"/>
+    <file src="App\assets\fonts\*" target="App\assets\fonts"/>
+    <file src="App\landing\fonts\icomoon\*" target="App\landing\fonts\icomoon"/>
+    <file src="App\landing\fonts\bootstrap\*" target="App\landing\fonts\bootstrap"/>
+    <file src="App\landing\fonts\*" target="App\landing\fonts"/>
+    <file src="App\assets\icons\**\*" target="App\assets\icons"/>
+    <file src="App\styles\vendors\chartiq\img\*" target="App\styles\vendors\chartiq\img"/>
+  </files>
+</package>

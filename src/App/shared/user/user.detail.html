@@ -1,0 +1,106 @@
+﻿<div>
+    <div class="p-50px text-center" ng-if="vm.isProfileLoading">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div class="row-md-4">
+        <div class="col-md-1">
+            <agms-user-portrait user="vm.previewProfile" developer="vm.previewDeveloperProfile" level-of-detail="3" class="m-bottom-10px" disable-clicking="true" hide-clicking="true"></agms-user-portrait>
+        </div>
+        <div class="col-md-3">
+            <div class="pull-left top developer">
+                <h5 ng-repeat="assetClass in vm.myProfile.MarketInfo.OwnedAssetClasses" class="asset-class pull-left">
+                    <agms-product-asset-class-icon asset-class="assetClass" class="h-40px w-40px p-5px m-right-10px m-left--10px pull-left">
+                    </agms-product-asset-class-icon>
+                    <span ng-if="assetClass !== 'Warrants'">{{assetClass | uppercase}}</span>
+                </h5>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div></div>
+    <div class="row-md-7 row-lg-5" ng-if="!vm.isProfileLoading">
+        <div class="col-md-2 col-lg-1 developer">
+            <div class="border panel m-bottom-10px">
+                <div class="panel-heading">Track Records</div>
+                <div class="p-5px">
+                    <table class="table-xlarge no-border">
+                        <tr>
+                            <td class="strong">Aggregate Return</td>
+                            <td class="w-75px">{{vm.myProfile.MarketInfo.AggregateReturn | valuePercentageOrDash:2}}</td>
+                        </tr>
+                        <tr>
+                            <td class="strong">Published Strategies</td>
+                            <td>{{vm.myProfile.MarketInfo.NumberOfPublishedStrategies}}</td>
+                        </tr>
+                        <tr ng-if="!vm.coreUserStateService.isTrader() && vm.showGroupStrategies">
+                            <td class="strong">Group Strategies</td>
+                            <td>{{vm.myProfile.MarketInfo.NumberOfGroupStrategies}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="border panel m-bottom-10px" ng-if="vm.hasPersonalInfo">
+                <div class="panel-heading">Personal Info</div>
+                <div class="p-5px">
+                    <table class="no-border m-top-10px m-bottom-10px">
+                        <tr ng-if="vm.myProfile.Education">
+                            <td class="strong">Education</td>
+                            <td>{{vm.myProfile.Education}}</td>
+                        </tr>
+                        <tr ng-if="vm.myProfile.Profession">
+                            <td class="strong">Profession</td>
+                            <td>{{vm.myProfile.Profession}}</td>
+                        </tr>
+                        <tr ng-if="vm.myProfile.TotalTurnover">
+                            <td>Personal Total Turnover</td>
+                            <td>{{vm.myProfile.TotalTurnover | customCurrencyOrDash:"USD":2}}</td>
+                        </tr>
+                        <tr ng-if="vm.myProfile.SubscribersTotalTurnover">
+                            <td>Subscriber's Total Turnover</td>
+                            <td>{{vm.myProfile.SubscribersTotalTurnover | customCurrencyOrDash:"USD":2}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-lg-4">
+
+            <dl ng-if="vm.myProfile.Description">
+                <dt>Profile</dt>
+                <dd>
+                    <pre class="simple">{{vm.myProfile.Description}}</pre>
+                </dd>
+            </dl>
+            <dl ng-if="vm.myProfile.VerifiedTrackRecords.length!==0">
+                <dt>Verified Track Record</dt>
+                <dd>
+                    <div ng-repeat="trackRecord in vm.myProfile.VerifiedTrackRecords">{{trackRecord}}</div>
+                </dd>
+            </dl>
+            <dl ng-if="vm.myProfile.FavouriteProducts && vm.myProfile.FavouriteProducts.length>0">
+                <dt>Favourite Products</dt>
+                <dd>
+                    <div ng-repeat="product in vm.myProfile.FavouriteProducts" class="pull-left  m-right-5px">
+                        <div agms-image img-src="product.ProductIconURL" img-fallback-src="vm.getEncodedSectorUrl(product.Sector.SectorName)" class="w-40px h-40px cover-center"></div>
+                    </div>
+                    <span class="clearfix"></span>
+                </dd>
+            </dl>
+            <dl ng-if="vm.myProfile.InvestmentStyles">
+                <dt>Investment Styles</dt>
+                <dd>
+                    <pre class="simple">{{vm.myProfile.InvestmentStyles}}</pre>
+                </dd>
+            </dl>
+            <hr ng-if="vm.hasPersonalInfo" />
+            <div class="strategy m-bottom-30px" ng-repeat="strategy in vm.myProfile.OwnedStrategies track by $index" ng-show="strategy | strategyDisplayInfoBasicInfoPublic">
+                <agmp-market-place-strategy-list-view my-strategy="strategy" disable-clicking="vm.disableStrategyClicking"></agmp-market-place-strategy-list-view>
+                <div ng-show="vm.isStrategyLoading" class="p-50px text-center">
+                    <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

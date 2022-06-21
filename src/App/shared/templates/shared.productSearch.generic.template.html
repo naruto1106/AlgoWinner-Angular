@@ -1,0 +1,32 @@
+﻿<a uib-tooltip="{{match.model.ProductName }}" class="agms-product-search-generic-template">
+    <div ng-if="match.model.DisplayMarketDataStatus" class="template-with-market-data-status">
+        <div class="row-md-6 gap-0px product-list-wrapper">
+            <div class="col-md-5">
+                <div class="f-16px ellipsis-nowrap">
+                    <span ng-bind-html="match.model.ProductName | uibTypeaheadHighlight:query"></span>
+                </div>
+                <div style="color: #999999; font-size: 14px" class="f-14px ellipsis-nowrap">
+                    <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>-{{match.model.TradeVenueLoc}}
+                    <span ng-if="match.model.Currency">[{{match.model.Currency}}] </span>
+                    {{match.model.AssetType}}
+                </div>
+            </div>
+            <div class="col-md-1 market-data-status">
+                <div class="eod" ng-if="match.model.MarketDataStatus == 'EOD'">EOD</div>
+                <div class="delayed" ng-if="match.model.MarketDataStatus == 'Delayed'">DELAYED</div>
+                <div class="real-time" ng-if="match.model.MarketDataStatus == 'Realtime'">REAL TIME</div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div ng-if="!match.model.DisplayMarketDataStatus">
+        <div class="f-16px ellipsis-nowrap">
+            <span ng-bind-html="match.model.ProductName | uibTypeaheadHighlight:query"></span>
+        </div>
+        <div style="color: #999999; font-size: 14px" class="f-14px ellipsis-nowrap">
+            <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>-{{match.model.TradeVenueLoc}}
+            <span ng-if="match.model.Currency">[{{match.model.Currency}}] </span>
+            {{match.model.AssetType}}
+        </div>
+    </div>
+</a>

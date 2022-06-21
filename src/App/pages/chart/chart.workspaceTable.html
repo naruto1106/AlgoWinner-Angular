@@ -1,0 +1,50 @@
+﻿<div class="workspace-table">
+    <input type="text" placeholder="SEARCH" class="form-control search" ng-model="vm.searchKeyword" />
+    <table>
+        <thead>
+            <tr>
+                <th class="template-name" ng-click="vm.sortColumn('Name')">
+                    WORKSPACE NAME
+                    <!--if I change to ng-if="vm.showSorting(...)" somehow it will close the dropdown-->
+                    <span class="glyphicon glyphicon-triangle-bottom" ng-show="vm.showSorting('Name', 'd')"></span>
+                    <span class="glyphicon glyphicon-triangle-top" ng-show="vm.showSorting('Name', 'a')"></span>
+                </th>
+                <th class="template-date" ng-click="vm.sortColumn('Date')">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    <span class="glyphicon glyphicon-triangle-bottom" ng-show="vm.showSorting('Date', 'd')"></span>
+                    <span class="glyphicon glyphicon-triangle-top" ng-show="vm.showSorting('Date', 'a')"></span>
+                </th>
+                <th class="navigation">
+
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <div class="scroll">
+        <table>
+            <tbody>
+                <tr ng-repeat="template in vm.getViewTemplates()" ng-class="{selected:vm.isSelectedTemplate(template)}" ng-click="vm.selectTemplate(template)">
+                    
+                    <td class="template-name" colspan="2">
+                        <a ng-click="vm.selectAndLoadTemplate(template)">{{template.name}}</a>
+                    </td>
+
+                    <td class="navigation">
+                        <span class="product-template-icon pull-left" uib-tooltip="{{template.filterDescription.primaryProduct.ProductName}}" 
+                              ng-if="template.filterDescription.primaryProduct">P</span>
+                        <div class="pull-right">
+                            <a class="star" ng-class="{'default':vm.isDefaultWorkspace(template)}" 
+                               uib-tooltip="Set As Default"
+                               ng-click="vm.toggleDefaultTemplate(template)">
+                                <span class="glyphicon glyphicon-star default-icon"></span>
+                            </a>
+                            <button class="cell-botton-normal" ng-click="vm.editTemplate(template)"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button class="cell-botton-alert" ng-click="vm.removeTemplate(template)"><span class="glyphicon glyphicon-remove"></span></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

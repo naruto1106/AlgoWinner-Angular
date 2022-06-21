@@ -1,0 +1,359 @@
+﻿.agms-trading-behavior {
+    .item {
+        .box {
+            font-size: 14px;
+            color: black;
+            line-height: 30px;
+            padding: 0 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        &:hover .box, &.highlighted .box {
+            color: white;
+            background: @plum;
+        }
+    }
+}
+
+.agm-component-trade-exposure {
+    .exposure-list {
+        background-color: white;
+
+        .trade {
+            line-height: 20px;
+            font-weight: bolder;
+            font-size: 20px;
+        }
+
+        .long, .short {
+            font-size: 14px;
+            font-weight: bolder;
+            line-height: 20px;
+            width: 70px;
+            display: inline-block;
+        }
+
+        .long {
+            color: #60E;
+        }
+
+        .short {
+            color: #e06;
+        }
+
+        .bar {
+            border: @grayMed1;
+            background: green;
+            height: 10px;
+            width: 100%;
+
+            .red-part {
+                height: 10px;
+                background: red;
+            }
+        }
+
+        .win, .lose {
+            line-height: 40px;
+            font-weight: bold;
+            font-size: 14px;
+            display: inline-block;
+            width: 80px;
+        }
+
+        .important-title {
+            line-height: 16px;
+            font-size: 12px;
+        }
+
+        .important-content {
+            line-height: 25px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .sub {
+            font-size: 16px;
+        }
+
+        .green-profit.darker {
+            color: mix(green,black,70);
+        }
+
+        .special-text.darker {
+            color: @plum;
+        }
+
+        .agms-directives.product-picture .product-icon {
+            top: 10px;
+            left: 5px;
+        }
+    }
+}
+
+.agm-component-trade-review {
+    .content {
+        position: relative;
+        max-height: 530px;
+
+        &.modal-body {
+            overflow-y: scroll;
+        }
+
+        .filter-section {
+            margin: 10px 0;
+
+            .checkbox {
+                float: left;
+                margin: 2px 2px 0 0;
+            }
+
+            .number-input {
+                width: 40px;
+                margin-right: 2px;
+                border-radius: 10px;
+            }
+        }
+
+        .pre-scrollable {
+            border-top: 1px solid @gray1;
+        }
+
+        .stats {
+            padding-top: 5px;
+            background: @gray1;
+
+            .special-text {
+                color: @persian;
+            }
+
+            dl {
+                margin-bottom: 5px;
+                text-align: center;
+
+                dd {
+                    line-height: 30px;
+                    font-size: 25px;
+                    font-weight: bold;
+                }
+
+                dt {
+                    line-height: 20px;
+                    font-size: 15px;
+                }
+            }
+
+            .bar {
+                border: @medGray1;
+                background: @gray1;
+                height: 20px;
+                width: 100%;
+
+                .blue-part {
+                    height: 20px;
+                    background: @sunFlower;
+                }
+            }
+
+            .winbar {
+                border: @medGray1;
+                background: @seafoam;
+                height: 10px;
+                width: 100%;
+
+                .red-part {
+                    height: 10px;
+                    background: @berry;
+                }
+            }
+
+            .trade {
+                line-height: 20px;
+                font-weight: bolder;
+                font-size: 20px;
+            }
+
+            .long, .short {
+                font-size: 14px;
+                font-weight: bolder;
+                line-height: 20px;
+                width: 70px;
+                display: inline-block;
+            }
+
+            .long {
+                color: #60E;
+            }
+
+            .short {
+                color: #e06;
+            }
+
+            .win, .lose {
+                line-height: 40px;
+                font-weight: bold;
+                font-size: 14px;
+                display: inline-block;
+                width: 80px;
+            }
+        }
+
+        .product-item {
+            height: 70px;
+            border-bottom: 1px solid @gray1;
+            padding-top: 10px;
+
+            .detail-btn {
+                float: right;
+                font-size: 20px;
+                color: @darkGray1;
+                margin-top: 5px;
+                margin-right: 10px;
+                cursor: pointer;
+            }
+
+            dl {
+                float: left;
+                margin: 0 5px;
+
+                dt {
+                    line-height: 18px;
+                    font-size: 18px;
+                }
+
+                dd {
+                    line-height: 25px;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+
+            .bar {
+                border: @medGray1;
+                background: @gray1;
+                height: 10px;
+                width: 100%;
+
+                .blue-part {
+                    height: 10px;
+                    background: @medGray1;
+                }
+            }
+
+            .winbar {
+                border: @grayMed1;
+                background: @seafoam;
+                height: 10px;
+                width: 100%;
+                margin-top: 5px;
+
+                .red-part {
+                    height: 10px;
+                    background: @berry;
+                }
+            }
+
+            .trade {
+                line-height: 20px;
+                font-weight: bolder;
+                font-size: 20px;
+
+                .smaller {
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+            }
+
+            .long, .short {
+                font-size: 14px;
+                font-weight: bolder;
+                line-height: 20px;
+                width: 75px;
+                display: inline-block;
+            }
+
+            .long {
+                color: @seafoam;
+            }
+
+            .short {
+                color: @berry;
+            }
+
+            .win, .lose {
+                line-height: 40px;
+                font-weight: bold;
+                font-size: 14px;
+                display: inline-block;
+            }
+
+            .win {
+                float: left;
+            }
+
+            .lose {
+                float: right;
+            }
+        }
+
+        .trades-review-item {
+            background-color: white;
+            height: 100px;
+            border: @gray2 1px solid;
+
+            .quantity, .title {
+                color: @sunFlower;
+                line-height: 25px;
+                font-size: 16px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                width: 100px;
+            }
+
+            .roi-label {
+                text-align: center;
+                margin-top: 10px;
+                font-size: 18px;
+            }
+
+            .roi {
+                text-align: center;
+                font-size: 20px;
+                font-weight: 800;
+            }
+
+            .return, .price {
+                line-height: 20px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .price {
+                .buy, .sell {
+                    font-size: 16px;
+                }
+            }
+
+            a {
+                font-style: italic;
+                text-decoration: underline;
+            }
+
+            .chart {
+                height: 80px;
+            }
+
+            .change {
+                line-height: 20px;
+                font-size: 25px;
+                font-weight: bold;
+            }
+
+            .gainloss {
+                line-height: 12px;
+                font-size: 12px;
+            }
+        }
+    }
+}

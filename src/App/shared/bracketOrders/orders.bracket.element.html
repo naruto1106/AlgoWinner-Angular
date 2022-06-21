@@ -1,0 +1,89 @@
+﻿<div class="bracket-element">
+    <!-- template for Orders Log -->
+    <div class="row-md-25 gap-0px w-100pct">
+        <div class="col-md-1 order-type-container" ng-class="vm.order.Action == 'Buy' ? ['buy']:['sell']">
+            <div class="order-type">
+                {{::vm.order.Action}}
+            </div>
+        </div>
+        <div class="col-md-24 border">
+            <div class="order-header box">
+                <div class="bracket-order pull-left hide-overflow">
+                    <div class="row-md-9 gap-0px">
+                        <div class="col-md-4 take-profit">
+                            <div class="pull-left order-name">
+                                <strong>TAKE PROFIT</strong>
+                            </div>
+                            <div class="pull-left price special-text text-uppercase">
+                                <span><strong>{{vm.getTakeProfitOrder(vm.order).OrderPrice | customCurrencyOrDashMinMax:vm.getTakeProfitOrder(vm.order).Product.Currency:2:4}}</strong> </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pull-left stop-loss">
+                                <strong>STOP LOSS</strong>
+                            </div>
+                            <div class="pull-left price special-text text-uppercase">
+                                <span><strong>{{vm.getStopLossOrder(vm.order).OrderPrice | customCurrencyOrDashMinMax:vm.getStopLossOrder(vm.order).Product.Currency:2:4}}</strong> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="order-body hide-overflow">
+                <div class="pull-left order-date">
+                    <span class="gray-text">ORDER DATE: </span>
+                    <br />
+                    <span>{{::vm.order.CreatedTime | date:'mediumDate'}}</span><br />
+                    <span>{{::vm.order.CreatedTime | date:'shortTime'}}</span>
+                </div>
+                <div class="pull-left product-container text-uppercase">
+                    <agms-product-picture product="::vm.order.Product"></agms-product-picture>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="pull-left intention text-uppercase">
+                    <span class="special-text">{{vm.order.Intention}}</span><br />
+                    <span><strong>&#39;{{::vm.order.Position}}&#39;</strong> position</span>
+                </div>
+                <div class="pull-left quantity text-uppercase">
+                    <h4 class="no-margin v-center">{{::vm.order.Quantity | valueOrDash:0}} <span class="smaller">UNITS</span></h4>
+                </div>
+                <div class="pull-left quantity text-uppercase">
+                    <h4 class="no-margin v-center">BRACKET ORDER</h4>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="order-footer box">
+                <div class="pull-left w-250px p-left-10px h-30px">
+                    <h5 class="lh-30px no-margin">{{vm.order.LatestStatus}}</h5>
+                </div>
+                <div ng-if="(vm.order | hasBeenRejectedCancelledOrExpired) && vm.order.RejectReason" class="pull-left w-200px p-left-10px  h-30px">
+                    <h5 class="red-loss lh-30px no-margin ellipsis-nowrap" title="{{vm.order.RejectReason}}">{{vm.order.RejectReason}}
+                    </h5>
+                </div>
+                <div class="pull-left w-150px p-left-10px h-30px">
+                    <h5 class="lh-30px no-margin"><span class="gray-text">VALIDITY : </span>{{::vm.order.Validity}}</h5>
+                </div>
+                <div class="pull-left m-right-10px w-160px h-30px" ng-if="vm.showCancelling(vm.order)">
+                    <h5 class=" lh-30px no-margin">Cancelling order...</h5>
+                </div>
+                <div class="order-since pull-right">
+                    <div>last updated {{vm.order.UpdateTime | timeSince}}</div>
+                </div>
+                <div class="pull-right cancel-button" ng-if="vm.showCancelButtonFunc(vm.order)">
+                    <button class="mini-filled-red" ng-click="vm.cancelFunc(vm.order)"
+                        analytics-on="click" analytics-category="Trade" analytics-event="CancelOrder" agmc-analytics-timestamp>
+                        CANCEL
+                    </button>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="blink_me h-120px w-100pct pass-through-pointer" ng-show="vm.isBlinking" style="margin-top: -120px"></div>
+    <div class="clearfix"></div>
+</div>

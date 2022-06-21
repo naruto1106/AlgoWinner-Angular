@@ -1,0 +1,8 @@
+﻿<div class="p-5px separator-bottom bigger">
+    <div class="f-16px">
+        <span ng-bind-html="populatedItem.ProductName | uibTypeaheadHighlight:models.textBox"></span>         
+    </div>
+    <div style="color: #999999; " class="f-14px ellipsis-nowrap">
+        <span ng-bind-html="populatedItem.Symbol | uibTypeaheadHighlight:models.textBox"></span>-{{populatedItem.TradeVenueLoc}} [{{populatedItem.Currency}}] {{populatedItem.AssetType}}
+    </div>    
+</div>

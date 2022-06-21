@@ -1,0 +1,48 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+
+        <span ng-if="vm.type == 'topUp'">TOP UP</span>
+        <span ng-if="vm.type == 'reduce'">REDUCE</span>
+        CAPITAL
+    </h4>
+</div>
+<div class="modal-body css-component-managestrategies rel">
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+    <div ng-if="!vm.isLoading">
+        <div>
+            <span ng-if="vm.type == 'topUp'">TOP UP AMOUNT</span>
+            <span ng-if="vm.type == 'reduce'">REDUCE AMOUNT </span>
+            <span class="m-left-10px lh-25px"> {{vm.strategy.Currency | currencySymbol}}</span>
+            <input type="number" min="0.01" ng-change="vm.refreshValue()" ng-if="vm.type == 'topUp'" placeholder="Top Up Capital"
+                   ng-model="vm.newValue" ng-model-options="{debounce: 50}" />
+            <input type="number" min="0.01" ng-change="vm.refreshValue()" ng-if="vm.type == 'reduce'" placeholder="Reduce Capital"
+                   ng-model="vm.newValue" ng-model-options="{debounce: 50}" />
+            <span ng-if="vm.type == 'topUp'"> (Max: {{vm.roundDown(vm.maxAllocation) | customCurrencyOrDash:vm.strategy.Currency:2}})</span>
+            <span ng-if="vm.type == 'reduce'"> (Max: {{vm.roundDown(vm.strategy.TradingCapital) | customCurrencyOrDash:vm.strategy.Currency:2}})</span>
+        </div>
+        <div class="red-loss m-left-50px p-left-30px" ng-if="vm.newValue < 0 || vm.invalidValue">Please input a valid number greater than zero</div>
+        <div class="red-loss m-left-50px p-left-30px" ng-if="vm.type == 'topUp' && vm.newValue && vm.newValue > vm.maxAllocation">You cannot top up an amount greater than the account available capital</div>
+        <div class="red-loss m-left-50px p-left-30px" ng-if="vm.type == 'reduce' && vm.newValue > vm.strategy.TradingCapital">You cannot withdraw an amount more than the available capital</div>
+        <table class="border m-top-10px">
+            <tr>
+                <td>New NAV</td>
+                <td>{{vm.capital.NAV | customCurrencyOrDash:vm.strategy.Currency:2}}</td>
+            </tr>
+            <tr>
+                <td>New Capital</td>
+                <td>{{vm.capital.TradingCapital | customCurrencyOrDash:vm.strategy.Currency:2}}</td>
+            </tr>
+            <tr>
+                <td>Available Capital</td>
+                <td>{{vm.roundDown(vm.capital.AvailableBalance) | customCurrencyOrDash:vm.strategy.Currency:2}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="clearfix m-bottom-10px"></div>
+    <div class="separator-top m-top-20px h-10px"></div>
+    <button class="pull-right filled-blue m-left-5px" agmc-button-wait-on-promise="vm.saveChanges(vm.strategy)" ng-disabled="vm.disableSubmit()">CONFIRM</button>
+    <button class="pull-right hollow-blue m-left-5px" ng-click="vm.uibDismissPanel()">CANCEL</button>
+    <div class="clearfix"></div>
+</div>

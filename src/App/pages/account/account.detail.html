@@ -1,0 +1,61 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        {{vm.strategy.DisplayInfo | strategyName}}
+    </h4>
+</div>
+<div class="modal-body">
+    <div class="col-md-6 p-0px border">
+        <agms-strategy-commerce-portrait disable-clicking="true" strategy="vm.strategy.DisplayInfo" level-of-detail="2"></agms-strategy-commerce-portrait>
+    </div>
+    <div class="col-md-6 p-right-0px">
+        <h4>Cumulative P/L</h4>
+        <h4 ng-class="vm.strategy.CapitalInfo.CumulativePl>=0?['green-profit']:['red-loss']">
+            {{vm.strategy.CapitalInfo.CumulativePl | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}
+        </h4>
+    </div>
+    <div class="clearfix"></div>
+        <table class="table-large m-top-20px">
+            <tr>
+                <td>Capital Available</td>
+                <td>{{vm.strategy.CapitalInfo.TradingCapital | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>
+            <tr>
+                <td>NAV</td>
+                <td>{{vm.strategy.CapitalInfo.NAV | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>
+            <!--<tr>
+                <td>Cash Balance</td>
+                <td>{{vm.strategy.CapitalInfo.CashBalance | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>-->
+            <tr>
+                <td>Realized P/L</td>
+                <td ng-class="vm.strategy.CapitalInfo.RealizedPL>=0?['green-profit']:['red-loss']">{{vm.strategy.CapitalInfo.RealizedPL | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>
+            <tr>
+                <td>Unrealized P/L</td>
+                <td ng-class="vm.strategy.CapitalInfo.UnrealizedPL>=0?['green-profit']:['red-loss']">{{vm.strategy.CapitalInfo.UnrealizedPL | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>
+            <tr ng-if="vm.strategy.CapitalInfo.Type==='Cash'">
+                <td>Exposure</td>
+                <td>{{vm.strategy.CapitalInfo.LongExposure | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>
+            <tr ng-if="vm.strategy.CapitalInfo.Type==='CFD'">
+                <td>Long Exposure</td>
+                <td>{{vm.strategy.CapitalInfo.LongExposure | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>
+            <tr ng-if="vm.strategy.CapitalInfo.Type==='CFD'">
+                <td>Short Exposure</td>
+                <td>{{vm.strategy.CapitalInfo.ShortExposure | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>
+            <!--<tr ng-if="vm.strategy.CapitalInfo.Type==='CFD'">
+                <td>Margin Used</td>
+                <td>{{vm.strategy.CapitalInfo.MarginUsed | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>
+            <tr ng-if="vm.strategy.CapitalInfo.Type==='CFD'">
+                <td>Margin Available</td>
+                <td>{{vm.strategy.CapitalInfo.MarginAvailable | customCurrencyOrDash:vm.strategy.CapitalInfo.Currency:2}}</td>
+            </tr>-->
+        </table>
+</div>

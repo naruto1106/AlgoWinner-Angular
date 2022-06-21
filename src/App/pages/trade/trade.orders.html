@@ -1,0 +1,95 @@
+﻿<!--<agmp-mobile-trade ng-if="vm.pMobileWebService.showMobileWeb()"
+                   is-loading-data="vm.isLoadingData"
+                   my-strategies="vm.myStrategies"
+                   selected-strategy="vm.selectedStrategy"
+                   select-strategy-func="vm.strategySelectedFromScrolling"
+                   is-loading-positions="vm.isLoadingPositions"
+                   is-loading-orders="vm.isLoadingOrders"
+                   is-by-account="vm.isByAccount"
+                   view-mode="vm.viewMode"
+                   place-order-func="vm.placeOrder"
+                   ></agmp-mobile-trade>-->
+<div>
+    <agms-header-trade current-page="ORDER_DETAILS"></agms-header-trade>
+    <div class="connection-status-amber lh-50px" ng-if="vm.showAllocateCapitalAlert && !vm.showReduceCapitalAlert">
+        Please allocate from available capital to your trade portfolios which have negative capital. Alternatively, you can top up your main account
+        (<span ng-repeat="account in vm.accountsNeedToTopUpForAllocateCapitalAlert">{{account.Name}}<span ng-if="!$last">, </span></span>).
+        <span class="glyphicon glyphicon-remove pull-right lh-30px p-10px cursor-pointer" ng-click="vm.closeAllocateNotification()"></span>
+        <div class="clearfix"></div>
+    </div>
+    <div class="connection-status-amber lh-50px" ng-if="!vm.showAllocateCapitalAlert && vm.showReduceCapitalAlert">
+        Please reduce your trade portfolio's capital (where positive) to free up capitals. Alternatively, you can top up your main account
+        (<span ng-repeat="account in vm.accountsNeedToTopUpForReduceCapitalAlert">{{account.Name}}<span ng-if="!$last">, </span></span>).
+        <span class="glyphicon glyphicon-remove pull-right lh-30px p-10px cursor-pointer" ng-click="vm.closeReduceNotification()"></span>
+        <div class="clearfix"></div>
+    </div>
+    <div class="connection-status-amber p-10px" ng-if="vm.showReduceCapitalAlert && vm.showAllocateCapitalAlert">
+        <span ng-repeat="account in vm.accountsNeedToTopUpForReduceCapitalAlert">{{account.Name}}<span ng-if="!$last">, </span></span>
+        : Please reduce your trade portfolio's capital (where positive) to free up capitals. Alternatively, you can top up your main account.
+        <br />
+        <span ng-repeat="account in vm.accountsNeedToTopUpForAllocateCapitalAlert">{{account.Name}}<span ng-if="!$last">, </span></span>
+        : Please allocate from available capital to your trade portfolios which have negative capital. Alternatively, you can top up your main account
+        <span class="glyphicon glyphicon-remove p-10px cursor-pointer abs top-10px right-10px" ng-click="vm.closeNotification()"></span>
+        <div class="clearfix"></div>
+    </div>
+    <div class="agm-component-orderstrades container padless m-bottom-30px">
+        <div class="clearfix"></div>
+        <div ng-if="vm.myStrategies.length <= 0 && !vm.isLoadingData && vm.strategiesType === 0" class="container p-left-15px">
+            <h4>
+                <a href="" ng-click="vm.openNewStrategy()" style=""><span class="no-content-color">To start trading, create your own trade portfolio by clicking </span>here</a>
+            </h4>
+        </div>
+        <div ng-if="vm.myStrategies.length > 0 && !vm.isLoadingData && vm.strategiesType === 0" class="row-md-14 gap-0px border box">
+            <div class="col-md-12 separator-right">
+                <div class="p-20px" agms-droid-helper-item="ordertrades.strategySelection">
+                    <h3 ng-if="vm.selectedStrategy!==0" class="text-uppercase m-top-0px">
+                        {{vm.selectedStrategy.DisplayInfo | strategyName}}
+                    </h3>
+                    <h3 ng-if="vm.selectedStrategy===0">
+                        ALL TRADE PORTFOLIOS
+                    </h3>
+                    <div class="m-bottom-5px"></div>
+                    <agms-strategy-commerce-circle-selection disable-all-selection="true"
+                                                             strategy-selections="vm.myStrategies"
+                                                             event-name="strategySelectedFromScrollingSelection"
+                                                             selected-strategy="vm.selectedStrategy"
+                                                             slides-per-view="4"
+                                                             analytics-on="click" analytics-category="Trade" analytics-event="Orders" analytics-label="ToggleStrategy" agmc-analytics-timestamp>
+                    </agms-strategy-commerce-circle-selection>
+                </div>
+            </div>
+            <div class="col-md-2 m-top-50px" agms-droid-helper-item="ordertrades.placeOrder">
+                <div class="p-10px text-center ">
+                    <button class="place-order-button btn-3d-bumpy-xtra" ng-click="vm.placeOrder()" ng-disabled="vm.isPlacingOrder" analytics-on analytics-category="Trade" analytics-event="PlaceOrder" agmc-analytics-timestamp>
+                        <div class="text-center w-100pct">
+                            <span class="glyphicon glyphicon-list-alt icon"></span>
+                        </div>
+                        <div class="clearfix m-bottom-5px"></div>
+                        <div class="text-center w-100pct">
+                            <span>PLACE ORDER</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="p-50px text-center" ng-if="vm.isLoadingData">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div class="f-14px red-loss m-top-10px m-left-15px" ng-if="vm.hasCapitalDeficit()">
+            Your trading activity on this trade portfolio may be limited due to capital deficits on other trade portfolios belonging to the same account.
+        </div>
+        <div class="clearfix"></div>
+        <div ng-if="!vm.isLoadingData">
+            <agms-orders-list-view is-by-account="vm.selectedStrategy===0"
+                                   is-loading-capital-summary="vm.isLoadingCapitalSummary"
+                                   is-loading-orders="vm.isLoadingOrders"
+                                   is-loading-active-positions="vm.isLoadingActivePositions"
+                                   is-loading-positions="vm.isLoadingPositions"
+                                   capital-info="vm.selectedCapitalInfo"
+                                   selected-strategy="vm.selectedStrategy"
+                                   view-mode="'normal'" ng-cloak></agms-orders-list-view>
+        </div>        
+    </div>
+</div>
+<div class="clearfix"></div>

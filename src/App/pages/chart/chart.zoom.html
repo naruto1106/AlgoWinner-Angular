@@ -1,0 +1,12 @@
+﻿<div class="btn-group" ng-show="vm.isPrimaryProductSelected()">
+    <button ng-click="vm.zoomIn()"
+            class="btn" uib-tooltip="Zoom In" tooltip-placement="bottom"
+            analytics-on="click" analytics-category="Chart" analytics-event="Top Menu" analytics-label="ZoomIn" agmc-analytics-timestamp>
+        <span class="glyphicon glyphicon-zoom-in"></span>
+    </button>
+    <button ng-click="vm.zoomOut()"
+            class="btn" uib-tooltip="Zoom Out" tooltip-placement="bottom"
+            analytics-on="click" analytics-category="Chart" analytics-event="Top Menu" analytics-label="ZoomOut" agmc-analytics-timestamp>
+        <span class="glyphicon glyphicon-zoom-out"></span>
+    </button>
+</div>

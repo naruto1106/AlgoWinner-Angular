@@ -1,0 +1,112 @@
+﻿<section class="agm-components-usersettings container">
+    <div class="m-right-20px pull-left rel">
+        <img class="img-circle" agms-image-fallback="//am708403.azureedge.net/images/profilePicture/defaultavatar.jpg?" ng-src="{{vm.myProfile.ProfileImageUrl}}" height="120" width="120">
+        <button type="button" class="abs upload" ng-click="vm.uploadImage()"><span class="glyphicon glyphicon-upload"></span></button>
+    </div>
+    <div class="pull-left">
+        <h3>{{vm.myProfile.UserName}}</h3>
+        <button class="mini-filled-blue" ng-click="vm.changePassword()" ng-disabled="vm.isSubmitting"
+                analytics-on="click" analytics-category="Setting" analytics-event="ChangePassword" agmc-analytics-timestamp>CHANGE PASSWORD</button>
+    </div>
+    <div class="clearfix"></div>
+
+    <uib-tabset class="tab-type1 larger m-top-20px tab-vertical">
+        <uib-tab heading="Basic Info">
+            <div class="p-15px">
+                <agmc-loading is-loading="vm.isSubmitting"></agmc-loading>
+                <div class="box-form p-15px">
+                    <dl>
+                        <dt>
+                            UserName <span class="smaller">(6-25 chars)</span>
+                        </dt>
+                        <dd class="rel">
+                            <input class="w-300px lh-25px pull-left" type="text" ng-model="vm.myProfile.NewUserName" ng-disabled="vm.isSubmitting" />
+                            <span class="loading pull-left m-left-10px" ng-if="vm.userNameVerifyState == 1"></span>
+                            <span class="glyphicon glyphicon-ok-sign pull-left m-left-10px lh-25px verified" ng-if="vm.userNameVerifyState == 2"></span>
+                            <span class="pull-left m-left-10px" style="color: red" ng-if="vm.userNameVerifyState == 3">Username cannot be empty</span>
+                            <span class="pull-left m-left-10px" style="color: red" ng-if="vm.userNameVerifyState == 7">Username too short</span>
+                            <span class="pull-left m-left-10px" style="color: red" ng-if="vm.userNameVerifyState == 8">Username too long</span>
+                            <span class="pull-left m-left-10px" style="color: red" ng-if="vm.userNameVerifyState == 4">Sorry, this username has already been taken. Please pick another username.</span>
+                            <span class="pull-left m-left-10px" style="color: red" ng-if="vm.userNameVerifyState == -1">We were unable to verify this username. Please check your network connection or refresh the page.</span>
+                        </dd>
+                    </dl>
+                    <div class="clearfix m-bottom-15px"></div>
+                    <div>
+                        <dl class="pull-left m-right-20px">
+                            <dt>
+                                Title
+                            </dt>
+                            <dd>
+                                <select class="w-70px" style="min-width: 0" ng-model="vm.myProfile.Salutation" ng-options="salutation for salutation in vm.salutationTypes" ng-disabled="vm.isSubmitting"></select>
+                            </dd>
+                        </dl>
+
+                        <dl class="pull-left">
+                            <dt>
+                                Name
+                            </dt>
+                            <dd>
+                                <input type="text" class="w-210px lh-25px" ng-model="vm.myProfile.RealName" ng-disabled="vm.isSubmitting" />
+                            </dd>
+                        </dl>
+                        <div class="clearfix"></div>
+                    </div>
+                    <dl>
+                        <dt>
+                            Email
+                        </dt>
+                        <dd>
+                            <input class="w-300px lh-25px" type="text" name="email" ng-model="vm.myProfile.Email" ng-disabled="true" />
+                            <div class="clearfix"></div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            Phone
+                        </dt>
+                        <dd>
+                            <input international-phone-number default-country="sg" preferred-countries="sg, us" skip-util-script-download
+                                   ng-model="vm.myProfile.PhoneNumberDetails"
+                                   type="text" name="phone" ng-disabled="vm.isSubmitting" />
+                            <div class="clearfix"></div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            Country of Residence
+                        </dt>
+                        <dd>
+                            <select class="w-300px lh-25px" ng-model="vm.myProfile.Country.CountryId" ng-options="country.CountryId as country.CountryName for country in vm.myCountries" ng-disabled="vm.isSubmitting">
+                                <option value="">-Country-</option>
+                            </select>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            Time Zone
+                        </dt>
+                        <dd>
+                            <select class="w-300px lh-25px" ng-model="vm.myProfile.Timezone.TimezoneId" ng-options="timezone.TimezoneId as timezone.TimezoneName for timezone in vm.myTimezones" ng-disabled="vm.isSubmitting">
+                                <option value="">-Timezone-</option>
+                            </select>
+                        </dd>
+                    </dl>
+                    <div>
+                        <button class="pull-right filled-blue" ng-click="vm.saveChanges()" ng-disabled="vm.isSubmitProfileDisabled()"
+                                analytics-on="click" analytics-category="Setting" analytics-event="ModifyBasicInfo" agmc-analytics-timestamp>SAVE CHANGES</button>
+                        <div ng-show="vm.isSubmitting" class="pull-right">
+                            <img class="w-25px h-25px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab heading="Notification Settings"
+                 analytics-on="click" analytics-category="Notifications" analytics-event="Manage" analytics-label="SettingsPage" agmc-analytics-timestamp>
+            <div class="notification-settings">
+                <agms-activity-notification-settings show-cancel="false" visible-aspects="vm.visibleAspects"></agms-activity-notification-settings>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</section>

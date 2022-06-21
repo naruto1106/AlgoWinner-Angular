@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        Create New Trade Portfolio
+    </h4>
+</div>
+<div class="modal-body new-trade-portfolio">
+    <div class="p-50px text-center" ng-show="vm.isSubmitting">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <form novalidate name="createStrategyForm" ng-show="!vm.isSubmitting">
+        <div ng-if="vm.currentStepName == 'select-type'">
+            <div class="center-align">
+                <h3>Please Select Portfolio Type</h3>
+                <div class="row-md-6 m-top-20px">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <div class="type-selection-box" ng-class="{active: true}">
+                            <div class="title">
+                                <input type="radio"/>
+                                Virtual Portfolio
+                            </div>
+                            <div class="description">
+                                Create a portfolio for simulated paper trading.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="separator-top m-top-20px h-10px"></div>
+            <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('basic-info')">NEXT</button>
+            <div class="clearfix"></div>
+        </div>
+        <div ng-if="vm.currentStepName != 'select-type'">
+            <agms-droid-helper-step-by-step-flow current-step-name="vm.currentStepName" last-step-name="vm.getProgressStepState()">
+                <agms-droid-helper-single-step title="Basic Info" name="basic-info" show-navigator="false" class="p-20px">
+                    <agms-strategy-commerce-characteristics strategy-model="vm.createStrategyModel.BasicInfo" is-simplified-mode="true"
+                                                            can-continue="vm.canContinue['basic-info']"
+                                                            next-label="'NEXT'" next-func="vm.setStep('market')"></agms-strategy-commerce-characteristics>
+                </agms-droid-helper-single-step>
+                <agms-droid-helper-single-step title="Market" name="market" show-navigator="false" class="p-20px">
+                    <div ng-if="vm.hasBroker">
+                        <agms-strategy-commerce-market-segment strategy-model="vm.createStrategyModel"
+                                                               prev-label="'PREVIOUS'" prev-func="vm.setStep('basic-info')"
+                                                               next-label="'NEXT'" next-func="vm.setStep('broker-linkage')">
+                        </agms-strategy-commerce-market-segment>                        
+                    </div>
+                    <div ng-if="!vm.hasBroker">
+                        <agms-strategy-commerce-market-segment strategy-model="vm.createStrategyModel"
+                                                               prev-label="'PREVIOUS'" prev-func="vm.setStep('basic-info')"
+                                                               next-label="'SUBMIT'" next-func="vm.submitNew()">
+                        </agms-strategy-commerce-market-segment>                        
+                    </div>
+                </agms-droid-helper-single-step>
+                <agms-droid-helper-single-step ng-if="vm.hasBroker" title="Broker Linkage" name="broker-linkage" show-navigator="false" class="p-20px">
+                    <agms-account-manager edit-model="vm.createStrategyModel.BrokerageDetail"
+                                          prev-label="'PREVIOUS'" prev-func="vm.setStep('market')" can-continue="vm.canContinue['broker-linkage']"
+                                          next-label="'SUBMIT'" next-func="vm.submit()"
+                                          link-status="false" market-info="vm.createStrategyModel.Market">
+                    </agms-account-manager>
+                </agms-droid-helper-single-step>
+            </agms-droid-helper-step-by-step-flow>
+        </div>
+    </form>
+</div>

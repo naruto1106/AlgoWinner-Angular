@@ -1,0 +1,1 @@
+﻿agmNgModuleWrapper('agms.chart',['agms.datamart','agms.tgps','agms.manualFollowFirebase']);

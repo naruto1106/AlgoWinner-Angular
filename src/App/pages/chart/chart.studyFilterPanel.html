@@ -1,0 +1,47 @@
+﻿<div class="agm-component-chart popup-panel">
+    <div class="modal-header">
+        <button class="close" ng-click="vm.uibDismissPanel()" class="glyphicon-remove glyphicon">&times;</button>
+        <h4 class="modal-title">STUDIES</h4>
+    </div>
+    <div class="modal-body">
+        <div class="fundamental-panel">
+            <div class="row-md-3 as-table">
+                <div class="col-md-1 category">
+                    <h4>Category</h4>
+                    <div class="max-scrollbox">
+                        <h5 ng-repeat="category in vm.filterDescription.studyCategories" class="active-item" ng-click="vm.setCategory(category);" ng-class="{selected:category===vm.selectedCategory}">
+                            {{::category}}
+                        </h5>
+                    </div>
+                </div>
+                
+
+                <div class="col-md-1 separator-left fundamental">
+                    <h4>Studies</h4>
+                    <div class="abs-container">
+                        <div class="max-scrollbox" agmc-custom-scrollbar>
+                            <div ng-repeat="study in vm.getListedStudies()" ng-if="vm.shouldShowStudy(study)">
+                                <h5 ng-click="vm.selectStudy(study)" class="active-item" ng-class="{selected:study===vm.selectedStudy}">
+                                    {{::study.label}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-1 separator-left fundamental" ng-show="false">
+                    <b>{{vm.selectedStudy.label}} </b>
+                    <p>{{vm.selectedStudy.description}}</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="pull-right btn-square btn btn-primary" ng-disabled="!vm.selectedStudy" ng-click="vm.addStudy(vm.selectedStudy)">ADD</button>
+        <button class="pull-right btn-square btn btn-outline-primary" ng-click="vm.uibDismissPanel()">CANCEL</button>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+

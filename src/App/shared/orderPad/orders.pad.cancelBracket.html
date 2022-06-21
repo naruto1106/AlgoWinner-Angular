@@ -1,0 +1,69 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Cancel Existing Orders?</h4>
+</div>
+<div class="modal-body">
+    <div class="agm-component-orderstrades">
+        <h4 class="center-align">Please select the order(s) you wish to cancel:</h4>
+        <div class="center-align">
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th class="text-center">Order Type</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Created Time</th>
+                    </tr>
+                    </thead>
+                    <tr ng-if="vm.showTakeProfit()">
+                        <td>
+                            <input type="checkbox" ng-model="vm.cancelTakeProfit"/>
+                        </td>
+                        <td>
+                            Take Profit
+                        </td>
+                        <td>
+                            <span><strong>{{vm.takeProfitOrder.OrderPrice | customCurrencyOrDashMinMax:vm.takeProfitOrder.Product.Currency:2:4}}</strong> </span>
+                        </td>
+                        <td>
+                            <span><strong>{{::vm.takeProfitOrder.Quantity}}</strong> Units</span>
+                        </td>
+                        <td>
+                            <span>{{::vm.takeProfitOrder.CreatedTime | date:'mediumDate'}}</span>
+                            <span>{{::vm.takeProfitOrder.CreatedTime | date:'shortTime'}}</span>
+                        </td>
+                    </tr>
+                    <tr ng-if="vm.showStopLoss()">
+                        <td>
+                            <input type="checkbox" ng-model="vm.cancelStopLoss"/>
+                        </td>
+                        <td>
+                            Stop Loss
+                        </td>
+                        <td>
+                            <span><strong>{{vm.stopLossOrder.OrderPrice | customCurrencyOrDashMinMax:vm.stopLossOrder.Product.Currency:2:4}}</strong> </span>
+                        </td>
+                        <td>
+                            <span><strong>{{::vm.stopLossOrder.Quantity}}</strong> Units</span>
+                        </td>
+                        <td>
+                            <span>{{::vm.stopLossOrder.CreatedTime | date:'mediumDate'}}</span>
+                            <span>{{::vm.stopLossOrder.CreatedTime | date:'shortTime'}}</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer agm-component-orderstrades">
+    <div class="edit-bracket">
+        <button class="filled-blue pull-right" agmc-button-wait-on-promise="vm.submit()" ng-disabled="vm.disableSubmit()">CONFIRM</button>
+        <button class="hollow-blue pull-right remove-button" ng-click="vm.uibDismissPanel()">
+            CANCEL
+        </button>
+    </div>
+</div>

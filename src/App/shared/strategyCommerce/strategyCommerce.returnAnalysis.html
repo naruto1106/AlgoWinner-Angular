@@ -1,0 +1,99 @@
+﻿<div>
+    <!-- DIRECTIVE agmReturnAnalysis.html +  agmReturnAnalysis.js -->       
+    <div ng-show="vm.sufficientData">
+        <div class="m-15px">
+            Select Benchmark&nbsp;&nbsp;
+            <select ng-model="vm.selectedBenchmark"
+                    ng-options="selection as (selection.ProductName+' ('+selection.Symbol+')') for selection in vm.benchmarkSelections"
+                    ng-change="vm.onBenchmarkChanged()"></select>
+        </div>
+        <div class="p-50px text-center" ng-show="vm.isBenchmarkLoading">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div ng-show="!vm.isBenchmarkLoading">
+            <div class="h-600px w-100pct">
+                <highchart config="vm.chartConfig"></highchart>
+            </div>
+            <div class="row-md-12 gap-20px">
+                <div class="col-md-6 p-left-0px">
+                    <table style="font-size: 110%">
+                        <thead>
+                            <tr>
+                                <th>RETURN PERIOD</th>
+                                <th>
+                                    <span ng-if="vm.myItem.SubscriptionId"> SUBSCRIPTION</span>
+                                    <span ng-if="!vm.myItem.SubscriptionId" class="text-uppercase">{{vm.myItem | strategyOrTradePortfolio:vm.userId}}</span>
+                                </th>
+                                <th>BENCHMARK ({{vm.selectedBenchmark.Symbol}})</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="v in vm.returnValue">
+                                <td>{{v.Name}}</td>
+                                <td ng-class="v.Value>=0?['green-profit']:['red-loss']">
+                                    {{v.Value | valuePercentageOrDash:2}}
+                                </td>
+                                <td ng-class="v.Benchmark>=0?['green-profit']:['red-loss']">
+                                    {{v.Benchmark | valuePercentageOrDash:2}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 no-padding">
+                    <table style="font-size: 110%">
+                        <thead>
+                            <tr>
+                                <th>DESCRIPTION</th>
+                                <th>
+                                    <span ng-if="vm.myItem.SubscriptionId"> SUBSCRIPTION</span>
+                                    <span ng-if="!vm.myItem.SubscriptionId" class="text-uppercase">{{vm.myItem | strategyOrTradePortfolio:vm.userId}}</span>
+                                </th>
+                                <th>BENCHMARK ({{vm.selectedBenchmark.Symbol}})</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CUM. RETURN <span class="glyphicon glyphicon-info-sign" uib-tooltip="Shows compounded return since portfolio inception"></span></td>
+                                <td ng-class="vm.myItem.Profitability.CumulativeReturnPct>=0?['green-profit']:['red-loss']">
+                                    {{vm.myItem.Profitability.CumulativeReturnPct | valuePercentageOrDash:2}}
+                                </td>
+                                <td ng-class="vm.benchmarkData.Profitability.CumulativeReturnPct>=0?['green-profit']:['red-loss']">
+                                    {{vm.benchmarkData.Profitability.CumulativeReturnPct | valuePercentageOrDash:2}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SHARPE RATIO <span class="glyphicon glyphicon-info-sign" uib-tooltip="Shows the excess return over the risk-free rate per unit of volatility. The higher this number, the better the returns of the portfolio."></span></td>
+                                <td ng-if="vm.myItem.Profitability.LatestMonthlyReturnPct != null">{{vm.myItem.Profitability.SharpeRatio | valueOrDash:2}}</td>
+                                <td ng-if="vm.myItem.Profitability.LatestMonthlyReturnPct == null"> - </td>
+                                <td>{{vm.benchmarkData.Profitability.SharpeRatio | valueOrDash:2}}</td>
+                            </tr>
+                            <tr>
+                                <td>MAX DRAWDOWN <span class="glyphicon glyphicon-info-sign" uib-tooltip="Shows the maximum percentage the portfolio has lost in the overall portfolios since portfolio inception. The lower the %, the better it is."></span></td>
+                                <td ng-class="vm.myItem.Risk.MaximumDrawdown<=vm.benchmarkData.Risk.MaximumDrawdown?['green-profit']:['red-loss']">
+                                    <span ng-if="vm.myItem.Risk.MaximumDrawdown">-</span>{{vm.myItem.Risk.MaximumDrawdown | valuePercentageOrDash:2}}
+                                </td>
+                                <td ng-class="vm.benchmarkData.Risk.MaximumDrawdown<=vm.myItem.Risk.MaximumDrawdown?['green-profit']:['red-loss']">
+                                    <span ng-if="vm.benchmarkData.Risk.MaximumDrawdown">-</span>{{vm.benchmarkData.Risk.MaximumDrawdown | valuePercentageOrDash:2}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>VOLATILITY <span class="glyphicon glyphicon-info-sign" uib-tooltip="Measures the dispersion of returns using the standard deviation of holding period returns. The higher the %, the riskier it is."></span></td>
+                                <td>{{vm.myItem.Risk.Volatility | valuePercentageOrDash:2}}</td>
+                                <td>{{vm.benchmarkData.Risk.Volatility | valuePercentageOrDash:2}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        
+    </div>
+    <div ng-show="!vm.sufficientData" class="text-center m-top-20px">
+        <h5>There is insufficient data for this
+            <span ng-if="vm.myItem.SubscriptionId"> subscription</span>
+            <span ng-if="!vm.myItem.SubscriptionId" class="text-lowercase"> {{vm.myItem | strategyOrTradePortfolio:vm.userId}}</span>
+            to display any meaningful return analysis.</h5>
+    </div>    
+</div>

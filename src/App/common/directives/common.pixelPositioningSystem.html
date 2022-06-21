@@ -1,0 +1,6 @@
+﻿<div class="agms-directive pixel-positioning-system" >
+    <div class="popup" ng-if="vm.commonPixelPositioningSystemService.currentActivePopup" ng-style="vm.getPositionStyle()">
+        <div agmc-static-include="{{::vm.commonPixelPositioningSystemService.currentActivePopup.templateId}}" replace="true">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿<section class="simple-watchlist flex-v">
+    <script type="text/ng-template" id="simpleWatchlist/product-info">
+        <agms-product-picture changeable="true" class="product-picture" product="productContainer.ProductModel"
+                              hide-market-data="true" 
+                              hide-symbol="true" 
+                              show-currency="false"
+                              disable-click="vm.isEodTradeVenue(productContainer.ProductModel.TradeVenueLoc)">
+        </agms-product-picture>
+    </script>
+
+    <div class="filter minor-column">
+        <fieldset ng-if="sharedState.watchlists.length>0" class="pull-left menu">
+            <span class="title">Watchlist Name: </span>
+            <select ng-options="item as item.WatchlistName for item in sharedState.watchlists" ng-model="sharedState.selectedWatchlist" ng-change="vm.onWatchlistChanged()"
+                    analytics-on="click" analytics-category="Dashboard" analytics-event="SmallWatchlist" analytics-label="ChooseWatchlist" agmc-analytics-timestamp></select>
+        </fieldset>
+        <button class="mini-filled-blue pull-right" ng-click="vm.addWatchlist()" uib-tooltip="Create New Watchlist" tooltip-placement="left"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="SmallWatchlist" analytics-label="CreateNewWatchlist" agmc-analytics-timestamp>
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        <div class="clearfix"></div>
+        <div ng-if="sharedState.watchlists.length<=0 && !vm.isLoading" class="text-center">
+            <div class="alert alert-info">Create a new watchlist to get started</div>
+        </div>
+    </div>
+    <div ng-if="sharedState.watchlists.length>0" class="minor-column form-group has-feedback">
+        <input type="text" placeholder="ADD NEW SYMBOL" ng-model="vm.searchedProductOnWatchlist"
+               ng-model-options="{debounce: 200}"
+               uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+               typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+               typeahead-wait-ms="200"
+               typeahead-on-select="vm.onProductSelected()"
+               class="form-control"
+               analytics-on="change" analytics-category="Dashboard" analytics-event="SmallWatchlist" analytics-label="SearchStock" agmc-analytics-timestamp>
+        <span class="form-control-feedback">
+            <i class="glyphicon glyphicon-search"></i>
+        </span>
+    </div>
+
+    <div class="add-product-success" ng-if="vm.addingProductSucceed">
+        <div>{{vm.AddedProductName}} has been added to watchlist</div>
+    </div>
+
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+
+    <div class="alert alert-info" ng-if="sharedState.selectedWatchlist.WatchlistProducts.length<=0">
+        Add a product to get started
+    </div>
+
+    <div ng-if="vm.showProductList()" class="major-column">
+        <agms-product-list options="vm.watchlistProductListOptions" class="watchlist-product-list" product-container-list="sharedState.selectedWatchlist.WatchlistProducts">
+        </agms-product-list>
+    </div>
+
+    <script type="text/ng-template" id="watchlist/simple-watchlist">
+        <button class="cell-botton-normal" uib-tooltip="Chart" tooltip-placement="left" ng-click="externalVm.gotoChart(productContainer)"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="SmallWatchlist" analytics-label="GoToChart" agmc-analytics-timestamp>
+            <span class="glyphicon glyphicon-stats"></span>
+        </button>
+        <button class="cell-botton-alert" uib-tooltip="Delete this product" tooltip-placement="left" ng-click="externalVm.deleteProductOnWatchlist(productContainer)"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="SmallWatchlist" analytics-label="DeleteFromWatchlist" agmc-analytics-timestamp>
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+    </script>
+</section>

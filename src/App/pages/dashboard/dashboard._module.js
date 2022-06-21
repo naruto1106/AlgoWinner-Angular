@@ -1,0 +1,20 @@
+﻿agmNgModuleWrapper('agmp.dashboard', [
+    'agm.core',
+    'agms.positions',
+    'agms.textProcessing',
+    'agms.product',
+    'agms.image',
+    'agms.header',
+    "agms.news",
+    'agms.datamart',
+    "agms.tgps",
+    'agms.droidHelper',
+    'agms.user',
+    'agms.trading',
+    'agms.watchlist',
+    'agms.datamart',
+    "agms.market",
+    'agms.menu',
+    'agms.priceAlert',
+    "sticky"
+]);

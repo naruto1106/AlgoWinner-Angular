@@ -1,0 +1,43 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Add Bracket Order/TP/SL</h4>
+</div>
+<div class="modal-body">
+    <div class="agm-component-orderstrades">
+        <h4 class="center-align">Please review the following order(s) before submitting.</h4>
+        <div class="center-align">
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center" ng-if="vm.order.HasAttachedTP">Take Profit</th>
+                            <th class="text-center" ng-if="vm.order.HasAttachedSL">Stop Loss</th>
+                            <th class="text-center">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td ng-if="vm.order.HasAttachedTP">
+                            <span><strong>{{vm.order.TakeProfitOrder.LimitPrice | customCurrencyOrDashMinMax:vm.order.Product.Currency:2:4}}</strong> </span>
+
+                        </td>
+                        <td ng-if="vm.order.HasAttachedSL">
+                            <span><strong>{{vm.order.StopLossOrder.StopPrice | customCurrencyOrDashMinMax:vm.order.Product.Currency:2:4}}</strong> </span>
+                        </td>
+                        <td>
+                            <span><strong>{{::vm.order.Quantity}}</strong> Units</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer agm-component-orderstrades">
+    <div class="edit-bracket">
+        <button class="filled-blue pull-right" agmc-button-wait-on-promise="vm.submit()">CONFIRM</button>
+        <button class="hollow-blue pull-right remove-button" ng-click="vm.uibDismissPanel()">
+            CANCEL
+        </button>
+    </div>
+</div>

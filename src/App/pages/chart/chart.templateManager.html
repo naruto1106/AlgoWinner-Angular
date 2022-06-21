@@ -1,0 +1,55 @@
+﻿<div class="btn-group ">
+    <div class="btn-group pull-left" uib-dropdown>
+        <button type="button" class="btn" uib-dropdown-toggle uib-tooltip="Save Workspace" tooltip-placement="bottom-right"
+                ng-click="vm.closeTemplateList()"
+                analytics-on="click" analytics-category="Chart" analytics-event="Top Menu" analytics-label="SaveTemplate" agmc-analytics-timestamp>
+            <span class="algoicon  algoicons-floppy-o"></span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-if="vm.pChartViewTemplateService.currentViewTemplate">
+            <li>
+                <a ng-click="vm.saveCurrentView(false)">
+                    Save '{{vm.pChartViewTemplateService.currentViewTemplate.name}}'
+                </a>
+            </li>
+            <li>
+                <a ng-click="vm.saveCurrentView(true)">
+                    Save Workspace As...
+                </a>
+            </li>
+        </ul>
+        <ul class="dropdown-menu" ng-if="!vm.pChartViewTemplateService.currentViewTemplate">
+            <li>
+                <a ng-click="vm.saveCurrentView(true)">
+                    Save Workspace As...
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!--<button ng-click="vm.loadWorkspace()"
+            class="btn" uib-tooltip="Load Workspace" tooltip-placement="bottom"
+            analytics-on="click" analytics-category="Chart" analytics-event="Top Menu" analytics-label="Load Workspace" agmc-analytics-timestamp>
+        <span class="algoicon  algoicons-folder-open-o"></span>
+    </button>-->
+
+
+    <div class="btn-group pull-left" uib-dropdown auto-close="outsideClick" is-open="vm.isOpen">
+        <button type="button" class="btn" uib-dropdown-toggle uib-tooltip="Load Workspace" tooltip-placement="bottom-right" ng-click="vm.getOrRefreshViewTemplates()"
+                analytics-on="click" analytics-category="Chart" analytics-event="Top Menu" analytics-label="SaveTemplate" agmc-analytics-timestamp>
+            <span class="algoicon  algoicons-folder-open-o"></span>
+
+            <span class="caret"></span>
+        </button>
+        <div class="dropdown-menu template-dropdown" uib-dropdown-menu role="menu" agms-guide-item="chart.load-panel">
+            <agmp-chart-workspace-table on-template-loaded="vm.closeTemplateList()" sorting="vm.sorting"></agmp-chart-workspace-table>
+
+        </div>
+    </div>
+
+    <button ng-click="vm.downloadImage()" ng-disabled="!vm.filterDescription.primaryProduct || vm.filterDescription.myProducts.length <= 0"
+            class="btn" uib-tooltip="Download" tooltip-placement="bottom-right"
+            analytics-on="click" analytics-category="Chart" analytics-event="Top Menu" analytics-label="Download" agmc-analytics-timestamp>
+        <span class="algoicon  algoicons-download"></span>
+    </button>
+</div>

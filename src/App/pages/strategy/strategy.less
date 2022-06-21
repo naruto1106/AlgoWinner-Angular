@@ -1,0 +1,210 @@
+﻿.agm-component-manage-subscription {
+    .slash {
+        text-decoration: line-through;
+        color: red;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+
+    div[agms-image] {
+        width: 50px;
+        height: 30px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        float: left;
+    }
+
+    .panel-heading {
+        color: #1b6abd;
+        font-weight: 800;
+        font-size: 18px;
+    }
+
+    .bundle-subscription.panel-body {
+        padding: 10px;
+        background: mix(white,transparent,30);
+
+        .bundle-title {
+            padding: 15px 10px 10px 10px;
+            border: 1px solid #CAD5DF;
+            background-color: #f8fafc;
+
+            .bundle-name {
+                text-transform: uppercase;
+                color: #08396b;
+                font-size: 17px;
+                font-weight: 500;
+                padding-left: 10px;
+            }
+
+            .bundle-price {
+                font-size: 15px;
+                float: right;
+                font-weight: 600;
+                margin-right: 20px;
+            }
+        }
+
+        .bundle-info {
+            height: 35px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #CAD5DF;
+
+            .bundle-button {
+                float: right;
+
+                .subscription-expire {
+                    color: #ec7c38;
+                    border-color: #ec7c38;
+                }
+            }
+        }
+
+        .bundle-table {
+            margin-bottom: 15px;
+
+            .table-strategy {
+                width: 250px;
+            }
+
+            .table-description {
+                width: 300px;
+            }
+
+            .table-long-description {
+                width: 500px;
+            }
+
+            .table-status {
+                width: 150px;
+            }
+
+            .table-feature {
+                width: 100px;
+            }
+        }
+    }
+
+    & thead > tr > td {
+        font-size: 15px;
+        font-weight: 600;
+    }
+}
+
+.select-subscription-highlighted {
+    background: mix(@blueBasic,transparent,30);
+    color: white;
+}
+
+.select-strategy-highlighted {
+    background: mix(@blueBasic,transparent,30);
+    color: white;
+}
+
+.new-trade-portfolio {
+    .type-selection-box {
+        text-align: left;
+        background-color: @gray1;
+        border-radius: 15px;
+        cursor: pointer;
+        border: 2px solid white;
+
+        .title {
+            background-color: @gray2;
+            border-radius: 15px 15px 0 0;
+            font-size: 20px;
+            line-height: 40px;
+            font-weight: 600;
+
+            input[type=radio] {
+                height: 20px;
+                width: 20px;
+                margin-left: 15px;
+            }
+        }
+
+        .description {
+            padding: 20px;
+            font-size: 15px;
+        }
+
+        &:hover, &.active {
+            border: 2px solid @plum;
+        }
+    }
+
+    .broker-selection {
+        .broker {
+            padding: 5px;
+            background-color: @gray1;
+            width: 300px;
+            height: 55px;
+            float: right;
+            border-radius: 10px;
+            border: 2px solid white;
+            cursor: pointer;
+
+            &.selected {
+                border: 2px solid @plum;
+            }
+
+            .name {
+                width: 200px;
+                float: left;
+                line-height: 40px;
+                font-weight: 600;
+                font-size: 20px;
+                padding-left: 10px;
+            }
+
+            .image {
+                height: 40px;
+                width: 40px;
+                float: right;
+                background-size: cover;
+                border-radius: 5px;
+                margin-right: 5px;
+            }
+        }
+
+        .login-form {
+            .api-key {
+                padding: 5px;
+                margin-bottom: 10px;
+                background-color: @gray1;
+            }
+        }
+    }
+
+    .link-broker {
+
+        .selected-broker {
+            width: 300px;
+            background-color: @gray1;
+            height: 80px;
+            margin: auto;
+            border-radius: 10px;
+
+            .image {
+                float: left;
+                height: 60px;
+                width: 60px;
+                background-size: cover;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .account-info {
+                float: right;
+                width: 210px;
+                padding-top: 10px;
+
+                .broker-type {
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

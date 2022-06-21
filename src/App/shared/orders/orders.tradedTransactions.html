@@ -1,0 +1,50 @@
+﻿<div>
+    <!--DIRECTIVE agmTradedTransactions.html + agm*TradedTransactions.js -->
+    <div class="p-50px text-center" ng-show="vm.isLoadingOrders">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div class="alert alert-info" ng-if="(!vm.hasOrders() && !vm.models.searchOrderText && vm.models.todaysTradeFilter === 'No Filter') && !vm.isLoadingOrders">
+        <span ng-if="vm.viewMode !== 'readonly'">{{vm.noOrderMessage}}</span>
+        <span ng-if="vm.viewMode == 'readonly'">{{vm.noOrderMessageForGroupStrategy}}</span>
+    </div>
+    <div ng-if="(vm.hasOrders() || vm.models.searchOrderText || vm.models.todaysTradeFilter !== 'No Filter') && !vm.isLoadingOrders">
+        <div>
+            <div class="pull-left m-left-50px m-bottom-15px">
+                TRADE INTENTION:
+                <select class="m-left-5px" ng-model="vm.models.todaysTradeFilter"
+                    ng-options="selection for selection in ::vm.todaysTradeFilters"
+                    analytics-on="click" analytics-category="{{vm.category}}" analytics-event="{{vm.event}}" analytics-label="FilterTradeIntention" agmc-analytics-timestamp>
+                </select>
+            </div>
+            <div class="pull-right search">
+                <input type="text" placeholder="SEARCH STOCK" ng-model="vm.models.searchOrderText"
+                    analytics-on="change" analytics-category="{{vm.category}}" analytics-event="{{vm.event}}" analytics-label="SearchStock" agmc-analytics-timestamp />
+                <button type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <h4 class="text-center" ng-if="(vm.models.searchOrderText !== '' && vm.getPagedOrders().length == 0 && !vm.isLoadingOrders) || !vm.hasOrders()">no results found</h4>
+        <div ng-if="vm.hasOrders(vm.orders,vm.orderFilter)">
+            <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+                first-text="&laquo;" last-text="&raquo;" max-size="10"
+                num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+            </ul>
+            <div ng-repeat="order in vm.getPagedOrders() track by order.OrderId" class="border  m-top-10px">
+                <agms-trading-transaction-element order="order"
+                    has-bracket-order-func="::vm.hasBracketOrder"
+                    view-bracket-order-func="::vm.viewBracketOrder"
+                    subscriber-orders="vm.subscriberOrders">
+                </agms-trading-transaction-element>
+            </div>
+            <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                class="pagination-sm  m-top-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+                first-text="&laquo;" last-text="&raquo;" max-size="10"
+                num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+            </ul>
+        </div>
+    </div>
+</div>

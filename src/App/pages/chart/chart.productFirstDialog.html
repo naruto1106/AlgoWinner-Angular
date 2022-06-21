@@ -1,0 +1,27 @@
+﻿<div class="product-first-dialog">
+    <h3>You have not added any securities.</h3>
+    <h5>Please search a product here or select one from the <mark>list on the left</mark> </h5>
+    <div class="product-container">
+        <div class="input-group search-product">
+            <input type="text"
+                   placeholder=""
+                   class="form-control last-input-group-item"
+                   ng-model="vm.selectedProduct"
+                   ng-model-options="{debounce: 200}"
+                   uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                   typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                   typeahead-wait-ms="200"
+                   typeahead-on-select="vm.onItemSelected()"
+                   analytics-on="change" analytics-category="Chart" analytics-event="Add Stock" analytics-label="Search Box" agmc-analytics-timestamp />
+            <div></div>
+            <span class="glyphicon glyphicon-search"></span>
+        </div>
+        <div class="clearfix"></div>
+        <div class="overlay" ng-class="{'is-focused':!vm.showOverlay()}">
+            <h4>{{vm.filterDescription.primaryProduct.ProductName}}</h4>
+            <h5>{{vm.filterDescription.primaryProduct.Symbol}} {{vm.filterDescription.primaryProduct.TradeVenueLoc}}</h5>
+        </div>
+    </div>
+
+</div>
+

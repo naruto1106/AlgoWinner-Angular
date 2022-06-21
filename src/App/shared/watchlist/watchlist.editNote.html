@@ -1,0 +1,19 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Write Notes</h4>
+</div>
+<div class="modal-body agms-directives edit-watchlist-note">
+    <h2>Product: <b>{{vm.watchlistProduct.ProductModel.Symbol}}-{{vm.watchlistProduct.ProductModel.TradeVenueLoc}} ({{vm.watchlistProduct.ProductModel.ProductName}})</b></h2>
+    <div class="p-10px" ng-if="!vm.isLoadingNotesData">
+        <textarea ng-model="vm.watchlistProduct.TemporaryNotes" maxlength="250"></textarea>
+        <div class="p-5px">
+            <button class="filled-blue m-right-5px pull-right" agmc-button-wait-on-promise="vm.saveNotes()">SAVE</button>
+            <button class="hollow-blue  m-right-5px pull-right" ng-click="vm.uibDismissPanel()">CANCEL</button>
+            <button class="filled-red  m-left-5px pull-left" agmc-button-wait-on-promise="vm.deleteNotes()">DELETE</button>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="p-50px text-center" ng-if="vm.isLoadingNotesData">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+</div>

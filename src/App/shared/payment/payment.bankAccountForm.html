@@ -1,0 +1,190 @@
+﻿<div class="agm-component-payment">
+    <div class="p-50px text-center" ng-if="vm.isLoadingBankAccounts">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        <div class="clearfix m-bottom-5px"></div>
+        <span class="gray-text">Loading Bank Account ...</span>
+    </div>
+    <div ng-if="!vm.isLoadingBankAccounts">
+        <span class="p-0px pull-right" ng-if="!vm.isNew && !vm.isEdit">
+            <a class="glyphicon glyphicon-trash pull-right silent-button" ng-click="vm.deleteBankAccount()"
+               analytics-on="click" analytics-category="Setting" analytics-event="DeleteBankAccount" agmc-analytics-timestamp></a>
+        </span>
+        <span class="p-0px pull-right" ng-if="!vm.isNew && !vm.isEdit">
+            <a class="glyphicon glyphicon-pencil pull-right m-right-5px  silent-button" ng-click="vm.setEdit()"
+               analytics-on="click" analytics-category="Setting" analytics-event="EditBankAccount" agmc-analytics-timestamp></a>
+        </span>
+
+        <h3 ng-if="vm.isNew">Add New Bank Account:</h3>
+        <h3 ng-if="vm.isEdit">Edit Bank Account:</h3>
+
+        <div ng-if="vm.isNew || vm.isEdit" class="border box p-5px m-bottom-10px">
+            We currently only support bank accounts based in Singapore. For bank accounts outside of Singapore, please <a ng-click="vm.showContactUs()">contact us</a> directly.
+        </div>
+
+        <form name="vm.bankAccountForm" ng-disabled="vm.isSubmitting">
+            <div class="m-bottom-5px underline">
+                <b>YOUR DETAILS</b><i> (should match bank account)</i>
+            </div>
+            <div class="m-top-15px box-form p-15px" ng-if="vm.isNew || vm.isEdit">
+                <div class="h-40px">
+                    <div class="row-md-2 gap-0px">
+                        <div class="col-md-1">
+                            <b>First Name</b>
+                            <input class="m-left-20px" style="width: 150px" type="text" ng-model="vm.bankAccount.BankAccountHolderFirstName" name="firstName" required/>
+                            <div style="color: red; font-size: 13px;margin-bottom: 5px" ng-show="vm.bankAccountForm.firstName.$dirty && vm.bankAccountForm.firstName.$invalid || vm.bankAccount.BankAccountHolderFirstName == ''">First Name is required.</div>
+                        </div>
+                        <div class="col-md-1">
+                            <b>Last Name</b>
+                            <input style="width: 150px; margin-left: 23px" type="text" ng-model="vm.bankAccount.BankAccountHolderLastName" name="lastName" required/>
+                            <div style="color: red; font-size: 13px;margin-bottom: 5px" ng-show="vm.bankAccountForm.lastName.$dirty && vm.bankAccountForm.lastName.$invalid || vm.bankAccount.BankAccountHolderLastName == ''">Last Name is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="m-top-10px h-40px">
+                    <div>
+                        <div class="gap-0px">
+                            <div class="col-xs-2">
+                                <b>Date of Birth</b>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="gap-0px">
+                                    <div class="col-xs-4">
+                                        <span class="m-left-10px">Day: </span>
+                                        <select style="width: 60px;min-width: 50px;" ng-model="vm.dateOfBirth.Day" ng-options="day as day for day in vm.days"></select>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <span class="m-left-10px">Month: </span>
+                                        <select style="width: 60px;min-width: 50px;" ng-model="vm.dateOfBirth.Month" ng-options="month as month for month in vm.months"></select>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <span class="m-left-10px">Year: </span>
+                                        <select style="width: 60px;min-width: 50px;" ng-model="vm.dateOfBirth.Year" ng-options="year as year for year in vm.years"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="color: red; font-size: 13px;margin-bottom: 10px" ng-show="vm.bankAccountForm.dateOfBirth.$dirty && vm.bankAccountForm.dateOfBirth.$invalid  || vm.dateOfBirth.Day == '' ||
+                          vm.dateOfBirth.Month == '' || vm.dateOfBirth.Year == ''">Date of Birth is required.</div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="m-top-20px h-40px">
+                    <b>Address Line1</b>
+                    <input style="width: 72%; margin-left: 4px" type="text" ng-model="vm.bankAccount.AddressLine1" name="address" required/>
+                    <div style="color: red; font-size: 13px; margin-bottom: 10px" ng-show="vm.bankAccountForm.address.$dirty && vm.bankAccountForm.address.$invalid || vm.bankAccount.AddressLine1 == ''">Address is required.</div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="m-top-20px h-40px">
+                    <b>Address Line2</b>
+                    <input style="width: 72%; margin-left: 4px" type="text" ng-model="vm.bankAccount.AddressLine2"/>
+                </div>
+                <div class="clearfix"></div>
+                <div class="m-top-10px h-40px">
+                    <div class="row-md-2 gap-0px">
+                        <div class="col-md-1">
+                            <b>City</b>
+                            <input style="width: 150px; margin-left: 63px" type="text" ng-model="vm.bankAccount.City" name="city" required/>
+                            <div style="color: red; font-size: 13px;margin-bottom: 5px" ng-show="vm.bankAccountForm.city.$dirty && vm.bankAccountForm.city.$invalid || vm.bankAccount.City == ''">City is required.</div>
+                        </div>
+                        <div class="col-md-1">
+                            <b>State</b>
+                            <input style="width: 150px; margin-left: 55px" type="text" ng-model="vm.bankAccount.State" name="state" required/>
+                            <div style="color: red; font-size: 13px;margin-bottom: 5px" ng-show="vm.bankAccountForm.state.$dirty && vm.bankAccountForm.state.$invalid || vm.bankAccount.State == ''">State is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="m-top-10px h-40px">
+                    <div class="row-md-2 gap-0px">
+                        <div class="col-md-1">
+                            <b>Country</b>
+                            <select style="width: 150px; margin-left: 38px;margin-bottom: 5px" class="lh-25px" ng-model="vm.bankAccount.CountryId" ng-options="country.CountryId as country.CountryName for country in vm.countries" ng-disabled="vm.isSubmitting"></select>
+                        </div>
+                        <div class="col-md-1">
+                            <b>Postal Code</b>
+                            <input style="width: 150px; margin-left: 16px" type="text" ng-model="vm.bankAccount.PostalCode" name="postalCode" pattern="[0-9]{6}" required/>
+                            <div style="color: red; font-size: 13px;" ng-show="vm.bankAccountForm.postalCode.$dirty && vm.bankAccountForm.postalCode.$invalid || vm.bankAccount.PostalCode == ''">Please enter a valid 6 digit Postal Code.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <dl class="dl-horizontal m-top-15px box-form p-15px" ng-if="!vm.isNew && !vm.isEdit">
+                <dt>First Name</dt>
+                <dd>{{vm.bankAccount.BankAccountHolderFirstName}}</dd>
+                <dt>Last Name</dt>
+                <dd>{{vm.bankAccount.BankAccountHolderLastName}}</dd>
+                <dt>Date of Birth</dt>
+                <dd>{{vm.dateOfBirth.Day}} / {{vm.dateOfBirth.Month}} / {{vm.dateOfBirth.Year}}</dd>
+                <dt>Address Line1</dt>
+                <dd>{{vm.bankAccount.AddressLine1}}</dd>
+                <dt>Address Line2</dt>
+                <dd>{{vm.bankAccount.AddressLine2}}</dd>
+                <dt>City</dt>
+                <dd>{{vm.bankAccount.City}}</dd>
+                <dt>State</dt>
+                <dd>{{vm.bankAccount.State}}</dd>
+                <dt>Country</dt>
+                <dd>{{vm.getCountryName(vm.bankAccount.CountryId)}}</dd>
+                <dt>Postal Code</dt>
+                <dd>{{vm.bankAccount.PostalCode}}</dd>
+            </dl>
+            <div class="m-top-10px underline m-bottom-5px">
+                <b>YOUR BANK ACCOUNT DETAILS</b>
+            </div>
+            <div class="m-top-15px box-form p-15px" ng-if="vm.isNew || vm.isEdit">
+                <div class="h-40px">
+                    <div class="row-md-2 gap-0px">
+                        <div class="col-md-1">
+                            <b>Bank Code</b>
+                            <input style="width: 150px; margin-left: 24px" type="text" ng-model="vm.bankAccount.BankCode" name="bankCode" minlength="4" maxlength="4" pattern="[0-9]{4}" required/>
+                            <div style="color: red; font-size: 13px;margin-bottom: 5px" ng-show="vm.bankAccountForm.bankCode.$dirty && vm.bankAccountForm.bankCode.$invalid || vm.bankAccount.BankCode == ''">Please enter a valid 4 digit bank code.</div>
+                        </div>
+                        <div class="col-md-1">
+                            <b>Branch Code</b>
+                            <input style="width: 150px; margin-left: 12px" type="text" ng-model="vm.bankAccount.BranchCode" name="branchCode" minlength="3" maxlength="3" pattern="[0-9]{3}" required/>
+                            <div style="color: red; font-size: 13px;" ng-show="vm.bankAccountForm.branchCode.$dirty && vm.bankAccountForm.branchCode.$invalid || vm.bankAccount.BranchCode == ''">Please enter a valid 3 digit branch code.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="m-top-10px h-40px">
+                    <div class="row-md-2 gap-0px">
+                        <div class="col-md-1">
+                            <b>Account No.</b>
+                            <input style="width: 150px; margin-left: 15px" type="text" ng-model="vm.bankAccount.BankAccountNumber" name="accountNumber" minlength="6" maxlength="12" pattern="[0-9]{6,12}" required/>
+                            <div style="color: red; font-size: 13px;margin-bottom: 5px" ng-show="vm.bankAccountForm.accountNumber.$dirty && vm.bankAccountForm.accountNumber.$invalid || vm.bankAccount.BankAccountNumber == ''">Please enter a valid bank account number (6-12 digits).</div>
+                        </div>
+                        <div class="col-md-1">
+                            <b>Currency</b>
+                            <select style="width: 150px; margin-left: 34px" class="lh-25px" ng-model="vm.bankAccount.Currency" ng-options="currency as currency for currency in vm.currencies" ng-disabled="vm.isSubmitting"></select>
+                            <div style="color: red; font-size: 13px;" ng-show="vm.bankAccountForm.currency.$dirty && vm.bankAccountForm.currency.$invalid">Please enter a valid currency.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <dl class="dl-horizontal m-top-15px box-form p-15px" ng-if="!vm.isNew && !vm.isEdit">
+                <dt>Bank Code</dt>
+                <dd>{{vm.bankAccount.BankCode}}</dd>
+                <dt>Branch Code</dt>
+                <dd>{{vm.bankAccount.BranchCode}}</dd>
+                <dt>Bank Account Number</dt>
+                <dd>{{vm.bankAccount.BankAccountNumber}}</dd>
+                <dt>Currency</dt>
+                <dd>{{vm.bankAccount.Currency}}</dd>
+            </dl>
+        </form>
+        <div class="left-align" ng-if="vm.isNew || vm.isEdit">
+            <input type="checkbox" ng-model="vm.termsChecked" name="terms">AlgoMerchant uses Stripe to send payments. By checking this box you agree to be bound to the <a href="/App/shared/payment/payment.termsOfService.html" target="_blank">Stripe Connected Account Agreement</a>
+        </div>
+        <div class="clearfix"></div>
+        <div class="separator-top m-top-20px h-10px"></div>
+        <button class="filled-blue pull-right m-left-10px" ng-if="vm.isEdit || vm.isNew" ng-disabled="vm.isFormInvalid() || vm.isSubmitting" ng-click="vm.submit()"
+                analytics-on="click" analytics-category="Setting" analytics-event="SaveBankAccount" agmc-analytics-timestamp>SUBMIT</button>
+        <button class="hollow-blue pull-right m-left-10px" ng-if="vm.isEdit && !vm.isNew" ng-click="vm.cancelEdit()">CANCEL</button>
+        <div class="clearfix m-bottom-10px"></div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿<div>
+    <table class="open-position">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Position</th>
+                <th>Realized<br />Quantity</th>
+                <th>Currency</th>
+                <th>Avg<br />Entry Price</th>
+                <th>Avg<br />Exit Price</th>
+                <th>Realized<br />P/L</th>
+                <th>Net<br />P/L <span class="glyphicon glyphicon-info-sign" uib-tooltip="Net P/L = Realized P/L - Brokerage Cost"></span></th>
+                <th>Entry<br />Time</th>
+                <th>Exit<br />Time</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="position in vm.getPagedItems('historical')">
+                <td>
+                    <agms-product-picture product="position.Product"></agms-product-picture>
+                    <div class="clearfix"></div>
+                </td>
+                <td><h5 class="lh-40px  m-0px">{{position.PositionType}}</h5></td>
+                <td><h5 class="lh-40px  m-0px">{{position.QuantityLiquidated | valueOrDash:0}}</h5></td>
+                <td><h5 class="lh-40px  m-0px">{{::position.Product.Currency}}</h5></td>
+                <td><h5 class="lh-40px  m-0px">{{position.AverageEntryPrice | customCurrencyOrDashMinMax:position.Product.Currency:2:4}}</h5></td>
+                <td><h5 class="lh-40px  m-0px">{{position.AverageExitPrice | customCurrencyOrDashMinMax:position.Product.Currency:2:4}}</h5></td>
+                <td ng-class="position.RealizedPL>=0?['green-profit']:['red-loss']">
+                    <h5 class="lh-15px m-top-5px">
+                        {{position.RealizedPL | customCurrencyOrDash:position.Product.Currency:2}}<br />
+                        ({{position.RealizedPL_Percent | valuePercentageOrDash:2}})
+                    </h5>
+                </td>
+                <td ng-class="position.NetPnL>=0?['green-profit']:['red-loss']">
+                    <h5 class="lh-15px m-top-5px">
+                        {{position.NetPnL | customCurrencyOrDash:position.Product.Currency:2}}<br />
+                        ({{position.NetPnL_Percent | valuePercentageOrDash:2}})
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="lh-40px  m-0px">
+                        {{::position.EntryTime | date:'mediumDate'}}
+                    </h5>
+                </td>
+                <td><h5 class="lh-40px  m-0px">{{position.LastExitTime | date:'mediumDate'}}</h5></td>
+                <td>
+                    <button ng-if="vm.showViewDetail() && !vm.isByAccount && vm.showDetail"
+                            agmc-button-wait-on-promise="vm.viewPositionDetailFunc(position)"
+                            class="mini-filled-blue  m-top-5px pull-right m-right-10px"
+                            style="line-height: 10px"
+                            analytics-on="click" analytics-category="Trade" analytics-event="Orders" analytics-label="HistoricalPositionDetail" agmc-analytics-timestamp>
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                    <div class="clearfix"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,89 @@
+﻿<div class="m-top-20px">
+    <div ng-if="vm.capitalInfo.TradingCapital <= 0">
+        <div class="alert alert-warning">
+            To start trading, allocate your trading capital
+            <a class="underline" href="#/tradeportfoliosettings?tradePortfolioId={{vm.capitalInfo.StrategyId}}">here</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <uib-tabset class="tab-type2" active="vm.activeTab" ng-if="vm.capitalInfo.TradingCapital">
+        <uib-tab index="0" ng-click="vm.setActiveTab(0)" analytics-on="click" analytics-category="Trade" analytics-event="Orders"
+            analytics-label="OverviewTab" agmc-analytics-timestamp>
+            <uib-tab-heading>
+                <div class="w-100pct m-right-5px m-left-5px" agms-droid-helper-item="orderListView.overviewTab">Overview</div>
+            </uib-tab-heading>
+            <div ng-if="vm.activeTab == 0">
+                <div class="p-50px text-center" ng-show="vm.isLoadingActivePositions">
+                    <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                </div>
+                <div class="row-md-5 gap-10px" ng-show="!vm.isLoadingActivePositions">
+                    <div class="col-md-1" ng-if="vm.hasPositions()">
+                        <agms-positions-sector-summary-developer is-loading-sectors="vm.isLoadingActivePositions" show-turnover="false" currency="vm.capitalInfo.Currency"></agms-positions-sector-summary-developer>
+                    </div>
+                    <div ng-class="[vm.hasPositions()?'col-md-4':'col-md-5']">
+                        <agms-positions-current-holding-developer is-by-account="vm.isByAccount" is-loading-positions="vm.isLoadingActivePositions" view-mode="vm.viewMode"></agms-positions-current-holding-developer>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" ng-click="vm.setActiveTab(1)" analytics-on="click" analytics-category="Trade" analytics-event="Orders"
+            analytics-label="OrdersLogTab" agmc-analytics-timestamp>
+            <uib-tab-heading>
+                <div class="w-100pct m-right-5px m-left-5px" agms-droid-helper-item="orderListView.ordersLogTab">Orders Log</div>
+            </uib-tab-heading>
+            <div class="row-md-10 gap-10px" ng-if="vm.activeTab == 1">
+                <div class="col-md-3">
+                    <agms-trading-cash-allocation is-loading="vm.isLoadingCapitalSummary" class="box border m-bottom-10px">
+                    </agms-trading-cash-allocation>
+                    <agms-positions-summary is-by-account="vm.isByAccount" is-loading-positions="vm.isLoadingActivePositions" view-mode="vm.viewMode"
+                        class="box border"></agms-positions-summary>
+
+                </div>
+                <div class="col-md-7">
+                    <agms-orders-transactions-developer is-by-account="vm.isByAccount" selected-strategy="vm.selectedStrategy" show-cancel-button="true" view-mode="vm.viewMode" is-loading-orders="vm.isLoadingOrders"></agms-orders-transactions-developer>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </uib-tab>
+        <uib-tab index="2" ng-click="vm.setActiveTab(2)" analytics-on="click" analytics-category="Trade" analytics-event="Orders"
+            analytics-label="ActiveOrdersTab" agmc-analytics-timestamp>
+            <uib-tab-heading>
+                <div class="w-100pct m-right-5px m-left-5px" agms-droid-helper-item="orderListView.activeOrdersTab">Active Orders</div>
+            </uib-tab-heading>
+            <agms-orders-active-developer is-by-account="vm.isByAccount" show-cancel-button="true" view-mode="vm.viewMode" is-loading-orders="vm.isLoadingOrders"
+                ng-if="vm.activeTab == 2"></agms-orders-active-developer>
+        </uib-tab>
+        <uib-tab index="3" ng-click="vm.setActiveTab(3)" analytics-on="click" analytics-category="Trade" analytics-event="Orders"
+            analytics-label="TodaysTradesTab" agmc-analytics-timestamp>
+            <uib-tab-heading>
+                <div class="w-100pct m-right-5px m-left-5px" agms-droid-helper-item="orderListView.todaysTradesTab">Today's Trades</div>
+            </uib-tab-heading>
+            <agms-orders-traded-transactions-developer is-loading-orders="vm.isLoadingOrders" view-mode="vm.viewMode" ng-if="vm.activeTab == 3"></agms-orders-traded-transactions-developer>
+        </uib-tab>
+        <uib-tab index="4" ng-click="vm.setActiveTab(4)" analytics-on="click" analytics-category="Trade" analytics-event="Orders"
+            analytics-label="OpenPositionsTab" agmc-analytics-timestamp>
+            <uib-tab-heading>
+                <div class="w-100pct m-right-5px m-left-5px" agms-droid-helper-item="orderListView.openPositionsTab">Open Positions</div>
+            </uib-tab-heading>
+            <agms-positions-active-developer is-by-account="vm.isByAccount" can-increase-decrease="false" is-loading-positions="vm.isLoadingActivePositions"
+                currency="vm.capitalInfo.Currency" strategies="vm.myStrategies" selected-strategy="vm.selectedStrategy" view-mode="vm.viewMode"
+                ng-if="vm.activeTab == 4"></agms-positions-active-developer>
+        </uib-tab>
+        <uib-tab index="5" ng-click="vm.setActiveTab(5)">
+            <uib-tab-heading>
+                <div class="w-100pct m-right-5px m-left-5px" agms-droid-helper-item="orderListView.historicalTab" analytics-on="click" analytics-category="Trade"
+                    analytics-event="Orders" analytics-label="HistoricalTab" agmc-analytics-timestamp>Historical</div>
+            </uib-tab-heading>
+            <uib-tabset class="tab-type1" n ng-if="vm.activeTab == 5">
+                <uib-tab heading="Realized Positions">
+                    <agms-positions-historical-developer selected-strategy="vm.selectedStrategy" is-by-account="vm.isByAccount" is-loading-positions="vm.isLoadingPositions" currency="vm.capitalInfo.Currency"
+                        strategies="vm.myStrategies" view-mode="vm.viewMode"></agms-positions-historical-developer>
+                </uib-tab>
+                <uib-tab heading="Historical Orders">
+                    <agms-orders-historical-developer selected-strategy="vm.selectedStrategy" is-loading-orders="vm.isLoadingOrders" currency="vm.capitalInfo.Currency" view-mode="vm.viewMode"></agms-orders-historical-developer>
+                </uib-tab>
+            </uib-tabset>
+        </uib-tab>
+    </uib-tabset>
+</div>

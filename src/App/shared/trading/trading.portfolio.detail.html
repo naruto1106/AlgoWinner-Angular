@@ -1,0 +1,28 @@
+﻿<div class="modal-header" >
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Portfolio Detail</h4>
+</div>
+<div class="modal-body agm-component-orderstrades">
+    <div class="p-10px box">
+        <agms-positions-active-table is-magnifier-shown="false" view-mode="'readonly'"
+                                     is-preview="false"
+                                     class="white-box"
+                                     get-paged-items="vm.getItem"></agms-positions-active-table>
+    </div>
+    <div class="p-10px">
+        <ul uib-pagination boundary-links="true" total-items="vm.orders.length" ng-model="vm.models.currentPage"
+            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="10"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+        <div class="border white-box text-left m-5px" ng-repeat="order in vm.getPagedFilledOrders()">
+            <agms-orders-table-element is-preview="false"
+                                       is-related-order-browsable="false"
+                                       order="order" ng-class="vm.cssClass(order)"></agms-orders-table-element>
+        </div>
+        <ul uib-pagination boundary-links="true" total-items="vm.orders.length" ng-model="vm.models.currentPage"
+            class="pagination-sm m-top-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="10"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+    </div>
+</div>
+

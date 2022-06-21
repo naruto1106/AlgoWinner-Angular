@@ -1,0 +1,17 @@
+build/*
+node_modules/*
+packages/*
+src/*.html
+src/node_modules/*
+src/dist/*
+src/html-env/*
+src/srcmap/*
+src/LocalProduction.config
+src/LocalStaging.config
+src/Pilot.config
+src/ProdAWS.config
+src/Production.config
+src/Release.config
+src/Staging.config
+src/Staging2.config
+src/StagingAWS.config

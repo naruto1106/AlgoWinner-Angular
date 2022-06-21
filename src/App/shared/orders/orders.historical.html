@@ -1,0 +1,78 @@
+﻿<div>
+    <!--DIRECTIVE agmHistoricalOrders.html + agm*HistoricalOrders.js -->
+    <div ng-if="::(vm.levelOfDetail==='Preview')">
+        Your subscription package does not include viewing of Active Orders.
+    </div>
+    <div ng-if="::(vm.levelOfDetail!=='Preview')">
+        <div class="p-50px text-center" ng-show="vm.isLoadingOrders">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div class="alert alert-info" ng-show="(!vm.hasOrders() && !vm.isLoadingOrders) || vm.isPreview">
+            <span ng-if="vm.viewMode !== 'readonly'">{{vm.noOrderMessage}}</span>
+            <span ng-if="vm.viewMode == 'readonly'">{{vm.noOrderMessageForGroupStrategy}}</span>
+        </div>
+        <div ng-show="!vm.isLoadingOrders && !vm.isPreview">
+            <div class="pull-right search">
+                <agms-product-search listen-on-resolve="vm.listenOnProductResolve"
+                                     placeholder="SEARCH STOCK"
+                                     search-products="vm.searchProducts"
+                                     auto-select-on-single-search-result="true"
+                                     on-product-selected="vm.onProductSelected">
+                </agms-product-search>
+            </div>
+
+            <div class="clearfix"></div>
+            <h4 class="text-center" ng-if="vm.models.searchProduct && vm.getPagedOrders().length == 0 && !vm.isLoadingOrders">no results found</h4>
+
+            <!--<div ng-if="vm.historicalDisplayKind === 'Signal'">
+                <ul uib-pagination boundary-links="true" total-items="vm.getTotalFilledItems()" ng-model="vm.models.currentPage"
+                    class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="&laquo;" last-text="&raquo;" max-size="10"
+                    num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                </ul>
+                <div class="p-50px text-center" ng-show="!vm.isPageLoaded()">
+                    <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                </div>
+                <div ng-show="vm.isPageLoaded()" ng-repeat="order in vm.getPagedFilledOrders() track by order.OrderId " class="border m-top-10px">
+                    <agms-orders-table-element is-preview="vm.isPreview"
+                                               is-related-order-browsable="true"
+                                               order="::order"
+                                               has-bracket-order-func="::vm.hasBracketOrder"
+                                               view-bracket-order-func="::vm.viewBracketOrder"></agms-orders-table-element>
+                </div>
+                <ul uib-pagination boundary-links="true" total-items="vm.getTotalFilledItems()" ng-model="vm.models.currentPage"
+                    class="pagination-sm m-top-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="&laquo;" last-text="&raquo;" max-size="10"
+                    num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                </ul>
+            </div>-->
+            <div ng-if="vm.historicalDisplayKind !== 'Signal'">
+                <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                    class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="&laquo;" last-text="&raquo;" max-size="10"
+                    num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                </ul>
+                <div class="p-50px text-center" ng-show="!vm.isPageLoaded()">
+                    <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                </div>
+                <div ng-show="vm.isPageLoaded()" ng-repeat="order in vm.getPagedOrders() track by order.OrderId " class="border m-top-10px">
+                    <agms-orders-table-element ng-if="!vm.isPlaceHolder(order) && !order.BracketOrder"
+                                               is-preview="vm.isPreview"
+                                               is-related-order-browsable="true"
+                                               order="::order"
+                                               has-bracket-order-func="::vm.hasBracketOrder"
+                                               view-bracket-order-func="::vm.viewBracketOrder"></agms-orders-table-element>
+                    <agms-orders-bracket-active ng-if="order.BracketOrder"
+                                                order="::order"></agms-orders-bracket-active>
+                </div>
+                <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                    class="pagination-sm m-top-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="&laquo;" last-text="&raquo;" max-size="10"
+                    num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                </ul>
+            </div>
+
+            <div class=" m-top-20px"></div>
+        </div>
+    </div>
+</div>

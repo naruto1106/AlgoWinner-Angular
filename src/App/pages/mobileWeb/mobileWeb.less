@@ -1,0 +1,361 @@
+﻿body.algo-oracle-mobile-view {
+    .agm-component-algooracle {
+        &.agm-components-mobile {
+            .oracle-box-container .oracle-box {
+                top: 0px;
+                min-height: 100%;
+            }
+        }
+    }
+}
+
+.agm-components-mobile {
+    .mobile-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: @headerBackground;
+        height: 40px;
+        width: 100%;
+        z-index: 911;
+        display: none;
+
+        &.show-download {
+            top: 30px;
+        }
+
+        .heading {
+            height: 100%;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            padding: 5px 0 0 0;
+            font-weight: 800;
+
+            .menu-icon {
+                font-size: 25px;
+                position: relative;
+                top: 2px;
+                left: 5px;
+                color: white;
+                float: left;
+                width: 25px;
+                height: 25px;
+            }
+
+            .close-icon {
+                font-size: 34px;
+                position: absolute;
+                top: 1px;
+                left: 1px;
+                color: white;
+                text-decoration: none;
+            }
+
+            .menu-logo {
+                height: 30px;
+                width: 65px;
+                float: right;
+                background: url(//am708403.azureedge.net/images/algowinner/logo.png) no-repeat;
+                background-size: cover;
+                margin-right: 5px;
+            }
+        }
+
+        .mobile-menu {
+            width: 100%;
+            height: 100vh;
+            padding: 40px 0 0 10px;
+            background-color: @headerBackground;
+            position: relative;
+            left: -100vw;
+
+            &.menu-close {
+                left: 0;
+                -webkit-animation: slide-out 1s forwards;
+                animation: slide-out 1s forwards;
+            }
+
+            &.menu-open {
+                left: -100vw;
+                -webkit-animation: slide-in 1s forwards;
+                animation: slide-in 1s forwards;
+            }
+
+            .menu-item {
+                height: 30px;
+                font-size: 18px;
+                border-bottom: 1px #2650a4 solid;
+                margin-bottom: 10px;
+
+                a {
+                    color: white;
+                    text-decoration: none;
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+
+                    .algoicon.algoicons-chevron-right {
+                        float: right;
+                        padding-top: 5px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.mobile-trading, &.mobile-order-pad {
+        .strategy-selector {
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            float: left;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 0 10px #93a2b0;
+
+            .selected-strategy {
+                float: left;
+                max-width: 90%;
+            }
+
+            .glyphicon {
+                font-size: 20px;
+                line-height: 40px;
+                margin-right: 5px;
+                float: right;
+            }
+
+            .dropdown-menu {
+                margin-left: 0px;
+                margin-top: 0;
+                border: 0;
+                width: 100%;
+
+                .strategy {
+                    padding: 5px;
+                }
+
+                .strategy:hover {
+                    background: #d0ecf8;
+                }
+            }
+        }
+    }
+
+    &.mobile-order-pad {
+    }
+
+    &.mobile-trading {
+        .mobile-orders {
+            margin-bottom: 10px;
+
+            .order-item {
+                margin-top: 5px;
+                padding: 5px;
+                border: 1px rgba(1,1,1,0.2) solid;
+                height: 60px;
+
+                .product-info {
+                    float: left;
+
+                    .product-icon {
+                        background-size: cover;
+                        height: 30px;
+                        width: 30px;
+                        border-radius: 20px;
+                        float: left;
+                    }
+
+                    .product-name {
+                        float: left;
+                        margin-left: 5px;
+                    }
+                }
+
+                .price-info {
+                    float: right;
+
+                    .price {
+                        float: right;
+                    }
+
+                    .status {
+                        text-align: right;
+                    }
+                }
+
+                .update-time {
+                    float: right;
+                }
+            }
+        }
+    }
+}
+
+.agm-component-algooracle {
+    &.agm-components-mobile {
+        display: block;
+
+        .oracle-box-container .oracle-box {
+            width: 100%;
+            top: 40px;
+            transform: none;
+            -webkit-transform: none;
+            left: 0px;
+            min-height: ~'calc(100% - 40px)';
+
+            &.show-download {
+                top: 70px;
+                min-height: ~'calc(100% - 70px)';
+            }
+
+            .heading, .message-box {
+                border-radius: 0;
+            }
+
+            .heading .close-button {
+                display: none;
+            }
+
+            .messages .messages-content {
+                .buttony {
+                    max-width: 230px;
+                }
+
+                .slider-box {
+                    width: 70%;
+
+                    .rzslider .rz-ceil {
+                        left: 99% !important;
+                    }
+                }
+
+                .talk-bubble {
+                    width: 104px;
+                    bottom: 52px;
+                    right: 0px;
+
+                    .talktext {
+                        padding: 0 3px;
+                    }
+                }
+
+                .tri-right.btm-right-in:after {
+                    right: 30px;
+                    bottom: -13px;
+                    border: 6px solid;
+                    border-color: #248458 #248458 transparent transparent;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    /* hide mobile web
+    body.mode-1 {
+        min-width: 0px !important;
+        overflow-x: hidden !important;
+
+        .modal.smaller-modal > .modal-dialog,
+        .default-modal .modal-dialog,
+        .full-size-modal .modal-dialog {
+            width: 100%;
+
+            .modal-body {
+                padding: 10px;
+            }
+        }
+    }
+
+    .agms-directives.generic-notification-box {
+        display: none;
+    }
+
+    body > .non-popup-area {
+        .content {
+            margin-top: 40px !important;
+        }
+
+        .download-app {
+            display: block !important;
+            height: 30px;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            text-align: center;
+            font-size: 15px;
+            z-index: 911;
+            background-color: white;
+
+            a {
+                text-decoration: underline;
+            }
+
+            .algoicon.algoicons-cancel {
+                position: relative;
+                top: 5px;
+                font-size: 20px;
+            }
+        }
+    }
+
+    .agm-components-dashboard .tab-type2 > .nav.nav-tabs {
+        display: none !important;
+    }
+
+    .agms-header {
+        &.show-download {
+            margin-top: 30px;
+        }
+
+        .sub-header {
+            display: none;
+        }
+
+        .fake-progress {
+            display: none;
+        }
+
+        > header.main-header {
+            display: none;
+        }
+
+        .agm-components-mobile {
+            .mobile-header {
+                display: block;
+            }
+        }
+    }
+
+    .agm-components-droid-helper.avatar .main-avatar-container .main-avatar {
+        display: none;
+    }
+    */
+}
+
+@-webkit-keyframes slide-in {
+    100% {
+        left: 0;
+    }
+}
+
+@-webkit-keyframes slide-out {
+    100% {
+        left: -100vw;
+    }
+}
+
+@keyframes slide-in {
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes slide-out {
+    100% {
+        left: -100vw;
+    }
+}

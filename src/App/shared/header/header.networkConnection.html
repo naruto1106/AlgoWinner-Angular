@@ -1,0 +1,13 @@
+﻿<div>
+    <div class="connection-status-amber  lh-50px" ng-if="vm.connectionStatus === 0">Establishing Connection...</div>
+    <div class="connection-status-amber  lh-50px" ng-if="vm.connectionStatus === 2 || vm.connectionStatus === 3">
+        Network Interruption Detected. Attempting to Reconnect ...
+    </div>
+    <div class="connection-status-red lh-50px" ng-if="!vm.hideDisconnectedNotification && vm.connectionStatus == 4">
+        <button ng-click="vm.refreshPage()" id="refresh-button" class="hollow-red pull-left m-10px">Refresh</button>
+        Sorry, we are unable to establish a connection. Please check your network connection and refresh the page.
+        <span class="glyphicon glyphicon-remove pull-right lh-30px p-10px" ng-click="vm.closeNotification()"></span>
+        <div class="clearfix"></div>
+    </div>
+    
+</div>

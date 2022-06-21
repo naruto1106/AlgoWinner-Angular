@@ -1,0 +1,140 @@
+﻿<div class="flex-v">
+    <div class="messages">
+        <div class="messages-content" agmc-custom-scrollbar options="vm.pAlgoOracleService.scrollbarOptions">
+            <div ng-repeat="conversation in vm.pAlgoOracleService.conversations">
+                <div class="message new" ng-if="!conversation.PosterProfile.IsUser" ng-class="conversation.IsLoading ? ['loading']:['']">
+                    <figure class="avatar"><img src="//am708403.azureedge.net/images/algooracle/icon-oracle.gif?" /></figure>
+                    <span></span>
+                    <div ng-bind-html="vm.trustAsHtml(conversation.Message)" ng-if="!conversation.IsLoading"></div>
+
+                    <div ng-if="!conversation.IsLoading && (conversation.State=='C1' || conversation.State=='I')">
+                        <div ng-if="!vm.pAlgoOracleService.predictionTimeOut">
+                            <button class="buttonx" agmc-button-wait-on-promise="vm.pAlgoOracleService.processByOracle('confirm', [], true)" ng-disabled="!conversation.IsActive">
+                                Confirm
+                            </button>
+                            <button class="buttony" agmc-button-wait-on-promise="vm.pAlgoOracleService.processByOracle('cancel', [], true)" ng-disabled="!conversation.IsActive">
+                                Cancel
+                            </button>
+                        </div>
+                        <div ng-if="vm.pAlgoOracleService.predictionTimeOut">
+                            <button class="buttonx" agmc-button-wait-on-promise="vm.pAlgoOracleService.processByOracle('yes', [], true)" ng-disabled="!conversation.IsActive">
+                                Yes, try again
+                            </button>
+                            <button class="buttony" agmc-button-wait-on-promise="vm.pAlgoOracleService.processByOracle('no', [], true)" ng-disabled="!conversation.IsActive">
+                                No, try another
+                            </button>
+                        </div>
+                    </div>
+
+                    <div ng-if="!conversation.IsLoading && conversation.State=='C2'">
+                        <div ng-if="conversation.Unpredictable">
+                            <button class="buttonz" ng-click="vm.seePredictableProduct()" ng-disabled="!conversation.IsActive">
+                                Predictable Products
+                            </button>
+                            <div class="m-top-5px">Or would you like to pick from these popular recent selections?</div>
+                        </div>
+                        <div ng-repeat="p in vm.getPagedProducts(conversation.ProductList)">
+                            <button class="buttony ellipsis-nowrap product-button" uib-tooltip = "{{p.ProductName}} ({{p.Symbol}})"
+                                    agmc-button-wait-on-promise="vm.pAlgoOracleService.processByOracle(p.ProductId, conversation.ProductList, true)"
+                                    ng-if="!vm.pMobileWebService.isOpenFromApp"
+                                    ng-disabled="!conversation.IsActive">
+                                {{p.ProductName}} ({{p.Symbol}})
+                            </button>
+                            <button class="buttony ellipsis-nowrap mobile-button"
+                                    agmc-button-wait-on-promise="vm.pAlgoOracleService.processByOracle(p.ProductId, conversation.ProductList, true)"
+                                    ng-if="vm.pMobileWebService.isOpenFromApp"
+                                    ng-disabled="!conversation.IsActive">
+                                {{p.ProductName}} <br /> 
+                                <span class="symbol">({{p.Symbol}})</span>
+                            </button>
+                            <br/>
+                        </div>
+                        <ul uib-pagination boundary-links="true" total-items="conversation.ProductList.length" ng-model="vm.paginationModel.currentPage"
+                            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+                            first-text="&laquo;" last-text="&raquo;" max-size="5" items-per-page="5"
+                            num-pages="vm.paginationModel.numPages" ng-show="vm.paginationModel.numPages > 1"></ul>
+                        <div class="clearfix"></div>
+                        <button class="buttonz" agmc-button-wait-on-promise="vm.pAlgoOracleService.processByOracle('search again', [], true)" ng-disabled="!conversation.IsActive">
+                            Search Again
+                        </button>
+                    </div>
+
+                    <div ng-if="!conversation.IsLoading && conversation.State=='G' && !vm.pMobileWebService.isOpenFromApp">
+                        <div class="slider-box">
+                            <rzslider rz-slider-model="conversation.ComfortableLevel"
+                                      rz-slider-options="vm.pAlgoOracleService.slider.options"
+                                      ng-disabled="!conversation.IsActive"></rzslider>
+                        </div>
+                        <div class="talk-bubble tri-right btm-right-in" ng-if="!conversation.HideBubble">
+                            <div class="talktext">
+                                <p>Press OK to continue</p>
+                            </div>
+                        </div>
+                        <button class="send-button" agmc-button-wait-on-promise="vm.confirmComfortableLevel(conversation)" ng-disabled="!conversation.IsActive">
+                            OK
+                        </button>
+                    </div>
+                    
+                    <div ng-if="!conversation.IsLoading && conversation.State=='J' && conversation.ShowTradeAndProduct">
+                        <button class="buttonx" ng-click="vm.gotoChart(vm.pAlgoOracleService.selectedProduct, false)"ng-disabled="!conversation.IsActive">
+                            Chart
+                        </button> 
+                        <button class="buttonx" ng-click="vm.goToProduct(vm.pAlgoOracleService.selectedProduct)" ng-disabled="!conversation.IsActive">
+                            Product Page
+                        </button>
+                    </div>
+                    
+                    <div ng-if="!conversation.IsLoading && conversation.State=='K'">
+                        <div class="progress-wrapper">
+                            <div class="current">
+                                {{conversation.Result.WinningChance}}%
+                            </div>
+                            <round-progress
+                                max="100"
+                                current="conversation.Result.WinningChance"
+                                color="#0fab53"
+                                bgcolor="#e90404"
+                                radius="80"
+                                stroke="6"
+                                rounded="false"
+                                clockwise="true"
+                                responsive="false"
+                                duration="800"
+                                animation="easeInOutQuart"
+                                animation-delay="0"></round-progress>
+                        </div>
+                        <div class="center-align">
+                            probability to hit 
+                            <span>{{conversation.Result.TargetPrice}}</span> <br/>
+                            <span class="highlighted days">in {{conversation.Result.NumDays}} days</span>                         
+                        </div>
+                        <div class="center-align" ng-if="!vm.pMobileWebService.isOpenFromApp">
+                            <button class="buttonx" agmc-button-wait-on-promise="vm.launchOrderPad()" ng-disabled="!conversation.IsActive">
+                                Trade Now
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="center-align" ng-if="!vm.pMobileWebService.isOpenFromApp">
+                            Or, enter another stock to predict
+                        </div>
+                        <div class="center-align" ng-if="vm.pMobileWebService.isOpenFromApp">
+                            Enter another stock to predict
+                        </div>
+                    </div>
+
+                    <div class="timestamp" ng-if="!conversation.IsLoading">{{::conversation.Timestamp}}</div>
+                </div>
+
+                <div class="message message-personal new" ng-if="conversation.PosterProfile.IsUser">
+                    {{::conversation.Message}}
+                    <!--<div class="timestamp">{{::conversation.Timestamp}}</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="message-box">
+        <input type="text" class="message-input" placeholder="Type message..." ng-model="vm.userInput" ng-keydown="vm.submitUserInput($event)"></input>
+        <button type="submit" class="message-submit" ng-click="vm.submitUserInput()">Send</button>
+    </div>
+</div>

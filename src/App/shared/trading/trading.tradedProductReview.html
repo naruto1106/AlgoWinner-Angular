@@ -1,0 +1,118 @@
+﻿<div class="agm-component-trade-review">
+    <!--<div class="m-bottom-10px p-bottom-10px">
+        <div class="pull-left m-right-30px">
+            <agmc-date-picker from-date="vm.models.fromDate" to-date="vm.models.toDate" allow-manual-entry="false"></agmc-date-picker>
+        </div>
+        <div class="clearfix"></div>
+    </div>-->
+
+    <div class="content">
+        <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+        <div ng-if="vm.tradesReview.TradesPerProduct.length > 0">
+            <div class="row-md-6 gap-0px stats">
+                <dl class="col-md-2">
+                    <dt>EXITED TRADES</dt>
+                    <dd class="special-text">{{vm.tradesReview.TotalExitedTrades}}</dd>
+                </dl>
+                <dl class="col-md-2">
+                    <dt>WINNING PRODUCTS</dt>
+                    <dd class="green-profit">{{vm.tradesReview.WinningProducts}}</dd>
+                </dl>
+                <dl class="col-md-2">
+                    <dt>LOSING PRODUCTS</dt>
+                    <dd class="red-loss">{{vm.tradesReview.LosingProducts}}</dd>
+                </dl>
+                <div class="clearfix"></div>
+            </div>
+            <!--<div class="row-md-5 gap-0px stats">
+                <dl class="col-md-1">
+                    <dt>EXITED TRADES</dt>
+                    <dd class="special-text">{{vm.tradesReview.ExitedTrades}}</dd>
+                </dl>
+                <dl class="col-md-1">
+                    <dt>WINNING RATE</dt>
+                    <dd class="special-text">{{vm.tradesReview.WinningRate | valuePercentageOrDash:2}}</dd>
+                </dl>
+                <dl class="col-md-1">
+                    <dt>CUM RETURN</dt>
+                    <dd ng-class="vm.tradesReview.CumulativeReturn>=0?['green-profit']:['red-loss']">
+                        {{vm.tradesReview.CumulativeReturn | valuePercentageOrDash:2}}
+                    </dd>
+                </dl>
+                <dl class="col-md-1">
+                    <dt>WINNING PRODUCTS</dt>
+                    <dd class="green-profit">{{vm.tradesReview.WinningProducts}}</dd>
+                </dl>
+                <dl class="col-md-1">
+                    <dt>LOSING PRODUCTS</dt>
+                    <dd class="red-loss">{{vm.tradesReview.LosingProducts}}</dd>
+                </dl>
+                <div class="clearfix"></div>
+            </div>-->
+            
+            <div class="filter-section">
+                <div class="pull-left search">
+                    <input type="text" placeholder="Search Product" ng-model="vm.filter.searchProductText" ng-model-options="{debounce: 200}" />
+                    <button type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+                <div class="pull-left m-left-30px m-top-5px">
+                    Sort By:
+                    <select class="m-left-5px" ng-model="vm.filter.sortingType"
+                            ng-options="selection for selection in ::vm.sortingSelections">
+                    </select>
+                </div>
+                <div class="pull-left m-left-30px m-top-5px">
+                    <input type="checkbox" ng-model="vm.filter.enableTradeFilter" class="checkbox"/>
+                    Exclude stocks with fewer than <input type="text" ng-model="vm.filter.tradeFilterNumber" class="number-input"/>exited trades
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="pre-scrollable">
+                <div ng-repeat="productItem in vm.getFilteredTrades()" class="product-item white-box row-md-10 gap-0px">
+                    <div class="col-md-2 h-100pct">
+                        <agms-product-picture product="productItem.ProductModel"></agms-product-picture>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="trade">{{productItem.LongTrades + productItem.ShortTrades}} <span class="smaller">Exited Trades</span></div>
+                        <span class="long">{{productItem.LongTrades}} LONG</span><span class="short">{{productItem.ShortTrades}} SHORT</span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="winbar">
+                            <div ng-style="vm.getTotalLosingTrade(productItem)" class="red-part pull-right"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="lh-20px win green-profit">{{productItem.WinningTrades}} WINS</div>
+                        <div class="lh-20px lose red-loss">{{productItem.LosingTrades}} LOSSES</div>
+                    </div>
+                    <div class="col-md-3">
+                        <dl>
+                            <dt>Win Rate</dt>
+                            <dd ng-class="productItem.WinningRatePerProduct>=0?['green-profit']:['red-loss']">
+                                {{productItem.WinningRatePerProduct | valuePercentageOrDash:2}}
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>ROI</dt>
+                            <dd ng-class="productItem.Roi>=0?['green-profit']:['red-loss']">
+                                {{productItem.Roi | valuePercentageOrDash:2}}
+                            </dd>
+                        </dl>
+                        <div class="detail-btn" ng-click="vm.openDetailPopUp(productItem.ExitTrades)" uib-tooltip="View Detail" tooltip-placement="left">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row-md-12 text-center" ng-if="!vm.tradesReview || vm.tradesReview.TradesPerProduct.length == 0">
+        <h3>No Exited Trades Found</h3>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿<div class="agm-component-payment">
+    <form name="vm.creditCardEditForm" ng-if="vm.isEdit" class="payment-panel">
+        <div class="credit-card m-bottom-5px">
+            <div style="position: relative" class="m-10px pull-left credit-card-logo {{vm.intendedCardType}}"></div>
+            <h4 class="lh-40px m-0px p-0px pull-left"><i>{{vm.creditCard.Number}}</i></h4>
+            <div class="clearfix"></div>
+        </div>
+        <dl>
+            <dt class="m-bottom-10px">Expiry</dt>
+            <dd>
+                <div class="row-2 gap-10px">
+                    <div class="col-1">
+                        <dl class="dl-small">
+                            <dt>Month:</dt>
+                            <dd>
+                                <select ng-change="vm.updateExpiryDate()" name="expiryMonth" ng-model="vm.creditCard.expiryMonth" ng-options="month as vm.showMonth(month) for month in vm.expiryMonthSelection(vm.creditCard.expiryYear) track by month"></select>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-1">
+                        <dl class="dl-small">
+                            <dt>Year:</dt>
+                            <dd>
+                                <select ng-change="vm.updateExpiryDate()" name="expiryYear" ng-model="vm.creditCard.expiryYear" ng-options="year as year for year in vm.expiryYearSelection track by year"></select>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <span style="color: red" ng-show="(!vm.creditCard.expiryYear || !vm.creditCard.expiryMonth) && (vm.creditCardEditForm.expiryMonth.$invalid || vm.creditCardEditForm.expiryYear.$invalid )">Please enter a valid expiry date.</span>
+            </dd>
+            <dt class="m-bottom-10px">CVC: ***</dt>
+        </dl>
+        <a href="" ng-click="vm.isEdit=false">Change CVC or use another Credit Card...</a>
+    </form>
+
+
+    <form name="vm.creditCardForm" ng-show="!vm.isEdit" class="payment-panel" id="payment-form">
+        <dl class="dl-horizontal m-top-15px">
+            <dt>Name on Card</dt>
+            <dd>
+                <!-- Name is not sensitive so we can use our own text field. Name is actually not required to generate the payment token. -->
+                <input type="text" ng-model="vm.creditCard.Name" name="name" required min-length="6"/>
+                <br />
+                <span style="color: red" ng-show="vm.creditCardForm.name.$dirty && vm.creditCardForm.name.$invalid">Name is required.</span>
+            </dd>
+            <dt>Credit/Debit Card</dt>
+            <dd>
+                <div id="card-element">
+                    <!-- a Stripe Element will be inserted here. All we do is load this card element from stripe-->
+                </div>
+                <br />
+                <span class="red-loss" id="card-errors">
+                    <!-- The errors (if any) returned from Stripe will be inserted here. All we do is stylize the display-->
+                </span>
+            </dd>
+        </dl>
+        <div class="m-top-10px m-bottom-10px" ng-if="vm.showAddCardButton">
+            <input type="checkbox" ng-model="vm.creditCard.AddToSavedCards" />
+            <strong>Add to Saved Cards</strong>
+        </div>
+    </form>
+</div>

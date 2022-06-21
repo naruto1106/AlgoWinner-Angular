@@ -1,0 +1,20 @@
+﻿
+<div class="modal-header" ng-class="getHeaderClass()">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">DELETE WATCHLIST</h4>
+</div>
+
+<div class="modal-body">
+    <div class="p-50px text-center" ng-show="vm.isSubmitting">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+
+    <div class="p-bottom-10px" ng-show="!vm.isSubmitting">
+        <div class="f-14px p-10px">Are you sure you want to delete this watchlist?</div>
+        <button class="filled-red pull-right m-right-10px" ng-click="vm.delete()" ng-if="true">CONFIRM</button>
+        <button class="hollow-gray pull-right m-right-10px" ng-click="vm.uibDismissPanel()" ng-if="true">CANCEL</button>
+        <span class="clearfix"></span>
+    </div>
+</div>
+
+

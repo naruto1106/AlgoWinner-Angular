@@ -1,0 +1,46 @@
+﻿<div>
+    <div class="panel-heading">Account Allocations</div>
+    <div class="p-5px">
+        <div class="p-50px text-center" ng-show="vm.isLoading">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>        
+        <table class="table-large no-border" ng-if="!vm.isLoading">
+            <tr>
+                <td>Capital Available <span class="glyphicon glyphicon-info-sign" uib-tooltip="Cash Balance - Margin Used + Unrealized P/L"></span></td>
+                <td>{{vm.capital.TradingCapital | customCurrencyOrDash:vm.capital.Currency:2}}</td>
+            </tr>
+            <tr>
+                <td>NAV <span class="glyphicon glyphicon-info-sign" uib-tooltip="Cash Balance + Unrealized P/L"></span></td>
+                <td>{{vm.capital.NAV | customCurrencyOrDash:vm.capital.Currency:2}}</td>
+            </tr>
+            <tr>
+                <td>Realized P/L</td>
+                <td ng-class="vm.capital.RealizedPL>=0?['green-profit']:['red-loss']">{{vm.capital.RealizedPL | customCurrencyOrDash:vm.capital.Currency:2}}</td>
+            </tr>
+            <tr>
+                <td>Unrealized P/L</td>
+                <td ng-class="vm.capital.UnrealizedPL>=0?['green-profit']:['red-loss']">{{vm.capital.UnrealizedPL | customCurrencyOrDash:vm.capital.Currency:2}}</td>
+            </tr>
+            <tr ng-if="vm.capital.Type==='Cash'">
+                <td>Exposure</td>
+                <td>{{vm.capital.LongExposure | customCurrencyOrDash:vm.capital.Currency:2}}</td>
+            </tr>
+            <tr ng-if="vm.capital.Type==='CFD'">
+                <td>Long Exposure</td>
+                <td>{{vm.capital.LongExposure | customCurrencyOrDash:vm.capital.Currency:2}}</td>
+            </tr>
+            <tr ng-if="vm.capital.Type==='CFD'">
+                <td>Short Exposure</td>
+                <td>{{vm.capital.ShortExposure | customCurrencyOrDash:vm.capital.Currency:2}}</td>
+            </tr>
+            <!--<tr ng-if="vm.capital.Type==='CFD'">
+                <td>Margin Used</td>
+                <td>{{vm.capital.MarginUsed | customCurrencyOrDash:vm.capital.Currency:2}}</td>
+            </tr>
+            <tr ng-if="vm.capital.Type==='CFD'">
+                <td>Margin Available</td>
+                <td>{{vm.capital.MarginAvailable | customCurrencyOrDash:vm.capital.Currency:2}}</td>
+            </tr>-->
+        </table>
+    </div>
+</div>

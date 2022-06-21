@@ -1,0 +1,97 @@
+﻿<div>
+    <script type="text/ng-template" id="managed-subscription-strategy-row">
+        <td>
+            <div>
+                <div agms-image img-src="strategy.DisplayInfo | strategyImage"></div>
+                <span>
+                    {{strategy.DisplayInfo | strategyName}}
+                </span>
+            </div>
+        </td>
+        <td>{{strategy.DisplayInfo.BasicInfo.Description}}</td>
+        <td class="green-profit">Active</td>
+        <td><button class="mini-hollow-blue" ng-click="vm.goToStrategyDetail(strategy.StrategyId)">DETAIL</button></td>
+    </script>
+    <script type="text/ng-template" id="managed-subscription-premium-item-row">
+        <td class="table-strategy">
+            <div agms-image img-src="item.ImageUrl"></div>
+            <span>
+                {{item.Name}}
+            </span>
+        </td>
+        <td class="table-long-description">{{item.Description}}</td>
+        <td class="green-profit">Active</td>
+        <td></td>
+    </script>
+    <div class="bundle-title">
+        <span class="bundle-name">{{vm.managedBundleSubscription.PricingPlanModel.BundleName}}</span>
+        <span ng-if="!vm.isJoeyBundle()">
+            <span class="bundle-price" ng-if="vm.hasStripeSubscription()">
+                <span ng-class="{slash:vm.showSlash()}">
+                    {{vm.managedBundleSubscription.PricingPlanModel.PerPeriodFee | customCurrencyOrDash:vm.managedBundleSubscription.PricingPlanModel.Currency:2}}
+                </span>
+                <span ng-if="vm.managedBundleSubscription.CouponModel">
+                    {{vm.getActualAmount() | customCurrencyOrDash:vm.managedBundleSubscription.PricingPlanModel.Currency:2}}
+                </span>
+                / {{vm.managedBundleSubscription.PricingPlanModel.PeriodType | periodLy}}
+            </span>
+            <span class="bundle-price" ng-if="!vm.hasStripeSubscription() && vm.managedBundleSubscription.BundleSubscriptionId != 0">
+                FREE
+            </span>
+        </span>
+    </div>
+    <table class="bundle-table">
+        <thead ng-if="!vm.hasSingleItem(vm.managedBundleSubscription)">
+            <tr>
+                <td class="table-strategy">Item</td>
+                <td class="table-description">Description</td>
+                <td class="table-status">Status</td>
+                <td class="table-feature">Features</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="strategy in vm.managedBundleSubscription.Strategies" ng-include="'managed-subscription-strategy-row'"></tr>
+            <tr ng-if="vm.managedBundleSubscription.AMPremiumItems != null" ng-include="'managed-subscription-premium-item-row'" ng-repeat="item in vm.managedBundleSubscription.AMPremiumItems"></tr>
+        </tbody>
+    </table>
+    <div class="bundle-info" ng-if="!vm.isJoeyBundle()">
+        <span ng-if="vm.showStartDate()">
+            <span>Start Date: </span>
+            <span class="strong">{{vm.managedBundleSubscription.StartDate | dateShort}}</span>
+        </span>
+        <span ng-if="vm.showNextAutoRenewDate()">
+            <span>Next AutoRenew Date: </span>
+            <span class="strong" ng-if="!vm.managedBundleSubscription.IsTrialingNow">{{vm.managedBundleSubscription.NextAutoRenewDate | dateShort}}</span>
+            <span class="strong" ng-if="vm.managedBundleSubscription.IsTrialingNow">{{vm.managedBundleSubscription.NextAutoRenewDateWithTrial | dateShort}}</span>
+        </span>
+        <span class="bundle-button">
+            <button class="mini-filled-red" ng-click="vm.stopSubscription()" ng-if="!vm.managedBundleSubscription.ExpiryDate && vm.managedBundleSubscription.BundleSubscriptionId > 0"
+                    analytics-on="click" analytics-category="MySubscriptions" analytics-event="ManageSubscriptions" analytics-label="StopSubscription" agmc-analytics-timestamp>
+                STOP AUTO-RENEW
+            </button>
+            <span class="alert subscription-expire" ng-if="vm.managedBundleSubscription.ExpiryDate">
+                <span ng-if="!vm.isSubscriptionExpired()">Subscription will expire on</span>
+                <span ng-if="vm.isSubscriptionExpired()" class="red-loss">Subscription is inactive since</span>
+                <span class="special-text">{{vm.managedBundleSubscription.ExpiryDate | dateShort}}</span>
+                <button ng-if="!vm.isSubscriptionExpired()" class="mini-filled-green"
+                        ng-click="vm.cancelExpiration()">
+                    RE-ACTIVATE
+                </button>
+            </span>
+        </span>
+        <div class="clearfix"></div>
+    </div>
+    <div ng-if="vm.isJoeyBundle()">
+        <div ng-if="vm.managedBundleSubscription.BundlePricingPlanId == 245">
+            <div class="alert alert-danger">
+                Please email to <a href="mailto:support@trading-impossible.com">support@trading-impossible.com</a> if you have any questions regarding your 1GT System access and renewal date. Our support team will get back to you as soon as possible within 1 - 2 working days. Thank you.
+            </div>
+        </div>
+        <div ng-if="vm.managedBundleSubscription.BundlePricingPlanId == 246 || vm.managedBundleSubscription.BundlePricingPlanId == 312">
+            <div class="alert alert-danger">
+                Please email to <a href="mailto:support@trading-impossible.com">support@trading-impossible.com</a> if you have any questions regarding your 1GT/1ET System access and renewal date. Our support team will get back to you as soon as possible within 1 - 2 working days. Thank you.
+            </div>
+        </div>
+    </div>
+</div>
+

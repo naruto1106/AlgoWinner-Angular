@@ -1,0 +1,15 @@
+﻿<div class="agms-directive checkbox-dropdown">
+    <div class="btn-group" uib-dropdown auto-close="outsideClick" on-toggle="vm.onToggle(open)" is-open="vm.isOpen">
+        <button id="opener" type="button" class="btn btn-primary" uib-dropdown-toggle>
+            {{vm.getCheckboxName()}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu-selection" uib-dropdown-menu role="menu" aria-labelledby="opener">
+            <li role="menuitem">
+                <input type="checkbox" ng-model="vm.allOptionsSelected" ng-change="vm.onAllOptionsToggled()" /><label>All</label>
+            </li>
+            <li role="menuitem" ng-repeat="item in vm.dropdownItems">
+                <input type="checkbox" ng-model="item.checked" ng-change="vm.onChange(item)"/><label> {{::vm.displayFunc(item)}}</label>
+            </li>
+        </ul>
+    </div>
+</div>

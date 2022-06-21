@@ -1,0 +1,49 @@
+﻿<div class="agm-component-payment">
+    <agms-header-payment current-page="credit"></agms-header-payment>
+
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+    <div class="container">
+        <div class="algo-coin">
+            <div class="title">
+                <div class="row-md-12">
+                    <!--<div class="col-md-12">
+                        You've got {{vm.accountBalance.Currency | currencySymbol}}{{vm.accountBalance.Total | valueTransactionOrDash:2}} to spend in total.-
+                    </div>-->
+                    <div class="col-md-12 text-right">
+                        Remaining Credit: {{vm.accountBalance.Currency | currencySymbol}}{{vm.accountBalance.Balance | valueTransactionOrDash:2}}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="content">
+                <div ng-repeat="credit in vm.creditTransactions" class="invited">
+                    <div ng-if="credit.Reason == 'Invite'" class="row-md-12">
+                        <div class="col-md-8">
+                            {{credit.RealName}} has registered on AlgoMerchant. 
+                        </div>
+                        <div class="col-md-4 text-right credit">
+                            You Got {{vm.accountBalance.Currency | currencySymbol}}{{credit.Amount | valueOrDash:2}}.
+                        </div>
+                    </div>
+                    <div ng-if="credit.Reason == 'Subscribe'" class="row-md-12">
+                        <div class="col-md-8">
+                            {{credit.RealName}} has made a payment on AlgoMerchant.
+                        </div>
+                        <div class="col-md-4 text-right credit">
+                            You Got {{vm.accountBalance.Currency | currencySymbol}}{{credit.Amount | valueOrDash:2}}.
+                        </div>
+                    </div>
+                    <div ng-if="credit.Reason == 'SignUp'" class="row-md-12">
+                        <div class="col-md-8">
+                            For signing up in AlgoMerchant (invited by {{credit.RealName}}).
+                        </div>
+                        <div class="col-md-4 text-right credit">
+                            You Got {{vm.accountBalance.Currency | currencySymbol}}{{credit.Amount | valueOrDash:2}}.
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

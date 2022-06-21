@@ -1,0 +1,41 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        Change Email
+    </h4>
+</div>
+<form class="modal-body" name="changeEmailForm" ng-submit="changeEmailForm.$valid && vm.submit()">
+    <div class="strong m-bottom-10px p-5px box">Your email serves as your login ID. Changing your email will also change your login ID.</div>
+    <span ng-if="vm.message">{{vm.message}}</span>
+    <div ng-if="vm.message" class="m-bottom-10px"></div>
+    <dl class="dl-horizontal form">
+        <dt class="w-100px">New Email</dt>
+        <dd class="rel">
+            <input type="email" class="pull-left w-220px" ng-model="vm.changeEmailModel.NewEmail" name="email" ng-model-options="{ debounce: 500 }" ng-disabled="vm.disableForm" />
+            <span class="loading pull-right" ng-if="vm.requestingState==1"></span>
+            <span class="glyphicon glyphicon-ok-sign pull-right lh-25px verified" ng-if="vm.emailVerified && vm.requestingState == 2"></span>
+            <div class="clearfix"></div>
+            <span style="color: red" ng-if="(changeEmailForm.email.$dirty || changeEmailForm.$submitted) && changeEmailForm.email.$invalid">Please enter a valid email.</span>
+            <span style="color: red" ng-if="changeEmailForm.email.$valid && vm.requestingState == 3">This email is already in use. Please choose another email.</span>
+            <span style="color: red" ng-if="changeEmailForm.email.$valid && vm.requestingState == 4">This is your current email. Please choose another email.</span>
+            <span style="color: red" ng-if="changeEmailForm.email.$valid && vm.requestingState == -1">We were unable to verify your email. Please refresh the page or try again later.</span>
+        </dd>
+        <dt class="w-100px">Confirm New Email</dt>
+        <dd class="rel">
+            <input class="pull-left w-220px" ng-model="vm.changeEmailModel.ConfirmNewEmail" type="email" name="confirmNewEmail" required ng-disabled="vm.disableForm" />
+            <span class="glyphicon glyphicon-ok-sign pull-right lh-25px verified" ng-if="vm.emailVerified && vm.requestingState == 2 && vm.changeEmailModel.ConfirmNewEmail==vm.changeEmailModel.NewEmail"></span>
+            <div class="clearfix"></div>
+            <span style="color: red" ng-show="changeEmailForm.confirmNewEmail.$dirty && (changeEmailForm.confirmNewEmail.$invalid || vm.changeEmailModel.ConfirmNewEmail!=vm.changeEmailModel.NewEmail)">Emails do not match!</span>
+        </dd>
+    </dl>
+    <div class="separator-bottom m-top-20px m-bottom-10px h-0px"></div>
+    <div>
+        <img class="w-20px h-20px pull-left m-left-5px" src="//am708403.azureedge.net/images/static/loading.gif?" ng-if="vm.disableForm" />
+        <button class="filled-blue pull-right"
+                ng-disabled="!changeEmailForm.$valid || !vm.isValidModel() || vm.submitting || vm.requestingState != 2">
+            Submit
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</form>

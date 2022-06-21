@@ -1,0 +1,126 @@
+table thead, table tfoot {
+    background: @gray1;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: @white02;
+}
+
+table.distinct tr:nth-child(even) {
+    background-color: @white02;
+}
+
+table {
+    td, th {
+        padding: 2px 8px;
+    }
+}
+
+table td, table th {
+    .span;
+    font-weight: 600;
+}
+
+table.table-large td, table.table-large th {
+    padding: 5px 10px;
+}
+
+table.table-large tr {
+    min-height: 30px;
+}
+
+table.table-xlarge td, table.table-xlarge th {
+    padding: 10px 10px;
+}
+
+table.table-xlarge tr {
+    min-height: 40px;
+}
+
+table {
+    .border;
+    width: 100%;
+}
+
+table.table-border {
+    border-collapse: separate;
+    border-spacing: 0px;
+    padding: 5px;
+}
+
+table.table-small td, table.table-small th {
+    padding: 0 5px;
+    line-height: 20px;
+    height: 20px;
+}
+
+table.table-transparent tbody tr:nth-child(even),
+table.table-transparent tbody tr:nth-child(odd) {
+    background: transparent;
+}
+
+table.table-transparent {
+    border: none;
+}
+
+/** JUST ENOUGH **/
+
+table.open-position {
+    thead {
+        th {
+            padding: 10px;
+            padding-left: 3px;
+        }
+    }
+
+    h5 {
+        font-size: 1em;
+    }
+
+    td {
+        padding: 3px;
+
+        .agms-directives.product-picture {
+            max-width: 200px;
+        }
+    }
+}
+
+table.simple-box {
+    tr {
+        td, th {
+            margin: 0px;
+        }
+    }
+}
+
+table.naked {
+    border: none;
+
+    tbody, thead {
+
+        tr {
+            border: none;
+            background: none;
+
+            td, th {
+                border: none;
+                background: none;
+                margin: 0px;
+                padding: 0px;
+            }
+        }
+    }
+}
+
+.uib-daypicker table td {
+    padding: 0;
+
+    button {
+        border-radius: 0;
+    }
+}

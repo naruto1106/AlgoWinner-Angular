@@ -1,0 +1,402 @@
+﻿.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vw;
+
+    .profile-image {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        margin-right: 20px;
+    }
+
+    &.darkmenu {
+        .header-top-shop {
+            background-color: #141414;
+
+            .shop-top-nav li a {
+                color: #808080;
+            }
+        }
+    }
+
+    .header-top-shop {
+        padding: 5px 0;
+        background-color: #f3f5f7;
+        min-height: 50px;
+
+        &.register, &.login, &.forgot-password {
+            height: 60px;
+        }
+
+        .pull-center {
+            text-align: center;
+            align-content: center;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .shop-top-nav {
+            float: left;
+            padding-top: 10px;
+            width: 100%;
+
+            .login-btn {
+                // background-color: #01b7f2;
+                // border-top: solid 1px #00f3ff;
+                // border-bottom: solid 1px #00203E;
+                // background: #00c6ff;
+                // background: -webkit-linear-gradient(to top, #0072ff, #00c6ff);
+                // background: linear-gradient(to top, #0072ff, #00c6ff);
+                -webkit-transition: all 0.4s ease-out;
+                -moz-transition: all 0.4s ease-out;
+                -o-transition: all 0.4s ease-out;
+                transition: all 0.4s ease-out;
+            }
+
+            .register-btn {
+                background: #006d5a;
+                background: -webkit-linear-gradient(to top, #006d5a, #00ff95);
+                background: linear-gradient(to top, #006d5a, #00ff95);
+                border-top: solid 1px #60ffe3;
+                border-bottom: solid 1px #00211a;
+                -webkit-transition: all 0.4s ease-out;
+                -moz-transition: all 0.4s ease-out;
+                -o-transition: all 0.4s ease-out;
+                transition: all 0.4s ease-out;
+            }
+
+            .login-btn, .register-btn {
+                height: 28px;
+                display: inline-block;
+                padding: 0 24px;
+                line-height: 28px;
+                border-radius: 40px;
+                font-size: 0.9167em;
+                color: white;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+
+            li {
+                margin-left: 25px;
+                display: inline-block;
+                width: 15%;
+
+                a {
+                    color: black;
+
+                    .algobrand {
+                        width: 45px;
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            &.sub-menu {
+                li {
+                    width: 10%;
+                }
+            }
+        }
+    }
+}
+
+.landing-forms {
+    .login-form-container,
+    .forget-password-container {
+        .login-btn {
+            width: 100%;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 22px;
+            border-radius: 40px;
+            padding: 0 32px;
+            height: 60px;
+            line-height: 60px;
+            min-width: 200px;
+            // background-color: #01b7f2;
+            // color: white;
+            // border-top: solid 1px #00f3ff;
+            // border-bottom: solid 1px #00203E;
+            // background: #00c6ff;
+            // background: -webkit-linear-gradient(to top, #0072ff, #00c6ff);
+            // background: linear-gradient(to top, #0072ff, #00c6ff);
+            -webkit-transition: all 0.4s ease-out;
+            -moz-transition: all 0.4s ease-out;
+            -o-transition: all 0.4s ease-out;
+            transition: all 0.4s ease-out;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            &:disabled {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .register-form-container {
+        .register-btn {
+            width: 100%;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 22px;
+            border-radius: 40px;
+            padding: 0 32px;
+            height: 60px;
+            line-height: 60px;
+            min-width: 200px;
+            color: white;
+            background-color: #00f59f;
+            border-color: #60ffe3;
+            background: #006d5a;
+            background: -webkit-linear-gradient(to top, #006d5a, #00ff95);
+            background: linear-gradient(to top, #006d5a, #00ff95);
+            border-top: solid 1px #60ffe3;
+            border-bottom: solid 1px #00211a;
+            -webkit-transition: all 0.4s ease-out;
+            -moz-transition: all 0.4s ease-out;
+            -o-transition: all 0.4s ease-out;
+            transition: all 0.4s ease-out;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            &:disabled {
+                opacity: 0.5;
+            }
+        }
+
+        p {
+            font-size: 12px;
+            line-height: 16px;
+
+            a {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .register-form-container,
+    .login-form-container,
+    .forget-password-container {
+        position: relative;
+        z-index: 0;
+
+        .login-form, .register-form, .forget-password-form {
+            margin-top: 100px;
+        }
+    }
+
+    .form-group {
+        label {
+            font-weight: 300;
+            opacity: 0.8;
+            font-size: 18px;
+        }
+
+        input[type="text"]::-moz-placeholder,
+        input[type="email"]::-moz-placeholder,
+        input[type="password"]::-moz-placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        input[type="text"]:-ms-input-placeholder,
+        input[type="email"]:-ms-input-placeholder,
+        input[type="password"]:-ms-input-placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        input[type="text"]::-webkit-input-placeholder,
+        input[type="email"]::-webkit-input-placeholder,
+        input[type="password"]::-webkit-input-placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            height: 50px;
+            margin: 0;
+            padding: 0 20px;
+            vertical-align: middle;
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid #828282;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 50px;
+            color: #888;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            -o-transition: all .3s;
+            -moz-transition: all .3s;
+            -webkit-transition: all .3s;
+            -ms-transition: all .3s;
+            transition: all .3s;
+            border-radius: 40px;
+
+            &:focus {
+                outline: 0;
+                background: rgb(255, 255, 255);
+                border: 2px solid #0198ff;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.75);
+                color: #000;
+            }
+        }
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+}
+
+.agm-page-gateway {
+    .modal-body {
+        .row {
+            margin: 0;
+        }
+
+        .form-control {
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.landing-main {
+    .form-control {
+        margin-bottom: 5px;
+    }
+
+    .error-input {
+        box-shadow: none;
+        color: #ffa862;
+    }
+}
+
+.l-form-10-top {
+    overflow: hidden;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid #fff;
+    border-color: rgba(255, 255, 255, 0.15);
+    text-align: left;
+
+    .bold-h {
+        color: #363C48;
+        font-weight: 800;
+        font-size: 60px;
+    }
+}
+
+.l-form-10-bottom {
+    padding: 25px 0 20px 0;
+    text-align: left;
+
+    .l-form-10-questions {
+        margin-top: 25px;
+        text-align: center;
+
+        a {
+            opacity: 0.8;
+            color: #2b2b2b;
+            border-bottom: 1px dotted #717171;
+        }
+    }
+}
+
+.error-input {
+    outline: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.75);
+    color: #D63131;
+    padding-left: 20px;
+}
+
+.success-input {
+    outline: 0;
+    background: rgb(255, 255, 255);
+    border: 2px solid #009A7F;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.75);
+    color: #009A7F;
+}
+
+.alert-input {
+    outline: 0;
+    background: rgb(255, 255, 255);
+    border: 2px solid #D4A63C;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.75);
+    color: #D4A63C;
+}
+
+.loading-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 98;
+    opacity: 0.5;
+    text-align: center;
+    background-color: white;
+
+    > img {
+        top: 50%;
+        position: absolute;
+        left: 50%;
+        margin-left: -25px;
+        margin-top: -25px;
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media (max-width: 992px) {
+    .shop-top-nav li a {
+        font-size: 12px;
+    }
+
+    .fixed-header .header-top-shop .shop-top-nav li {
+        width: 20%;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-default .navbar-nav > li > a {
+        &.enter-btn {
+            padding-top: 5px !important;
+        }
+    }
+
+    .fixed-header .header-top-shop .shop-top-nav li {
+        width: 40%;
+    }
+
+    .fixed-header .header-top-shop .shop-top-nav.sub-menu li {
+        width: 16%;
+    }
+}

@@ -1,0 +1,46 @@
+﻿<div class="agm-component-faq">
+    <div class="container">
+        <div class="p-50px text-center" ng-show="vm.isLoading">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div class="row-md-5 gap-10px" ng-show="!vm.isLoading">
+            <div class="col-md-1">
+                <agmc-sticky-sidebar hooked-on-bottom-at="500" refresh-func-container="vm.refreshSidebarFuncContainer">
+                    <div class="list-topic">
+                        <h3 class="title">Topics</h3>
+                        <ul>
+                            <li ng-class="{selected:vm.selectedCategory==category}" ng-click="vm.setCategory(category)" ng-repeat="category in vm.questionSet.userRoles[vm.selectedUserRole].categories" ng-if="category.name!='AutoInvest'">
+                                {{category.name}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact m-top-10px" ng-if="!vm.coreConfigService.AlgoLeader.HideForAlgoLeader">
+                        <h3 class="no-margin">Contact Us</h3>
+                        <h4>(+65) 6708 9337</h4>
+                        <a ng-click="vm.showContactUs()">support@algomerchant.com</a>
+                    </div>
+                    <div class="contact m-top-10px" ng-if="vm.coreConfigService.AlgoLeader.HideForAlgoLeader">
+                        <h3 class="no-margin">Contact Us</h3>
+                        <a ng-click="vm.showContactUs()">support@algoleader.com</a>
+                    </div>
+                </agmc-sticky-sidebar>
+            </div>
+            <div class="col-md-4">
+                <div class="content">
+                    <div ng-repeat="flow in vm.filteredQuestions" class="guide-box" is-open="flow.isOpened">
+                        <div class="pic" agms-image img-src="flow.imageUrl">
+                            <button ng-click="vm.showGuideAsPopup(flow)">
+                                <span class="glyphicon glyphicon-play"></span>
+                            </button>
+                        </div>
+                        <h3 agmc-paragraph-clipper="flow.flowTitle" max-line-count="2"></h3>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div ng-if="vm.filteredFaqs.length==0" class="alert alert-info">
+                        Sorry, no FAQ under this category.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

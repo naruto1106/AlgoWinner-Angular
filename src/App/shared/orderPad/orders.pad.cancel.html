@@ -1,0 +1,104 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Cancel Order</h4>
+</div>
+<div class="agm-component-orderpad modal-body modal-body-orderpad" tabindex="0" id="orderPad">
+    <div class="row-md-3">
+        <div class="col-md-2 left-div order-selection rel">
+            <div class="p-50px text-center" ng-show="vm.isSubmitting">
+                <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+            </div>
+            <form name="orderpad" ng-show="!vm.isSubmitting">
+                <section class="cancel-box">
+                    <div class="gray-text text-center bigger">
+                        ORDER TO CANCEL
+                    </div>
+                    <div>
+                        <table class="table-large m-bottom-10px m-top-10px">
+                            <tr>
+                                <td><strong>Order ID</strong></td>
+                                <td>{{vm.order.OrderId}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Symbol</strong></td>
+                                <td>{{vm.order.Product.Symbol}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Order Price</strong></td>
+                                <td>{{vm.order.Product.Currency | currencySymbol}}{{vm.order.OrderPrice}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quantity</strong></td>
+                                <td>{{vm.order.Quantity}} Units </td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Direction</strong></td>
+                                <td>{{vm.order.OriginalAction}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Intention</strong></td>
+                                <td>{{vm.order.Intention}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Order Type</strong></td>
+                                <td>{{vm.order.OrderType}}</td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>CreatedTime</strong></td>
+                                <td>{{vm.order.CreatedTime | dateLong}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Latest Status</strong></td>
+                                <td>{{vm.order.LatestStatus}}</td>
+                                <td></td>
+                            </tr>
+                        </table>                        
+                    </div>
+                    <div class="clearfix m-bottom-30px"></div>
+                </section>
+                <div class="submit-container m-top-10px separator-top p-top-10px">
+                    <p class="f-16px">Click Confirm to proceed with 'order cancellation' or cancel to go back to previous menu.</p>
+                    <button class="filled-blue m-bottom-10px pull-right m-right-10px" ng-click="vm.submit()">CONFIRM</button>
+                    <button class="hollow-blue m-bottom-10px pull-right m-right-10px" ng-click="vm.uibDismissPanel()">CANCEL</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-1 rel right-div" ng-if="vm.selectedStrategy != null">
+            <div class="text-center m-top-20px">
+                <span class="gray-text bigger">SELECTED TRADE PORTFOLIO:</span>
+            </div>
+
+            <div class="clearfix m-bottom-20px"></div>
+            <div class="w-150px account">
+                <agms-strategy-commerce-portrait class="border"
+                                                 strategy="vm.selectedStrategy.DisplayInfo"
+                                                 level-of-detail="5"></agms-strategy-commerce-portrait>
+            </div>
+            <div class="clearfix m-bottom-30px"></div>
+            <div class="text-center">
+                <span class="gray-text bigger">{{vm.selectedStrategy.DisplayInfo | strategyName}}</span>
+            </div>
+            <div class="clearfix m-bottom-5px"></div>
+            <div class="text-center">
+                <span class="gray-text bigger">({{vm.selectedStrategy.BrokerageDetail.BrokerageType}} {{vm.selectedStrategy.BrokerageDetail.AccountNumber}})</span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-1 rel right-div" ng-if="vm.selectedStrategy == null">
+            <div class="text-center m-top-50px">
+                <span class="gray-text bigger">No Trade Portfolio Selected</span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

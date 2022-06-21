@@ -1,0 +1,30 @@
+﻿<div class="agm-component-trade-exposure">
+    <!-- DIRECTIVE agmStrategyExposure.html +  agmStrategyExposure.js -->     
+    <div class="p-right-0px" ng-if="vm.exposureList.length > 0">
+        <div class="text-center"><h4>Top Products By Turnover</h4></div>
+        <div ng-repeat="exposure in vm.exposureList | orderBy:'-Turnover' |limitTo: 5" class="exposure-list border">
+            <agms-product-picture product="exposure" class="p-10px col-md-3 col-xs-3 separator-right h-60px"></agms-product-picture>
+            <div class="p-10px pull-left col-md-4 col-xs-5 p-left-15px p-right-15px separator-right h-60px">
+                <div class="important-title">Cumulative Return</div>
+                <div ng-class="exposure.CumulativeReturn>=0?['green-profit important-content']:['red-loss important-content']">{{exposure.CumulativeReturn | customCurrencyOrDash:exposure.Currency:2}} <span ng-class="exposure.CumulativeReturn>=0?['sub green-profit']:['sub red-loss']">({{exposure.CumulativeReturnPct | valuePercentOrDashDynamicDecimals:4}})</span></div>
+            </div>
+            <div class="col-md-5 col-xs-4">
+                <div class="p-10px pull-left p-left-15px p-right-15px h-60px">
+                    <div class="important-title">Turnover</div>
+                    <div class="important-content special-text">{{exposure.Turnover | customCurrencyOrDash:exposure.Currency:2}} <span class="sub special-text">{{exposure.Proportion | valuePercentOrDashDynamicDecimals:4}}</span></div>
+                </div>
+                <agmc-rainbow-donut data="[exposure.Proportion,100-exposure.Proportion]" width="40" height="40" class="m-10px pull-right" thickness="100" colors="['#06F','#EEE']"></agmc-rainbow-donut>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="text-center" ng-if="(vm.exposureList == null || vm.exposureList.length == 0) && !vm.hideIfNoTurnovers">
+        <h5>
+            There is insufficient data for this
+            <span ng-if="vm.isStrategy">strategy</span>
+            <span ng-if="!vm.isStrategy">trade portfolio</span> 
+            to display any meaningful turnover analysis.
+        </h5>
+    </div>
+    <br/>
+</div>

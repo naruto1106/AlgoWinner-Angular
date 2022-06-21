@@ -1,0 +1,16 @@
+﻿
+<div class="modal-header" >
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Edit Watchlist</h4>
+</div>
+<div class="modal-body">
+    <div class="p-50px text-center" ng-show="vm.isSubmitting">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div class="p-left-50px p-right-20px p-bottom-20px p-top-20px" ng-show="!vm.isSubmitting">
+        <strong>Name: </strong><input type="text" ng-model="vm.newName" class="m-left-10px" /><br />
+        <span class="red-loss lh-25px" ng-if="vm.hasSameName()">You already have a watchlist with the same name.</span>
+        <button class="filled-blue pull-right m-right-20px" ng-click="vm.submit(vm.watchlist)" ng-if="true" ng-disabled="vm.hasSameName() || !vm.newName">SUBMIT</button>
+        <span class="clearfix"></span>
+    </div>
+</div>

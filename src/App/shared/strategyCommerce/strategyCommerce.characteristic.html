@@ -1,0 +1,180 @@
+﻿<form name="strategycharacteristics" ng-submit="vm.canSubmit() && vm.nextFunc()" class="agm-components-strategy-characteristic">
+    <div ng-if="!vm.isStrategyPublished(vm.strategyModel.Status)">
+        <section class="col-md-6 p-left-0px">
+            <dl class="dl-horizontal form-larger">
+                <dt>
+                    Name:
+                    <br />
+                    <small>Max 25 Chars</small>
+                </dt>
+                <dd ng-if="vm.isSimplifiedMode">
+                    <input type="text" ng-model="vm.strategyModel.Name" placeholder="e.g. Momentum Stocks"
+                           ng-model-options="{debounce: 200}" name="name" ng-change="vm.checkStrategyNameSimplified()"
+                           ng-maxlength=25 maxlength="25" required/>
+                    <span class="f-16px green-profit glyphicon glyphicon-ok" ng-if="strategycharacteristics.name.$valid && !vm.sameStrategyName"></span>
+                    <br/>
+                    <span style="color: red" ng-show="vm.sameStrategyName">You already have a trade portfolio with this name. Please use another one.</span>
+                    <span style="color: red" ng-show="strategycharacteristics.name.$invalid">Trade Portfolio name is required and should not be too long.</span>
+                </dd>
+                <dd ng-if="!vm.isSimplifiedMode">
+                    <input type="text" ng-model="vm.strategyModel.Name" placeholder="e.g. Momentum Stocks"
+                           ng-model-options="{debounce: 200}" name="name" ng-change="vm.checkStrategyName()"
+                           ng-maxlength=25 maxlength="25" pattern=".{6,25}" required />
+                    <span class="f-16px green-profit glyphicon glyphicon-ok" ng-if="strategycharacteristics.name.$valid && !vm.sameStrategyName"></span>
+                    <br />
+                    <span style="color:red" ng-show="vm.sameStrategyName">There is already a strategy with this name. Please use another one.</span>
+                    <span style="color:red" ng-show="strategycharacteristics.name.$invalid">Strategy names should be between 6 - 25 chars long.</span>
+                </dd>
+            </dl>
+            <dl class="dl-horizontal form-larger" ng-if="!vm.isSimplifiedMode">
+                <dt>
+                    Description:
+                    <br />
+                    <small>Max 500 Chars</small>
+                </dt>
+                <dd>
+                    <textarea rows="5" cols="50" ng-model-options="{debounce: 200}" ng-attr-placeholder="Please elaborate further about the strategy"
+                              ng-model="vm.strategyModel.Description" name="description" maxlength="500" required class="w-100pct"></textarea>
+                    <br />
+                    <span style="color:red" ng-show="strategycharacteristics.description.$invalid">
+                        Description is required.
+                    </span>
+                </dd>
+            </dl>
+            <dl class="dl-horizontal form-larger">
+                <dt>Image:</dt>
+                <dd>
+                    <div img-fallback-src="'//am708403.azureedge.net/images/no-image.jpg'"
+                         agms-image img-src="vm.getImage()" class="cover-center w-180px h-120px m-bottom-5px"></div>
+                    <button type="button" class="mini-filled-green" ng-click="vm.changeIcon()">CHANGE IMAGE...</button>
+                    <br />
+                    <span color="special-text" ng-hide="vm.getImage()">Image has not been uploaded</span>
+                    <span style="color:red" ng-show="!vm.isSimplifiedMode && !vm.hasValidImageToPublish()"><strong>Default images are not allowed.</strong> Please change your strategy image in order for subscribers to uniquely identify your strategy.</span>
+
+                </dd>
+            </dl>
+        </section>
+        <section class="col-md-6 p-right-0px" ng-if="!vm.isSimplifiedMode">
+            <dl class="dl-horizontal form-larger">
+                <dt>
+                    Investment Horizon:
+                    <br />
+                    <small>Time taken from entering to liquidating a position</small>
+                </dt>
+                <dd>
+                    <select ng-model="vm.strategyModel.TradeDuration" ng-options="(etd.Operator+' '+etd.Length+' '+etd.DurationType) for etd in vm.expectedTradeDurations"></select>
+                </dd>
+                <dt>
+                    Category:
+                    <br />
+                    <small>Pick up to three</small>
+                </dt>
+                <dd class="w-210px border p-10px p-right-20px">
+                    <div ng-repeat="category in vm.categories" class="category">
+                        <input type="checkbox" ng-model="category.value" ng-change="vm.changeModel()" />
+                        <span class="lh-30px">{{category.name}}</span>
+                        <div ng-switch on="category.name" class="pull-right w-20px h-20px m-top-5px">
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/trend.svg'" ng-switch-when="Trend Following"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/news.svg'" ng-switch-when="News"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/fundamental.svg'" ng-switch-when="Fundamental"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/fish.svg'" ng-switch-when="Bottom Fishing"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/stat.svg'" ng-switch-when="Statistical"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/break.svg'" ng-switch-when="Breakout"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/misc.svg'" ng-switch-when="Others"></span>
+                            <span ng-switch-default>UNKNOWN CATEGORY</span>
+                        </div>
+                        <span class="clearfix"></span>
+                    </div>
+                    <br />
+                    <span style="color:red" ng-show="vm.tooManyCategoriesSelected()">Choose only up to three categories</span>
+                    <span style="color:red" ng-show="vm.noCategorySelected()">Choose at least one category</span>
+                </dd>
+            </dl>
+        </section>
+        <section class="col-md-6 p-right-0px" ng-if="vm.isSimplifiedMode && vm.showHint">
+            <div class="alert alert-info">
+                <h1 class="f-20px">
+                    What is a trade portfolio?
+                </h1>
+                <h3 class="f-16px">
+                    In AlgoMerchant, a trade portfolio is simply a means of grouping your trades. You may create up to ten different trade portfolios. When you place an order, you have to indicate which trade portfolio you wish to place the order to. Each trade portfolio you create should therefore correspond to a different set of investment objectives and risk tolerances.
+                </h3>
+                <h1 class="f-20px">
+                    Who can see the trades in my trade portfolio?
+                </h1>
+                <h3 class="f-16px" ng-if="vm.coreUserStateService.isFollower()">
+                    The trades you place on your own trade portfolios are private to you. However, you may find strategies in our ecosystem, which are essentially published trade portfolios of other traders, which you can subscribe to in order to see their trade activities.
+                </h3>
+                <h3 class="f-16px" ng-if="!vm.coreUserStateService.isFollower()">
+                    The trades you place on your trade portfolios are private to you. However, once you are confident of your trade portfolio's performance, you may be allowed to publish your trade portfolio as a strategy to other users in AlgoMerchant, in return for profits from subscription fees.
+                </h3>
+            </div>
+        </section>
+        <div class="clearfix"></div>
+    </div>
+    <div ng-if="vm.isStrategyPublished(vm.strategyModel.Status)">
+        <section class="col-md-6 p-left-0px">
+            <dl class="dl-horizontal form-larger">
+                <dt>Strategy Name:</dt>
+                <dd>
+                    <span class="f-16px lh-30px">{{vm.strategyModel.Name}}</span>
+                </dd>
+                <dt>Description:</dt>
+                <dd>
+                    <span class="f-16px">{{vm.strategyModel.Description}}</span>
+                </dd>
+                <dt>Uploaded Image:</dt>
+                <dd ng-if="vm.hasValidImageToPublish()">
+                    <div agms-image img-src="vm.strategyModel.ImageUrl" class="pull-left cover-center w-180px h-120px"></div>
+                </dd>
+                <dd ng-if="!vm.hasValidImageToPublish()">
+                    <div img-fallback-src="'//am708403.azureedge.net/images/no-image.jpg'"
+                         agms-image img-src="vm.getImage()" class="cover-center w-180px h-120px m-bottom-5px"></div>
+                    <button type="button" class="mini-filled-green" ng-click="vm.changeIcon()">CHANGE IMAGE...</button>
+                    <br/>
+                    <span style="color:red"><strong>Default images are not allowed.</strong> Please change your strategy image in order for subscribers to uniquely identify your strategy.</span>
+                    <span color="special-text" ng-hide="vm.getImage()">Image has not been uploaded</span>
+
+                </dd>
+            </dl>
+        </section>
+        <section class="col-md-6 p-right-0px">
+            <dl class="dl-horizontal form-larger">
+                <dt>
+                    Investment Horizon:
+                    <br />
+                    <small>Time taken from entering to liquidating a position</small>
+                </dt>
+                <dd>
+                    <span class="f-16px lh-30px">
+                        {{vm.strategyModel.TradeDuration.Operator}} {{vm.strategyModel.TradeDuration.Length}} {{vm.strategyModel.TradeDuration.DurationType}}
+                    </span>
+                </dd>
+                <dt>
+                    Strategy Category
+                </dt>
+                <dd class="w-210px border p-10px p-right-20px">
+                    <div ng-repeat="category in vm.categories" class="category" ng-if="category.value">
+                        <span class="lh-30px">{{category.name}}</span>
+                        <div ng-switch on="category.name" class="pull-right w-20px h-20px m-top-5px">
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/trend.svg'" ng-switch-when="Trend Following"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/news.svg'" ng-switch-when="News"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/fundamental.svg'" ng-switch-when="Fundamental"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/fish.svg'" ng-switch-when="Bottom Fishing"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/stat.svg'" ng-switch-when="Statistical"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/break.svg'" ng-switch-when="Breakout"></span>
+                            <span agmc-svg-loader svg-src="'/App/assets/icons/category/misc.svg'" ng-switch-when="Others"></span>
+                            <span ng-switch-default>UNKNOWN CATEGORY</span>
+                        </div>
+                        <span class="clearfix"></span>
+                    </div>
+                </dd>
+            </dl>
+        </section>
+        <div class="clearfix"></div>
+    </div>
+    <div class="separator-top m-top-20px h-10px"></div>
+    <button class="pull-right filled-blue m-left-10px" ng-if="vm.nextLabel" ng-disabled="!vm.canSubmit()" type="submit">{{vm.nextLabel}}</button>
+    <button class="pull-right hollow-blue m-left-10px" ng-if="vm.prevLabel" ng-click="vm.prevFunc()" type="button">{{vm.prevLabel}}</button>
+    <div class="clearfix"></div>
+</form>

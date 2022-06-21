@@ -1,0 +1,104 @@
+﻿<div class="legends" ng-style="vm.getLegendStyle()">
+    <div ng-if="vm.filterDescription.primaryProduct && vm.filterDescription.isComparisonMode()"
+         uib-btn-checkbox
+         analytics-on="click"
+         analytics-category="Chart"
+         analytics-event="Legend"
+         analytics-label="ChartLegend"
+         ng-model="vm.filterDescription.primaryProduct.included"
+         ng-change="vm.productVisibilityChanged(vm.filterDescription.primaryProduct)"
+         agmc-analytics-timestamp=""
+         class="strategy primary"
+         ng-class="{lighttheme: vm.pChartThemeService.getCurrentTheme() == 'Light', darktheme: vm.pChartThemeService.getCurrentTheme() == 'Dark'}">
+        <div class="main-item">
+            <div class="product-label" ng-if="vm.isPrimaryProductInLineChart()" ng-style="{backgroundColor:vm.getPrimaryColor(product)}"></div>
+            <div ng-class="{inactive:!vm.filterDescription.primaryProduct.included}" class="checkbox">
+                <span class="glyphicon glyphicon-ok"></span>
+            </div>
+            <h4>
+                {{vm.filterDescription.primaryProduct.ProductName}}&nbsp;
+            </h4>
+            <h5 class="price">
+                {{vm.displayedChartSelectedItemInfo.price.data.Close | correctTickSizeDecimalPlacesWithCurrency:vm.displayedChartSelectedItemInfo.price.data.Currency:vm.displayedChartSelectedItemInfo.price.data.TradeVenueLoc}}
+            </h5>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div ng-if="vm.filterDescription.primaryProduct && vm.filterDescription.myProducts.length>0 && !vm.filterDescription.isComparisonMode()"
+         class="strategy primary"
+         ng-class="{lighttheme: vm.pChartThemeService.getCurrentTheme() == 'Light', darktheme: vm.pChartThemeService.getCurrentTheme() == 'Dark'}">
+        <div class="main-item">
+            <div class="product-label" ng-if="vm.isPrimaryProductInLineChart()" ng-style="{backgroundColor:vm.getPrimaryColor(product)}"></div>
+            <h4>
+                {{vm.filterDescription.primaryProduct.ProductName}}&nbsp;
+            </h4>
+            <h5 class="price">
+                {{vm.displayedChartSelectedItemInfo.price.data.Close | correctTickSizeDecimalPlacesWithCurrency:vm.displayedChartSelectedItemInfo.price.data.Currency:vm.displayedChartSelectedItemInfo.price.data.TradeVenueLoc}}
+            </h5>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div ng-repeat="product in vm.filterDescription.myProducts"
+         ng-if="product!=vm.filterDescription.primaryProduct"
+         class="strategy"
+         uib-btn-checkbox
+         analytics-on="click"
+         analytics-category="Chart"
+         analytics-event="Legend"
+         analytics-label="ChartLegend"
+         agmc-analytics-timestamp=""
+         ng-model="product.included"
+         ng-change="vm.productVisibilityChanged(product)"
+         ng-class="{inactive:!product.included}">
+        <div class="main-item">
+            <div class="product-label" ng-style="{backgroundColor:vm.getProductRendererColor(product)}"></div>
+            <div ng-class="{inactive:!product.included}" class="checkbox">
+                <span class="glyphicon glyphicon-ok"></span>
+            </div>
+            <h4>
+                {{product.ProductName}}&nbsp;
+            </h4>
+            <h5 ng-if="product.included">
+                {{vm.displayedChartSelectedItemInfo.price.data[product.Symbol] | correctTickSizeDecimalPlacesWithCurrency:product.Currency:product.TradeVenueLoc}}
+            </h5>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
+    <div ng-repeat="pf in vm.filterDescription.productFundamentals"
+         ng-if="vm.shouldShowFundamentalLabel(pf)"
+         class="strategy"
+         uib-btn-checkbox
+         analytics-on="click"
+         analytics-category="Chart"
+         analytics-event="Legend"
+         analytics-label="ChartLegend"
+         agmc-analytics-timestamp=""
+         ng-model="pf.included"
+         ng-disabled="!vm.isBarSizeValid(pf)"
+         ng-change="vm.productFundamentalVisibilityChanged(pf)"
+         ng-class="{inactive:!pf.included}">
+
+        <div class="main-item">
+            <div class="product-label" ng-style="{backgroundColor:vm.getRendererColor(pf)}"></div>
+            <div ng-class="{inactive:!pf.included}" class="checkbox">
+                <span class="glyphicon glyphicon-ok"></span>
+            </div>
+            <h4>
+                {{pf.product.ProductName}}&nbsp;{{pf.fundamentalDisplayName}}&nbsp;
+            </h4>
+            <h5 ng-if="pf.included">
+                {{vm.displayedChartSelectedItemInfo.price.data[pf.legend] | valueOrDash:3}}
+            </h5>
+        </div>
+        <div class="clearfix"></div>
+        <!--<a uib-btn-checkbox ng-model="pf.included" ng-disabled="!vm.isBarSizeValid(pf)" ng-change="vm.removeProductFundamentalFromList(pf)">
+                <span class="glyphicon glyphicon-remove red-loss"></span>
+            </a>-->
+    </div>
+
+</div>
+

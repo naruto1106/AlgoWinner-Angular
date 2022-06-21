@@ -1,0 +1,35 @@
+﻿.panel-title {
+    font-weight: 600;
+    color: @grayDark3;
+    text-transform: uppercase;
+
+    &.large {
+        font-size: 20px;
+        line-height: 40px;
+    }
+}
+
+.panel {
+    background: none;
+    background-color: white;
+
+    .panel-heading {
+        background-color: mix(white,transparent,70);
+        padding: 5px 10px;
+    }
+
+    .panel-body {
+        background-color: mix(white,transparent,90);
+        padding: 10px;
+    }
+}
+
+.panel {
+    .panel-body.compact {
+        padding: 0px;
+    }
+}
+
+.shaded {
+    background: mix(black,transparent,5);
+}

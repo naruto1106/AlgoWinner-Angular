@@ -1,0 +1,67 @@
+﻿<div>
+    <div class="p-50px text-center" ng-show="vm.isLoadingCards">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        <div class="clearfix m-bottom-5px"></div>
+        <span class="gray-text">Loading Card ...</span>
+    </div>
+    <div class="box-form p-15px agm-component-payment" ng-show="!vm.isLoadingCards">
+        <button class="filled-blue" ng-click="vm.openAddCardModal()" ng-if="vm.canAddMoreCard()">
+            <span class="glyphicon glyphicon-plus"></span> ADD CREDIT CARD
+        </button>
+        <div class="clearfix m-10px"></div>
+        <div ng-show="!vm.myCreditCards || vm.myCreditCards.length == 0" class="add-new-card-panel">
+            <div ng-if="!vm.commonScreenResizerService.isOpenedFromMobileDevice">
+                <h3>Add New Credit Card:</h3>
+                <agms-payment-form is-form-invalid="vm.isSubmitNewCardInvalid"
+                                   generate-stripe-token="vm.getNewCardToken"
+                                   show-add-card-button="false">
+                </agms-payment-form>
+
+                <button class="filled-blue pull-right m-left-10px" ng-disabled="vm.isSubmitNewCardInvalid()" ng-click="vm.saveNewCard()" wait-state="vm.waitState"
+                        analytics-on="click" analytics-category="Payment" analytics-event="ClickSaveCard" agmc-analytics-timestamp>SAVE</button>
+                <div class="clearfix"></div>
+            </div>
+            <div class="credit-card" ng-if="vm.commonScreenResizerService.isOpenedFromMobileDevice">
+                <div class="credit-card-new text-center" ng-if="!vm.myCreditCards || vm.myCreditCards.length==0">
+                    <button ng-click="vm.openAddCardModal()">
+                        <h1 class="glyphicon glyphicon-plus"></h1>
+                        <h3>Add Credit Card</h3>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="vm.myCreditCards.length > 0">
+            <div class="f-16px">
+                My Saved Credit Card:
+            </div>
+            <div class="clearfix m-bottom-10px"></div>
+            <div class="credit-card">
+                <div ng-repeat="card in vm.myCreditCards" class="credit-card-box rel">
+                    <div class="credit-card-logo {{card.shortName}}"></div>
+                    <div class="card-brand">
+                        {{card.brand}}
+                        <span class="card-country">
+                            {{card.country}}
+                        </span>
+                    </div>
+                    <div class="card-number">
+                        <span ng-if="card.brand == 'Visa' || card.brand == 'MasterCard'">**** **** ****</span>
+                        <span ng-if="card.brand == 'Amex' || card.brand == 'American Express'">**** ****** *</span>
+                        {{card.last4}}
+                    </div>
+
+                    <div class="card-expiry">
+                         Expiry Date {{card.exp_month}}/{{card.exp_year}}
+                    </div>
+                    <div class="card-action-button">
+                        <a class="glyphicon glyphicon-trash pull-right silent-button" ng-click="vm.deleteCard(card)"
+                           analytics-on="click" analytics-category="Payment" analytics-event="ClickDeleteCard" agmc-analytics-timestamp></a>
+                        <a class="glyphicon glyphicon-pencil pull-right silent-button" ng-click="vm.editCard(card)"
+                           analytics-on="click" analytics-category="Payment" analytics-event="ClickEditCard" agmc-analytics-timestamp></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

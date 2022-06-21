@@ -1,0 +1,92 @@
+﻿<div class="agm-components-referral">
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+    <div class="hero-image"></div>
+    <div class="top-section">
+        <div ng-if="!vm.isLoading">
+            <div class="algo-hero">
+                Become
+                <span ng-if="!vm.isReferralPartner">an AlgoHero</span>
+                <span ng-if="vm.isReferralPartner">a Referral Partner</span>
+            </div>
+            <div class="introduce-friend">
+                Introduce
+                <span ng-if="!vm.isReferralPartner">a friend</span>
+                <span ng-if="vm.isReferralPartner">people</span>
+                to AlgoMerchant.
+                <span ng-if="!vm.isReferralPartner">They'll get $30 in AlgoMerchant credit when they sign up.</span>
+            </div>
+            <div class="your-benefit" ng-if="!vm.isReferralPartner">
+                You'll get $10 immediately when they sign up, and $50 once they spend more than $180 in AlgoMerchant.*
+            </div>
+
+            <div class="invitation">
+                <textarea autofocus placeholder="please enter comma separated emails" rows="2" cols="60"
+                          ng-model="vm.invitationEmails"
+                          ng-change="vm.validateEmail()"
+                          ng-keyup="vm.autoExpand($event)"
+                          class="invitation-email"></textarea>
+                <button class="filled-green invitation-btn" ng-click="vm.sendInvitationEmail()" ng-disabled="vm.disableSubmit()"
+                        analytics-on="click" analytics-category="InviteFriend" analytics-event="SendInvites" agmc-analytics-timestamp>
+                    SEND INVITES
+                </button>
+            </div>
+
+            <div class="error-message" ng-if="vm.invalidEmail && !vm.isEamilValid">
+                {{vm.invalidEmail}} is not a valid email address
+            </div>
+
+            <div class="terms" ng-if="!vm.isReferralPartner">
+                *For new AlgoMerchant users only. <a href="//am708403.azureedge.net/pdf/AlgoMerchantReferralProgramTerms&Conditions.pdf" target="_blank">Terms & conditions</a>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-section">
+        <div class="referral-link">
+            Share Your Link:
+            <input type="text" ng-model="vm.referralLink" class="link-text" id="link-text" />
+            <button class="copy-btn" ng-click="vm.copyToClipboard()">Copy</button>
+        </div>
+        <div class="social-media">
+            <button class="mini-filled-blue"
+                    socialshare
+                    socialshare-provider="facebook"
+                    socialshare-type="sharer"
+                    socialshare-via="959604877527616"
+                    socialshare-url="{{vm.referralLink}}"
+                    socialshare-popup-height="300"
+                    socialshare-popup-width="400"
+                    socialshare-hashtags="#AlgoMerchant"
+                    socialshare-trigger="click"
+                    analytics-on="click" analytics-category="InviteFriend" analytics-event="FacebookShare" agmc-analytics-timestamp>
+                Facebook
+            </button>
+            <button class="mini-hollow-blue"
+                    socialshare
+                    socialshare-provider="twitter"
+                    socialshare-hashtags="AlgoMerchant, Investment, RobotInvesting, Stocks"
+                    socialshare-via="twitter"
+                    socialshare-text="Sign up to get $30 credit in AlgoMerchant!"
+                    socialshare-url="{{vm.referralLink}}"
+                    socialshare-popup-height="300"
+                    socialshare-popup-width="400"
+                    socialshare-trigger="click"
+                    analytics-on="click" analytics-category="InviteFriend" analytics-event="TwitterShare" agmc-analytics-timestamp>
+                Twitter
+            </button>
+        </div>
+        <div class="invitation-history">
+            <div class="invitation-title">
+                <span ng-if="vm.pendingInvitations.length > 0">Your Invitations:</span>
+                <span ng-if="vm.pendingInvitations.length <= 0">You have not invited anyone yet</span>
+            </div>
+            <div class="invitation-content">
+                <div ng-repeat="pending in vm.pendingInvitations" class="pending">
+                    {{pending.EmailInvited}} has not registered yet.
+                </div>
+                <div ng-repeat="credit in vm.creditTransactions" class="invited" ng-if="credit.Reason == 'Invite'">
+                    <div>{{credit.RealName}} has registered on AlgoMerchant. You Got {{credit.Currency | currencySymbol}}{{credit.Amount | valueOrDash:2}}.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

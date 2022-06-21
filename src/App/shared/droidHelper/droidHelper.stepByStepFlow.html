@@ -1,0 +1,16 @@
+﻿<div class="agms-directives step-by-step-flow" ng-class="{'has-navigator':vm.navigatorVisibility}">
+    <div class="step-list">
+        <button ng-repeat="step in vm.enabledSteps" ng-click="vm.goToStep($index+1)" ng-disabled="!vm.isAccessible($index)" ng-class="{accessible:vm.isAccessible($index), active:vm.isActive($index)}">
+            <span class="bullet">{{$index + 1}}</span> <span class="name">{{step.title}}</span>
+        </button>
+        <h4 class="title">
+            {{vm.enabledSteps[vm.currentStep-1].title}}
+        </h4>
+    </div>
+    <div ng-transclude class="transclude-container"></div>
+    <div class="navigator" ng-show="vm.navigatorVisibility">
+        <button class="next-button filled-blue semi-mini-button" ng-click="vm.nextStep()" ng-disabled="vm.currentStep>=vm.maximumStep || vm.isLoading">{{vm.enabledSteps[vm.currentStep-1].nextLabel || 'NEXT'}}</button>
+        <button class="prev-button filled-blue semi-mini-button" ng-click="vm.prevStep()" ng-disabled="vm.currentStep<=1 || vm.isLoading">{{vm.enabledSteps[vm.currentStep-1].prevLabel || 'PREVIOUS'}}</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

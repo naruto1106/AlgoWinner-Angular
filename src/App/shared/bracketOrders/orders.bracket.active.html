@@ -1,0 +1,96 @@
+﻿<div class="bracket-active flex-h">
+    <!-- template for Active Orders-->
+    <div class="order-type-box" ng-class="vm.order.Action == 'Buy' ? ['buy']:['sell']">
+        <div class="order-type">
+            {{::vm.order.Action}}
+        </div>
+    </div>
+    <div class="order-main-box">
+        <div class="simple-box row-md-9 h-70px">
+            <div class="col-md-7 no-padding">
+                <div class="pull-left bracket-order special-text">
+                    <div>Bracket</div>
+                    <div>Order</div>
+                </div>
+                <div class="pull-left order-date">
+                    <span class="gray-text">ORDER DATE</span><br />
+                    <span>{{::vm.order.CreatedTime | date:'mediumDate'}}</span><br />
+                    <span>{{::vm.order.CreatedTime | date:'shortTime'}}</span>
+                </div>
+                <div class="w-190px pull-left p-top-10px text-uppercase">
+                    <agms-product-picture product="::vm.order.Product"></agms-product-picture>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="w-110px pull-left text-uppercase m-top-10px">
+                    <span class="special-text">{{vm.order.Intention}}</span><br />
+                    <span><strong>&#39;{{::vm.order.Position}}&#39;</strong> position</span>
+                </div>
+
+                <div class="pull-left">
+                    <div class="take-profit">
+                        <div class="special-text pull-left order-name">
+                            <strong>TAKE PROFIT</strong>
+                        </div>
+                        <div class="pull-left price">
+                            <strong>{{vm.getTakeProfitOrder(vm.order).OrderPrice | customCurrencyOrDashMinMax:vm.getTakeProfitOrder(vm.order).Product.Currency:2:4}}</strong>
+                        </div>
+                        <div class="pull-left status" ng-if="vm.showCancelling(vm.getTakeProfitOrder(vm.order))">
+                            <div>Cancelling order...</div>
+                        </div>
+                        <h5 class="red-loss lh-20px no-margin ellipsis-nowrap" title="{{vm.getTakeProfitOrder(vm.order).RejectReason}}"
+                            ng-if="(vm.getTakeProfitOrder(vm.order) | hasBeenRejectedCancelledOrExpired) && vm.getTakeProfitOrder(vm.order).RejectReason">{{vm.getTakeProfitOrder(vm.order).RejectReason}}
+                        </h5>
+                    </div>
+                    <div class="stop-loss">
+                        <div class="special-text pull-left order-name">
+                            <strong>STOP LOSS</strong>
+                        </div>
+                        <div class="pull-left price">
+                            <strong>{{vm.getStopLossOrder(vm.order).OrderPrice | customCurrencyOrDashMinMax:vm.getStopLossOrder(vm.order).Product.Currency:2:4}}</strong>
+                        </div>
+                        <div class="pull-left status" ng-if="vm.showCancelling(vm.getStopLossOrder(vm.order))">
+                            <div>Cancelling order...</div>
+                        </div>
+                        <h5 class="red-loss lh-20px no-margin ellipsis-nowrap" title="{{vm.getStopLossOrder(vm.order).RejectReason}}"
+                            ng-if="(vm.getStopLossOrder(vm.order) | hasBeenRejectedCancelledOrExpired) && vm.getStopLossOrder(vm.order).RejectReason">{{vm.getStopLossOrder(vm.order).RejectReason}}
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="pull-right cancel-button" ng-if="vm.showCancelButtonFunc(vm.order)">
+                    <button class="mini-filled-red" ng-click="vm.cancelFunc(vm.order)"
+                        analytics-on="click" analytics-category="Trade" analytics-event="CancelOrder" agmc-analytics-timestamp>
+                        CANCEL
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="box h-70px col-md-2 no-padding rel">
+                <div ng-if="vm.sameOrderStatus()">
+                    <div class="abs top-20px left-10px">
+                        <img src="//am708403.azureedge.net/images/static/wait.svg?" class="w-20px h-20px" ng-if="vm.showQueuedStatus()"/>
+                    </div>
+                    <div class="abs top-10px left-35px w-60px" style="line-height: 14px">
+                        <span class="strong">{{vm.getFilledQuantity(vm.order) | number:0}}/{{::vm.order.Quantity | number:0}}</span><br />
+                        <span>{{vm.order.LatestStatus}}</span>
+                    </div>
+                </div>
+                <div ng-if="!vm.sameOrderStatus()">
+                    <div class="take-profit-status">
+                        <span>{{vm.getTakeProfitOrder(vm.order).LatestStatus}}</span>
+                        <span class="strong">{{vm.getFilledQuantity(vm.getTakeProfitOrder(vm.order)) | number:0}}/{{::vm.getTakeProfitOrder(vm.order).Quantity | number:0}}</span>
+                    </div>
+                    <div class="stop-loss-status">
+                        <span>{{vm.getStopLossOrder(vm.order).LatestStatus}}</span>
+                        <span class="strong">{{vm.getFilledQuantity(vm.getStopLossOrder(vm.order)) | number:0}}/{{::vm.getStopLossOrder(vm.order).Quantity | number:0}}</span>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="abs" style="right: 10px; bottom: 5px">last updated {{vm.order.UpdateTime | timeSince}}</div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

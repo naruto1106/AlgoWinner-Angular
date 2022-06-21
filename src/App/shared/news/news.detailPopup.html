@@ -1,0 +1,54 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title"></h4>
+</div>
+<div class="modal-body agm-components-dashboard">
+    <div class="news-popup">
+        <div class="content-container">
+            <h1 class="title">{{vm.news.Title}}</h1>
+            <div ng-if="vm.news.Products.length>0" class="news-tips-cash-tags">
+                <a ng-repeat="product in vm.news.Products" ng-click="vm.goToProduct(product)">${{product.Symbol}}</a>
+            </div>
+            <div class="special-text news-tips-date">
+                {{vm.news.UpdateTime | date:'shortTime'}} {{vm.news.UpdateTime | date:'mediumDate'}}
+            </div>
+            <div ng-if="vm.news.PreviewImageUrl">
+                <div class="image-buttons">
+                    <a class="glyphicon glyphicon-search silent-button2 m-right-5px m-top-5px pull-right" ng-click="vm.showPicture('Attachment #'+($index+1), vm.news.PreviewImageUrl)"
+                       analytics-on="click" analytics-category="Dashboard" analytics-event="News" analytics-label="OpenImage" dimension-value="{{vm.news.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4"></a>
+                    <a class="glyphicon glyphicon-download-alt silent-button2 m-right-5px m-top-5px pull-right" href="{{vm.news.PreviewImageUrl}}" target="_blank"
+                       analytics-on="click" analytics-category="Dashboard" analytics-event="News" analytics-label="DownloadImage" dimension-value="{{vm.news.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4"></a>
+                </div>
+                <div ng-if="vm.news.PreviewImageUrl != null" class="image-preview" agms-image img-src="vm.news.PreviewImageUrl" ng-click="vm.goToLink(vm.news.UrlLink)">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <p class="content" agmc-paragraph-clipper="vm.news.Content" is-clipping-active="true" max-line-count="999"></p>
+            <div class="clearfix"></div>
+
+            <p class="f-12px pull-right" ng-if="vm.news.UrlLink">
+                Read more at <a ng-click="vm.goToLink(vm.news.UrlLink)" analytics-on="click" analytics-category="Dashboard" analytics-event="News" analytics-label="ClickNewsUrl" dimension-value="{{vm.news.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4">
+                    {{vm.news.UrlLink | limitTo: 50}} ...
+                </a>
+            </p>
+
+            <div class="clearfix m-bottom-5px"></div>
+
+            <div ng-if="vm.news.Attachments && vm.news.Attachments.length > 0" class="sub p-left-10px p-right-10px">
+                <div>
+                    <strong>Attachments:</strong>
+                </div>
+                <div ng-repeat="attachment in vm.news.Attachments" class="p-5px m-right-10px m-bottom-10px pull-left">
+                    <span ng-if="vm.isPdfAttachment(attachment)"><img src="//am708403.azureedge.net/images/logo-adobe-pdf.jpg" style="width: auto; background-size: contain" class="h-30px" /> {{attachment.AttachmentName}} </span>
+                    <span ng-if="!vm.isPdfAttachment(attachment)"><img ng-src="{{attachment.AttachmentUrl}}" style="width: auto" class="h-30px" /> {{attachment.AttachmentName | limitTo:50}} </span>
+                    <a ng-if="!vm.isPdfAttachment(attachment)" class="glyphicon glyphicon-search silent-button2" ng-click="vm.showPicture(attachment.AttachmentName, attachment.AttachmentUrl )"
+                       analytics-on="click" analytics-category="Dashboard" analytics-event="News" analytics-label="OpenImage" dimension-value="{{vm.news.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="'dimension4'"></a>
+                    <a class="glyphicon glyphicon-download-alt silent-button2" href="{{attachment.AttachmentUrl}}" target="_blank"
+                       analytics-on="click" analytics-category="Dashboard" analytics-event="News" analytics-label="DownloadAttachment" dimension-value="{{vm.news.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4"></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

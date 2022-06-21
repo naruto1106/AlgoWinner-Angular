@@ -1,0 +1,242 @@
+﻿<div class="agm-components-backtester">
+    <agmc-loading is-loading="vm.pBacktesterService.isLoading"></agmc-loading>
+    <div class="backtester-container">
+        <div class="row-md-12">
+            <div class="col-md-9">
+                <div class="button-group tab-selection">
+                    <button class="child-button blue transition-fast" ng-click="vm.selectBacktest()" ng-model="vm.selectedTab" uib-btn-radio="'backtest'">
+                        Backtest
+                    </button>
+                    <button class="child-button blue transition-fast" ng-change="" ng-model="vm.selectedTab" uib-btn-radio="'result'">
+                        Result
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <button class="hollow-blue" ng-click="vm.reset()" uib-tooltip="Reset All Parameters">
+                Reset
+                </button>
+            </div>
+            <div class="col-md-1 text-center">
+                <a href="https://am708403.blob.core.windows.net/pdf/tool/Momentum-Analyzer-User-Guide.pdf" target="_blank"
+                   uib-tooltip="Open Guide">
+                    <div class="algoicon algoicons-question-circle"></div>
+                </a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="unlock-box" ng-if="!vm.hasPremiumSubscription" ng-click="vm.subscribePremium()">
+            You are currently using a free version, <span class="here">click here</span> to unlock all Premium Strategies!
+        </div>
+
+        <div ng-if="vm.selectedTab == 'backtest'" class="backtest">
+            <uib-accordion close-others="false">
+                <div uib-accordion-group class="panel-default" is-open="vm.steps.step1.isOpen">
+                    <uib-accordion-heading>
+                        <div>
+                            1. Set Up
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.steps.step1.isOpen, 'glyphicon-chevron-right': !vm.steps.step1.isOpen}"></i> ﻿
+                        </div>
+                    </uib-accordion-heading>
+                    <fieldset>
+                        <div class="">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Pick a Stock
+                                </label>
+                                <input type="text" placeholder="Search Stock..."
+                                       ng-model="vm.pBacktesterService.selectedStock"
+                                       ng-model-options="{debounce: 200}"
+                                       uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                                       typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                                       typeahead-wait-ms="200">
+                                <div class="error-message" ng-if="!vm.pBacktesterService.selectedStock || !vm.pBacktesterService.selectedStock.Symbol">
+                                    (Product not selected)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Direction
+                                </label>
+                                <div class="button-group">
+                                    <button class="child-button blue transition-fast" ng-change="" ng-model="vm.steps.step1.direction" uib-btn-radio="'long'">
+                                        Long
+                                    </button>
+                                    <button class="child-button blue transition-fast" ng-change="" ng-model="vm.steps.step1.direction" uib-btn-radio="'short'">
+                                        Short
+                                    </button>
+                                    <!--<button class="child-button blue transition-fast" ng-change="" ng-model="vm.steps.step1.direction" uib-btn-radio="'long and short'">
+                                        Long and Short
+                                    </button>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Bar Size
+                                </label>
+                                <select ng-options="bs as bs for bs in vm.barSizes"
+                                        ng-model="vm.steps.step1.barSize"></select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Start & End Date
+                                </label>
+                                <agmc-date-picker from-date="vm.steps.step1.startDate"
+                                                  to-date="vm.steps.step1.endDate"
+                                                  date-selection-changes=""
+                                                  allow-manual-entry="false"
+                                                  analytics-on="click" analytics-category="Backtester" analytics-event="DatePicker" analytics-label="ClickDatePicker" agmc-analytics-timestamp
+                                                  class="">
+                                </agmc-date-picker>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center m-top-10px" ng-show="!vm.steps.step2.isOpen">
+                            <button class="filled-blue" ng-click="vm.steps.step2.isOpen = true" ng-disabled="vm.disableStep2()">
+                                Next
+                            </button>
+                        </div>
+                    </fieldset>
+                </div>
+                <div uib-accordion-group class="panel-default" is-open="vm.steps.step2.isOpen" is-disabled="vm.disableStep2()">
+                    <uib-accordion-heading>
+                        <div>
+                            2. Set Entry Indicator
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.steps.step2.isOpen, 'glyphicon-chevron-right': !vm.steps.step2.isOpen}"></i> ﻿
+                        </div>
+                    </uib-accordion-heading>
+                    <fieldset>
+                        <div class="indicator">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Select Indicator
+                                </label>
+                                <select ng-options="indicator.name as indicator.name for indicator in vm.indicators"
+                                        ng-model="vm.steps.step2.entryIndicator.name" ng-change="vm.setEntryIndicator(vm.steps.step2.entryIndicator.name)"></select>
+                                <div class="error-message" ng-if="vm.isPremiumSelected()" ng-click="vm.subscribePremium()">
+                                    <a href="">(Not available for free version, click to unlock)</a>
+                                </div>
+                            </div>
+
+                            <div ng-if="vm.steps.step1.direction == 'long'">
+                                <div class="form-group" ng-repeat="param in vm.steps.step2.entryIndicator.longTrigger.params">
+                                    <label class="form-label">
+                                        {{param.name}}{{vm.getParamSuffix(param.name)}}
+                                    </label>
+                                    <input ng-if="param.name != 'Smooth'" type="number" min="1" step="1" ng-model="param.value" />
+                                    <div class="error-message" ng-if="param.name != 'Smooth' && (!param.value || param.value < 0)">
+                                        (Please set a positive number)
+                                    </div>
+                                    <input ng-if="param.name == 'Smooth'" style="margin-top: 6px;" type="checkbox" ng-model="param.value" />
+                                </div>
+                                <div ng-if="vm.steps.step2.entryIndicator.longTrigger.triggers.length > 0">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            Trigger
+                                        </label>
+                                        <div class="select-trigger">
+                                            {{vm.steps.step2.entryIndicator.longTrigger.selectedTrigger.before}}
+                                            &nbsp;
+                                            <select ng-options="t as t for t in vm.steps.step2.entryIndicator.longTrigger.triggers"
+                                                    ng-model="vm.steps.step2.entryIndicator.longTrigger.selectedTrigger.trigger" ng-change=""></select>
+                                            &nbsp;
+                                            {{vm.steps.step2.entryIndicator.longTrigger.selectedTrigger.after}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="vm.steps.step1.direction == 'short'">
+                                <div class="form-group" ng-repeat="param in vm.steps.step2.entryIndicator.shortTrigger.params">
+                                    <label class="form-label">
+                                        {{param.name}}{{vm.getParamSuffix(param.name)}}
+                                    </label>
+                                    <input ng-if="param.name != 'Smooth'" type="number" min="1" step="1" ng-model="param.value" />
+                                    <div class="error-message" ng-if="param.name != 'Smooth' && (!param.value || param.value < 0)">
+                                        (Please set a positive number)
+                                    </div>
+                                    <input ng-if="param.name == 'Smooth'" style="margin-top: 6px;" type="checkbox" ng-model="param.value" />
+                                </div>
+                                <div ng-if="vm.steps.step2.entryIndicator.shortTrigger.triggers.length > 0">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            Trigger
+                                        </label>
+                                        <div class="select-trigger">
+                                            {{vm.steps.step2.entryIndicator.shortTrigger.selectedTrigger.before}}
+                                            &nbsp;
+                                            <select ng-options="t as t for t in vm.steps.step2.entryIndicator.shortTrigger.triggers"
+                                                    ng-model="vm.steps.step2.entryIndicator.shortTrigger.selectedTrigger.trigger" ng-change=""></select>
+                                            &nbsp;
+                                            {{vm.steps.step2.entryIndicator.shortTrigger.selectedTrigger.after}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center m-top-20px" ng-show="!vm.steps.step3.isOpen">
+                            <button class="filled-blue" ng-click="vm.goStep3()" ng-disabled="vm.disableStep3()">
+                                Next
+                            </button>
+                        </div>
+                    </fieldset>
+                </div>
+                <div uib-accordion-group class="panel-default" is-open="vm.steps.step3.isOpen" is-disabled="vm.disableStep3()">
+                    <uib-accordion-heading>
+                        <div ng-click="vm.clickStep3()">
+                            3. Set Exit Conditions
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.steps.step3.isOpen, 'glyphicon-chevron-right': !vm.steps.step3.isOpen}"></i> ﻿
+                        </div>
+                    </uib-accordion-heading>
+                    <fieldset>
+                        <div class="">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Take Profit (%)
+                                </label>
+                                <div class="slider">
+                                    <rzslider rz-slider-model="vm.steps.step3.exitConditions.tp"
+                                              rz-slider-options="{floor: 0, ceil: 1000, step: 5, precision: 1}"></rzslider>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Cut Loss (%)
+                                </label>
+                                <div class="slider">
+                                    <rzslider rz-slider-model="vm.steps.step3.exitConditions.sl"
+                                              rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" style="line-height: unset;">
+                                    Max Holding Duration (Days)
+                                </label>
+                                <div class="slider">
+                                    <rzslider rz-slider-model="vm.steps.step3.exitConditions.maxHolding"
+                                              rz-slider-options="{floor: 0, ceil: 1000, step: 5, precision: 1}"></rzslider>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" style="line-height: unset;">
+                                    Exit When Entry Trigger Reverse
+                                </label>
+                                <input style="margin-top: 10px;" type="checkbox" ng-model="vm.steps.step3.exitConditions.reverse" />
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center m-top-10px">
+                            <button class="filled-blue" ng-disabled="vm.disableSimulate()" ng-click="vm.simulate()">
+                                Simulate
+                            </button>
+                        </div>
+                    </fieldset>
+                </div>
+            </uib-accordion>
+        </div>
+        <div ng-if="vm.selectedTab == 'result'">
+            <agmp-backtester-result></agmp-backtester-result>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,269 @@
+﻿<div class="agms-header" ng-class="{'show-download': vm.pMobileWebService.showDownloadApp == true}">
+    <div ng-if="vm.fakeProgress.isProgressing" class="w-100pct box fake-progress">
+        <div ng-style="vm.progressBarStyle()" class="transition-superfast page-progress-bar"></div>
+    </div>
+
+    <agms-header-confirm-email ng-show="vm.showConfirmEmailBox()"></agms-header-confirm-email>
+
+    <section class="container padless">
+        <div>
+            <agms-header-network-connection></agms-header-network-connection>
+        </div>
+    </section>
+
+    <header class="main-header"
+            ng-class="{'no-header':vm.headerMode.hasNoHeader(),
+                       'fixed-floating':vm.headerMode.hasFixedFloatingHeader(),
+                       'email-not-confirmed': vm.showConfirmEmailBox()}"
+            agms-guide-item="header.new">
+        <ul class="main-menu">
+            <li analytics-on="click" analytics-category="TopMenu" analytics-event="Home" agmc-analytics-timestamp>
+                <a href="#/overview" ng-class="{'selected': vm.sHeaderService.selectedMenu == 'dashboard'}" ng-click="vm.selectMenu('dashboard')">
+                    <div class="algoicon" ng-if="!vm.coreConfigService.AlgoLeader.HideForAlgoLeader">
+                        <img class="menu-logo" src="//am708403.azureedge.net/images/algowinner/logo.png?" alt="" />
+                    </div>
+                    <div class="algoicon" ng-if="vm.coreConfigService.AlgoLeader.HideForAlgoLeader">
+                        <img class="menu-logo" src="//am708403.azureedge.net/images/algoleader/logo.png" alt="" />
+                    </div>
+                    <div class="menu-title">Home</div>
+                </a>
+            </li>
+            <li ng-if="!vm.sHeaderService.hasJoeyOnly"
+                analytics-on="click" analytics-category="TopMenu" analytics-event="VirtualPortfolio" agmc-analytics-timestamp>
+                <a href="#/orderstrades" ng-class="{'selected': vm.sHeaderService.selectedMenu == 'trade'}" ng-click="vm.selectMenu('trade')">
+                    <div class="algoicon algoicons-trade3"></div>
+                    <div class="menu-title">Virtual Portfolio</div>
+                </a>
+            </li>
+            <li ng-if="!vm.sHeaderService.hasJoeyOnly" class="momentum"
+                analytics-on="click" analytics-category="TopMenu" analytics-event="Backtester" agmc-analytics-timestamp>
+                <a href="#/backtester" ng-class="{'selected': vm.sHeaderService.selectedMenu == 'backtester'}" ng-click="vm.selectMenu('backtester')">
+                    <div class="algoicon algoicons-graph"></div>
+                    <div class="menu-title">Momentum Analyzer</div>
+                </a>
+            </li>
+            <li analytics-on="click" analytics-category="TopMenu" analytics-event="Academy" agmc-analytics-timestamp
+                ng-if="!vm.sHeaderService.hasJoeyOnly">
+                <a href="" ng-class="{'selected': vm.sHeaderService.selectedMenu == 'academy'}" ng-click="vm.openAcademy()">
+                    <div class="algoicon algoicons-book-open"></div>
+                    <div class="menu-title">Academy</div>
+                </a>
+            </li>
+            <li ng-if="vm.sHeaderService.chartMenuType == 'Normal'"
+                analytics-on="click" analytics-category="TopMenu" analytics-event="Charts" agmc-analytics-timestamp>
+                <a href="#/charts" target="_blank">
+                    <div class="algoicon algoicons-chart"></div>
+                    <div class="menu-title">Chart</div>
+                </a>
+            </li>
+            <li ng-if="vm.sHeaderService.chartMenuType == 'TGPS'"
+                analytics-on="click" analytics-category="TopMenu" analytics-event="Chart TGPS" agmc-analytics-timestamp>
+                <a href="#/charts" target="_blank">
+                    <div class="algoicon algoicons-chart"></div>
+                    <div class="menu-title">Chart TGPS</div>
+                </a>
+            </li>
+            <li ng-if="vm.sHeaderService.chartMenuType == 'Partner'"
+                analytics-on="click" analytics-category="TopMenu" analytics-event="{{vm.sHeaderService.partnerChartName}}" agmc-analytics-timestamp>
+                <a href="" target="_blank" ng-click="vm.goToNewTab('/Partners/Inside#/charts')">
+                    <div class="algoicon algoicons-chart"></div>
+                    <div class="menu-title">{{vm.sHeaderService.partnerChartName}}</div>
+                </a>
+            </li>
+            <li ng-if="vm.sHeaderService.chartMenuType == 'DropDown'"
+                class="dropdown strategies hover-to-open" uib-dropdown
+                analytics-on="click" analytics-category="TopMenu" analytics-event="Charts" agmc-analytics-timestamp>
+                <a>
+                    <div class="algoicon algoicons-chart"></div>
+                    <div class="menu-title">
+                        Chart
+                        <span class="glyphicon glyphicon-chevron-down indicator-closed smaller"></span>
+                        <span class="glyphicon glyphicon-chevron-up indicator-open smaller"></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#/charts" target="_blank"
+                           analytics-on="click" analytics-category="TopMenu" analytics-event="Chart TGPS" agmc-analytics-timestamp>
+                            Chart TGPS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" target="_blank" ng-click="vm.goToNewTab('/Partners/Inside#/charts')"
+                           analytics-on="click" analytics-category="TopMenu" analytics-event="{{vm.sHeaderService.partnerChartName}}" agmc-analytics-timestamp>
+                            {{vm.sHeaderService.partnerChartName}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-if="vm.showAlgoOracle"
+                analytics-on="click" analytics-category="TopMenu" analytics-event="AlgoOracle" agmc-analytics-timestamp>
+                <a ng-click="vm.showOrHideOracleBox()" class="algo-oracle">
+                    <div class="icon" agms-image img-src="'//am708403.azureedge.net/images/algooracle/icon-oracle.gif?'"></div>
+                    <div class="menu-title">AlgoOracle</div>
+                </a>
+            </li>
+            <li ng-if="vm.menuVisibility.showAutoInvest"
+                analytics-on="click" analytics-category="TopMenu" analytics-event="AutoInvest" agmc-analytics-timestamp>
+                <a href="" target="_blank" ng-click="vm.goToAmAuto()">
+                    <div class="algoicon algoicons-autoinvest"></div>
+                    <div class="menu-title">AutoInvest</div>
+                </a>
+            </li>
+            <li ng-if="!vm.sHeaderService.hasJoeyOnly" class="dropdown strategies hover-to-open" uib-dropdown
+                analytics-on="click" analytics-category="TopMenu" analytics-event="Connect" agmc-analytics-timestamp>
+                <a>
+                    <div class="algoicon algoicons-organization"></div>
+                    <div class="menu-title">
+                        Connect <span class="glyphicon glyphicon-chevron-down indicator-closed smaller"></span> <span class="glyphicon glyphicon-chevron-up indicator-open smaller"></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="https://event.algomerchant.com" target="_blank"
+                           analytics-on="click" analytics-category="TopMenu" analytics-event="Events" agmc-analytics-timestamp>
+                            Events
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.algomerchant.com/blog" target="_blank"
+                           analytics-on="click" analytics-category="TopMenu" analytics-event="Blog" agmc-analytics-timestamp>
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/algomerchant/" target="_blank"
+                           analytics-on="click" analytics-category="TopMenu" analytics-event="Facebook" agmc-analytics-timestamp>
+                            Facebook
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-if="vm.sHeaderService.hasJoeyOnly" class="dropdown strategies hover-to-open" uib-dropdown
+                analytics-on="click" analytics-category="TopMenu" analytics-event="Connect" agmc-analytics-timestamp>
+                <a>
+                    <div class="algoicon algoicons-organization"></div>
+                    <div class="menu-title">
+                        Connect <span class="glyphicon glyphicon-chevron-down indicator-closed smaller"></span> <span class="glyphicon glyphicon-chevron-up indicator-open smaller"></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="https://www.youtube.com/c/JoeyChoy" target="_blank"
+                           analytics-on="click" analytics-category="TopMenu" analytics-event="Blog" agmc-analytics-timestamp>
+                            Youtube
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/tradingimpossible/" target="_blank"
+                           analytics-on="click" analytics-category="TopMenu" analytics-event="Facebook" agmc-analytics-timestamp>
+                            Facebook
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-if="vm.menuVisibility.news" analytics-on="click" analytics-category="TopMenu" analytics-event="News" agmc-analytics-timestamp>
+                <a href="#/writenews" ng-class="{'selected': vm.sHeaderService.selectedMenu == 'news'}" ng-click="vm.selectMenu('news')">
+                    <div class="algoicon algoicons-news"></div>
+                    <div class="menu-title">News</div>
+                </a>
+            </li>
+        </ul>
+        <div class="user-icon-wrapper dropdown hover-to-open" uib-dropdown>
+            <button class="user-icon" agms-image img-src="vm.coreUserStateService.user.ProfileImageUrl" img-fallback-src="'//am708403.azureedge.net/images/profilePicture/defaultavatar.jpg?'">
+                <span class="glyphicon glyphicon-chevron-down indicator-closed smaller"></span>
+                <span class="glyphicon glyphicon-chevron-up indicator-open smaller"></span>
+            </button>
+
+            <ul class="dropdown-menu" uib-dropdown-menu>
+                <li>
+                    <a href="#/profile" ng-click="vm.selectMenu('profile', 'profile')"
+                       ng-class="{'selected': vm.sHeaderService.selectedSubMenu == 'profile'}"
+                       analytics-on="click" analytics-category="TopMenu" analytics-event="Profile" agmc-analytics-timestamp>
+                        Profile & Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#/subscriptions" ng-click="vm.selectMenu('setting', 'setting')"
+                       ng-class="{'selected': vm.sHeaderService.selectedSubMenu == 'setting'}"
+                       analytics-on="click" analytics-category="TopMenu" analytics-event="Payment" agmc-analytics-timestamp>
+                        Payment & Subscriptions
+                    </a>
+                </li>
+                <li ng-if="!vm.sHeaderService.hasJoeyOnly"
+                    ng-click="vm.selectMenu('account', 'account')"
+                    analytics-on="click" analytics-category="TopMenu" analytics-event="Account" agmc-analytics-timestamp>
+                    <a href="#/accounts" ng-class="{'selected': vm.sHeaderService.selectedSubMenu == 'account'}">
+                        My Brokerage Accounts
+                    </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                    <a ng-click="vm.logout()">Log Out</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="action-icon-group">
+            <li class="dropdown" uib-dropdown is-open="vm.isNotificationOpen" analytics-on="click" analytics-category="TopMenu" analytics-event="Notifications" agmc-analytics-timestamp>
+                <a uib-dropdown-toggle ng-click="markAllNotificationsAsRead()" uib-tooltip="Notifications" tooltip-placement="bottom">
+                    <div class="notification-indicator" ng-if="vm.sActivityNotificationService.numUnread>0">
+                        {{vm.sActivityNotificationService.numUnread}}
+                    </div>
+                    <span class="algoicons algoicons-megaphone-1"></span>
+                </a>
+                <div class="dropdown-menu notification-content" uib-dropdown-menu>
+                    <agms-activity-notification is-notification-open="vm.isNotificationOpen" mark-all-as-read-func="markAllNotificationsAsRead"></agms-activity-notification>
+                </div>
+            </li>
+            <li class="dropdown hover-to-open" uib-dropdown>
+                <a>
+                    <span class="algoicons algoicons-help-1"></span>
+                </a>
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                    <li ng-if="!vm.sHeaderService.hasJoeyOnly">
+                        <a ng-click="vm.showContactUs()" analytics-on="click" analytics-category="TopMenu" analytics-event="ContactUs" agmc-analytics-timestamp>
+                            Contact Us
+                        </a>
+                    </li>
+                    <li ng-if="vm.sHeaderService.hasJoeyOnly">
+                        <a ng-click="vm.showContactUsJoey()" analytics-on="click" analytics-category="TopMenu" analytics-event="ContactUs" agmc-analytics-timestamp>
+                            Contact Us
+                        </a>
+                    </li>
+                    <li ng-if="!vm.sHeaderService.hasJoeyOnly" role="separator" class="divider"></li>
+                    <li ng-if="!vm.sHeaderService.hasJoeyOnly">
+                        <a ng-if="vm.coreConfigService.General.ShowFaq && !vm.coreConfigService.AlgoLeader.HideForAlgoLeader"
+                           href="https://support.algomerchant.com" target="_blank"
+                           ng-class="{'selected': vm.sHeaderService.selectedSubMenu == 'faq'}"
+                           analytics-on="click" analytics-category="TopMenu" analytics-event="Faq" agmc-analytics-timestamp>
+                            Help Center
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="store" ng-if="!vm.sHeaderService.hasJoeyOnly">
+            <li>
+                <a href="#/bundle" analytics-on="click" analytics-category="TopMenu" analytics-event="Store" agmc-analytics-timestamp
+                   ng-class="{'selected': vm.sHeaderService.selectedMenu == 'store'}">
+                    <div class="algoicon algoicons-shop-bag"></div>
+                    <div class="menu-title">Store</div>
+                </a>
+            </li>
+        </ul>
+        <form class="search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Stock..."
+                       ng-model="vm.selectedProduct"
+                       ng-model-options="{debounce: 200}"
+                       uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                       typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                       typeahead-wait-ms="200"
+                       typeahead-on-select="vm.goToProduct(vm.selectedProduct)"
+                       analytics-on="change" analytics-category="TopMenu" analytics-event="SearchProduct" agmc-analytics-timestamp>
+            </div>
+        </form>
+    </header>
+
+    <agmp-mobile-menu></agmp-mobile-menu>
+</div>

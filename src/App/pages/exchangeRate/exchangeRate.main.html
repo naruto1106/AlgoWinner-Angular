@@ -1,0 +1,39 @@
+﻿<header class="submenu">
+    <section class="container padless">
+        <ul class="nav navbar-nav pull-left">
+            <li class="title">
+                <h3>
+                    <div agmc-svg-loader svg-src="'/App/assets/icons/exchangerate.svg'" class="submenu-title-icon"></div>
+                    EXCHANGE RATE
+                    <div class="clearfix"></div>
+                </h3>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </section>
+</header>
+<div class="container">
+    <div></div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <!--TODO: Implement some kind of calculator here <div class="col-md-3">
+                <input ng-model="" type="text" />
+                <input ng-model="" type="text" ng-disabled="true" />
+            </div>-->
+            <div class="col-md-3">
+                <table class="table-large distinct" style="font-size:110%">
+                    <thead>
+                        <tr>
+                            <th>Currency</th>
+                            <th>Rate</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="rate in vm.exchangeRates">
+                        <td>{{rate.CurrencyPair.replace("_", "/")}}</td>
+                        <td>{{rate.Rate}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

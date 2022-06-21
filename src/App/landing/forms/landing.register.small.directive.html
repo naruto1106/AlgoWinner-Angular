@@ -1,0 +1,37 @@
+﻿<div class="landing-main">
+    <agmc-loading is-loading="vm.submitting"></agmc-loading>
+    <form role="form" name="registerForm">
+        <h2>Sign Up Now</h2>
+        <div class="form-group">
+            <input class="form-control" type="email" placeholder="Email" ng-model="vm.newUserRegisterModel.Email" required name="email" ng-model-options="{ debounce: 500 }" />
+            <span class="error-input" ng-if="(registerForm.email.$dirty || registerForm.$submitted) && registerForm.email.$invalid">Please enter a valid email</span>
+            <span class="error-input" ng-if="registerForm.email.$valid && vm.requestingState == 3">This email has already been registered with us. Log in or enter another email.</span>
+            <span class="error-input" ng-if="registerForm.email.$valid && vm.requestingState == -1">We were unable to verify your email. Please refresh the page or try again later.</span>
+        </div>
+        <div class="form-group">
+            <input class="form-control" placeholder="Your First Name" type="text" ng-model="vm.newUserRegisterModel.FirstName" name="firstName" ng-model-options="{debounce: 200}" required />
+            <span class="error-input" ng-if="(registerForm.firstName.$dirty || registerForm.$submitted) && registerForm.firstName.$invalid">First Name is required.</span>
+        </div>
+        <div class="form-group">
+            <input class="form-control" placeholder="Your Last Name" type="text" ng-model="vm.newUserRegisterModel.LastName" name="lastName" ng-model-options="{debounce: 200}" required />
+            <span class="error-input" ng-if="(registerForm.lastName.$dirty || registerForm.$submitted) && registerForm.lastName.$invalid">Last Name is required.</span>
+
+        </div>
+        <div class="form-group">
+            <input class="form-control" placeholder="Your Password" ng-model="vm.newUserRegisterModel.Password" type="password" name=" password" required id="password_field" ng-change="vm.verifyPassword()" />
+            <span class="error-input" ng-if="(registerForm.password.$dirty || registerForm.$submitted) && registerForm.password.$invalid">Please enter a password.</span>
+            <span class="error-input" ng-if="registerForm.password.$valid && vm.passwordState == 1">Password must be at least 8 characters long.</span>
+            <span class="error-input" ng-if="registerForm.password.$valid && vm.passwordState == 2">Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.</span>
+        </div>
+
+        <p>
+            By clicking Create Account, you agree to our <a href="//am708403.azureedge.net/pdf/AlgomerchantTerms&Conditions.pdf" target="_blank">Terms & Conditions</a>.
+        </p>
+        <button class="btn btn-warning btn-lg" ng-disabled="!registerForm.$valid || registerForm.$submitted || vm.disableSubmit()"
+                ng-click="vm.register()"
+                analytics-on="click" analytics-category="Landing" analytics-event="Main" analytics-label="CreateAccount" agmc-analytics-timestamp>
+            Create Account
+        </button>
+    </form>
+</div>
+

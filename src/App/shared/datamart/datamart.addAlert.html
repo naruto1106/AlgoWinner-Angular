@@ -1,0 +1,144 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        <span ng-if="!vm.isEditing">Set A Data Mart Alert</span>
+        <span ng-if="vm.isEditing">Edit Data Mart Alert</span>
+    </h4>
+</div>
+<div class="modal-body datamart-add-alert">
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+    <div ng-if="vm.step == 1">
+        <div class="title">
+            1 Select Alert Category
+            <span class="glyphicon glyphicon-ok green-profit pull-right"></span>
+        </div>
+
+        <div class="datamart-selection">
+            <div class="row-md-4 gap-0px">
+                <div class="col-md-1 datamart" ng-repeat="datamart in vm.datamartSelections" ng-click="vm.selectDataMart(datamart)"
+                     ng-class="{'selected': vm.selectedDataMart.Name == datamart.Name, 'disabled': datamart.IsPremium && !datamart.IsAllowedForUser}">
+                    <div class="datamart-icon" agms-image img-src="datamart.ImageUrl"></div>
+                    <div class="datamart-name">{{datamart.Name}}</div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="selected-data-mart">
+            <div class="data-mart-name">{{vm.selectedDataMart.Name}}</div>
+            <div class="data-mart-icon" agms-image img-src="vm.selectedDataMart.ImageUrl"></div>
+            <div class="data-mart-description">
+                {{vm.selectedDataMart.Description}}
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="vm.step == 2">
+        <div class="title">
+            2 Select Alert Event
+            <span class="glyphicon glyphicon-ok green-profit pull-right"></span>
+        </div>
+
+        <div class="datamart-event">
+            <div class="single-event" ng-repeat="(key, value) in vm.selectedDataMart.CategoryDict">
+                <div class="datamart-name">{{key}}</div>
+                <div class="event-selection">
+                    <div class="event-name" ng-repeat="event in value">
+                        <input type="radio" ng-model="vm.selectedEventName" ng-value="event.Name" ng-change="vm.getProductCategories()"/>
+                        {{event.Name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="vm.step == 3">
+        <div class="title">
+            3 Select Product Universe
+            <span class="glyphicon glyphicon-ok green-profit pull-right" ng-if="!vm.disableSubmit()"></span>
+        </div>
+
+        <div class="list-selection">
+            <div class="selection-title">
+                <input type="radio" ng-model="vm.selectedAlertType" value="lists"/>
+                <span>Select Entire Lists</span>
+            </div>
+            <div ng-if="vm.selectedAlertType == 'lists'">
+                <div ng-repeat="category in vm.productCategories" class="product-category">
+                    <input type="checkbox" ng-model="category.Selected"/> 
+                    <div class="watchlist-name ellipsis-nowrap">{{category.Category}}</div>
+                    <button class="mini-filled-green view-button" ng-if="category.Products.length > 0"
+                            ng-click="vm.viewProducts(category)">View</button>
+                </div>
+                <div ng-repeat="w in vm.watchlists" class="watchlist">
+                    <input type="checkbox" ng-model="w.Selected"/> 
+                    <div class="watchlist-name ellipsis-nowrap">{{w.WatchlistName}}</div>
+                    <button class="mini-filled-green view-button" ng-if="w.WatchlistProducts.length > 0"
+                            ng-click="vm.viewProducts(w)">View</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-selection">
+            <div class="selection-title">
+                <input type="radio" ng-model="vm.selectedAlertType" value="products"/>
+                <span>Select Individual Products</span>
+            </div>
+            <div ng-if="vm.selectedAlertType == 'products'">
+                <div class="selected-products-list">
+                    <div class="selected-product" ng-repeat="product in vm.selectedProducts">
+                        <div class="product-icon" agms-image img-src="product.ProductIconURL"></div>
+                        <div class="product-name">{{product.ProductName}}</div>
+                        <div class="glyphicon glyphicon-minus-sign cursor-pointer" ng-click="vm.removeProduct(product)"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group product-search lh-20px">
+                    <input type="text" placeholder="ADD NEW SYMBOL" ng-model="vm.searchedProduct"
+                           ng-model-options="{debounce: 200}"
+                           uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                           typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                           typeahead-wait-ms="200"
+                           typeahead-on-select="vm.onProductSelected()"
+                           class="form-control">
+                    <span class="form-control-feedback">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="vm.step == 4" class="success-result">
+        <div class="success">SUCCESS</div>
+        <div class="added">
+            <span ng-if="!vm.isEditing">Added Data Mart Alert</span>
+            <span ng-if="vm.isEditing">Edited Data Mart Alert</span>
+        </div>
+        <div class="datamart-name">{{vm.selectedDataMart.Name}}</div>
+        <div class="event-name">{{vm.selectedEventName}}</div>
+        <div class="products">
+            <span ng-repeat="w in vm.watchlists" ng-if="w.Selected">{{w.WatchlistName}} </span>
+            <span ng-repeat="p in vm.selectedProducts">{{p.ProductName}}</span>
+            <span ng-repeat="pc in vm.productCategories" ng-if="pc.Selected">{{pc.Name}}</span>
+        </div>
+        <div class="btn btn-outline-primary ok-btn" ng-click="vm.uibDismissPanel()">
+            OK
+        </div>
+    </div>
+</div>
+<div class="modal-footer" ng-if="vm.step != 4">
+    <div class="btn btn-primary pull-right" ng-if="vm.showNext()" ng-click="vm.goNext()">
+        NEXT
+    </div>
+    <div class="btn btn-primary pull-right" ng-if="vm.step == 3" ng-click="vm.confirm()" ng-disabled="vm.disableSubmit()">
+        CONFIRM
+    </div>
+    <div ng-if="vm.showBack()" class="btn btn-outline-primary pull-right" ng-click="vm.goBack()">
+        BACK
+    </div>
+    <div ng-if="vm.step == 1" class="btn btn-outline-primary pull-right" ng-click="vm.uibDismissPanel()">
+        CANCEL
+    </div>
+</div>

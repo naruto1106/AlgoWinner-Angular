@@ -1,0 +1,1691 @@
+﻿.agm-components-dashboard {
+    // start defining from here
+    .rel;
+    min-height: 80vh;
+
+    .agms-header .sub-header {
+        margin-bottom: 0px;
+    }
+
+    select {
+        border-radius: 16px;
+        background-color: @white;
+        border: 1px solid #b8c1cb;
+        height: 25px;
+        padding-left: 5px;
+        margin-left: 5px;
+    }
+
+    .agms-text-processing-multi-autocomplete .input-box {
+        max-width: 55vw;
+    }
+
+    .note-for-delay {
+        background: mix(@caramel,white,50);
+        padding: 5px 10px;
+    }
+
+    .overview .note-for-delay {
+        margin-bottom: 5px;
+    }
+
+    .alert.alert-info {
+        margin-top: 10px;
+    }
+
+    .page-area {
+        margin: 0;
+        padding: 0;
+    }
+
+    .generic-panel {
+        background: transparent;
+        margin-bottom: 15px;
+        .rel;
+        padding-top: 25px;
+
+        > h3.title {
+            .abs;
+            top: 0px;
+            font-size: 16px;
+            padding: 0 10px;
+            color: @persian;
+            background: @gray1;
+            height: 25px;
+            line-height: 25px;
+            border-radius: 6px 6px 0px 0;
+            margin: 0;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        > .white-box {
+            background: white;
+            box-shadow: 0 1px 10px 2px mix(@grayDark3,transparent,10);
+        }
+    }
+
+    .news-popup {
+        .content-container {
+            padding: 0px;
+
+            .title {
+                margin: 0;
+                font-size: 20px;
+            }
+
+            .news-tips-cash-tags {
+                line-height: 15px;
+
+                > a {
+                    margin: 2px;
+                    font-size: 12px;
+                    color: @persian;
+                    border-radius: 5px;
+                    padding: 0 5px;
+                    display: inline-block;
+                }
+            }
+
+            .news-tips-date {
+                text-align: right;
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 10px 0;
+                line-height: 25px;
+                font-size: 14px;
+            }
+
+            .image-preview {
+                height: 250px;
+                background-size: cover;
+                cursor: pointer;
+            }
+
+            .image-buttons {
+                width: 400px;
+                margin: 0 auto;
+            }
+
+            .url-preview, .image-preview {
+                width: 400px;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+
+.agm-components-dashboard {
+
+    .overview {
+        height: inherit;
+        padding: 5px;
+
+        .main-container {
+            margin: auto;
+            width: 1200px;
+        }
+
+        .left-panel {
+            width: 800px;
+            padding: 0px;
+
+            .markets {
+                .generic-panel {
+                    height: 415px;
+                }
+            }
+        }
+
+        .right-panel {
+            padding: 0 0px 0 10px;
+            width: 390px;
+
+            .indices {
+                min-height: 500px;
+            }
+
+            .breaking-news,
+            .price-alert {
+                width: 380px;
+            }
+        }
+    }
+
+    .generic-panel {
+        height: 500px;
+
+        > .white-box {
+            height: 100%;
+        }
+
+        &.sector-performance {
+            height: 500px;
+
+            .white-box {
+                padding: 10px;
+
+                .filter {
+                    .market-selector {
+                        width: 50px;
+                        min-width: 0px;
+                        margin-right: 20px;
+                    }
+
+                    .time-selector {
+                        margin-right: 20px;
+                    }
+                }
+
+                .sector-info {
+                    .sector-chart {
+                        float: left;
+
+                        .small-chart {
+                            width: 500px !important;
+                        }
+
+                        .highcharts-xaxis-labels {
+                            text {
+                                cursor: pointer !important;
+                            }
+                        }
+                    }
+
+                    .sector-detail {
+                        border: 1px solid #bcc6d0;
+                        padding: 10px;
+                        background: #e4eaf0;
+                        height: 335px;
+                        width: 280px;
+                        float: right;
+
+                        .sector-name {
+                            text-align: center;
+                            font-size: 16px;
+                            margin-bottom: 5px;
+                            font-weight: 800;
+                        }
+
+                        .sector-data {
+                            text-align: center;
+                            margin-bottom: 5px;
+
+                            .market-cap {
+                                margin-left: 10px;
+                            }
+                        }
+
+                        table td {
+                            padding: 0 5px;
+                            text-align: center;
+                        }
+
+                        .top-company {
+                            margin-top: 15px;
+
+                            .company-name {
+                                max-width: 150px;
+                                text-align: left;
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .watchlist-notification-box {
+        .abs;
+        left: 10%;
+        width: 80%;
+        padding: 10px;
+        font-weight: 700;
+        font-size: 14px;
+        text-align: center;
+        background-color: rgba(255,255,255,0.8);
+        border: 1px solid;
+        z-index: 1;
+    }
+
+    .index-panel {
+        padding-bottom: 10px;
+
+        .section-name {
+            font-size: 16px;
+            text-align: left;
+            padding: 4px 0 0 8px;
+            height: 25px;
+            border-radius: 4px 4px 0 0;
+            color: @persian;
+            background: @gray1;
+            font-weight: 600;
+        }
+
+        .index-loading {
+            height: 500px;
+            width: 380px;
+            margin-left: 20px;
+        }
+
+        tbody {
+            &:not(:last-of-type) {
+                border-bottom: 1px solid #c1c1c1;
+            }
+
+            tr {
+                background-color: @white;
+                height: 25px;
+
+                .price-change {
+                    text-align: center;
+                }
+
+                &.update-time {
+                    text-align: right;
+                    height: 19px;
+                    font-size: 11px;
+                    color: @regular;
+                    background-color: @white;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .product-info {
+            max-width: 140px;
+            position: relative;
+
+            .product-text {
+                padding-left: 40px;
+                width: 140px;
+                color: @darkGray2;
+            }
+
+            .product-icon {
+                top: 5px;
+                width: 30px;
+                height: 30px;
+                border-radius: 20px;
+                background-size: cover;
+                position: absolute;
+                background-color: @medGray1;
+            }
+        }
+
+        .current-price {
+            min-width: 80px;
+        }
+
+        .price-change {
+            min-width: 130px;
+        }
+    }
+
+    .simple-screener {
+        padding: 8px;
+        height: 100%;
+
+        div[agmc-custom-scrollbar] {
+            border: 1px solid @gray1;
+            border-top: none;
+            height: 210px;
+        }
+
+        .filter {
+            margin-bottom: 10px;
+
+            > .menu {
+                float: left;
+                margin-right: 20px;
+
+                .market-selector {
+                    width: 50px;
+                }
+
+                .period-selector {
+                    width: 110px;
+                }
+
+                select {
+                    min-width: 0px;
+                }
+            }
+        }
+    }
+
+    .simple-watchlist {
+        padding: 8px;
+
+        .add-product-success {
+            .watchlist-notification-box;
+            top: 100px;
+            border: 1px solid;
+        }
+
+        .watchlist-product-list {
+            .abs;
+            height: 100%;
+            width: 100%;
+
+            .table-wrapper table {
+                > tbody > tr > td.product-info > .product-picture {
+                    .product-icon {
+                        width: 24px;
+                        height: 24px;
+                        top: -3px;
+                        border-radius: 15px;
+                    }
+
+                    .product-text > .product-symbol {
+                        margin-top: 0;
+                        margin-left: 2px;
+                    }
+                }
+            }
+        }
+
+        .filter {
+            margin-bottom: 8px;
+
+            > .menu {
+                &:disabled {
+                    opacity: 0.5;
+                }
+
+                select {
+                    width: 150px;
+                }
+            }
+        }
+
+        .form-group.has-feedback {
+            > input {
+                height: 25px;
+                line-height: 15px;
+                border-radius: 16px;
+            }
+
+            > .form-control-feedback {
+                height: 25px;
+                line-height: 28px;
+            }
+
+            margin-bottom: 10px;
+        }
+
+        div[agmc-custom-scrollbar] {
+            border: 1px solid @gray1;
+            border-top: none;
+            height: 205px;
+        }
+    }
+
+    .simple-news-tips {
+        height: 100%;
+
+        .market-filter {
+            padding: 5px 0 5px 10px;
+
+            select {
+                width: 50px;
+                min-width: 0px;
+            }
+        }
+
+        .content {
+            height: ~'calc(100% - 35px)';
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            .news-tips {
+                padding: 5px 5px 0 5px;
+
+                &:hover {
+                    background-color: mix(@blueBasic,white,20);
+                }
+
+                &:not(:first-of-type) {
+                    padding-top: 10px;
+                }
+
+                &:not(:last-of-type) {
+                    border-bottom: 1px solid @gray1;
+                }
+
+                .news-tips-content {
+                    width: 100%;
+                    padding-right: 5px;
+                    float: right;
+
+                    .title {
+                        cursor: pointer;
+                        line-height: 20px;
+                        margin-top: 0;
+                        margin-bottom: 0;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    > .news-tips-date {
+                        font-size: 12px;
+                        line-height: 15px;
+                        margin-top: 4px;
+                        float: right;
+
+                        .source {
+                            margin-right: 10px;
+                            color: grey;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .big-news-tips {
+        padding: 10px;
+
+        .sticky-panel {
+            width: auto !important;
+        }
+
+        .panel {
+            border: none;
+
+            .panel-heading {
+                height: 30px;
+                padding: 0 10px;
+                line-height: 30px;
+                background: @gray1;
+            }
+        }
+
+        .filter-panel {
+            .filter-item {
+                margin-bottom: 10px;
+
+                .filter-name {
+                    font-size: 14px;
+                }
+
+                select {
+                    height: 25px;
+                    margin: 3px 0px 3px 5px;
+                }
+
+                &.market-filter {
+                    select {
+                        width: 100%;
+                        min-width: 0px;
+                    }
+                }
+
+                .product-search {
+                    .agms-text-processing-multi-autocomplete {
+                        width: 90%;
+                    }
+                }
+
+                .list-filter {
+                    select {
+                        width: 100%;
+                    }
+                }
+
+                .news-disclaimer {
+                    font-size: 10px;
+                }
+
+                .uib-datepicker-popup.dropdown-menu {
+                    top: 30px !important;
+                }
+            }
+
+            .date-picker {
+                > input {
+                    width: 100px;
+                    padding-left: 5px;
+                    padding-right: 25px;
+                }
+
+                .from-date {
+                    margin-right: 5px;
+                }
+
+                .title {
+                    margin-right: 5px;
+                }
+
+                .date-button {
+                    padding: 0;
+                    width: 25px;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .left-panel > .related-news,
+        .right-panel > .breaking-news {
+            .news-tips {
+                padding: 3px;
+                background-color: white;
+                border-bottom: 1px solid @gray1;
+
+                &:hover {
+                    background-color: mix(@blueBasic,white,20);
+                }
+
+                > .news-tips-content {
+                    width: 100%;
+                    padding: 5px;
+
+                    .title {
+                        cursor: pointer;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    .show-more {
+                        cursor: pointer;
+                        display: inline-block;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    > .arrow {
+                        position: relative;
+                        float: right;
+                        top: -40px;
+                        right: 20px;
+                    }
+
+                    > .news-tips-date {
+                        color: @blueDarker1;
+                        font-size: 11px;
+                        line-height: 20px;
+                        margin-right: 10px;
+                        float: right;
+
+                        .source {
+                            margin-right: 10px;
+                            color: grey;
+                        }
+                    }
+
+                    > h1 {
+                        font-size: 14px;
+                        line-height: 18px;
+                        margin-top: 0;
+                        margin-bottom: 0;
+                    }
+
+                    > .news-tips-cash-tags {
+                        line-height: 15px;
+
+                        > a {
+                            margin: 2px;
+                            font-size: 12px;
+                            color: @persian;
+                            border-radius: 5px;
+                            padding: 0 5px;
+                            border: 1px solid #039;
+                            display: inline-block;
+
+                            .last-price {
+                                letter-spacing: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .left-panel {
+            .related-news {
+                height: 350px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                padding: 0px;
+            }
+        }
+
+        .right-panel {
+            .breaking-news {
+                height: 350px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                padding: 0px;
+
+                .alert.alert-info {
+                    margin: 10px;
+                }
+            }
+        }
+
+        .message-for-newstips {
+            font-size: 16px;
+        }
+
+        .content-container {
+            padding: 0px;
+            margin-bottom: 0px;
+            border-top: 1px solid #e4eaf0;
+
+            &.selected, &:hover {
+                .panel-heading {
+                    background-color: @sunFlower;
+                    color: white;
+
+                    .source {
+                        color: white;
+                    }
+
+                    .news-tips-date {
+                        color: white;
+                    }
+
+                    .news-type {
+                        color: white;
+                    }
+
+                    .news-tips-cash-tags {
+                        > a {
+                            background-color: white;
+                        }
+                    }
+                }
+            }
+
+            .panel-heading {
+                height: 100%;
+                line-height: 25px;
+                border-bottom: none;
+                padding: 15px 5px;
+                background: white;
+
+                .news-tips-icon {
+                    width: 50px;
+                    height: 50px;
+                    background-size: cover;
+                    float: left;
+                    box-shadow: 0 0 2px @gray1;
+                    background-color: #F1F4F8;
+                    margin-right: 10px;
+                    border-radius: 10px;
+                }
+
+                .source {
+                    font-size: 13px;
+                    margin-left: 5px;
+                    letter-spacing: 0;
+                    color: grey;
+                }
+
+                .news-type {
+                    color: @blueBasic;
+                    position: relative;
+                    bottom: -15px;
+                    font-size: 12px;
+                    padding-left: 3px;
+                    text-align: center;
+                }
+
+                .title {
+                    margin: 2px 0;
+                    font-size: 16px;
+                    font-weight: 600;
+                    letter-spacing: 0;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                .news-tips-cash-tags {
+                    line-height: 15px;
+                    font-size: 12px;
+                    letter-spacing: 0;
+
+                    .show-more {
+                        cursor: pointer;
+                        display: inline-block;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    > a {
+                        margin: 2px;
+                        color: @persian;
+                        border-radius: 5px;
+                        padding: 0 5px;
+                        border: 1px solid @persian;
+                        display: inline-block;
+                    }
+                }
+            }
+
+            .panel-body {
+                border-top: 1px solid #e4eaf0;
+            }
+
+            .news-tips-date {
+                text-align: left;
+                font-size: 12px;
+                letter-spacing: 0px;
+            }
+
+            .content {
+                padding: 10px 0;
+                line-height: 25px;
+                font-size: 14px;
+            }
+
+            .image-preview {
+                height: 250px;
+                background-size: cover;
+                cursor: pointer;
+            }
+
+            .image-buttons {
+                width: 400px;
+                margin: 0 auto;
+            }
+
+            .url-preview, .image-preview {
+                width: 400px;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .big-watchlist-panel {
+        display: flex;
+        flex-direction: column;
+
+        .inside-table {
+            background: white;
+        }
+
+        .overlay-message {
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: @grayDark1;
+            border: 1px solid #ffda73;
+            background: mix(@caramel,white,50);
+            margin: 10px;
+        }
+
+        .product-search > div[editor] > input.search-product {
+            line-height: 30px;
+            height: 30px;
+        }
+
+        .scrollable-height {
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .content-container {
+            background: @gray1;
+            height: 100%;
+
+            .content {
+                background: @grayLight4;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        .big-screener-product-list, .watchlist-product-list {
+            height: 100%;
+        }
+
+        .filter {
+            padding: 5px;
+            border: 1px solid #EEE;
+            border-radius: 10px;
+            background: white;
+
+            > .selection {
+                margin: 2px;
+                background: @blueDarker3;
+                border-radius: 5px;
+                padding: 0 25px 0 5px;
+                line-height: 21px;
+                color: white;
+                font-size: 12px;
+                float: left;
+                .rel;
+
+                button {
+                    width: 15px;
+                    background: @blueDarker1;
+                    height: 15px;
+                    border: none;
+                    margin: 3px;
+                    padding: 0;
+                    border-radius: 3px;
+                    font-size: 11px;
+                    .abs;
+                    top: 0;
+                    right: 0;
+
+                    &:hover {
+                        background: @blueBasicer1;
+                    }
+                }
+            }
+        }
+
+        fieldset.top-filter {
+            &[disabled] {
+                opacity: 0.5;
+            }
+        }
+
+        .top-filter {
+            background: @white02;
+            flex: 0 1 auto;
+            padding: 5px;
+
+            .add-watchlist-product {
+                padding: 5px;
+            }
+
+            > .top-filter-content {
+                padding: 5px;
+
+                .as-of-date {
+                    margin-top: 5px;
+                }
+
+                .watchlist-button {
+                    float: left;
+                    margin-right: 10px;
+                }
+
+                > fieldset,
+                > .subsection > fieldset {
+                    &[disabled] {
+                        opacity: 0.5;
+                    }
+
+                    padding: 5px;
+                    background: white;
+                    border: 1px solid @grayLight3;
+                    border-radius: 5px;
+                }
+
+                > .subsection > .big-radio {
+                    width: 20px;
+                    height: 20px;
+                    top: 20px;
+                    margin-right: 5px;
+                }
+
+                > .menu {
+                    margin-right: 10px;
+
+                    .watchlist-selector {
+                        width: 150px;
+                    }
+
+                    > .btn-group.dropdown > button {
+                        font-size: 12px;
+                        padding: 0 8px;
+                    }
+
+                    &.agms-directives.date-picker {
+                        > .from-date, > .to-date {
+                            > .date-picker.input-group {
+                                width: 130px;
+
+                                > .input-date {
+                                    padding: 0 40px 0 10px;
+                                    font-size: 12px;
+                                    width: 130px;
+                                }
+                            }
+                        }
+                    }
+
+                    > select.date-dropdown-selector {
+                        width: 140px;
+                        font-size: 12px;
+                    }
+                }
+
+                > .top-search-panel {
+                    width: 140px;
+                    font-size: 12px;
+
+                    .dropdown-menu {
+                        width: 250px;
+                        margin-left: -100px;
+                        right: 0px;
+                    }
+                }
+
+                > .menu,
+                > fieldset > .menu,
+                > .subsection > .menu,
+                > .subsection > fieldset > .menu {
+                    > label {
+                        display: block;
+                        line-height: 20px;
+                        font-weight: 500;
+                        font-size: 12px;
+                        float: none;
+                        margin: 0;
+                        display: block;
+                    }
+
+                    label.sublabel {
+                        line-height: 30px;
+                        margin-bottom: 0;
+                    }
+
+                    > select {
+                        min-width: 0;
+                        height: 30px;
+                    }
+                }
+
+                > .agms-directives.date-picker,
+                > .subsection > .agms-directives.date-picker {
+                    > .from-date, > .to-date {
+                        > .title {
+                            display: block;
+                            line-height: 20px;
+                            font-weight: 500;
+                            font-size: 12px;
+                            float: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .screener-panel {
+            flex: 1 auto;
+        }
+    }
+
+    .big-watchlist-panel {
+        .notes-button {
+            padding-top: 2px;
+
+            &.note-disable {
+                color: @medGray1;
+            }
+        }
+
+        .agms-directives.edit-watchlist-note {
+            left: 10px;
+            top: 10px;
+        }
+
+        .add-product-success {
+            .watchlist-notification-box;
+            top: 120px;
+            left: 20%;
+            width: 60%;
+            font-size: 18px;
+            border: 1px solid;
+        }
+    }
+
+    .complete-product-picture {
+        .rel;
+
+        .product-icon {
+            box-shadow: 0 0 1px 1px mix(black, transparent,10);
+            background-color: @gray1;
+            width: 20px;
+            height: 20px;
+            .abs;
+            top: 5px;
+            left: 0px;
+            background-size: cover;
+        }
+
+        .product-text {
+            padding-left: 30px;
+
+            > .product-symbol {
+                font-size: 15px;
+                line-height: 15px;
+                color: black;
+            }
+
+            > .product-name {
+                margin-top: -2px;
+                line-height: 15px;
+                font-size: 12px;
+                color: @grayMed1;
+            }
+        }
+    }
+
+    .simple-trending {
+        padding: 10px;
+
+        .trending-box {
+            height: 270px;
+        }
+
+        .trending-table {
+            table-layout: fixed;
+
+            > thead > tr > th, > tbody > tr > td {
+                &.trending {
+                    width: 200px;
+                    text-align: center;
+                }
+            }
+
+            > tbody {
+                > tr {
+                    > td {
+                        padding: 0 5px;
+                        height: 40px;
+
+                        &.trending {
+                            line-height: 40px;
+                            font-size: 20px;
+                            color: @blueDarker1;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .simple-alert {
+        padding: 8px;
+        background-color: white;
+        height: inherit;
+
+        .simple-alert-buttons {
+            height: 30px;
+            padding-left: 5px;
+
+            .simple-alert-button {
+                margin-right: 5px;
+                float: right;
+            }
+        }
+
+        .active-alert, .triggered-alert {
+            height: 100%;
+        }
+
+        .alert-box {
+            height: 100%;
+
+            .scrollbar-container {
+                height: 85%;
+            }
+        }
+
+        .active-alert {
+            .price-alert-table {
+                tbody {
+                    border-bottom: 1px #e4eaf0 solid;
+                }
+
+                .trigger-price {
+                    font-size: 14px;
+                    padding: 0;
+                }
+            }
+        }
+
+        .price-alert-table {
+
+            > thead > tr > th, > tbody > tr > td {
+                &.trigger-stock {
+                    width: 140px;
+                }
+
+                &.delete-alert-column {
+                    width: 40px;
+                }
+
+                &.trigger-time {
+                    text-align: right;
+                    font-size: 12px;
+                    color: @grayDark1;
+                    height: 15px;
+                }
+            }
+        }
+    }
+
+    .big-alert {
+        padding: 10px;
+
+        .alert-box {
+            height: 80vh;
+            min-height: 500px;
+            background: white;
+
+            .button-group {
+                margin: 10px;
+            }
+
+            .scrollbar-container {
+                height: ~'calc(100% - 64px)';
+            }
+
+            .active-alert, .triggered-alert {
+                height: 100%;
+            }
+
+            .filter {
+                padding: 5px;
+                background-color: white;
+                float: right;
+            }
+        }
+
+        .active-alert {
+            .price-alert-table {
+                tbody {
+                    border-bottom: 1px #e4eaf0 solid;
+                }
+
+                > thead > tr > th.trigger-price,
+                > tbody > tr > td.trigger-price {
+                    text-align: left;
+                }
+            }
+        }
+
+        .price-alert {
+
+            .title {
+                background: @gray1;
+                height: 30px;
+                padding: 5px;
+                font-size: 16px;
+                font-weight: 600;
+
+                .clear-all, .add-alert {
+                    float: right;
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        .price-alert-table {
+
+            > thead > tr > th {
+                cursor: pointer;
+            }
+
+            > thead > tr > th, > tbody > tr > td {
+                &.trigger-stock {
+                    width: auto;
+
+                    > * {
+                        min-width: 100px;
+                    }
+                }
+
+                &.trigger-price {
+                    text-align: center;
+                    font-size: 14px;
+                    padding: 0px;
+                }
+
+                &.trigger-date {
+                    text-align: center;
+                }
+
+                &.delete-alert-column {
+                    width: 50px;
+                }
+            }
+        }
+    }
+
+    .simple-alert, .big-alert {
+
+        .price-alert-table {
+            table-layout: fixed;
+
+            > thead > tr > th, > tbody > tr > td {
+
+                &.trigger-price {
+                    width: auto;
+                }
+
+                &.edit-delete-alert-column {
+                    width: 75px;
+                }
+            }
+
+            > tbody > tr > td {
+                padding: 0 5px;
+                height: 40px;
+
+                &.trigger-price {
+                    line-height: 15px;
+                    color: @blueDarker1;
+
+                    .trigger-time {
+                        font-size: 12px;
+                        font-style: italic;
+                    }
+                }
+            }
+        }
+    }
+
+    .basic-product-list {
+
+        .table-wrapper table {
+            border: none;
+            table-layout: fixed;
+
+            > thead > tr > th {
+                padding: 2.5px 5px;
+            }
+
+            > tbody > tr {
+                height: 35px;
+
+                &:hover {
+                    background: mix(@blueBasic,white,30);
+                }
+            }
+
+            > thead > tr > th, > tbody > tr > td {
+
+                &.not-available, .not-available {
+                    line-height: 30px;
+                    color: @gray1;
+                }
+
+                &.product-info {
+                    text-align: left;
+                    padding-left: 5px;
+                    max-width: 400px;
+                }
+
+                &.bid-price, &.ask-price {
+                    min-width: 115px;
+                    text-align: center;
+                }
+
+                &.bid-volume, &.ask-volume {
+                    width: 80px;
+                    text-align: center;
+                }
+
+                &.compact-price-changes {
+                    padding-right: 15px;
+                    width: 150px;
+                }
+
+                &.price-changes {
+                    padding-right: 15px;
+                    text-align: right;
+                    margin-top: -2px;
+                    width: 150px;
+                }
+
+                &.last-traded-price {
+                    padding-right: 15px;
+                    width: 100px;
+                }
+            }
+
+            > tbody > tr {
+                border-bottom: 1px solid @gray1;
+
+                > td {
+                    height: 30px;
+                    padding: 0;
+
+                    &.product-info {
+
+                        > .product-picture {
+                            .rel;
+                            min-width: 100px;
+
+                            .product-icon {
+                                width: 20px;
+                                height: 20px;
+                                .abs;
+                                top: 4px;
+                                left: 0px;
+                                background-size: cover;
+                                box-shadow: 0 0 1px 1px mix(black, transparent,10);
+                                background-color: @gray1;
+                            }
+
+                            .product-text {
+                                > .product-symbol {
+                                    font-size: 14px;
+                                    margin-top: 2px;
+                                    margin-bottom: 0;
+                                    color: black;
+                                }
+
+                                > .product-name {
+                                    display: block;
+                                    font-size: 12px;
+                                    line-height: 15px;
+                                    color: @grayMed1;
+                                    margin-top: -2px;
+                                }
+                            }
+                        }
+                    }
+
+                    &.price-changes {
+                        .rel;
+                        color: @berry;
+                        padding-left: 10px;
+                        height: 15px;
+
+                        &.up, > .up {
+                            color: @seafoam;
+                        }
+
+                        .glyphicon {
+                            display: block;
+                            .abs;
+                            top: 0px;
+                            right: 0px;
+                            font-size: 14px;
+                            line-height: 30px;
+                        }
+
+                        .nominal-price-changes {
+                            font-size: 12px;
+                            line-height: 15px;
+                            margin-top: 2px;
+                        }
+
+                        .percentage-price-changes {
+                            font-size: 12px;
+                            line-height: 15px;
+                            margin-top: -2px;
+                        }
+                    }
+
+                    &.last-traded-price {
+                        height: 30px;
+                        line-height: 30px;
+                        color: black;
+                        font-size: 14px;
+                    }
+
+                    &.bid-price, &.ask-price {
+
+                        > button {
+                            width: 100%;
+                            border: none;
+                            display: block;
+                            line-height: 30px;
+                            font-size: 14px;
+                            background: transparent;
+                            height: 30px;
+                            color: black;
+                            cursor: default;
+
+                            &.up, > .up {
+                                background: green;
+                                color: white;
+                            }
+
+                            &.down {
+                                background: red;
+                                color: white;
+                            }
+                        }
+                    }
+
+                    &.bid-volume, &.ask-volume {
+                        line-height: 20px;
+                        font-size: 14px;
+                    }
+
+                    &.trade-volume {
+                        line-height: 20px;
+                        font-size: 14px;
+                        padding-right: 5px;
+                    }
+
+                    &.compact-price-changes {
+
+                        > .last-traded-price {
+                            height: 13px;
+                            margin-top: 0px;
+                            line-height: 13px;
+                            color: black;
+                            font-size: 12px;
+                            text-align: right;
+                        }
+
+                        > .price-changes {
+                            .rel;
+                            color: @berry;
+                            margin-top: -2px;
+
+                            &.up, > .up {
+                                color: @seafoam;
+                            }
+
+                            .glyphicon {
+                                display: inline;
+                                line-height: 15px;
+                                font-size: 12px;
+                            }
+
+                            .percentage-price-changes {
+                                display: inline;
+                                font-size: 11px;
+                                line-height: 15px;
+                                letter-spacing: -0.5px;
+                                margin-top: -2px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .gainer-loser-product-list {
+        .basic-product-list;
+
+        .table-wrapper table {
+            > tbody > tr > td {
+                height: 100%;
+            }
+
+            > thead > tr > th, > tbody > tr > td {
+                &.bid-price, &.ask-price, &.last-traded-price {
+                    min-width: 0px;
+                    width: 85px;
+                }
+
+                &.simple-price-changes {
+                    width: 85px;
+                    text-align: center;
+                }
+
+                &.last-traded-price {
+                    padding-right: 0px;
+                    text-align: center;
+                    font-size: 14px;
+                }
+
+                &.product-info > .product-picture {
+                    .product-icon {
+                        top: 3px;
+                        border-radius: 20px;
+                        height: 24px;
+                        width: 24px;
+                    }
+
+                    .product-text {
+                        .product-symbol {
+                            margin: 0 0 2px 2px;
+                        }
+
+                        .product-currency {
+                            font-size: 11px;
+                            line-height: 10px;
+                            padding-left: 2px;
+                            color: grey;
+                        }
+                    }
+                }
+
+                &.simple-screener {
+                    padding-right: 0px;
+                }
+
+                &.volume {
+                    width: 100px;
+                    padding-right: 10px;
+                }
+
+                &.symbol {
+                    width: 85px;
+                    text-align: center;
+                }
+
+                &.buttons {
+                    width: 100px;
+                    padding-right: 0px;
+                    padding-left: 5px;
+                }
+            }
+        }
+    }
+
+    .watchlist-product-list {
+        .basic-product-list;
+
+        .table-wrapper table {
+            > tbody > tr > td {
+                &.volume {
+                    font-size: 14px;
+                }
+            }
+
+            > thead > tr > th, > tbody > tr > td {
+                &.trade-volume {
+                    width: 150px;
+                }
+
+                &.simple-watchlist {
+                    width: 120px;
+                    padding-left: 20px;
+                }
+
+                &.volume {
+                    width: 120px;
+                    padding-right: 5px;
+                }
+
+                &.symbol {
+                    text-align: center;
+                    width: 120px;
+                }
+            }
+        }
+    }
+
+    .basic-screener {
+        display: flex;
+        flex-direction: column;
+
+        .big-screener-product-list-container {
+            flex: 1 auto;
+        }
+    }
+
+    .big-screener-product-list {
+        .basic-product-list;
+
+        .table-wrapper table {
+            > thead > tr > th, > tbody > tr > td {
+                width: 100px;
+                text-align: center;
+
+                &.product-info {
+                    width: auto;
+                }
+            }
+        }
+
+        table > tbody > tr > td {
+
+            &.product-info {
+
+                > .product-picture {
+                    .product-text {
+                        > .product-symbol {
+                            line-height: 15px;
+                        }
+
+                        > .product-name {
+                            display: block;
+                            font-size: 12px;
+                            line-height: 15px;
+                            color: @grayMed1;
+                            margin-top: -2px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .big-screener-product-list, .watchlist-product-list {
+        .table-wrapper table {
+
+            > tbody > tr > td, > thead > tr > th {
+                &.screener-column {
+                    > div {
+                        width: 95px;
+                        height: 100%;
+                    }
+                }
+
+                &.last-traded-price {
+                    padding-right: 0px;
+                    width: 150px;
+                    text-align: center;
+                }
+
+                &.watchlist-column {
+                    width: 200px;
+                    padding-left: 20px;
+                }
+            }
+        }
+    }
+}

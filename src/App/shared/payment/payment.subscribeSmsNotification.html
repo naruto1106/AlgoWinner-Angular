@@ -1,0 +1,103 @@
+﻿<div class="modal-header" >
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Subscribe To SMS Notification</h4>
+</div>
+
+<div class="agm-component-replicate modal-body">
+    <div class="p-50px text-center" ng-show="vm.isSubmitting">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div class="subscribe agm-component-replicate" ng-show="!vm.isSubmitting">
+        <div class="lh-40px stepping-menu">
+            <a ng-repeat="text in vm.steps" ng-click="vm.step<$index+1 || vm.setStep($index+1)"
+               class="{{vm.step==$index+1?'active':''}} {{vm.step>=$index+1?'passed':'disable-link'}}">
+                <span class="bullet">{{$index+1}}</span>{{text}}
+            </a>
+        </div>
+
+        <div ng-if="vm.step == 1" class="p-20px">
+            <div>
+                <div>
+                    <h4>This will entitle you to receive unlimited SMS notifications of the trade signals from all the strategies you are subscribed to</h4>
+                    <div class="row-md-3 gap-10px m-top-20px">
+                        <div class="col-md-2">
+                            <agms-payment-form-with-existing-check get-cards="vm.getCards"></agms-payment-form-with-existing-check>
+                        </div>
+                        <div class="col-md-1">
+                            <div>
+                                Have A Coupon Code?
+                                <input type="text" ng-model="vm.couponCode" style="text-transform: uppercase"/>
+                                <button class="mini-filled-green" ng-click="vm.verifyCouponCode()"
+                                        analytics-on="click" analytics-category="SubscribeSMSPopUp" analytics-event="ClickApplyCoupon" analytics-label="{{vm.couponCode}}" agmc-analytics-timestamp>Apply</button>
+                                <div style="color: red" ng-if="!vm.isCouponCodeValid">{{vm.couponInvalidMessage}}</div>
+                            </div>
+                            <table class="no-border m-top-20px">
+                                <tr ng-if="vm.coupon && vm.isCouponCodeValid">
+                                    <td><h5 class="gray-text">Original Price:</h5></td>
+                                    <td><h4 class="special-text">{{vm.getOriginalPrice() | customCurrencyOrDash:vm.tradingSignalSMSNotificationPlan.Currency:2}}</h4></td>
+                                </tr>
+                                <tr ng-if="vm.coupon && vm.isCouponCodeValid">
+                                    <td><h5 class="gray-text">Discount:</h5></td>
+                                    <td><h4 class="special-text">{{vm.getDiscountPrice() | customCurrencyOrDash:vm.tradingSignalSMSNotificationPlan.Currency:2}}</h4></td>
+                                </tr>
+                                <tr>
+                                    <td><h5 class="gray-text">Total Price:</h5></td>
+                                    <td><h4 class="special-text">{{vm.getTotalPrice() | customCurrencyOrDash:vm.tradingSignalSMSNotificationPlan.Currency:2}}</h4></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="separator-top m-top-20px h-10px"></div>
+                    <button class="filled-blue pull-right m-left-10px" ng-disabled="vm.getCards().length<=0" ng-click="vm.setStep(vm.step+1)"
+                            analytics-on="click" analytics-category="SubscribeSMSPopUp" analytics-event="ClickNext" agmc-analytics-timestamp>NEXT</button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="vm.step == 2" class="p-20px">
+            <div class="m-left-50px">
+                <h3>Payment Summary:</h3>
+                <table class="no-border">
+                    <tr ng-if="vm.coupon && vm.isCouponCodeValid">
+                        <td>
+                            <h5 class="gray-text">
+                                Subscription to
+                                <span ng-if="vm.subscriptionMode=='single'">{{vm.itemToSubscribe | strategyName}}</span><span ng-if="vm.subscriptionMode=='bundled'">{{vm.itemToSubscribe.Name}}</span>:
+                            </h5>
+                        </td>
+                        <td>
+                            <h4 class="special-text">{{vm.getOriginalPrice() | customCurrencyOrDash:vm.tradingSignalSMSNotificationPlan.Currency:2}} per {{vm.tradingSignalSMSNotificationPlan.PeriodType | periodLy}}</h4>
+                        </td>
+                    </tr>
+                    <tr ng-if="vm.coupon && vm.isCouponCodeValid">
+                        <td><h5 class="gray-text">Discount:</h5></td>
+                        <td><h4 class="special-text">{{vm.getDiscountPrice() | customCurrencyOrDash:vm.tradingSignalSMSNotificationPlan.Currency:2}}</h4></td>
+                    </tr>
+                    <tr>
+                        <td><h5 class="gray-text">Total Payment:</h5></td>
+                        <td><h4 class="special-text">{{vm.getTotalPrice() | customCurrencyOrDash:vm.tradingSignalSMSNotificationPlan.Currency:2}}</h4></td>
+                    </tr>
+                </table>
+            </div>
+            <div ng-class="[vm.paymentAgreed?'agree-payment-green':'agree-payment-red']" ng-if="vm.getTotalPrice() > 0">
+                <input type="checkbox" style="margin-left: 0" ng-model="vm.paymentAgreed" />
+                By checking this box you consent to allowing us to
+                <span>
+                    commence your subscription at the rate of
+                    {{vm.getTotalPrice() | customCurrencyOrDash:vm.tradingSignalSMSNotificationPlan.Currency:2}}/{{vm.tradingSignalSMSNotificationPlan.PeriodType | periodLy}}
+                    with immediate effect. We will charge your credit card {{vm.getTotalPrice() | customCurrencyOrDash:vm.tradingSignalSMSNotificationPlan.Currency:2}} immediately.
+                </span>
+                You also consent to auto-renewal of your subscription for every {{vm.tradingSignalSMSNotificationPlan.PeriodType | periodLy}} thereafter and billing to your credit card on file.
+                <!--For more information on subscription cycles, click <a href="#/faq" target="_blank">here</a>.-->
+            </div>
+            <div class="separator-top m-top-20px h-10px"></div>
+            <button class="filled-blue pull-right m-left-10px" ng-click="vm.submit()" ng-disabled="vm.getTotalPrice() > 0 && !vm.paymentAgreed"
+                    analytics-on="click" analytics-category="SubscribeSMSPopUp" analytics-event="ClickSubmit" agmc-analytics-timestamp>SUBMIT</button>
+            <button class="hollow-blue pull-right m-left-10px" ng-click="vm.setStep(vm.step-1)"
+                    analytics-on="click" analytics-category="SubscribeSMSPopUp" analytics-event="ClickPrevious" agmc-analytics-timestamp>PREVIOUS</button>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+

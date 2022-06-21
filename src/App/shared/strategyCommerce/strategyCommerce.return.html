@@ -1,0 +1,12 @@
+﻿<table class="no-border return-panel">
+        <tr class="numbers">
+            <td ng-repeat="v in vm.returnValue">
+                <span class="glyphicon glyphicon-triangle-top green-profit" ng-if="v.Value != null && v.Value >= 0"></span>
+                <span class="glyphicon glyphicon-triangle-bottom red-loss" ng-if="v.Value != null && v.Value < 0"></span>
+                <h4>{{v.Value | valuePercentageOrDash:2}}</h4>
+            </td>
+        </tr>
+        <tr>
+            <td ng-repeat="v in vm.returnValue">{{v.Name}}</td>
+        </tr>
+    </table>

@@ -1,0 +1,47 @@
+﻿<div class="agm-component-trade-review">
+    <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+        <h4 class="modal-title ellipsis-nowrap">
+            Trade Detail
+        </h4>
+    </div>
+    <div class="modal-body content">
+        <div ng-repeat="trade in vm.trades | orderBy:'-ExitTime'" class="m-bottom-10px trades-review-item">
+            <div class="pull-right strong m-right-10px">Entered <span class="special-text">{{trade.EntryTime | date:'mediumDate'}}</span>, held for <span class="special-text">{{trade.ExitTime | timeDiff:trade.EntryTime}}</span></div>
+            <div class="clearfix"></div>
+            <div class="row-md-5">
+                <div class="h-100pct w-100pct col-md-2 p-10px p-right-0px">
+                    <div class="pull-left title" ng-if="trade.Quantity < 0">LONG</div>
+                    <div class="pull-left title" ng-if="trade.Quantity >= 0">SHORT</div>
+                    <div class="pull-left">
+                        <div class="price">
+                            <span class="buy" ng-if="trade.Quantity < 0">BUY</span>
+                            <span class="buy" ng-if="trade.Quantity >= 0">SELL</span>
+                            {{trade.AverageEntryPrice | customCurrencyOrDashMinMax:trade.Product.Currency:2:4}}
+                        </div>
+                        <!--<a ng-click="vm.goToEntryOrder(trade.Entries)">see transactions</a>-->
+                    </div>
+                </div>
+                <div class="h-100pct w-100pct col-md-2 p-10px  p-right-0px">
+                    <div class="quantity">Q: {{vm.getQuantity(trade)}}</div>
+                    <div class="pull-left">
+                        <div class="price">
+                            <span class="buy" ng-if="trade.Quantity < 0">SELL</span>
+                            <span class="buy" ng-if="trade.Quantity >= 0">BUY</span>
+                            {{trade.ExitPrice | customCurrencyOrDashMinMax:trade.Product.Currency:2:4}}
+                        </div>
+                        <!--<a ng-click="vm.goToExitOrder(trade.Exit)">see transactions</a>-->
+                    </div>
+                </div>
+                <div class="h-100pct w-100pct col-md-1 p-10px  p-right-0px">
+                    <div class="roi-label">ROI:</div>
+                    <div class="roi" ng-class="trade.Roi>=0?['green-profit']:['red-loss']">
+                        {{trade.Roi | valuePercentageOrDash:2}}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

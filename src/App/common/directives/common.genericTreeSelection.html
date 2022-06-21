@@ -1,0 +1,22 @@
+﻿<div class="agms-directives generic-tree-selection">
+    <input type="checkbox" ng-class="{indeterminate:vm.branch.indeterminate}" ng-model="vm.branch.checked" ng-change="vm.onCheckboxChanged()" />
+    <label>
+        <a ng-if="vm.canBeExpanded()" ng-click="vm.toggleExpanded()">{{vm.branch.shortLabel}}</a>
+        <span ng-if="!vm.canBeExpanded()">{{vm.branch.shortLabel}}</span>
+    </label>
+    <button class="expand-button" ng-if="!vm.canBeExpanded() && vm.subCombinations" disabled>
+        <span class="glyphicon glyphicon-triangle-bottom">
+        </span>
+    </button>
+    <button ng-click="vm.toggleExpanded()" class="expand-button" ng-if="vm.canBeExpanded()">
+        <span class="glyphicon" ng-class="{'glyphicon-triangle-top':vm.isExpanded(), 'glyphicon-triangle-bottom':!vm.isExpanded()}">
+        </span>
+    </button>
+    <button ng-click="vm.showDescription(vm.branch.datamartRef.Datamart)" class="info-button" ng-if="vm.showInfoBtn(vm.branch)">
+        <span class="glyphicon glyphicon-info-sign">
+        </span>
+    </button>
+    <div ng-repeat="item in vm.branch.subCombinations" class="m-left-15px" ng-show="vm.isExpanded()">
+        <agmc-generic-tree-selection branch="item" can-expand="vm.isExpanded()"></agmc-generic-tree-selection>
+    </div>
+</div>

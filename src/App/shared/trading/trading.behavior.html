@@ -1,0 +1,51 @@
+﻿<div class="agms-trading-behavior">
+    <div>
+        <h4 class="title text-center">Select Criteria</h4>
+        <div class="row-md-12">
+            <div class="col-md-6 item p-5px"
+                 ng-class="param==vm.selectedParam?['highlighted']:[]"
+                 ng-repeat="param in vm.sProductSelectionServices"
+                 ng-model="vm.selectedParam"
+                 uib-btn-radio="param"
+                 ng-change="vm.onParameterChange()"
+                 analytics-on="click" analytics-category="{{vm.category}}" analytics-event="Performance" analytics-label="TradesBehaviourCriteria" agmc-analytics-timestamp>
+                <div class="box border">
+                    {{param}} 
+                    <span ng-if="param == 'Cumulative Winning Rate'" class="glyphicon glyphicon-info-sign" uib-tooltip="% of (Winning /Total ) closed trades"></span>
+                    <span ng-if="param == 'Profit Factor'" class="glyphicon glyphicon-info-sign" uib-tooltip="A proprietary system of measuring trading performance. The general idea is to look at gains and losses while factoring in transaction cost in the computation process."></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="p-50px text-center" ng-if="vm.isLoadingData">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div ng-show="(!vm.shouldDisplayData() && !vm.isLoadingData)"
+             class="alert alert-info m-top-20px text-center">
+            <h5>
+                <span ng-if="vm.myItem.SubscriptionId">There is insufficient data for this subscription to display any meaningful trades behaviour analysis.</span>
+                <span ng-if="!vm.myItem.SubscriptionId">There is insufficient data for this <span class="text-lowercase">{{vm.myItem | strategyOrTradePortfolio:vm.userId}}</span> to display any meaningful trades behaviour analysis.</span>
+            </h5>
+        </div>
+        <div class="alert alert-info m-top-20px p-10px ng-hide">
+            <h3 class="glyphicon glyphicon-info-sign pull-left w-30px  no-margin"></h3>
+            <div class="pull-right w-100pct  calc-h-minus-40px">
+                <strong>PROFIT FACTOR</strong><br />
+                This is measuring the ability of the trader in making profits.<br />
+                The higher of the profits indicate accumulation of the profits.<br />
+                When profits over timeline is very steep, the risk is getting higher.
+            </div>
+
+        </div>
+        <div class="m-top-20px" ng-if="(vm.shouldDisplayData() && !vm.isLoadingData)">
+            <highchart config="vm.chartConfig"></highchart>
+        </div>
+    </div>
+    <div ng-if="vm.showTurnover()" class="p-5px m-top-20px">
+        <agms-trading-exposure strategy-id="vm.myItem.DisplayInfo.BasicInfo.StrategyId" 
+                               currency="vm.myItem.Currency"
+                               hide-if-no-turnovers="!vm.shouldDisplayData()" 
+                               is-strategy="vm.myItem.DisplayInfo.BasicInfo.PublishState === 'Published'"></agms-trading-exposure>
+    </div>
+</div>

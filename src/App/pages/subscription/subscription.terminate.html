@@ -1,0 +1,27 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        Stop Subscription
+    </h4>
+</div>
+
+<div class="modal-body">
+    <div class="f-14px" ng-if="vm.subscription.DisplayInfo">
+        You will not be receiving any new signal from the Strategy <span class="strong">{{vm.subscription.DisplayInfo | strategyName}}</span><span ng-if="vm.subscription.NextAutoRenewDate"> after <span class="special-text">{{vm.subscription.NextAutoRenewDate | dateShort}}</span></span>.
+    </div>
+    <div class="f-14px" ng-if="!vm.subscription.DisplayInfo && vm.subscription.NextAutoRenewDate">
+        Your subscription to this bundle will be stopped after <span class="special-text">{{vm.subscription.NextAutoRenewDate | dateShort}}</span>.
+    </div>
+    <div class="f-14px" ng-if="!vm.subscription.DisplayInfo && !vm.subscription.NextAutoRenewDate">
+        Your subscription to this bundle will be stopped <span class="special-text">immediately</span>.
+    </div>
+    <div class="strong f-16px">
+        Do you want to stop your subscription?        
+    </div>
+
+    <div class="m-top-10px">
+        <button class="filled-blue pull-right m-left-10px" ng-click="vm.stopSubscription()">CONFIRM</button>
+        <button class="hollow-blue pull-right" ng-click="vm.uibDismissPanel()">CANCEL</button>
+        <div class="clearfix"></div>        
+    </div>
+</div>

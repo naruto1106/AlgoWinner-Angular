@@ -1,0 +1,54 @@
+﻿<div class="modal-header" >
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">PRICE ALERT</h4>
+</div>
+
+<div class="agm-component-watchlist modal-body">
+    <div class="alert-product">
+        <div class="m-bottom-5px m-left-30px" ng-if="vm.product == null || vm.selectedProduct != null">
+            <span class="f-14px m-right-5px">Please select a product to add price alert:</span>
+            <input type="text" placeholder="Type to search stock" ng-model="vm.selectedProduct"
+                   ng-model-options="{debounce: 200}"
+                   uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                   typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                   typeahead-wait-ms="200"
+                   typeahead-on-select="vm.getPrice(vm.selectedProduct)">
+        </div>
+        <div class="row-md-10 h-50px gap-0px m-top-10px" ng-if="vm.product != null">
+            <div class="col-md-3">
+                <agms-product-picture product="vm.product" changeable="true" class="product"></agms-product-picture>
+            </div>
+            <div class="col-md-6">
+                <div class="">
+                    <span class="pull-left lh-25px current-price">{{vm.currentPrice | correctTickSizeDecimalPlacesWithCurrency:vm.product.Currency:vm.product.TradeVenueLoc}}</span>
+                    <span class="pull-left lh-25px symbol">{{vm.product.Currency | currencySymbol}}</span>
+                    <input class="alert-price"
+                           type="number" ng-model="vm.alertPrice" ng-change="vm.verifyPrice()" />
+                    <div class="inline-block change-price">
+                        <a ng-click="vm.decreasePrice()">
+                            <span class="glyphicon glyphicon-minus-sign red-loss clickable" style="font-size: 16px"></span>
+                        </a>
+                        <a ng-click="vm.increasePrice()" ng-disabled="">
+                            <span class="glyphicon glyphicon-plus-sign green-profit clickable" style="font-size: 16px"></span>
+                        </a>
+                    </div>
+                    <div class="price-diff">
+                        {{vm.priceDifference | correctTickSizeDecimalPlacesWithCurrency:vm.product.Currency:vm.product.TradeVenueLoc}} ({{vm.priceDifferencePct | valuePercentageOrDash:2}})
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <button class="mini-filled-green m-top-5px" ng-if="!vm.isEdit" ng-click="vm.addAlert()" ng-disabled="vm.disableAdd()">ADD</button>
+                <button class="mini-filled-green m-top-5px" ng-if="vm.isEdit" ng-click="vm.editAlert()" ng-disabled="vm.disableEdit()">EDIT</button>
+            </div>
+        </div>
+        <div ng-if="vm.priceDifference != 0 && !vm.invalidPrice" class="text-center m-top-10px">
+            We will alert you when price hits {{vm.product.Currency | currencySymbol}} {{vm.alertPrice}} or
+            <span ng-if="vm.priceDifference < 0">lower</span>
+            <span ng-if="vm.priceDifference > 0">higher</span>
+        </div>
+        <div ng-if="vm.invalidPrice" class="text-center m-top-10px red-loss">
+            Please input a price between {{vm.minPrice}} and {{vm.maxPrice}}
+        </div>
+    </div>
+</div>

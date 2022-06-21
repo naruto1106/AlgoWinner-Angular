@@ -1,0 +1,64 @@
+﻿<div class="datetime-picker css-reposition-item">
+    <div class="date-group">
+        <h4>From</h4>
+        <div class="input-group">
+            <agms-text-processing-tex-box-date-picker date="vm.barStartDate" timezone="vm.filterDescription.primaryProduct.timeZone" has-time="vm.isIntraday(vm.filterDescription.barSize)" on-date-changed="vm.setBarRange()" instant-set="false">
+            </agms-text-processing-tex-box-date-picker>
+            <div class="btn-group pull-left" uib-dropdown is-open="vm.startDatePickerOpened" auto-close="outsideClick">
+                <button type="button" class="btn" uib-dropdown-toggle>
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </button>
+                <fieldset class="dropdown-menu" uib-dropdown-menu role="menu">
+                    <div class="calendar"
+                         ng-click="$event.stopPropagation()"
+                         uib-datepicker="mediumDate" ng-model="vm.barStartDate" is-open="vm.barStartDateOpened"
+                         datepicker-options="vm.dateOptionsFrom"
+                         datepicker-mode="vm.getDatePickerMode(vm.filterDescription.barSize)"
+                         show-button-bar="false"
+                         ng-required="true" close-text="Close" ng-change="vm.barStartDateChanged()">
+                    </div>
+                    <div ng-show="vm.isIntraday()">
+                        <div class=" time-picker pull-left"
+                             uib-timepicker ng-model="vm.barStartDate"
+                             ng-change="vm.barStartDateChanged()" show-meridian="false">
+                        </div>
+                        <button class="pull-right filled-blue" ng-click="vm.closeStartDatePicker()">OK</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="date-group">
+        <h4>To</h4>
+        <div class="input-group">
+            <agms-text-processing-tex-box-date-picker date="vm.barEndDate" timezone="vm.filterDescription.primaryProduct.timeZone" has-time="vm.isIntraday(vm.filterDescription.barSize)" on-date-changed="vm.setBarRange()" instant-set="false">
+            </agms-text-processing-tex-box-date-picker>
+            <div class="btn-group pull-left" uib-dropdown is-open="vm.endDatePickerOpened" auto-close="outsideClick">
+                <button type="button" class="btn" uib-dropdown-toggle>
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </button>
+                <fieldset class="dropdown-menu" uib-dropdown-menu role="menu">
+                    <div class="calendar"
+                         ng-click="$event.stopPropagation()"
+                         uib-datepicker="mediumDate" ng-model="vm.barEndDate" is-open="vm.barEndDateOpened"
+                         datepicker-options="vm.dateOptionsTo"
+                         datepicker-mode="vm.getDatePickerMode(vm.filterDescription.barSize)"
+                         show-button-bar="false"
+                         ng-required="true" close-text="Close" ng-change="vm.barEndDateChanged()">
+                    </div>
+
+                    <div ng-show="vm.isIntraday()">
+                        <div class=" time-picker pull-left"
+                             uib-timepicker ng-model="vm.barEndDate"
+                             ng-change="vm.barEndDateChanged()" show-meridian="false">
+                        </div>
+                        <button class="pull-right filled-blue" ng-click="vm.closeEndDatePicker()">OK</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

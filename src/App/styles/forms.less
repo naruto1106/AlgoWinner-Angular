@@ -1,0 +1,582 @@
+﻿textarea, input[type=text], input[type=password] {
+    border: 1px solid @grayMed1;
+}
+
+textarea:focus input:focus, span:focus, a:focus {
+    outline: 0;
+}
+
+textarea {
+    resize: none;
+    overflow: hidden;
+}
+
+input, textarea {
+    outline-width: 0;
+}
+
+.verified {
+    color: green;
+    font-size: 14px;
+    line-height: 25px;
+    .rel;
+    top: -1px;
+    right: 3px;
+}
+
+.loading {
+    background-image: url('//am708403.azureedge.net/images/ajax-loader.gif?v1');
+    width: 15px;
+    height: 15px;
+    margin: 5px;
+    display: block;
+    background-size: contain;
+    background-position:center center;
+}
+
+.ui-slider .ui-slider-handle {
+    border: none;
+    background: @grayDark1;
+    width: 16px;
+    height: 16px;
+    .clickable;
+    border-radius: 0 8px 8px 8px;
+    top: 4px;
+    transform: rotate(45deg);
+
+    &:hover {
+        background: @blueBasic;
+    }
+}
+
+.ui-slider {
+    border: none;
+    position: relative;
+    height: 6px;
+    .clickable;
+    background: @grayMed3;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 10px 10px;
+    margin-bottom: 30px;
+}
+
+.ui-slider .ui-slider-range {
+    background: @grayDark3;
+    .clickable;
+    border-radius: 0;
+
+    &:hover {
+        background: @blueBasic;
+    }
+}
+
+
+.ui-slider.slim .ui-slider-handle {
+    border: none;
+    background: @grayMed1;
+    width: 16px;
+    height: 16px;
+    top: -7px;
+    .clickable;
+    border-radius: 4px;
+    transform: rotate(0);
+
+    &:hover {
+        background: @blueBasic;
+    }
+}
+
+.ui-slider.slim {
+    position: relative;
+    height: 2px;
+    .clickable;
+    border: none;
+    background: @grayMed3;
+    box-shadow: none;
+    margin: 10px 10px;
+}
+
+.ui-slider.slim .ui-slider-range {
+    background: @grayMed3;
+    .clickable;
+    border: none;
+    border-radius: 4px;
+    top: -7px;
+    height: 16px;
+}
+
+select {
+    min-width: 100px;
+}
+
+input[type=radio], input[type=checkbox] {
+    position: relative;
+    bottom: -0.2em;
+    margin-left: 10px;
+    margin-right: 3px;
+}
+
+.input-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.input-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.input-file input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.calendar {
+    .day-selector, .month-selector, .year-selector {
+        nav {
+            text-align: center;
+            margin-bottom: 10px;
+
+            .left {
+                float: left;
+                width: 70px;
+            }
+
+            .right {
+                float: right;
+                width: 70px;
+            }
+
+            .center {
+                width: 100px;
+            }
+
+            div.center {
+                line-height: 25px;
+                display: inline-block;
+            }
+
+            button {
+                border: none;
+                line-height: 25px;
+                background: none;
+
+                &:hover {
+                    background: @grayLight3;
+                }
+            }
+        }
+    }
+
+    .day-indicator {
+        .day {
+            width: 14.285%;
+            float: left;
+            text-align: center;
+            padding: 2px;
+        }
+    }
+
+    .day-grid {
+        border-left: 1px solid @grayLight1;
+        border-top: 1px solid @grayLight1;
+
+        .day {
+            width: 14.285%;
+            float: left;
+            text-align: left;
+            padding: 3px;
+            height: 50px;
+            border-right: 1px solid @grayLight1;
+            border-bottom: 1px solid @grayLight1;
+        }
+    }
+
+    .last-month, .next-month {
+        color: #CCC;
+    }
+
+    .current-month.day-5, .current-month.day-6 {
+        color: red;
+    }
+
+
+    .year-grid, .month-grid {
+        border-left: 1px solid @grayLight1;
+        border-top: 1px solid @grayLight1;
+
+        .year, .month {
+            border-right: 1px solid @grayLight1;
+            border-bottom: 1px solid @grayLight1;
+            float: left;
+            padding: 10px;
+            text-align: center;
+            .clickable;
+
+            &:hover {
+                background: @blueBasic;
+                color: white;
+            }
+        }
+
+        .year {
+            width: 20%;
+        }
+
+        .month {
+            width: 25%;
+        }
+    }
+
+    .selected {
+        background: #CDF;
+    }
+
+    .current {
+        background: #FED;
+    }
+}
+
+.time-picker {
+    tr {
+        margin: 0;
+
+        td {
+            margin: 0;
+        }
+    }
+
+    a {
+        padding: 0;
+    }
+
+    input {
+        width: 50px;
+    }
+
+    .btn.btn-link {
+        margin: 0 5px;
+    }
+
+    width: 150px;
+}
+
+.date-picker .dropdown-menu {
+    border: none;
+    padding: 10px;
+
+    table {
+        .focusable;
+    }
+
+    button {
+        padding: 0px 10px;
+        .focusable;
+    }
+
+    button:focus {
+        .focusable;
+    }
+
+    table td {
+        padding: 0px;
+
+        button {
+            box-shadow: none;
+            border: none;
+            background: white;
+            .button-text;
+
+            &:hover {
+                background: @grayLight3;
+            }
+
+            span {
+                color: @grayDark1;
+            }
+        }
+
+        button.active {
+            background: @blueBasic;
+
+            span {
+                color: white;
+            }
+        }
+    }
+
+    button {
+        line-height: 30px;
+        height: 30px;
+    }
+}
+
+
+
+.marker-chart {
+    .rel;
+    margin-top: -10px;
+
+    h7 {
+        line-height: 10px;
+        font-size: 10px;
+        height: 12px;
+        margin: 0;
+        padding: 0;
+        color: @grayMed1;
+        display: block;
+    }
+}
+
+.signal-buy {
+    background: #093;
+    padding: 0 10px;
+    color: white;
+    position: relative;
+    line-height: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+
+.signal-buy:after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 10px;
+    border-width: 5px 5px 0;
+    border-style: solid;
+    border-color: #093 transparent;
+    display: block;
+    width: 0;
+}
+
+.signal-sell {
+    background: #C09;
+    padding: 0 10px;
+    color: white;
+    position: relative;
+    line-height: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+
+.signal-sell:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 10px;
+    border-width: 0 5px 5px;
+    border-style: solid;
+    border-color: #C09 transparent;
+    display: block;
+    width: 0;
+}
+
+
+
+.dropbox {
+    border: 2px solid @grayLight3;
+    background: none;
+}
+
+.dropbox:hover {
+    border: 2px solid @blueBasic;
+    //background:mix(@blueBasic,transparent,10);
+}
+
+
+.blinker() {
+    0% {
+        background: transparent;
+    }
+
+    20% {
+        background: mix(@blueBasic,transparent,50);
+    }
+
+    100% {
+        background: transparent;
+    }
+}
+
+@-moz-keyframes blinker {
+    .blinker;
+}
+
+@-webkit-keyframes blinker {
+    .blinker;
+}
+
+@keyframes blinker {
+    .blinker;
+}
+
+
+.blink_me {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-iteration-count: 3;
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 0.8s;
+    -moz-animation-timing-function: ease-out;
+    -moz-animation-iteration-count: 3;
+    animation-name: blinker;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 3;
+}
+
+.blink_comments {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-iteration-count: 2;
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-timing-function: ease-out;
+    -moz-animation-iteration-count: 2;
+    animation-name: blinker;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 2;
+}
+
+input {
+    padding: 0 5px;
+}
+
+.special-tooltip {
+    background: @grayDark1;
+    padding: 5px;
+    color: white;
+    position: absolute;
+    left: -50px;
+    color: @grayDark1;
+}
+
+
+.special-tooltip:after {
+    content: "";
+    top: -10px;
+    left: 45px;
+    position: absolute;
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: @grayDark1 transparent;
+    display: block;
+    width: 0;
+}
+
+.naked-modal {
+    .modal-dialog {
+        width: 100%;
+        max-width: 800px;
+        padding: 0px;
+        border-radius: 0px;
+        border: none;
+    }
+}
+
+.shoutout {
+    padding: 5px;
+    min-width: 150px;
+    min-height: 30px;
+    margin: 0px;
+    border: 2px solid @grayDark1;
+    background: white;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 5px;
+}
+
+.shoutout:before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: @grayDark1 transparent;
+    display: block;
+    width: 0;
+}
+
+.shoutout:after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 20px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: white transparent;
+    display: block;
+    width: 0;
+}
+
+.special.dropdown-menu {
+    li {
+        cursor: pointer;
+        background: mix(@blueBasic,white,10);
+        margin-bottom: 5px;
+    }
+
+    li:hover {
+        background: mix(@blueBasic,white,20);
+    }
+}
+
+.textbox-small {
+    min-width: 100px;
+    width: 0;
+}
+
+.disabled-opacity {
+    opacity: 0.3;
+}
+
+.dropdown-menu.dropdown-down {
+    top: 100%;
+    left: 10px;
+    bottom: auto;
+    display: block;
+}
+
+.dropdown-menu.dropdown-up {
+    bottom: 100%;
+    left: 10px;
+    top: auto;
+    display: block;
+    border-top: 1px solid @blueDarker3;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+}
+
+select[disabled], input[disabled] {
+    opacity: 0.5;
+}
+
+fieldset[disabled] {
+    input, selected {
+        opacity: 0.5;
+    }
+}
+
+
+.date-picker > input[disabled] {
+    font-weight: 700;
+    opacity: 0.8;
+}
+
+

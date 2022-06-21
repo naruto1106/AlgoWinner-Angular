@@ -1,0 +1,34 @@
+﻿<div>
+
+    <section>
+        <div ng-if="vm.pChartStrategyOrderService.myStrategies.length>0">
+            <div class="tag-channel">
+                <h5>
+                    All
+                </h5>
+                <div class="switch"
+                     ng-click="vm.onAllVisibilityChanged(vm.pChartStrategyOrderService.myStrategies)"
+                     ng-class="{checked:vm.allVisible(vm.pChartStrategyOrderService.myStrategies)}">
+                </div>                
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel"
+                 ng-repeat="strategy in vm.pChartStrategyOrderService.myStrategies">
+                <h5>
+                    {{strategy.DisplayInfo | strategyName}}
+                </h5>
+                <div class="switch"
+                     ng-click="vm.onStrategyVisibilityChanged(strategy)"
+                     ng-class="{checked:vm.strategyVisibility(strategy)}">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div ng-if="vm.pChartStrategyOrderService.myStrategies.length<=0">
+            <div class="tag-channel">
+                No Trade Portfolios Created                
+            </div>
+            <div class="clearfix"></div>
+        </div>        
+    </section>
+</div>

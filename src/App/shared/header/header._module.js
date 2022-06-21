@@ -1,0 +1,17 @@
+﻿agmNgModuleWrapper('agms.header',
+[
+    'agmp.user',
+    'agms.user',
+    'agms.gateway',
+    'agms.image',
+    'agmp.strategy',
+    'agms.activity',
+    'agms.product',
+    'agms.strategyCommerce',
+    'agms.account',
+    'agms.subscription',
+    'agms.community',
+    'agms.droidHelper',
+    'agms.tgps',
+    'agms.textProcessing'
+]);

@@ -1,0 +1,286 @@
+﻿.agm-component-orderpad {
+    background: @grayLight3;
+
+    .close-position {
+        .order-form {
+            padding-top: 100px;
+            height: 400px;
+        }
+    }
+
+    .up-down-buttons {
+        padding: 5px;
+
+        button {
+            width: 20px;
+            padding: 0;
+        }
+    }
+
+    .bracket {
+        padding: 10px;
+        margin: 10px;
+
+        .check-all {
+            margin-left: 50px;
+        }
+
+        .check-box-lines {
+            .abs;
+            width: 110px;
+            height: 89px;
+            top: 30px;
+            left: 62px;
+        }
+
+        dl {
+            margin-left: 60px;
+            clear: both;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+
+        dt {
+            width: 110px;
+            float: left;
+            margin-right: 5px;
+            line-height: 30px;
+        }
+
+        dd {
+            float: left;
+            line-height: 30px;
+
+            .type {
+                display: block;
+                float: left;
+                width: 40px;
+            }
+
+            .price-and-currency {
+                float: left;
+                display: block;
+
+                .currency {
+                    width: 30px;
+                }
+
+                .price {
+                    line-height: 28px;
+                    width: 80px;
+                    height: 28px;
+                }
+            }
+
+            .validity {
+                display: block;
+                float: left;
+                width: 100px;
+            }
+
+            .percentage {
+                width: 85px;
+                font-size: 12px;
+                float: left;
+                font-style: italic;
+            }
+        }
+    }
+
+    .bid-ask {
+        border-radius: 5px;
+        padding: 5px 10px;
+        background: @grayLight1;
+        font-size: 12px;
+        text-align: center;
+
+        h4 {
+            margin: 0;
+            padding: 0;
+            line-height: 20px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        &.down {
+            background: @berry;
+            color: white;
+        }
+
+        &.up {
+            background: @seafoam;
+            color: white;
+        }
+    }
+
+    .order-selection {
+        background: @grayLight1;
+        padding: 10px;
+        min-height: 500px;
+    }
+
+    .follow-order-selection {
+        background: @grayLight1;
+        padding: 10px;
+        min-height: 500px;
+
+        .order-summary {
+            margin-top: 20px;
+        }
+
+        .submit-container {
+            margin-top: 50px;
+        }
+
+        select {
+            -webkit-appearance: menulist-button;
+        }
+    }
+
+    .account {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .dl-horizontal-100px > dd {
+        margin-left: 120px;
+        text-align: left;
+        line-height: 200%;
+        padding: 5px;
+        background: @grayLight1;
+
+        > input {
+            height: 30px;
+        }
+
+        select {
+            line-height: 30px;
+            height: 30px;
+            -webkit-appearance: menulist-button;
+        }
+    }
+
+    .dl-horizontal-100px > dt {
+        float: left;
+        width: 110px;
+        overflow: hidden;
+        clear: left;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 200%;
+        padding: 5px;
+        vertical-align: middle;
+    }
+
+    .select-type {
+        min-width: 60px;
+        width: 60px;
+    }
+
+    .strategy-info {
+        padding: 10px;
+    }
+
+    .submit-container {
+        padding: 10px;
+    }
+
+    .strategy-box {
+        background: @grayLight2;
+        height: 60px;
+
+        &:hover, &.active {
+            color: white;
+            background: @grayDark1;
+        }
+    }
+
+    .strategy-box-selected {
+        color: white;
+        background: @blueBasic;
+    }
+
+    .order-details {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 0px;
+        margin-left: 85px;
+
+        .bracket-order {
+            input {
+                margin-left: 3px;
+            }
+        }
+
+        .validity {
+            margin-left: 0px;
+        }
+    }
+
+    .follow-order-details {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 0px;
+    }
+
+    .error-message {
+        font-size: 13px;
+        color: @berry;
+    }
+
+    .edit-settings {
+        text-decoration: underline;
+    }
+
+    .cancel-box {
+        padding: 100px 50px;
+    }
+
+    .not-supported-large {
+        .abs;
+        top: 43px;
+        left: 0;
+        width: 100%;
+        font-weight: 600;
+        color: white;
+        line-height: 40px;
+        background: @berry;
+        font-size: 20px;
+        transform: rotate(-30deg);
+    }
+
+    .not-supported-small {
+        .abs;
+        top: 33px;
+        left: 20px;
+        width: 78%;
+        font-weight: 600;
+        color: white;
+        line-height: 40px;
+        background: @berry;
+        font-size: 20px;
+        transform: rotate(-30deg);
+    }
+
+    .not-supported-alert {
+        font-size: 14px;
+        color: @berry;
+        border: 2px solid @berry;
+        border-radius: 5px;
+        padding-left: 10px;
+        margin-top: 10px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+}

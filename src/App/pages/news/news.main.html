@@ -1,0 +1,94 @@
+﻿<div class="container agm-component-news">
+    <div class="row-md-2 gap-5px">
+        <div class="col-md-1 separator-right">
+            <h1>News</h1>
+            <button class="hollow-blue pull-right clear-btn" ng-click="vm.clearNews()">CLEAR ALL</button>
+            <div class="clearfix"></div>
+
+            <form name="newsForm" class="news-form">
+                <dl class="dl-horizontal">
+                    <dt>Title</dt>
+                    <dd>
+                        <input name="title" type="text" ng-model="vm.newsModel.Title" class="w-100pct"/>
+                    </dd>
+                    <dt>Post</dt>
+                    <dd>
+                        <agms-posting-cash-tag-text-area
+                            item="vm.feedPost"
+                            on-changed="vm.handleItemChanged(item, contentInfo, contentControl)"
+                            content-control="vm.cashtagContentControl"
+                            disabled-func="vm.disabledFunc" direction="1"></agms-posting-cash-tag-text-area>
+                    </dd>
+                    <dt>Tags</dt>
+                    <dd>
+                        <agms-text-processing-multi-autocomplete placeholder-text="'ADD TAGS'"
+                                            class="m-bottom-10px"
+                                            promise="vm.populateSearchItemPromise"
+                                            items="vm.tags"
+                                            unrecognized-items="vm.unrecognizedItems">
+                        </agms-text-processing-multi-autocomplete>
+                    </dd>
+                    <dt>Preview Link</dt>
+                    <dd>
+                        <agms-posting-cash-tag-text-area item="vm.previewLink"
+                                                on-changed="vm.handleItemChanged(item, contentInfo, contentControl)"
+                                                content-control="vm.cashtagContentControl"
+                                                disabled-func="vm.disabledFunc" direction="1"></agms-posting-cash-tag-text-area>
+                        <div>(Please add a space after typing the url to resolve the link)</div>
+                    </dd>
+                    <dt>Attachment <br/>(Max 2)</dt>
+                    <dd>
+                        <agmc-generic-file-uploader on-file-loaded="vm.loadFile(fileUrl, fileName, fileWidth, fileHeight, toCrop)" is-disabled="vm.isSubmitting" select-file-function="vm.selectPdfFile" accepted-file-types="vm.acceptedPdfTypes" upload-file-type="vm.uploadPdfType">
+                            <button type="button" ng-click="vm.selectPdfFile()" ng-disabled="vm.isSubmitting || vm.postFiles.length >= 2" class="simple silent-button pull-left m-left-5px" uib-tooltip="Upload PDF" tooltip-placement="bottom">
+                                <img class="w-15px h-15px" src="//am708403.azureedge.net/images/pdf.png?"/>
+                            </button>
+                        </agmc-generic-file-uploader>
+                        <agmc-generic-file-uploader on-file-loaded="vm.loadFile(fileUrl, fileName, fileWidth, fileHeight, toCrop)" is-disabled="vm.isSubmitting" select-file-function="vm.selectImageFile" accepted-file-types="vm.acceptedImageTypes" upload-file-type="vm.uploadImageType">
+                            <button type="button" ng-click="vm.selectImageFile()" ng-disabled="vm.isSubmitting || vm.postFiles.length >= 2" class="simple silent-button pull-left m-left-5px" uib-tooltip="Upload Image" tooltip-placement="bottom"><span class="glyphicon glyphicon-picture pull-left lh-20px"></span></button>
+                        </agmc-generic-file-uploader>
+
+                        <div class="clearfix"></div>
+                        <div ng-repeat="file in vm.postFiles" ng-if="!file.ShareId" class="box m-top-5px">
+                            <h6 ng-class="{'disable-click':vm.isSubmitting}" ng-click="vm.removeAttachment(file)" class="glyphicon glyphicon-remove pull-left p-10px cursor-pointer"></h6>
+                            <agms-image-cropper ng-if="file!=null && !vm.isPdfUrl(file.AttachmentUrl) && file.ToCrop" ng-show="false" image-source="file.AttachmentUrl" on-image-cropped="vm.replaceWithCroppedImage(result)"
+                                               width="file.Width" height="file.Height">
+                            </agms-image-cropper>
+                            <span class="pull-left m-5px border" ng-if="vm.isPdfUrl(file.AttachmentUrl)" style="background-image: url(//am708403.azureedge.net/images/logo-adobe-pdf.jpg); height: 40px; width: 40px; background-size: contain">
+                            </span>
+                            <span class="pull-left m-5px border" ng-if="!vm.isPdfUrl(file.AttachmentUrl) && !file.ToCrop" ng-style="{'background-image': 'url({{file.AttachmentUrl}})', 'height': '40px', 'width': '40px', 'background-size': 'cover'}">
+                            </span>
+                            <span class="pull-left m-5px border" ng-if="!vm.isPdfUrl(file.AttachmentUrl) && file.ToCrop && !file.Cropped" ng-style="{'background-image': 'url(//am708403.azureedge.net/images/static/loading.gif?)', 'height': '40px', 'width': '40px', 'background-size': 'cover'}">
+                            </span>
+                            <span class="pull-left m-5px border" ng-if="!vm.isPdfUrl(file.AttachmentUrl) && file.ToCrop && file.Cropped" ng-style="{'background-image': 'url({{file.AttachmentUrl}})', 'height': '40px', 'width': '40px', 'background-size': 'cover'}">
+                            </span>
+                            <div class="pull-left lh-50px strong">{{file.AttachmentName}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </dd>
+                </dl>
+            </form>
+            <div class="m-top-10px m-bottom-10px separator-top"></div>
+            <button class="filled-blue pull-right m-right-10px" agmc-button-wait-on-promise="vm.addNews()" ng-disabled="vm.disableSubmit()"> SUBMIT </button>
+            <button class="hollow-blue pull-right m-right-10px" ng-click="vm.previewNews()" ng-disabled="vm.disableSubmit()"> PREVIEW </button>
+            <div class="clearfix m-bottom-20px"></div>
+        </div>
+        <div class="col-md-1">
+            <h1>Preview</h1>
+            <h3>{{vm.previewModel.Title}}</h3>
+            <div class="wrap-text f-16px" ng-if="vm.previewModel.Content != ''"
+                 agmc-paragraph-clipper="vm.previewModel.Content"
+                 max-line-count="20"
+                 is-clipping-active="!vm.previewModel.isContentExpanded"
+                 is-clipping-required="vm.previewModel.needClipping"></div>
+            <div class="m-top-10px" ng-if="vm.previewModel.Content && vm.previewModel.Content != ''">
+                <agms-posting-url-live-preview feed-post="vm.previewLink" user-post="vm.userPost" single-close-btn="false" hide-close-btn="true" show-only-image="true"></agms-posting-url-live-preview>
+
+                <div class="clearfix m-bottom-10px"></div>
+            </div>
+            <div ng-if="vm.previewModel.needClipping">
+                <a ng-if="!vm.previewModel.isContentExpanded" ng-click="vm.previewModel.isContentExpanded=!vm.previewModel.isContentExpanded">(Show More ...)</a>
+                <a ng-if="vm.previewModel.isContentExpanded" ng-click="vm.previewModel.isContentExpanded=!vm.previewModel.isContentExpanded">(Show Less ...)</a>
+            </div>
+        </div>
+    </div>
+</div>

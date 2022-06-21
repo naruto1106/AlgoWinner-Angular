@@ -1,0 +1,12 @@
+﻿<div class="category-icon box lh-100pct">
+    <div class="category" ng-repeat="category in vm.categories" uib-tooltip="{{category}}">
+        <div agmc-svg-loader svg-src="'/App/assets/icons/category/trend.svg'" ng-if="category == 'Trend Following'" class="h-100pct"></div>
+        <div agmc-svg-loader svg-src="'/App/assets/icons/category/news.svg'" ng-if="category == 'News'" class="h-100pct"></div>
+        <div agmc-svg-loader svg-src="'/App/assets/icons/category/fundamental.svg'" ng-if="category == 'Fundamental'" class="h-100pct"></div>
+        <div agmc-svg-loader svg-src="'/App/assets/icons/category/fish.svg'" ng-if="category == 'Bottom Fishing'" class="h-100pct"></div>
+        <div agmc-svg-loader svg-src="'/App/assets/icons/category/stat.svg'" ng-if="category == 'Statistical'" class="h-100pct"></div>
+        <div agmc-svg-loader svg-src="'/App/assets/icons/category/break.svg'" ng-if="category == 'Breakout'" class="h-100pct"></div>
+        <div agmc-svg-loader svg-src="'/App/assets/icons/category/misc.svg'" ng-if="category == 'Others'" class="h-100pct"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,33 @@
+﻿<div>
+    <form ng-submit="vm.submit(true)" method="post" name="contactUsForm">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input class="form-control" placeholder="Your First Name" type="text" ng-model="vm.contact.FirstName" name="firstName" ng-model-options="{debounce: 200}" required />
+                <span class="error-input" ng-show="(contactUsForm.firstName.$dirty || contactUsForm.$submitted) && contactUsForm.firstName.$invalid">First name is required.</span>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Your Last Name" type="text" ng-model="vm.contact.LastName" name="lastName" ng-model-options="{debounce: 200}" required />
+                <span class="error-input" ng-show="(contactUsForm.lastName.$dirty || contactUsForm.$submitted) && contactUsForm.lastName.$invalid">Last name is required.</span>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Your Email" name="email" type="email" ng-model="vm.contact.Email" ng-model-options="{debounce: 200}" required />
+                <span class="error-input" ng-show="(contactUsForm.email.$dirty || contactUsForm.$submitted) && contactUsForm.email.$error.required">Email is required.</span>
+                <span class="error-input" ng-show="contactUsForm.email.$dirty && !contactUsForm.email.$error.required && contactUsForm.email.$invalid">Email is not in correct format.</span>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <textarea class="form-control" name="message" rows="7" ng-model="vm.contact.Message" placeholder="Your Message..."></textarea>
+                <span class="error-input" ng-show="(contactUsForm.message.$dirty || contactUsForm.$submitted) && contactUsForm.message.$invalid">Message is required.</span>
+            </div><!-- // .form-group -->
+            <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-md btn-success pull-right" ng-disabled="vm.contactingInProgress || contactUsForm.firstName.$invalid || contactUsForm.lastName.$invalid || contactUsForm.email.$invalid
+                || contactUsForm.message.$invalid">
+                    Submit
+                </button>
+            </div><!-- // .form-group -->
+        </div>
+    </form>
+</div>
+

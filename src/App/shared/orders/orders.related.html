@@ -1,0 +1,22 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">{{vm.title}}</h4>
+</div>
+
+<div class="modal-body agm-component-orderstrades">
+    <ul uib-pagination boundary-links="true" total-items="vm.relatedOrders.length" ng-model="vm.models.currentPage"
+        class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+        first-text="&laquo;" last-text="&raquo;" max-size="10"
+        num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+    </ul>
+    <div class="border white-box gray-text text-left  m-5px" ng-repeat="relatedOrder in vm.getPagedRelatedOrders()">
+        <agms-orders-table-element is-preview="false"
+            is-related-order-browsable="false"
+            order="relatedOrder" ng-class="vm.cssClass(relatedOrder)"></agms-orders-table-element>
+    </div>
+    <ul uib-pagination boundary-links="true" total-items="vm.relatedOrders.length" ng-model="vm.models.currentPage"
+        class="pagination-sm m-top-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+        first-text="&laquo;" last-text="&raquo;" max-size="10"
+        num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+    </ul>
+</div>

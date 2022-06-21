@@ -1,0 +1,43 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Eligible Stocks for Prediction</h4>
+</div>
+
+<div class="modal-body agm-component-algooracle">
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+    <div class="predictable-product">
+        <div>
+            <span>Market:</span>
+            <select ng-model="vm.selectedMarket" ng-change="vm.getPredictableProducts()" ng-options="m for m in vm.markets" ></select>
+        </div>
+        <div class="clearfix m-top-10px"></div>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Symbol</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="product in vm.getPagedProducts()">
+                <td>{{product.ProductName}}</td>
+                <td>{{product.Symbol}}</td>
+                <td>
+                    <button class="mini-filled-green" ng-click="vm.selectPredictableProduct(product)">Select</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul uib-pagination boundary-links="true" total-items="vm.productList.length" ng-model="vm.paginationModel.currentPage"
+            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="10" items-per-page="10"
+            num-pages="vm.paginationModel.numPages" ng-show="vm.paginationModel.numPages > 1"></ul>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <div class="btn btn-outline-primary pull-right" ng-click="vm.uibDismissPanel()">
+        CANCEL
+    </div>
+</div>

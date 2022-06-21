@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html ng-app="agm.landing">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AlgoMerchant</title>
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="AlgoMerchant builds intelligent robots to help you invest better than star fund managers. 
+          We offer access to top performing investment algorithms developed by the best quant traders from all over the world. 
+          With AlgoMerchant, anyone can become a successful investor."/>
+    <meta name="keywords" content="stock trading robot, robo investing, investment, Singapore stocks, US stocks, free high performance stock charting platform" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/png" href="//am708403.azureedge.net/images/landing/fav.png" />
+    <link href="//am708403.azureedge.net/images/algofont/styles.css" rel="stylesheet">
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="The future of investing is here" />
+    <meta property="og:description" content="AlgoMerchant builds intelligent robots to help you invest better than star fund managers." />
+    <meta property="og:image" content="//am708403.azureedge.net/images/newLanding/strategies44.jpg" />
+    <meta property="fb:app_id" content="959604877527616" />
+
+    <script>
+        //convert old url to hashbang mode
+        if (window.location.hash.indexOf('#/') === 0) {
+            window.location.hash = '#!' + window.location.hash.slice(1);
+        }
+    </script>
+
+    {{"VendorScript"|bundle}}
+    {{"agmLandingJs"|bundle}}
+    {{"agmLandingCssLib"|bundle}}
+    {{"agmLandingCss"|bundle}}
+    {%if DEBUG %}
+    <script>
+        angular.module("agm.templates", []);
+    </script>
+    {%else%}
+    {{"agmTemplates"|bundle}}
+    {%endif%}
+</head>
+<body ng-controller="agm.landing.RootController as vm">
+    <div class="gtco-loader" ng-if="!vm.isloading"></div>
+    <div id="page" ng-if="!vm.isloading">
+        <section ng-view></section>
+
+        <agm-landing-footer></agm-landing-footer>
+    </div>
+
+    <script>Raven.config('https://9910ad1321a84aaa91baa596a647d688@sentry.io/95282').install();</script>
+    <script type='text/javascript'>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', "{{ appSettings.GoogleAnalyticsId }}", 'auto');
+    </script>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '{{ appSettings.FacebookPixelId }}');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+
+    <script>
+    angular.module('agm.core')
+        .service('coreConfigService', [function() {
+            return {{ coreConfigService|safe }}
+    }]);
+    angular.module('agm.core').constant("coreServerVersionConstants", {
+        ServerVersion: "{{ ServerVersion }}"
+    });
+    angular.module('agm.core').constant("coreApiServerAddress",
+        "{{ appSettings.ApiServerAddress }}"
+    );
+    angular.module('agm.core')
+        .constant("coreMarketDataServerAddress", "{{ appSettings.MarketDataServerAddress }}")
+        .constant("coreMarketDataServerAddressDelayed", "{{ appSettings.MarketDataServerAddressDelayed }}")
+    </script>
+</body>
+</html>

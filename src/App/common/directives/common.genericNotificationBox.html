@@ -1,0 +1,8 @@
+﻿<div class="agms-directives generic-notification-box">
+    <div class="rel box transition-moderate" ng-class="{shown:content.displayState==1,gone:content.displayState==2, blink:content.blink}"
+         ng-repeat="content in vm.commonGenericNotificationBoxService.contents">
+        <a ng-click="vm.close(content)" class="close-button glyphicon glyphicon-remove"></a>
+        <div ng-include src="content.templateUrl">      
+        </div>
+    </div>
+</div>

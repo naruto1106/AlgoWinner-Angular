@@ -1,0 +1,492 @@
+dl {
+    box-sizing: border-box;
+}
+
+svg {
+    overflow: hidden;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    .clickable;
+    color: @persian;
+
+    &:hover {
+        color: @plum;
+    }
+}
+
+button {
+    .focusable;
+}
+
+.logo {
+    background-image: url('//am708403.azureedge.net/images/logo.png?');
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position: left center;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: @grayMed3;
+    border: 4px solid white;
+    border-radius: 4px;
+
+    :hover {
+        background-color: @grayLight1;
+    }
+}
+/* the new scrollbar will have a flat appearance with the set background color */
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: @grayDark1;
+    border-radius: 6px;
+
+    :hover {
+        background-color: @blueBasic;
+    }
+}
+/* this will style the thumb, ignoring the track */
+
+.custom-scrollbar::-webkit-scrollbar-button {
+    background-color: @grayDark1;
+    border-radius: 6px;
+
+    :hover {
+        background-color: @blueBasic;
+    }
+}
+/* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+    background-color: black;
+}
+
+
+/* footer css */
+.footer-wrapper {
+    box-shadow: 0 0 10px mix(black,transparent,40);
+    position: relative;
+
+    footer.ssl {
+        min-height: 65px;
+        background: #96a7b8;
+        box-shadow: 0 0 10px mix(black,transparent,15);
+        position: relative;
+        color: black;
+
+        .contact {
+            padding-left: 20px;
+            padding-right: 0px;
+        }
+
+        .ssl-message {
+            height: 60px;
+            padding-left: 30px;
+            padding-right: 0px;
+            margin: 10px 0 10px 0;
+
+            .copy-right {
+                margin: 5px 0;
+                font-size: 12px;
+                font-weight: 800;
+            }
+        }
+
+        ul {
+            padding: 0;
+
+            li {
+                display: inline-block;
+                border-right: 1px solid black;
+                margin: 5px;
+                padding: 0 10px 0 0;
+
+                a {
+                    color: black;
+                }
+            }
+
+            li:last-child {
+                border-right: 0px;
+            }
+        }
+    }
+}
+
+
+.ellipsis-nowrap {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.ref-order {
+    border: 2px solid @sunFlower;
+    color: #0b1e30;
+}
+
+.notification-box:before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 83px;
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: @grayMed3 transparent;
+    display: block;
+    width: 0;
+}
+
+
+.notification-box, .activity-notification-box {
+    width: 350px;
+    top: -6px;
+    left: -44px;
+    background: white;
+    border: 5px solid;
+    z-index: 1000;
+
+    .notification-btn {
+        position: relative;
+        width: 340px;
+        top: 0px;
+        padding-left: 10px;
+
+        .notification-text {
+            margin-left: 160px;
+            font-style: italic;
+            text-decoration: underline;
+            font-size: 13px;
+            cursor: pointer;
+
+            .notification-icon {
+                height: 20px;
+                top: 3px;
+                left: 3px;
+            }
+        }
+    }
+
+    .notification {
+        cursor: pointer;
+    }
+
+
+    .notification-scroll-container {
+        min-height: 70px;
+        max-height: 50vh;
+        overflow: auto;
+    }
+}
+
+.notification-box {
+    color: @blueDarker3;
+    border-color: @blueDarker3;
+
+    .notification-btn {
+        background-color: @blueDarker3;
+
+        .notification-text {
+            color: white;
+        }
+    }
+
+    .notification-scroll-container {
+
+
+        .separator-bottom {
+            border-bottom: 4px solid @blueDarker3;
+        }
+    }
+
+    .notification {
+
+
+        &.unread {
+            background: mix(#FFF,@blueBasic,90);
+        }
+
+        &:hover {
+            background: mix(#FFF,@blueBasic,80);
+        }
+    }
+}
+
+.activity-notification-box {
+    border-color: @medGray1;
+    box-shadow: 0 0 10px @gray2;
+
+    .notification-btn {
+        background-color: @medGray1;
+
+        .notification-text {
+            color: @darkGray2;
+            font-weight: 800;
+            font-size: 14px;
+        }
+    }
+
+    .notification-scroll-container {
+        .separator-bottom {
+            border-bottom: 1px solid @darkGray2;
+        }
+    }
+
+
+    .notification {
+        color: initial;
+        width: 320px;
+
+        h1.strategy-name {
+            margin: 10px 0 0 0;
+            padding: 0;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 800;
+            color: black;
+        }
+
+        background: @gray1;
+
+        &.unread {
+            background: white;
+        }
+
+        &:hover {
+            background: mix(white,@sunFlower,90);
+        }
+    }
+}
+
+.notification-indicator {
+    top: -65px;
+    left: 50px;
+    background: @berry;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.circle-green {
+    display: block;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: #32CD32;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.circle-amber {
+    display: block;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: #ff6a00;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.circle-red {
+    display: block;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: #ff0000;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.stock-font {
+    color: @blueDarker1;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.no-overflow {
+    overflow: hidden;
+}
+
+.invert-rtl {
+    direction: rtl;
+}
+
+.left-scrollbar {
+    direction: rtl;
+    overflow-y: auto;
+
+    > * {
+        direction: ltr;
+    }
+}
+
+.v-center {
+    top: 50%;
+    transform: translate(0,-50%);
+    position: relative;
+}
+
+.rating {
+    .behind {
+        .rel;
+        color: @grayMed1;
+        display: inline-block;
+
+        .front {
+            .abs;
+            top: 0;
+            left: 0;
+            color: #FA0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
+}
+
+.country-flag {
+    img {
+        width: 45px;
+        height: 30px;
+        box-shadow: 0 0 3px @grayMed1;
+    }
+}
+
+.country-flag.mini {
+    img {
+        width: 20px;
+        height: 15px;
+        box-shadow: 0 0 3px @grayMed1;
+    }
+}
+
+.hide-spin {
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+}
+
+//help page
+.help-page {
+    position: fixed;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    opacity: 0.8;
+
+    .close-btn {
+        .abs;
+        color: white;
+        top: 30px;
+        right: 50px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .step-number {
+        position: absolute;
+        bottom: 120px;
+        color: white;
+        font-size: 30px;
+        margin-left: 50%;
+    }
+
+    .next-btn {
+        .abs;
+        width: 50%;
+        margin-left: 40%;
+        text-align: center;
+        color: white;
+        bottom: 80px;
+        font-size: 30px;
+    }
+
+    .previous-btn {
+        .abs;
+        width: 50%;
+        margin-left: 10%;
+        text-align: center;
+        color: white;
+        bottom: 80px;
+        font-size: 30px;
+    }
+}
+
+[agms-help-page-section] {
+
+    .highlight-box {
+        .abs;
+        z-index: 1001;
+        background-color: transparent;
+        border: 2px solid yellow;
+        color: yellow;
+        top: -10px;
+        left: -10px;
+        height: ~'calc(100% + 20px)';
+        width: ~'calc(100% + 20px)';
+
+        .help-text {
+            .abs;
+            top: ~'calc(100% + 10px)';
+            font-size: 16px;
+            width: 100vw;
+        }
+    }
+
+    .help-page-text {
+        letter-spacing: 0.05em;
+    }
+}
+
+.clickable-container {
+    pointer-events: none;
+
+    & > * {
+        pointer-events: all;
+    }
+}
+
+//loading directive
+.loading-page {
+    .abs;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 98;
+    opacity: 0.5;
+    text-align: center;
+    background-color: white;
+
+    > img {
+        top: 50%;
+        position: absolute;
+        left: 50%;
+        margin-left: -25px;
+        margin-top: -25px;
+        width: 25px;
+        height: 25px;
+    }
+}

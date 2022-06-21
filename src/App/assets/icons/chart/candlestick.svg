@@ -1,0 +1,18 @@
+<svg class="algo-icon"  viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+  <g>
+    <title>background</title>
+    <rect x="-1" y="-1" width="22.408163" height="22.408163" id="canvas_background" fill="none"/>
+    <g id="canvasGrid" display="none">
+      <rect id="svg_5" width="100%" height="100%" x="0" y="0" stroke-width="0" fill="url(#gridpattern)"/>
+    </g>
+  </g>
+  <g>
+    <title>Layer 1</title>
+    <line fill="none" stroke-width="3" x1="25.806452" y1="9.182794" x2="25.806452" y2="93.268816" id="svg_3" stroke-linejoin="null" stroke-linecap="null" class="bull-stroke"/>
+    <rect fill="#ffffff" stroke-width="2" x="9.892473" y="41.870969" width="31.827957" height="39.354838" id="svg_1" class="bull-stroke"/>
+    <line fill="none" stroke-width="3" x1="73.978495" y1="9.827957" x2="73.978495" y2="91.978496" id="svg_4" stroke-linejoin="null" stroke-linecap="null" class="bear-stroke"/>
+    <rect stroke-width="2.5" x="56.129032" y="18.860215" width="34.83871" height="20.215049" id="svg_2" class="bull-stroke bear-fill"/>
+  </g>
+</svg>

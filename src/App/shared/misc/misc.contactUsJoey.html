@@ -1,0 +1,56 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        Contact Us
+    </h4>
+</div>
+<div class="modal-body">
+    <form name="contactUsForm" class="contact-us" novalidate ng-submit="vm.submit(contactUsForm)">
+        <dl class="dl-horizontal">
+            <dt>First Name</dt>
+            <dd>
+                <input name="firstName" type="text" ng-model="vm.contact.FirstName" required />
+                <br />
+                <span style="color:red" ng-show="(contactUsForm.firstName.$dirty || contactUsForm.$submitted) && contactUsForm.firstName.$invalid">First name is required.</span>
+            </dd>
+            <dt>Last Name</dt>
+            <dd>
+                <input name="lastName" type="text" ng-model="vm.contact.LastName" />
+            </dd>
+            <dt>E-mail</dt>
+            <dd>
+                <input name="email" type="email" ng-model="vm.contact.Email" required />
+                <br />
+                <span style="color:red" ng-show="(contactUsForm.email.$dirty || contactUsForm.$submitted) && contactUsForm.email.$error.required">Email is required.</span>
+                <span style="color:red" ng-show="contactUsForm.email.$dirty && !contactUsForm.email.$error.required && contactUsForm.email.$invalid">Email is not in correct format.</span>
+            </dd>
+            <dt>Phone (optional)</dt>
+            <dd>
+                <input international-phone-number default-country="sg" preferred-countries="sg, us" skip-util-script-download
+                       type="text" ng-model="vm.phoneNumberDetails" name="phone"/>
+                <span style="color: red" ng-show="(!vm.isPhoneNumberEmpty() && contactUsForm.phone.$invalid)">Invalid Phone number.</span>
+            </dd>
+
+            <dt>Message</dt>
+            <dd>
+                <textarea name="message" required ng-model="vm.contact.Message" class="message" ></textarea>
+                <br />
+                <span style="color:red" ng-show="(contactUsForm.message.$dirty || contactUsForm.$submitted)  && contactUsForm.message.$invalid">Please enter some message</span>
+            </dd>
+        </dl>
+        <div class="alert alert-info">
+            Otherwise, send your enquiries to <strong class="special-text"><a href="mailto:support@trading-impossible.com">support@trading-impossible.com</a></strong>
+        </div>
+        <div class="m-top-10px m-bottom-10px separator-top"></div>
+        <img class="pull-left w-30px h-30px text-center" src="//am708403.azureedge.net/images/static/loading.gif?" ng-show="vm.contactingInProgress" alt="Busy" />
+        <button class=" filled-blue submit-button"
+                ng-disabled="vm.contactingInProgress || contactUsForm.firstName.$invalid || contactUsForm.lastName.$invalid || contactUsForm.email.$invalid
+                || contactUsForm.objective.$invalid || contactUsForm.message.$invalid || (!vm.isPhoneNumberEmpty() && contactUsForm.phone.$invalid)">
+            SUBMIT
+        </button>
+        <button type="button" class="cancel-button hollow-blue" ng-disabled="vm.contactingInProgress" ng-click="vm.uibClosePanel()">CANCEL</button>
+
+        <div class="clearfix"></div>        
+    </form>
+    <div class="clearfix"></div>
+</div>

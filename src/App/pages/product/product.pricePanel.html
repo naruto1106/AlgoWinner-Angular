@@ -1,0 +1,83 @@
+﻿<section class="price-panel rel">
+    <h1 class="title-section">PRICE</h1>
+    <div class="abs top-35px right-20px">
+        <button class="filled-blue pull-right m-left-10px" ng-click="vm.addToWatchlist()">ADD TO WATCHLIST</button>
+        <button class="hollow-blue pull-right m-left-10px" ng-if="false">ADD TO PRICE ALERT</button>
+        <div class="clearfix"></div>
+        <agms-watchlist-add-product product="vm.priceDetail.Product"
+                                     on-product-added="vm.onProductAddedToWatchlist(product)"
+                                     on-dismissed="vm.dismissAddToWatchlist()"
+                                     ng-if="vm.isAddingToWatchlist"></agms-watchlist-add-product>
+    </div>
+    <div class="row-md-17 gap-10px ">
+        <div class="col-md-4">
+            <div agms-image img-src="vm.priceDetail.Product.ProductIconURL" img-fallback-src="vm.getEncodedSectorUrl(vm.priceDetail.Product.Sector.SectorName)" class="logo pull-left"></div>
+            <div class="pull-right w-100pct calc-h-minus-80px">
+                <div class="white-box">
+                    <h3 class="no-margin">{{vm.priceDetail.Product.Symbol}}-{{vm.priceDetail.Product.TradeVenueLoc}}</h3>
+                    <h5>{{vm.priceDetail.Product.ProductName}}</h5>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-3">
+            <div class="white-box rel price-box transition-fast" ng-class="{'up':vm.priceDetail.MarketData.BidPriceChanges>0, 'down':vm.priceDetail.MarketData.BidPriceChanges<0}">
+                <h4 class="no-margin">Bid Price</h4>
+                <div ng-if="vm.isLoadingPrice()" class="text-center">
+                    <img class="w-30px h-30px m-10px" src="//am708403.azureedge.net/images/static/loading.gif?"/>
+                </div>
+                <div ng-if="!vm.isLoadingPrice()">
+                    <h3 ng-if="vm.priceDetail.MarketData.BidPrice" class="no-margin p-top-5px"> {{vm.priceDetail.MarketData.BidPrice  | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}</h3>
+                    <h3 ng-if="!vm.priceDetail.MarketData.BidPrice" class="no-margin p-top-5px">N/A</h3>
+                    <div class="volume-text">Vol: {{vm.priceDetail.MarketData.BidSize | largeAmountValue:2:true}}</div>
+                </div>
+                <button class="filled-red pull-right square-button abs right-10px top-20px w-50px" ng-click="vm.placeOrder('Sell',vm.priceDetail.Product)">SELL</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="white-box rel price-box transition-fast" ng-class="{'up':vm.priceDetail.MarketData.AskPriceChanges>0, 'down':vm.priceDetail.MarketData.AskPriceChanges<0}">
+                <h4 class="no-margin">Ask Price</h4>
+                <div ng-if="vm.isLoadingPrice()" class="text-center">
+                    <img class="w-30px h-30px m-10px" src="//am708403.azureedge.net/images/static/loading.gif?"/>
+                </div>
+                <div ng-if="!vm.isLoadingPrice()">
+                    <h3 ng-if="vm.priceDetail.MarketData.AskPrice" class="no-margin p-top-5px"> {{vm.priceDetail.MarketData.AskPrice  | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}</h3>
+                    <h3 ng-if="!vm.priceDetail.MarketData.AskPrice" class="no-margin p-top-5px">N/A</h3>
+                    <div class="volume-text">Vol: {{vm.priceDetail.MarketData.AskSize | largeAmountValue:2:true}}</div>
+                </div>
+                <button class="filled-green pull-right square-button abs right-10px top-20px w-50px" ng-click="vm.placeOrder('Buy',vm.priceDetail.Product)">BUY</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="white-box rel">
+                <h4 class="no-margin">Last Price</h4>
+                <div ng-if="vm.isLoadingPrice()" class="text-center">
+                    <img class="w-30px h-30px m-10px" src="//am708403.azureedge.net/images/static/loading.gif?"/>
+                </div>
+                <div ng-if="!vm.isLoadingPrice()">
+                    <h5 ng-if="vm.priceDetail.MarketData.LastTradedPrice" class="date-updated gray-text"><i>{{vm.priceDetail.MarketData.LastTradedTime | dateLongWithTimeZone: vm.getMarketTimeZone()}}</i></h5>
+                    <h3 ng-if="vm.priceDetail.MarketData.LastTradedPrice" class="no-margin p-top-5px">{{vm.priceDetail.MarketData.LastTradedPrice  | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}</h3>
+                    <h3 ng-if="!vm.priceDetail.MarketData.LastTradedPrice" class="no-margin p-top-5px">N/A</h3>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="white-box rel">
+                <h4 class="no-margin">Today's Range</h4>
+                <div ng-if="vm.isLoadingPrice()" class="text-center">
+                    <img class="w-30px h-30px m-10px" src="//am708403.azureedge.net/images/static/loading.gif?"/>
+                </div>
+                <div ng-if="!vm.isLoadingPrice()">
+                    <h3 ng-if="vm.priceDetail.MarketData.Low && vm.priceDetail.MarketData.High" class="no-margin p-top-5px">{{vm.priceDetail.MarketData.Low   | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}} - {{vm.priceDetail.MarketData.High   | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}</h3>
+                    <h3 ng-if="!vm.priceDetail.MarketData.Low || !vm.priceDetail.MarketData.High" class="no-margin p-top-5px">N/A</h3>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+</section>

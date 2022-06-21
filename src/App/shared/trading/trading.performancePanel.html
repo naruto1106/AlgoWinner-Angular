@@ -1,0 +1,30 @@
+﻿<table class="h-100pct no-border">
+    <tr ng-if="vm.content.Profitability" class="performance-value  m-top-10px">
+        <td ng-style="vm.goodOkBadColor(vm.content.Profitability.AnnualizedCumulativeReturnPct,0,0.1)" class="no-padding">
+            <h4>{{vm.content.Profitability.CumulativeReturnPct | valuePercentageOrDash:2}}</h4>
+        </td>
+        <td ng-style="vm.goodOkBadColor(vm.content.Profitability.PercentageWinningTrades,0.5,0.6)" class=" no-padding">
+            <h4>{{vm.content.Profitability.PercentageWinningTrades | valuePercentageOrDash:2}}</h4>
+        </td>
+        <td ng-style="vm.goodOkBadColor(vm.content.Profitability.SharpeRatio,0,1)" class=" no-padding">
+            <h4 ng-if="vm.content.Profitability.LatestMonthlyReturnPct != null">{{vm.content.Profitability.SharpeRatio | valueOrDash:2}}</h4>
+            <h4 ng-if="vm.content.Profitability.LatestMonthlyReturnPct == null"> - </h4>
+        </td>
+    </tr>
+    <tr ng-if="!vm.content.Profitability" class="performance-value">
+        <td >
+            <span>-</span>
+        </td>
+        <td >
+            <span>-</span>
+        </td>
+        <td >
+            <span>-</span>
+        </td>
+    </tr>
+    <tr class="performance-title">
+        <td>CUM. RETURN<br /><span ng-if="vm.content.CreatedDate!=null" class="special-text">{{vm.content.CreatedDate | timeSince:true}}</span></td>
+        <td>WINNING<br/>PERCENTAGE</td>
+        <td>SHARPE<br />RATIO</td>
+    </tr>
+</table>

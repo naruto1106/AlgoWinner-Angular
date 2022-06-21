@@ -1,0 +1,55 @@
+﻿<div class="agm-components-mobile">
+    <header class="mobile-header" ng-class="{'show-download': vm.pMobileWebService.showDownloadApp == true}">
+        <div class="heading">
+            <a class="menu-icon" ng-click="vm.showMobileMenu()">
+                <div class="algoicon algoicons-bars-1" ng-if="!vm.isMobileMenuOpen"></div>
+            </a>
+            <a class="close-icon" ng-click="vm.hideMobileMenu()" ng-if="vm.isMobileMenuOpen">
+                <div class="algoicon algoicons-cancel"></div>
+            </a>
+            <div class="menu-logo"></div>
+            <div>
+                {{vm.pMobileWebService.menuTitle}}
+            </div>
+        </div>
+
+        <div class="mobile-menu" ng-class="vm.isMobileMenuOpen ? ['menu-open']:['menu-close']" ng-if="vm.isMobileMenuOpen">
+            <div class="menu-item" ng-click="vm.selectMenu('My Portfolio')">
+                <a href="#/orderstrades">
+                    My Portfolio
+                    <div class="algoicon algoicons-chevron-right"></div>
+                </a>
+            </div>
+            <div class="menu-item" ng-click="vm.selectMenu('Follow')">
+                <a href="#/opportunities">
+                    Follow
+                    <div class="algoicon algoicons-chevron-right"></div>
+                </a>
+            </div>
+            <div class="menu-item" ng-click="vm.selectMenu('AlgoOracle')">
+                <a href="#/algooracle">
+                    AlgoOracle
+                    <div class="algoicon algoicons-chevron-right"></div>
+                </a>
+            </div>
+            <div class="menu-item" ng-click="vm.selectMenu('Watchlists')">
+                <a href="#/watchlist">
+                    Watchlists
+                    <div class="algoicon algoicons-chevron-right"></div>
+                </a>
+            </div>
+            <div class="menu-item" ng-click="vm.selectMenu('Alerts')">
+                <a href="#/pricealert">
+                    My Alerts
+                    <div class="algoicon algoicons-chevron-right"></div>
+                </a>
+            </div>
+            <div class="menu-item" ng-click="vm.selectMenu('Settings')">
+                <a href="#/payment">
+                    Settings
+                    <div class="algoicon algoicons-chevron-right"></div>
+                </a>
+            </div>
+        </div>
+    </header>
+</div>

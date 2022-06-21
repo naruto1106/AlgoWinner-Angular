@@ -1,0 +1,54 @@
+﻿<div class="rel">
+    <div class="abs activity-notification-box" ng-if="vm.isNotificationOpen">
+        <div class="notification-btn p-10px text-center m-top--5px">
+            <button class="filled-blue" ng-click="vm.setNotification()"
+                    analytics-on="click" analytics-category="Notifications" analytics-event="Manage" analytics-label="NotificationMenu" agmc-analytics-timestamp>
+                <span class="glyphicon glyphicon-cog notification-icon"></span>
+                <span>MANAGE NOTIFICATIONS</span>
+            </button>
+        </div>
+        <div ng-if="vm.notifications.length <= 0" class="box separator-bottom p-10px text-center">
+            You have no notifications at the moment
+        </div>
+        <div class="notification-scroll-container" id="infiniteScrollContainer" ng-show="vm.notifications.length > 0">
+            <div infinite-scroll="vm.getMoreNotifications()"
+                 infinite-scroll-disabled="vm.isLoading || vm.hasReachedEnd"
+                 infinite-scroll-parent="true"
+                 analytics-on="scroll" analytics-category="Notifications" analytics-event="Scroll" agmc-analytics-timestamp>
+                <div ng-repeat="notification in vm.notifications| orderBy:'-TimeStamp'" ng-if="!notification.isDeleted" class="notification separator-bottom p-5px"
+                     ng-class="{unread:notification.Unread}" ng-click="vm.clickNotification(notification)">
+                    <div agms-image img-src="vm.encodeImageUrl(notification.ImageUrl)" class="m-top-15px m-5px cover-center pull-left w-50px h-50px"
+                         img-fallback-src="vm.getEncodedSectorUrl(notification.Product.Sector.SectorName)"></div>
+                    <div class="pull-right w-250px" ng-if="!vm.hasOrder(notification)">
+                        <div class="f-16px"><b>{{notification.Title}}</b></div>
+                        <div class="f-14px">{{notification.Content}}</div>
+                        <h7 class="pull-right text-right gray-text m-right-5px">{{notification.TimeStamp | timeSince}}</h7>
+                    </div>
+                    <div class="pull-right w-250px" ng-if="vm.hasOrder(notification)" ng-init="order=notification.DeveloperOrder">
+                        <h1 class="strategy-name">{{order.DisplayModel.BasicInfo.Name}}</h1>
+                        <p class="m-bottom-0px">
+                            <b class="f-16px" ng-class="{'green-profit':order.Action=='Buy', 'red-loss': order.Action=='Sell'}">{{order.Action}}</b>
+                            <span class="special-text f-14px">{{order.Product.ProductName}} ({{order.Product.Symbol}})</span>
+                            <b class="f-14px">
+                                at {{order.Product.Currency | currencySymbol}} {{vm.getPrice(order)}}
+                            </b>
+                            <br />
+                            <span class="f-14px">
+                                To <b>{{order.Intention | getOrderIntentionString: order.Action}}</b> position
+                            </span>
+                            <br />
+                            <div class="pull-left strong f-14px"><span class=" special-text">{{order.Quantity}}</span>  units</div>
+                            <div class="text-uppercase f-14px pull-right"><b>{{order.LastOrderUpdate.OrderStatus}}</b></div>
+                            <div class="clearfix"></div>
+                        </p>
+                        <h7 class="pull-right text-right gray-text m-right-5px">{{notification.TimeStamp | timeSince}}</h7>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="p-10px text-center" ng-if="vm.isLoading && !vm.hasReachedEnd">
+                    <img class="w-10px h-10px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

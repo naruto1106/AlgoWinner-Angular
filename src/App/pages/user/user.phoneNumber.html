@@ -1,0 +1,23 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">
+        Welcome to AlgoMerchant
+    </h4>
+</div>
+
+<div class="modal-body">
+    <h5>
+        Adding your phone number to your account will help keep your account secure.
+    </h5>
+    <form name="resetPasswordForm">
+        <input international-phone-number default-country="sg" preferred-countries="sg, us" skip-util-script-download
+               ng-model="vm.myProfile.PhoneNumberDetails"
+               type="text" name="phone" reqiured /><br />
+        <span style="color: red" ng-if="vm.myProfile.PhoneNumberDetails === ''">Phone number is required.</span>
+        <span style="color: red" ng-if="(resetPasswordForm.phone.$dirty || resetPasswordForm.$submitted) && resetPasswordForm.phone.$error['international-phone-number']">Phone is not in correct format.</span>
+        <div class="p-top-10px separator-top m-top-20px">
+            <button class="filled-blue pull-right m-left-10px" ng-disabled="vm.isSubmitDisabled() || !resetPasswordForm.$valid" ng-click="vm.saveChanges()">SAVE CHANGES</button>
+            <button class="hollow-blue pull-right" ng-click="vm.logout()">CANCEL & LOG OUT</button>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+</div>

@@ -1,0 +1,274 @@
+.modal.agm-component-tradersgps-popup > .modal-dialog {
+    width: 1200px;
+
+    > .modal-content > .modal-body {
+        padding: 0;
+
+        > * {
+            width: 100%;
+            height: 100%;
+
+            > .agm-component-tradersgps {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .top-filter {
+                    flex: 0 1 auto;
+                }
+
+                .tgps-position, .tgps-swing {
+                    flex: 1 auto;
+                }
+            }
+        }
+    }
+}
+
+.agm-component-tradersgps.fundamental-filter {
+    .fundamental-item {
+        &[disabled], &.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        padding: 10px;
+
+        .flag-image {
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+}
+
+.agm-component-tradersgps {
+    position: relative;
+
+    .delay-notes {
+        padding: 5px 10px;
+        font-style: italic;
+        font-size: 12px;
+        background: mix(white,@caramel,50);
+    }
+
+    .notification-btn {
+        position: absolute;
+        right: 24px;
+        font-style: italic;
+        text-decoration: underline;
+    }
+
+    .tradersgps-image {
+        margin-left: 40px;
+        height: 160px;
+        width: 160px;
+        background-size: cover;
+    }
+
+    .filter-strength {
+        width: 200px;
+        margin-left: 10px;
+        margin-right: 40px !important;
+
+        .filter-text {
+            display: flex;
+            justify-content: space-between;
+            width: 110%;
+            margin-left: -5%;
+            margin-bottom: -8px;
+            margin-top: 5px;
+
+            .text {
+                font-size: 12px;
+            }
+        }
+    }
+
+    .agms-directive.product-list table {
+
+        > tbody tr > td.screener-column, > thead > tr > th.screener-column {
+            width: 115px;
+            margin: 5px;
+        }
+
+        > tbody tr > td.mid-column {
+            .green-profit {
+                color: darkgreen;
+                font-weight: 800;
+            }
+
+            .red-loss {
+                color: #da0606;
+                font-weight: 800;
+            }
+        }
+
+        > tbody tr > td.direction, > thead > tr > th.direction {
+            .green-profit {
+                padding: 3px;
+                background-color: black;
+                color: #35f335;
+                font-weight: 800;
+            }
+
+            .red-loss {
+                padding: 3px;
+                background-color: black;
+                color: #ff7979;
+                font-weight: 800;
+            }
+        }
+
+        .remark {
+            padding: 5px 0;
+            width: 360px;
+            line-height: 18px;
+        }
+
+        .direction {
+            padding: 0 5px;
+            width: 72px;
+        }
+
+        .target-price {
+            width: 100px;
+        }
+    }
+
+    .agms-directive.product-list table {
+
+        > tbody tr > td.product-info, > thead > tr > th.product-info {
+            width: 200px;
+        }
+    }
+
+    .agms-directive.product-list table {
+
+        > tbody tr > td.last-traded-price, > thead > tr > th.last-traded-price {
+            width: initial;
+            padding-right: initial;
+            margin-right: initial;
+            text-align: center;
+        }
+    }
+
+    .agms-directive.product-list table > tbody > tr > td .not-available {
+        line-height: 15.4px;
+    }
+
+    .top-filter {
+        background: @grayLight4;
+
+        > .top-filter-search {
+            padding: 5px 10px 5px 10px;
+
+            .top-search-panel {
+                z-index: 2;
+            }
+
+            .available-date {
+                .rel;
+                text-align: center;
+                top: 10px;
+                z-index: 1;
+            }
+
+            .available-date-paladin {
+                .rel;
+                text-align: right;                
+                z-index: 1;
+            }
+
+            .products-found {
+                position: relative;
+                top: 10px;
+                float: right;
+            }
+        }
+
+        > .top-filter-content {
+            padding: 10px 10px 5px 10px;
+
+            .show-fundamental-filter {
+                .rel;
+                text-align: center;
+
+                .filter-number {
+                    .abs;
+                    background-color: @seafoam;
+                    color: white;
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 10px;
+                    padding: 2px 5px 5px 4px;
+                    top: -5px;
+                    right: -5px;
+                    font-size: 12px;
+                }
+            }
+
+            > .menu {
+                float: left;
+                margin-right: 30px;
+
+                > label {
+                    display: block;
+                    line-height: 20px;
+                    font-weight: 800;
+                    font-size: 12px;
+                    float: none;
+                    margin: 0;
+                    display: block;
+                }
+
+                > select, > div > select {
+                    min-width: 0;
+                    height: 30px;
+                }
+
+                .date-picker-range {
+                    width: 400px;
+                }
+
+                .agms-directives.date-picker {
+                    > .from-date {
+                        margin-right: 10px;
+                    }
+
+                    > .from-date, .to-date {
+                        float: left;
+
+                        .date-picker {
+                            width: 120px;
+                            float: left;
+                        }
+
+                        > .title {
+                            line-height: 30px;
+                            float: left;
+                            margin-right: 10px;
+                        }
+                        /*WILL BE RESTRUCTURED*/
+                        > .date-picker.input-group {
+                        }
+                    }
+                }
+            }
+
+            > .agms-directives.date-picker {
+                > .from-date, > .to-date {
+                    > .title {
+                        display: block;
+                        line-height: 20px;
+                        font-weight: 800;
+                        font-size: 12px;
+                        float: none;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+﻿<section class="overview">
+    <div class="main-container row-md-3" ng-if="!vm.sHeaderService.hasJoeyOnly">
+        <agmp-am-auto-panel width='1200'></agmp-am-auto-panel>
+    </div>
+
+    <div class="main-container row-md-3">
+        <div class="left-panel col-md-2 col-sm-3">
+            <div class="markets">
+                <agmp-dashboard-generic-panel heading="Stock Summary">
+                    <agmp-dashboard-simple-screener></agmp-dashboard-simple-screener>
+                </agmp-dashboard-generic-panel>
+            </div>
+
+            <agmp-dashboard-sector-performance></agmp-dashboard-sector-performance>
+
+            <div class="watchlist" agms-droid-helper-item="dashboardOverview.watchlistPanel">
+                <agmp-dashboard-generic-panel heading="Watchlist" get-panel-class="'watchlist-panel'">
+                    <agmp-dashboard-simple-watchlist></agmp-dashboard-simple-watchlist>
+                </agmp-dashboard-generic-panel>
+            </div>
+        </div>
+        <div class="right-panel col-md-1 col-sm-3">
+            <!--<div class="indices">
+                <agmp-dashboard-index-panel></agmp-dashboard-index-panel>
+            </div>-->
+
+            <div class="breaking-news" agms-droid-helper-item="dashboardOverview.newsTipsPanel">
+                <agmp-dashboard-generic-panel heading="Breaking News">
+                    <agmp-dashboard-simple-news-tips></agmp-dashboard-simple-news-tips>
+                </agmp-dashboard-generic-panel>
+            </div>
+
+            <div class="price-alert" agms-droid-helper-item="dashboardOverview.priceAlertPanel">
+                <agmp-dashboard-generic-panel heading="Price Alert">
+                    <agmp-dashboard-simple-alert show-active-only="true"></agmp-dashboard-simple-alert>
+                </agmp-dashboard-generic-panel>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+</section>

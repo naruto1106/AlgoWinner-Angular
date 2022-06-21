@@ -1,0 +1,77 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">{{::vm.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="agm-component-orderstrades">
+        <div class="order-element">
+            <div class="row-md-25 gap-0px">
+                <div class="col-md-1 order-type-container" ng-class="vm.order.Action == 'Buy' ? ['buy']:['sell']">
+                    <div class="order-type">
+                        {{::vm.order.Action}}
+                    </div>
+                </div>
+                <div class="col-md-24 border">
+                    <div class="order-header box">
+                        <div class="pull-left order-replicate">
+                            <a ng-if="vm.coreConfigService.Trading.EnableComment"
+                                ng-click="placeComment(vm.order.OrderId)" class="p-right-20px">
+                                <span class="glyphicon glyphicon-comment p-right-5px"></span>Comment
+                            </a>
+                            <span class="gray-text">ORDER DATE: </span>
+                            <span>{{::vm.order.CreatedTime | date:'mediumDate'}}</span>
+                            <span>{{::vm.order.CreatedTime | date:'shortTime'}}</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="order-body hide-overflow">
+                        <div class="pull-left w-190px m-top-10px text-uppercase">
+                            <agms-product-picture product="::vm.order.Product"></agms-product-picture>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="pull-left w-120px text-uppercase" style="margin-top: 12px">
+                            <span class="special-text">{{vm.order.Intention}}</span><br />
+                            <span><strong>&#39;{{::vm.order.Position}}&#39;</strong> position</span>
+                        </div>
+
+                        <div class="pull-left w-80px text-uppercase" style="margin-top: 12px">
+                            <span class="special-text"><strong>{{::vm.order.OrderType}}</strong></span><br />
+                            <span>ORDER</span>
+                        </div>
+                        <div class="pull-left w-110px m-right-10px  h-70px text-uppercase">
+                            <h4 class="no-margin v-center">{{vm.order.OrderPrice | customCurrencyOrDashMinMax:vm.order.Product.Currency:2:4}}</h4>
+                        </div>
+                        <div class="pull-left w-110px  h-70px text-uppercase">
+                            <h4 class="no-margin v-center">{{::vm.order.Quantity | valueOrDash:0}} <span class="smaller">UNITS</span></h4>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="order-footer box">
+                        <div class="pull-left w-250px p-left-10px  h-30px">
+                            <h5 class="lh-30px no-margin">{{vm.order.LatestStatus}}</h5>
+                        </div>
+                        <div class="pull-left w-150px p-left-10px h-30px">
+                            <h5 class="lh-30px no-margin"><span class="gray-text">VALIDITY : </span>{{::vm.order.Validity}}</h5>
+                        </div>
+                        <div class="order-date pull-right">
+                            {{vm.order.UpdateTime | timeSince}}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <agms-orders-bracket-base order="vm.order" error-message="vm.errorMessage" type="'order'"></agms-orders-bracket-base>
+</div>
+
+<div class="modal-footer agm-component-orderstrades">
+    <div class="edit-bracket">
+        <button class="filled-blue pull-right" ng-click="vm.submit()" ng-disabled="vm.disableSubmit()">SUBMIT</button>
+        <button class="hollow-blue pull-right remove-button" ng-click="vm.uibDismissPanel()">CANCEL</button>
+    </div>
+</div>

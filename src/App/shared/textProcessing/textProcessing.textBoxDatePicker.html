@@ -1,0 +1,26 @@
+﻿<div class="agms-directives text-box-date-picker">
+    <input type="text" ng-model="vm.textbox" content-caret ng-keydown="vm.evaluateMovement($event)" ng-show="vm.editMode>=0" />
+    <div class="h-100pct">
+        <div ng-mousedown="vm.setHour()" ng-show="vm.hasTime" class="value-box" ng-class="{'highlight-box':vm.editMode==0}">
+            {{vm.zeroed(vm.dateDescriptor.hour)}}
+        </div>
+        <div class="datepicker-colon pull-left" ng-show="vm.hasTime">:</div>
+        <div ng-mousedown="vm.setMinute()" ng-show="vm.hasTime" class="value-box" ng-class="{'highlight-box':vm.editMode==1}">
+            {{vm.zeroed(vm.dateDescriptor.minute)}}
+        </div>
+        <div class="pull-left gap" ng-show="vm.hasTime"></div>
+        <div ng-mousedown="vm.setDay()" class="value-box" ng-class="{'highlight-box':vm.editMode==2}">
+            {{vm.zeroed(vm.dateDescriptor.day)}}
+        </div>
+        <div ng-mousedown="vm.setMonth()" class="value-box" ng-class="{'highlight-box':vm.editMode==3}">
+            {{vm.viewMonth(vm.dateDescriptor.month)}}
+        </div>
+        <div class="value-box" ng-mousedown="vm.setYear()" ng-class="{'highlight-box':vm.editMode==4}">
+            {{vm.dateDescriptor.year}}
+        </div>
+        <div ng-show="vm.hasTime" class="value-box">
+            {{vm.dateDescriptor.timezone}}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

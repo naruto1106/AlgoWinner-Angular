@@ -1,0 +1,72 @@
+﻿<div>
+    <agms-header-payment current-page="transaction"></agms-header-payment>
+
+    <div class="box-form p-15px agm-component-payment container">
+        <h4>Transaction History</h4>
+        <agmc-date-picker from-date="vm.transactionFilter.fromDate"
+                          to-date="vm.transactionFilter.toDate"
+                          date-selection-changes="vm.loadTransactionHistoryByFilter(vm.transactionFilter)"
+                          allow-manual-entry="false"
+                          analytics-on="click" analytics-category="Setting" analytics-event="TransactionHistory" analytics-label="SelectDateRange" agmc-analytics-timestamp></agmc-date-picker>
+        <div class="pull-right transaction-filter">
+            View By Month
+            <select class="w-100px lh-25px" ng-model="vm.selectedTransactionMonth" ng-options="month as month.name for month in vm.transactionMonths" ng-change="vm.loadTransactionHistoryByFilter(vm.selectedTransactionMonth)"
+                    analytics-on="click" analytics-category="Setting" analytics-event="TransactionHistory" analytics-label="ChangeMonth" agmc-analytics-timestamp>
+                <option value="">-All Months-</option>
+            </select>
+        </div>
+        <div class="clearfix"></div>
+        <div ng-if="vm.isLoadingTransactionHistory" class="text-center">
+            <img class="w-25px h-25px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div ng-if="!vm.isLoadingTransactionHistory">
+            <div class="alert alert-info" ng-if="vm.myCharges == null || vm.myCharges.length <= 0">No Transaction History</div>
+            <ul uib-pagination boundary-links="true" total-items="vm.myCharges.length" ng-model="vm.models.currentPage"
+                class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+                first-text="&laquo;" last-text="&raquo;" max-size="10"
+                num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+            <table ng-if="vm.myCharges.length > 0">
+                <thead>
+                    <tr>
+                        <td>Date</td>
+                        <td>Item</td>
+                        <td colspan="2">Amount</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="charge in vm.getPagedCharges()" class="card-row box">
+                        <td>{{charge.CreatedTime | date:'mediumDate'}}</td>
+                        <td>
+                            <div ng-if="charge.Invoice.Subscription != null">
+                                <strong>Subscription to {{charge.Invoice.Plan.PlanName}}</strong><br />
+                                ({{charge.Invoice.Subscription.PeriodStart | date:'mediumDate'}} to {{charge.Invoice.Subscription.PeriodEnd | date:'mediumDate'}})
+                                <span ng-if="charge.IsTrial"> (Trial)</span>
+                            </div>
+                            <div>{{charge.Description}}</div>
+                            <div ng-if="charge.AmountRefunded > 0" class="box-form p-5px">
+                                <div>
+                                    Subscription to {{charge.Invoice.Plan.PlanName}}: {{charge.Currency | currencySymbol}} {{charge.Amount | valueTransactionOrDash:2}}
+                                </div>
+                                <div>
+                                    Refunded {{charge.Invoice.Plan.PlanName}}: - {{charge.Currency | currencySymbol}} {{charge.AmountRefunded | valueTransactionOrDash:2}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="w-20px">
+                            {{charge.Currency | currencySymbol}}
+                        </td>
+                        <td>{{charge.Amount - charge.AmountRefunded | valueTransactionOrDash:2}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul uib-pagination boundary-links="true" total-items="vm.myCharges.length" ng-model="vm.models.currentPage"
+                class="pagination-sm m-top-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+                first-text="&laquo;" last-text="&raquo;" max-size="10"
+                num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+            <div class="m-5px pull-right f-16px" ng-if="vm.myCharges.length > 0">
+                <strong>Total Amount: <span ng-repeat="(currency, amount) in vm.transactionTotalAmount"><span ng-if="!$first">/</span> {{currency | currencySymbol}} {{amount | valueTransactionOrDash:2}} </span></strong>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

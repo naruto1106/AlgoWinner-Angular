@@ -1,0 +1,131 @@
+@import 'base-theme.less';
+
+
+
+.btn-primary {
+    .filled-blue;
+}
+
+.btn-secondary {
+    color: @text-c1;
+    border-bottom: 2px solid lighten(@theme-c2, 20%);
+    border-top: 2px solid @theme-c2;
+    background: @theme-c2;
+
+    &:hover {
+        border-bottom: 2px solid @theme-c2;
+        text-shadow: 1px 1px 0px darken(@theme-c2,20%);
+        color: @text-c1;
+        border-top: 2px solid @theme-c2;
+        background: @theme-c2;
+    }
+
+    &:active, &:focus {
+        border-bottom: 2px solid darken(spin(@theme-c2, 7%),5%);
+        border-top: 2px solid lighten(@theme-c2, 20%);
+        background: darken(spin(@theme-c2, 7%),5%);
+    }
+}
+
+.btn-success {
+    color: @white;
+    background: @seafoam;
+
+    &:hover {
+        background: @seafoam;
+    }
+
+    &:active, &:focus {
+        background: @seafoam;
+    }
+}
+
+.btn-warning {
+    color: darken(@theme-yellow, 30%);
+    border-bottom: 2px solid darken(@theme-yellow, 20%);
+    border-top: 2px solid @theme-yellow;
+    background: @theme-yellow;
+
+    &:hover {
+        border-bottom: 2px solid @theme-yellow;
+        text-shadow: 1px 1px 0px darken(@theme-yellow,20%);
+        color: darken(@theme-yellow, 30%);
+        border-top: 2px solid @theme-yellow;
+        background: @theme-yellow;
+    }
+
+    &:active, &:focus {
+        border-bottom: 2px solid darken(@theme-yellow,10%);
+        border-top: 2px solid lighten(@theme-yellow, 20%);
+        background: darken(@theme-yellow,10%);
+    }
+}
+
+.btn-danger {
+    color: @text-c1;
+    border-bottom: 2px solid darken(@theme-red, 20%);
+    border-top: 2px solid @theme-red;
+    background: @theme-red;
+
+    &:hover {
+        border-bottom: 2px solid @theme-red;
+        text-shadow: 1px 1px 0px darken(@theme-red,20%);
+        border-top: 2px solid @theme-red;
+        background: @theme-red;
+    }
+
+    &:active, &:focus {
+        border-bottom: 2px solid darken(@theme-red,10%);
+        border-top: 2px solid lighten(@theme-red, 20%);
+        background: darken(@theme-red,10%);
+    }
+}
+
+.btn-info {
+    color: @text-c1;
+    border: 0px;
+    border-bottom: 2px solid darken(@theme-c3, 20%);
+    border-top: 2px solid @theme-c3;
+    background: @theme-c3;
+
+    &:hover {
+        border-bottom: 2px solid @theme-c3;
+        text-shadow: 1px 1px 0px darken(@theme-c3,20%);
+        border-top: 2px solid @theme-c3;
+        background: @theme-c3;
+    }
+
+    &:active, &:focus {
+        border-bottom: 2px solid darken(spin(@theme-c3, 7%),5%);
+        border-top: 2px solid lighten(@theme-c3, 20%);
+        background: darken(spin(@theme-c3, 7%),5%);
+    }
+}
+
+
+
+
+.btn-outline-primary {
+    .hollow-blue;
+}
+
+.btn-group > .btn {
+    background: transparent;
+}
+
+
+
+.btn-outline-danger {
+
+    &, &:active, &:focus {
+        color: @theme-red;
+        border-color: @theme-red;
+        background: fade(@theme-red, 10%);
+    }
+
+    &:hover {
+        color: @text-c1;
+        background-color: @theme-red;
+        border-color: @theme-red;
+    }
+}

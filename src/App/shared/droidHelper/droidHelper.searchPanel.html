@@ -1,0 +1,81 @@
+﻿<div class="agm-components-droid-helper search-panel">
+    <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" ng-click="vm.hideDriodHelper()">&times;</button>
+        <h4 class="modal-title">Hello, {{vm.user.UserName}}</h4>
+    </div>
+    <div class="modal-body">
+        <p>Thank you for using AlgoMerchant. I'm AlgoBot and I'll be here to guide you as you navigate the features of our platform.  Please choose from one of the options below:</p>
+
+        <div class="option-box outside">
+            <input class="search-item" ng-model="vm.searchHelpKeyword" ng-change="vm.search()" placeholder="Search for help..." />
+            <p class="red-loss" ng-if="vm.noResultFound()">No result found</p>
+            <p class="green-profit" ng-if="vm.needMoreSpecificKeyword()">Need more specific keyword</p>
+        </div>
+        <div class="row-md-2 gap-10px as-table" ng-if="vm.hasTour()">
+            <div class="col-md-1">
+                <div class="option-box">
+                    <button class="filled-blue main-button" ng-click="vm.goToGuidePage()">
+                        STEP-BY-STEP<br />GUIDE
+                    </button>
+                    <p>
+                        Learn our features via topical guides!
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="option-box">
+                    <button class="filled-green main-button" ng-click="vm.startPageTour()">
+                        30 SECONDS<br />TOUR
+                    </button>
+                    <p>
+                        Tour the current page in 30 seconds!
+                    </p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="option-box outside" ng-if="!vm.hasTour()">
+            <button class="filled-blue thin-button" ng-click="vm.goToGuidePage()">
+                STEP-BY-STEP GUIDE
+            </button>
+            <p>
+                Learn our features via topical guides!
+            </p>
+        </div>
+        <div class="text-separator">OR</div>
+        <div class="option-box outside">
+            <button class="filled-green thin-button" ng-click="vm.contactUs()">
+                <span class="glyphicon glyphicon-phone"></span> CONTACT US
+            </button>
+            <p>
+                Drop us a message!
+            </p>
+        </div>
+
+        <div class="search-result-wrapper" ng-if="vm.hasResult()">
+            <a class="glyphicon glyphicon-remove remove-click" ng-click="vm.clearSelection()"></a>
+            <div class="clearfix"></div>
+            <div class="search-result">
+                <section>
+                    <h4>Guide containing '{{vm.searchHelpKeyword}}'</h4>
+                    <div ng-repeat="guide in vm.guideList" class="guide" ng-click="vm.goToGuide(guide)">
+                        <h3 ng-bind-html="guide.flowTitle | uibTypeaheadHighlight:vm.searchHelpKeyword"></h3>
+                        <p ng-bind-html="guide.flowStep | uibTypeaheadHighlight:vm.searchHelpKeyword"></p>
+                    </div>
+                </section>
+                <section>
+                    <h4>FAQ containing '{{vm.searchHelpKeyword}}'</h4>
+                    <div ng-repeat="faq in vm.faqList" class="faq" ng-click="vm.goToFaq(faq)">
+                        <h3 ng-bind-html="faq.question | uibTypeaheadHighlight:vm.searchHelpKeyword"></h3>
+                        <p ng-bind-html="faq.answer | uibTypeaheadHighlight:vm.searchHelpKeyword"></p>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="pull-right filled-green" ng-click="vm.hideDriodHelper()">OK</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿<div class="agm-component-positions">
+    <!--DIRECTIVE positions.sectorSummary.html + agm*SectorSummary.js -->
+    <div class="p-50px text-center" ng-show="vm.isLoadingSectors">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div class="sector-summary" ng-if="!vm.isLoadingSectors && vm.checkVisibility()">
+        <div ng-if="(vm.sectorCapitals && vm.sectorCapitals.length>0)">
+            <agmc-rainbow-donut ng-if="vm.showTurnover"
+                                      class=" m-bottom-20px m-top-20px"
+                                      width="100"
+                                      colors="vm.colors"
+                                      height="100" data="vm.turnoverDonutValues" thickness="30"></agmc-rainbow-donut>
+            <agmc-rainbow-donut ng-if="!vm.showTurnover"
+                                      class=" m-bottom-20px m-top-20px"
+                                      width="100"
+                                      colors="vm.colors"
+                                      height="100" data="vm.exposureDonutValues" thickness="30"></agmc-rainbow-donut>
+        </div>
+        <table ng-show="(vm.sectorCapitals && vm.sectorCapitals.length>0)" class="table-large distinct">
+            <thead>
+                <tr>
+                    <td class="text-left">Sector</td>
+                    <td ng-if="vm.showTurnover" class="text-right">Turnover</td>
+                    <td ng-if="!vm.showTurnover" class="text-right">Allocated Exposure</td>
+                </tr>
+            </thead>
+            <tr ng-repeat="sector in vm.sectorCapitals" ng-if="vm.showRow(sector)">
+                <td class="sector-col">
+                    <div class="as-table">
+                        <div class="as-table-cell w-15px">
+                            <agmc-bullet color="vm.colors[$index]" diameter="10"></agmc-bullet>
+                        </div>
+                        <div class="as-table-cell">
+                            {{::sector.SectorName}}
+                        </div>
+                    </div>
+                </td>
+                <td ng-if="vm.showTurnover && !vm.isPreview" class="text-right">{{sector.Turnover | customCurrencyOrDash:vm.currency:2}}</td>
+                <td ng-if="vm.showTurnover && vm.isPreview" class="text-right">{{sector.TurnoverPercentage | valuePercentageOrDashDynamicDecimals:4}}</td>
+                <td ng-if="!vm.showTurnover && !vm.isPreview" class="text-right">{{sector.Exposure | customCurrencyOrDash:vm.currency:2}}</td>
+                <td ng-if="!vm.showTurnover && vm.isPreview" class="text-right">{{sector.ExposurePercentage | valuePercentageOrDashDynamicDecimals:4}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

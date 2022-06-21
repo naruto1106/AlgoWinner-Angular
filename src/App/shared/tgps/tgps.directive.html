@@ -1,0 +1,330 @@
+﻿<div class="agm-component-tradersgps">
+    <script type="text/ng-template" id="bigscreener/tgps">
+        <div>
+            <button ng-if="externalVm.canAddToWatchlist(productContainer.ProductModel)" class="cell-botton-normal" uib-tooltip="Add Price Alert" tooltip-placement="left" ng-click="externalVm.addToPriceAlert(productContainer)">
+                <span class="glyphicon glyphicon-bell"></span>
+            </button>
+            <button ng-if="externalVm.canAddToWatchlist(productContainer.ProductModel)" class="cell-botton-normal" uib-tooltip="Add To Watchlist" tooltip-placement="left" ng-click="externalVm.addToWatchlist(productContainer)">
+                <span class="glyphicon glyphicon-eye-open"></span>
+            </button>
+            <button class="cell-botton-normal" uib-tooltip="Chart" tooltip-placement="left" ng-click="externalVm.gotoChart(productContainer)">
+                <span class="glyphicon glyphicon-stats"></span>
+            </button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.TriggerTime">
+        <h5>{{productContainer.TriggerTime | timeShort}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Day">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Day|number:2}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Week">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Week|number:2}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Month">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Month|number:2}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Quarter">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Quarter|number:2}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Close">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Close|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Last">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Last|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Close_NoCurr">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Close|number:2}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Date">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Timestamp| dateShort}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Volume">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Volume|largeAmountValue:2:true}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.TriggerPrice">
+        <h5 ng-if="productContainer.Direction == 0">-</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="productContainer.Direction != 0">{{productContainer.TriggerPrice|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.StopPrice">
+        <h5 ng-if="!productContainer.StopPrice">-</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="productContainer.StopPrice">{{productContainer.StopPrice|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.TriggerValue">
+        <h5 ng-if="productContainer.Direction == 0">-</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="productContainer.Direction != 0">{{productContainer.TriggerPrice|number:2}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Direction">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{externalVm.showDirection(productContainer)}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.NumTriggers">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.NumTriggers}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.TIF">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{externalVm.showTIF(productContainer)}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.COM">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{externalVm.indicatorDirection(productContainer)}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.LastSignal">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Kind}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.LastSignalDate">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.LastSignalDate | dateShort}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.NumSignals">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.NumSignals}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.ComCrossover">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{externalVm.getComCrossover(productContainer)}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Odd">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Odds| valuePercentageOrDash:0}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.SIF">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">
+            <span ng-if="productContainer.SIF === -2">Strong Bearish</span>
+            <span ng-if="productContainer.SIF === -1">Moderate Bearish</span>
+            <span ng-if="productContainer.SIF === 0">Neutral</span>
+            <span ng-if="productContainer.SIF === 1">Moderate Bullish</span>
+            <span ng-if="productContainer.SIF === 2">Strong Bullish</span>
+        </h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.PositionDirection">
+        <span>{{productContainer.PositionType}}</span>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.ToExit">
+        <span ng-if="productContainer.ToExit "><b>YES</b></span>
+        <h5 ng-if="!productContainer.ToExit ">NO</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.Remark">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="productContainer.StopPrice">
+            <span>Exit on <b>{{productContainer.NextTradingDate | date:'mediumDate'}}</b> if price breaks</span>
+            <span>{{productContainer.PositionType === 'Long' ? 'above' : 'below'}}</span>
+            <span><b>{{productContainer.StopPrice|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}</b></span>
+        </h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="!productContainer.StopPrice && productContainer.ToExit">
+            <span>Exit on <b>{{productContainer.NextTradingDate | date:'mediumDate'}}</b> market open</span>
+        </h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="!productContainer.ToExit">
+            <span>-</span>
+        </h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.HoldingDuration">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)"> {{productContainer.EntryTime | timeSince:true}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.EntryCriteria">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)"> {{productContainer.EntryCriteria}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.lastTradedPrice">
+        <h5 ng-if="vm.getMarketData(productContainer).LastTradedPrice">
+            {{vm.getMarketData(productContainer).LastTradedPrice | correctTickSizeDecimalPlacesWithCurrency:vm.getProduct(productContainer).Currency:vm.getProduct(productContainer).TradeVenueLoc}}
+            <span ng-if="externalVm.isNotRealTimeIndices(productContainer)">
+                *
+            </span>
+        </h5>
+        <h5 ng-if="!vm.getMarketData(productContainer).LastTradedPrice" ng-class="externalVm.getIndicatorColor(productContainer)">-</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.lastTradedPrice_NoCurr">
+        <h5 ng-if="vm.getMarketData(productContainer).LastTradedPrice" ng-class="externalVm.getIndicatorColor(productContainer)">
+            {{vm.getMarketData(productContainer).LastTradedPrice|number:2}}
+            <span ng-if="externalVm.isNotRealTimeIndices(productContainer)">
+                *
+            </span>
+        </h5>
+        <h5 ng-if="!vm.getMarketData(productContainer).LastTradedPrice" ng-class="externalVm.getIndicatorColor(productContainer)">-</h5>
+    </script>
+
+    <div class="top-filter">
+        <div class="top-filter-content">
+            <div class="menu">
+                <label>Mode</label>
+                <select ng-model="vm.mode" ng-options="d as d for d in vm.modeOptions"></select>
+            </div>
+
+            <div class="menu" ng-if="vm.mode === 'Plus'">
+                <label>Market</label>
+                <h5 style="margin-bottom: 0; margin-top: 7px">Singapore </h5>
+            </div>
+            <div class="menu" ng-if="vm.mode === 'Plus'">
+                <label>Intention</label>
+                <div class="button-group event-combination-mode">
+                    <button class="child-button blue transition-fast"
+                            ng-model="vm.paladinMode" uib-btn-radio="'Entry'">
+                        Entry
+                    </button>
+                    <button class="child-button blue transition-fast"
+                            ng-model="vm.paladinMode" uib-btn-radio="'Exit'">
+                        Exit
+                    </button>
+                </div>
+            </div>
+            <!--
+    <div class="menu" ng-if="vm.mode === 'Plus'">
+        <label>Horizon</label>
+        <select ng-model="vm.paladinHorizon" ng-options="o.id as o.label for o in vm.horizonOptions"></select>
+    </div>
+    <div class="menu filter-strength" ng-if="vm.mode === 'Plus'">
+        <label>Filter Strength</label>
+        <div class="filter-text">
+            <span class="text">Basic</span>
+            <span class="text">Moderate</span>
+            <span class="text">Strong</span>
+        </div>
+        <div ui-slider min="0" max="2" step="1" ng-model="vm.filterStrength"></div>
+    </div>
+    -->
+            <div class="menu" ng-if="vm.mode !== 'Plus'">
+                <label>Market/Watchlist</label>
+                <agms-tgps-complex-selector watchlists="vm.watchlists"
+                                            trade-venue-loc-list="vm.tradeVenueLocList"
+                                            update-selection="vm.updateSelection(param)"></agms-tgps-complex-selector>
+            </div>
+            <div class="menu" ng-if="vm.mode==='Position' || (vm.mode === 'Plus' && vm.paladinMode === 'Entry')">
+                <label>Date</label>
+                <div class="pull-left">
+                    <input type="radio" ng-change="vm.updateTradeVenue()" class="pull-left" ng-model="vm.filter.dateSelectionMode" ng-value="0" />
+                    <label class="sublabel lh-25px" ng-click="vm.filter.dateSelectionMode=0">
+                        Last Trading Day<span ng-if="vm.showLastAvailableDay()">*</span>
+                    </label>
+                </div>
+                <div class="m-left-20px pull-left">
+                    <input type="radio" ng-change="vm.updateTradeVenue()" class="pull-left" ng-model="vm.filter.dateSelectionMode" ng-value="1" />
+                    <div class="date-picker pull-left input-group w-130px">
+                        <input type="text" class="m-left-10px w-120px lh-30px border p-left-10px p-right-30px va-top "
+                               uib-datepicker-popup="mediumDate" ng-model="vm.filter.dateFromCalendar" is-open="vm.dateOpened"
+                               datepicker-options="vm.dateOptions"
+                               ng-disabled="vm.filter.dateSelectionMode!=1"
+                               ng-required="true" close-text="Close" ng-change="vm.onFilterChanged()" />
+                        <button type="button" ng-click="vm.setDateSelectionOpen()">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="menu">
+                <label>Bar Size</label>
+                <select ng-model="vm.filter.barSize" ng-options="b as b.label for b in vm.barSizeOptions" ng-change="vm.onBarSizeChanges()"></select>
+            </div>
+            <div class="menu" ng-if="vm.mode==='Swing'">
+                <label>Date Range</label>
+                <div class="pull-left">
+                    <input type="radio" ng-change="vm.updateTradeVenue()" class="pull-left" ng-model="vm.filter.dateSelectionMode" ng-value="0" />
+                    <label class="sublabel lh-25px" ng-click="vm.filter.dateSelectionMode=0">
+                        Last Trading Day<span ng-if="vm.showLastAvailableDay()">*</span>
+                    </label>
+                </div>
+                <div class="m-left-20px pull-left">
+                    <input type="radio" ng-change="vm.updateTradeVenue()" class="pull-left" ng-model="vm.filter.dateSelectionMode" ng-value="1" />
+                    <agmc-date-picker from-date="vm.filter.fromDateFromCalendar" class="date-picker-range" ng-click="vm.setDateSelectionOpen()"
+                                      to-date="vm.filter.toDateFromCalendar"
+                                      date-selection-changes="vm.onDatePickerChanges()"
+                                      show-trading-day-only="true"
+                                      allow-manual-entry="false">
+                    </agmc-date-picker>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="menu" ng-if="vm.mode==='Position'">
+                <label>Signal</label>
+                <select ng-model="vm.filter.direction" ng-change="vm.onFrontEndFilterChanged()" ng-options="d as d for d in vm.directions"></select>
+            </div>
+            <div class="menu" ng-if="vm.mode==='Position'">
+                <label>COM Crossover</label>
+                <select ng-model="vm.filter.crossover" ng-change="vm.onFrontEndFilterChanged()" ng-options="d as d for d in vm.comCrossover"></select>
+            </div>
+            <div class="show-fundamental-filter pull-right" ng-if="vm.mode !== 'Plus' && vm.hasFundamentalFilterSelections()">
+                <div class="filter-number" ng-if="vm.sTgpsScreenerService.fundamentalFilterNumber > 0">{{vm.sTgpsScreenerService.fundamentalFilterNumber}}</div>
+                <button class="filled-blue" ng-click="vm.showFundamentalFilter()">SHOW FILTERS</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="top-filter">
+        <div class="top-filter-search">
+            <div class="pull-left search top-search-panel rel" ng-if="vm.mode !== 'Plus'">
+                <input type="text" placeholder="SEARCH PRODUCT" ng-model="vm.filter.searchProductFilter"
+                       ng-model-options="{debounce: 200}"
+                       uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                       typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                       typeahead-wait-ms="200"
+                       typeahead-on-select="vm.showProduct(vm.filter.searchProductFilter)">
+                <button type="submit" ng-click="vm.showProduct(vm.filter.searchProductFilter)">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+            <div class="products-found" ng-if="vm.mode==='Swing' && vm.totalNumberOfStocksForSwingWithoutFilter && vm.uniqueFilteredProductCount > 0">
+                <div>{{vm.uniqueFilteredProductCount}} product(s) found.</div>
+            </div>
+            <div class="products-found" ng-if="vm.mode==='Position' && vm.totalNumberOfStocksForPositionWithoutFilter && vm.filteredStocksForPosition.length > 0">
+                <div>{{vm.filteredStocksForPosition.length}} product(s) found.</div>
+            </div>
+            <div class="available-date" ng-if="vm.showLastAvailableDay() && vm.mode !== 'Plus'">
+                *Last Available Trading Day: <span ng-repeat="date in vm.lastAvailableDate">{{date.Market}} = {{date.Date | date:'mediumDate'}}<span ng-if="!$last">; </span></span>
+            </div>
+            <div class="available-date-paladin" ng-if="vm.mode === 'Plus' && vm.lastPaladinEvaluationDate">
+                *Last Analysis as of {{vm.lastPaladinEvaluationDate | date:'medium'}}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div ng-if="vm.mode==='Position'" class="tgps-position ">
+        <div ng-if="vm.filter.barSize.value==='1 day'">
+            <agms-product-list options="vm.productListOptionForPosition" product-container-list="vm.filteredStocksForPosition"
+                               ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
+            </agms-product-list>
+        </div>
+        <div ng-if="vm.filter.barSize.value==='1 week'">
+            <agms-product-list options="vm.productListOptionForWeeklyPosition" product-container-list="vm.filteredStocksForPosition"
+                               ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
+            </agms-product-list>
+        </div>
+        <h4 class="m-20px text-center" ng-if="vm.filteredStocksForPosition.length == 0 && !vm.isLoading">{{vm.noResultMessage}}</h4>
+        <h4 class="m-20px text-center" ng-if="vm.filteredStocksForPosition.length > 0 && vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length == 0 && !vm.isLoading">No results found.</h4>
+        <div class="m-top-20px text-center" ng-if="vm.isLoading">
+            <h4 class="m-20px">Screening in Progress...</h4>
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+    </div>
+    <div ng-if="vm.mode==='Swing'" class="tgps-swing ">
+        <agms-product-list options="vm.productListOptionForSwing" product-container-list="vm.filteredStocksForSwing"
+                           ng-if="vm.filteredStocksForSwing.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForSwing).length > 0">
+        </agms-product-list>
+        <h4 class="m-20px text-center" ng-if="vm.filteredStocksForSwing.length == 0 && !vm.isLoading">{{vm.noResultMessage}}</h4>
+        <h4 class="m-20px text-center" ng-if="vm.filteredStocksForSwing.length > 0 && vm.preprocessFilterListFunc(vm.filteredStocksForSwing).length == 0 && !vm.isLoading">No results found.</h4>
+        <div class="m-top-20px text-center" ng-if="vm.isLoading">
+            <h4 class="m-20px">Screening in Progress...</h4>
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+    </div>
+
+    <div ng-if="vm.mode==='Plus'" class="tgps-position ">
+        <div ng-if="vm.paladinMode === 'Entry'">
+            <agms-product-list options="vm.productListOptionForPaladinEntry" product-container-list="vm.filteredStockPaladinEntry"
+                               ng-if="vm.filteredStockPaladinEntry.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStockPaladinEntry).length > 0">
+            </agms-product-list>
+            <h4 class="m-20px text-center" ng-if="vm.filteredStockPaladinEntry.length == 0 && !vm.isLoading">{{vm.noResultMessage}}</h4>
+            <h4 class="m-20px text-center" ng-if="vm.filteredStockPaladinEntry.length > 0 && vm.preprocessFilterListFunc(vm.filteredStockPaladinEntry).length == 0 && !vm.isLoading">No results found.</h4>
+            <div class="m-top-20px text-center" ng-if="vm.isLoading">
+                <h4 class="m-20px">Screening in Progress...</h4>
+                <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+            </div>
+        </div>
+        <div ng-if="vm.paladinMode === 'Exit'">
+            <agms-product-list options="vm.productListOptionForPaladinExit" product-container-list="vm.filteredStockPaladinExit"
+                               ng-if="vm.filteredStockPaladinExit.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStockPaladinExit).length > 0">
+            </agms-product-list>
+            <h4 class="m-20px text-center" ng-if="vm.filteredStockPaladinExit.length == 0 && !vm.isLoading">{{vm.noResultMessage}}</h4>
+            <h4 class="m-20px text-center" ng-if="vm.filteredStockPaladinExit.length > 0 && vm.preprocessFilterListFunc(vm.filteredStockPaladinExit).length == 0 && !vm.isLoading">No results found.</h4>
+            <div class="m-top-20px text-center" ng-if="vm.isLoading">
+                <h4 class="m-20px">Screening in Progress...</h4>
+                <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+</div>

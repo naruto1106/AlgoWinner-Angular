@@ -1,0 +1,14 @@
+<svg class="algo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+  <g>
+    <title>Layer 1</title>
+    <g stroke="null" id="svg_19">
+      <path stroke="null" id="svg_18" d="m99.922077,394.095684l33.063978,33.063671l-83.694059,83.694059l-33.045232,-33.063671l83.675313,-83.694059zm58.153143,-7.974199l-14.745262,-14.745262c-5.698535,-5.698535 -14.951777,-5.698535 -20.669673,0l-14.124487,14.124487l33.063978,33.063978l16.475443,-16.475443c4.419799,-4.420106 4.419799,-11.547961 0,-15.96776zm-159.131497,138.14191c-0.601722,2.708056 1.843273,5.134612 4.551637,4.476037l36.844255,-8.933328l-33.045232,-33.063671l-8.35066,37.520962z"/>
+    </g>
+    <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_24" y2="94.166662" x2="0.982882" y1="94.166662" x1="98.796292" fill-opacity="null" stroke-opacity="null" stroke-width="10" fill="none"/>
+    <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_25" y2="88.076079" x2="95.648149" y1="1.574081" x1="95.648149" fill-opacity="null" stroke-opacity="null" stroke-width="6" fill="none"/>
+    <path id="svg_27" d="m60.523974,2.426755l17.373735,0l14.478111,15.140844l-14.478111,15.140843l-17.373735,0l0,-30.281686z" stroke-width="6" fill="#9e004c"/>
+    <path id="svg_28" d="m60.523974,42.241998l17.373735,0l14.478111,15.140844l-14.478111,15.140842l-17.373735,0l0,-30.281686z" stroke-width="6" fill="#ff7f00"/>
+    <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="80" id="svg_26" y="84.166663" x="-2.129618" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">%</text>
+  </g>
+</svg>

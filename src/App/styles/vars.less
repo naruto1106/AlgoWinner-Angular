@@ -1,0 +1,156 @@
+.abs {
+    position: absolute;
+}
+
+.rel {
+    position: relative;
+}
+
+.focusable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    outline: none;
+}
+
+.clickable {
+    .focusable;
+    cursor: pointer;
+}
+
+.generateTransition(@name,@time) {
+    .transition-@{name} {
+        -webkit-transition: all @time ease-in-out;
+        -moz-transition: all @time ease-in-out;
+        -o-transition: all @time ease-in-out;
+        transition: all @time ease-in-out;
+    }
+}
+
+.generateTransitionDef(@time) {
+    -webkit-transition: all @time ease-in-out;
+    -moz-transition: all @time ease-in-out;
+    -o-transition: all @time ease-in-out;
+    transition: all @time ease-in-out;
+}
+
+.generateRepetition(@animationName, @time) {
+    -webkit-animation: @animationName @time infinite;
+    -moz-animation: @animationName @time infinite;
+    -o-animation: @animationName @time infinite;
+    animation: @animationName @time infinite;
+}
+
+.transition-superfast {
+    .generateTransitionDef(0.2s);
+}
+.transition-fast {
+    .generateTransitionDef(0.5s);
+}
+.transition-moderate {
+    .generateTransitionDef(1s);
+}
+.transition-slow {
+    .generateTransitionDef(2s);
+}
+
+.border {
+    border: 1px solid @grayMed3;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-margin-h {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.no-margin-v {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.no-padding-h {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no-padding-v {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.no-border-top {
+    border-top: none;
+}
+
+.no-border-bottom {
+    border-bottom: none;
+}
+
+.no-border-left {
+    border-left: none;
+}
+
+.no-border-right {
+    border-right: none;
+}
+
+.border.no-border-top {
+    border-top: 1px solid transparent;
+}
+
+.border.no-border-bottom {
+    border-bottom: 1px solid transparent;
+}
+
+.border.no-border-left {
+    border-left: 1px solid transparent;
+}
+
+.border.no-border-right {
+    border-right: 1px solid transparent;
+}
+
+.no-border {
+    border: none;
+}
+
+.highlight {
+    background: mix(@blueBasic,transparent,5);
+}
+
+.inline {
+    display: inline;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.hide-overflow {
+    overflow: hidden;
+}
+
+.pass-through-pointer {
+    pointer-events: none;
+}
+
+.transparent-50pct {
+    opacity: 0.5;
+}
+
+fieldset[disabled] .switch {
+    pointer-events: none;
+    opacity:0.5;
+}

@@ -1,0 +1,27 @@
+﻿<form class="modal-content gateway">
+    <div ng-if="vm.popUpType === 'inactiveSession'">
+        <div class="modal-header">
+            <h4 class="modal-title">Existing Session Detected</h4>
+        </div>
+        <div class="modal-body">
+            Another session(s) with the same login exists. Do you want to continue and disconnect the other session(s)?
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="vm.reconnect()">Yes</button>
+            <button type="button" class="btn btn-outline btn-primary" data-dismiss="modal" ng-click="vm.ignore()">No</button>
+        </div>
+    </div>
+    
+    <div ng-if="vm.popUpType === 'kickedOut'">
+        <div class="modal-header">
+            <h4 class="modal-title">Session Disabled Due to Login on Other Device</h4>
+        </div>        
+        <div class="modal-body">
+            Your session is disabled as we have detected your login on another device. Do you want to reconnect this session and disconnect the other session?
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="vm.reconnect()">Reconnect This Session</button>
+            <button type="button" class="btn btn-outline btn-primary" data-dismiss="modal" ng-click="vm.ignore()">Log out this session</button>
+        </div>
+    </div>
+</form>

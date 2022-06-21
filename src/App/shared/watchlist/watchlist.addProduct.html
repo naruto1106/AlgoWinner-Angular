@@ -1,0 +1,28 @@
+﻿<div class="agms-directives add-to-watchlist ">
+    <div class="modal-body">
+        <h2>Product: <b>{{vm.product.Symbol}}-{{vm.product.TradeVenueLoc}} ({{vm.product.ProductName}})</b></h2>
+        <div class="inner-selection">
+            <div ng-if="vm.myWatchlists.length<=0 && vm.myFilteredWatchlists.length<=0" class="m-bottom-10px">
+                <b class="red-loss">No available watchlists</b>
+            </div>
+            <div ng-if="vm.myWatchlists.length> 0 && vm.myFilteredWatchlists.length<=0" class="m-bottom-10px">
+                <b class="red-loss">This product has already been added to watchlists: <span ng-repeat="w in vm.myWatchlists">{{w.WatchlistName}}<span ng-if="!$last">, </span></span></b>
+            </div>
+            <dl>
+                <dd ng-if="vm.myFilteredWatchlists && vm.myFilteredWatchlists.length > 0">Watchlist:</dd>
+                <dt>
+                    <select class="m-right-20px" ng-if="vm.myFilteredWatchlists && vm.myFilteredWatchlists.length>0" ng-options="watchlist.WatchlistName for watchlist in vm.myFilteredWatchlists" ng-model="vm.selectedWatchlist"></select>
+                    <button ng-click="vm.createNewWatchlist()" class="semi-mini-button filled-green"><span class="glyphicon glyphicon-plus"></span>NEW WATCHLIST</button>
+                </dt>
+            </dl>
+            <div class="clearfix"></div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary pull-right" agmc-button-wait-on-promise="vm.addProductToWatchlist()" ng-disabled="vm.disableSubmit()">ADD TO WATCHLIST</button>
+        <button class="btn btn-outline-danger pull-right" ng-click="vm.dismiss()">CANCEL</button>
+        <div class="clearfix"></div>
+    </div>
+</div>
+

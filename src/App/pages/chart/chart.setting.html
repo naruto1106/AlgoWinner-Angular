@@ -1,0 +1,51 @@
+﻿<div class="btn-group chart-setting" uib-dropdown>
+    <button uib-tooltip="Drag Vertically" tooltip-placement="bottom-right"
+            class="btn"
+            ng-class="{'active-toggle':vm.isVerticalMoveEnabled()}"
+            ng-click="vm.toggleFreeYAxis()">
+        <img ng-src="/App/assets/icons/chart/move-v.svg" class="chart-tool-icon pull-right" />
+    </button>
+    <button uib-tooltip="Normalize Y Axis" tooltip-placement="bottom-right"
+            class="btn"
+            ng-class="{'active-toggle':vm.isNormalizedToPercentage()}"
+            ng-click="vm.toggleNormalization()">
+        <img ng-src="/App/assets/icons/chart/normalize.svg" class="chart-tool-icon" />
+    </button>
+    <button class="btn"
+            uib-tooltip="Show Data Labels on Chart" tooltip-placement="bottom-right"
+            ng-class="{'active-toggle':vm.showLegendsOnChart()}"
+            ng-click="vm.toggleDataLabel()">
+        <span class="algoicon algoicons-tooltip"></span>
+    </button>
+
+    <div class="btn-group" uib-tooltip="Change Theme" tooltip-placement="bottom-right"
+         uib-dropdown
+         is-open="vm.isThemeSettingOpen"
+         ng-if="vm.hasAlgoChartBundle() || vm.hasAlgoChartDarkTheme()">
+        <button type="button" class="btn" uib-dropdown-toggle
+                analytics-on="click" analytics-category="Chart" analytics-event="Top Menu" analytics-label="ChangeTheme" agmc-analytics-timestamp>
+            <span class="algoicon algoicons-theme"></span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu no-bound" uib-dropdown-menu role="menu">
+            <li ng-click="vm.changeTheme('Light')" analytics-on="click">
+                <a analytics-category="Chart" analytics-event="Top Menu" analytics-label="SelectLightTheme" agmc-analytics-timestamp>
+                    <span class="algoicon algoicons-light small-icon"></span>
+                    <span>Light Theme</span>
+                </a>
+                <div class="star" ng-class="{'default':vm.getDefaultTheme() == 'Light'}">
+                    <span class="glyphicon glyphicon-star default-icon"></span>
+                </div>
+            </li>
+            <li ng-click="vm.changeTheme('Dark')" analytics-on="click">
+                <a analytics-category="Chart" analytics-event="Top Menu" analytics-label="SelectDarkTheme" agmc-analytics-timestamp>
+                    <span class="algoicon algoicons-dark small-icon"></span>
+                    <span>Premium Theme</span>
+                </a>
+                <div class="star" ng-class="{'default':vm.getDefaultTheme() == 'Dark'}">
+                    <span class="glyphicon glyphicon-star default-icon"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

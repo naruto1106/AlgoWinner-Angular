@@ -1,0 +1,14 @@
+﻿<div class="btn-group rel" uib-dropdown>
+    <button type="button" class="btn" uib-dropdown-toggle uib-tooltip="Bar Duration" tooltip-placement="bottom-right"
+            analytics-on="click" analytics-category="Chart" analytics-event="Top Menu" analytics-label="BarDuration" agmc-analytics-timestamp>
+        <label class="pull-left">{{vm.selectedBarSize}}</label>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-class="{'tgps-mode':vm.isTgpsInPositionMode()}">
+        <li ng-repeat="barSize in vm.getBarSizes()">
+            <a ng-click="vm.setBarSize(barSize)">
+                {{::barSize.Name}}
+            </a>
+        </li>
+    </ul>
+</div>

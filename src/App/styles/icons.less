@@ -1,0 +1,407 @@
+img[src='Error.src'] {
+    display: none;
+    background: @grayLight2;
+}
+
+.icon {
+    max-height: 100%;
+    height: auto;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+img.icon-big, .img.icon-big {
+    .icon;
+    width: 100px;
+    height: 100px;
+}
+
+img.icon-80px {
+    .icon;
+    width: 80px;
+    height: 80px;
+}
+
+img.icon-60px, img.icon-medium {
+    .icon;
+    width: 60px;
+    height: 60px;
+}
+
+img.icon-50px {
+    .icon;
+    width: 50px;
+    height: 50px;
+}
+
+img.icon-40px, img.icon-small, .img.icon-small {
+    .icon;
+    width: 40px;
+    height: 40px;
+}
+
+img.icon-small-faded {
+    .icon;
+    width: 40px;
+    height: 40px;
+    opacity: 0.5;
+}
+
+img.icon-30px, img.icon-tiny {
+    .icon;
+    width: 30px;
+    height: 30px;
+}
+
+img.icon-micro {
+    .icon;
+    width: 25px;
+    height: 25px;
+}
+
+.dev-basic {
+    .rel;
+    width: 100%;
+
+    button {
+        .abs;
+    }
+
+    .icon-big {
+        .abs;
+        top: 0;
+        left: 0;
+    }
+
+    .graybox, .detail {
+        .abs;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 16px;
+        line-height: 25px;
+        font-weight: 600;
+    }
+
+    h4 {
+        margin: 0;
+        font-size: 14px;
+        color: @blueBasic;
+        line-height: 20px;
+        font-weight: 600;
+    }
+
+    h5 {
+        margin: 0;
+        font-size: 12px;
+        color: @grayDark3;
+        line-height: 20px;
+        font-weight: 600;
+    }
+
+    .professional, .community {
+        .checkbox-button.large;
+    }
+
+    .community {
+        background: @blueDarker2;
+    }
+
+    .professional {
+        background: @goldenBasic;
+    }
+}
+
+.dev-bigger-icon {
+    .dev-basic;
+    height: 110px;
+
+    button {
+        left: 0;
+        bottom: 0;
+    }
+
+    .graybox {
+        border-radius: 45px;
+        top: 5px;
+        padding-top: 10px;
+        height: 90px;
+        width: 100%;
+        padding-left: 110px;
+        left: 0px;
+        background: @grayLight2;
+        color: @blueDarker3;
+        text-align: left;
+    }
+
+    .professional, .community {
+        border-radius: 10px;
+        bottom: 0;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 15px;
+        left: 0px;
+        width: 100%;
+        text-align: right;
+    }
+}
+
+.dev-bigger-plain-2 {
+    .dev-basic;
+    height: 120px;
+
+    .icon-big {
+        width: 120px;
+        height: 120px;
+    }
+
+    .professional, .community {
+        border-radius: 10px;
+        bottom: 10px;
+        height: 20px;
+        line-height: 20px;
+        right: 50px;
+        min-width: 150px;
+    }
+
+    .detail {
+        .abs;
+        left: 130px;
+        top: 10px;
+        right: 50px;
+
+        h3 {
+            line-height: 25px;
+        }
+
+        h4, h5 {
+            line-height: 20px;
+            font-size: 14px;
+        }
+    }
+
+    button {
+        left: 70px;
+        bottom: 10px;
+        width: 80px;
+    }
+
+    & .shade {
+        width: 100%;
+        height: 120px;
+        .abs;
+        left: 0;
+        top: 0;
+        background: @grayLight3;
+        border-radius: 60px;
+    }
+}
+
+.dev-bigger-plain {
+    .dev-basic;
+    height: 100px;
+
+    .professional, .community {
+        border-radius: 10px;
+        bottom: 10px;
+        height: 20px;
+        line-height: 20px;
+        left: 175px;
+        min-width: 150px;
+    }
+
+    .detail {
+        .abs;
+        left: 110px;
+        top: 0px;
+
+        h3 {
+            line-height: 25px;
+        }
+
+        h4, h5 {
+            line-height: 20px;
+            font-size: 14px;
+        }
+    }
+
+    button {
+        left: 110px;
+        bottom: 0px;
+        width: 60px;
+    }
+
+    & .shade {
+        width: 100%;
+        height: 100px;
+        .abs;
+        left: 0;
+        top: 0;
+        background: @grayLight3;
+        border-radius: 50px;
+    }
+}
+
+.dev-big-icon {
+    .dev-basic;
+    height: 100px;
+
+    button {
+        right: 0;
+        bottom: 60px;
+    }
+
+    .professional, .community {
+        border-radius: 25px;
+        bottom: 10px;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 75px;
+        left: 30px;
+        width: ~'calc(100% - 30px)';
+        .panel-text;
+        text-align: left;
+    }
+}
+
+div.dev-icon {
+    .rel;
+    height: 40px;
+    width: 100%;
+
+    a {
+        margin-left: 3px;
+        margin-top: 5px;
+        .developer-text;
+        padding-left: 45px;
+        padding-right: 20px;
+        border-radius: 15px;
+        display: block;
+        background: @plum;
+        line-height: 30px;
+        height: 30px;
+        color: white;
+        display: inline-block;
+        font-size: 13px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+            background: @sunFlower;
+        }
+    }
+
+    .img {
+        .icon;
+        height: 40px;
+        width: 40px;
+        .abs;
+        left: 0;
+        top: 0;
+    }
+}
+
+div.dev-icon.professional a {
+    background: @goldenBasic;
+
+    &:hover {
+        background: @goldenLighter1;
+    }
+}
+
+div .dev-icon.mini {
+    height: 30px;
+
+    a {
+        border-radius: 20px;
+        line-height: 14px;
+        height: auto;
+        max-width: 190px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding: 3px 10px 3px 25px;
+        margin-left: 10px;
+    }
+
+
+    .img {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+div .dev-icon.micro {
+    height: 25px;
+
+    a {
+        padding-left: 25px;
+        padding-right: 10px;
+        border-radius: 10px;
+        line-height: 20px;
+        height: 20px;
+        margin-left: 5px;
+    }
+
+    .img {
+        height: 25px;
+        width: 25px;
+    }
+}
+
+.inside-strategy {
+    margin: 0;
+    .abs;
+    display: block;
+}
+
+.rtl div.dev-icon {
+    img {
+        right: 0;
+        left: auto;
+    }
+
+    a {
+        padding-left: 10px;
+        padding-right: 45px;
+    }
+}
+
+.strategy-icon, .cover-center {
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-size: cover;
+    background-color: @grayLight1;
+}
+
+div.subscribe {
+    .strategy-icon {
+        padding-bottom: 140px;
+    }
+}
+
+.algo-icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.submenu-title-icon {
+    display: block;
+    padding: 6px;
+    height: 40px;
+    width: 40px;
+    float: left;
+
+    .algo-icon g {
+        fill: @grayDark2;
+    }
+}
+
+.filled-button-icon {
+    width: 26px;
+    height: 26px;
+    padding: 5px;
+    display: block;
+}

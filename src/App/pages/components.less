@@ -1,0 +1,74 @@
+﻿.agm-component-strategy-bundle-detail {
+    .selected {
+        box-shadow: 0 0 10px 10px #FC0;
+    }
+}
+
+.image-upload-dialog {
+    cursor: move;
+
+    .reposition {
+        margin-top: -30px;
+        margin-left: -30px;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        font-size: 60px;
+        transform: rotate(45deg);
+        color: mix(@blueBasic,transparent,50);
+        pointer-events: none;
+    }
+
+    .cropper:hover .reposition {
+        color: mix(@blueBasic,transparent,80);
+    }
+
+    .cropper:active .reposition {
+        color: transparent;
+    }
+}
+
+.agm-components-strategy-characteristic {
+    .category {
+        height: 30px;
+    }
+}
+
+.uib-typeahead-match {
+    &.active {
+        .agms-product-search-generic-template {
+            .template-with-market-data-status {
+                .market-data-status {
+                    .real-time, .eod, .delayed {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+
+    .agms-product-search-generic-template {
+        .template-with-market-data-status {
+            .product-list-wrapper {
+                min-width: 300px;
+            }
+
+            .market-data-status {
+                padding: 10px 0 0 10px;
+                font-size: 12px;
+
+                .real-time {
+                    color: green;
+                }
+
+                .eod {
+                    color: grey;
+                }
+
+                .delayed {
+                    color: orange;
+                }
+            }
+        }
+    }
+}

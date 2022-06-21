@@ -1,0 +1,462 @@
+﻿<section class="agm-component-chart">
+    <div class="main-scene">
+        <div class="sidebar transition-fast" ng-class="{hidden: !vm.pChartService.isSidebarShown}">
+            <div class="inner-sidebar flex-v">
+                <agmp-chart-selected-security class="minor-column" ng-if="vm.filterDescription.primaryProduct"></agmp-chart-selected-security>
+                <ul class="nav nav-tabs nav-justified sidebar-nav minor-column">
+                    <li class="nav-item" ng-class="{selected:vm.isSidebarMode('productList')}">
+                        <a class="nav-link" ng-click="vm.setSidebarMode('productList')">Product</a>
+                    </li>
+                    <li class="nav-item dark" ng-class="{selected:vm.isSidebarMode('filter')}">
+                        <a class="nav-link " ng-click="vm.setSidebarMode('filter')">Analyze</a>
+                    </li>
+                </ul>
+                <div class="full-panel  major-column" ng-if="vm.isSidebarMode('productList')">
+                    <agmp-chart-security-filter class="column-container">
+                    </agmp-chart-security-filter>
+                </div>
+                <!--this tab is not an ng-if because the data mart events need to be loaded from URL -->
+                <div class="full-panel dark  major-column" ng-show="vm.isSidebarMode('filter')">
+                    <agmp-chart-analyze class="column-container">
+                    </agmp-chart-analyze>
+                </div>
+            </div>
+        </div>
+
+        <!--Create as directive-->
+        <div class="toggle-sidebar-button" uib-btn-checkbox ng-model="vm.pChartService.isSidebarShown" ng-class="{closed:!vm.pChartService.isSidebarShown}">
+            <div class="inner" uib-tooltip="{{vm.pChartService.isSidebarShown?'Hide Panel':'Show Panel'}}" tooltip-placement="right">
+                <button class="btn">
+                    <div class="icon" agmc-svg-loader svg-src="'/App/assets/icons/charttool/outdent.svg'"></div>
+                </button>
+                <div class="knob">
+                    <div class="button-indicator">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="top-as-sidebar laptop-screen-below">
+            <div>
+                <div uib-tooltip="Unset Traders GPS Position to change chart type"
+                     tooltip-placement="bottom"
+                     tooltip-enable="vm.isTgpsInPositionMode()">
+                    <agmp-chart-type-selector ng-disabled="vm.isTgpsInPositionMode()"></agmp-chart-type-selector>
+                </div>
+                <div class="btn-group" ng-class="{'active-toggle':vm.pChartService.isDrawingShown}">
+                    <button class="btn"
+                            uib-btn-checkbox
+                            ng-change="vm.toggleDrawingMode()"
+                            ng-model="vm.pChartService.isDrawingShown"
+                            uib-tooltip="Drawing"
+                            tooltip-placement="bottom-right">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </div>
+                <agmp-chart-template-manager></agmp-chart-template-manager>
+                <agmp-chart-setting toggle-normalization="vm.switchNormalization"></agmp-chart-setting>
+            </div>
+        </div>
+        <div class="extra-left" ng-class="{hidden: !vm.pChartService.isDrawingShown}">
+            <agmp-chart-drawing-tool class="pull-left"></agmp-chart-drawing-tool>
+            <agmp-chart-undo-redo-drawing class="pull-left"></agmp-chart-undo-redo-drawing>
+        </div>
+
+        <div class="content" ng-class="vm.pChartThemeService.getCurrentTheme()=='Dark'?['content-dark']:['content-light']">
+
+            <div class="container">
+
+                <div class="inner-container">
+                    <agmp-chart-legend displayed-chart-selected-item-info="vm.displayedChartSelectedItemInfo">
+                    </agmp-chart-legend>
+                    <div class="loading-chart" ng-show="vm.isProductDataLoading">
+                        <img src="//am708403.azureedge.net/images/static/loading.gif?" />
+                    </div>
+                    <div class="warning-box" ng-show="vm.fundamentalAvailabilityMessagesShown && vm.getFundamentalAvailabilityMessages().length>0">
+                        <a class="close" ng-click="vm.closeWarningMessage()">&times;</a>
+                        <div ng-repeat="entry in vm.getFundamentalAvailabilityMessages()">
+                            {{entry.symbols}} {{entry.displayName}} data is not provided by FactSet
+                        </div>
+                    </div>
+
+                    <div agmc-covered-dialog-box covered-dialog-box-id="'chartIQ'" class="chart-frame" ng-show="vm.filterDescription.myProducts.length>0">
+                        <!--agmp-chart-yaxis-legend-->
+                        <agmp-chart-yaxis-legend class="algochart-y-axis"></agmp-chart-yaxis-legend>
+                        <div class="chartContainer"></div>
+                        <agmp-chart-slider ng-show="vm.filterDescription.myProducts.length>0"></agmp-chart-slider>
+                    </div>
+                    <div class="no-products" ng-show="vm.filterDescription.myProducts.length==0">
+                        <div class="alert alert-warning message">You have not added any securities.</div>
+                    </div>
+                    <agmp-chart-tooltip ng-if="vm.filterDescription.showLegendsOnChart"></agmp-chart-tooltip>
+                </div>
+            </div>
+
+            <div class="top-level-2" ng-class="{extended:!vm.pChartService.isSidebarShown}">
+                <!--<div class="btn-group pull-left">
+                    <button class="btn"
+                            uib-tooltip="{{vm.pChartService.isSidebarShown?'Hide Sidebar':'Show Sidebar'}}" tooltip-placement="right"
+                            uib-btn-checkbox ng-model="vm.pChartService.isSidebarShown">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </button>
+                </div>-->
+
+                <div agms-droid-helper-item="chart.main.datePicker" class="pull-right">
+                    <agmp-chart-date-picker></agmp-chart-date-picker>
+                </div>
+                <div class="pull-right top-menu">
+                    <agmp-chart-zoom class="pull-right"></agmp-chart-zoom>
+                    <agmp-chart-warning class="pull-right" warning-count="vm.getFundamentalAvailabilityMessages().length"
+                                        ng-show="vm.getFundamentalAvailabilityMessages().length>0"
+                                        show-flag="vm.fundamentalAvailabilityMessagesShown">
+                    </agmp-chart-warning>
+                </div>
+                <div class="pull-left top-menu" agms-droid-helper-item="chart.main.settings">
+                    <agmp-chart-bar-size-picker class=" pull-left"></agmp-chart-bar-size-picker>
+                    <div class="laptop-screen-above pull-left"
+                         uib-tooltip="Unset Traders GPS Position to change chart type"
+                         tooltip-placement="bottom"
+                         tooltip-enable="vm.isTgpsInPositionMode()">
+                        <agmp-chart-type-selector class="pull-left" ng-disabled="vm.isTgpsInPositionMode()"></agmp-chart-type-selector>
+                    </div>
+                    <agmp-chart-setting class="laptop-screen-above pull-left" toggle-normalization="vm.switchNormalization"></agmp-chart-setting>
+                    <div class="laptop-screen-above btn-group pull-left" ng-class="{'active-toggle':vm.pChartService.isDrawingShown}">
+                        <button class="btn"
+                                uib-btn-checkbox
+                                ng-change="vm.toggleDrawingMode()"
+                                ng-model="vm.pChartService.isDrawingShown"
+                                uib-tooltip="Drawing"
+                                tooltip-placement="bottom">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </div>
+                    <agmp-chart-compare class="pull-left"></agmp-chart-compare>
+                    <agmp-chart-template-manager class="laptop-screen-above pull-left"></agmp-chart-template-manager>
+                    <agmp-chart-tgps class="pull-left"></agmp-chart-tgps>
+                    <div class="historical-data-flag pull-left">
+                        <input type="checkbox" ng-model="vm.filterDescription.showUnadjusted" ng-change="vm.updateHistoricalData()"
+                               analytics-on="click" analytics-category="Chart" analytics-event="UnadjustData" analytics-label="CheckUnadjustData" agmc-analytics-timestamp />
+                        &nbsp;
+                        <label>Unadjusted Data</label>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="top-level-1">
+            <agmp-chart-product-list-manager class="pull-left"></agmp-chart-product-list-manager>
+            <agmp-chart-ohlc class="pull-left" ohlc-data="vm.displayedChartSelectedItemInfo.price.data"></agmp-chart-ohlc>
+            <agmp-chart-vol class="pull-left" vol-date-data="vm.displayedChartSelectedItemInfo.price.data"></agmp-chart-vol>
+            <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-if="vm.sHeaderService.chartMenuType == 'DropDown'"
+                    ng-click="vm.goToPartnerChart()">
+                Go to {{vm.sHeaderService.partnerChartName}}
+            </button>
+            <div class="clearfix"></div>
+            <agmp-chart-product-first-dialog ng-if="false"></agmp-chart-product-first-dialog>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="stx-dialog-container">
+        <div id="stxWatchEditDialog" style="display:none" class="stx-dialog">
+            <h4>Watch List Name:</h4>
+            <input id="stxWatchEditName" class="stx-input-field" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" maxlength="40" placeholder="Enter Watch Name" type="text">
+            <div class="textarea">
+                <textarea id="stxWatchEditTA" class="stx-textarea" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" ng-attr-placeholder="Enter symbols separated by spaces"></textarea>
+            </div>
+            <span id="stxWatchCancelEdit" class="stx-btn">Cancel</span> <span id="stxWatchSaveEdit" class="stx-btn">Save</span>
+        </div>
+        <div id="stxViewSaveDialog" style="display:none" class="stx-dialog">
+            <h4>View Name:</h4>
+            <input id="stxViewEditName" class="stx-input-field" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" maxlength="40" placeholder="Enter View Name" type="text">
+            <span id="stxViewCancelEdit" class="stx-btn">Cancel</span> <span id="stxViewSaveEdit" class="stx-btn">Save</span>
+        </div>
+        <div id="drawingDialog" style="display:none" class="stx-dialog">
+            <div onclick="STX.DialogManager.dismissDialog()" class="stx-btn stx-ico"><span class="stx-ico-close"></span></div>
+            <div style="text-align:center;margin: 0 auto;">
+                <h4 class="title" style="margin: 0 auto;"></h4><p>
+                    <div class="stx-btn stx-delete m-5px" style="width:100px;">Delete</div>
+                    <div class="stx-btn stx-duplicate m-5px" style="width:100px;">Duplicate</div>
+                    <div id="drawingFillColorPicker" class="pull-left p-left-20px f-14px m-5px" style="display:none">
+                        Fill Color:
+                        <div class="stx-color" style="background-color: rgb(125, 166, 245); margin-left: 13px;"></div>
+                    </div>
+                    <div id="drawingColorPicker" class="pull-left p-left-20px f-14px m-5px">
+                        <span id="drawingColorPickerLabel">Line Color:</span>
+                        <div class="stx-color"></div>
+                    </div>
+                    <div id="drawingWidthPicker" class="pull-left p-left-20px f-14px m-5px hide-spin" style="display:none">
+                        Line Width:
+                        <input class="stx-width" type="text" style="min-width: 0; width: 22px;" />
+                    </div>
+                    <div id="chartTextEditor" class="stx-btn stx-edit-text m-5px" style="width:100px;display:none">Edit Text</div>
+                    <div class="stx-btn stx-ok m-5px" style="width:100px;">OK</div>
+            </div>
+        </div>
+        <div id="seriesDialog" style="display:none;width:220px" class="stx-dialog">
+            <div onclick="STX.DialogManager.dismissDialog()" class="stx-btn stx-ico"><span class="stx-ico-close"></span></div>
+            <div style="text-align:center;margin: 0 auto;">
+                <h4 class="title" style="margin: 0 auto;"></h4><p>
+                    <div id="seriesColorPicker" class="pull-left p-left-20px f-14px m-5px">
+                        Line Color:
+                        <div class="stx-color"></div>
+                    </div>
+                    <div class="stx-btn stx-ok m-5px" style="width:100px;">OK</div>
+                    <div class="stx-btn stx-hide m-5px" style="width:100px;">Hide</div>
+            </div>
+        </div>
+        <div id="contextMenu" style="display:none" class="stx-dialog">
+            <div onclick="STX.DialogManager.dismissDialog()" class="stx-btn stx-ico"><span class="stx-ico-close"></span></div>
+            <div style="text-align:center;margin: 0px auto;">
+                <h4 class="title" style="margin: 0px auto;"></h4><p>
+                    <div class="stx-btn stx-edit" style="width:100px;">Edit</div>
+                <p>
+                    <div class="stx-btn stx-delete" style="width:100px;">Delete</div>
+            </div>
+        </div>
+        <div id="studyDialog" style="display:none;" class="stx-dialog centered">
+            <h4 class="title">{{vm.filterDescription.selectedStudy.label}}</h4>
+            <div ng-click="vm.dismissStudy()" class="stx-btn stx-ico"><span class="stx-ico-close"></span></div>
+            <div id="inputs">
+                <div class="inputTemplate" style="display:none">
+                    <div class="stx-heading"></div>
+                    <div class="stx-data"></div>
+                </div>
+            </div>
+            <div id="outputs">
+                <hr />
+                <div class="outputTemplate" style="display:none">
+                    <div class="stx-heading"></div>
+                    <div class="stx-color"><span></span></div>
+                </div>
+            </div>
+            <div id="parameters"></div>
+            <div ng-click="vm.updateStudy()" class="stx-btn">Create</div>
+        </div>
+        <div id="studyOverZones" style="display:none">
+            Show Zones<input id="studyOverZonesEnabled" type="checkbox">
+            <div class="outputTemplate">
+                <div class="stx-heading">OverBought</div>
+                <div class="stx-data">
+                    <input id="studyOverBoughtValue" type="text" style="width:36px;" class="stx-input-field">
+                    <div class="stx-color" id="studyOverBoughtColor"><span></span></div>
+                </div>
+            </div>
+            <div class="outputTemplate">
+                <div class="stx-heading">OverSold</div>
+
+                <div class="stx-data">
+                    <input id="studyOverSoldValue" type="text" style="width:36px;" class="stx-input-field">
+                    <div class="stx-color" id="studyOverSoldColor"><span></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <script type="text/ng-template" id="template[corporate-actions.SD]">
+        <div class="abs event event-corporate-actions-e"
+             ng-mouseover="pChartPopupService.showChartPopupDetail(data)"
+             ng-mouseleave="pChartPopupService.hideChartPopupDetail(data)">
+            <div class="event-label">
+                SD
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[corporate-actions.B]">
+        <div class="abs event event-corporate-actions-f"
+             ng-mouseover="pChartPopupService.showChartPopupDetail(data)"
+             ng-mouseleave="pChartPopupService.hideChartPopupDetail(data)">
+            <div class="event-label">
+                B
+            </div>
+            <div class="detail-wrap"
+                 ng-class="pChartPopupService.getClassNameString(getNode)">
+                <div class="detail">
+                    <h4>Bonus</h4>
+                    <h5>
+                        <b class="special-text">{{::data.NewValue}} {{::data.NewValue>1?"Shares":"Share"}}</b>, per
+                        <b class="special-text">{{::data.OldValue}} {{::data.OldValue>1?"Holdings":"Holding"}}.</b>
+                    </h5>
+                    <h5><b class="special-text">{{::data.ExDate | dateShort}}</h5>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[corporate-actions.CD]">
+        <div class="abs event event-corporate-actions-d"
+             ng-mouseover="pChartPopupService.showChartPopupDetail(data)"
+             ng-mouseleave="pChartPopupService.hideChartPopupDetail(data)">
+            <div class="event-label">
+                CD
+            </div>
+            <div class="detail-wrap"
+                 ng-class="pChartPopupService.getClassNameString(getNode)">
+                <div class="detail">
+                    <h4>Cash Dividend</h4>
+                    <h5><b class="special-text">{{::pChartPopupService.getProduct().Currency  | currencySymbol}} {{::data.DividendAmount}} </b>per share</h5>
+                    <h5><b class="special-text">{{::data.ExDate | dateShort}}</h5>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[corporate-actions.SC]">
+        <div class="abs event event-corporate-actions-n"
+             ng-mouseover="pChartPopupService.showChartPopupDetail(data)"
+             ng-mouseleave="pChartPopupService.hideChartPopupDetail(data)">
+            <div class="event-label">
+                <div class="event-label">
+                    SC
+                </div>
+                <div class="detail-wrap"
+                     ng-class="pChartPopupService.getClassNameString(getNode)">
+                    <div class="detail">
+                        <h4>Symbol Change</h4>
+                        <h5><b class="special-text">{{::data.OldSymbol}}</b> to <b class="special-text">{{::data.NewSymbol}}</b></h5>
+                        <h5><b class="special-text">{{::data.ExDate | dateShort}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[corporate-actions.S]">
+        <div class="abs event event-corporate-actions-s"
+             ng-mouseover="pChartPopupService.showChartPopupDetail(data)"
+             ng-mouseleave="pChartPopupService.hideChartPopupDetail(data)">
+            <div class="event-label">
+                S
+            </div>
+            <div class="detail-wrap" ng-class="pChartPopupService.getClassNameString(getNode)">
+                <div class="detail">
+                    <h4>Split</h4>
+                    <h5><b class="special-text">{{::data.OldValue}}</b> to <b class="special-text">{{::data.NewValue}}</b> Ratio</h5>
+                    <h5><b class="special-text">{{::data.ExDate | dateShort}}</h5>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[myStrategies]">
+        <div class="abs trade" ng-class="{'buy':trade.Action==='Buy', 'sell':trade.Action==='Sell'}">
+            <div class="balloon b" ng-style="::pChartPopupService.tradeBackgroundColor(trade.color)">
+                <div class="balloon-after" ng-style="::pChartPopupService.tradeBorderTopColor(trade.color)"></div>
+                <div class="user-icon cover-center"
+                     ng-mouseover="trade.showDetail()"
+                     ng-mouseleave="trade.hideDetail()"
+                     agms-image img-src="::trade.Strategy.DisplayInfo.BasicInfo.ImageUrl"></div>
+                <div class="abs detail" ng-if="trade.detailShown">
+                    <div class="username">{{::trade.Strategy.DisplayInfo | strategyName}}</div>
+                    <span class="action">{{::trade.Action}}</span>, P:
+                    <span class="price">{{::trade.FillPrice}}</span>, Q:
+                    <span class="quantity">{{::trade.Quantity}}</span>
+                    <br />
+                    <span class="intention">{{::trade.Intention}}</span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[mySubscriptions]">
+        <div class="abs trade" ng-class="{'buy':trade.Action==='Buy', 'sell':trade.Action==='Sell'}">
+            <div class="balloon b" ng-style="::pChartPopupService.tradeBackgroundColor(trade.color)">
+                <div class="balloon-after" ng-style="::pChartPopupService.tradeBorderTopColor(trade.color)"></div>
+                <div class="user-icon cover-center"
+                     ng-mouseover="trade.showDetail()"
+                     ng-mouseleave="trade.hideDetail()"
+                     agms-image img-src="::trade.Strategy.DisplayInfo.BasicInfo.ImageUrl"></div>
+                <div class="abs detail" ng-if="trade.detailShown" ng-class="pChartPopupService.getClassNameString(getNode)">
+                    <div class="username">{{::trade.Strategy.DisplayInfo | strategyName}}</div>
+                    <span class="action">{{::trade.Action}}</span>, P:
+                    <span class="price">{{::trade.FillPrice}}</span>, Q:
+                    <span class="quantity">{{::trade.Quantity}}</span>
+                    <br />
+                    <span class="intention">{{::trade.Intention}}</span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[tradesListDetail]">
+        <div class="panel-container">
+            <div ng-repeat="trade in trades.arr" class="white-box m-bottom-5px p-5px">
+                <div class="pull-left m-right-10px">
+                    <div ng-style="::pChartPopupService.tradeBorderColor(trade.color)" class="inner-user-icon cover-center"
+                         agms-image img-src="::trade.Strategy.DisplayInfo.BasicInfo.ImageUrl"></div>
+                </div>
+                <div class="pull-left">
+                    <div class="top-title m-bottom-5px">
+                        <span class="strong lh-20px">{{::trade.Strategy.DisplayInfo | strategyName}}</span>
+                    </div>
+                    <span class="action" ng-class="[trade.Action==='Buy' ? 'green-profit' : 'red-loss']">{{::trade.Action}},</span>
+                    P: <span class="price">{{::trade.FillPrice}},</span>
+                    Q: <span class="quantity">{{::trade.Quantity}}</span>
+                    <span class="intention">({{::trade.Intention}})</span>
+                    <br />
+                    <span class="date">{{::trade.date | dateLong}}</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[tradesBuy]">
+        <div class="abs trade buy">
+            <div class="balloon b"
+                 ng-mouseover="pChartPopupService.showChartPopupDetail(trades)"
+                 ng-mouseleave="pChartPopupService.hideChartPopupDetail(trades)"
+                 ng-style="::pChartPopupService.tradeBackgroundColor(trades.arr[0].color)">
+                <div class="balloon-after" ng-style="::pChartPopupService.tradeBorderTopColor(trades.arr[0].color)"></div>
+                <div class="user-icon cover-center" agms-image img-src="::trades.arr[0].Strategy.DisplayInfo.BasicInfo.ImageUrl"></div>
+                <div class="hover-area"></div>
+                <div class="detail-wrap" ng-class="pChartPopupService.getClassNameString(getNode)">
+                    <div class="detail">
+                        <div ng-include="'template[tradesListDetail]'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[tradesSell]">
+        <div class="abs trade sell">
+            <div class="balloon b"
+                 ng-mouseover="pChartPopupService.showChartPopupDetail(trades)"
+                 ng-mouseleave="pChartPopupService.hideChartPopupDetail(trades)"
+                 ng-style="::pChartPopupService.tradeBackgroundColor(trades.arr[0].color)">
+                <div class="balloon-after" ng-style="::pChartPopupService.tradeBorderTopColor(trades.arr[0].color)"></div>
+                <div class="user-icon cover-center" agms-image img-src="::trades.arr[0].Strategy.DisplayInfo.BasicInfo.ImageUrl"></div>
+                <div class="hover-area"></div>
+                <div class="detail-wrap" ng-class="pChartPopupService.getClassNameString(getNode)">
+                    <div class="detail">
+                        <div ng-include="'template[tradesListDetail]'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="template[algoFeed-grouped]">
+        <div class="abs algofeed"
+             ng-class="{'bull':algoFeedPostGroup.Direction==='Bull', 'bear':algoFeedPostGroup.Direction==='Bear','neutral':algoFeedPostGroup.Direction==='Neutral'}">
+            <div class="plane" ng-mouseover="algoFeedPostGroup.showDetail()" ng-mouseleave="algoFeedPostGroup.hideDetail()">
+                <div class="balloon" ng-if="::algoFeedPostGroup.hasMarketKing()">
+                    <div class="balloon-after" ng-style="::pChartPopupService.tradeBorderTopColor(trades.arr[0].color)"></div>
+                    <div class="user-icon cover-center" agms-image img-src="::algoFeedPostGroup.getUserPicture()"></div>
+                </div>
+                <div class="arrow" ng-if="::!algoFeedPostGroup.hasMarketKing()">
+                </div>
+                <div class="detail-wrap" ng-show="algoFeedPostGroup.detailShown" ng-class="pChartPopupService.getClassNameString(getNode)">
+                    <div class="detail">
+                        <div ng-repeat="algoFeedPost in algoFeedPostGroup.list track by $index">
+                            <div class="title" ng-if="::!algoFeedPost.actualItem.ManagerImageUrl">
+                                {{::algoFeedPost.renamedAlgoFeedEventTypeName}}
+                            </div>
+                            <div class="title" ng-if="::algoFeedPost.actualItem.ManagerImageUrl">
+                                {{::algoFeedPost.actualItem.TransactionSummary}}
+                            </div>
+                            <div class="item" ng-if="::algoFeedPost.BarDuration">Bar Duration: {{::algoFeedPost.BarDuration}}</div>
+                            <div ng-if="!$last" class="separator-top"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</section>

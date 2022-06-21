@@ -1,0 +1,282 @@
+﻿.agm-component-product {
+    .rel;
+    padding-left: 50px;
+    background: @gray1;
+    min-height: 100%;
+    min-width: 1200px;
+
+    h3 {
+        font-size: 23px;
+    }
+
+    .invalid-product {
+        .abs;
+        height: 100%;
+        width: 100%;
+        display: block;
+        z-index: 1000;
+        text-align: center;
+    }
+
+    .static-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 50px;
+        height: 100%;
+        box-shadow: 0 0 10px @darkGray1;
+        z-index: 90;
+
+
+        > button {
+            border: none;
+            background: transparent;
+            width: 100%;
+            height: 50px;
+            padding: 10px;
+            display: block;
+
+            &.special {
+                background: @gray2;
+            }
+
+            > span[agmc-svg-loader] {
+                width: 30px;
+                height: 30px;
+
+                .algo-icon {
+                    fill: @persian;
+                }
+            }
+
+            &:hover {
+                background: white;
+
+                > span[agmc-svg-loader] {
+                    .algo-icon {
+                        fill: @sunFlower;
+                    }
+                }
+            }
+        }
+    }
+
+    &.has-header {
+        padding-left: 60px;
+
+        .static-sidebar {
+            top: 120px;
+            width: 50px;
+            height: inherit;
+            border-radius: 0 10px 10px 0;
+            overflow: hidden;
+        }
+    }
+
+    .white-box {
+        background: white;
+        padding: 10px;
+        border: 1px solid @grayLight2;
+
+        h1 {
+            margin: 0;
+        }
+    }
+
+    .price-panel {
+        margin-bottom: -30px;
+
+        .white-box {
+            height: 80px;
+
+            .date-updated {
+                .abs;
+                bottom: 5px;
+                right: 10px;
+                margin: 0;
+                font-size: 13px;
+            }
+        }
+
+        .price-box {
+            &.up {
+                background: green;
+                color: white;
+            }
+
+            &.down {
+                background: red;
+                color: white;
+            }
+
+            .volume-text {
+                font-size: 14px;
+                font-weight: 800;
+                line-height: 20px;
+                color: @deepBlue;
+            }
+        }
+
+        .agms-directives.add-to-watchlist {
+            h1 {
+                margin: 0;
+                font-size: 20px;
+            }
+
+            z-index: 10;
+            position: fixed;
+            background: white;
+            padding: 10px;
+            width: 400px;
+            left: ~'calc(50% - 200px)';
+            top: 20px;
+            box-shadow: 0 0 10px @grayMed1;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+        }
+    }
+
+    .chart-panel {
+        margin-bottom: -20px;
+
+        > .white-box {
+            padding: 20px 20px 0px 20px;
+            min-height: 300px;
+
+            .barsizes > button, .periodsizes > button {
+                margin: 2px;
+                padding: 0 10px;
+                border: none;
+                line-height: 30px;
+                border-radius: 4px;
+                background: white;
+                color: black;
+                font-size: 14px;
+                border: 1px solid @grayLight1;
+
+                &:hover, &.active {
+                    background: @blueBasic;
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .fundamental-panel {
+        margin-bottom: -40px;
+
+        .white-box {
+            .rel;
+            height: 320px;
+            padding: 20px;
+
+            > h1 {
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+
+            .date-updated {
+                .abs;
+                top: 10px;
+                right: 10px;
+                margin: 0;
+                font-size: 13px;
+            }
+
+            p {
+                font-size: 20px;
+                text-align: center;
+                font-weight: 600;
+            }
+
+            .single-fundamental {
+                text-align: center;
+                padding-top: 50px;
+            }
+        }
+    }
+
+    .related-company-panel {
+        margin-bottom: -20px;
+
+        .white-box {
+            padding: 0;
+            min-height: 230px;
+
+            .company-header {
+                padding: 10px;
+                border-bottom: 1px solid @grayLight3;
+
+                h1 {
+                    font-size: 20px;
+                }
+            }
+
+            .company-description {
+                padding: 10px;
+            }
+        }
+    }
+
+    h1.title-section {
+        font-size: 40px;
+        margin-bottom: 0;
+        line-height: 35px;
+        padding: 0px;
+        font-weight: 700;
+    }
+
+    .company-overview-panel {
+        p {
+            font-size: 14px;
+        }
+
+        .scoring-boxes {
+            background: white;
+            padding: 10px;
+
+            .scoring {
+                h1 {
+                    font-size: 28px;
+                    margin: 0;
+
+                    &.smaller {
+                        font-size: 20px;
+                    }
+                }
+
+
+                h3 {
+                    font-size: 16px;
+                    color: @grayMed1;
+                    font-weight: 600;
+                    margin: 0;
+                }
+
+                margin-top: 5px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    .news-panel {
+        .news-content {
+            padding: 2px 5px;
+            background: white;
+            border-top: 1px solid #e4eaf0;
+            cursor: pointer;
+
+            .news-title {
+                font-size: 16px;
+            }
+
+            .news-date {
+                float: right;
+            }
+        }
+    }
+}

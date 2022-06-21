@@ -1,0 +1,12 @@
+﻿agmNgModuleWrapper('agmp.product',
+[
+    'agms.watchlist',
+    'agms.image',
+    'agms.header',
+    'agms.droidHelper',
+    'agms.product',
+    'agms.orders',
+    'agms.trading',
+    'agms.subscription',
+    'agms.market'
+]);

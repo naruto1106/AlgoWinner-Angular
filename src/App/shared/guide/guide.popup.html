@@ -1,0 +1,18 @@
+﻿<div class="agm-component-guide popup-area {{vm.config.cssClass}}">
+    <div class="popup-anchor">
+        <div class="popup">
+            {{vm.config.getCoordinate()}}
+            <h3 ng-show="vm.config.title">{{vm.config.title}}</h3>
+            <p ng-if="vm.config.message">
+                {{vm.config.message}}
+            </p>
+            <div ng-if="vm.config.html" ng-bind-html="vm.config.html">
+            </div>
+            <button ng-click="vm.config.buttonAction($event)" class="filled-blue">
+                {{vm.config.buttonLabel}}
+            </button>
+            <div class="clip-shade"></div>
+            <div class="clip"></div>
+        </div>
+    </div>
+</div>

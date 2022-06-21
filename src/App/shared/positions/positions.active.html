@@ -1,0 +1,111 @@
+﻿<div>
+    <div ng-if="::(vm.levelOfDetail==='Preview')">
+        Your subscription package does not include viewing of Active Position.
+    </div>
+    <div ng-if="::(vm.levelOfDetail!=='Preview')">
+        <div class="p-50px text-center" ng-show="vm.isLoadingPositions">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div ng-if="!vm.isLoadingPositions">
+            <div ng-if="vm.hasPositionsWithFilter(vm.positions, vm.positionFilter) && !vm.isPreview">
+                <div class="pull-right search">
+                    <input type="text" placeholder="SEARCH STOCK" ng-model="vm.models.searchStockText" ng-model-options="{debounce: 200}"
+                        analytics-on="change" analytics-category="{{vm.category}}" analytics-event="{{vm.event}}" analytics-label="SearchStock" agmc-analytics-timestamp />
+                    <button type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+                <div class="clearfix m-bottom-10px"></div>
+
+                <h4 class="text-center" ng-if="vm.models.searchStockText !== '' && vm.getTotalItems() == 0">no results found</h4>
+                <div ng-if="vm.hasPositions()">
+                    <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                        class="pagination-sm m-bottom-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+                        first-text="&laquo;" last-text="&raquo;" max-size="10"
+                        num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                    </ul>
+                    <agms-positions-active-table is-by-account="vm.isByAccount"
+                        get-paged-items="::vm.getPagedItems"
+                        is-magnifier-shown="true"
+                        is-preview="false"
+                        view-mode="vm.viewMode"
+                        selected-strategy="vm.selectedStrategy"
+                        can-increase-decrease="vm.canIncreaseDecrease"></agms-positions-active-table>
+                    <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                        class="pagination-sm m-bottom-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+                        first-text="&laquo;" last-text="&raquo;" max-size="10"
+                        num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                    </ul>
+                    <div class=" m-top-20px"></div>
+                    <div class="border row-md-10">
+                        <div class="col-md-3 p-20px box" style="min-height: 400px">
+                            <agms-positions-sector-summary-developer is-loading-positions="vm.isLoadingPositions"
+                                ng-if="vm.activeDisplayKind === 'Developer'"
+                                show-turnover="false"
+                                currency="vm.currency"></agms-positions-sector-summary-developer>
+
+                            <agms-positions-sector-summary-signal is-loading-positions="vm.isLoadingPositions"
+                                ng-if="vm.activeDisplayKind === 'Signal'"
+                                is-preview="false"
+                                show-turnover="false"
+                                currency="vm.currency"></agms-positions-sector-summary-signal>
+                        </div>
+                        <div class="col-md-7 p-20px">
+                            <div ng-if="vm.quantityOnHoldChartValues" class="col-md-6 p-bottom-20px text-center">
+                                <h4>Quantity On Hold</h4>
+                                <agmc-rainbow-donut width="100" height="100" colors="vm.positionChartColors" data="vm.quantityOnHoldChartValues" thickness="50">
+                                    
+                                </agmc-rainbow-donut>
+                            </div>
+                            <div ng-if="vm.exposureChartValues" class="col-md-6 p-bottom-20px text-center">
+                                <h4>Exposure</h4>
+                                <agmc-rainbow-donut width="100" height="100" colors="vm.positionChartColors" data="vm.exposureChartValues" thickness="50">
+                                    
+                                </agmc-rainbow-donut>
+                            </div>
+                            <div class="clearfix"></div>
+                            <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.exposureModels.currentPage"
+                                class="pagination-sm m-bottom-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                first-text="&laquo;" last-text="&raquo;" max-size="10"
+                                num-pages="vm.exposureModels.numPages" ng-show="vm.showExposurePagination()">
+                            </ul>
+                            <div class="box border">
+                                <table class="no-border table-large">
+                                    <!--ng-repeat="">-->
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity On Hold</th>
+                                            <th>Exposure</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="position in vm.getExposurePagedItems()">
+                                            <td>
+                                                <agmc-bullet color="vm.positionChartColors[$index + (vm.exposureModels.currentPage - 1) * vm.itemsPerPage]" diameter="10"></agmc-bullet>
+                                                <a ng-click="vm.goToProduct(position.Product)">{{::position.Product.ProductName}} ({{::position.Product.Symbol}})</a>
+                                            </td>
+                                            <td>{{position.QuantityOnHold | positionQuantity:position.PositionType}}</td>
+                                            <td>{{position.Exposure | customCurrencyOrDash:position.Product.Currency:2}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.exposureModels.currentPage"
+                                class="pagination-sm m-bottom-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+                                first-text="&laquo;" last-text="&raquo;" max-size="10"
+                                num-pages="vm.exposureModels.numPages" ng-show="vm.showExposurePagination()">
+                            </ul>
+                            <div class="clearfix "></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-info" ng-if="!vm.hasPositionsWithFilter(vm.positions, vm.positionFilter) || vm.isPreview">
+                <span ng-if="vm.viewMode !== 'readonly'">{{vm.noPositionMessage}}</span>
+                <span ng-if="vm.viewMode == 'readonly'">{{vm.noPositionMessageForGroupStrategy}}</span>
+            </div>
+        </div>
+    </div>
+</div>

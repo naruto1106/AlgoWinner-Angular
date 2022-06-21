@@ -1,0 +1,114 @@
+﻿<div class="agm-component-positions">
+    <table class="open-position">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Position</th>
+                <th>Holding<br />
+                    Quantity</th>
+                <th>Currency</th>
+                <th>Avg<br />
+                    Entry Price</th>
+                <th>Unrealized<br />
+                    P/L</th>
+                <th>Exposure</th>
+                <th>Margin Used</th>
+                <th>Entry<br />
+                    Time</th>
+                <th>Last Exit<br />
+                    Time</th>
+                <th ng-if="vm.showBracketOrder()">Stop Loss/<br />
+                    Take Profit</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="position in vm.getPagedItems()">
+                <td>
+                    <agms-product-picture product="::position.Product"></agms-product-picture>
+                    <div class="clearfix"></div>
+                </td>
+                <td>
+                    <h5 class="lh-40px  m-0px">{{position.PositionType}}</h5>
+                </td>
+                <td>
+                    <h5 class="lh-40px  m-0px">{{position.QuantityOnHold | valueOrDash:0}}</h5>
+                </td>
+                <td>
+                    <h5 class="lh-40px  m-0px">{{::position.Product.Currency}}</h5>
+                </td>
+                <td>
+                    <h5 class="lm-0px">{{position.AverageEntryPrice | customCurrencyOrDashMinMax:position.Product.Currency:2:4}}</h5>
+                </td>
+                <td ng-class="position.UnrealizedPL>=0?['green-profit']:['red-loss']">
+                    <h5>{{position.UnrealizedPL | customCurrencyOrDash:position.Product.Currency:2}}<br />
+                        ({{position.UnrealizedPL_Percent | valuePercentageOrDash:2}})
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="m-0px">{{position.Exposure | customCurrencyOrDash:position.Product.Currency:2}}</h5>
+                </td>
+                <td>
+                    <h5 class="m-0px">{{position.MarginValue | customCurrencyOrDash:position.Product.Currency:2}}</h5>
+                </td>
+                <td>
+                    <h5 class="m-0px">{{::position.EntryTime | date:'mediumDate'}}
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="m-0px">{{position.LastExitTime | date:'mediumDate'}}</h5>
+                </td>
+                <td ng-if="vm.showBracketOrder()">
+                    <div ng-repeat="order in position.BracketOrders">
+                        <span ng-if="order.OrderType == 'Stop'">SL: {{order.StopPrice | customCurrencyOrDashMinMax:position.Product.Currency:2:4}} ({{order.Quantity}} Units)</span>
+                        <span ng-if="order.OrderType == 'Limit'">TP: {{order.LimitPrice | customCurrencyOrDashMinMax:position.Product.Currency:2:4}} ({{order.Quantity}} Units)</span>
+                    </div>
+                </td>
+                <td>
+                    <button ng-if="vm.isMagnifierShown && !vm.isByAccount && vm.viewMode == 'readonly'"
+                        agmc-button-wait-on-promise="vm.viewPositionDetailFunc(position)"
+                        class="mini-filled-blue search-button"
+                        analytics-on="click" analytics-category="Trade" analytics-event="Orders" analytics-label="OpenPositionDetail" agmc-analytics-timestamp>
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                    <div class="dropdown pull-right" uib-dropdown is-open="status.isopen"
+                        ng-if="vm.isMagnifierShown && !vm.isByAccount && vm.viewMode !== 'readonly'">
+                        <button class="mini-filled-blue search-button"
+                            analytics-on="click" analytics-category="Trade" analytics-event="Orders" analytics-label="OpenPositionOptions" agmc-analytics-timestamp
+                            uib-dropdown-toggle>
+                            <span class="glyphicon glyphicon-option-horizontal"></span>
+                        </button>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                            <li ng-click="vm.editBracketOrder(position, 'add', 'position')" ng-if="vm.showAddBracket(position)">
+                                <a>Add Bracket/TP/SL</a>
+                            </li>
+                            <li ng-click="vm.editBracketOrder(position, 'edit', 'position')" ng-if="vm.showEditBracket(position)">
+                                <a>Edit Bracket/TP/SL</a>
+                            </li>
+                            <li ng-click="vm.viewPositionDetailFunc(position)">
+                                <a>View Position Detail</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button ng-if="!vm.canIncreaseDecrease &&  vm.viewMode !== 'readonly'  && !vm.isByAccount"
+                        ng-click="vm.decreasePosition(position)"
+                        class="mini-filled-red close-button super-compact-button"
+                        analytics-on="click" analytics-category="Trade" analytics-event="ClosePosition" analytics-label="OpenPositions" agmc-analytics-timestamp>
+                        CLOSE
+                    </button>
+                    <!--This div only applies for developer page only-->
+                    <div ng-if="vm.canIncreaseDecrease && vm.viewMode !== 'readonly' &&  !vm.isByAccount" class="pull-right m-right-5px">
+                        <a ng-click="vm.decreasePosition(position)">
+                            <span class="glyphicon glyphicon-minus-sign red-loss clickable lh-30px f-16px"></span>
+                        </a>
+                        <a ng-click="vm.increasePosition(position)">
+                            <span class="glyphicon glyphicon-plus-sign green-profit clickable lh-30px  f-16px"></span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

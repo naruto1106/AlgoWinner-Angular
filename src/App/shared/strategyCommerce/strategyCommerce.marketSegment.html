@@ -1,0 +1,41 @@
+﻿<form name="marketSegment" ng-submit="marketSegment.$valid && vm.nextFunc()">
+    <dl class="no-padding col-md-4  form-larger">
+        <dt>Trade Venue:</dt>
+        <dd ng-if="vm.strategyModel.BasicInfo.StrategyId">{{vm.strategyModel.Market.TradeVenueLoc}}</dd>
+        <dd ng-if="!vm.strategyModel.BasicInfo.StrategyId">
+            <select ng-model="vm.strategyModel.Market.TradeVenueLoc" ng-options="(tradeVenue + ' Exchanges') for tradeVenue in vm.tradeVenues" ng-change="vm.checkAssetClasses()"
+                    name="tradeVenueLoc" required></select>
+            <br/>
+            <span style="color: red" ng-show="marketSegment.tradeVenueLoc.$dirty && marketSegment.tradeVenueLoc.$invalid">Trade venue is required.</span>
+        </dd>
+    </dl>
+    <dl class="no-padding col-md-4 form-larger">
+        <dt>Asset Class:</dt>
+        <dd ng-if="vm.strategyModel.BasicInfo.StrategyId">{{vm.strategyModel.Market.AssetClass}}</dd>
+        <dd ng-if="!vm.strategyModel.BasicInfo.StrategyId">
+            <select ng-model="vm.strategyModel.Market.AssetClass" ng-options="asset for asset in vm.assetClasses"
+                    name="assetClass" required></select>
+            <br />
+            <span style="color:red" ng-show="marketSegment.assetClass.$dirty && marketSegment.assetClass.$invalid">Asset class is required.</span>
+        </dd>
+    </dl>
+    <dl class="no-padding col-md-4  form-larger">
+        <dt>Direction:</dt>
+        <dd ng-if="vm.strategyModel.BasicInfo.StrategyId">{{vm.strategyModel.Market.TradingDirection}}</dd>
+        <dd ng-if="!vm.strategyModel.BasicInfo.StrategyId">
+            <select ng-model="vm.strategyModel.Market.TradingDirection" ng-options="tradingDirection for tradingDirection in vm.tradingDirections"
+                    name="tradingDirection" required></select>
+            <br />
+            <span style="color:red" ng-show="marketSegment.tradingDirection.$dirty && marketSegment.tradingDirection.$invalid">Trade direction is required.</span>
+        </dd>
+    </dl>
+    <div class="clearfix"></div>
+    <div ng-if="vm.strategyModel.BasicInfo.StrategyId" class="alert alert-success">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        Your market segmentation has been set and no longer editable
+    </div>
+    <div class="separator-top m-top-20px h-10px"></div>
+    <button class="pull-right filled-blue m-left-10px" ng-if="vm.nextLabel" type="submit">{{vm.nextLabel}}</button>
+    <button class="pull-right hollow-blue m-left-10px" ng-if="vm.prevLabel" ng-click="vm.prevFunc()" type="button">{{vm.prevLabel}}</button>
+    <div class="clearfix"></div>
+</form>

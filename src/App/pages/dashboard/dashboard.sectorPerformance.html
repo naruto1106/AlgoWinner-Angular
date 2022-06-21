@@ -1,0 +1,74 @@
+﻿<div class="sector-performance generic-panel">
+    <h3 class="title">Sector Summary</h3>
+    <div class="white-box">
+        <div class="filter">
+            <span class="title">Market: </span>
+            <select class="market-selector" ng-model="vm.selectedMarket" ng-options="m for m in vm.markets"
+                    ng-change="vm.getSectorPerformancesByMarket()"
+                    analytics-on="click" analytics-category="Dashboard" analytics-event="SectorSummary" analytics-label="ChooseMarket" agmc-analytics-timestamp></select>
+            <span class="title">Period: </span>
+            <select class="time-selector" ng-model="vm.selectedPeriod" ng-options="m for m in vm.periods"
+                    ng-change="vm.onPeriodChange()"
+                    analytics-on="click" analytics-category="Dashboard" analytics-event="SectorSummary" analytics-label="ChoosePeriod" agmc-analytics-timestamp></select>
+            <span class="title">Sort By: </span>
+            <select class="sorting-selector" ng-model="vm.selectedSorting" ng-options="m for m in vm.sortingTypes"
+                    ng-change="vm.generateChart(vm.sectorPerformances)"
+                    analytics-on="click" analytics-category="Dashboard" analytics-event="SectorSummary" analytics-label="ChooseSorting" agmc-analytics-timestamp></select>
+            <span class="pull-right" ng-if="!vm.isLoading">As Of: {{vm.sectorPerformances[0].UpdatedTime | date:'mediumDate'}} {{vm.sectorPerformances[0].UpdatedTime | date:'shortTime'}} {{vm.timeZone}}</span>
+        </div>
+        <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+        <div class="sector-info">
+            <div class="sector-chart">
+                <div id="sector-chart-container" style="height: 440px; margin: 0 auto; width: 750px"
+                     ng-class="{'small-chart': vm.showSectorInformation}"></div>
+            </div>
+            <div class="sector-detail" ng-if="vm.showSectorInformation">
+                <div>
+                    <div class="sector-name">{{vm.selectedSector.SectorInfoModel.SectorName}}</div>
+                    <div class="sector-data">
+                        <span>{{vm.selectedSector.SectorInfoModel.CompanyNumber}} Companies</span>
+                        <span class="market-cap">Market Cap {{vm.selectedSector.Companies[0].Product.Currency | currencySymbol}} {{vm.selectedSector.SectorInfoModel.MarketCap * 1000000 | largeAmountValue:2}}</span>
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                        <td colspan="4" class="center-align">Performance</td>
+                    </tr>
+                    <tr>
+                        <td>1 Week</td>
+                        <td>1 Month</td>
+                        <td>3 Month</td>
+                        <td>1 Year</td>
+                    </tr>
+                    <tr>
+                        <td ng-class="vm.selectedSector.Performance.OneWeek>=0?['green-profit']:['red-loss']">{{vm.selectedSector.Performance.OneWeek | valuePercentageOrDash:2}}</td>
+                        <td ng-class="vm.selectedSector.Performance.OneMonth>=0?['green-profit']:['red-loss']">{{vm.selectedSector.Performance.OneMonth | valuePercentageOrDash:2}}</td>
+                        <td ng-class="vm.selectedSector.Performance.ThreeMonths>=0?['green-profit']:['red-loss']">{{vm.selectedSector.Performance.ThreeMonths | valuePercentageOrDash:2}}</td>
+                        <td ng-class="vm.selectedSector.Performance.Oneyear>=0?['green-profit']:['red-loss']">{{vm.selectedSector.Performance.Oneyear | valuePercentageOrDash:2}}</td>
+                    </tr>
+                </table>
+                <div class="top-company">
+                    <div>
+                        Top 3 performing companies in this sector:
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Performance</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="c in vm.selectedSector.Companies">
+                                <td class="company-name ellipsis-nowrap" uib-tooltip="{{c.Product.ProductName}}">
+                                    {{c.Product.ProductName}}
+                                </td>
+                                <td ng-class="c.Performance>=0?['green-profit']:['red-loss']">{{c.Performance | valuePercentageOrDash:2}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

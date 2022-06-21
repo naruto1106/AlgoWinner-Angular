@@ -1,0 +1,272 @@
+﻿<div class="agm-components-dashboard">
+    <agms-header-dashboard current-page="news"></agms-header-dashboard>
+    <section class="big-news-tips">
+        <div class="row-md-4 gap-10px">
+            <div class="col-md-1">
+                <agmc-sticky-sidebar hooked-on-bottom-at="0" offset-top-at="50" on-scroll-bottom="">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            Filters
+                            <h4 class="lh-30px m-0px glyphicon glyphicon-chevron-down hoverable-text clickable pull-right"
+                                ng-click="vm.showOrHideFilters()" ng-show="!vm.showFilters"></h4>
+                            <h4 class="lh-30px m-0px glyphicon glyphicon-chevron-up  hoverable-text clickable pull-right"
+                                ng-click="vm.showOrHideFilters()" ng-show="vm.showFilters"></h4>
+                        </div>
+                        <div class="filter-panel panel-body" ng-show="vm.showFilters">
+                            <div class="p-50px text-center" ng-if="vm.isLoadingFilter">
+                                <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                            </div>
+
+                            <div ng-if="!vm.isLoadingFilter">
+                                <div class="filter-item">
+                                    <agmc-date-picker from-date="vm.filter.From"
+                                                      to-date="vm.filter.To"
+                                                      date-selection-changes="vm.onProductFilteredChanged()"
+                                                      allow-manual-entry="false"
+                                                      analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="ClickDateFilter" agmc-analytics-timestamp
+                                                      class="pull-left">
+                                    </agmc-date-picker>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="filter-item market-filter">
+                                    <span class="filter-name">Markets:</span>
+                                    <div>
+                                        <select ng-options="tradeVenue as tradeVenue for tradeVenue in vm.tradeVenues" ng-model="vm.filter.Market" ng-change="vm.onMarketChanged()"></select>
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <div class="filter-name">
+                                        Stock Filter:
+                                    </div>
+                                    <div class="product-search">
+                                        <input type="radio" ng-model="vm.selectedProductFilter" ng-change="vm.onProductFilteredChanged()" value="search" />
+                                        <agms-text-processing-multi-autocomplete placeholder-text="'Search Name or Symbol ...'"
+                                                                                 class="pull-right"
+                                                                                 on-items-changed="vm.onProductFilteredChanged"
+                                                                                 promise="vm.populateSearchItemPromise"
+                                                                                 items="vm.selectedProducts"
+                                                                                 unrecognized-items="vm.unrecognizedItems"
+                                                                                 analytics-on="change" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="TypeStocksFilter" agmc-analytics-timestamp>
+                                        </agms-text-processing-multi-autocomplete>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="list-filter" ng-if="vm.watchlists.length > 0">
+                                        <input type="radio" ng-model="vm.selectedProductFilter" ng-change="vm.onProductFilteredChanged()" value="watchlist" />
+                                        By Watchlist:
+                                        <div>
+                                            <select ng-options="item as item.WatchlistName for item in vm.watchlists" ng-model="vm.selectedWatchlist" ng-change="vm.onProductFilteredChanged()"></select>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix m-10px"></div>
+                                    <div class="news-disclaimer">
+                                        Certain information displayed on this page are links from public domain sites; if we have in any way violated any copyrights and other proprietary rights, kindly inform us immediately and we will remove the indicated content from this page.
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="left-panel panel" ng-if="vm.relatedNews.length > 0">
+                        <div class="panel-heading">
+                            Related News
+                            <h4 class="lh-30px m-0px glyphicon glyphicon-chevron-down hoverable-text clickable pull-right"
+                                ng-click="vm.showOrHideRelatedNews()" ng-show="!vm.showRelatedNews"></h4>
+                            <h4 class="lh-30px m-0px glyphicon glyphicon-chevron-up  hoverable-text clickable pull-right"
+                                ng-click="vm.showOrHideRelatedNews()" ng-show="vm.showRelatedNews"></h4>
+                        </div>
+                        <div class="panel-body related-news" ng-show="vm.showRelatedNews">
+                            <div infinite-scroll="" infinite-scroll-parent="true"
+                                 analytics-on="scrollby" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="ScrollRelatedNews" agmc-analytics-timestamp>
+                                <div class="news-tips" ng-repeat="newsTips in vm.relatedNews" ng-if="!vm.isLoadingRelatedNews"
+                                     analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="ClickRelatedNews" dimension-value="{{newsTips.NewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4">
+                                    <div class="news-tips-content">
+                                        <h1 class="title" ng-click="vm.seeNewsDetail(newsTips)" ng-bind-html="::newsTips.Title"></h1>
+                                        <div ng-if="newsTips.ProductsWithMarketData.length>0" class="news-tips-cash-tags">
+                                            <a ng-repeat="p in newsTips.ProductsWithMarketData" ng-click="vm.goToProduct(p.ProductModel)"
+                                               ng-if="$index < 4 || newsTips.isExpanded">
+                                                <span ng-if="vm.filter.Market == 'US'">{{::p.ProductModel.Symbol}}</span>
+                                                <span ng-if="vm.filter.Market == 'SG'">{{::p.ProductModel.ProductName}}</span>
+                                                <span class="last-price" ng-class="p.MarketData.LastTradedPriceDiff >= 0 ? ['green-profit']:['red-loss']">
+                                                    <span class="glyphicon glyphicon-triangle-top" ng-if="p.MarketData.LastTradedPriceDiff >= 0"></span>
+                                                    <span class="glyphicon glyphicon-triangle-bottom" ng-if="p.MarketData.LastTradedPriceDiff < 0"></span>
+                                                    <span>{{p.MarketData.LastTradedPriceDiffPct | valuePercentOrDash:2 }}</span>
+                                                </span>
+                                            </a>
+                                            <span ng-if="newsTips.ProductsWithMarketData.length>3" class="show-more">
+                                                <span ng-if="!newsTips.isExpanded" ng-click="newsTips.isExpanded=!newsTips.isExpanded">
+                                                    Show more...
+                                                </span>
+                                                <span ng-if="newsTips.isExpanded" ng-click="newsTips.isExpanded=!newsTips.isExpanded">
+                                                    Show less...
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div class="special-text news-tips-date">
+                                            <span class="source">- {{::newsTips.Source}}</span>
+                                            {{newsTips.PublishedTime | timeSince}}
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="p-50px text-center" ng-if="vm.isLoadingRelatedNews">
+                                    <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </agmc-sticky-sidebar>
+            </div>
+
+            <div class="col-md-2">
+                <div ng-if="vm.showEmptyMessage()" class="alert alert-info message-for-newstips">
+                    No news for the filters selected.
+                </div>
+                <div infinite-scroll="vm.getFilteredNewsTips(vm.hasReachedEnd)" infinite-scroll-disabled="searchInProgress">
+                    <div class="content-container panel" ng-repeat="newsTips in vm.newsTipsList" ng-class="{selected: newsTips.Selected}"
+                         ng-click="vm.selectNews(newsTips)"
+                         analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="SelectBigNews" agmc-analytics-timestamp>
+                        <div class="panel-heading clickable">
+                            <div class="row-md-10 gap-0px">
+                                <div class="col-md-9">
+                                    <div agms-image img-src="newsTips.ImageUrl" img-fallback-src="'//am708403.azureedge.net/images/broker/algomerchant.png?'" class="news-tips-icon"></div>
+                                    <h1 class="title" ng-bind-html="::newsTips.Title" ng-click="vm.expandNews(newsTips)"
+                                        analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="ClickBigNewsTitle" agmc-analytics-timestamp></h1>
+                                    <span class="special-text news-tips-date">
+                                        {{newsTips.PublishedTime | calendarTime}}
+                                    </span>
+                                    <span class="source">- {{::newsTips.Source}}</span>
+                                    <span ng-if="newsTips.ProductsWithMarketData.length>0" class="news-tips-cash-tags">
+                                        <a ng-repeat="p in newsTips.ProductsWithMarketData" ng-click="vm.goToProduct(p.ProductModel)"
+                                           analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="ClickBigNewsProduct" agmc-analytics-timestamp
+                                           ng-if="$index < 4 || newsTips.isExpanded">
+                                            <span ng-if="vm.filter.Market == 'US'">{{::p.ProductModel.Symbol}}</span>
+                                            <span ng-if="vm.filter.Market == 'SG'">{{::p.ProductModel.ProductName}}</span>
+                                            <span class="last-price" ng-class="p.MarketData.LastTradedPriceDiff >= 0 ? ['green-profit']:['red-loss']">
+                                                <span class="glyphicon glyphicon-triangle-top" ng-if="p.MarketData.LastTradedPriceDiff >= 0"></span>
+                                                <span class="glyphicon glyphicon-triangle-bottom" ng-if="p.MarketData.LastTradedPriceDiff < 0"></span>
+                                                <span>{{p.MarketData.LastTradedPriceDiffPct | valuePercentOrDash:2 }}</span>
+                                            </span>
+                                        </a>
+                                        <span ng-if="newsTips.ProductsWithMarketData.length>3" class="show-more">
+                                            <span ng-if="!newsTips.isExpanded" ng-click="newsTips.isExpanded=!newsTips.isExpanded">
+                                                Show more...
+                                            </span>
+                                            <span ng-if="newsTips.isExpanded" ng-click="newsTips.isExpanded=!newsTips.isExpanded">
+                                                Show less...
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="news-type">
+                                        {{::newsTips.Type}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="panel-body" ng-if="newsTips.isOpen && newsTips.Content">
+                            <div ng-if="newsTips.PreviewImageUrl">
+                                <div class="image-buttons">
+                                    <a class="glyphicon glyphicon-search silent-button2 m-right-5px m-top-5px pull-right" ng-click="vm.showPicture('Attachment #'+($index+1), newsTips.PreviewImageUrl)"
+                                       analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="OpenImage" dimension-value="{{newsTips.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4"></a>
+                                    <a class="glyphicon glyphicon-download-alt silent-button2 m-right-5px m-top-5px pull-right" href="{{newsTips.PreviewImageUrl}}" target="_blank"
+                                       analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="DownloadImage" dimension-value="{{newsTips.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4"></a>
+                                </div>
+                                <div ng-if="newsTips.PreviewImageUrl != null" class="image-preview" agms-image img-src="newsTips.PreviewImageUrl" ng-click="vm.goToLink(newsTips.UrlLink)">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <p class="content" agmc-paragraph-clipper="newsTips.Content" is-clipping-active="true" max-line-count="999"></p>
+                            <div class="clearfix"></div>
+
+                            <p class="f-12px pull-right" ng-if="newsTips.UrlLink">
+                                Read more at <a ng-click="vm.goToLink(newsTips.UrlLink)"
+                                                analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="ClickNewsUrl" dimension-value="{{newsTips.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4">
+                                    {{newsTips.UrlLink | limitTo: 50}} ...
+                                </a>
+                            </p>
+
+                            <div class="clearfix m-bottom-5px"></div>
+
+                            <div ng-if="newsTips.Attachments && newsTips.Attachments.length > 0" class="sub p-left-10px p-right-10px">
+                                <div>
+                                    <strong>Attachments:</strong>
+                                </div>
+                                <div ng-repeat="attachment in newsTips.Attachments" class="p-5px m-right-10px m-bottom-10px pull-left">
+                                    <span ng-if="vm.isPdfAttachment(attachment)"><img src="//am708403.azureedge.net/images/logo-adobe-pdf.jpg" style="width: auto; background-size: contain" class="h-30px" /> {{attachment.AttachmentName}} </span>
+                                    <span ng-if="!vm.isPdfAttachment(attachment)"><img ng-src="{{attachment.AttachmentUrl}}" style="width: auto" class="h-30px" /> {{attachment.AttachmentName | limitTo:50}} </span>
+                                    <a ng-if="!vm.isPdfAttachment(attachment)" class="glyphicon glyphicon-search silent-button2" ng-click="vm.showPicture(attachment.AttachmentName, attachment.AttachmentUrl )"
+                                       analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="OpenImage" dimension-value="{{newsTips.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="'dimension4'"></a>
+                                    <a class="glyphicon glyphicon-download-alt silent-button2" href="{{attachment.AttachmentUrl}}" target="_blank"
+                                       analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="DownloadAttachment" dimension-value="{{newsTips.AlgoNewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4"></a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-50px text-center" ng-if="vm.isLoadingData">
+                    <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <agmc-sticky-sidebar hooked-on-bottom-at="0" offset-top-at="50" on-scroll-bottom="">
+                    <div class="right-panel panel">
+                        <div class="panel-heading">
+                            Breaking News
+                        </div>
+                        <div class="panel-body breaking-news">
+                            <div ng-if="vm.breakingNews.length <= 0 && !vm.isLoadingBreakingNews" class="alert alert-info">
+                                No Breaking News for {{vm.filter.Market}}
+                            </div>
+                            <div infinite-scroll="" infinite-scroll-parent="true"
+                                 analytics-on="scrollby" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="ScrollBreakingNews" agmc-analytics-timestamp>
+                                <div class="news-tips" ng-repeat="newsTips in vm.breakingNews" ng-if="!vm.isLoadingBreakingNews"
+                                     analytics-on="click" analytics-category="Dashboard" analytics-event="BigNews" analytics-label="ClickBreakingNews" dimension-value="{{newsTips.NewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4">
+                                    <div agms-image img-src="newsTips.ImageUrl" img-fallback-src="'//am708403.azureedge.net/images/broker/algomerchant.png?'" class="news-tips-icon"></div>
+                                    <div class="news-tips-content">
+                                        <h1 class="title" ng-click="vm.seeNewsDetail(newsTips)" ng-bind-html="::newsTips.Title"></h1>
+                                        <div ng-if="newsTips.ProductsWithMarketData.length>0" class="news-tips-cash-tags">
+                                            <a ng-repeat="p in newsTips.ProductsWithMarketData" ng-click="vm.goToProduct(p.ProductModel)"
+                                               ng-if="$index < 4 || newsTips.isExpanded">
+                                                <span ng-if="vm.filter.Market == 'US'">{{::p.ProductModel.Symbol}}</span>
+                                                <span ng-if="vm.filter.Market == 'SG'">{{::p.ProductModel.ProductName}}</span>
+                                                <span class="last-price" ng-class="p.MarketData.LastTradedPriceDiff >= 0 ? ['green-profit']:['red-loss']">
+                                                    <span class="glyphicon glyphicon-triangle-top" ng-if="p.MarketData.LastTradedPriceDiff >= 0"></span>
+                                                    <span class="glyphicon glyphicon-triangle-bottom" ng-if="p.MarketData.LastTradedPriceDiff < 0"></span>
+                                                    <span>{{p.MarketData.LastTradedPriceDiffPct | valuePercentOrDash:2 }}</span>
+                                                </span>
+                                            </a>
+                                            <span ng-if="newsTips.ProductsWithMarketData.length>3" class="show-more">
+                                                <span ng-if="!newsTips.isExpanded" ng-click="newsTips.isExpanded=!newsTips.isExpanded">
+                                                    Show more...
+                                                </span>
+                                                <span ng-if="newsTips.isExpanded" ng-click="newsTips.isExpanded=!newsTips.isExpanded">
+                                                    Show less...
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div class="special-text news-tips-date">
+                                            <span class="source">- {{::newsTips.Source}}</span>
+                                            {{newsTips.PublishedTime | timeSince}}
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="p-50px text-center" ng-if="vm.isLoadingBreakingNews">
+                                    <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </agmc-sticky-sidebar>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </section>
+</div>

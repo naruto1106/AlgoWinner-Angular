@@ -1,0 +1,122 @@
+﻿<agms-header-trade current-page="SETTINGS"></agms-header-trade>
+<section class="container css-component-managestrategies white-box">
+    <div class="p-50px text-center" ng-if="vm.isLoadingData">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div ng-if="!vm.isLoadingData">
+        <div ng-if="vm.myTradeSettings.length <= 0">
+            <h4>
+                <a href="" ng-click="vm.openNewStrategy()" style=""><span class="no-content-color">To start trading, create your own trade portfolio by clicking </span> here</a>
+            </h4>
+        </div>
+        <div ng-show="vm.myTradeSettings.length > 0">
+            <div class="w-100pct box p-20px white-box" agms-droid-helper-item="tradePortfolioSettings.strategySelection">
+                <agms-strategy-commerce-circle-selection disable-all-selection="true"
+                                               strategy-selections="vm.strategySelections"
+                                               event-name="strategySelectedFromScrollingSelection"
+                                               selected-strategy="vm.selectedStrategy" slides-per-view="5">
+                </agms-strategy-commerce-circle-selection>
+            </div>
+
+            <div ng-if="vm.selectedStrategy">
+                <div class="m-top-30px"></div>
+                <div class="m-bottom-20px m-left-0px m-right-0px h-300px border">
+                    <div class="row box m-0px panel-heading">
+                        <div class="pull-left">
+                            <h4>{{vm.selectedStrategySetting.Name}} SETTINGS</h4>
+                        </div>
+                        <div class="pull-right m-top-5px m-right-10px" agms-droid-helper-item="tradePortfolioSettings.editTradePortfolios"
+                             ng-if="vm.selectedStrategySetting.Status === 'Created' || vm.selectedStrategySetting.Status === 'Linked'">
+                            <button class="filled-blue"
+                                    ng-click="vm.editStrategy(vm.selectedStrategySetting.StrategyId)"
+                                    analytics-on="click" analytics-category="Trade" analytics-event="TradeSettings" analytics-label="EditStrategy" agmc-analytics-timestamp>
+                                EDIT
+                            </button>
+                        </div>
+                        <div class="pull-right m-top-5px m-right-10px" agms-droid-helper-item="tradePortfolioSettings.deleteTradePortfolios"
+                             ng-if="vm.coreConfigService.StrategyManagement.EnableDeleteStrategy">
+                            <button class="filled-red"
+                                    ng-click="vm.deleteStrategy(vm.selectedStrategySetting.StrategyId)"
+                                    analytics-on="click" analytics-category="Trade" analytics-event="TradeSettings" analytics-label="DeleteStrategy" agmc-analytics-timestamp>
+                                DELETE
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row-md-14">
+                        <div class="col-md-6 m-top-30px">
+                            <div class="agm-components-strategy-commerce border white-box">
+                                <div class="p-0px h-140px">
+                                    <div class="strategy-type0 pull-left w-210px no-padding h-100pct">
+                                        <div class="strategy-icon transition-fast" agms-image img-src="vm.selectedStrategySetting.ImageUrl" img-fallback-src="'//am708403.azureedge.net/images/no-image.jpg?'"></div>
+                                        <h1 class="title">{{vm.selectedStrategySetting.Name}}</h1>
+                                    </div>
+                                    <div class="no-padding h-100pct pull-left strategy w-100pct calc-h-minus-210px">
+                                        <div class="rel h-100pct ">
+                                            <div class="p-10px ">
+                                                <p style="line-height: 20px;" agmc-paragraph-clipper="vm.selectedStrategySetting.Description" max-line-count="4" is-clipping-active="true" is-clipping-required="true"></p>
+                                            </div>
+                                            <agms-strategy-commerce-category class="abs w-100pct bottom-0px lh-40px p-left-10px no-border" categories="vm.selectedStrategySetting.Categories">
+                                            </agms-strategy-commerce-category>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div ng-if="vm.selectedStrategySetting.Status==='Expired'">
+                                <div class="alert alert-danger text-center m-top-10px">
+                                    YOUR TRADE PORTFOLIO HAS EXPIRED
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 m-top-30px">
+                            <div class="box border m-bottom-10px" agms-droid-helper-item="tradePortfolioSettings.cashAllocation">
+                                <div class="panel-heading">Cash Allocation</div>
+                                <div class="p-5px">
+                                    <table class="table-large no-border">
+                                        <tr>
+                                            <td class="va-mid w-130px">
+                                                Capital Available
+                                            </td>
+                                            <td class="va-mid">
+                                                <span class="strategy-capital">{{vm.selectedStrategySetting.TradingCapital | customCurrencyOrDash:vm.selectedStrategySetting.Currency:2}}</span>
+                                                <button class="mini-filled-green square-button h-30px m-right-5px m-left-5px" ng-click="vm.allocateCashBalance(vm.selectedStrategySetting, vm.selectedAccount, 'topUp')"
+                                                        analytics-on="click" analytics-category="Trade" analytics-event="TradeSettings" analytics-label="TopUp" agmc-analytics-timestamp>
+                                                    <span class="glyphicon glyphicon-plus m-right-5px"></span>Top Up
+                                                </button>
+                                                <button class="mini-filled-red square-button h-30px" ng-click="vm.allocateCashBalance(vm.selectedStrategySetting, vm.selectedAccount, 'reduce')"
+                                                        analytics-on="click" analytics-category="Trade" analytics-event="TradeSettings" analytics-label="Reducec" agmc-analytics-timestamp>
+                                                    <span class="glyphicon glyphicon-minus m-right-5px"></span>Reduce
+                                                </button>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <table class="table-large no-border">
+                                        <tr style="min-height: 0;"></tr>
+                                        <tr>
+                                            <td>Realized P/L</td>
+                                            <td ng-class="vm.selectedStrategySetting.RealizedPL>=0?['green-profit']:['red-loss']">{{vm.selectedStrategySetting.RealizedPL | customCurrencyOrDash:vm.selectedStrategySetting.Currency:2}}</td>
+                                            <td>Unrealized P/L</td>
+                                            <td ng-class="vm.selectedStrategySetting.UnrealizedPL>=0?['green-profit']:['red-loss']">{{vm.selectedStrategySetting.UnrealizedPL | customCurrencyOrDash:vm.selectedStrategySetting.Currency:2}}</td>
+                                        </tr>
+                                        <tr ng-if="vm.selectedStrategySetting.Type==='Cash'">
+                                            <td>Exposure</td>
+                                            <td>{{vm.selectedStrategySetting.LongExposure | customCurrencyOrDash:vm.selectedStrategySetting.Currency:2}}</td>
+                                        </tr>
+                                        <tr ng-if="vm.selectedStrategySetting.Type==='CFD'">
+                                            <td>Long Exposure</td>
+                                            <td>{{vm.selectedStrategySetting.LongExposure | customCurrencyOrDash:vm.selectedStrategySetting.Currency:2}}</td>
+                                            <td>Short Exposure</td>
+                                            <td>{{vm.selectedStrategySetting.ShortExposure | customCurrencyOrDash:vm.selectedStrategySetting.Currency:2}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

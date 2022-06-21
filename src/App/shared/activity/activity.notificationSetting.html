@@ -1,0 +1,132 @@
+﻿<div>
+    <div class="panel panel-body text-center" ng-if="vm.submitting">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <form class="panel panel-body" ng-if="!vm.submitting">
+        <table class="table-xlarge" style="font-size: 110%">
+            <thead>
+                <tr>
+                    <th>Events</th>
+                    <th>Global Notification</th>
+                    <th>Alert Sound</th>
+                    <th>Email</th>
+                    <th>SMS</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr ng-show="vm.visibleAspects.SubscribedStrategies">
+                    <td>Trading Activities from
+                        <br />Subscribed Strategies</td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.SubscribedStrategies.GlobalNotification"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.SubscribedStrategies.AlertSound"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.SubscribedStrategies.Email"
+                        />
+                    </td>
+                    <td style="min-width: 90px">
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" switch-active="{{vm.isSubscribedTotradingSignalSMSNotificationPlan}}"
+                            ng-model="vm.currentSettings.SubscribedStrategies.Sms" />*
+                    </td>
+                </tr>
+                <tr ng-if="vm.isInvestmentLeaderOrSuperUser()" ng-show="vm.visibleAspects.MarketPlayerStrategies">
+                    <td>Trading Activities from
+                        <br />Market Player</td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.MarketPlayerStrategies.GlobalNotification"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.MarketPlayerStrategies.AlertSound"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.MarketPlayerStrategies.Email"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.MarketPlayerStrategies.Sms"
+                        />*
+                    </td>
+                </tr>
+                <tr ng-show="vm.visibleAspects.TradingActivities">
+                    <td>My Trading Activities</td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.TradingActivities.GlobalNotification"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.TradingActivities.AlertSound"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.TradingActivities.Email"
+                        />
+                    </td>
+                    <td></td>
+                </tr>
+                <tr ng-if="vm.coreConfigService.General.ShowPriceAlert" ng-show="vm.visibleAspects.PriceAlerts">
+                    <td>Price Alerts</td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.PriceAlerts.GlobalNotification"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.PriceAlerts.AlertSound"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.PriceAlerts.Email"
+                        />
+                    </td>
+                    <td></td>
+                </tr>
+                <tr ng-if="vm.coreConfigService.TradersGPS.HasAlertConfig && vm.coreConfigService.TradersGPS.Enabled" ng-show="vm.visibleAspects.TradersGPS">
+                    <td>TradersGPS</td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.TradersGPS.GlobalNotification"
+                        />
+                    </td>
+                    <td>
+                        <input type="checkbox" agmc-button-toggle switch-on-color="success" switch-size="mini" ng-model="vm.currentSettings.TradersGPS.AlertSound"
+                        />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="m-top-10px" ng-show="vm.visibleAspects.MarketPlayerStrategies || vm.visibleAspects.SubscribedStrategies">
+            <div ng-if="vm.isSubscribedTotradingSignalSMSNotificationPlan && vm.currentSubscription && !vm.currentSubscription.ExpiryDate">
+                *You are currently subscribed to SMS notifications on trading signals from subscribed strategies.
+                <a ng-click="vm.stoptradingSignalSMSNotification()"
+                    class="red-loss strong">Click here to terminate this subscription.</a>
+            </div>
+            <div ng-if="!vm.currentSubscription && !vm.isSubscribedTotradingSignalSMSNotificationPlan && !vm.currentSettings.SubscribedStrategies.Sms">
+                *Click
+                <a class="red-loss strong" ng-click="vm.subscribetradingSignalSMSNotification()">here</a> to activate SMS notifications on trading signals from subscribed strategies ({{vm.tradingSignalSMSNotificationPlan.PerPeriodFee
+                | customCurrencyOrDash:vm.tradingSignalSMSNotificationPlan.Currency:2}}/{{vm.tradingSignalSMSNotificationPlan.PeriodType
+                | periodLy}}).
+            </div>
+            <div ng-if="vm.currentSubscription && vm.currentSubscription.ExpiryDate">
+                *Your subscription to SMS notifications on trading signals from subscribed strategies will terminate on {{vm.currentSubscription.ExpiryDate
+                | date:'mediumDate'}} {{vm.currentSubscription.ExpiryDate | date:'shortTime'}}.
+                <a ng-click="vm.reActivateTradingSignalSmsNotification()" class="red-loss strong">Click here to re-activate.</a>
+            </div>
+        </div>
+        <div class="center-align">
+            <div class="separator-top m-top-20px h-10px"></div>
+            <button class="pull-right filled-green" agmc-button-wait-on-promise="vm.save()" ng-disabled="vm.submitting" analytics-on="click"
+                analytics-category="Notifications" analytics-event="Save" agmc-analytics-timestamp>
+                SAVE
+            </button>
+            <button class="pull-right hollow-green m-right-10px" ng-if="vm.showCancel" ng-click="vm.closePanel()">CANCEL</button>
+        </div>
+    </form>
+</div>

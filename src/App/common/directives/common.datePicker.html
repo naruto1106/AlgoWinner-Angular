@@ -1,0 +1,36 @@
+﻿<div class="agms-directives date-picker" ng-focus="vm.resetPairStep()" ng-blur="vm.resetPairStep()">
+    <div class="from-date">
+        <div class="title" ng-if="vm.fromLabel">{{vm.fromLabel}}</div>
+        <div class=" date-picker input-group" >
+            <input type="text" class="input-date"
+                   uib-datepicker-popup="{{vm.format}}"
+                   ng-model="vm.fromDate"
+                   is-open="vm.fromOpenedMyChannels"
+                   show-weeks="false"
+                   show-button-bar="false"
+                   datepicker-options="vm.dateOptionsFrom"
+                   ng-required="true" close-text="Close" />
+            <button type="button" class="date-button" ng-click="vm.openFromMyChannels($event)">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="to-date">
+        <div class="title" ng-if="vm.toLabel">{{vm.toLabel}}</div>
+        <div class="date-picker input-group" ng-if="!vm.hideToDate" >
+            <input type="text" class="input-date"
+                   uib-datepicker-popup="{{vm.format}}"
+                   ng-model="vm.toDate"
+                   is-open="vm.toOpenedMyChannels"
+                   show-button-bar="false"
+                   datepicker-options="vm.dateOptionsTo"
+                   ng-required="true" close-text="Close" />
+            <button type="button" class="date-button" ng-click="vm.openToMyChannels($event)">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>

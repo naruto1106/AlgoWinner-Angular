@@ -1,0 +1,20 @@
+﻿<div>
+    <div ng-switch on="vm.selectedBroker">
+        <img ng-src="//am708403.azureedge.net/images/broker/etrade.png?" width="100%" height="100%" ng-switch-when="E-Trade" />
+        <img ng-src="//am708403.azureedge.net/images/broker/oanda.png?" width="100%" height="100%" ng-switch-when="OANDA" />
+        <img ng-src="//am708403.azureedge.net/images/broker/ig.png?" width="100%" height="100%" ng-switch-when="IG" />
+        <img ng-src="//am708403.azureedge.net/images/broker/ib.png?" width="100%" height="100%" ng-switch-when="Interactive Brokers" />
+        <img ng-src="//am708403.azureedge.net/images/broker/poems.png?" width="100%" height="100%" ng-switch-when="POEMS" />
+        <img ng-src="//am708403.azureedge.net/images/broker/algomerchant.png?" width="100%" height="100%" ng-switch-when="AM" />
+        <img ng-src="//am708403.azureedge.net/images/broker/ketrade.png?" width="100%" height="100%" ng-switch-when="KE Trade" />
+        <img ng-src="//am708403.azureedge.net/images/broker/cityindex.png?" width="100%" height="100%" ng-switch-when="City Index" />
+        <img ng-src="//am708403.azureedge.net/images/broker/futu.png?" width="100%" height="100%" ng-switch-when="Futu" />
+        <img ng-src="//am708403.azureedge.net/images/broker/tiger.png?" width="100%" height="100%" ng-switch-when="Tiger" />
+        <div class="w-100pct h-150px box text-center" ng-switch-when="None">
+            <div class="p-top-50px lh-50px">NOT YET SET</div>
+        </div>
+    </div>
+    <div ng-if="!vm.disableWatermark">
+        <!--{{vm.accountType}}-->
+    </div>    
+</div>

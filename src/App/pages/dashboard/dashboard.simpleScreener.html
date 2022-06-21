@@ -1,0 +1,85 @@
+﻿<section class="simple-screener rel flex-v">
+    <script type="text/ng-template" id="simpleScreener/screener">
+        <button class="cell-botton-normal" uib-tooltip="Chart" tooltip-placement="left" ng-click="externalVm.gotoChart(productContainer)"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="StockSummary" analytics-label="GoToChart" agmc-analytics-timestamp>
+            <span class="glyphicon glyphicon-stats"></span>
+        </button>
+        <button class="cell-botton-normal" uib-tooltip="Add To Watchlist" tooltip-placement="left" ng-click="externalVm.addToWatchlist(productContainer)"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="StockSummary" analytics-label="AddToWatchlist" agmc-analytics-timestamp>
+            <span class="glyphicon glyphicon-eye-open"></span>
+        </button>
+    </script>
+    <script type="text/ng-template" id="simpleScreener/product-info">
+        <agms-product-picture changeable="true" class="product-picture" product="productContainer.ProductModel"
+                              hide-market-data="true" hide-symbol="true" show-currency="true">
+        </agms-product-picture>
+    </script>
+    <script type="text/ng-template" id="simpleScreener/price-changes">
+        <span ng-if="productContainer.PriceDiffPct == null" class="not-available">N/A</span>
+        <div ng-if="productContainer.PriceDiffPct != null">
+            <div ng-class="productContainer.PriceDiffPct>=0?['green-profit']:['red-loss']">
+                <span class="glyphicon glyphicon-triangle-top" ng-if="productContainer.PriceDiffPct >= 0"></span>
+                <span class="glyphicon glyphicon-triangle-bottom" ng-if="productContainer.PriceDiffPct < 0"></span>
+                <span class="percentage-price-changes">{{productContainer.PriceDiffPct | valuePercentageOrDash:2}}</span>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="simpleScreener/trade-volume">
+        <div ng-if="productContainer.Volume">
+            {{productContainer.Volume | largeAmountValue:2:true}}
+        </div>
+        <span class="not-available" ng-if="!productContainer.Volume">N/A</span>
+    </script>
+    <script type="text/ng-template" id="simpleScreener/last-traded-price">
+        <div ng-if="productContainer.Last != null">
+            {{productContainer.Last | correctTickSizeDecimalPlacesWithoutCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}
+        </div>
+        <span ng-if="productContainer.Last == null" class="not-available">N/A</span>
+    </script>
+
+    <div class="filter minor-column">
+        <div class="menu">
+            <span class="title">Market: </span>
+            <select analytics-on="click" analytics-category="Dashboard" analytics-event="StockSummary" analytics-label="ChooseMarket" agmc-analytics-timestamp
+                    class="market-selector" ng-model="vm.selectedTradeVenue" ng-options="m for m in vm.tradeVenueSelections" ng-change="vm.getTopList()"></select>
+        </div>
+        <div class="menu">
+            <span class="title">Period: </span>
+            <select analytics-on="click" analytics-category="Dashboard" analytics-event="StockSummary" analytics-label="ChoosePeriod" agmc-analytics-timestamp
+                    class="period-selector" ng-model="vm.selectedPeriod" ng-options="p for p in vm.periodSelections" ng-change="vm.getTopList()"></select>
+        </div>
+        <div class="menu" ng-if="vm.asOfDate">
+            As Of: {{vm.asOfDate | date:'mediumDate'}} {{vm.asOfDate | date:'shortTime'}} {{vm.timeZone}}
+        </div>
+        <div class=" inline-block pull-right">
+            <div class="button-group mini">
+                <button class="child-button blue transition-superfast"
+                        uib-btn-radio="'TopGainers'" ng-model="vm.selectedType"
+                        ng-class="{'active':vm.selectedType=='TopGainers'}" ng-change="vm.getTopList()"
+                        analytics-on="click" analytics-category="Dashboard" analytics-event="StockSummary" analytics-label="ChooseGainers" agmc-analytics-timestamp>
+                    GAINERS
+                </button>
+                <button class="child-button blue transition-superfast"
+                        uib-btn-radio="'TopLosers'" ng-model="vm.selectedType"
+                        ng-class="{'active':vm.selectedType=='TopLosers'}" ng-change="vm.getTopList()"
+                        analytics-on="click" analytics-category="Dashboard" analytics-event="StockSummary" analytics-label="ChooseLosers" agmc-analytics-timestamp>
+                    LOSERS
+                </button>
+                <button class="child-button blue transition-superfast"
+                        uib-btn-radio="'TopVolume'" ng-model="vm.selectedType"
+                        ng-class="{'active':vm.selectedType=='TopVolume'}" ng-change="vm.getTopList()"
+                        analytics-on="click" analytics-category="Dashboard" analytics-event="StockSummary" analytics-label="ChooseActive" agmc-analytics-timestamp>
+                    ACTIVE
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+
+    <section class="major-column abs-container" ng-if="!vm.isLoading">
+        <agms-product-list class="gainer-loser-product-list" options="vm.gainerLosersListOptions" product-container-list="vm.topList">
+        </agms-product-list>
+    </section>
+</section>

@@ -1,0 +1,222 @@
+﻿<div class="order-element flex-h">
+    <div class="order-type-box" ng-class="vm.order.Action == 'Buy' ? ['buy']:['sell']">
+        <div class="order-type">
+            {{::vm.order.Action}}
+        </div>
+    </div>
+    <div class="order-main-box">
+        <div class="order-header separator-bottom box" ng-if="vm.hasBracketOrderFunc(vm.order)">
+            <div class="pull-left order-replicate">
+                <a ng-if="vm.coreConfigService.Trading.EnableComment"
+                    ng-click="placeComment(vm.order.OrderId)" class="p-right-20px">
+                    <span class="glyphicon glyphicon-comment p-right-5px"></span>Comment
+                </a>
+            </div>
+            <div class="bracket-order pull-left hide-overflow">
+                <div class="row-md-2 gap-0px">
+                    <div class="col-md-1 take-profit">
+                        <div ng-if="vm.order.TakeProfitOrder!=null">
+                            <div class="pull-left order-name">
+                                <strong>TAKE PROFIT</strong>
+                            </div>
+                            <div class="pull-left price special-text text-uppercase">
+                                <span><strong>{{vm.order.TakeProfitOrder.OrderPrice | customCurrencyOrDashMinMax:vm.order.Product.Currency:2:4}}</strong> </span>
+                            </div>
+
+                            <div class="pull-left status">
+                                <span ng-if="!vm.showCancelling(vm.order.TakeProfitOrder)"><strong>{{vm.order.TakeProfitOrder.LatestStatus}}</strong> </span>
+                                <div ng-if="vm.showCancelling(vm.order.TakeProfitOrder)">
+                                    <strong>Cancelling...</strong>
+                                </div>
+                            </div>
+                            <div class="pull-left cancel">
+                                <button class="mini-filled-red" ng-click="vm.cancelFunc(vm.order.TakeProfitOrder)" ng-if="vm.showCancelButtonFunc(vm.order.TakeProfitOrder)"
+                                    analytics-on="click" analytics-category="Trade" analytics-event="CancelOrder" agmc-analytics-timestamp>
+                                    CANCEL
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div ng-if="vm.order.StopLossOrder!=null">
+                            <div class="pull-left stop-loss">
+                                <strong>STOP LOSS</strong>
+                            </div>
+                            <div class="pull-left price special-text text-uppercase">
+                                <span><strong>{{vm.order.StopLossOrder.OrderPrice | customCurrencyOrDashMinMax:vm.order.Product.Currency:2:4}}</strong> </span>
+                            </div>
+
+                            <div class="pull-left status">
+                                <span ng-if="!vm.showCancelling(vm.order.StopLossOrder)"><strong>{{vm.order.StopLossOrder.LatestStatus}}</strong> </span>
+                                <div ng-if="vm.showCancelling(vm.order.StopLossOrder)">
+                                    <strong>Cancelling...</strong>
+                                </div>
+                            </div>
+                            <div class="pull-left cancel">
+                                <button class="mini-filled-red" ng-click="vm.cancelFunc(vm.order.StopLossOrder)" ng-if="vm.showCancelButtonFunc(vm.order.StopLossOrder)"
+                                    analytics-on="click" analytics-category="Trade" analytics-event="CancelOrder" agmc-analytics-timestamp>
+                                    CANCEL
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="bracket-button">
+                <button class="pull-right mini-filled-blue" ng-if="vm.hasBracketOrderFunc(vm.order)" ng-click="vm.viewBracketOrderFunc(vm.order)"
+                    uib-tooltip="View Bracket/TP/SL">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                </button>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="simple-box row-md-9">
+            <div class="col-md-7 no-padding h-70px">
+                <div class="pull-left detail-button">
+                    <h4 class="lh-30px m-0px glyphicon glyphicon-chevron-down hoverable-text clickable"
+                        ng-click="vm.showOrderDetail()" ng-show="!vm.detailShown"></h4>
+                    <h4 class="lh-30px m-0px glyphicon glyphicon-chevron-up  hoverable-text clickable"
+                        ng-click="vm.hideOrderDetail()" ng-show="vm.detailShown"></h4>
+                </div>
+                <div class="w-120px pull-left h-100pct p-top-10px lh-15px">
+                    <span class="gray-text">ORDER DATE</span><br />
+                    <span>{{::vm.order.CreatedTime | date:'mediumDate'}}</span><br />
+                    <span>{{::vm.order.CreatedTime | date:'shortTime'}}</span>
+                </div>
+                <div class=" w-190px pull-left p-top-10px text-uppercase">
+                    <agms-product-picture product="::vm.order.Product"></agms-product-picture>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="w-110px pull-left text-uppercase m-top-10px">
+                    <span class="special-text">{{vm.order.Intention}}</span><br />
+                    <span><strong>&#39;{{::vm.order.Position}}&#39;</strong> position</span>
+                </div>
+                <div class=" w-70px pull-left text-uppercase  m-top-10px">
+                    <span class="special-text"><strong>{{::vm.order.OrderType}}</strong></span><br />
+                    <span>ORDER</span>
+                </div>
+                <div class="w-130px pull-left h-100pct text-uppercase">
+                    <h4 class="no-margin lh-60px ellipsis-nowrap">{{vm.order.OrderPrice | customCurrencyOrDashMinMax:vm.order.Product.Currency:2:4}}
+                    </h4>
+                </div>
+                <div class="w-130px pull-right p-10px">
+                    <h5 class="red-loss lh-30px no-margin ellipsis-nowrap" title="{{vm.order.RejectReason}}"
+                        ng-if="(vm.order | hasBeenRejectedCancelledOrExpired) && vm.order.RejectReason">{{vm.order.RejectReason}}
+                    </h5>
+                    <h5 class=" lh-30px no-margin" ng-show="(vm.order | isCancellingOrder) && order.LatestStatus !='Filled'">Cancelling order...</h5>
+                    <div>
+                        <button class="pull-right mini-filled-blue  w-90px m-5px"
+                            ng-if="vm.isRelatedOrderBrowsable"
+                            agmc-button-wait-on-promise="vm.viewOrderDetailFunc(vm.order)"
+                            analytics-on="click" analytics-category="Trade" analytics-event="RelatedOrderDetail" agmc-analytics-timestamp>
+                            <span class="glyphicon glyphicon glyphicon-link"></span>
+                        </button>
+                        <button class="pull-right mini-filled-red w-90px m-top-15px m-5px"
+                            ng-if="vm.viewMode !== 'readonly' && vm.showCancel() && !vm.isByAccount"
+                            ng-click="vm.cancelFunc(vm.order)"
+                            analytics-on="click" analytics-category="Trade" analytics-event="CancelOrder" agmc-analytics-timestamp>
+                            CANCEL
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="box h-70px col-md-2 no-padding rel">
+                <div class="abs top-20px left-10px"
+                    ng-init="orderProportion=vm.getPartiallyFilledProportions()">
+                    <img src="//am708403.azureedge.net/images/static/wait.svg?"
+                        class="w-20px h-20px"
+                        ng-show="vm.showQueuedStatus()" />
+                    <img src="//am708403.azureedge.net/images/static/filled.svg?"
+                        class="w-20px h-20px"
+                        ng-show="vm.showFilledStatus()" />
+                    <agmc-rainbow-donut ng-show="vm.showPartialFilledStatus()"
+                        width="20" height="20" colors="['#000','#CCD']"
+                        data="orderProportion" thickness="50"></agmc-rainbow-donut>
+                </div>
+                <div class="abs top-10px left-35px w-150px" style="line-height: 14px">
+                    <span ng-if="vm.showPositionDetail()" class="strong">{{vm.getFilledQuantity() | number:0}}/{{::vm.order.Quantity | number:0}}</span><br />
+                    <span>{{vm.order.LatestStatus}}</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="abs" style="right: 10px; bottom: 5px">last updated {{vm.order.UpdateTime | timeSince}}</div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="separator-top soft p-10px" ng-if="vm.detailShown">
+            <div class="col-md-8 p-left-0px">
+                <div class="box lh-30px m-bottom-10px p-left-15px">
+                    <span class="m-right-20px">Order ID: <strong class="special-text">{{::vm.order.OrderId}}</strong></span>
+                    <span class="m-right-20px">Validity: <strong>{{::vm.order.Validity}}</strong></span>
+                    <span class="m-right-20px">Remaining Quantity: <strong>{{vm.remainingQuantity() | valueOrDash:0}}</strong></span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Last<br />
+                                Update
+                            </th>
+                            <th>Quantity<br />
+                                Transacted
+                            </th>
+                            <th>Price<br />
+                                Transacted
+                            </th>
+                            <th>Remaining<br />
+                                Quantity
+                            </th>
+                            <th>Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="update in vm.order.OrderUpdates track by $index | orderBy:'-moment(LastUpdatedTime)'">
+                            <td>
+                                <span>{{::update.LastUpdatedTime | date:'short'}}</span>
+                            </td>
+                            <td>
+                                <span>{{::update.FillQuantity | valueOrDash:0}}</span>
+                            </td>
+                            <td>
+                                <span>{{::(update.FillPrice | customCurrencyOrDashMinMax:vm.order.Product.Currency:2:4)}}</span>
+                            </td>
+                            <td>
+                                <span>{{::vm.remainingQuantity(update) | valueOrDash:0}}</span>
+                            </td>
+                            <td>
+                                <span>{{::update.OrderStatus}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4 p-0px">
+                <table class="table-large m-bottom-15px">
+                    <tr>
+                        <td>Average Transacted Price</td>
+                        <td>{{vm.averagePrice() | customCurrencyOrDashMinMax:vm.order.Product.Currency:2:4}}</td>
+                    </tr>
+                    <tr>
+                        <td>Transacted Quantity</td>
+                        <td>{{vm.lastUpdate().FillQuantity | valueOrDash:0}}</td>
+                    </tr>
+                </table>
+                <a ng-if="vm.coreConfigService.Trading.EnableComment"
+                    ng-click="placeComment(vm.order.OrderId)" class="p-right-20px">
+                    <span class="glyphicon glyphicon-comment p-right-5px"></span>Comment
+                </a>
+                <!--<span class="p-right-20px" style="color:#0056ab">
+                <span ng-if="vm.order.ReplicatedCount != null">{{vm.order.ReplicatedCount | number:0}} Replicated</span>
+            </span>-->
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

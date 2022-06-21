@@ -1,0 +1,125 @@
+﻿@media (max-width: 1350px) {
+    .agm-component-chart {
+        .laptop-screen-above {
+            display: none;
+        }
+
+        .laptop-screen-below {
+            display: inherit;
+        }
+
+        .algomerchant-logo {
+            background-image: url(//am708403.azureedge.net/images/landing/Logo-min.png);
+            width: 50px;
+        }
+
+        & .header > .top-level-1 {
+            .product-container {
+                max-width: 200px;
+            }
+
+            .ohlc, .vol-date {
+                padding: 0 5px;
+                margin: 0;
+
+                dl {
+                    float: left;
+                    padding: 0px 10px;
+                    margin: 0;
+
+                    > dd {
+                        height: 30px;
+                        font-size: 14px;
+                        line-height: 40px;
+                        font-weight: 600;
+                        float: left;
+
+                        small {
+                            display: none;
+                            opacity: 0.5;
+                            font-size: 11px;
+                        }
+                    }
+
+
+
+                    > dt {
+                        float: left;
+                        font-size: 14px;
+                        line-height: 40px;
+                        margin-right: 5px;
+                    }
+                }
+            }
+
+            .vol-date dl {
+
+                &.date {
+                    > dd, dt {
+                        font-size: 12px;
+                    }
+                }
+
+                &.product {
+
+                    > dt {
+                        float: none;
+                        height: 25px;
+                        line-height: 25px;
+                        font-size: 14px;
+                    }
+
+                    > dd {
+                        float: none;
+                        height: 10px;
+                        line-height: 10px;
+                        font-size: 11px;
+                        font-weight: lighter;
+                    }
+                }
+            }
+        }
+
+        & .legends {
+            position: absolute;
+            left: 30px;
+            top: 5px;
+            z-index: 30;
+
+            .product-label {
+                border-radius: 6px;
+                width: 10px;
+                height: 10px;
+                margin: 5px 0;
+                display: inline-block;
+            }
+
+            .strategy {
+                > .main-item {
+                    > h4 {
+                        font-size: 13px;
+                    }
+
+                    > h5 {
+                    }
+                }
+            }
+
+            .strategy {
+
+
+                > h4, > h5 {
+                    line-height: 20px;
+                }
+
+                > h4 {
+                    font-size: 13px;
+                }
+
+                > h5 {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

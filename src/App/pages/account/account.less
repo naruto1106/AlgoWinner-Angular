@@ -1,0 +1,43 @@
+﻿.agm-component-accounts {
+    .add-account {
+        margin: 10px 0;
+    }
+
+    .remove-button {
+        margin-left: 25px;
+        margin-top: 15px;
+        height: 30px;
+    }
+
+    .account-strategy {
+        float: left;
+        width: 350px;
+    }
+
+    .new-account.active {
+        background: mix(@blueBasic,transparent,30);
+    }
+
+    a.account-detail-button {
+        color: @grayMed1;
+        text-align: center;
+        .clickable;
+        width: 70px;
+
+        h4 {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        span {
+            .mini-button-text;
+        }
+
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    a.account-detail-button:hover, a.account-detail-button.active {
+        color: @blueBasic;
+    }
+}

@@ -1,0 +1,15 @@
+﻿<div class="modal-header" >
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">ADD BANK ACCOUNT</h4>
+</div>
+
+<div class="modal-body agm-component-payment">
+    <div class="p-50px text-center" ng-if="vm.isSubmitting">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        <div class="clearfix m-bottom-5px"></div>
+        <span class="gray-text">Submitting Bank Account ...</span>
+    </div>
+    <div ng-if="!vm.isSubmitting">
+        <agms-payment-bank-account-form deferred-completion="vm.deferredCompletion" is-submitting="vm.isSubmitting"></agms-payment-bank-account-form>
+    </div>
+</div>

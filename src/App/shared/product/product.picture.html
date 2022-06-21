@@ -1,0 +1,30 @@
+﻿<div class="agms-directives product-picture">
+    <script type="text/ng-template" id="product.marketData.template">
+        <div>
+            {{vm.product.ProductName}}
+        </div>
+        <div ng-if="!vm.hideMarketData">
+            Last Price: {{vm.productWithMarketData.MarketData.LastTradedPrice | correctTickSizeDecimalPlacesWithCurrency:vm.product.Currency:vm.product.TradeVenueLoc}}
+            <div ng-class="vm.productWithMarketData.MarketData.LastTradedPriceDiff >= 0 ? ['green-profit']:['red-loss']" ng-if="vm.productWithMarketData.MarketData.LastTradedPrice != null">
+                <span class="glyphicon glyphicon-triangle-top" ng-if="vm.productWithMarketData.MarketData.LastTradedPriceDiff >= 0"></span>
+                <span class="glyphicon glyphicon-triangle-bottom" ng-if="vm.productWithMarketData.MarketData.LastTradedPriceDiff < 0"></span>
+                <span>({{vm.productWithMarketData.MarketData.LastTradedPriceDiffPct | valuePercentOrDash:2}})</span>
+            </div>
+        </div>
+    </script>
+
+    <div class="cursor-pointer" ng-click="vm.goToProduct(vm.product)"
+         ng-mouseover="vm.hoverMarketData()"
+         uib-tooltip-template="'product.marketData.template'" tooltip-placement="right" tooltip-class="product-tooltip">
+        <div agms-image img-src="vm.product.ProductIconURL" img-fallback-src="vm.getEncodedSectorUrl(vm.product.Sector.SectorName)"
+             class="product-icon"></div>
+        <div class="product-text">
+            <div class="product-symbol ellipsis-nowrap">
+                {{vm.product.ProductName}}
+            </div>
+            <div class="product-name ellipsis-nowrap" ng-if="!vm.hideSymbol">{{vm.product.Symbol}}</div>
+            <div class="product-currency" ng-if="vm.showCurrency">{{vm.product.Currency}}</div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

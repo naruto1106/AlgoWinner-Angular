@@ -1,0 +1,70 @@
+﻿<div ng-switch on="vm.levelOfDetail" class="agm-components-strategy-commerce">
+    <div ng-switch-when="0">
+        <div class="strategy-type2" ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)">
+            <div class="strategy-icon transition-fast" agms-image img-src="vm.strategy | strategyImage" img-fallback-src="vm.defaultImageFallback"
+                 ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)"></div>
+            <h1 class="title" ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)">{{vm.strategy | strategyName}}</h1>
+            <h2 class="feature" ng-if="vm.strategy.IsFeatured">FEATURED</h2>
+        </div>
+    </div>
+    <div ng-switch-when="2" class="p-0px h-140px">
+        <div class="strategy-type0 pull-left w-210px no-padding h-100pct">
+            <div class="strategy-icon transition-fast" agms-image img-src="vm.strategy | strategyImage" img-fallback-src="vm.defaultImageFallback"
+                 ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)"></div>
+            <h1 class="title" ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)">{{vm.strategy | strategyName}}</h1>
+            <h2 class="feature" ng-if="vm.strategy.IsFeatured">FEATURED</h2>
+        </div>
+        <div class="no-padding h-100pct pull-left strategy w-100pct calc-h-minus-210px">
+            <div class="rel h-100pct " ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)">
+                <div class="p-10px ">
+                    <p style="line-height: 20px;" agmc-paragraph-clipper="vm.strategy.BasicInfo.Description" max-line-count="4" is-clipping-active="true" is-clipping-required="true"></p>
+                </div>
+                <agms-strategy-commerce-category class="abs w-100pct bottom-0px lh-40px p-left-10px no-border" categories="vm.strategy.BasicInfo.Categories">
+                </agms-strategy-commerce-category>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div ng-switch-when="3">
+        <div class="row" ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="strategy-icon transition-fast" agms-image img-src="vm.strategy | strategyImage" img-fallback-src="vm.defaultImageFallback"></div>
+                    <div class="feature-label absolute-pos" ng-if="vm.strategy.IsFeatured">FEATURED</div>
+                    <div class="strategy-label absolute-pos">{{vm.strategy | strategyName}}</div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="5">
+        <div class="strategy-type1" ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)">
+            <div class="strategy-icon transition-fast" agms-image img-src="vm.strategy | strategyImage" img-fallback-src="vm.defaultImageFallback"></div>
+            <h1 class="title">{{vm.strategy | strategyName}}</h1>
+        </div>
+    </div>
+    <div ng-switch-when="6">
+        <div class="strategy-type3">
+            <div class="strategy-icon transition-fast" agms-image img-src="vm.strategy | strategyImage" img-fallback-src="vm.defaultImageFallback"
+                 ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)"></div>
+            <a ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)">
+                <h1 class=" title">{{vm.strategy | strategyName}}</h1>
+            </a>
+            <h2 class="feature" ng-if="vm.strategy.IsFeatured">FEATURED</h2>
+        </div>
+    </div>
+    <div ng-switch-when="8">
+        <div class="strategy-type3 strategy-type3-small">
+            <div class="strategy-icon transition-fast" agms-image img-src="vm.strategy | strategyImage" img-fallback-src="vm.defaultImageFallback"
+                 ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)"></div>
+            <a ng-click="vm.strategyDetails(vm.strategy.BasicInfo.StrategyId)">
+                <h1 class=" title">{{vm.strategy | strategyName}}</h1>
+            </a>
+            <h2 class="feature" ng-if="vm.strategy.IsFeatured">FEATURED</h2>
+        </div>
+    </div>   
+    <div ng-switch-default>
+        INVALID PORTRAIT
+    </div>
+</div>
+

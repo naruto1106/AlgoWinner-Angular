@@ -1,0 +1,47 @@
+﻿
+<div class="ohlc">
+    <dl>
+        <dt>O:</dt>
+        <dd>
+            <small>
+                {{vm.ohlcData.Currency | currencySymbol}}
+            </small>
+            {{vm.ohlcData.Open | correctTickSizeDecimalPlacesWithoutCurrency:vm.ohlcData.Currency:vm.ohlcData.TradeVenueLoc}}
+        </dd>
+    </dl>
+    <dl>
+        <dt>H:</dt>
+        <dd>
+            <small>
+                {{vm.ohlcData.Currency | currencySymbol}}
+            </small>
+            {{vm.ohlcData.High | correctTickSizeDecimalPlacesWithoutCurrency:vm.ohlcData.Currency:vm.ohlcData.TradeVenueLoc}}
+        </dd>
+    </dl>
+    <dl>
+        <dt>L:</dt>
+        <dd>
+            <small>
+                {{vm.ohlcData.Currency | currencySymbol}}
+            </small>
+            {{vm.ohlcData.Low | correctTickSizeDecimalPlacesWithoutCurrency:vm.ohlcData.Currency:vm.ohlcData.TradeVenueLoc}}
+        </dd>
+    </dl>
+    <dl>
+        <dt>C:</dt>
+        <dd>
+            <small>
+                {{vm.ohlcData.Currency | currencySymbol}}
+            </small>
+            <span>{{vm.ohlcData.Close | correctTickSizeDecimalPlacesWithoutCurrency:vm.ohlcData.Currency:vm.ohlcData.TradeVenueLoc}}</span>
+            <div class="price-changes" ng-class="{ 'up': vm.priceUp, 'down': !vm.priceUp }" ng-if="vm.percentDifferent">
+                <span>(<i class="glyphicon price-change-icon" ng-class="{ 'glyphicon-triangle-top': vm.priceUp, 'glyphicon-triangle-bottom': !vm.priceUp }"></i>
+                    {{vm.percentDifferent | valuePercentOrDash:2}})
+                </span>
+            </div>
+            <div class="price-changes" ng-class="{ 'up': vm.priceUp }" ng-if="vm.percentDifferent === 0">
+                <span>(0%)</span>
+            </div>
+        </dd>
+    </dl>
+</div>

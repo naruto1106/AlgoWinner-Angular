@@ -1,0 +1,43 @@
+{
+  "version": "0.0.1",
+  "private": true,
+  "name": "JoeyWebClient",
+  "description": "Angular JS project by AlgoMerchant",
+  "devDependencies": {
+    "angular": "^1.6.1",
+    "angular-mocks": "^1.6.1",
+    "chokidar": "^1.6.1",
+    "glob": "^7.0.5",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-concat": "^2.6.0",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-debug": "^3.0.0",
+    "gulp-find": "0.0.10",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-less": "^3.5.0",
+    "gulp-nunjucks-render": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-search": "^1.0.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-tap": "^0.1.3",
+    "gulp-uglify": "^1.5.4",
+    "http-proxy": "^1.14.0",
+    "md5-file": "^3.1.1",
+    "q": "^1.4.1",
+    "vinyl-map": "^1.0.2",
+    "xdt-transform": "^1.0.4",
+    "xmlreader": "^0.2.3"
+  },
+  "scripts": {
+    "serve": "node server.js"
+  },
+  "dependencies": {
+    "gulp-less-sourcemap": "^1.4.3",
+    "natives": "1.1.6"
+  },
+  "resolutions": {
+    "graceful-fs": "^4.2.4"
+  }
+}

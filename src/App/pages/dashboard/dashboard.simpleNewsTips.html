@@ -1,0 +1,29 @@
+﻿<section class="simple-news-tips">
+    <div class="market-filter">
+        <span>Markets:</span>
+        <select ng-options="tradeVenue as tradeVenue for tradeVenue in vm.tradeVenues" ng-model="vm.selectedTradeVenue" ng-change="vm.onMarketChanged()"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="SmallNews" analytics-label="SelectMarket" agmc-analytics-timestamp></select>
+    </div>
+    <div ng-if="vm.listOfNewsTips.length <= 0 && !vm.isLoadingData" class="alert alert-info">
+        No Breaking News for {{::vm.selectedTradeVenue}}
+    </div>
+    <div class="content">
+        <div infinite-scroll="" infinite-scroll-parent="true"
+             analytics-on="scrollby" analytics-category="Dashboard" analytics-event="SmallNews" analytics-label="ScrollSmallNews" agmc-analytics-timestamp>
+            <div class="news-tips" ng-repeat="newsTips in vm.listOfNewsTips" 
+                 analytics-on="click" analytics-category="Dashboard" analytics-event="SmallNews" analytics-label="ClickSmallNews" dimension-value="{{::newsTips.NewsId}}" agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4">
+                <div class="news-tips-content">
+                    <div class="title" ng-bind-html="::newsTips.Title" ng-click="vm.seeNewsDetail(newsTips)"></div>
+                    <div class="news-tips-date">
+                        <span class="source">- {{::newsTips.Source}}</span>
+                        {{newsTips.PublishedTime | timeSince}}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="p-50px text-center" ng-if="vm.isLoadingData">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+    </div>
+</section>

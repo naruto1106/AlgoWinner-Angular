@@ -1,0 +1,1471 @@
+﻿@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.agm-component-algooracle {
+
+    .oracle-bg {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #7a7b7c;
+        top: 0;
+        left: 0;
+        opacity: 0.9;
+        z-index: 100;
+    }
+
+    .oracle-box-container {
+        .oracle-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            width: 400px;
+            max-height: 500px;
+            height: 80vh;
+            z-index: 101;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+
+            .heading {
+                text-align: right;
+                font-size: 20px;
+                color: #fff;
+                font-weight: 500;
+                padding-top: 5px;
+                height: 40px;
+                background: #313232;
+                border-radius: 20px 20px 0 0;
+                flex: 0 1 45px;
+                -webkit-box-flex: 0;
+                -ms-flex: 0 1 45px;
+
+                .small-heading {
+                    font-weight: normal;
+                    padding-left: 45px;
+                    text-align: left;
+                    color: rgba(255, 255, 255, 0.5);
+                    font-size: 10px;
+                    letter-spacing: 2px;
+                }
+
+                .big-heading {
+                    font-weight: normal;
+                    font-size: 11px;
+                    text-align: left;
+                    padding-left: 45px;
+                    letter-spacing: 1px;
+                    margin-top: 2px;
+                }
+
+                .heading-icon {
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 30px;
+                    background-size: cover;
+                    float: left;
+                    margin: 2px 0px 0px 5px;
+                    border: 2px solid rgba(255, 255, 255, 0.24);
+                }
+
+                .reload-button {
+                    border: none;
+                    background: none;
+                    position: relative;
+                    right: 10px;
+                    margin-top: 5px;
+                    font-size: 20px;
+                    color: #979797;
+                }
+
+                .close-button {
+                    border: none;
+                    background: none;
+                    position: relative;
+                    right: 10px;
+                    margin-top: 7px;
+                    font-size: 15px;
+                    color: #979797;
+                }
+            }
+        }
+    }
+    /*--------------------
+        Body
+    --------------------*/
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        background: -webkit-linear-gradient(315deg, #044f48, #2a7561);
+        background: linear-gradient(135deg, #044f48, #2a7561);
+        background-size: cover;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 12px;
+        line-height: 1.3;
+        overflow: hidden;
+    }
+
+    .loading-img {
+        width: 150px;
+        display: inline;
+        margin: 10px 65px;
+        height: 150px;
+        border-radius: 90px;
+    }
+
+    .buttonx {
+        background: #0070ff;
+        padding: 5px 30px;
+        margin: 5px 5px 5px 0px;
+        border: 1px solid #0070ff;
+        color: #fff;
+        border-radius: 30px;
+    }
+
+    .buttonx:hover {
+        background: #0066ff;
+        border: 1px solid #0066ff;
+    }
+
+    .buttony {
+        background: transparent;
+        padding: 5px 30px;
+        margin: 5px 5px 5px 0px;
+        border: 1px solid #00b6ff;
+        color: #00b6ff;
+        border-radius: 30px;
+        max-width: 300px;
+        text-transform: uppercase;
+    }
+
+    .buttony:hover {
+        background: #0070ff;
+        border: 1px solid #0070ff;
+        color: #fff;
+    }
+
+    .buttonz {
+        background: transparent;
+        padding: 0px 9px;
+        margin: 5px 5px 5px 0px;
+        border: 1px solid #929292;
+        color: #929292;
+        border-radius: 10px;
+    }
+
+    .oracle-search {
+        width: 100%;
+        margin: 7px auto;
+        height: 29px;
+        padding: 5px;
+        font-size: 12px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        color: #fff;
+        background: rgba(68, 68, 68, 0.47);
+    }
+
+    .chat-product {
+        line-height: 1px;
+        margin-bottom: 13px;
+
+        a {
+            color: #de9e2f;
+        }
+    }
+
+    .chat-product strong {
+        color: #de9e2f;
+    }
+
+    .chat-product p {
+        line-height: 18px;
+        margin: 0px;
+    }
+
+    .error-chat {
+        color: #ff5d5d;
+        display: block;
+        line-height: 15px;
+        padding: 9px 1px;
+    }
+
+    .error-chat h5 {
+        color: red;
+        font-weight: bold;
+        font-size: 16px;
+        margin: 0px 0 -11px 0;
+        padding: 0;
+    }
+    /*--------------------
+        Chat
+    --------------------*/
+    input[type="range"] {
+        -webkit-appearance: none;
+        width: 265px;
+        height: 2px;
+        background: #0070ff;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0px;
+        bottoM: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        display: block;
+        margin-top: 90px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        background: #434343;
+        position: relative;
+        border: 3px solid #0070ff;
+        z-index: 3;
+        cursor: pointer;
+        content: counter(3)
+    }
+
+    .chat {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 80vh;
+        max-height: 500px;
+        z-index: 2;
+        overflow: hidden;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+    /*--------------------
+        Chat Title
+    --------------------*/
+    .chat-title {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 45px;
+        flex: 0 1 45px;
+        position: relative;
+        z-index: 2;
+        background: rgba(0, 0, 0, 0.2);
+        color: #fff;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 10px 10px 10px 50px;
+    }
+
+    .chat-title h1, .chat-title h2 {
+        font-weight: normal;
+        font-size: 10px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .chat-title h2 {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .chat-title .avatar {
+        position: absolute;
+        z-index: 1;
+        top: 8px;
+        left: 9px;
+        border-radius: 30px;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        border: 2px solid rgba(255, 255, 255, 0.24);
+    }
+
+    .chat-title .avatar img {
+        width: 100%;
+        height: auto;
+    }
+    /*--------------------
+        Messages
+    --------------------*/
+    .messages {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: rgba(255, 255, 255, 0.5);
+        background-color: #3d3e3e;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+
+        .highlighted {
+            color: #de9e2f;
+            font-size: 18px;
+
+            &.days {
+                font-size: 22px;
+            }
+        }
+    }
+
+    .messages .messages-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 101%;
+        width: 100%;
+
+        .product-button, .mobile-button {
+            padding: 5px;
+        }
+
+        .mobile-button {
+            font-size: 12px;
+            width: 100%;
+
+            .symbol {
+                font-size: 11px;
+                color: #de9e2f;
+            }
+        }
+
+        .pagination {
+            display: block;
+        }
+
+        .pagination > li > a, .pagination > .disabled > a {
+            background: transparent;
+            border: none;
+        }
+
+        .progress-wrapper {
+            text-align: center;
+            height: 180px;
+
+            .current {
+                font-size: 40px;
+                position: relative;
+                top: 62px;
+                color: #0fab53;
+                font-weight: 600;
+            }
+
+            .round-progress-wrapper {
+                top: -45px;
+            }
+        }
+
+        .send-button {
+            float: right;
+            color: white;
+            background-color: #0070ff;
+            width: 30px;
+            height: 30px;
+            border: 0;
+            border-radius: 15px;
+            padding: 3px 2px 0 0;
+            margin: 10px 5px 0 0;
+        }
+
+        .slider-box {
+            float: left;
+            width: 195px;
+            color: white;
+            padding-left: 10px;
+            margin-left: 5px;
+            margin-top: 5px;
+
+            .rzslider {
+                margin: 20px 0 0 3px;
+
+                .rz-pointer {
+                    width: 20px;
+                    height: 20px;
+                    top: -8px;
+
+                    &:after {
+                        visibility: hidden;
+                    }
+                }
+
+                .rz-bubble {
+                    bottom: 10px;
+                    color: white;
+                }
+
+                .rz-ceil {
+                    visibility: visible !important;
+                    left: 185px !important;
+                    top: -8px;
+                    color: white;
+                }
+
+                .rz-floor {
+                    visibility: visible !important;
+                    left: -23px !important;
+                    top: -8px;
+                    color: white;
+                }
+            }
+        }
+
+        .talk-bubble {
+            margin: 0px;
+            position: absolute;
+            width: 80px;
+            height: auto;
+            background-color: rgba(36, 135, 89, 0.96);
+            z-index: 1000;
+            bottom: 60px;
+            right: -25px;
+            color: #fff;
+            border-radius: 14px;
+            font-size: 11px;
+            border: #00cc6d 1px solid !important;
+            opacity: 0;
+            -webkit-animation: fadeIn 1s; /* Safari, Chrome and Opera > 12.1 */
+            -moz-animation: fadeIn 1s; /* Firefox < 16 */
+            -ms-animation: fadeIn 1s; /* Internet Explorer */
+            -o-animation: fadeIn 1s; /* Opera < 12.1 */
+            animation: fadeIn 1s;
+            -webkit-animation-delay: 4s;
+            -moz-animation-delay: 4s;
+            animation-delay: 4s;
+            -webkit-animation-fill-mode: forwards;
+            -moz-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+
+            .talktext {
+                padding: 1em;
+                text-align: left;
+                line-height: 1.5em;
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
+
+        .tri-right.btm-right-in:after {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: auto;
+            right: 35px;
+            bottom: -20px;
+            border: 12px solid;
+            border-color: #248458 transparent transparent #248458;
+        }
+    }
+
+    .messages .message {
+        clear: both;
+        float: left;
+        padding: 10px 12px 10px;
+        border-radius: 10px 10px 10px 0;
+        background: rgba(0, 0, 0, 0.3);
+        margin: 8px 0;
+        font-size: 16px;
+        line-height: 1.4;
+        margin-left: 35px;
+        position: relative;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        max-width: 320px;
+        color: #fff;
+    }
+
+    .messages .message .timestamp {
+        position: absolute;
+        bottom: -15px;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .messages .message::before {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        border-top: 6px solid rgba(0, 0, 0, 0.3);
+        left: 0;
+        border-right: 7px solid transparent;
+    }
+
+    .messages .message .avatar {
+        position: absolute;
+        z-index: 1;
+        bottom: -15px;
+        left: -35px;
+        border-radius: 30px;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        border: 2px solid rgba(255, 255, 255, 0.24);
+    }
+
+    .messages .message .avatar img {
+        width: 100%;
+        height: auto;
+    }
+
+    .messages .message.message-personal {
+        float: right;
+        color: #fff;
+        text-align: right;
+        background: -webkit-linear-gradient(330deg, #248A52, #257287);
+        background: linear-gradient(120deg, #248A52, #257287);
+        border-radius: 10px 10px 0 10px;
+    }
+
+    .messages .message.message-personal::before {
+        left: auto;
+        right: 0;
+        border-right: none;
+        border-left: 5px solid transparent;
+        border-top: 4px solid #257287;
+        bottom: -4px;
+    }
+
+    .messages .message:last-child {
+        margin-bottom: 30px;
+    }
+
+    .messages .message.new {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-animation: bounce 500ms linear both;
+        animation: bounce 500ms linear both;
+    }
+
+    .messages .message.loading::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        content: '';
+        display: block;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        z-index: 2;
+        margin-top: 4px;
+        -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+        animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+        border: none;
+        -webkit-animation-delay: .15s;
+        animation-delay: .15s;
+    }
+
+    .messages .message.loading span {
+        display: block;
+        font-size: 0;
+        width: 20px;
+        height: 10px;
+        //position: relative;
+    }
+
+    .messages .message.loading span::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        content: '';
+        display: block;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        z-index: 2;
+        margin-top: 4px;
+        -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+        animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+        margin-left: -7px;
+    }
+
+    .messages .message.loading span::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        content: '';
+        display: block;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        z-index: 2;
+        margin-top: 4px;
+        -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+        animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+        margin-left: 7px;
+        -webkit-animation-delay: .3s;
+        animation-delay: .3s;
+    }
+    /*--------------------
+        Message Box
+    --------------------*/
+    .message-box {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 40px;
+        flex: 0 1 40px;
+        width: 100%;
+        background: #2c2d2d;
+        position: relative;
+        height: 45px;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .message-box .message-input {
+        background: none;
+        border: none;
+        outline: none !important;
+        resize: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 18px;
+        height: 45px;
+        margin: 0;
+        width: 350px;
+        padding-left: 20px;
+    }
+
+    .message-box textarea:focus:-webkit-placeholder {
+        color: transparent;
+    }
+
+    .message-box .message-submit {
+        position: absolute;
+        z-index: 1;
+        top: 9px;
+        right: 10px;
+        color: #fff;
+        border: none;
+        background: #248A52;
+        font-size: 10px;
+        text-transform: uppercase;
+        line-height: 1;
+        padding: 6px 10px;
+        border-radius: 10px;
+        outline: none !important;
+        -webkit-transition: background .2s ease;
+        transition: background .2s ease;
+    }
+
+    .message-box .message-submit:hover {
+        background: #1D7745;
+    }
+    /*--------------------
+        Custom Srollbar
+    --------------------*/
+    .mCSB_scrollTools {
+        margin: 1px -3px 1px 0;
+        opacity: 0;
+    }
+
+    .mCS-dark-3.mCSB_scrollTools .mCSB_draggerRail {
+        background-color: rgba(0,0,0,0.2);
+        width: 4px;
+    }
+
+    .mCSB_inside > .mCSB_container {
+        margin-right: 0px;
+        padding: 0 15px 0 10px;
+    }
+
+    .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+        background-color: rgba(0, 0, 0, 0.63) !important;
+        width: 7px;
+        float: inherit;
+    }
+    /*--------------------
+        Bounce
+    --------------------*/
+    @-webkit-keyframes bounce {
+        0% {
+            -webkit-transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        4.7% {
+            -webkit-transform: matrix3d(0.45, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.45, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        9.41% {
+            -webkit-transform: matrix3d(0.883, 0, 0, 0, 0, 0.883, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.883, 0, 0, 0, 0, 0.883, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        14.11% {
+            -webkit-transform: matrix3d(1.141, 0, 0, 0, 0, 1.141, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.141, 0, 0, 0, 0, 1.141, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        18.72% {
+            -webkit-transform: matrix3d(1.212, 0, 0, 0, 0, 1.212, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.212, 0, 0, 0, 0, 1.212, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        24.32% {
+            -webkit-transform: matrix3d(1.151, 0, 0, 0, 0, 1.151, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.151, 0, 0, 0, 0, 1.151, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        29.93% {
+            -webkit-transform: matrix3d(1.048, 0, 0, 0, 0, 1.048, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.048, 0, 0, 0, 0, 1.048, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        35.54% {
+            -webkit-transform: matrix3d(0.979, 0, 0, 0, 0, 0.979, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.979, 0, 0, 0, 0, 0.979, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        41.04% {
+            -webkit-transform: matrix3d(0.961, 0, 0, 0, 0, 0.961, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.961, 0, 0, 0, 0, 0.961, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        52.15% {
+            -webkit-transform: matrix3d(0.991, 0, 0, 0, 0, 0.991, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.991, 0, 0, 0, 0, 0.991, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        63.26% {
+            -webkit-transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        85.49% {
+            -webkit-transform: matrix3d(0.999, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.999, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        100% {
+            -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+    }
+
+    @keyframes bounce {
+        0% {
+            -webkit-transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        4.7% {
+            -webkit-transform: matrix3d(0.45, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.45, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        9.41% {
+            -webkit-transform: matrix3d(0.883, 0, 0, 0, 0, 0.883, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.883, 0, 0, 0, 0, 0.883, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        14.11% {
+            -webkit-transform: matrix3d(1.141, 0, 0, 0, 0, 1.141, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.141, 0, 0, 0, 0, 1.141, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        18.72% {
+            -webkit-transform: matrix3d(1.212, 0, 0, 0, 0, 1.212, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.212, 0, 0, 0, 0, 1.212, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        24.32% {
+            -webkit-transform: matrix3d(1.151, 0, 0, 0, 0, 1.151, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.151, 0, 0, 0, 0, 1.151, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        29.93% {
+            -webkit-transform: matrix3d(1.048, 0, 0, 0, 0, 1.048, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.048, 0, 0, 0, 0, 1.048, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        35.54% {
+            -webkit-transform: matrix3d(0.979, 0, 0, 0, 0, 0.979, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.979, 0, 0, 0, 0, 0.979, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        41.04% {
+            -webkit-transform: matrix3d(0.961, 0, 0, 0, 0, 0.961, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.961, 0, 0, 0, 0, 0.961, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        52.15% {
+            -webkit-transform: matrix3d(0.991, 0, 0, 0, 0, 0.991, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.991, 0, 0, 0, 0, 0.991, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        63.26% {
+            -webkit-transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        85.49% {
+            -webkit-transform: matrix3d(0.999, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(0.999, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+
+        100% {
+            -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+            transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
+    }
+
+    @-webkit-keyframes ball {
+        from {
+            -webkit-transform: translateY(0) scaleY(0.8);
+            transform: translateY(0) scaleY(0.8);
+        }
+
+        to {
+            -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes ball {
+        from {
+            -webkit-transform: translateY(0) scaleY(0.8);
+            transform: translateY(0) scaleY(0.8);
+        }
+
+        to {
+            -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+        }
+    }
+    //css for robot
+    .robot-preload {
+        -webkit-animation: mymove 3s infinite;
+        animation: mymove 3s infinite;
+        width: 300px;
+        height: 404px;
+        position: absolute;
+        left: -9999px;
+        background: no-repeat center center;
+    }
+
+    .robot {
+        -webkit-animation: mymove 3s infinite;
+        animation: mymove 3s infinite;
+        width: 300px;
+        height: 404px;
+        position: absolute;
+        z-index: 120;
+        top: 30%;
+        left: ~'calc(50% + 200px)';
+        background: no-repeat center center;
+        background: url(//am708403.azureedge.net/images/algooracle/robot/1.png);
+    }
+
+    .robot:hover {
+        -webkit-animation: mymove2 6s infinite;
+        animation: mymove2 6s infinite;
+        top: ~'calc(30% + 10px)';
+        background: url(//am708403.azureedge.net/images/algooracle/robot/24.png);
+    }
+
+
+    @keyframes mymove {
+        0% {
+            top: ~'calc(30% + 0px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/1.png) no-repeat;
+        }
+
+        5% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/2.png) no-repeat
+        }
+
+        10% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/3.png) no-repeat
+        }
+
+        15% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/4.png) no-repeat
+        }
+
+        20% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/5.png) no-repeat
+        }
+
+        25% {
+            top: ~'calc(30% + 20px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/6.png) no-repeat
+        }
+
+        30% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/7.png) no-repeat
+        }
+
+        35% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/8.png) no-repeat
+        }
+
+        40% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/9.png) no-repeat
+        }
+
+        45% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/10.png) no-repeat
+        }
+
+        50% {
+            top: ~'calc(30% + 10px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/11.png) no-repeat
+        }
+
+        55% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/12.png) no-repeat
+        }
+
+        60% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/13.png) no-repeat
+        }
+
+        70% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/14.png) no-repeat
+        }
+
+        80% {
+            top: ~'calc(30% + 15px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/15.png) no-repeat
+        }
+
+
+        86% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/16.png) no-repeat
+        }
+
+        89% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/17.png) no-repeat
+        }
+
+        92% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/18.png) no-repeat
+        }
+
+        95% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/19.png) no-repeat
+        }
+
+        100% {
+            top: ~'calc(30% + 0px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/20.png) no-repeat
+        }
+    }
+
+    @-webkit-keyframes mymove /* Safari and Chrome */
+    {
+        0% {
+            top: ~'calc(30% + 0px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/1.png) no-repeat;
+        }
+
+        5% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/2.png) no-repeat
+        }
+
+        10% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/3.png) no-repeat
+        }
+
+        15% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/4.png) no-repeat
+        }
+
+        20% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/5.png) no-repeat
+        }
+
+        25% {
+            top: ~'calc(30% + 20px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/6.png) no-repeat
+        }
+
+        30% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/7.png) no-repeat
+        }
+
+        35% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/8.png) no-repeat
+        }
+
+        40% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/9.png) no-repeat
+        }
+
+        45% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/10.png) no-repeat
+        }
+
+        50% {
+            top: ~'calc(30% + 10px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/11.png) no-repeat
+        }
+
+        55% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/12.png) no-repeat
+        }
+
+        60% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/13.png) no-repeat
+        }
+
+        70% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/14.png) no-repeat
+        }
+
+        80% {
+            top: ~'calc(30% + 15px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/15.png) no-repeat
+        }
+
+
+        86% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/16.png) no-repeat
+        }
+
+        89% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/17.png) no-repeat
+        }
+
+        92% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/18.png) no-repeat
+        }
+
+        95% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/19.png) no-repeat
+        }
+
+        100% {
+            top: ~'calc(30% + 0px)';
+            background: url(//am708403.azureedge.net/images/algooracle/robot/20.png) no-repeat
+        }
+    }
+
+    @keyframes mymove2 {
+        0% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/21.png) no-repeat
+        }
+
+        2% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/22.png) no-repeat
+        }
+
+        3% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/23.png) no-repeat
+        }
+
+        4% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/24.png) no-repeat
+        }
+
+
+        5% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/25.png) no-repeat
+        }
+
+        6% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/26.png) no-repeat
+        }
+
+        7% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/27.png) no-repeat
+        }
+
+        8% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/28.png) no-repeat
+        }
+
+        9% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/29.png) no-repeat
+        }
+
+        10% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/1.png) no-repeat;
+        }
+
+        14% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/2.png) no-repeat
+        }
+
+        16% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/3.png) no-repeat
+        }
+
+        19% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/4.png) no-repeat
+        }
+
+        22% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/5.png) no-repeat
+        }
+
+        25% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/6.png) no-repeat
+        }
+
+        28% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/7.png) no-repeat
+        }
+
+        31% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/8.png) no-repeat
+        }
+
+        34% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/9.png) no-repeat
+        }
+
+        37% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/10.png) no-repeat
+        }
+
+
+        39% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/11.png) no-repeat
+        }
+
+        44% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/1.png) no-repeat;
+        }
+
+        47% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/2.png) no-repeat
+        }
+
+        50% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/3.png) no-repeat
+        }
+
+        52% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/4.png) no-repeat
+        }
+
+        55% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/5.png) no-repeat
+        }
+
+        58% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/6.png) no-repeat
+        }
+
+        61% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/7.png) no-repeat
+        }
+
+        64% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/8.png) no-repeat
+        }
+
+        67% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/9.png) no-repeat
+        }
+
+        70% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/10.png) no-repeat
+        }
+
+        79% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/11.png) no-repeat
+        }
+
+        86% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/12.png) no-repeat
+        }
+
+        89% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/13.png) no-repeat
+        }
+
+        92% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/14.png) no-repeat
+        }
+
+        95% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/15.png) no-repeat
+        }
+
+
+        96% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/16.png) no-repeat
+        }
+
+        97% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/17.png) no-repeat
+        }
+
+        98% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/18.png) no-repeat
+        }
+
+        99% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/19.png) no-repeat
+        }
+
+        100% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/20.png) no-repeat;
+        }
+    }
+
+    @-webkit-keyframes mymove2 /* Safari and Chrome */
+    {
+
+        0% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/21.png) no-repeat
+        }
+
+        2% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/22.png) no-repeat
+        }
+
+        3% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/23.png) no-repeat
+        }
+
+        4% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/24.png) no-repeat
+        }
+
+
+        5% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/25.png) no-repeat
+        }
+
+        6% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/26.png) no-repeat
+        }
+
+        7% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/27.png) no-repeat
+        }
+
+        8% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/28.png) no-repeat
+        }
+
+        9% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/29.png) no-repeat
+        }
+
+        10% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/1.png) no-repeat;
+        }
+
+        14% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/2.png) no-repeat
+        }
+
+        16% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/3.png) no-repeat
+        }
+
+        19% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/4.png) no-repeat
+        }
+
+        22% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/5.png) no-repeat
+        }
+
+        25% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/6.png) no-repeat
+        }
+
+        28% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/7.png) no-repeat
+        }
+
+        31% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/8.png) no-repeat
+        }
+
+        34% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/9.png) no-repeat
+        }
+
+        37% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/10.png) no-repeat
+        }
+
+
+        39% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/11.png) no-repeat
+        }
+
+        44% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/1.png) no-repeat;
+        }
+
+        47% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/2.png) no-repeat
+        }
+
+        50% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/3.png) no-repeat
+        }
+
+        52% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/4.png) no-repeat
+        }
+
+        55% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/5.png) no-repeat
+        }
+
+        58% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/6.png) no-repeat
+        }
+
+        61% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/7.png) no-repeat
+        }
+
+        64% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/8.png) no-repeat
+        }
+
+        67% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/9.png) no-repeat
+        }
+
+        70% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/10.png) no-repeat
+        }
+
+        79% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/11.png) no-repeat
+        }
+
+        86% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/12.png) no-repeat
+        }
+
+        89% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/13.png) no-repeat
+        }
+
+        92% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/14.png) no-repeat
+        }
+
+        95% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/15.png) no-repeat
+        }
+
+
+        96% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/16.png) no-repeat
+        }
+
+        97% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/17.png) no-repeat
+        }
+
+        98% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/18.png) no-repeat
+        }
+
+        99% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/19.png) no-repeat
+        }
+
+        100% {
+            background: url(//am708403.azureedge.net/images/algooracle/robot/20.png) no-repeat;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .robot {
+            -ms-transform: scale(0.5, 0.5);
+            -webkit-transform: scale(0.5, 0.5);
+            transform: scale(0.5, 0.5);
+            top: 50%;
+            left: ~'calc(50% + 100px)';
+        }
+    }
+
+    @media (max-width: 645px) {
+        .robot {
+            -ms-transform: scale(0.3, 0.3);
+            -webkit-transform: scale(0.3, 0.3);
+            transform: scale(0.3, 0.3);
+            top: 70%;
+            left: ~'calc(50% + 78px)';
+        }
+    }
+
+    @media (max-width: 550px) {
+        .robot {
+            -ms-transform: scale(0.3, 0.3);
+            -webkit-transform: scale(0.3, 0.3);
+            transform: scale(0.3, 0.3);
+            top: 70%;
+            left: ~'calc(50% + 25px)';
+        }
+
+        .oracle-box-container .oracle-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            width: 280px;
+        }
+
+        .agm-component-algooracle .loading-img {
+            margin: 10px 40px;
+        }
+    }
+
+    @media (max-width: 350px) {
+        .loading-img {
+            margin: 10px 30px;
+        }
+    }
+}

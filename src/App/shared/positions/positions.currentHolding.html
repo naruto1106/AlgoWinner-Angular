@@ -1,0 +1,152 @@
+﻿<div class="agm-component-positions current-holding">
+    <div class="p-50px text-center" ng-show="vm.isLoadingPositions">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div class="pull-right search" ng-if="!vm.isLoadingPositions">
+        <input type="text" placeholder="SEARCH STOCK" ng-model="vm.models.searchStockText" ng-model-options="{debounce: 200}"
+               analytics-on="change" analytics-category="{{vm.category}}" analytics-event="{{vm.event}}" analytics-label="SearchStock" agmc-analytics-timestamp />
+        <button type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <!-- DIRECTIVE agmCurrentHoldings.html +  agm*CurrentHolding.js -->
+    <div class="alert alert-info" ng-show="!vm.hasPositions() && !vm.isLoadingPositions && vm.models.searchStockText == ''">
+        <span ng-if="vm.viewMode !== 'readonly'">{{vm.noPositionMessage}}</span>
+        <span ng-if="vm.viewMode == 'readonly'">{{vm.noPositionMessageForGroupStrategy}}</span>
+    </div>
+    <h4 class="text-center" ng-if="vm.models.searchStockText !== '' && !vm.hasPositions()">no results found</h4>
+
+    <table class="distinct m-bottom-10px" ng-show="vm.hasPositions() && !vm.isLoadingPositions">
+        <thead>
+            <tr>
+                <th>Current Unrealized P/L</th>
+                <th>Allocated Exposure</th>
+                <th>No. of LONG</th>
+                <th>No. of SHORT</th>
+            </tr>
+        </thead>
+        <tr>
+            <td ng-class="vm.capitals.UnrealizedPL>=0?['green-profit']:['red-loss']"
+                ng-if="!vm.isPreview">
+                {{vm.capitals.UnrealizedPL | customCurrencyOrDash:vm.capitals.Currency:2}}
+            </td>
+            <td ng-if="vm.isPreview">
+                -
+                <!--ng-class="capitals.UnrealizedPL>=0?['green-profit']:['red-loss']"-->
+                <!--MaRa: Not implemented. Quick hide for now-->
+                <!--{{vm.capitals.UnrealizedPL | valuePercentageOrDash:2}}-->
+            </td>
+            <td ng-if="!vm.isPreview">{{(vm.capitals.LongExposure + vm.capitals.ShortExposure) | customCurrencyOrDash:vm.capitals.Currency:2}}</td>
+            <td ng-if="vm.isPreview">-</td>
+            <td>{{vm.holdingSummary.currentNumOfLong | number:0}}</td>
+            <td>{{vm.holdingSummary.currentNumOfShort | number:0}}</td>
+        </tr>
+    </table>
+    <div ng-if="vm.hasPositions() && !vm.isLoadingPositions" class="pull-right m-bottom-5px">
+        <b>Sort By:</b> &nbsp;
+        <select ng-model="vm.models.overviewSorting" ng-change="vm.setDefaultSortReverse();vm.sortPositions(vm.models.overviewSorting)"
+                ng-options="selection for selection in ::vm.overviewSortings"
+                analytics-on="click" analytics-category="{{vm.category}}" analytics-event="{{vm.event}}" analytics-label="SortBy(Overview)" agmc-analytics-timestamp></select>
+    </div>
+    <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+        class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+        first-text="&laquo;" last-text="&raquo;" max-size="10"
+        num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+    <table class="distinct m-bottom-10px table-large tablesorter" ng-show="vm.hasPositions() && !vm.isLoadingPositions" id="current-holding">
+        <thead>
+            <tr>
+                <th class="cursor-pointer" ng-click="vm.sortReverse['Product'] = !vm.sortReverse['Product']; vm.sortPositions('Product')">
+                    Product
+                    <span ng-show="vm.models.overviewSorting == 'Product' && !vm.sortReverse['Product']" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.models.overviewSorting == 'Product' && vm.sortReverse['Product']" class="fa fa-caret-up"></span>
+                </th>
+                <th class="cursor-pointer" ng-click="vm.sortReverse['Allocated Exposure'] = !vm.sortReverse['Allocated Exposure']; vm.sortPositions('Allocated Exposure')">
+                    Allocated Exposure
+                    <span ng-show="vm.models.overviewSorting == 'Allocated Exposure' && !vm.sortReverse['Allocated Exposure']" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.models.overviewSorting == 'Allocated Exposure' && vm.sortReverse['Allocated Exposure']" class="fa fa-caret-up"></span>
+                </th>
+                <th class="cursor-pointer" ng-click="vm.sortReverse['Margin Used'] = !vm.sortReverse['Margin Used']; vm.sortPositions('Margin Used')">
+                    Margin Used
+                    <span ng-show="vm.models.overviewSorting == 'Margin Used' && !vm.sortReverse['Margin Used']" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.models.overviewSorting == 'Margin Used' && vm.sortReverse['Margin Used']" class="fa fa-caret-up"></span>
+                </th>
+                <th class="cursor-pointer" ng-click="vm.sortReverse['Unrealized P/L (%)'] = !vm.sortReverse['Unrealized P/L (%)']; vm.sortPositions('Unrealized P/L (%)')">
+                    Unrealized P/L
+                    <span ng-show="vm.models.overviewSorting == 'Unrealized P/L (%)' && !vm.sortReverse['Unrealized P/L (%)']" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.models.overviewSorting == 'Unrealized P/L (%)' && vm.sortReverse['Unrealized P/L (%)']" class="fa fa-caret-up"></span>
+                </th>
+                <th class="cursor-pointer" ng-click="vm.sortReverse['Position'] = !vm.sortReverse['Position']; vm.sortPositions('Position')">
+                    Position
+                    <span ng-show="vm.models.overviewSorting == 'Position' && !vm.sortReverse['Position']" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.models.overviewSorting == 'Position' && vm.sortReverse['Position']" class="fa fa-caret-up"></span>
+                </th>
+                <th class="cursor-pointer" ng-click="vm.sortReverse['Holding Duration'] = !vm.sortReverse['Holding Duration']; vm.sortPositions('Holding Duration')">
+                    Holding<br />Duration
+                    <span ng-show="vm.models.overviewSorting == 'Holding Duration' && !vm.sortReverse['Holding Duration']" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.models.overviewSorting == 'Holding Duration' && vm.sortReverse['Holding Duration']" class="fa fa-caret-up"></span>
+                </th>
+                <th></th>
+                <th ng-if="isSignal"></th>
+            </tr>
+        </thead>
+
+        <tr ng-repeat="position in vm.getPagedItems()" class="p-top-5px">
+            <td class="lh-40px">
+                <div class="m-top-5px">
+                    <agms-product-picture product="::position.Product"></agms-product-picture>
+                    <div class="clearfix"></div>
+                </div>
+            </td>
+            <td class="lh-40px text-left p-right-50px">
+                <h5 ng-if="position.QuantityOnHold != null">
+                    {{position.Exposure | customCurrencyOrDash:position.Product.Currency:2}}
+                </h5>
+                <h5 ng-if="position.QuantityOnHold == null && isPreview">
+                    {{position.Exposure_Percent | valuePercentageOrDashDynamicDecimals:4}}
+                </h5>
+                <h5 ng-if="position.QuantityOnHold == null && !isPreview">
+                    -
+                </h5>
+            </td>
+            <td class="lh-40px text-left p-right-50px">
+                <h5 ng-if="position.QuantityOnHold != null">
+                    {{position.MarginValue | customCurrencyOrDash:position.Product.Currency:2}}
+                </h5>
+                <h5 ng-if="position.QuantityOnHold == null">
+                    -
+                </h5>
+            </td>
+            <td class="lh-40px p-right-50px text-left" ng-class="position.UnrealizedPL>=0?['green-profit']:['red-loss']">
+                <h5 ng-if="!isPreview">
+                    {{position.UnrealizedPL | customCurrencyOrDash:position.Product.Currency:2}}
+                    <br />
+                    <span class="smaller">({{position.UnrealizedPL_Percent | valuePercentageOrDash:2}})</span>
+                </h5>
+                <h5 ng-if="isPreview">
+                    {{position.UnrealizedPL_Percent | valuePercentageOrDash:2}}
+                </h5>
+            </td>
+            <td class="lh-40px">
+                <h5>{{position.PositionType | uppercase}}</h5>
+            </td>
+            <td class="lh-40px">
+                <h5>{{::position.EntryTime | timeSince:true}}</h5>
+            </td>
+            <td class="text-center lh-40px w-100px">
+                <button class="filled-blue m-top-5px m-left-5px pull-right"
+                        agmc-button-wait-on-promise="vm.viewPositionDetailFunc(position)"
+                        ng-if="vm.showPositionDetail() && !isByAccount"
+                        analytics-on="click" analytics-category="{{vm.category}}" analytics-event="{{vm.event}}" analytics-label="PositionDetail" agmc-analytics-timestamp>
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+                <div class="clearfix"></div>
+            </td>
+        </tr>
+    </table>
+    <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+        class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+        first-text="&laquo;" last-text="&raquo;" max-size="10"
+        num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+</div>

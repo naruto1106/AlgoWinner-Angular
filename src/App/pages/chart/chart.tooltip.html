@@ -1,0 +1,22 @@
+﻿<div class="chart-tooltip" ng-show="vm.data">
+    <div class="box-container" ng-repeat="tooltip in vm.tooltips track by tooltip.primary" id="tooltip_{{$index}}" ng-show="tooltip.shown">
+        <div class="box">
+            <div class="primary-symbol">{{vm.getPrimarySymbol()}}</div>
+            <div ng-if="tooltip.name=='chart'" class="date-label">{{vm.getDateByBarsize()}}</div>            
+            <table ng-if="tooltip.hasDataset && tooltip.datasetLabels.length>0" class="simple-table">
+                <tr ng-repeat="label in tooltip.datasetLabels">
+                    <td>{{label}}</td>
+                    <td ng-if="label !== 'Change'">{{vm.getLabelValue(label)}}</td>
+                    <td ng-if="label === 'Change'">
+                        <span class="data-label" ng-if="vm.getLabelValue(label).priceChanged" ng-class="{ 'price-up': vm.getLabelValue(label).priceUp, 'price-down': !vm.getLabelValue(label).priceUp }">
+                            <i class="glyphicon price-change-icon" ng-class="{ 'glyphicon-triangle-top': vm.getLabelValue(label).priceUp, 'glyphicon-triangle-bottom': !vm.getLabelValue(label).priceUp }"></i> 
+                            {{vm.getLabelValue(label).value}}
+                        </span>
+                        <span ng-if="!vm.getLabelValue(label).priceChanged">0%</span>
+                    </td>
+                </tr>
+            </table>
+            <div ng-if="!tooltip.hasDataset">{{vm.getLabelValue(tooltip.primary) | number:tooltip.defaultDecimalPlace}}</div>
+        </div>
+    </div>
+</div>

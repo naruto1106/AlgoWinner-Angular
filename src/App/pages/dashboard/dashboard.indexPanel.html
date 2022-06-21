@@ -1,0 +1,127 @@
+﻿<div class="index-panel">
+    <agmc-loading is-loading="vm.isLoadingIndices" class="index-loading"></agmc-loading>
+    <div ng-if="!vm.isLoadingIndices">
+        <div class="section-name">Asia</div>
+        <table>
+            <tbody ng-repeat="i in vm.asiaIndices">
+            <tr>
+                <td class="product-info">
+                    <div agms-image img-src="i.ProductModel.ProductIconURL" class="product-icon"></div>
+                    <div class="product-text">
+                        <div class="product-symbol">
+                            {{i.ProductModel.ProductName}}
+                        </div>
+                    </div>
+                </td>
+                <td class="current-price">
+                    <div ng-if="i.MarketData.LastTradedPrice != null">
+                        {{i.MarketData.LastTradedPrice | correctTickSizeDecimalPlacesWithoutCurrency:i.ProductModel.Currency:i.ProductModel.TradeVenueLoc}}
+                    </div>
+                    <span ng-if="i.MarketData.LastTradedPrice == null" class="not-available">N/A</span>
+                </td>
+                <td class="price-change">
+                    <span ng-if="i.MarketData.LastTradedPriceDiff == null" class="not-available">N/A</span>
+                    <div ng-if="i.MarketData.LastTradedPriceDiff != null">
+                        <div ng-class="i.MarketData.LastTradedPriceDiff>=0?['green-profit']:['red-loss']">
+                            {{i.MarketData.LastTradedPriceDiff}}
+                            <span>
+                                <span>(</span>
+                                <span class="glyphicon glyphicon-triangle-top green-profit" ng-if="i.MarketData.LastTradedPriceDiff >= 0"></span>
+                                <span class="glyphicon glyphicon-triangle-bottom red-loss" ng-if="i.MarketData.LastTradedPriceDiff < 0"></span>
+                                <span>{{i.MarketData.LastTradedPriceDiffPct | valuePercentOrDash:2}})</span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="update-time">
+                <td colspan="3">
+                    <div>{{i.MarketData.LastTradedTime | date:'mediumDate'}} {{i.MarketData.LastTradedTime | date:'shortTime'}} {{vm.timeZone}}</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="section-name">Europe</div>
+        <table>
+            <tbody ng-repeat="i in vm.europeIndices">
+            <tr>
+                <td class="product-info">
+                    <div agms-image img-src="i.ProductModel.ProductIconURL" class="product-icon"></div>
+                    <div class="product-text">
+                        <div class="product-symbol">
+                            {{i.ProductModel.ProductName}}
+                        </div>
+                    </div>
+                </td>
+                <td class="current-price">
+                    <div ng-if="i.MarketData.LastTradedPrice != null">
+                        {{i.MarketData.LastTradedPrice | correctTickSizeDecimalPlacesWithoutCurrency:i.ProductModel.Currency:i.ProductModel.TradeVenueLoc}}
+                    </div>
+                    <span ng-if="i.MarketData.LastTradedPrice == null" class="not-available">N/A</span>
+                </td>
+                <td class="price-change">
+                    <span ng-if="i.MarketData.LastTradedPriceDiff == null" class="not-available">N/A</span>
+                    <div ng-if="i.MarketData.LastTradedPriceDiff != null">
+                        <div ng-class="i.MarketData.LastTradedPriceDiff>=0?['green-profit']:['red-loss']">
+                            {{i.MarketData.LastTradedPriceDiff}}
+                            <span>
+                                <span>(</span>
+                                <span class="glyphicon glyphicon-triangle-top green-profit" ng-if="i.MarketData.LastTradedPriceDiff >= 0"></span>
+                                <span class="glyphicon glyphicon-triangle-bottom red-loss" ng-if="i.MarketData.LastTradedPriceDiff < 0"></span>
+                                <span>{{i.MarketData.LastTradedPriceDiffPct | valuePercentOrDash:2}})</span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="update-time">
+                <td colspan="3">
+                    <div>{{i.MarketData.LastTradedTime | date:'mediumDate'}} {{i.MarketData.LastTradedTime | date:'shortTime'}} {{vm.timeZone}}</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="section-name">America</div>
+        <table>
+            <tbody ng-repeat="i in vm.americaIndices">
+            <tr>
+                <td class="product-info">
+                    <div agms-image img-src="i.ProductModel.ProductIconURL" class="product-icon"></div>
+                    <div class="product-text">
+                        <div class="product-symbol">
+                            {{i.ProductModel.ProductName}}
+                        </div>
+                    </div>
+                </td>
+                <td class="current-price">
+                    <div ng-if="i.MarketData.LastTradedPrice != null">
+                        {{i.MarketData.LastTradedPrice | correctTickSizeDecimalPlacesWithoutCurrency:i.ProductModel.Currency:i.ProductModel.TradeVenueLoc}}
+                    </div>
+                    <span ng-if="i.MarketData.LastTradedPrice == null" class="not-available">N/A</span>
+                </td>
+                <td class="price-change">
+                    <span ng-if="i.MarketData.LastTradedPriceDiff == null" class="not-available">N/A</span>
+                    <div ng-if="i.MarketData.LastTradedPriceDiff != null">
+                        <div ng-class="i.MarketData.LastTradedPriceDiff>=0?['green-profit']:['red-loss']">
+                            {{i.MarketData.LastTradedPriceDiff}}
+                            <span>
+                                <span>(</span>
+                                <span class="glyphicon glyphicon-triangle-top green-profit" ng-if="i.MarketData.LastTradedPriceDiff >= 0"></span>
+                                <span class="glyphicon glyphicon-triangle-bottom red-loss" ng-if="i.MarketData.LastTradedPriceDiff < 0"></span>
+                                <span>{{i.MarketData.LastTradedPriceDiffPct | valuePercentOrDash:2}})</span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="update-time">
+                <td colspan="3">
+                    <div>{{i.MarketData.LastTradedTime | date:'mediumDate'}} {{i.MarketData.LastTradedTime | date:'shortTime'}} {{vm.timeZone}}</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿<div class="agm-components-shop">
+    <agms-header-shop current-page="analyze"></agms-header-shop>
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+    <div class="analyze-page container">
+        <div class="col-md-4" ng-repeat="tool in vm.availableTools">
+            <div class="tool-box">
+                <div class="overview-image" agms-image img-src="tool.DescriptionUrl"></div>
+                <div class="row-md-12">
+                    <div class="col-md-5">
+                        <div class="image" agms-image img-src="tool.ImageUrl"></div>
+                    </div>
+                    <div class="col-md-7 text-left name-container">
+                        <div class="name">{{tool.Name}}</div>
+                    </div>
+                </div>
+                <div class="clearfix m-bottom-20px"></div>
+
+                <div class="description m-bottom-20px">{{tool.Description}}</div>
+                <div class="price">From {{vm.getMinMonthlyFee(tool.Offers) | customCurrencyOrDash:tool.Offers[0].Bundle.PricingPlanModel.Currency:2}} / month</div>
+
+                <div class="clearfix m-bottom-20px"></div>
+
+                <button class="filled-green" ng-if="!tool.IsSubscribed" ng-click="vm.subscribe(tool)"
+                        analytics-on="click" analytics-category="ShopTools" analytics-event="SubscribeNow" analytics-label="{{item.Name}}" agmc-analytics-timestamp>SUBSCRIBE NOW</button>
+                <button class="hollow-green" ng-if="tool.IsSubscribed" ng-disabled="tool.IsSubscribed">SUBSCRIBED</button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

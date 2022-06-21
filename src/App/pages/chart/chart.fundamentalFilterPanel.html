@@ -1,0 +1,49 @@
+﻿<!-- TEMPLATE user.notification.new.html + user.notification.js -->
+<div class="agm-component-chart popup-panel">
+    <div class="modal-header">
+        <button class="close" ng-click="vm.uibDismissPanel()" class="glyphicon-remove glyphicon">&times;</button>
+        <h4 class="modal-title">FUNDAMENTAL</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="fundamental-panel">
+            <div class="alert alert-warning" ng-if="vm.hasError">You have already added {{vm.selectedFundamentals.displayName}}</div>
+            <div class="row-md-5 gap-med as-table">
+                <div class="col-md-1 category">
+                    <h4>Category</h4>
+                    <div class="max-scrollbox">
+                        <h5 ng-repeat="category in vm.categories" class="active-item" ng-click="vm.setCategory(category);" ng-class="{selected:category===vm.selectedCategory}">
+                            {{::category}}
+                        </h5>
+                    </div>
+                </div>
+                <div class="col-md-2 separator-left fundamental">
+                    <h4>Fundamentals</h4>
+                    <div class="abs-container">
+                        <div class="max-scrollbox" agmc-custom-scrollbar>
+                            <div ng-repeat="fundamental in vm.getListedFundamentals()">
+                                <h5 ng-click="vm.selectFundamental(fundamental)" class="active-item" ng-if="!fundamental.added" ng-class="{selected:fundamental===vm.selectedFundamentals}">
+                                    {{::fundamental.displayName}}
+                                </h5>
+                                <h5 ng-if="fundamental.added" class="gray-text">
+                                    {{::fundamental.displayName}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 separator-left fundamental">
+                    <b ng-if="vm.selectedFundamentals">{{vm.selectedFundamentals.displayName}}: </b>
+                    <p>{{vm.selectedFundamentals.description}}</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="pull-right btn btn-primary btn-square" ng-disabled="!vm.selectedFundamentals || vm.hasError" ng-click="vm.addToFundamentals(vm.selectedFundamentals);">ADD</button>
+        <button class="pull-right btn btn-outline-primary  btn-square" ng-click="vm.uibDismissPanel()">CANCEL</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

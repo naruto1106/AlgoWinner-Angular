@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html ng-app="agmp.start.oracle">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="//am708403.azureedge.net/images/landing/fav.png" />
+    <link href="//am708403.azureedge.net/images/algofont/styles.css" rel="stylesheet">
+
+    {{"OracleJs"|bundle}}
+    {{"VendorStyle"|bundle}}
+    {{"CssCore"|bundle}}
+    {%if DEBUG %}
+    <script>
+        angular.module("agm.oracleTemplates", []);
+    </script>
+    {%else%}
+    {{"oracleTemplates"|bundle}}
+    {%endif%}
+
+    <script>
+        angular.module('agm.core')
+            .service('coreConfigService', [function() {
+                return {{ coreConfigService|safe }}
+        }]);
+    </script>
+    <script>
+        angular.module('agm.core').constant("coreServerVersionConstants", {
+            ServerVersion: "{{ ServerVersion }}"
+        });
+        angular.module('agm.core').constant("coreApiServerAddress",
+            "{{ appSettings.ApiServerAddress }}"
+        );
+        angular.module('agm.core')
+            .constant("coreMarketDataServerAddress", "{{ appSettings.MarketDataServerAddress }}")
+            .constant("coreMarketDataServerAddressDelayed", "{{ appSettings.MarketDataServerAddressDelayed }}")
+    </script>
+    <title>AlgoMerchant</title>
+</head>{% raw %}
+<body ng-controller="OracleRootController as vm" class="algo-oracle-mobile-view">
+    <!--<agmc-loading is-loading="vm.isLoading"></agmc-loading>-->
+    <div ng-if="vm.showOracle && !vm.isLoading">
+        <agmp-mobile-oracle></agmp-mobile-oracle>
+    </div>
+    <div ng-if="!vm.showOracle && !vm.isLoading">
+        You don't have permission to view this page
+    </div>
+
+    <script type='text/javascript'>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', "{{ appSettings.GoogleAnalyticsId }}", 'auto');
+    </script>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '{{ appSettings.FacebookPixelId }}');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+</body>
+</html>{%endraw%}

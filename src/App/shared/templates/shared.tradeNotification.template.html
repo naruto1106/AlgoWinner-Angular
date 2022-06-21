@@ -1,0 +1,18 @@
+﻿<div class="agms-templates trade-notification-box" ng-class="{blink:content.item.blink}">
+    <agms-strategy-commerce-portrait ng-if="content.externalVm.getDisplayInfo(content.item.LastOrderUpdate.StrategyId)" strategy="content.externalVm.getDisplayInfo(content.item.LastOrderUpdate.StrategyId)" level-of-detail="8"></agms-strategy-commerce-portrait>
+    <p class="m-top-5px m-bottom-20px">
+        <b class="f-16px" ng-class="{'green-profit':content.item.Action=='Buy', 'red-loss': content.item.Action=='Sell'}">{{content.item.Action}}</b>
+        <span class="special-text f-14px">{{content.item.Product.ProductName}} ({{content.item.Product.Symbol}})</span>
+        <b class="f-14px">
+            at  {{content.item.Product.Currency | currencySymbol}} {{content.externalVm.getPrice(content.item)}}
+        </b>
+        <br />
+        <b class="f-14px special-text">{{content.item.Quantity}}</b> units
+        <br />
+        <span class="f-14px">
+            To <b>{{content.item.Intention | getOrderIntentionString: content.item.Action}}</b> position
+        </span>
+        <br />
+        <span class="text-uppercase pull-right"><b>{{content.item.LastOrderStatus}}</b></span>
+    </p>
+</div>

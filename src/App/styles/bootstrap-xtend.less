@@ -1,0 +1,166 @@
+﻿@size-xxs: 0px;
+@size-xs: 480px;
+@size-sm: 768px;
+@size-md: 992px;
+@size-lg: 1200px;
+@size-xl: 1600px;
+
+
+@size-xs2: 479px;
+@size-sm2: 767px;
+@size-md2: 991px;
+@size-lg2: 1199px;
+@size-xl2: 1599px;
+
+
+
+.generateSegment(@width,@prefix,@counter) when (@counter <= @width) {
+    .row-@{prefix}@{width} > .col-@{prefix}@{counter} {
+        @res: @counter/@width*100;
+        width: unit(@res, %);
+    }
+
+    .generateSegment(@width,@prefix,(@counter + 1));
+}
+
+
+.generateVisibilityFrom(@prefix) {
+    .show-from-@{prefix} {
+        display: inherit;
+    }
+
+    .hide-from-@{prefix} {
+        display: none;
+        visibility:hidden;
+    }
+}
+
+.generateVisibilityTill(@prefix) {
+    .show-till-@{prefix} {
+        display: inherit;
+    }
+
+    .hide-till-@{prefix} {
+        display: none;
+        visibility:hidden;
+    }
+}
+
+.generateContainerAndSegment(@width,@prefix) {
+    .generateSegment(@width,@prefix,1);
+}
+
+.generateContainerSet(@prefix) {
+    .generateContainerAndSegment(1,@prefix);
+    .generateContainerAndSegment(2,@prefix);
+    .generateContainerAndSegment(3,@prefix);
+    .generateContainerAndSegment(4,@prefix);
+    .generateContainerAndSegment(5,@prefix);
+    .generateContainerAndSegment(6,@prefix);
+    .generateContainerAndSegment(7,@prefix);
+    .generateContainerAndSegment(8,@prefix);
+    .generateContainerAndSegment(9,@prefix);
+    .generateContainerAndSegment(10,@prefix);
+    .generateContainerAndSegment(11,@prefix);
+    .generateContainerAndSegment(12,@prefix);
+    .generateContainerAndSegment(13,@prefix);
+    .generateContainerAndSegment(14,@prefix);
+    .generateContainerAndSegment(15,@prefix);
+    .generateContainerAndSegment(16,@prefix);
+    .generateContainerAndSegment(17,@prefix);
+    .generateContainerAndSegment(18,@prefix);
+    .generateContainerAndSegment(19,@prefix);
+    .generateContainerAndSegment(20,@prefix);
+    .generateContainerAndSegment(21,@prefix);
+    .generateContainerAndSegment(22,@prefix);
+    .generateContainerAndSegment(23,@prefix);
+    .generateContainerAndSegment(24,@prefix);
+    .generateContainerAndSegment(25,@prefix);
+    .generateContainerAndSegment(26,@prefix);
+    .generateContainerAndSegment(27,@prefix);
+    .generateContainerAndSegment(28,@prefix);
+    .generateContainerAndSegment(29,@prefix);
+    .generateContainerAndSegment(30,@prefix);
+}
+
+.as-table {
+    display: table;
+    width: 100%;
+}
+
+.as-table-cell {
+    display: table-cell;
+}
+
+.as-table-row{
+    display: table-row;
+    width: 100%;
+    &.compact{
+        height:0;
+    }
+}
+
+*[class*="row-"] > *[class*="col-"] {
+    float: left;
+}
+
+*[class*="row-"].as-table > *[class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+
+.generateContainerSet(~'');
+.generateVisibilityFrom(none);
+
+@media (min-width: @size-xs) {
+    .generateContainerSet(xs-);
+    .generateVisibilityFrom(xs);
+}
+
+@media (min-width: @size-sm) {
+    .generateContainerSet(sm-);
+    .generateVisibilityFrom(sm);
+}
+
+@media (min-width: @size-md) {
+    .generateContainerSet(md-);
+    .generateVisibilityFrom(md);
+}
+
+@media (min-width: @size-lg) {
+    .generateContainerSet(lg-);
+    .generateVisibilityFrom(lg);
+}
+
+@media (min-width: @size-xl) {
+    .generateContainerSet(xl-);
+    .generateVisibilityFrom(xl);
+}
+
+
+@media (max-width: @size-xl2) {
+    .generateVisibilityTill(xl);
+}
+@media (max-width: @size-lg2) {
+    .generateVisibilityTill(lg);
+}
+@media (max-width: @size-md2) {
+    .generateVisibilityTill(md);
+}
+@media (max-width: @size-sm2) {
+    .generateVisibilityTill(sm);
+}
+@media (max-width: @size-xs2) {
+    .generateVisibilityTill(xs);
+}
+
+
+
+body.ignore-media {
+    .generateContainerSet(xs-);
+    .generateContainerSet(sm-);
+    .generateContainerSet(md-);
+    .generateContainerSet(lg-);
+    .generateContainerSet(xl-);
+}

@@ -1,0 +1,34 @@
+﻿<div class="agm-component-orderstrades agm-carousel">
+    <div class="left-button">
+        <button ng-click="vm.moveLeft(160)">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </button>
+    </div>
+    <div class="right-button">
+        <button ng-click="vm.moveRight(160)">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+    </div>
+    <div class="p-50px text-center" ng-if="!vm.resizeReady">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <section class="swiper-box">
+        <div class="swiper-container" >
+            <div class="swiper-wrapper">
+                <div class="swiper-slide rel" ng-repeat="strategy in vm.strategySelections" ng-class="{selected:vm.selectedStrategy==strategy}">
+                    <button ng-show="vm.resizeReady" ng-model="vm.selectedStrategy" ng-change="vm.triggerChange(strategy)" uib-btn-radio="strategy">
+                        <div class="agm-components-strategy-commerce strategy" style="pointer-events: none">
+                            <div class="strategy-type1">
+                                <div class="strategy-icon transition-fast" agms-image img-src="strategy.DisplayInfo | strategyImage" img-fallback-src="'//am708403.azureedge.net/images/no-image.jpg?'"></div>                                
+                                <h1 class="title ellipsis-nowrap">{{strategy.DisplayInfo | strategyName}}</h1>
+                                <h2 class="feature" ng-if="strategy.DisplayInfo.IsFeatured">FEATURED</h2>
+                            </div>
+                        </div>
+                        <div ng-class="[vm.selectedStrategy==strategy ? 'not-supported-large' : 'not-supported-small']" ng-if="vm.isOrderPad && strategy.compatibleValue != 0">Not Supported</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+</div>

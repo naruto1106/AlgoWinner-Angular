@@ -1,0 +1,25 @@
+﻿<div class="agm-components-droid-helper avatar" ng-class="{'show-detail':vm.sDroidHelperService.isDetailShown}"
+     ng-show="!vm.pAlgoOracleService.isOracleOpen">
+    <div class="black-screen" ng-class="{active:vm.sDroidHelperService.isGuiding}"></div>
+    <div class="main-avatar-container" ng-show="!vm.commonBrowserDetectorService.isMobile()">
+        <div class="main-avatar">
+            <div class="conversation-starter">
+                <button class="detail-button" ng-if="!vm.sDroidHelperService.isGuiding" ng-click="vm.showDetail()">Click Here For Help!</button>
+                <button class="detail-button" ng-if="vm.sDroidHelperService.isGuiding" ng-click="vm.endTour()">End current tour</button>
+                <div class="comment" ng-if="vm.sDroidHelperService.currentSmallMessage">
+                    <div ng-bind-html="vm.sDroidHelperService.currentSmallMessage.content"></div>
+                    <div ng-if="vm.sDroidHelperService.currentSmallMessage.actions.length>0">
+                        <button ng-repeat="action in vm.sDroidHelperService.currentSmallMessage.actions" ng-class="action.cssClasses" class="pull-right" ng-click="action.run()">{{action.label}}</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="detail-avatar-container">
+        <div class="big-icon">
+            <div droid-popup-element ng-class="{minified:!vm.sDroidHelperService.showPopup}"></div>            
+            <button class="enlarge-button" ng-click="vm.enlargeView()" ng-if="!vm.sDroidHelperService.showPopup && vm.sDroidHelperService.hasActiveModal()">Enlarge</button>
+        </div>
+    </div>
+</div>

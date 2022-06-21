@@ -1,0 +1,16 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="algo-icon">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+  <g>
+    <title>Layer 1</title>
+    <g stroke="null" id="svg_19">
+      <path stroke="null" id="svg_18" d="m99.922077,394.095684l33.063978,33.063671l-83.694059,83.694059l-33.045232,-33.063671l83.675313,-83.694059zm58.153143,-7.974199l-14.745262,-14.745262c-5.698535,-5.698535 -14.951777,-5.698535 -20.669673,0l-14.124487,14.124487l33.063978,33.063978l16.475443,-16.475443c4.419799,-4.420106 4.419799,-11.547961 0,-15.96776zm-159.131497,138.14191c-0.601722,2.708056 1.843273,5.134612 4.551637,4.476037l36.844255,-8.933328l-33.045232,-33.063671l-8.35066,37.520962z"/>
+    </g>
+    <ellipse ry="14.537035" rx="14.537035" id="svg_36" cy="14.539011" cx="14.539017" stroke-opacity="null" stroke-width="6" stroke="null" fill="#bf00bf"/>
+    <rect opacity="0.5" id="svg_43" height="14.259258" width="59.999993" y="7.409382" x="35.557533" stroke-opacity="null" stroke-width="6" stroke="null" fill="#000000"/>
+    <ellipse ry="14.537035" rx="14.537035" id="svg_49" cy="85.448922" cx="14.539017" stroke-width="6" fill="#005fbf"/>
+    <rect opacity="0.5" id="svg_50" height="14.259258" width="59.999993" y="78.319293" x="35.557533" stroke-opacity="null" stroke-width="6" stroke="null" fill="#000000"/>
+    <ellipse ry="14.537035" rx="14.537035" id="svg_51" cy="50.299513" cx="14.539017" stroke-opacity="null" stroke-width="6" stroke="null" fill="#bf5f00"/>
+    <rect opacity="0.5" id="svg_52" height="14.259258" width="59.999993" y="43.169884" x="35.557533" stroke-opacity="null" stroke-width="6" stroke="null" fill="#000000"/>
+  </g>
+</svg>

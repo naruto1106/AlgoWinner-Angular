@@ -1,0 +1,16 @@
+﻿<div class="agm-components-datamart event-detail">
+    <div class="modal-header">
+        <button class="close" ng-click="vm.uibDismissPanel()" class="glyphicon-remove glyphicon">&times;</button>
+        <h4 class="modal-title">{{vm.feed.AlgoFeedName}}</h4>
+    </div>
+    <div class="modal-body datamart-description">
+        <div class="feed-image" ng-style="{'background-image': 'url({{vm.feed.AlgoFeedImageUrl}})'}"></div>
+        <div class="title">DESCRIPTION</div>
+        <div class="description">{{vm.feed.AlgoFeedDescription}}</div>
+        <div class="description-image" ng-style="{'background-image': 'url({{vm.feed.AlgoFeedDescriptionImageUrl}})'}">
+            <a class="glyphicon glyphicon-search silent-button2 pull-right" ng-if="vm.feed.AlgoFeedDescriptionImageUrl"
+               ng-click="vm.showPicture('', vm.feed.AlgoFeedDescriptionImageUrl)"></a>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,25 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    height: 100%;
+    background: #000;
+}
+
+p {
+    color: #fff;
+}
+
+.notfound span {
+    padding-left: 15px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+
+canvas {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-bottom: -5px;
+    filter: saturate(3.25) brightness(55%);
+    -webkit-filter: saturate(3.25) brightness(55%);
+}

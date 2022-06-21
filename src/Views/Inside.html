@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html ng-app="agmp.start.inside">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    {{"VendorScript"|bundle}}
+    <!--Just contentful-->
+    {{"contentful.min"|bundle}}
+    <!--BASE-->
+    {{"JavascriptBase"|bundle}}
+    <!--MAIN-->
+    {{"JavascriptMain"|bundle}}
+    {{"VendorStyle"|bundle}}
+    {{"ChartScript"|bundle}}
+
+    {%if DEBUG %}
+    <script>
+        angular.module("agm.templates", []);
+    </script>
+    {%else%}
+    {{"agmTemplates"|bundle}}
+    {%endif%}
+
+    <script>Raven.config('https://9910ad1321a84aaa91baa596a647d688@sentry.io/95282').install();</script>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link rel="shortcut icon" href="//am708403.azureedge.net/images/landing/fav.png" />
+    <link href="//am708403.azureedge.net/images/algofont/styles.css" rel="stylesheet">
+
+    <script>
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep:","
+            }
+        });
+        angular.module('agm.core').constant("coreServerVersionConstants", {
+            ServerVersion: "{{ ServerVersion }}",
+            RefreshRedirection: true
+        });
+        angular.module('agm.core').constant("coreApiServerAddress",
+            "{{ appSettings.ApiServerAddress }}"
+        );
+        angular.module('agm.core')
+            .constant("coreMarketDataServerAddress", "{{ appSettings.MarketDataServerAddress }}")
+            .constant("coreMarketDataServerAddressDelayed", "{{ appSettings.MarketDataServerAddressDelayed }}")
+    </script>
+
+    <script>
+        angular.module('agm.core')
+            .service('coreConfigService', [function() {
+                return {{ coreConfigService|safe }}
+            }]);
+    </script>
+
+    {{"CssMainReformed"|bundle}}
+    {{"ChartIqStyle"|bundle}}
+    {{"ChartIqStylePrint"|bundle}}
+
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+
+    <title></title>
+</head>
+<body ng-controller="InsideRootController as vm" ng-class="vm.bodyClass()">
+    <noscript class="js-disabled">
+        <div class="js-disabled-box">
+            <span class="text">
+                <strong>Attention</strong>: JavaScript is <strong>disabled</strong> in your browser.
+                This page requires JavaScript to run.
+                <a href="http://www.activatejavascript.org/" target="_blank">Click here for instructions on how to enable JavaScript in your browser.</a>
+            </span>
+        </div>
+    </noscript>
+
+    <div class="non-popup-area" ng-show="!vm.coreUserStateService.hasPendingLogoutConfirmation">
+        <div class="download-app" ng-if="vm.pMobileWebService.showDownloadApp">
+            <a href="">Click here to download AlgoLite</a>
+            <span class="algoicon algoicons-cancel" ng-click="vm.pMobileWebService.showDownloadApp = false"></span>
+        </div>
+        <agms-header-main></agms-header-main>
+        <section ng-view class="content"></section>
+        <agms-misc-footer ng-if="vm.commonScreenResizerService.isFooterVisible"></agms-misc-footer>
+        <agmc-generic-notification-box></agmc-generic-notification-box>
+        <agmc-pixel-positioning-popup></agmc-pixel-positioning-popup>
+    </div>
+
+    <agms-algo-oracle ng-if="!vm.pMobileWebService.showMobileWeb()"></agms-algo-oracle>
+    <agms-guide></agms-guide>
+
+    <script type='text/javascript'>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', "{{ appSettings.GoogleAnalyticsId }}", 'auto');
+    </script>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '{{ appSettings.FacebookPixelId }}');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+</body>
+</html>

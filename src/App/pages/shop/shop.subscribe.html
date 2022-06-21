@@ -1,0 +1,212 @@
+﻿<div class="agm-components-shop">
+    <div class="modal-header">
+        <button class="close" ng-click="vm.uibDismissPanel()" class="glyphicon-remove glyphicon">&times;</button>
+        <h4 class="modal-title">Subscribing to {{vm.subscribingItemName}}</h4>
+    </div>
+
+    <div class="modal-body shop-subscribe">
+        <div class="breadcrumb">
+            <a ng-class="{active: vm.step==1}">
+                <span>&nbsp;</span>
+            </a>
+            <a ng-class="{active: vm.step==2}">
+                <span>&nbsp;</span>
+            </a>
+            <a ng-class="{active: vm.step==3}">
+                <span>&nbsp;</span>
+            </a>
+        </div>
+
+        <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+
+        <div class="step1" ng-if="vm.step==1">
+            <div class="select-plan" ng-if="vm.mode == 'normal' || vm.mode == 'switch'">
+                <div class="title">Select Plan</div>
+                <div>
+                    <div class="col-md-6" ng-repeat="offer in vm.getBasicOffers()">
+                        <div class="selection-box" ng-click="vm.selectPlan(offer)"
+                             ng-class="{selected: offer.Bundle.BundleId == vm.selectionModel.selectedOffer.Bundle.BundleId}"
+                             analytics-on="click" analytics-category="SubscribePopUp" analytics-event="SelectPlan" analytics-label="{{offer.Bundle.Name}}" agmc-analytics-timestamp>
+                            <div class="price" ng-if="offer.Action.Action=='FollowNormally' || offer.Action.Action=='Switch'">
+                                <div>{{vm.getNumberOfMonth(offer.Bundle.PricingPlanModel.PeriodType)}} Months</div>
+                                <div>
+                                    {{vm.getMonthlyPrice(offer) | customCurrencyOrDash:offer.Bundle.PricingPlanModel.Currency:2}}/month
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="auto-invest" ng-if="vm.hasAutoInvest">
+                <div class="title">Activate AutoInvest</div>
+                <div uib-btn-checkbox class="switch" ng-class="{checked:vm.showAutoInvest}" ng-model="vm.showAutoInvest" ng-if="vm.mode != 'autoinvest'" ng-change="vm.onAutoinvestChange()">
+                </div>
+                <div ng-if="vm.showAutoInvest">
+                    <div class="col-md-6" ng-if="vm.getPlanForAutoInvestWithVM()">
+                        <div class="selection-box" ng-click="vm.selectAutoInvestWithVM()"
+                             ng-class="{selected: vm.selectionModel.isVMSelected}">
+                            <div class="description">Run AutoInvest on managed Virtual Machine set up by AlgoMerchant</div>
+                            <div class="price">
+                                S${{vm.coreConfigService.Shop.VMPrice}}/month
+                            </div>
+                            <div class="trial" ng-if="vm.getPlanForAutoInvestWithVM().Bundle.PricingPlanModel.TrialDays > 0">
+                                PLUS FREE {{vm.getPlanForAutoInvestWithVM().Bundle.PricingPlanModel.TrialDays}}-DAY SUBSCRIPTIONS
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-if="vm.getPlanForAutoInvest()">
+                        <div class="selection-box" ng-click="vm.selectAutoInvest()"
+                             ng-class="{selected: vm.selectionModel.isAutoInvestSelected}">
+                            <div class="description">Run AutoInvest on VM</div>
+                            <div class="setup-link">
+                                <a href="https://algomerchantsupport.zendesk.com/hc/en-us/articles/115002549832-What-is-a-Virtual-Machine-VM-Why-do-I-need-a-Virtual-Machine-VM-" target="_blank">
+                                    <i class="glyphicon glyphicon-info-sign"></i>
+                                    Why do I need a VM?
+                                </a>
+                            </div>
+                            <div class="price">
+                                S${{vm.coreConfigService.Shop.AutoInvestPrice}}/month
+                            </div>
+                            <div class="trial" ng-if="vm.getPlanForAutoInvest().Bundle.PricingPlanModel.TrialDays > 0">
+                                PLUS FREE {{vm.getPlanForAutoInvest().Bundle.PricingPlanModel.TrialDays}}-DAY SUBSCRIPTIONS
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="available-broker" ng-if="vm.availableBrokers.length > 0">
+                        <div class="title">Available Broker:</div>
+                        <div class="col-md-6" ng-repeat="broker in vm.availableBrokers">
+                            {{broker}}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="add-on" ng-if="vm.availableAddOns && vm.availableAddOns.length > 0 && vm.showAddOn">
+                <div class="title">Add-Ons</div>
+                <div ng-repeat="addOn in vm.availableAddOns">
+                    <input type="checkbox" ng-model="addOn.selected" ng-change="vm.takeSelectedAddOns()" />
+                    {{addOn.Name}} ({{addOn.PricingPlanModel.PerPeriodFee | customCurrencyOrDash:addOn.PricingPlanModel.Currency:2}}
+                    / {{addOn.PricingPlanModel.PeriodType | periodLy}})
+                </div>
+            </div>
+        </div>
+
+        <div class="step2" ng-if="vm.step==2">
+            <div class="coupon">
+                Have A Coupon Code?
+                <input type="text" ng-model="vm.couponCode" />
+                <button class="mini-filled-green" ng-click="vm.verifyCouponCode()"
+                        analytics-on="click" analytics-category="SubscribePopUp" analytics-event="ClickApplyCoupon" analytics-label="{{vm.couponCode}}" agmc-analytics-timestamp>Apply</button>
+                <div class="red-loss" ng-if="vm.couponInvalidMessage">{{vm.couponInvalidMessage}}</div>
+                <div class="green-profit" ng-if="vm.isCouponCodeValid">Coupon applied successfully</div>
+            </div>
+            <div class="payment-summary">
+                <table class="cost-breakdown">
+                    <thead>
+                    <tr>
+                        <th>PRODUCT</th>
+                        <th>INTERVAL</th>
+                        <th>UNIT PRICE</th>
+                        <th>SUB TOTAL</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-if="vm.mode == 'normal' || vm.mode == 'switch'">
+                        <td>{{vm.subscribingItemName}}</td>
+                        <td>for {{vm.getNumberOfMonth(vm.selectionModel.selectedOffer.Bundle.PricingPlanModel.PeriodType)}} Months</td>
+                        <td>{{vm.getMonthlyPrice(vm.selectionModel.selectedOffer) | customCurrencyOrDash:vm.selectionModel.selectedOffer.Bundle.PricingPlanModel.Currency:2}}/month</td>
+                        <td>{{vm.selectionModel.selectedOffer.Bundle.PricingPlanModel.PerPeriodFee | customCurrencyOrDash:vm.selectionModel.selectedOffer.Bundle.PricingPlanModel.Currency:2}}</td>
+                    </tr>
+                    <tr ng-if="vm.selectionModel.isVMSelected && vm.showAutoInvest">
+                        <td>Activate AutoInvest and VM</td>
+                        <td>for {{vm.getNumberOfMonth(vm.getPlanForAutoInvestWithVM().Bundle.PricingPlanModel.PeriodType)}} Months</td>
+                        <td>{{vm.coreConfigService.Shop.VMPrice | customCurrencyOrDash:vm.getPlanForAutoInvestWithVM().Bundle.PricingPlanModel.Currency:2}}/month</td>
+                        <td>{{vm.coreConfigService.Shop.VMPrice * vm.getNumberOfMonth(vm.getPlanForAutoInvestWithVM().Bundle.PricingPlanModel.PeriodType) | customCurrencyOrDash:vm.getPlanForAutoInvestWithVM().Bundle.PricingPlanModel.Currency:2}}</td>
+                    </tr>
+                    <tr ng-if="vm.selectionModel.isAutoInvestSelected && vm.showAutoInvest">
+                        <td>Activate AutoInvest</td>
+                        <td>for {{vm.getNumberOfMonth(vm.getPlanForAutoInvest().Bundle.PricingPlanModel.PeriodType)}} Months</td>
+                        <td>{{vm.coreConfigService.Shop.AutoInvestPrice | customCurrencyOrDash:vm.getPlanForAutoInvest().Bundle.PricingPlanModel.Currency:2}}/month</td>
+                        <td>{{vm.coreConfigService.Shop.AutoInvestPrice * vm.getNumberOfMonth(vm.getPlanForAutoInvest().Bundle.PricingPlanModel.PeriodType) | customCurrencyOrDash:vm.getPlanForAutoInvest().Bundle.PricingPlanModel.Currency:2}}</td>
+                    </tr>
+                    <tr ng-repeat="item in vm.selectedAddOns">
+                        <td>{{item.Name}}</td>
+                        <td>for 1 Month</td>
+                        <td>{{item.PricingPlanModel.PerPeriodFee | customCurrencyOrDash:item.PricingPlanModel.Currency:2}}/month</td>
+                        <td>{{item.PricingPlanModel.PerPeriodFee * vm.getNumberOfMonth(item.PricingPlanModel.PeriodType) | customCurrencyOrDash:item.PricingPlanModel.Currency:2}}</td>
+                    </tr>
+                    <tr ng-if="vm.mode === 'autoinvest' || vm.mode === 'switch'">
+                        <td>Unused Credit from <br /> current subscription</td>
+                        <td></td>
+                        <td></td>
+                        <td>({{vm.getUnusedCredit() | customCurrencyOrDash:vm.selectionModel.selectedOffer.Bundle.PricingPlanModel.Currency:2}})</td>
+                    </tr>
+                    <tr ng-if="vm.accountBalance.Balance > 0">
+                        <td>Deduction from AlgoCredits</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            ({{vm.getDeductionAmount() | customCurrencyOrDash:vm.accountBalance.Currency:2}})
+                        </td>
+                    </tr>
+                    <tr class="total">
+                        <td></td>
+                        <td></td>
+                        <td>TOTAL</td>
+                        <td>
+                            {{vm.getTotalPrice() | customCurrencyOrDash:vm.selectionModel.selectedOffer.Bundle.PricingPlanModel.Currency:2}}
+                            <span ng-if="vm.getFinalSelectedPlan().Bundle.PricingPlanModel.TrialDays > 0 && vm.accountBalance.Balance > 0">*</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box" ng-if="vm.getFinalSelectedPlan().Bundle.PricingPlanModel.TrialDays > 0 && vm.accountBalance.Balance > 0">
+                *Payment transaction will occur in {{vm.getFinalSelectedPlan().Bundle.PricingPlanModel.TrialDays}} days. At point of payment, we will always deduct from your AlgoCredits first before charging the remaining amount to your credit card. Thus, the amount that is charged to your credit card may vary based on the amount of AlgoCredits you have at the point of payment.
+            </div>
+        </div>
+
+        <div class="step3" ng-if="vm.step==3">
+            <agms-payment-form-with-existing-check get-cards="vm.getCards"></agms-payment-form-with-existing-check>
+        </div>
+
+        <div class="buttons">
+            <div class="total">
+                <div>
+                    <span ng-if="vm.mode === 'autoinvest' || vm.mode === 'switch'">Estimated </span>
+                    Total:
+                </div>
+                <div class="price">
+                    {{vm.getTotalPrice() | customCurrencyOrDash:vm.selectionModel.selectedOffer.Bundle.PricingPlanModel.Currency:2}}
+                </div>
+            </div>
+            <button class="pull-right filled-green" ng-click="vm.goNext()" ng-if="vm.step==1" ng-disabled="vm.isNoVacancy(vm.getFinalSelectedPlan())"
+                    analytics-on="click" analytics-category="SubscribePopUp" analytics-event="ClickPaymentDetails" analytics-label="{{vm.subscribingItemName}}" agmc-analytics-timestamp>
+                PAYMENT DETAILS
+            </button>
+            <button class="pull-right filled-green" ng-click="vm.goNext()" ng-if="vm.step==2"
+                    analytics-on="click" analytics-category="SubscribePopUp" analytics-event="ClickCheckOut" analytics-label="{{vm.subscribingItemName}}" agmc-analytics-timestamp>
+                CHECKOUT
+            </button>
+            <button class="pull-right filled-green" ng-click="vm.pay()" ng-disabled="vm.getCards().length==0" ng-if="vm.step==3"
+                    analytics-on="click" analytics-category="SubscribePopUp" analytics-event="ClickConfirmAndPay" analytics-label="{{vm.subscribingItemName}}" agmc-analytics-timestamp>
+                CONFIRM & PAY
+            </button>
+            <button class="pull-right hollow-green m-right-10px" ng-click="vm.goBack()" ng-if="vm.step==2 || vm.step==3"
+                    analytics-on="click" analytics-category="SubscribePopUp" analytics-event="ClickBack" analytics-label="{{vm.subscribingItemName}}" agmc-analytics-timestamp>
+                BACK
+            </button>
+            <div class="clearfix"></div>
+            <div class="price-difference" ng-if="vm.mode === 'autoinvest' || vm.mode === 'switch'">
+                Based on prorated usage of your current subscription. The unused portion of your current subscription will be applied as credit to your new subscription.
+            </div>
+            <div class="price-difference" ng-if="vm.isNoVacancy(vm.getFinalSelectedPlan())">
+                <span ng-if="vm.hasAutoInvest && vm.showAutoInvest">AutoInvest has reached maximum allowed capacity. Please switch off the autoinvest toggle in order to proceed with the subscription.</span>
+                <span ng-if="!(vm.hasAutoInvest && vm.showAutoInvest)">Sorry, this plan has reached its maximum capacity, please select another one.</span>
+            </div>
+        </div>
+    </div>
+</div>

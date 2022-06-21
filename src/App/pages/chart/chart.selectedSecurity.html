@@ -1,0 +1,42 @@
+﻿<div class="top-security-filter">
+    <div class="panel">
+        <div class="panel-heading">
+            <h4>VIEWING PRODUCT</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group primary-product-list">
+                <li class="list-group-item">
+                    <a ng-click="vm.goToProductPage(vm.filterDescription.primaryProduct)" ng-if="vm.isProductPageAllowed(vm.filterDescription.primaryProduct)">
+                        <div class="product-info">
+                            <h4>
+                                {{vm.filterDescription.primaryProduct.ProductName}}
+                            </h4>
+                            <h5>
+                                {{vm.filterDescription.primaryProduct.Symbol}}
+                            </h5>
+                        </div>
+                    </a>
+                    <div class="product-info" ng-if="!vm.isProductPageAllowed(vm.filterDescription.primaryProduct)">
+                        <h4>
+                            {{vm.filterDescription.primaryProduct.ProductName}}
+                        </h4>
+                        <h5>
+                            {{vm.filterDescription.primaryProduct.Symbol}}
+                        </h5>
+                    </div>
+                    <div ng-if="vm.pChartService.canAddToWatchlist(vm.filterDescription.primaryProduct)"
+                         class="btn-group">
+                        <button class=" btn-xs btn-primary" 
+                                ng-if="vm.pChartService.canAddToPriceAlert(vm.filterDescription.primaryProduct)"
+                                ng-click="vm.addProductToPriceAlert(vm.filterDescription.primaryProduct)">
+                            <span class="glyphicon glyphicon-bell"></span>
+                        </button>
+                        <button class=" btn-xs btn-primary" ng-click="vm.addToWatchlist(vm.filterDescription.primaryProduct)">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

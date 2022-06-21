@@ -1,0 +1,46 @@
+﻿<div class="agms-header">
+    <div class="sub-header">
+        <ul class="nav navbar-nav">
+            <li class="sub-item">
+                <a ng-click="vm.go('/orderstrades')" ng-class="{active:vm.isCurrentPage('ORDER_DETAILS')}"
+                   analytics-on="click" analytics-category="Trade" analytics-event="Orders" analytics-label="OpenPage" agmc-analytics-timestamp>
+                    Orders
+                </a>
+            </li>
+            <li class="sub-item">
+                <a ng-click="vm.go('/tradeportfoliosettings')" ng-class="{active:vm.isCurrentPage('SETTINGS')}"
+                   analytics-on="click" analytics-category="Trade" analytics-event="Settings" analytics-label="OpenPage" agmc-analytics-timestamp>
+                    Settings
+                </a>
+            </li>
+            <!--<li class="sub-item dropdown" uib-dropdown>
+                <a ng-class="{active:vm.isCurrentPage(['SETTINGS','PERFORMANCES'])}">
+                    My Trade Portfolios
+                    <span class="glyphicon glyphicon-chevron-up f-12px indicator-open"></span>
+                    <span class="glyphicon glyphicon-chevron-down f-12px indicator-closed"></span>
+                </a>
+                <ul class="dropdown-menu right-0px w-250px" role="menu">
+                    <li>
+                        <a href="#/tradeportfolioperformance" ng-class="{'selected': vm.sHeaderService.selectedSubMenu == 'performance'}"
+                           analytics-on="click" analytics-category="Trade" analytics-event="Performances" analytics-label="OpenPage" agmc-analytics-timestamp>
+                            Performances
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#/tradeportfoliosettings" ng-class="{'selected': vm.sHeaderService.selectedSubMenu == 'trade-setting'}"
+                           analytics-on="click" analytics-category="Trade" analytics-event="Settings" analytics-label="OpenPage" agmc-analytics-timestamp>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </li>-->
+            <li class="sub-item-btn" agms-droid-helper-item="sharedHeaderTrade.createTradePortfolio">
+                <button class="filled-blue m-right-5px" ng-click="vm.openNewStrategy()" ng-if="vm.canHaveMoreStrategy"
+                        analytics-on="click" analytics-category="Trade" analytics-event="CreateTradePortfolio" agmc-analytics-timestamp>
+                    CREATE TRADE PORTFOLIO
+                </button>
+                <div class="clearfix"></div>
+            </li>
+        </ul>
+    </div>
+</div>

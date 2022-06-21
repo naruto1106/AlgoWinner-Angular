@@ -1,0 +1,40 @@
+﻿<div class="agm-component-manage-subscription">
+    <agms-header-payment current-page="subscription"></agms-header-payment>
+
+    <div class="p-50px text-center" ng-if="vm.isLoadingData">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?"/>
+    </div>
+    <div ng-if="!vm.isLoadingData">
+        <div ng-if="!vm.hasSubscriptions()" class="container">
+            <h4>
+                <a href="#/shop">
+                    <span class="no-content-color">Currently you have no subscriptions. Click</span> here <span class="no-content-color">to subscribe to a product.</span>
+                </a>
+            </h4>
+        </div>
+        <div ng-if="vm.multipleBundledSubscriptions.length>0" class="container">
+            <div class="panel border" ng-if="vm.bundledSubscriptions.length > 0">
+                <div class="panel-heading">BUNDLE SUBSCRIPTIONS</div>
+                <div class="bundle-subscription  panel-body">
+                    <agmp-subscription-managed-bundle managed-bundle-subscription="managedBundle" ng-repeat="managedBundle in vm.multipleBundledSubscriptions"></agmp-subscription-managed-bundle>
+                </div>
+            </div>
+        </div>
+        <div ng-if="vm.singlePremiumItemSubscriptions.length>0" class="container">
+            <div class="panel border" ng-if="vm.bundledSubscriptions.length > 0">
+                <div class="panel-heading">PREMIUM ITEM SUBSCRIPTIONS</div>
+                <div class="bundle-subscription  panel-body">
+                    <agmp-subscription-managed-bundle managed-bundle-subscription="managedBundle" ng-repeat="managedBundle in vm.singlePremiumItemSubscriptions"></agmp-subscription-managed-bundle>
+                </div>
+            </div>
+        </div>
+        <div ng-if="vm.singleStrategySubscriptions.length>0" class="container">
+            <div class="panel border" ng-if="vm.bundledSubscriptions.length > 0">
+                <div class="panel-heading">STRATEGY SUBSCRIPTIONS</div>
+                <div class="bundle-subscription panel-body">
+                    <agmp-subscription-managed-bundle managed-bundle-subscription="managedBundle" ng-repeat="managedBundle in vm.singleStrategySubscriptions"></agmp-subscription-managed-bundle>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

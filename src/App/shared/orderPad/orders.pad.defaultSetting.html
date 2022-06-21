@@ -1,0 +1,72 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.dismissPopup()">&times;</button>
+    <h4 class="modal-title">Default Settings</h4>
+</div>
+
+<div class="modal-body">
+    <div class="p-50px text-center" ng-show="vm.isSubmitting">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div class="row-md-2" ng-show="!vm.isSubmitting">
+        <!--<h4> <span><strong>SET DEFAULT ORDER SETTINGS</strong></span></h4>-->
+        <!--<div class="clearfix separator-bottom m-top-5px m-bottom-10px"></div>-->
+        <dl class="dl-horizontal dl-horizontal-120px p-top-10px p-left-10px">
+            <dt style="text-align: left;" ng-if="vm.type != 'follow'">
+                Action
+            </dt>
+            <dd ng-if="vm.type != 'follow'">
+                <select ng-model="vm.currentSetup.Action" ng-options="action for action in vm.actionTypes"></select>
+            </dd>
+            <dt style="text-align: left;">
+                Quantity
+            </dt>
+            <dd>
+                <input class="textbox-small" type="number" min="0"
+                       ng-model="vm.currentSetup.Quantity" ng-model-options="{debounce: 200}">
+            </dd>
+            <dt style="text-align: left;">
+                Quantity Mode
+            </dt>
+            <dd>
+                <select ng-model="vm.currentSetup.QuantityType" ng-options="quantityType for quantityType in vm.quantityTypes"></select>
+                <br />
+                <i ng-if="vm.currentSetup.QuantityType == 'K Lot'">1 K Lot = 1000 units</i>
+            </dd>
+            <dt style="text-align: left;">
+                Type
+            </dt>
+            <dd>
+                <select ng-model="vm.currentSetup.OrderType" ng-options="orderType for orderType in vm.orderTypes"></select>
+            </dd>
+            <dt style="text-align: left;" ng-if="vm.type != 'follow'">
+                Default Product
+            </dt>
+            <dd ng-if="vm.type != 'follow'">
+                <input class="textbox-small"
+                       type="text" ng-model="vm.currentSetup.DefaultProduct"
+                       ng-model-options="{debounce: 200}"
+                       uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                       typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                       typeahead-wait-ms="200" />
+            </dd>
+            <dt style="text-align: left;" ng-if="vm.type != 'follow'">
+                Default Validity
+            </dt>
+            <dd ng-if="vm.type != 'follow'">
+                <select ng-model="vm.currentSetup.DefaultValidity" ng-options="validity for validity in vm.validityTypes"></select>
+            </dd>
+        </dl>
+        <div class="f-14px" ng-if="vm.type != 'follow'">
+            <div>
+                <input type="checkbox" ng-model="vm.currentSetup.EnableBuyShortcut" />Enable BUY Shortcut Key (B)
+            </div>
+            <div>
+                <input type="checkbox" ng-model="vm.currentSetup.EnableSellShortcut" />Enable SELL Shortcut Key (S)
+            </div>
+        </div>
+    </div>
+    <div class="separator-top m-top-20px h-10px m-left-5px m-right-5px"></div>
+    <button class="filled-blue m-bottom-10px pull-right m-right-10px" ng-click="vm.submit()" ng-disabled="vm.isSubmitting">SAVE</button>
+    <button class="hollow-blue m-bottom-10px pull-right m-right-10px" ng-click="vm.dismissPopup()">CANCEL</button>
+    <div class="clearfix m-bottom-10px"></div>
+</div>

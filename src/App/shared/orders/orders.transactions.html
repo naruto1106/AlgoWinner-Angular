@@ -1,0 +1,52 @@
+﻿<div>
+    <div class="pull-right search" ng-show="!vm.isLoadingOrders">
+        <agms-product-search
+                             listen-on-resolve="vm.listenOnProductResolve"
+                             placeholder="SEARCH STOCK"
+                             search-products="vm.searchProducts"
+                             auto-select-on-single-search-result="true"
+                             on-product-selected="vm.onProductSelected">
+        </agms-product-search>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <div class="p-50px text-center" ng-show="vm.isLoadingOrders">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div class="alert alert-info" ng-show="!vm.hasOrders() && !vm.isLoadingOrders">
+        <span ng-if="vm.viewMode !== 'readonly'">{{::vm.noOrderMessage}}</span>
+        <span ng-if="vm.viewMode == 'readonly'">{{::vm.noOrderMessageForGroupStrategy}}</span>
+    </div>
+    <div ng-show="!vm.isLoadingOrders">
+        <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="10"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+        </ul>
+        <div class="p-50px text-center" ng-show="!vm.isPageLoaded()">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div ng-show="vm.isPageLoaded()" ng-repeat="order in vm.getPagedOrders() track by order.OrderId" class="m-top-10px rel">
+            <agms-orders-transaction-element ng-if="!order.BracketOrder"
+                                             is-by-account="vm.isByAccount"
+                                             show-cancel-button="::vm.showCancelButton"
+                                             view-mode="vm.viewMode"
+                                             order="order"
+                                             view-bracket-order-func="::vm.viewBracketOrder"
+                                             edit-bracket-order-func="::vm.editBracketOrder"></agms-orders-transaction-element>
+            <agms-orders-bracket-element ng-if="order.BracketOrder"
+                                         is-by-account="vm.isByAccount"
+                                         show-cancel-button="::vm.showCancelButton"
+                                         view-mode="vm.viewMode"
+                                         order="order"></agms-orders-bracket-element>
+        </div>
+        <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+            class="pagination-sm m-top-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="10"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+        </ul>
+    </div>
+
+    <h4 class="text-center" ng-show="vm.models.searchProduct && vm.getPagedOrders().length == 0 && !vm.isLoadingOrders">no results found
+    </h4>
+</div>

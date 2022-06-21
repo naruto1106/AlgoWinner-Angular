@@ -1,0 +1,39 @@
+﻿<div ng-switch on="vm.levelOfDetail">
+    <div ng-switch-when="5" class="dev-bigger-plain-2">
+        <div class="shade"></div>
+        <div class="detail">
+            <h3 class="pull-left">{{vm.user.UserName}}</h3>
+            <h5 class="pull-right">Since {{vm.user.DateJoined | date:'MMM yyyy'}}</h5>
+            <br/>
+            <h4>{{vm.developer.Profession}}</h4>
+        </div>
+        <div ng-if="user.DeveloperType==='PROFESSIONAL'" class="professional">PROFESSIONAL</div>
+        <div ng-if="user.DeveloperType==='COMMUNITY'" class="community">COMMUNITY</div>
+        <div class="img  cover-center icon-big" agms-image img-fallback-src="'//am708403.azureedge.net/images/profilePicture/defaultavatar.jpg?'" img-src="vm.user.ProfileImageUrl || '//:0'"></div>
+        <button class="mini-hollow-blue" ng-if="!hideClicking" ng-disabled="disableClicking">DETAIL</button>
+    </div>	    
+    <div ng-switch-when="4" class="dev-bigger-plain">
+        <div class="detail">
+            <h3>{{vm.user.UserName}}</h3>
+            <h4>{{vm.developer.Profession}}</h4>
+            <h5>Since {{vm.user.DateJoined | date:'MMM yyyy'}}</h5>
+        </div>
+        <div class="img  cover-center icon-big" agms-image img-fallback-src="'//am708403.azureedge.net/images/profilePicture/defaultavatar.jpg?'" img-src="vm.user.ProfileImageUrl || '//:0'"></div>
+        <button class="mini-hollow-blue" ng-if="!hideClicking" ng-disabled="disableClicking">DETAIL</button>
+    </div>
+    <div ng-switch-when="3" class="dev-bigger-icon">
+        <div class="graybox">
+            <h3>{{vm.user.UserName}}</h3>
+            <h4>{{vm.developer.Profession}}</h4>
+            <h5>Since {{vm.user.DateJoined | date:'MMM yyyy'}}</h5>
+        </div>
+        <div class="community">COMMUNITY</div>
+        <div class="img  cover-center icon-big" agms-image img-fallback-src="'//am708403.azureedge.net/images/profilePicture/defaultavatar.jpg?'" img-src="vm.user.ProfileImageUrl  || '//:0'"></div>
+        <button class="mini-hollow-blue" ng-if="!hideClicking" ng-disabled="disableClicking">DETAIL</button>
+    </div>
+    <div ng-switch-when="2" class="dev-big-icon">
+        <div class="community">{{vm.user.UserName}}</div>
+        <button class="hollow-blue" ng-if="!hideClicking" ng-disabled="disableClicking">DETAIL</button>
+        <div class="img  cover-center icon-big " agms-image img-fallback-src="'//am708403.azureedge.net/images/profilePicture/defaultavatar.jpg?'" img-src="vm.user.ProfileImageUrl  || '//:0'"></div>
+    </div>
+</div>

@@ -1,0 +1,306 @@
+::-webkit-input-placeholder {
+   color: @grayMed1;  
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: @grayMed1;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: @grayMed1;  
+}
+
+:-ms-input-placeholder {  
+   color: @grayMed1;  
+}
+.mini-text {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.button-text {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+pre.simple {
+    font-family: inherit;
+    border: none;
+    background: none;
+    width: 100%;
+    word-break: break-word;
+    white-space: pre-line;
+    padding: 0;
+    overflow: visible;
+}
+
+.small-button-text {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.mini-button-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.panel-text {
+    letter-spacing: 0.1em;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.subpanel-text {
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.developer-text {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+}
+
+.strategy-text {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.span {
+}
+
+.center-text {
+    text-align: center;
+}
+
+.left-text {
+    text-align: left;
+}
+
+.right-text {
+    text-align: right;
+}
+
+.green-profit {
+    color: @seafoam;
+}
+
+.red-loss {
+    color: @berry;
+}
+
+.gray-text {
+    color: @grayMed1;
+}
+
+.special-text {
+    color: @sunFlower;
+    font-weight: 600;
+}
+
+@sub-basic: #70808f;
+@sub-standard: #84bd00;
+@sub-premium: #002b55;
+
+.sub-basic {
+    background: @sub-basic;
+    color: white;
+}
+
+.sub-standard {
+    background: @sub-standard;
+    color: white;
+}
+
+.sub-premium {
+    background: @sub-premium;
+    color: white;
+}
+
+.sub-basic.invert {
+    background: none;
+    color: @sub-basic;
+    border-color: @sub-basic;
+}
+
+.sub-standard.invert {
+    background: none;
+    color: @sub-standard;
+    border-color: @sub-standard;
+}
+
+.sub-premium.invert {
+    background: none;
+    color: @sub-premium;
+    border-color: @sub-premium;
+}
+
+
+
+.sub-basic.sub-button:hover {
+    background: lighten(@sub-basic,8%);
+}
+
+.sub-standard.sub-button:hover {
+    background: lighten(@sub-standard,8%);
+}
+
+.sub-premium.sub-button:hover {
+    background: lighten(@sub-premium,8%);
+}
+
+.gray-text {
+    color: @grayMed1;
+}
+
+.text-larger {
+    font-size: 1.2em;
+}
+
+.hoverable-text:hover {
+    color: @blueBasic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.dropdown-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.algofeed-active-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: @greenBasic;
+}
+
+.algofeed-inactive-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: @redBasic;
+}
+
+.vertical-text {
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+    background: @sub-premium;
+    color: white;
+}
+
+.strong {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.bigger {
+    font-size: 1.2em;
+}
+
+.smaller {
+    font-size: 0.9em;
+}
+/** JUST ENOUGH **/
+
+.f-20px {
+    font-size: 20px;
+}
+
+.f-16px {
+    font-size: 16px;
+}
+
+.f-14px {
+    font-size: 14px;
+}
+
+.f-12px {
+    font-size: 12px;
+}
+
+
+.gold {
+    color: @highlightOrange;
+}
+
+.light-color {
+    opacity: 0.5;
+}
+
+
+.overflow-y-scroll {
+    overflow-y: scroll;
+}
+
+.black {
+    color: black;
+}
+
+.word-wrap {
+    word-wrap: break-word;
+}
+
+dl.form-larger {
+    & > dt {
+        font-size: 1.3em;
+        line-height: 30px;
+
+        small {
+            white-space: normal;
+            font-size: 0.7em;
+            line-height: 20px;
+            display: block;
+        }
+    }
+
+    & > dd {
+
+        span {
+            font-size: 1.1em;
+            line-height: 30px;
+        }
+
+        input[type=text], input[type=number], select {
+            font-size: 1.2em;
+            line-height: 30px;
+            height: 30px;
+            padding: 0 5px;
+        }
+
+        input[type=number] {
+            line-height: 20px;
+        }
+
+        textarea {
+            line-height: 20px;
+            font-size: 1.2em;
+            padding: 5px;
+        }
+    }
+}
+
+[agm-smart-text-area-editor-placeholder-text] {
+    .abs;
+    top: 5px;
+    left: 5px;
+    color: @grayMed1;
+    display: block;
+    pointer-events: none;
+}
+
+[smart-text-area] {
+    outline: none;
+    cursor: text;
+}

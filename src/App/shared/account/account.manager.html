@@ -1,0 +1,80 @@
+﻿<form name="accountManager" ng-submit="(vm.editModel.BrokerageType | isBrokerDefined) && vm.nextFunc()">
+    <div ng-if="vm.linkStatus">
+        <div class="col-md-12 panel panel-default">
+            <div class="pull-left w-80px h-80px">
+                <agms-account-brokerage-selector selected-broker="vm.editModel.BrokerageType" 
+                                     account-type="vm.editModel.AccountType"
+                                     class="pull-left w-80px h-80px"></agms-account-brokerage-selector>
+            </div>
+            <div class=" m-left-20px pull-left as-table h-80px w-90pct">
+                <!--MaRa: There is another similar definition below, so I will override it here for similar styling-->
+                <div class="as-table-cell va-mid">
+                    <strong class="lh-25px">{{vm.editModel.BrokerageType}} </strong><br/>
+                    <span class="lh-25px ellipsis-nowrap" uib-tooltip="{{vm.editModel.AccountType}}">(Account: {{vm.editModel.AccountNumber}})</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 alert alert-success">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            Your trading account has been set and no longer editable
+        </div>
+    </div>
+    <uib-tabset class="tab-type1 larger" ng-if="!vm.linkStatus" active="vm.tabIndex">
+        <uib-tab heading="LINK TO EXISTING ACCOUNT"
+                 ng-show="vm.accountLinkingOptions.length > 1"
+                 select="vm.onSelectedTabChanged(0)"
+                 index="0">
+            <div style="height: 300px;" class="custom-scrollbar">
+                <!-- Please note that onSelectedAccountChanged is needed for both div and radio here!!! Otherwise selection may toggle partially -->
+                <div ng-repeat="account in vm.accounts" class="h-70px p-5px account" ng-model="vm.selectedAccount" ng-change="vm.onSelectedAccountChanged()" uib-btn-radio="account">
+                    <div class="col-md-1 text-right">
+                        <input ng-if="true" class="w-20px h-20px" style="margin-right: 0"
+                               type="radio"
+                               ng-model="vm.selectedAccount"
+                               ng-change="vm.onSelectedAccountChanged()"
+                               ng-value="account">
+                    </div>
+                    <div class="border col-md-11 h-60px  no-padding white-box">
+                        <agms-account-brokerage-selector selected-broker="account.SelectionInfo.BrokerageType"
+                                             account-type="account.AccountType"
+                                             class="pull-left w-55px h-55px"></agms-account-brokerage-selector>
+                        <div class="m-left-10px h-60px  pull-left w-200px p-top-5px">
+                            <div class="va-mid">
+                                <strong class="lh-25px">{{account.SelectionInfo.BrokerageType}} </strong><br />
+                                <span class="lh-25px ellipsis-nowrap" uib-tooltip="{{account.AccountType}}">(Account: {{account.SelectionInfo.AccountNumber}})</span>
+                            </div>
+                        </div>
+                        <div class="pull-left m-left-15px h-60px p-top-5px">
+                            <div>
+                                <span class="no-margin lh-25px gray-text">Account Type</span><br />
+                                <span class="no-margin lh-25px ellipsis-nowrap"
+                                      uib-tooltip="{{account.AccountType}}">{{account.AccountType}}(Simulated)</span>
+                            </div>
+                        </div>
+
+                        <div class="w-100px pull-right va-mid p-top-5px">
+                            <span class="no-margin lh-25px gray-text">Account Capital </span><br />
+                            <span class="no-margin lh-25px">{{account.BalanceForTrading | customCurrencyOrDash:account.Currency:2}}</span>
+                        </div>
+                        <div class="w-100px pull-right va-mid p-top-5px">
+                            <span class="no-margin lh-25px gray-text">Allocated </span><br />
+                            <span class="no-margin lh-25px">{{account.Allocated | customCurrencyOrDash:account.Currency:2}}</span>
+                        </div>
+                        <div class="w-100px pull-right va-mid p-top-5px">
+                            <span class="no-margin lh-25px gray-text">Available </span><br />
+                            <span class="no-margin lh-25px">{{account.Remaining | customCurrencyOrDash:account.Currency:2}}</span>
+                        </div>
+                        <div class="pull-right h-60px p-top-15px m-right-10px" ng-init="donutdata=vm.generateDonutValues(account)">
+                            <agmc-rainbow-donut data=" donutdata" colors="['#40556a','#F80']" height="20" width="20" thickness="100"></agmc-rainbow-donut>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+    <div class="separator-top m-top-20px h-10px"></div>
+    <button class="pull-right filled-blue m-left-10px" ng-if="vm.nextLabel" ng-disabled="vm.disableSubmit()" ng-click="(vm.nextLabel !== 'SUBMIT' && vm.nextFunc())" type="submit">{{vm.nextLabel}}</button>
+    <button class="pull-right hollow-blue m-left-10px" ng-if="vm.prevLabel" ng-click="vm.prevFunc()" type="button">{{vm.prevLabel}}</button>
+    <div class="clearfix"></div>
+</form>

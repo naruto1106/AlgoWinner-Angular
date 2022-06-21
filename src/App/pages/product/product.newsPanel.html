@@ -1,0 +1,28 @@
+﻿<section class="news-panel">
+    <h1 class="title-section">NEWS</h1>
+    <div class="p-50px text-center" ng-if="vm.isLoadingNews">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div ng-if="!vm.isLoadingNews">
+        <div ng-if="vm.news.length <= 0" class="alert alert-info m-top-10px">
+            No News for {{vm.product.Symbol}}
+        </div>
+        <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="10"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+        <div class="news-content" ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)">
+            <div class="news-title">{{news.Title}}</div>
+            <span class="special-text news-date">
+                {{news.PublishedTime | date:'shortTime'}} {{news.PublishedTime | date:'mediumDate'}}
+            </span>
+            <div class="clearfix"></div>
+        </div>
+        <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="10"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+    </div>
+
+    <div class="clearfix"></div>
+</section>

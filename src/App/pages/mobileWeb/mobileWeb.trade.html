@@ -1,0 +1,52 @@
+﻿<div class="agm-components-mobile mobile-trading">
+    <div class="p-50px text-center" ng-if="vm.isLoadingData">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+
+    <div ng-if="vm.myStrategies.length <= 0 && !vm.isLoadingData" class="container p-left-15px m-top-50px">
+        <h4>
+            You need to create your own trade portfolio first
+        </h4>
+    </div>
+
+    <div ng-if="vm.myStrategies.length > 0 && !vm.isLoadingData">
+        <div class="p-5px">
+            <h4>Select Portfolio:</h4>
+            <div uib-dropdown is-open="status.isopen" class="strategy-selector m-bottom-10px">
+                <div uib-dropdown-toggle class="toggle">
+                    <agms-strategy-commerce-portrait class="selected-strategy"
+                                                     strategy="vm.selectedStrategy.DisplayInfo"
+                                                     level-of-detail="6"
+                                                     disable-click-strategy="true">
+                    </agms-strategy-commerce-portrait>
+                    <span class="glyphicon glyphicon-triangle-bottom"></span>
+                </div>
+                <div uib-dropdown-menu role="menu">
+                    <agms-strategy-commerce-portrait ng-repeat="strategy in vm.myStrategies"
+                                                     ng-click="vm.selectStrategyFunc(strategy)"
+                                                     class="strategy"
+                                                     strategy="strategy.DisplayInfo"
+                                                     level-of-detail="6"
+                                                     disable-click-strategy="true">
+                    </agms-strategy-commerce-portrait>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            
+            <div class="text-center">
+                <button class="filled-green w-100pct" ng-click="vm.placeOrderFunc()">Place Order</button>
+                <div class="clearfix m-bottom-10px"></div>
+            </div>
+            
+            <agms-trading-cash-allocation is-loading="vm.isLoadingPositions || vm.isLoadingOrders"
+                                          class="box border m-bottom-10px">
+            </agms-trading-cash-allocation>
+            <agms-positions-summary is-by-account="vm.isByAccount"
+                                    is-loading-positions="vm.isLoadingPositions"
+                                    view-mode="vm.viewMode"
+                                    class="box border m-bottom-10px"></agms-positions-summary>
+            
+            <agmp-mobile-orders is-loading-orders="vm.isLoadingOrders"></agmp-mobile-orders>
+        </div>
+    </div>
+</div>

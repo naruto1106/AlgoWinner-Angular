@@ -1,0 +1,245 @@
+﻿<div class="agm-components-datamart">
+    <script type="text/ng-template" id="bigscreener/screener">
+        <button class="cell-botton-normal"
+                uib-tooltip="Add Price Alert" tooltip-placement="left" tooltip-append-to-body="true"
+                ng-click="externalVm.addToPriceAlert(productContainer)">
+            <span class="glyphicon glyphicon-bell"></span>
+        </button>
+        <button class="cell-botton-normal"
+                uib-tooltip="Add To Watchlist" tooltip-placement="left" tooltip-append-to-body="true"
+                ng-click="externalVm.addToWatchlist(productContainer)">
+            <span class="glyphicon glyphicon-eye-open"></span>
+        </button>
+        <button class="cell-botton-normal"
+                uib-tooltip="Chart" tooltip-placement="left" tooltip-append-to-body="true"
+                ng-click="externalVm.gotoChart(productContainer)">
+            <span class="glyphicon glyphicon-stats"></span>
+        </button>
+    </script>
+
+    <script type="text/ng-template" id="bigscreener/screener-algofeed">
+        <div class="rel">
+            <div class="icon-datamart" ng-if="!productContainer.AlgoFeed.ManagerImageUrl" agms-image img-src="externalVm.getAlgoFeedInfo(productContainer.AlgoFeed.AlgoFeedEventTypeId).datamart.AlgoFeedImageUrl"></div>
+            <div class="icon-datamart" ng-if="productContainer.AlgoFeed.ManagerImageUrl" agms-image img-src="productContainer.AlgoFeed.ManagerImageUrl"></div>
+            <div class="event-name" ng-if="!productContainer.AlgoFeed.TransactionSummary">
+                {{externalVm.getAlgoFeedInfo(productContainer.AlgoFeed.AlgoFeedEventTypeId).longName}}
+            </div>
+            <div class="event-name" ng-if="productContainer.AlgoFeed.TransactionSummary">
+                {{productContainer.AlgoFeed.TransactionSummary}}
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="bigscreener/screener-algofeed-timestamp">
+        {{productContainer.AlgoFeed.TimestampString}}
+    </script>
+    <script type="text/ng-template" id="bigscreener/screener-algofeed-price">
+        {{productContainer.AlgoFeed.TriggerPrice | correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}
+    </script>
+
+    <div class="row-md-20 no-gap">
+        <div class="col-md-5">
+            <div class="sidebar-container left-scrollbar">
+                <div class="sidebar">
+                    <div>
+                        <fieldset ng-disabled="vm.screenerFilter.mode!='Custom'">
+                            <div class="button-group event-combination-mode">
+                                <button class="child-button blue transition-fast" ng-change="vm.screenerModeChanged()" ng-model="vm.eventTypeSearchCombinationType" uib-btn-radio="'AND'">
+                                    AND
+                                </button><button class="child-button blue transition-fast" ng-change="vm.screenerModeChanged()" ng-model="vm.eventTypeSearchCombinationType" uib-btn-radio="'OR'">
+                                    OR
+                                </button>
+                            </div>
+                            <div class="alert alert-info tiny-alert">
+                                <span ng-if="vm.eventTypeSearchCombinationType==='AND'">
+                                    AND: Screener results trigger <b>all</b> of the selected events below
+                                </span>
+                                <span ng-if="vm.eventTypeSearchCombinationType==='OR'">
+                                    OR: Screener results trigger <b>any</b> of the selected events below.
+                                </span>
+                            </div>
+                            <agms-datamart-filter-selector on-selection-changed="vm.repopulateCustomScreener()"
+                                                           is-selector-open="vm.openCustomScreenerSelector()"
+                                                           branch="branch"
+                                                           ng-repeat="branch in vm.screenerFilter.treeStructure.subCombinations"
+                                                           is-invalid-event-func="vm.isInvalidEventFunc">
+                            </agms-datamart-filter-selector>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-15 rel custom-screener" ng-if="vm.screenerFilter.mode=='Custom' && !vm.isLoading">
+            <div class="top-filter">
+                <div class="top-filter-content">
+                    <div class="menu">
+                        <label>Market</label>
+                        <select class="market-selector" ng-model="vm.screenerFilter.selectedTradeVenue" ng-options="tv for tv in vm.screenerFilter.customScreenerTradeVenues" ng-change="vm.onMarketChangedForCustomScreener()"></select>
+                    </div>
+                    <!-- <div class="menu">
+                        <label>Product Type</label>
+                        <select class="product-selector" ng-model="vm.screenerFilter.selectedAssetClass" ng-options="ac for ac in vm.assetClassesForCustomFilter" ng-change="vm.repopulateCustomScreener()"></select>
+                    </div> -->
+                    <div class="menu">
+                        <label>Sectors</label>
+                        <div class="btn-group" uib-dropdown auto-close="outsideClick" on-toggle="vm.screenerFilter.onIndustryDropdownToggled(open)" is-open="vm.screenerFilter.isIndustrySelectionOpened">
+                            <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                                {{vm.checkBoxName}} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu industry-selection" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                <li role="menuitem">
+                                    <input type="checkbox" ng-model="vm.screenerFilter.allIndustriesChecked" ng-change="vm.onAllIndustriesCheckedChanged()" /><label>All</label>
+                                </li>
+                                <li role="menuitem" ng-repeat="industry in vm.getFilteredIndustryList(vm.screenerFilter.selectedTradeVenue)">
+                                    <input type="checkbox" ng-model="industry.checked" ng-change="vm.evaluateAll(industry)" /><label> {{industry.Sector.SectorName }}</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="menu">
+                        <label>Date</label>
+                        <select class="date-dropdown-selector"
+                                ng-model="vm.screenerFilter.selectedDateRange"
+                                ng-options="tv for tv in vm.getDateRanges(vm.isDateSelectionExpanded)"
+                                ng-mousedown="vm.expandDateRangeSelection()"
+                                ng-blur="vm.collapseDateRangeSelection()"
+                                ng-change="vm.dateRangeDropdownSelectionChanged()"></select>
+                    </div>
+                    <agmc-date-picker class="menu" ng-click="vm.setCustomDateSelection()"
+                                      from-date="vm.screenerFilter.fromDate"
+                                      to-date="vm.screenerFilter.toDate"
+                                      min-date="vm.getMinimumDate()"
+                                      is-set-in-pair="true"
+                                      on-date-to-changed="vm.adjustDateFromRange()"
+                                      on-date-from-changed="vm.adjustDateToRange()"
+                                      show-trading-day-only="true"
+                                      date-selection-changes="vm.repopulateCustomScreener()"></agmc-date-picker>
+                    <div class="show-fundamental-filter pull-right">
+                        <a ng-click="vm.setFundamentalFilterVisibility(true)" ng-if="!vm.isFundamentalFilterShown">Show Fundamental Filter...</a>
+                        <a ng-click="vm.setFundamentalFilterVisibility(false)" ng-if="vm.isFundamentalFilterShown">Hide Fundamental Filter...</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="top-filter" ng-if="vm.isFundamentalFilterShown">
+                <div class="top-filter-content">
+                    <div class="subsection" ng-if="vm.screenerFilter.selectedTradeVenue==='US'">
+                        <input type="radio" class="pull-left big-radio" ng-model="vm.screenerFilter.usePredefinedList" ng-value="true" ng-change="vm.repopulateCustomScreener()" />
+                        <fieldset class="menu fundamental-filter" ng-disabled="!vm.screenerFilter.usePredefinedList">
+                            <label>Select from List</label>
+                            <select ng-options="cat for cat in vm.predefinedCategories" ng-model="vm.screenerFilter.predefinedCategory" 
+                                    ng-change="vm.repopulateCustomScreener()"></select>
+                        </fieldset>
+                        <input type="radio" class="pull-left big-radio" ng-model="vm.screenerFilter.usePredefinedList" ng-value="false" ng-change="vm.repopulateCustomScreener()" />
+                        <fieldset class="pull-left" ng-disabled="vm.screenerFilter.usePredefinedList">
+                            <div class="menu fundamental-filter">
+                                <label>Market Cap</label>
+                                <agmc-check-box-dropdown on-item-checked-state-changed="vm.repopulateCustomScreener()"
+                                                         dropdown-items="vm.screenerFilter.fundamental.marketCaps"
+                                                         display-func="vm.showMarketCap"></agmc-check-box-dropdown>
+                            </div>
+                            <div class="menu fundamental-filter">
+                                <label>PE Ratio</label>
+                                <agmc-check-box-dropdown on-item-checked-state-changed="vm.repopulateCustomScreener()"
+                                                         dropdown-items="vm.screenerFilter.fundamental.peRatios"
+                                                         display-func="vm.showRange"></agmc-check-box-dropdown>
+                            </div>
+                            <div class="menu fundamental-filter">
+                                <label>Earning Growth <span class="glyphicon glyphicon-info-sign" uib-tooltip="Trailing Twelve months"></span></label>
+                                <agmc-check-box-dropdown on-item-checked-state-changed="vm.repopulateCustomScreener()"
+                                                         dropdown-items="vm.screenerFilter.fundamental.earningGrowths"
+                                                         display-func="vm.showRange"></agmc-check-box-dropdown>
+                            </div>
+                        </fieldset>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="subsection" ng-if="vm.screenerFilter.selectedTradeVenue==='SG'">
+                        <div class="menu fundamental-filter">
+                            <label>Market Cap</label>
+                            <agmc-check-box-dropdown on-item-checked-state-changed="vm.repopulateCustomScreener()"
+                                                     dropdown-items="vm.screenerFilter.fundamental.marketCaps"
+                                                     display-func="vm.showMarketCap"></agmc-check-box-dropdown>
+                        </div>
+                        <div class="menu fundamental-filter">
+                            <label>Current Price Range</label>
+                            <agmc-check-box-dropdown on-item-checked-state-changed="vm.repopulateCustomScreener()"
+                                                     dropdown-items="vm.screenerFilter.fundamental.priceRanges"
+                                                     display-func="vm.showRange"></agmc-check-box-dropdown>
+                        </div>
+                        <div class="menu fundamental-filter">
+                            <label>PE Ratio</label>
+                            <agmc-check-box-dropdown on-item-checked-state-changed="vm.repopulateCustomScreener()"
+                                                     dropdown-items="vm.screenerFilter.fundamental.peRatios"
+                                                     display-func="vm.showRange"></agmc-check-box-dropdown>
+                        </div>
+                        <div class="menu fundamental-filter">
+                            <label>Earnings Growth (%) <span class="glyphicon glyphicon-info-sign" uib-tooltip="Trailing Twelve months"></span></label>
+                            <agmc-check-box-dropdown on-item-checked-state-changed="vm.repopulateCustomScreener()"
+                                                     dropdown-items="vm.screenerFilter.fundamental.earningGrowths"
+                                                     display-func="vm.showRange"></agmc-check-box-dropdown>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="top-filter">
+                <div class="top-filter-content">
+                    <div class="pull-left search top-search-panel rel ">
+                        <input type="text" placeholder="SEARCH STOCK" ng-model="vm.selectedItemAsFilter"
+                               ng-model-options="{debounce: 200}"
+                               uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                               typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                               typeahead-wait-ms="200"
+                               typeahead-on-select="vm.showProduct(vm.selectedItemAsFilter)">
+                        <button type="submit" ng-click="vm.showProduct(vm.selectedItemAsFilter)">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="p-50px text-center" ng-if="vm.isLoadingCustomList || !vm.isInitialized ">
+                <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+            </div>
+            <div ng-if="!vm.screenerFilter.isCustomScreenerFundamentalOnly" class="custom-screener-panel">
+                <h4 ng-if="vm.populatedCustomScreenerList.length<=0 && !vm.isLoadingCustomList && vm.isInitialized " class="m-20px text-center">
+                    <span ng-if="vm.checkCounts==0">
+                        Please select at least one event from the filter on the left.
+                    </span>
+                    <span ng-if="vm.checkCounts==1">
+                        No stocks match the available criteria. Please select another event(s) from the filter on the left.
+                    </span>
+                    <span ng-if="vm.checkCounts>1">
+                        No stocks match the available criteria. Please broaden your criteria by selecting fewer events from the filter on the left.
+                    </span>
+                </h4>
+                <h4 ng-if="vm.populatedCustomScreenerList.length > 0 && !vm.isLoadingCustomList && vm.preprocessFilterListFunc(vm.populatedCustomScreenerList).length <=0" class="m-20px text-center">
+                    No results found.
+                </h4>
+                <agmc-sticky-sidebar hooked-on-bottom-at="400" offset-top-at="50">
+                    <agms-product-list class="big-screener-product-list" options="vm.customScreenerProductListOption" product-container-list="vm.populatedCustomScreenerList"
+                                       ng-if="vm.populatedCustomScreenerList.length>0 && !vm.isLoadingCustomList && vm.preprocessFilterListFunc(vm.populatedCustomScreenerList).length >0">
+                    </agms-product-list>
+                </agmc-sticky-sidebar>
+            </div>
+            <div ng-if="vm.screenerFilter.isCustomScreenerFundamentalOnly" class="custom-screener-panel">
+                <h4 ng-if="vm.populatedCustomScreenerList.length<=0 && !vm.isLoadingCustomList && vm.isInitialized " class="m-20px text-center">
+                    <span ng-if="vm.screenerFilter.hasTooBroadFundamentalFilter">
+                        Your filter is too broad. Please narrow down by either selecting events on the left or more specific fundamental criteria on top.
+                    </span>
+                    <span ng-if="!vm.screenerFilter.hasTooBroadFundamentalFilter">
+                        No stocks match the available criteria. Please broaden your criteria by selecting broader fundamental criteria on top.
+                    </span>
+                </h4>
+                <h4 ng-if="vm.populatedCustomScreenerList.length > 0 && !vm.isLoadingCustomList && vm.preprocessFilterListFunc(vm.populatedCustomScreenerList).length <=0" class="m-20px text-center">
+                    No results found.
+                </h4>
+                <agms-product-list class="big-screener-product-list" options="vm.fundamentalScreenerProductListOption" product-container-list="vm.populatedCustomScreenerList"
+                                   ng-if="vm.populatedCustomScreenerList.length>0 && !vm.isLoadingCustomList && vm.preprocessFilterListFunc(vm.populatedCustomScreenerList).length >0">
+                </agms-product-list>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

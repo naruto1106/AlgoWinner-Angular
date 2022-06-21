@@ -1,0 +1,410 @@
+﻿<div>
+    <agm-landing-header show-logo-only="true"></agm-landing-header>
+
+    <div class="top-section">
+        <div class="invitation" ng-if="vm.profitType != 'ReferralPartner'">
+            {{vm.userName}} has sent you $30 to spend on AlgoMerchant.
+            <a href="//am708403.azureedge.net/pdf/AlgoMerchantReferralProgramTerms&Conditions.pdf" target="_blank">See Terms.</a>
+        </div>
+        <div class="invitation" ng-if="vm.profitType == 'ReferralPartner'">
+            {{vm.userName}} invited you to join AlgoMerchant.
+        </div>
+        <div class="action-buttons">
+            <button class="sign-up" ng-click="vm.signUp()"
+                    analytics-on="click" analytics-category="Landing" analytics-event="Referral" analytics-label="SignUp" agmc-analytics-timestamp>
+                <span ng-if="vm.profitType != 'ReferralPartner'">
+                    SIGN UP TO CLAIM YOUR CREDIT
+                </span>
+                <span ng-if="vm.profitType == 'ReferralPartner'">
+                    SIGN UP NOW
+                </span>
+            </button>
+            <button class="learn-more" ng-click="vm.learnMore()"
+                    analytics-on="click" analytics-category="Landing" analytics-event="Referral" analytics-label="LearnMore" agmc-analytics-timestamp>
+                LEARN MORE
+                <span class="algoicon algoicons-angle-double-down"></span>
+            </button>
+        </div>
+    </div>
+
+    <section class="introduction new-grad2">
+        <div class="container max-w90">
+            <div class="row pull-center ">
+                <div class=" col-md-10 col-sm-12 align-div-center">
+                    <div class="algomerchant bold-h">
+                        AlgoMerchant builds intelligent robots to help you invest better than star fund managers.
+                    </div>
+                    <div class="introduction-more">
+                        We offer access to top performing investment algorithms developed by the best quant traders from all over the world.
+                        With AlgoMerchant, anyone can become a successful investor.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="space-lg  padding-t30 section-grey">
+        <div class="container max-w90">
+            <div class="row pull-center ">
+                <div class=" col-md-8 col-sm-12 align-div-center">
+                    <h2 class="margin-b0  bold-h f40">Why AlgoMerchant ? </h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="iconbox ">
+                        <img src="//am708403.azureedge.net/images/newLanding/gif1.gif" alt="">
+                        <h4>Higher Returns </h4>
+                        <p>Quantitative trading and machine learning techniques allow our strategies to achieve alpha. </p>
+                    </div><!-- // .iconbox -->
+                </div><!-- .col-md-4 -->
+
+                <div class="col-md-4">
+                    <div class="iconbox ">
+                        <img src="//am708403.azureedge.net/images/newLanding/risk-management.gif" alt="">
+                        <h4>Customized Risk Management  </h4>
+                        <p>Systematic risk management and customized downside protection to guard against bearish market events </p>
+                    </div><!-- // .iconbox -->
+                </div><!-- .col-md-4 -->
+
+                <div class="col-md-4">
+                    <div class="iconbox ">
+                        <img src="//am708403.azureedge.net/images/newLanding/loading2done.gif" alt="">
+                        <h4>Smart Execution</h4>
+                        <p>Direct Broker Execution optimized for the best timing and price </p>
+                    </div><!-- // .iconbox -->
+                </div><!-- .col-md-4 -->
+            </div>
+        </div><!-- // .container -->
+    </section>
+
+    <section class="space-lg">
+        <div class="container-90">
+            <div class="row pull-center ">
+                <div class=" col-md-8 col-sm-12 align-div-center">
+                    <h2 class=" f80">Robo-Invest</h2>
+                    <h2 class="bold-h">
+                        Start Investing in 4 Simple Steps
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12  col-lg-6 macw-bg padding10z ">
+                    <div id="MSvideoContainer">
+                        <div id="MSvideoContent">
+                            <video src="//am708403.azureedge.net/images/newLanding/Compb.mp4" width="300" height="543" type="video/mp4" controls="false" preload="true" poster="undefined" autoplay airplay="allow" x-webkit-airplay="allow" loop></video>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="iconbox light2 text-left">
+                        <h2 class="text-left f40">How it works: </h2>
+                        <h3 class="text-left">1. Subscribe to your preferred robot</h3>
+                        <h3 class="text-left">2. Link the robot to your personal brokerage account</h3>
+                        <h3 class="text-left">3. Customize your money management</h3>
+                        <h3 class="text-left">
+                            4. Sit back, relax and let the robot work for you!<br>
+                            <br>
+                        </h3>
+                        <!-- <div class="text-left">
+                            <a href="#!/robot" target="_blank">
+                                <button class="btn btn-blue btn-lg"
+                                        analytics-on="click" analytics-category="Landing" analytics-event="Referral" analytics-label="Robot" agmc-analytics-timestamp>
+                                    Learn More
+                                </button>
+                            </a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="space-lg section-grey home">
+        <div class="row">
+            <div class="col-sm-12 col-lg-6 paddingR3-10p padding-r50 text-right">
+                <h2 class=" f80">Trading</h2>
+                <h2 class="bold-h">
+                    Prefer to trade <br>
+                    on your own?
+                </h2>
+                <h3>
+                    If you prefer to directly manage your own money <br>
+                    and robo-investing isn’t for you,
+                    <br>
+
+                    <a href="#!/trading" target="_blank" style="display: inline-block">
+                        <ul class="list-checked">
+                            <li data-animation="fadeInLeft" data-animation-delay="600">click here</li>
+                        </ul>
+                    </a> to discover our Trading Solutions
+                </h3>
+            </div>
+
+            <div class="col-sm-12 col-lg-6  paddingL3-10p ">
+                <img src="//am708403.azureedge.net/images/newLanding/invest7.gif" style="max-width: 480px" class="right-m25" alt="" />
+            </div>
+        </div>
+    </section>
+
+    <section class="space-lg section-grey padding0">
+        <div class="container-100">
+            <div class="row new-grad">
+                <div class="col-sm-12 col-lg-6 paddingR3-10p padding-r50 text-center">
+                    <img src="//am708403.azureedge.net/images/newLanding/learn.gif" width="150px" alt="" />
+                    <h2 class=" f80">Interested?</h2>
+                    <h2 class="bold-h">
+                        Join our investment revolution today.
+                    </h2>
+                </div>
+
+                <div class="col-sm-12 col-lg-6 paddingL3-10p">
+                    <div class="l-form-10-bottom">
+                        <agm-landing-register-small></agm-landing-register-small>
+                        <div class="form-elements-divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="space-lg section-grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="text-center ">What People Say About Us</h2>
+                </div>
+            </div>
+
+            <div class="row space-bottom">
+                <div class="col-md-12">
+                    <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                        <!-- Carousel Slides / Quotes -->
+                        <div class="carousel-inner text-center">
+                            <!-- Quote 1 -->
+                            <div class="item active">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <p class="f24 min190">“...systematic investing approach. Impressively simple...”</p>
+                                            <h4 class="f18">Sahand Ahmad PhD</h4>
+                                            <small>Ex-Goldman Sachs Asset Management Quantitative Strategies.</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <!-- Quote 2 -->
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <p class="f24 min190">“...Uber for retail investing.”</p>
+                                            <h4 class="f18">Randolph Tsai</h4>
+                                            <small>Head of Electronic FX Trading BNP Paribas, APAC.</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <p class="f24 min190">“This is how technology can be used to help investors.”</p>
+                                            <h4 class="f18">Leslie Loh</h4>
+                                            <small>
+                                                Red Dot Ventures Managing Director, founder of System Access Pte Ltd
+                                            </small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <p class="f24 min190">“Algomerchant is providing a multi-solution approach to all investors and it is probably the first of its kind. This solutions approach is offered to all investors, ranging from novice to professional.”</p>
+                                            <h4 class="f18">Collin Seow</h4>
+                                            <small>
+                                                SMT Traders, Investor, Author of Systematic Trader book
+                                                Member of MENSA
+                                            </small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <p class="f24 min190">"AlgoMerchant is my go-to platform to automate my trading strategies and create an eco-system for my trading community. I highly recommend AlgoMerchant for anyone seeking to gain an advantage in the stock market."</p>
+                                            <h4 class="f18">Joel Sim</h4>
+                                            <small>
+                                                Finance Savvy Trader,
+                                                Phillip Securities Remisier
+                                            </small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <!-- Quote 3 -->
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <p class="f24 min190">“AlgoMerchant is easy to use, complete with excellent chart, research capabilities and great format.”</p>
+                                            <h4 class="f18">Ernest Lim</h4>
+                                            <small>
+                                                A Trader, CIMB remisier, investor.
+                                                Chartered Financial Analyst® charterholder Chartered Accountant of Singapore
+                                            </small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <!-- Quote 2 -->
+
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <p class="f24 min190">“I have been using AlgoOracle for a few months and after witnessing its proficiency, I would never enter a trade without checking on what AlgoOracle has to say about it first...I strongly recommend the inexpensive AlgoOracle to any and all serious stock traders out there.”</p>
+                                            <h4 class="f18">Anson Soh</h4>
+                                            <small>
+                                                AlgoMerchant trader community
+                                            </small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <p class="f24 min190">“Algomerchant gives independent traders and investors an edge by providing transparent insight into what professional traders are doing, as they’re doing it, not after. This combined with the features and functionality of both the mobile and web based platforms make Algomerchant a must-have trading tool.”</p>
+                                            <h4 class="f18">Ro Charlz</h4>
+                                            <small>Vickers Venture Associate, Professional Sportsman and Independent Trader</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <p class="f24 min190">"AlgoMerchant is a revolutionary platform that bridges the gap between retail investors and experts in the stock market...Using AlgoMerchant, investors are now able to follow strategies which aligns with their financial objectives and also hone their trading skills to become more successful. Great job to the Algo team."</p>
+                                            <h4 class="f18">
+                                                Joey Choy
+                                            </h4>
+                                            <small>
+                                                Singapore’s Leading Coach on Stock Trading,
+                                                Top Tier Remisier, Trader, Chief Trainer at Trading Impossible
+                                            </small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <!-- Bottom Carousel Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#quote-carousel" data-slide-to="0" class="active">
+                                <img class="img-responsive" src="//am708403.azureedge.net/images/newLanding/person_1.jpg" alt="">
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="1">
+                                <img class="img-responsive" src="//am708403.azureedge.net/images/newLanding/person_2.jpg" alt="">
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="2">
+                                <img class="img-responsive" src="//am708403.azureedge.net/images/newLanding/person_3.png" alt="">
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="3">
+                                <img class="img-responsive" src="//am708403.azureedge.net/images/newLanding/collin.jpg" alt="">
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="4">
+                                <img class="img-responsive " src="//am708403.azureedge.net/images/newLanding/person_6.jpg" alt="">
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="5">
+                                <img class="img-responsive" src="//am708403.azureedge.net/images/newLanding/person_4.jpg" alt="">
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="6">
+                                <img class="img-responsive " src="//am708403.azureedge.net/images/newLanding/person_5.jpg" alt="">
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="7">
+                                <img class="img-responsive" src="//am708403.azureedge.net/images/newLanding/ro.jpg" alt="">
+                            </li>
+                            <li data-target="#quote-carousel" data-slide-to="8">
+                                <img class="img-responsive" src="//am708403.azureedge.net/images/newLanding/person_7.jpg" alt="">
+                            </li>
+                        </ol>
+
+                        <!-- Carousel Buttons Next/Prev -->
+                        <a data-slide="prev" href="" data-target="#quote-carousel" class="left carousel-control"><i class="algoicon algoicons-chevron-left"></i></a>
+                        <a data-slide="next" href="" data-target="#quote-carousel" class="right carousel-control"><i class="algoicon algoicons-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="space-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="brands-title text-center">Featured in</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="owl-carousel gallery-slider">
+                        <div class="gallery-slider-item">
+                            <a href="http://www.businesstimes.com.sg/technology/singapore-startup-unveils-asias-first-robot-trader-for-retail-investors-0" target="_blank">
+                                <img src="//am708403.azureedge.net/images/newLanding/bt-1.png" alt="Business Times">
+                            </a>
+                        </div>
+                        <div class="gallery-slider-item">
+                            <a href="https://www.techinasia.com/algomerchant-hard-launch" target="_blank">
+                                <img src="//am708403.azureedge.net/images/newLanding/techinasia.png" alt="Tech in Asia">
+                            </a>
+                        </div>
+                        <div class="gallery-slider-item">
+                            <a href="https://e27.co/algomerchant-raises-us2m-launches-robot-trading-platform-20171103/" target="_blank">
+                                <img src="//am708403.azureedge.net/images/newLanding/e27.png" alt="E27">
+                            </a>
+                        </div>
+                        <div class="gallery-slider-item">
+                            <a href="https://www.digitalnewsasia.com/algomerchant-trading-platform-for-the-rest-of-us" target="_blank">
+                                <img src="//am708403.azureedge.net/images/newLanding/dna.png" alt="DNA">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="owl-carousel gallery-slider">
+                        <div class="gallery-slider-item">
+                            <a href="https://dailysocial.id/post/startup-fintech-algomerchant-peroleh-pendanaan-awal-126-miliar-rupiah-dari-east-ventures" target="_blank">
+                                <img src="//am708403.azureedge.net/images/newLanding/dailysocial.png" alt="Intro Image">
+                            </a>
+                        </div>
+                        <div class="gallery-slider-item">
+                            <a href="https://east.vc/1/country/singapore/" target="_blank">
+                                <img src="//am708403.azureedge.net/images/newLanding/ev.png" alt="Intro Image">
+                            </a>
+                        </div>
+                        <div class="gallery-slider-item">
+                            <a href="http://www.ntuitive.sg/our-start-ups/algomerchant-pte-ltd" target="_blank">
+                                <img src="//am708403.azureedge.net/images/newLanding/ntu.png" alt="NTU">
+                            </a>
+                        </div>
+                        <div class="gallery-slider-item">
+                            <a href="http://techsg.io/ecosystem/show/algomerchant" target="_blank">
+                                <img src="//am708403.azureedge.net/images/newLanding/nus.png" alt="NUS">
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

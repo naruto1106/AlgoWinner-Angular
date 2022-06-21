@@ -1,0 +1,12 @@
+﻿<div class="vol-date">
+    <dl class="vol" ng-if="vm.filterDescription.primaryProduct.AssetType != 'Indices'">
+        <dt>VOL:</dt>
+        <dd>{{vm.volDateData.Volume | volumeSeparatorFormat}}</dd>
+    </dl>
+    <dl ng-if="vm.volDateData.DT"
+        class="date">
+        <dt></dt>
+        <dd>{{vm.displayFormatted(vm.volDateData.DT)}}</dd>
+    </dl>
+    <div class="clearfix"></div>
+</div>

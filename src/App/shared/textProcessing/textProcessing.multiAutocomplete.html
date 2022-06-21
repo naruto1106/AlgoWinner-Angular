@@ -1,0 +1,24 @@
+﻿<div class="agms-text-processing-multi-autocomplete rel" >
+    <div class="input-box" ng-class="{focused:isFocusing}" ng-click="focus()" ng-blur="setFocusingFalse()" agmc-click-outside="isFocusing=false">
+        <div class="pull-right right-box"><span class="glyphicon glyphicon-remove remove" ng-click="removeAllItems()" ng-disabled="items.length == 0 && models.textBox == ''"></span></div>
+        <div class="pull-left left-box">
+            <span ng-repeat="item in items track by $index" class="keyword" ng-class="item.typeClass">
+                {{item.name}}
+                <span class="glyphicon glyphicon-remove remove" ng-click="removeItem($index)"></span>
+            </span>
+            <input placeholder="{{placeholderText}}" ng-focus="isFocusing=true" ng-blur="setFocusingFalse()" class="input" ng-model="models.textBox" ng-keyup="onInputKeyup($event)" ng-keydown="onInputKeydown($event)"/>
+        </div>
+    </div>
+    <div ng-if="unrecognizedItems.length > 0 && (populatedItems.length <= 0 || !isFocusing)" class="red-loss m-left-5px f-14px">
+        <span class="glyphicon glyphicon-asterisk"></span>
+        <span ng-repeat="item in unrecognizedItems track by $index">"{{item.name}}"{{$last ? '' : ', '}}</span>
+        <span ng-if="unrecognizedItems.length == 1">is not recognized as a valid user or stock.</span>
+        <span ng-if="unrecognizedItems.length > 1">are not recognized as valid users or stocks.</span>
+        <div class="clearfix m-bottom-10px" ng-if="populatedItems.length <= 0"></div>
+    </div>
+    <div class="dropdown abs w-100pct" ng-show="populatedItems.length>0 && isFocusing">
+        <div ng-repeat="populatedItem in populatedItems" class="item" ng-class="{active:$index==pointerIndex}"
+             ng-include="populatedItem.template" ng-mousedown="addToList(populatedItem)" ng-mouseenter="setPointerIndex($index)">
+        </div>
+    </div>
+</div>

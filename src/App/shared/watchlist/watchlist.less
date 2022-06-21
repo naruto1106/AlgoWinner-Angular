@@ -1,0 +1,227 @@
+﻿.agm-component-watchlist {
+    .category-list {
+        padding: 0 20px;
+
+        .item {
+            line-height: 35px;
+            height: 0;
+            font-size: 14px;
+            padding: 0 10px;
+            overflow: hidden;
+        }
+
+        &.expanded {
+            padding: 20px 20px;
+
+            .item {
+                height: 35px;
+            }
+        }
+    }
+
+
+    .price-alert {
+        color: black;
+        padding: 5px 0;
+        border: 2px solid @grayMed1;
+        background: @grayLight1;
+        color: black;
+        border-radius: 6px;
+        width: 100%;
+
+        div.button-box {
+            line-height: 20px;
+        }
+
+        div.price {
+            line-height: 20px;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        &:hover {
+            background: @blueBasic;
+            color: white;
+            -webkit-transition: none;
+            -moz-transition: none;
+            -o-transition: none;
+            transition: none;
+        }
+    }
+
+    td.td-button {
+        padding: 5px 10px 5px 10px;
+    }
+
+    .price-alert.down {
+        background: red;
+        color: white;
+    }
+
+    .price-alert.up {
+        background: green;
+        color: white;
+    }
+
+    .alert-product {
+        padding: 20px;
+        background: @white02;
+        
+        .dropdown-menu {
+            width: 200px;
+        }
+
+        .current-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: @seafoam;
+            margin-top: 6px;
+        }
+
+        .symbol {
+            .rel;
+            top: 6px;
+            left: 10px;
+        }
+
+        .alert-price {
+            .rel;
+            top: 6px;
+            left: 20px;
+            width: 70px;
+        }
+
+        .price-diff {
+            .rel;
+            top: 10px;
+            left: 80px;
+        }
+
+        .change-price {
+            .rel;
+            top: 6px;
+            left: 25px;
+        }
+    }
+
+    .border-dash {
+        border: 2px dashed @grayMed3;
+        border-radius: 15px;
+        padding-top: 3px;
+    }
+
+    .white-bg {
+        background: white;
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .glyphicon-red {
+        color: red;
+    }
+
+    .pre-scrollable-auto {
+        max-height: 340px;
+        overflow-y: auto;
+    }
+
+    .watchlist-highlighted {
+        background: mix(@blueBasic,transparent,60);
+        color: white;
+    }
+
+    .silent-button-m {
+        .clickable;
+        text-decoration: none;
+        padding: 10px 5px;
+        line-height: 10px;
+        font-size: 14px;
+        border-radius: 10px;
+
+        &:hover {
+            background: @grayLight2;
+            text-decoration: none;
+        }
+    }
+
+    .watchlist-row {
+        border-bottom: 1px solid @grayLight3;
+        font: bold 16px;
+        padding: 5px;
+
+        .agms-directives.add-to-watchlist {
+            position: absolute;
+            z-index: 4;
+            line-height: 25px;
+            border: 1px solid @grayLight1;
+            right: 75px;
+            top: 15px;
+            width: 300px;
+
+            textarea {
+                width: 100%;
+                line-height: 25px;
+                overflow-y: scroll;
+                height: 100px;
+            }
+        }
+
+        .notes-button {
+            border: none;
+            line-height: 25px;
+            width: 35px;
+            border-radius: 10px;
+            padding-top: 0;
+            color: @blueDarker3;
+            background: mix(black,transparent,5);
+            height: 30px;
+            font-size: 25px;
+
+            .glyphicon {
+                top: 4px;
+                left: -1px;
+            }
+
+            &:hover {
+                color: @blueBasic;
+            }
+        }
+
+        .close-button {
+            border: none;
+            line-height: 25px;
+            width: 30px;
+            border-radius: 10px;
+            padding-top: 5px;
+            color: red;
+            background: mix(black,transparent,5);
+            opacity: 0;
+            height: 30px;
+        }
+
+        &:hover {
+            background: mix(@blueBasic,transparent, 30);
+
+            .close-button {
+                opacity: 1;
+            }
+        }
+    }
+
+    .search {
+        padding: 6px 15px 6px 30px;
+        margin: 3px;
+        background: url('./images/search.png') no-repeat 8px 6px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}

@@ -1,0 +1,8 @@
+﻿
+<svg ng-width="{{vm.width}}" ng-height="{{vm.height}}" viewBox="-100 -100 200 200">
+    <path ng-repeat="arc in vm.arcs"
+          ng-attr-d="{{arc.d}}"
+          ng-attr-stroke="{{arc.color}}"
+          fill="none"
+          ng-attr-stroke-width="{{vm.thickness}}"></path>
+</svg>

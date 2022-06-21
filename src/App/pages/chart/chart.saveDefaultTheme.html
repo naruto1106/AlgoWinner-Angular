@@ -1,0 +1,28 @@
+﻿<!-- TEMPLATE chartSaveTemplateName.html + agmChartViewsManager.js -->
+<div class="modal-header">
+    <button class="close" ng-click="vm.uibDismissPanel()" class="glyphicon-remove glyphicon">&times;</button>
+    <h4 class="modal-title">Set Default Theme</h4>
+</div>
+<div class="modal-body">
+    <dl>
+        <dd>
+            <input type="radio"
+                   ng-model="vm.selectedDefaultTheme"
+                   value="Light"/><span class="algoicon algoicons-light small-icon"></span> Light Theme
+            <br/>
+            <input type="radio"
+                   ng-model="vm.selectedDefaultTheme"
+                   value="Dark"/><span class="algoicon algoicons-dark small-icon"></span> Dark Theme
+        </dd>
+    </dl>
+    <dl>
+        <dd>
+            <input type="checkbox" ng-model="vm.applyToCurrent"/>Apply Default Theme to Current Chart
+        </dd>
+    </dl>
+</div>
+<div class="modal-footer">
+    <span class="red-loss" ng-show="!vm.selectedDefaultTheme">Please select a theme from above</span>
+    <button class="btn btn-primary" ng-click="vm.saveDefaultTheme()" ng-disabled="!vm.selectedDefaultTheme">SAVE</button>
+    <button class="btn btn-outline-primary " ng-click="vm.uibDismissPanel()">CANCEL</button>
+</div>

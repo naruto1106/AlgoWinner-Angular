@@ -1,0 +1,64 @@
+@import 'base.less';
+
+.btn {
+    outline: 0;
+    font-size: 12px;
+    height: 30px;
+    line-height: 25px;
+    letter-spacing: 2px;
+    padding: 0 15px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    cursor: pointer;
+    .base-unselected;
+    .base-button-ease;
+    outline: none;
+
+    &:focus, &:active {
+        outline: none;
+    }
+}
+
+
+.btn-group {
+
+    .btn {
+        border: 1px solid mix(@grayDark3,transparent,50);
+        outline: 0;
+        font-size: 12px;
+        height: 30px;
+        line-height: 1;
+        letter-spacing: 2px;
+        padding: 0 10px;
+        text-transform: uppercase;
+        border-radius: 15px;
+        cursor: pointer;
+        .base-button-ease;
+        .base-unselected;
+    }
+}
+
+
+button:focus {
+    outline: 0;
+}
+
+.btn.btn-square {
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-warning,
+.btn-info,
+.btn-danger {
+    border: 0px;
+}
+
+.btn-outline-primary,
+.btn-outline-danger {
+    background-image: none;
+    background-color: transparent;
+}

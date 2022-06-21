@@ -1,0 +1,562 @@
+﻿.blinker-color(@name,@color) {
+    @name2: ~'@{name}er';
+
+    .@{name} {
+        animation: @name2 0.5s linear infinite;
+    }
+    /*@keyframes @{name2} {
+        50% {
+            background-color: @color;
+        }
+    }
+
+    @-webkit-keyframes @{name2} {
+        50% {
+            background-color: @color;
+        }
+    }
+
+    @-moz-keyframes @{name2} {
+        50% {
+            background-color: @color;
+        }
+    }*/
+}
+
+.as-comic-box {
+    border-radius: 5px;
+    box-shadow: 0 5px 10px mix(black,transparent,50);
+    background: black;
+    padding: 5px;
+
+    &::after {
+        display: block;
+        position: absolute;
+        content: "";
+        right: -50px;
+        bottom: 50px;
+        border-color: transparent;
+        border-width: 25px;
+        border-style: solid;
+        border-left-color: black;
+    }
+}
+
+
+.agm-components-droid-helper.avatar {
+    position: absolute;
+    .blinker-color(blink-green,green);
+
+    .action-button {
+        border: none;
+        border-radius: 20px;
+        font-size: 14px;
+        line-height: 20px;
+        height: 34px;
+        padding: 0;
+        background: white;
+        color: black;
+        border: 2px solid black;
+        z-index: 1;
+    }
+
+    .main-avatar-container {
+        z-index: 3000;
+        left: inherit;
+        display: none;
+        top: 25px;
+        right: 30px;
+        position: fixed;
+        display: none;
+        cursor: move;
+        @time: 1s;
+        -webkit-transition: all @time ease-in-out;
+        -moz-transition: all @time ease-in-out;
+        -o-transition: all @time ease-in-out;
+        transition: all @time ease-in-out;
+
+
+        &.dragging {
+            @time: 0.5s;
+            @time: 1s;
+            -webkit-transition: none;
+            -moz-transition: none;
+            -o-transition: none;
+            transition: none;
+        }
+
+
+        .main-avatar {
+            .rel;
+            left: 0px;
+            top: 0px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50px;
+            background-size: cover;
+            background-image: url('//am708403.azureedge.net/images/r2d2icon.png');
+            background-color: mix(black,transparent,10);
+            box-shadow: 0 5px 10px mix(black,transparent,50);
+
+            > .conversation-starter {
+                .abs;
+
+                > .comment {
+                    .abs;
+                    top: 35px;
+                    min-width: 250px;
+                    padding: 5px 10px;
+                    font-size: 15px;
+                    line-height: 20px;
+                    font-weight: 500;
+                    background: white;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 5px mix(black,transparent,50);
+                    background: mix(yellow,white,20);
+                }
+
+                > .detail-button {
+                    .action-button;
+                    .abs;
+                    top: 5px;
+                    width: 150px;
+                    display: none;
+                }
+            }
+
+            &:hover {
+                > .conversation-starter {
+
+                    > .detail-button {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        &.left-side {
+            //left: 50px;
+            > .main-avatar {
+                > .conversation-starter {
+                    left: 60px;
+                    right: auto;
+
+                    > .comment {
+                        text-align: left;
+                        left: 0px;
+                        right: auto;
+                    }
+
+                    > .detail-button {
+                        left: -15px;
+                        right: auto;
+                    }
+                }
+            }
+        }
+
+        &.right-side {
+            //right: 50px;
+            > .main-avatar {
+                > .conversation-starter {
+                    right: 60px;
+                    left: auto;
+
+                    > .comment {
+                        text-align: left;
+                        right: 0px;
+                        left: auto;
+                    }
+
+                    > .detail-button {
+                        right: -15px;
+                        left: auto;
+                    }
+                }
+            }
+        }
+    }
+
+
+    .detail-avatar-container {
+        z-index: 3000;
+        opacity: 0;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        @time: 1s;
+        -webkit-transition: all @time ease-in-out;
+        -moz-transition: all @time ease-in-out;
+        -o-transition: all @time ease-in-out;
+        transition: all @time ease-in-out;
+
+        .big-icon {
+            .abs;
+            background-image: url('//am708403.azureedge.net/images/r2d2.png');
+            bottom: -12vw;
+            background-size: cover;
+            right: 0px;
+            height: 12vw;
+            width: 12vw;
+            background-repeat: none;
+            background-position: top center;
+            @time: 1s;
+            -webkit-transition: all @time ease-in-out;
+            -moz-transition: all @time ease-in-out;
+            -o-transition: all @time ease-in-out;
+            transition: all @time ease-in-out;
+
+            > .detail-button {
+                .abs;
+                right: 4vw;
+                bottom: 4vw;
+                .action-button;
+                width: 150px;
+            }
+
+            > .enlarge-button {
+                .abs;
+                right: 4vw;
+                bottom: 6vw;
+                .action-button;
+                width: 150px;
+            }
+
+            > *[droid-popup-element] {
+
+                @time: 1s;
+                -webkit-transition: all @time ease-in-out;
+                -moz-transition: all @time ease-in-out;
+                -o-transition: all @time ease-in-out;
+                transition: all @time ease-in-out;
+
+                &.minified {
+                    transform: translate(4vw,0) scale(0.2,0.2);
+                    opacity: 0.2;
+                    pointer-events: none;
+                    filter: saturate(0);
+                }
+
+                .abs;
+                left: 0vw;
+                bottom: 4vw;
+                overflow: visible;
+
+                > .modal {
+                    .abs;
+                    top: auto;
+                    left: auto;
+                    bottom: 0;
+                    right: 0;
+                    overflow: visible;
+                    background: none;
+
+
+                    &:not(:first-of-type) {
+                        opacity: 0;
+                        pointer-events: none;
+                    }
+
+                    > .modal-dialog {
+                        margin: 0px;
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.show-detail {
+
+        .main-avatar-container {
+            opacity: 0;
+            top: 90%;
+            left: 90%;
+        }
+
+        .detail-avatar-container {
+            opacity: 1;
+
+
+
+            .big-icon {
+                background-image: url('//am708403.azureedge.net/images/r2d2.png');
+                bottom: 0px;
+            }
+        }
+    }
+}
+
+
+.agm-components-droid-helper.content-panel {
+    background-color: mix(yellow,white,20);
+
+    h1 {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    padding: 10px;
+}
+
+
+.agm-components-droid-helper.search-panel {
+
+    h1.title {
+        margin: 0;
+        font-size: 20px;
+        margin-bottom: 15px;
+        float: left;
+        color: black;
+    }
+
+    h1.close-button {
+        margin: 0;
+        font-size: 20px;
+        margin-bottom: 15px;
+        float: right;
+        color: black;
+    }
+
+
+    .option-box {
+        background: @grayLight2;
+        padding: 5px;
+        border-radius: 5px;
+        text-align: center;
+
+        p {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 0;
+            line-height: 13px;
+        }
+
+        &.outside {
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+    }
+
+    .as-table {
+        .option-box {
+            height: 100px;
+        }
+    }
+
+    .footer-panel {
+        margin-top: 10px;
+    }
+
+    .text-separator {
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .search-item {
+        line-height: 25px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        border: 2px solid @grayDark1;
+        color: black;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .search-result-wrapper {
+        .as-comic-box;
+        .abs;
+        bottom: -4px;
+        left: -105%;
+        width: 100%;
+
+        > .remove-click {
+            color: white;
+            float: right;
+            padding: 5px;
+        }
+    }
+
+    .search-result {
+        background: white;
+        padding: 5px;
+        max-height: 80vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        section {
+            border: 1px solid black;
+            margin-bottom: 10px;
+
+            h4 {
+                background: black;
+                margin-top: 0;
+                margin-bottom: 0px;
+                color: white;
+                font-size: 14px;
+                line-height: 20px;
+                padding: 5px;
+            }
+
+            .faq, .guide {
+                cursor: pointer;
+                padding: 5px;
+
+                &:not(:last-of-type) {
+                    border-bottom: 1px solid @grayLight1;
+                }
+
+                &:hover {
+                    background: mix(@blueBasic,white,20);
+                }
+
+                h3 {
+                    > strong {
+                        color: @blueBasic;
+                    }
+
+                    font-size: 15px;
+                    font-weight: 700;
+                    margin: 0;
+                }
+
+                p {
+                    > strong {
+                        color: @blueBasic;
+                        font-weight: 700;
+                    }
+
+                    font-size: 14px;
+                    color: @grayDark1;
+                }
+            }
+        }
+    }
+
+    padding: 0px;
+
+    .main-button {
+        margin-bottom: 2px;
+        width: 100%;
+        text-align: center;
+        line-height: 15px;
+        padding: 10px;
+        font-size: 13px;
+        height: 50px;
+    }
+
+    .thin-button {
+        font-size: 13px;
+        line-height: 20px;
+        height: 30px;
+        width: 100%;
+        margin-bottom: 2px;
+    }
+}
+
+.agm-components-droid-helper.avatar {
+    > .black-screen {
+        z-index: 1999;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        @time: 1s;
+        background: mix(black,transparent,80);
+        -webkit-transition: all @time ease-in-out;
+        -moz-transition: all @time ease-in-out;
+        -o-transition: all @time ease-in-out;
+        transition: all @time ease-in-out;
+        opacity: 0;
+        pointer-events: none;
+        left: 0;
+        top: 0;
+
+        &.active {
+            pointer-events: all;
+            opacity: 1;
+        }
+    }
+}
+
+
+*[agms-droid-helper-item], *[agms-droid-helper-item] *[helper-subitem] {
+    *[highlighter] {
+        .abs;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        display: none;
+        top: 0px;
+        left: 0px;
+
+        > [comments] {
+            .abs;
+            color: white;
+            font-size: 20px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            display: none;
+            line-height: 22px;
+            transform: scale(1.3,1);
+
+            &.N {
+                display: block;
+                bottom: ~'calc(100% + 20px)';
+                transform-origin: bottom;
+            }
+
+            &.S {
+                display: block;
+                top: ~'calc(100% + 20px)';
+                transform-origin: top;
+            }
+
+            &.W {
+                display: block;
+                right: ~'calc(100% + 20px)';
+                transform-origin: right;
+                text-align: right;
+            }
+
+            &.E {
+                display: block;
+                left: ~'calc(100% + 20px)';
+                transform-origin: left;
+            }
+        }
+    }
+
+
+    *[highlighter].white-bg {
+        background: white;
+    }
+
+    *[highlighter].humble {
+        background: mix(yellow,transparent,50);
+    }
+
+    *[highlighter].big-bordered {
+        .abs;
+        top: -8px;
+        left: -8px;
+        width: ~'calc(100% + 16px)';
+        height: ~'calc(100% + 16px)';
+        border: 4px solid yellow;
+    }
+
+    &.highlighted {
+        z-index: 2000;
+        pointer-events: none;
+
+        > *[highlighter] {
+            display: block;
+        }
+    }
+}

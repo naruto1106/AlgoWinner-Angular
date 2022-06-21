@@ -1,0 +1,43 @@
+﻿    <div class="agm-component-smartchart" ng-class="options.customClass" ng-style="options.customStyle">
+    <div class="tr">
+        <div class="td"><!--EMPTY--></div>
+        <div class="rulers north">
+            <div ng-style="options.rulers.north.style">
+                <agms-chart-smartchart-boundary class="full-screen" ng-repeat="item in options.rulers.north.items" local-item="item">
+                </agms-chart-smartchart-boundary>
+            </div>
+        </div>
+        <div class="td"><!--EMPTY--></div>
+    </div>
+    <div class="tr middle">
+        <div class="rulers west">
+            <div ng-style="options.rulers.west.style">
+                <agms-chart-smartchart-boundary class="full-screen" ng-repeat="item in options.rulers.west.items" local-item="item">
+                </agms-chart-smartchart-boundary>
+            </div>
+        </div>
+        <div class="td center" ng-mouseleave="onMouseleave($event)" ng-mousedown="onMousedown($event)" ng-mouseup="onMouseup($event)" ng-mousemove="onMousemove($event)">
+            <div class="smartchart-content-layer">
+                <agms-chart-smartchart-boundary class="full-screen"  ng-repeat="item in items" local-item="item">
+                </agms-chart-smartchart-boundary>
+            </div>
+        </div>
+        <div class="rulers east">
+            <div ng-style="options.rulers.east.style">
+                <agms-chart-smartchart-boundary class="full-screen" ng-repeat="item in options.rulers.east.items" local-item="item">
+                </agms-chart-smartchart-boundary>
+            </div>
+        </div>
+    </div>
+    <div class="tr">
+        <div class="td"><!--EMPTY--></div>
+        <div class="rulers south">
+            <div ng-style="options.rulers.south.style">
+                <agms-chart-smartchart-boundary class="full-screen" ng-repeat="item in options.rulers.south.items" local-item="item">
+                </agms-chart-smartchart-boundary>
+            </div>
+        </div>
+        <div class="td"><!--EMPTY--></div>
+    </div>
+</div>
+

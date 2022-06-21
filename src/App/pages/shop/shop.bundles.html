@@ -1,0 +1,36 @@
+﻿<div class="agm-components-shop">
+    <agms-header-shop current-page="bundle"></agms-header-shop>
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+    <div class="bundle-page container">
+        <div ng-if="vm.availableBundles.length <= 0 && !vm.isLoading" class="no-bundles">
+            No Bundles Available
+        </div>
+
+        <div class="bundle-box" ng-repeat="bundle in vm.availableBundles">
+            <div class="row-md-3">
+                <div class="col-md-2">
+                    <div class="name">{{bundle.Name}}</div>
+                    <div class="description m-bottom-10px">{{bundle.Description}}</div>
+                    <div class="clearfix">Items</div> 
+                    
+                    <div class="item-list">
+                        <span class="item" ng-repeat="s in bundle.Strategies">{{s.StrategyName}}</span>
+                        <span class="item" ng-repeat="i in bundle.AMPremiumItems">{{i.Name}}</span>
+                    </div>
+                    
+
+                    <div class="clearfix m-bottom-20px"></div>
+                </div>
+                <div class="col-md-1 text-right">
+                    <button class="filled-green" ng-if="!bundle.IsSubscribed" ng-click="vm.subscribe(bundle)"
+                            analytics-on="click" analytics-category="ShopBundle" analytics-event="SubscribeNow" analytics-label="{{bundle.Name}}" agmc-analytics-timestamp>SUBSCRIBE NOW</button>
+                    <button class="hollow-green" ng-if="bundle.IsSubscribed" ng-disabled="bundle.IsSubscribed">SUBSCRIBED</button>
+                    <div class="price">
+                        {{bundle.PerPeriodFee | customCurrencyOrDash:bundle.Currency:2}} / {{bundle.PeriodType | periodLy}}
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

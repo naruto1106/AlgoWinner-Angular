@@ -1,0 +1,42 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        Payment Successful
+    </h4>
+</div>
+<div class="modal-body agm-components-shop">
+    <div class="autoinvest-popup">
+        <div ng-if="!vm.hasVM">
+            <p>
+                Congratulations! Your subscription to {{vm.bundle.Name}} is successful! 
+            </p>
+            <p>
+                We are preparing your VM* for AutoInvest. This can take <b>up to 2 working days</b> and we will notify you once its ready.
+            </p>
+            <p>
+                <a class="setup-link"
+                   href="https://algomerchantsupport.zendesk.com/hc/en-us/articles/115002549832-What-is-a-Virtual-Machine-VM-Why-do-I-need-a-Virtual-Machine-VM-" target="_blank">
+                     <i class="glyphicon glyphicon-info-sign"></i> What is VM? Why do I need a VM?
+                </a>
+            </p>
+
+            <p>
+                Meanwhile, would you like to proceed with AutoInvest setup?
+            </p>
+        </div>
+        
+        <div ng-if="vm.hasVM">
+            <p>
+                Congratulations! Your subscription to {{vm.bundle.Name}} is successful! 
+            </p>
+            <p>
+                Would you like to proceed with AutoInvest setup?
+            </p>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="hollow-blue m-right-5px" ng-click="vm.uibDismissPanel()">NO - I WILL SETUP LATER</button>
+    <a href="#/autoinvest" class="filled-green" ng-click="vm.uibDismissPanel()">YES - SETUP AUTO INVEST NOW</a>
+    <div class="clearfix"></div>
+</div>

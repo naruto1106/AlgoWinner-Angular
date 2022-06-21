@@ -1,0 +1,88 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Cancel Existing Orders?</h4>
+</div>
+<div class="modal-body">
+    <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+    <div class="agm-component-orderstrades">
+        <h4 class="center-align">The following Bracket/Take Profit/Stop Loss order(s) will be cancelled.</h4>
+        <div class="center-align">
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="text-center">Take Profit</th>
+                        <th class="text-center">Stop Loss</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Created Time</th>
+                        <th class="text-center">Remark</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="order in vm.bracketOrders">
+                        <td>
+                            <span><strong>{{vm.getTakeProfitOrder(order).OrderPrice | customCurrencyOrDashMinMax:vm.getCurrency():2:4}}</strong> </span>                            
+                        </td>
+                        <td>
+                            <span><strong>{{vm.getStopLossOrder(order).OrderPrice | customCurrencyOrDashMinMax:vm.getCurrency():2:4}}</strong> </span>
+                        </td>
+                        <td>
+                            <span><strong>{{::order.Quantity}}</strong> Units</span>
+                        </td>
+                        <td>
+                            <span>{{::order.CreatedTime | date:'mediumDate'}}</span>
+                            <span>{{::order.CreatedTime | date:'shortTime'}}</span>
+                        </td>
+                        <td>
+                            <span ng-if="order.ParentOrderId">Order Level</span>
+                            <span ng-if="order.ParentPortfolioId">Position Level</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <h4 class="center-align">The following order(s) will be placed.</h4>
+        <div class="center-align">
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="text-center" ng-if="vm.order.LimitPrice">Price</th>
+                        <th class="text-center">Take Profit</th>
+                        <th class="text-center">Stop Loss</th>
+                        <th class="text-center">Quantity</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td ng-if="vm.order.LimitPrice">
+                            <span><strong>{{vm.order.LimitPrice | customCurrencyOrDashMinMax:vm.getCurrency():2:4}}</strong></span>
+                        </td>
+                        <td>
+                            <span ng-if="vm.order.TakeProfitPrice"><strong>{{vm.order.TakeProfitPrice | customCurrencyOrDashMinMax:vm.getCurrency():2:4}}</strong></span>
+                            <span ng-if="vm.order.TakeProfitOrder"><strong>{{vm.order.TakeProfitOrder.OrderPrice | customCurrencyOrDashMinMax:vm.getCurrency():2:4}}</strong></span>
+                            <span ng-if="!vm.order.TakeProfitPrice && !vm.order.TakeProfitOrder"><strong>-</strong></span>
+                        </td>
+                        <td>
+                            <span ng-if="vm.order.StopLossPrice"><strong>{{vm.order.StopLossPrice | customCurrencyOrDashMinMax:vm.getCurrency():2:4}}</strong></span>
+                            <span ng-if="vm.order.StopLossOrder"><strong>{{vm.order.StopLossOrder.OrderPrice | customCurrencyOrDashMinMax:vm.getCurrency():2:4}}</strong></span>
+                            <span ng-if="!vm.order.StopLossPrice && !vm.order.StopLossOrder"><strong>-</strong></span>
+                        </td>
+                        <td>
+                            <span><strong>{{vm.getQuantity()}}</strong> Units</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer agm-component-orderstrades">
+    <div class="edit-bracket" ng-if="!vm.isLoading">
+        <button class="filled-blue pull-right" agmc-button-wait-on-promise="vm.submit()">CONTINUE</button>
+        <button class="hollow-blue pull-right remove-button" ng-click="vm.uibDismissPanel()">
+            CANCEL
+        </button>
+    </div>
+</div>

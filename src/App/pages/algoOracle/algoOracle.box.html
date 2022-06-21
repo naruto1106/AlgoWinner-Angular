@@ -1,0 +1,19 @@
+﻿<div class="oracle-box flex-v">
+    <div class="heading">
+        <div agms-image img-src="vm.pAlgoOracleService.algoOracleImageUrl" class="heading-icon"></div>
+        <button class="close-button pull-right" ng-click="vm.closeOracleBox()"
+                analytics-on="click" analytics-category="AlgoOracle" analytics-event="Mininise" agmc-analytics-timestamp>
+            <span class="algoicon algoicons-line-h"></span>
+        </button>
+        <button class="reload-button pull-right" ng-click="vm.restart()"
+                analytics-on="click" analytics-category="AlgoOracle" analytics-event="Reload" agmc-analytics-timestamp>
+            <span class="algoicon algoicons-cw"></span>
+        </button>
+
+        <div class="big-heading">ALGOORACLE</div>
+        <div class="small-heading">PREDICT THE FUTURE</div>
+    </div>
+    <div class="clearfix"></div>
+
+    <agms-algo-oracle-conversation></agms-algo-oracle-conversation>
+</div>

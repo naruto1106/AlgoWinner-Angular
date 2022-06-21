@@ -1,0 +1,29 @@
+﻿<form name="tradingSetup" ng-submit="tradingSetup.$valid && vm.nextFunc()">
+    <section ng-if="vm.strategyModel.BasicInfo.Status!=='Linked'
+         && vm.strategyModel.BasicInfo.Status!=='Published' && !vm.strategyModel.BrokerageDetail">
+        <div class="alert alert-danger">
+            You need to link your trade portfolio to a broker before completing trading setup
+        </div>
+    </section>
+    <section class="col-md-6 p-left-0px">
+        <dl class="dl-horizontal  form-larger">
+            <dt>Execution Channel</dt>
+            <dd>
+                <select class="w-300px" ng-model="vm.strategyModel.TradingSetup.ExecutionChannel"
+                        required name="executionChannel"
+                        ng-options="executionChannel for executionChannel in vm.executionChannels"></select>
+                <br />
+                <br />
+                <span style="color:red" ng-show="tradingSetup.executionChannel.$dirty && tradingSetup.executionChannel.$invalid">Execution channel is required.</span>
+                <span style="color:blue" ng-if="vm.strategyModel.TradingSetup.ExecutionChannel==='AlgoMerchant API'">
+                    If you wish to use API, please click <a href="" ng-click="vm.showContactUs()">HERE</a> to contact AlgoMerchant Support
+                </span>
+            </dd>
+        </dl>
+    </section>
+    <div class="clearfix"></div>
+    <div class="separator-top m-top-20px h-10px"></div>
+    <button class="pull-right filled-blue m-left-10px" ng-if="vm.nextLabel" ng-disabled="!vm.canSubmit()" type="submit">{{vm.nextLabel}}</button>
+    <button class="pull-right hollow-blue m-left-10px" ng-if="vm.prevLabel" ng-click="vm.prevFunc()" type="button">{{vm.prevLabel}}</button>
+    <div class="clearfix"></div>
+</form>

@@ -1,0 +1,38 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        Edit Trade Portfolio
+    </h4>
+</div>
+<div class="modal-body">
+    <div class="p-50px text-center" ng-show="vm.isSubmitting">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+    </div>
+    <div ng-show="!vm.isSubmitting">
+        <div class="lh-40px stepping-menu">
+            <a ng-repeat="text in vm.stepText" ng-click="vm.setStep(vm.getStepIndex($index))"
+               ng-class="vm.stepStrategyClass($index)">
+                <span class="bullet">{{$index+1}}</span>{{text}}
+            </a>
+        </div>
+        <div ng-if="vm.step==1" class="p-20px">
+            <agms-strategy-commerce-characteristics strategy-model="vm.strategyToEdit.BasicInfo" is-simplified-mode="true"
+                                                    prev-label="null" next-label="'NEXT'" next-func="vm.setStep(2)"></agms-strategy-commerce-characteristics>
+        </div>
+        <div ng-if="vm.step==2" class="p-20px">
+            <agms-strategy-commerce-market-segment strategy-model="vm.strategyToEdit"
+                                                   prev-label="'PREVIOUS'" prev-func="vm.setStep(1)" next-label="'NEXT'" next-func="vm.setStep(3)"></agms-strategy-commerce-market-segment>
+        </div>
+        <div ng-if="vm.step==3" class="p-20px">
+            <agms-account-manager edit-model="vm.strategyToEdit.BrokerageDetail"
+                                  link-status="vm.strategyToEdit.BasicInfo.Status==='Linked' || vm.strategyToEdit.BasicInfo.Status==='Published'"
+                                  market-info="vm.strategyToEdit.Market"
+                                  prev-label="'PREVIOUS'" prev-func="vm.setStep(2)" next-label="'SUBMIT'" next-func="vm.saveChanges()"></agms-account-manager>
+        </div>
+        <!--<div ng-if="vm.step==4" class="p-20px">
+            <agms-trading-setup strategy-model="vm.strategyToEdit"
+                                prev-label="'PREVIOUS'" prev-func="vm.setStep(3)" next-label="'SUBMIT'" next-func="vm.saveChanges()"></agms-trading-setup>
+        </div>-->
+    </div>
+
+</div>

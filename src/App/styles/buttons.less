@@ -1,0 +1,625 @@
+.super-compact-button {
+    font-size: 11px;
+    padding: 0px 6px;
+}
+
+.btn-3d-bumpy-small {
+    box-shadow: 0 0px 2px 0px mix(black,transparent,20) inset, 0 -1px 1px 0px mix(black,transparent,20) inset;
+}
+
+.btn-3d-bumpy {
+    box-shadow: 0 0px 15px 0px mix(black,transparent,20) inset, 0 -2px 2px 0px mix(black,transparent,20) inset;
+}
+
+.btn-3d-bumpy-xtra {
+    box-shadow: 0 0px 15px 0px mix(black,transparent,40) inset, 0 -2px 2px 0px mix(black,transparent,20) inset;
+}
+
+.button {
+    &:disabled {
+        opacity: 0.5;
+    }
+
+    .clickable;
+    .button-text;
+    display: inline-block;
+    line-height: 100%;
+    padding: 0px 15px;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 8px;
+    height: 30px;
+    line-height: 28px;
+    vertical-align: top;
+    border: none;
+    box-shadow: none !important;
+    background: @deepBlue;
+}
+
+.filled-btn.btn:hover {
+    color: white;
+}
+
+.hollow-button {
+    .button;
+    line-height: 26px;
+}
+
+.mini-button {
+    .button;
+    .btn-3d-bumpy-small;
+    .mini-button-text;
+    padding: 0px 8px;
+    border-radius: 6px;
+    height: 20px;
+    line-height: 18px;
+}
+
+.mini-hollow-button {
+    .mini-button;
+    line-height: 16px;
+}
+
+.filled-blue {
+    .button;
+    background: linear-gradient(to bottom, @plum, @persian);
+    color: white;
+    border: 1px solid @plum;
+    border-radius: 5px;
+
+    .algo-icon g {
+        color: white;
+    }
+}
+
+.filled-green {
+    .button;
+    background: linear-gradient(to bottom, @mossGreen, @green4);
+    color: white;
+    border: 1px solid @mossGreen;
+    border-radius: 5px;
+
+    .algo-icon g {
+        color: white;
+    }
+}
+
+.filled-red {
+    .button;
+    background: linear-gradient(to bottom, @berry, @darkRed);
+    color: white;
+    border: 1px solid @berry;
+    border-radius: 5px;
+
+    .algo-icon g {
+        color: white;
+    }
+}
+
+.filled-gray {
+    .button;
+    background: linear-gradient(to bottom, @gray2, @medGray1);
+    color: white;
+    border: 1px solid @medGray1;
+    border-radius: 5px;
+
+    .algo-icon g {
+        color: white;
+    }
+}
+
+.hollow-red {
+    .hollow-button;
+    color: @berry;
+    background: white;
+    border: 1px solid @berry;
+    border-radius: 5px;
+
+    .algo-icon g {
+        color: @berry;
+    }
+}
+
+.hollow-green {
+    .hollow-button;
+    color: @seafoam;
+    background: white;
+    border: 1px solid @seafoam;
+    border-radius: 5px;
+
+    .algo-icon g {
+        color: @seafoam;
+    }
+}
+
+.hollow-blue {
+    .hollow-button;
+    color: @plum;
+    background: white;
+    border: 1px solid @plum;
+    border-radius: 5px;
+
+    .algo-icon g {
+        color: @plum;
+    }
+}
+
+.hollow-gray {
+    .hollow-button;
+    color: @medGray1;
+    background: white;
+    border: 1px solid @medGray1;
+    border-radius: 5px;
+
+    .algo-icon g {
+        color: @medGray1;
+    }
+}
+
+.mini-filled-green {
+    .mini-button;
+    background: linear-gradient(to bottom, @mossGreen, @green4);
+    color: white;
+    border: 1px solid @mossGreen;
+    border-radius: 16px;
+
+    .algo-icon g {
+        color: white;
+    }
+}
+
+.mini-filled-blue {
+    .mini-button;
+    background: linear-gradient(to bottom, @plum, @persian);
+    color: white;
+    border: 1px solid @plum;
+    border-radius: 16px;
+
+    .algo-icon g {
+        color: white;
+    }
+}
+
+.mini-filled-red {
+    .mini-button;
+    background: linear-gradient(to bottom, @berry, @darkRed);
+    color: white;
+    border: 1px solid @berry;
+    border-radius: 16px;
+
+    .algo-icon g {
+        color: white;
+    }
+}
+
+.mini-filled-gray {
+    .mini-button;
+    background: linear-gradient(to bottom, @gray2, @medGray1);
+    color: white;
+    border: 1px solid @medGray1;
+    border-radius: 16px;
+
+    .algo-icon g {
+        color: white;
+    }
+}
+
+.mini-hollow-blue {
+    .mini-hollow-button;
+    color: @plum;
+    background: white;
+    border: 1px solid @plum;
+    border-radius: 16px;
+
+    .algo-icon g {
+        color: @plum;
+    }
+}
+
+.mini-hollow-green {
+    .mini-hollow-button;
+    color: @seafoam;
+    background: white;
+    border: 1px solid @seafoam;
+    border-radius: 16px;
+
+    .algo-icon g {
+        color: @seafoam;
+    }
+}
+
+.mini-hollow-red {
+    .mini-hollow-button;
+    color: @berry;
+    background: white;
+    border: 1px solid @berry;
+    border-radius: 16px;
+
+    .algo-icon g {
+        color: @berry;
+    }
+}
+
+.mini-hollow-gray {
+    .mini-hollow-button;
+    color: @medGray1;
+    background: white;
+    border: 1px solid @medGray1;
+    border-radius: 16px;
+
+    .algo-icon g {
+        color: @medGray1;
+    }
+}
+
+.cell-botton-normal {
+    .mini-button;
+    background: @gray1;
+    color: @teal;
+    border-radius: 16px;
+}
+
+.cell-botton-alert {
+    .mini-button;
+    background: @gray1;
+    color: @berry;
+    border-radius: 16px;
+}
+
+.button-plain {
+    background: @grayLight2;
+    color: @grayDark1;
+    border: none;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 8px;
+    font-size: 18px;
+
+    &:hover {
+        background: @grayLight3;
+        color: @blueBasic;
+
+        .algo-icon g {
+            color: @blueBasic;
+        }
+    }
+}
+
+
+.checkbox-button.filled-button {
+    padding-left: 35px;
+    .rel;
+
+    span.glyphicon {
+        padding: 2px;
+        background: rgba(0,0,0,0.5);
+        border-radius: 4px;
+        margin-right: 5px;
+        height: 16px;
+        width: 16px;
+        .abs;
+        top: 7px;
+        left: 10px;
+        display: inline-block;
+        vertical-align: top;
+        color: transparent;
+    }
+
+    &.active span.glyphicon {
+        color: white;
+    }
+}
+
+.button-group {
+    //box-shadow: 0 4px 10px 0px rgba(0,0,0,0.2) inset;
+    border-radius: 8px;
+    height: 30px;
+    padding: 0;
+    background: transparent;
+    box-shadow: none !important;
+
+    .child-button {
+        .button;
+        color: @sunFlower;
+
+        .algo-icon g {
+            fill: @grayDark2;
+        }
+
+        &:not(:first-child) {
+            border-bottom-left-radius: 0px;
+            border-top-left-radius: 0px;
+        }
+
+        &:not(:last-child) {
+            border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+        }
+
+        background: #fff;
+        vertical-align: top;
+        border: 1px solid @sunFlower;
+        border-radius: 8px;
+        line-height: 20px;
+        padding-bottom: 3px;
+        height: 30px;
+        box-shadow: none !important;
+        margin-left: -4px;
+
+        &.blue:hover {
+            color: @sunFlower;
+
+            .algo-icon g {
+                fill: @blueBasic;
+            }
+        }
+
+        &.green:hover {
+            color: @greenBasic;
+
+            .algo-icon g {
+                fill: @greenBasic;
+            }
+        }
+
+        &.gold:hover {
+            color: @goldenBasic;
+
+            .algo-icon g {
+                fill: @goldenBasic;
+            }
+        }
+
+        &.red:hover {
+            color: @redBasic;
+
+            .algo-icon g {
+                fill: @redBasic;
+            }
+        }
+
+        &.gray:hover {
+            background: @darkGray1;
+        }
+
+        &.active, &.active:hover {
+            color: white;
+
+            .algo-icon g {
+                fill: white;
+            }
+        }
+
+        &.blue.active {
+            background: @sunFlower;
+        }
+
+        &.green.active {
+            background: @blueDarker2;
+        }
+
+        &.gold.active {
+            background: @goldenBasic;
+        }
+
+        &.gray.active {
+            background: @grayDark3;
+        }
+
+        &.red.active {
+            background: @redBasic;
+        }
+    }
+}
+
+.button-group.mini {
+    height: 20px;
+
+    .child-button {
+        height: 21px;
+        padding: 0 8px;
+        padding-bottom: 0px;
+        font-size: 12px;
+        box-shadow: none;
+        border: 1px solid @sunFlower;
+        margin-left: -5px;
+
+        &.hover, &.active, &.active:hover {
+            padding-bottom: 0;
+            height: 21px;
+        }
+    }
+}
+
+.button-group.gray {
+    .child-button {
+        background: @grayLight1;
+    }
+}
+
+.checkbox-button.large {
+    .button-text;
+    color: white;
+
+    .algo-icon g {
+        fill: white;
+    }
+
+    .abs;
+}
+
+button.professional {
+    .button;
+    color: white;
+    background: @goldenBasic;
+
+    &:hover {
+        background: @goldenLighter1;
+    }
+}
+
+button.community {
+    .button;
+    color: white;
+    background: @blueDarker2;
+
+    &:hover {
+        background: @blueDarker1;
+    }
+}
+
+button.inactive {
+    opacity: 0.3;
+}
+
+.clickable.green-profit:hover {
+    color: #0C0;
+}
+
+.clickable.red-loss:hover {
+    color: #F33;
+}
+
+.normal-selector {
+    border: 2px solid @grayLight1;
+    line-height: 30px;
+    background: @grayLight2;
+    border-radius: 8px;
+    padding: 0 10px;
+
+    &:hover {
+        background: @blueBasic;
+        border: 2px solid @blueBasicer1;
+        color: white;
+    }
+}
+
+ul.dropdown-menu.special {
+    border: 1px solid @blueBasic;
+    background: white;
+    border-top: 1px solid @blueBasic;
+    border-radius: 0px;
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.silent-button {
+    .clickable;
+    text-decoration: none;
+    padding: 0 5px;
+    line-height: 20px;
+    font-size: 14px;
+    border-radius: 6px;
+
+    &:hover {
+        background: @grayLight2;
+        text-decoration: none;
+    }
+}
+
+.silent-button2 {
+    .clickable;
+    text-decoration: none;
+    padding: 0 4px;
+    line-height: 17px;
+    font-size: 12px;
+    border-radius: 6px;
+    background: @grayLight3;
+
+    &:hover {
+        background: @grayLight1;
+        text-decoration: none;
+    }
+}
+
+.semi-mini-button, .semi-mini-button:hover {
+    border: none;
+    line-height: 25px;
+    height: 25px;
+    border-radius: 8px;
+    font-size: 11px;
+}
+
+.bullish, .bearish, button.simple {
+    .button;
+    .clickable;
+    background: white;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+.bullish:hover {
+    color: green;
+}
+
+.bearish:hover {
+    color: red;
+}
+
+.bullish.active {
+    background: green;
+    color: white;
+}
+
+.bearish.active {
+    background: red;
+    color: white;
+}
+
+.square-button {
+    border-radius: 8px;
+    height: 40px;
+    padding: 0 8px;
+
+    &.multiline-button {
+        height: inherit;
+        line-height: 20px;
+        padding: 10px;
+    }
+}
+
+.square-button-small {
+    border-radius: 8px;
+    height: 25px;
+    padding: 0 8px;
+    line-height: 24px;
+}
+
+.shadow {
+    box-shadow: 0 0.5px 1px 1px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 0.5px 1px 1px rgba(0,0,0,0.1);
+}
+
+.btn.btn-3d, .btn.btn-3d.btn-primary {
+    border-width: 3px;
+    border-color: #d3dbe3;
+    border-style: solid;
+    .btn-3d-bumpy-xtra;
+    border-radius: 10px;
+
+    &:focus {
+        outline: none;
+        color: white;
+    }
+}
+
+.btn-filter {
+    border-radius: 0;
+    border: 1px solid @grayLight1;
+    background: @grayLight3;
+    color: @grayDark1;
+    line-height: 40px;
+    font-size: 14px;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: none;
+    height: 40px;
+}

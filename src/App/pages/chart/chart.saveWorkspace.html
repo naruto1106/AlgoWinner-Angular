@@ -1,0 +1,302 @@
+﻿<div class="agm-component-chart save-workspace" agms-guide-item="chart.save-panel">
+    <div class="modal-header">
+        <h4 class="modal-title" ng-if="vm.templateMode==='SAVE'">SAVE WORKSPACE</h4>
+        <h4 class="modal-title" ng-if="vm.templateMode==='EDIT'">EDIT WORKSPACE</h4>
+        <h4 class="modal-title" ng-if="vm.templateMode==='LOAD'">LOAD '{{vm.viewTemplate.name}}'</h4>
+        <button class="close" ng-click="vm.uibDismissPanel()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <div class="title-section" ng-if="vm.templateMode!='LOAD'">
+            <h4 class="pull-left segment-title">Workspace Name:</h4>
+            <div ng-if="vm.templateMode==='SAVE'" class="pull-right save-name-field">
+                <input type="text"
+                       placeholder="Enter Name Here"
+                       ng-model="vm.viewTemplate.name"                       
+                       uib-typeahead="viewTemplate.name for viewTemplate in vm.getFilteredViewTemplates($viewValue)"                       
+                       typeahead-min-length="2">
+                <div class="btn-group pull-right file-selector" uib-dropdown>
+                    <button type="button" ng-click="vm.refreshViewTemplates()" class="btn" uib-dropdown-toggle tooltip-placement="bottom">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                        <li ng-repeat="template in vm.getAllViewTemplates()">
+                            <a ng-click="vm.assignNameToExistingTemplate(template.name)">
+                                {{template.name}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text"
+                   ng-if="vm.templateMode==='EDIT'"
+                   class="pull-right"
+                   ng-change=""
+                   placeholder="Enter Name Here"
+                   ng-model="vm.viewTemplate.name" />
+
+            <div class="clearfix"></div>
+            <div class="form-entry-fail m-top-10px" ng-if="!vm.isValidName(vm.viewTemplate.name)">Name must be between 2-30 characters</div>
+        </div>
+        <div class="properties">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            Bar Duration
+                        </td>
+                        <td>
+                            {{vm.states.durationForDisplay.Name}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Chart Type
+                        </td>
+                        <td>{{vm.states.chartType.Name}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Show Data Labels on Chart
+                        </td>
+                        <td>
+                            {{vm.viewTemplate.filterDescription.showLegendsOnChart | fromTrueFalseToYesNo}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Normalize to Percentage
+                        </td>
+                        <td>
+                            {{vm.viewTemplate.filterDescription.normalizeToPercentage | fromTrueFalseToYesNo}}
+                            <span class="glyphicon glyphicon-info-sign pull-right"
+                                  uib-tooltip="If set to “Yes”, the y axes values will be normalized to percentage values for display on a common axis."></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Show Drawing Toolbar
+                        </td>
+                        <td>
+                            {{vm.viewTemplate.addOnSettings.isDrawingShown | fromTrueFalseToYesNo}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Enable Vertical Dragging
+                        </td>
+                        <td>
+                            {{vm.viewTemplate.addOnSettings.enableVerticalMove | fromTrueFalseToYesNo}}
+                        </td>
+                    </tr>
+                    
+                    <tr ng-if="vm.coreConfigService.TradersGPS.Enabled">
+                        <td>
+                            TGPS
+                        </td>
+                        <td>{{vm.states.tgpsStatus}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Data Mart
+                        </td>
+                        <td>
+                            {{vm.getSelectedDatamartsLabel(vm.states.selectedDatamarts)}}
+                            <span class="glyphicon glyphicon-info-sign pull-right"
+                                  ng-if="vm.states.selectedDatamarts.length>1"
+                                  uib-tooltip-template="'saveWorkspace.selectedDatamarts'">
+
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Subscribed Strategies
+                        </td>
+                        <td>
+                            {{vm.getSubscriptionLabel(vm.states.subscriptions)}}
+                            <span class="glyphicon glyphicon-info-sign pull-right"
+                                  ng-if="vm.states.subscriptions.length>1"
+                                  uib-tooltip-template="'saveWorkspace.subscriptions'"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            My Traded Portfolio
+                        </td>
+                        <td>
+                            {{vm.getTradePortfoliosLabel(vm.states.tradePortfolios)}}
+                            <span class="glyphicon glyphicon-info-sign pull-right"
+                                  ng-if="vm.states.tradePortfolios.length>1"
+                                  uib-tooltip-template="'saveWorkspace.tradePortfolios'"></span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Studies
+                        </td>
+                        <td>
+                            {{vm.getSelectedStudiesLabel(vm.states.selectedStudies)}}
+                            <span class="glyphicon glyphicon-info-sign pull-right"
+                                  ng-if="vm.states.selectedStudies.length>1"
+                                  uib-tooltip-template="'saveWorkspace.selectedStudies'"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Fundamentals
+                        </td>
+                        <td>
+                            {{vm.getSelectedFundamentalsLabel(vm.states.selectedFundamentals)}}
+                            <span class="glyphicon glyphicon-info-sign pull-right"
+                                  ng-if="vm.states.selectedFundamentals.length>1"
+                                  uib-tooltip-template="'saveWorkspace.selectedFundamentals'"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <script type="text/ng-template" id="saveWorkspace.selectedDatamarts">
+                <ul>
+                    <li ng-repeat="label in vm.getAllSelectedDatamartsLabel(vm.states.selectedDatamarts)">
+                        {{label}}
+                    </li>
+                </ul>
+            </script>
+            <script type="text/ng-template" id="saveWorkspace.subscriptions">
+                <ul>
+                    <li ng-repeat="label in vm.getAllSubscriptionLabel(vm.states.subscriptions)">
+                        {{label}}
+                    </li>
+                </ul>
+            </script>
+
+            <script type="text/ng-template" id="saveWorkspace.corporateActions">
+                <ul>
+                    <li ng-repeat="label in vm.getAllCorporateActionsLabel(vm.states.corporateActions)">
+                        {{label}}
+                    </li>
+                </ul>
+            </script>
+            <script type="text/ng-template" id="saveWorkspace.selectedStudies">
+                <ul>
+                    <li ng-repeat="label in vm.getAllSelectedStudiesLabel(vm.states.selectedStudies)">
+                        {{label}}
+                    </li>
+                </ul>
+            </script>
+            <script type="text/ng-template" id="saveWorkspace.selectedFundamentals">
+                <ul>
+                    <li ng-repeat="label in vm.getAllSelectedFundamentalsLabel(vm.states.selectedFundamentals)">
+                        {{label}}
+                    </li>
+                </ul>
+            </script>
+            <script type="text/ng-template" id="saveWorkspace.tradePortfolios">
+                <ul>
+                    <li ng-repeat="label in vm.getAllTradePortfoliosLabel(vm.states.tradePortfolios)">
+                        {{label}}
+                    </li>
+                </ul>
+            </script>
+        </div>
+    </div>
+    <div class="modal-body" ng-if="vm.viewTemplate.filterDescription.primaryProduct" agms-guide-item="chart.save-panel.product">
+        <div class="title-section">
+            <h4 class="segment-title" ng-if="vm.templateMode!='LOAD'">
+                Product <a ng-click="vm.showGuideAgain()">Learn More...</a>
+            </h4>
+            <div class="segment-choice">
+                <input type="radio" ng-model="vm.flags.includeProduct" ng-value="true" />
+                <h5>Yes, save product(s) in this workspace
+                    <small>
+                        Save your analysis & drawings for your selected product(s)
+                    </small>
+                </h5>
+            </div>
+            <h5 ng-if="vm.templateMode=='LOAD'">
+                <input type="checkbox" ng-model="vm.flags.includeProduct" />
+                Load '{{vm.viewTemplate.filterDescription.primaryProduct.ProductName}}', its drawings, and its comparisons?
+            </h5>
+            <div class="product-detail">
+                <table class="table" ng-class="{disabled: !vm.flags.includeProduct}">
+                    <tr>
+                        <td>
+                            Primary Product
+                        </td>
+                        <td>
+                            {{vm.viewTemplate.filterDescription.primaryProduct.ProductName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Comparison
+                        </td>
+                        <td ng-if="vm.states.comparisonProducts.length>0">
+                            <div ng-repeat="p in vm.states.comparisonProducts">
+                                {{p.ProductName}}
+                            </div>
+                        </td>
+                        <td ng-if="!vm.states.comparisonProducts.length">
+                            None Selected
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Drawing
+                        </td>
+                        <td>{{vm.viewTemplate.drawings.length}} drawing(s)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="segment-choice">
+                <input type="radio" ng-model="vm.flags.includeProduct" ng-value="false" />
+                <h5>
+                    No, don't save any product(s) in this workspace
+                    <small>
+                        Allows you to load this set of workspace settings onto any product selections.
+                    </small>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body" ng-if="!vm.viewTemplate.filterDescription.primaryProduct && vm.templateMode=='LOAD'">
+        <div class="title-section">
+            <h5 class="pull-left">
+                <input type="checkbox" ng-model="vm.flags.includeNewProduct" />
+                Load A Product
+            </h5>
+            <div class="input-group search-product pull-right" ng-if="vm.flags.includeNewProduct">
+                <input type="text"
+                       placeholder="Search..."
+                       class="form-control last-input-group-item"
+                       ng-model="vm.selectedNewProduct"
+                       ng-model-options="{debounce: 200}"
+                       uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                       typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                       typeahead-wait-ms="200"
+                       typeahead-on-select="vm.onNewProductSelected()" />
+                <div></div>
+                <span class="glyphicon glyphicon-search"></span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="modal-footer" ng-if="vm.templateMode!='LOAD'">
+        <div class="pull-left">
+            <input type="checkbox" ng-model="vm.flags.setAsDefault" />
+            <label>Set as Default Workspace</label>
+        </div>
+        <button class="btn btn-primary  pull-right" ng-disabled="!vm.canSave()" ng-if="vm.templateMode==='SAVE'" agmc-button-wait-on-promise="vm.saveWorkspace()">SAVE</button>
+        <button class="btn btn-primary  pull-right" ng-disabled="!vm.canEdit()" ng-if="vm.templateMode==='EDIT'" agmc-button-wait-on-promise="vm.editWorkspace()">SAVE</button>
+        <button class="hollow-blue m-right-10px pull-right" ng-click="vm.uibDismissPanel()">CANCEL</button>
+        <div class="clearfix"></div>
+    </div>
+    <div class="modal-footer" ng-if="vm.templateMode==='LOAD'">
+        <button class="btn btn-primary pull-right" ng-click="vm.loadWorkspace()">LOAD</button>
+        <button class="hollow-blue m-right-10px pull-right" ng-click="vm.uibDismissPanel()">CANCEL</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

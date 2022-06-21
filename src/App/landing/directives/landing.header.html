@@ -1,0 +1,49 @@
+﻿<header class="fixed-header nav-header" id="page-top" ng-class="{'darkmenu': vm.showDarkMenu}">
+    <nav class="navbar navbar-default ">
+        <a class="navbar-brand visible-xs" href="#!/">
+            <img src="//am708403.azureedge.net/images/algowinner/logo.png" alt="Mint Logo">
+        </a>
+
+        <div class="container-100">
+            <div ng-show="!vm.showLogoOnly" class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right float-none" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="logo-box hidden-xs">
+                        <a class="dropdown-toggle external" href="#!/">
+                            <figure class="logo"><div> <img src="//am708403.azureedge.net/images/algowinner/logo.png" alt="Mint Logo" class="algobrand"> </div></figure>
+                            <div class="logo-title"> <img src="//am708403.azureedge.net/images/algowinner/logoname.png" height="25px" alt=""></div>
+                        </a>
+                    </li>
+                    <li><a href="#!/" class="scroll" data-speed="200"><i class="iconx algoicon algoicons-home-9"></i>Overview </a></li>
+                                <li><a href="#!/lite" class="scroll" data-speed="200"><i class="iconx algoicon algoicons-lite"></i>Lite </a></li>
+                                <li><a href="#!/oracle" class="scroll" data-speed="500"><i class="iconx algoicon algoicons-oracle-1"></i> Oracle</a></li>
+                                <li><a href="#!/chart"><i class="iconx algoicon algoicons-bars"></i>Chart</a></li>
+                    <!--<li class="dropdown">
+                        <a class="dropdown-toggle external" href="#!/">Who We Are</a>
+                    </li>-->
+                    <li ng-show="!vm.showLogoOnly" class="active full">
+                        <a class="dropdown-toggle external curve-border" href="#!/login"
+                           analytics-on="click" analytics-category="Landing" analytics-event="Menu" analytics-label="LogIn" agmc-analytics-timestamp>
+                            Log In
+                        </a>
+                    </li>
+                    <li ng-show="!vm.showLogoOnly" class="active full">
+                        <a class="dropdown-toggle external curve-border2" href="#!/register"
+                           analytics-on="click" analytics-category="Landing" analytics-event="Menu" analytics-label="SignUp" agmc-analytics-timestamp>
+                            Sign Up
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </nav>
+</header>

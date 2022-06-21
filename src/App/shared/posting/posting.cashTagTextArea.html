@@ -1,0 +1,20 @@
+﻿<div class="postbox-container" ng-class="{'disabled-opacity':vm.disabledfunc()}">
+    <agms-text-processing-multi-typeahead class="postbox w-100pct" type="text" ng-class="{'focus':vm.isFocus || vm.hasMatchesShown}" ng-show="!vm.disabledfunc()"
+                                ng-model="vm.item.content"
+                                ng-paste="vm.onItemPasted($event)"
+                                ng-model-options="{debounce: 10}"
+                                placeholder="{{vm.placeholder}}"
+                                content-control="vm.contentControl"
+                                content-info="vm.contentInfo"
+                                iteration-func="vm.searchProducts"
+                                has-matches-shown="vm.hasMatchesShown"
+                                on-changed="vm.onContentChanged()"
+                                is-focus="vm.isFocus"
+                                iteration-expression="product as product.Symbol for product"
+                                template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                                dropdown-classes="{{vm.getDropdownClass()}}"
+                                wait-ms="500" ng-keydown="onInputKeydown($event)"
+                                on-item-selected="vm.updateContent(selectedItem,contentInfo)">
+    </agms-text-processing-multi-typeahead>
+    <div class="h-20px" ng-if="vm.disabledfunc()"></div>
+</div>

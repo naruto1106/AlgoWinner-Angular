@@ -1,0 +1,21 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">{{::vm.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="p-10px box">
+        <agms-positions-active-table is-magnifier-shown="false" view-mode="'readonly'"
+                                     is-preview="false"
+                                     class="white-box"
+                                     get-paged-items="vm.getItem"></agms-positions-active-table>
+    </div>
+
+    <agms-orders-bracket-base order="vm.order" error-message="vm.errorMessage" type="'position'"></agms-orders-bracket-base>
+</div>
+
+<div class="modal-footer agm-component-orderstrades">
+    <div class="edit-bracket">
+        <button class="filled-blue pull-right" ng-click="vm.submit()" ng-disabled="vm.disableSubmit()">SUBMIT</button>
+        <button class="hollow-blue pull-right remove-button" ng-click="vm.uibDismissPanel()">CANCEL</button>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿<div class="agm-components-users">
+    <div class="modal-header">
+        <button class="close" ng-click="vm.uibDismissPanel()" class="glyphicon-remove glyphicon">&times;</button>
+        <h4 class="modal-title">Please Confirm Email</h4>
+    </div>
+    <div class="modal-body confirm-email">
+        <div ng-if="!vm.coreConfigService.AlgoLeader.HideForAlgoLeader">
+            Please verify your email within 48 hours to permanently activate your account in AlgoMerchant. Meanwhile, feel free to browse our platform to explore our features.
+        </div>
+        <div ng-if="vm.coreConfigService.AlgoLeader.HideForAlgoLeader">
+            Please verify your email within 48 hours to permanently activate your account. Meanwhile, feel free to browse our platform to explore our features.
+        </div>
+        <div class="m-top-20px">
+            Email verification is important for us to know that you are the rightful owner of <span class="email">{{vm.profile.Email}}</span>.
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="pull-right filled-blue" ng-click="vm.uibDismissPanel()">OK</button>
+    </div>
+</div>

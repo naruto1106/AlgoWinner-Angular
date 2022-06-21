@@ -1,0 +1,18 @@
+﻿<div class="agms-header">
+    <div class="sub-header">
+        <ul class="nav navbar-nav">
+            <li class="sub-item">
+                <a ng-click="vm.go('/subscriptions')" ng-class="{active:vm.isCurrentPage('subscription')}"
+                   analytics-on="click" analytics-category="Setting" analytics-event="ClickManageSubscriptions" agmc-analytics-timestamp>Manage Subscriptions</a>
+            </li>
+            <li class="sub-item" ng-if="!vm.sHeaderService.hasJoeyOnly">
+                <a ng-click="vm.go('/payment')" ng-class="{active:vm.isCurrentPage('payment')}"
+                   analytics-on="click" analytics-category="Setting" analytics-event="ClickPaymentMethods" agmc-analytics-timestamp>Payment Methods</a>
+            </li>
+            <li class="sub-item" ng-if="!vm.sHeaderService.hasJoeyOnly">
+                <a ng-click="vm.go('/transaction')" ng-class="{active:vm.isCurrentPage('transaction')}"
+                   analytics-on="click" analytics-category="Setting" analytics-event="ClickTransactionHistory" agmc-analytics-timestamp>Transaction History</a>
+            </li>
+        </ul>
+    </div>
+</div>

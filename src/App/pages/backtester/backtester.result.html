@@ -1,0 +1,72 @@
+﻿<div class="result">
+    <div class="no-result" ng-if="vm.pBacktesterService.result == null">
+        No Result. Please try again.
+    </div>
+    <div class="no-result" ng-if="vm.pBacktesterService.result && vm.pBacktesterService.result.tradelog && vm.pBacktesterService.result.tradelog.length == 0">
+        There are no trades during this period. Please try to adjust the Start & End Date or other necessary parameters.
+    </div>
+    <div class="summary" ng-if="vm.pBacktesterService.result && vm.pBacktesterService.result.summary && vm.pBacktesterService.result.tradelog && vm.pBacktesterService.result.tradelog.length > 0">
+        <div class="title">Backtesting Summary</div>
+        <table class="table-large m-top-20px">
+            <tr>
+                <td>P/L</td>
+                <td>{{vm.pBacktesterService.result.summary.pnl | valuePercentageOrDash:2}}</td>
+            </tr>
+            <tr>
+                <td>Trades Count</td>
+                <td>{{vm.pBacktesterService.result.summary.count}}</td>
+            </tr>
+            <tr>
+                <td>Avg P/L per Trade</td>
+                <td>{{vm.pBacktesterService.result.summary.avg_pnl_per_trade | valuePercentageOrDash:2}}</td>
+            </tr>
+            <tr>
+                <td>Winning Rate</td>
+                <td>{{vm.pBacktesterService.result.summary.winning_rate | valuePercentageOrDash:2}}</td>
+            </tr>
+            <tr>
+                <td>Avg Signal Alpha</td>
+                <td>{{vm.pBacktesterService.result.summary.avg_signal_alpha | valuePercentageOrDash:2}}</td>
+            </tr>
+            <tr>
+                <td>Reward to Risk Ratio</td>
+                <td>{{vm.pBacktesterService.result.summary.reward_risk_ratio | valueOrDash:2}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="trades" ng-if="vm.pBacktesterService.result && vm.pBacktesterService.result.tradelog && vm.pBacktesterService.result.tradelog.length > 0">
+        <div class="title">Trade Log</div>
+        <table class="table-large m-top-20px">
+            <thead>
+                <tr>
+                    <th>Direction</th>
+                    <th>Avg Entry Price</th>
+                    <th>Avg Exit Price</th>
+                    <th>P/L</th>
+                    <th>Entry Date</th>
+                    <th>Exit Date</th>
+                    <th>Alpha</th>
+                    <th>Info</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="trade in vm.pBacktesterService.result.tradelog">
+                    <td>{{trade.direction}}</td>
+                    <td>{{trade.entry | customCurrencyOrDash:vm.pBacktesterService.selectedStock.Currency:2}}</td>
+                    <td>{{trade.exit | customCurrencyOrDash:vm.pBacktesterService.selectedStock.Currency:2}}</td>
+                    <td>
+                        <span ng-if="trade.pnl === 'None'">-</span>
+                        <span ng-if="trade.pnl != 'None'">{{trade.pnl | valuePercentageOrDash:2}}</span>
+                    </td>
+                    <td>{{trade.entry_date}}</td>
+                    <td>{{trade.exit_date}}</td>
+                    <td>
+                        <span ng-if="trade.alpha === 'None'">-</span>
+                        <span ng-if="trade.alpha != 'None'">{{trade.alpha| valuePercentageOrDash:2}}</span>
+                    </td>
+                    <td>{{trade.info}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+﻿<div class="agms-header">
+    <div class="sub-header">
+        <ul class="nav navbar-nav">
+            <li class="sub-item">
+                <a ng-click="vm.go('/overview')" ng-class="{active:vm.isCurrentPage('overview')}" 
+                   analytics-on="click" analytics-category="Dashboard" analytics-event="Overview" analytics-label="OpenPage" agmc-analytics-timestamp>Overview</a>
+            </li>
+            <li class="sub-item">
+                <a ng-click="vm.go('/watchlist')" ng-class="{active:vm.isCurrentPage('watchlist')}" 
+                   analytics-on="click" analytics-category="Dashboard" analytics-event="Watchlist" analytics-label="OpenPage" agmc-analytics-timestamp>Watchlist</a>
+            </li>
+            <li class="sub-item">
+                <a ng-click="vm.go('/pricealert')" ng-class="{active:vm.isCurrentPage('pricealert')}" 
+                   analytics-on="click" analytics-category="Dashboard" analytics-event="Alerts" analytics-label="OpenPage" agmc-analytics-timestamp>Alerts</a>
+            </li>
+            <li class="sub-item">
+                <a ng-click="vm.go('/news')" ng-class="{active:vm.isCurrentPage('news')}" 
+                   analytics-on="click" analytics-category="Dashboard" analytics-event="News" analytics-label="OpenPage" agmc-analytics-timestamp>News</a>
+            </li>
+        </ul>
+    </div>
+</div>

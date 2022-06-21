@@ -1,0 +1,20 @@
+﻿<div class="traders-gps-flag" ng-show="vm.coreConfigService.TradersGPS.Enabled" ng-class="{'active-toggle':vm.pChartTgpsService.tradersGpsMode}">
+    <input type="checkbox" ng-model="vm.pChartTgpsService.tradersGpsMode" ng-change="vm.toggleTradersGps()"
+           analytics-on="click" analytics-category="Chart" analytics-event="TGPS" analytics-label="TGPSCheckbox" agmc-analytics-timestamp />
+    &nbsp;
+    <label>TGPS</label>
+    &nbsp;
+    <select ng-model="vm.pChartTgpsService.tradersgps_swing.mode"
+            ng-if="vm.pChartTgpsService.tradersGpsMode"
+            ng-change="vm.toggleTradersGps()"
+            ng-options="opt as opt for opt in vm.swingModeOptions"
+            analytics-on="click" analytics-category="Chart" analytics-event="TGPS" 
+            analytics-label="TGPSType" dimension-value="{{vm.pChartTgpsService.tradersgps_swing.mode === 'Swing'}}" 
+            agmc-anal agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4"></select>
+
+    &nbsp;
+    <button class="btn-xs btn-success" ng-click="vm.loadTradersGps()" ng-if="vm.pChartTgpsService.tradersGpsMode"
+            analytics-on="click" analytics-category="Chart" analytics-event="TGPS" analytics-label="TGPSScreener" agmc-analytics-timestamp>
+        <span>Screener</span>
+    </button>
+</div>

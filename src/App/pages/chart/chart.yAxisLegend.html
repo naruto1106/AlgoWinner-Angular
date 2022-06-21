@@ -1,0 +1,8 @@
+﻿<div class="abs">
+    <div class="abs y-axis-legend" 
+         ng-repeat="legend in vm.legends" 
+         ng-style="{top:legend.top,left:legend.left}" 
+         ng-class="vm.getYAxisLegendClass()">
+        {{legend.text}}
+    </div>
+</div>

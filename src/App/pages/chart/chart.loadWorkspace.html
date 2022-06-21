@@ -1,0 +1,13 @@
+﻿<div class="agm-component-chart load-workspace">
+    <div class="modal-header">
+        <h4 class="modal-title">LOAD WORKSPACE</h4>
+        <button class="close" ng-click="vm.uibDismissPanel()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <agmp-chart-workspace-table></agmp-chart-workspace-table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="vm.applySelectionViaWizard()" ng-disabled="!vm.selectedTemplate">LOAD</button>
+        <button class="hollow-blue m-right-10px" ng-click="vm.uibDismissPanel()">CANCEL</button>
+    </div>
+</div>

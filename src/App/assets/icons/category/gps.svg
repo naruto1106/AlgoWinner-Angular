@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg  class="algo-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 318.996 318.996" style="enable-background:new 0 0 318.996 318.996;" xml:space="preserve">
+		<g>
+
+				<path d="M318.996,298.548c0,6.6-1.746,12-9.996,12H15c-8.25,0-15-6.75-15-15V18.446c0-8.25,5.4-9.998,12-9.998
+					s12,1.748,12,9.998v253.103c0,8.25,6.75,15,15,15h270C317.25,286.548,318.996,291.949,318.996,298.548z"/>
+
+		</g>
+		<g transform=" translate(203 133) rotate(-45) scale(0.75)" stroke="black">
+            <rect x="-80" y="-40" width="160" rx="40" ry="40" height="80"/>
+        </g>
+
+        <g  stroke-width="12" transform="translate(75 125) rotate(45 150 50) scale(0.7)">
+            <polyline points="0,0 100,0 200,100 300,100 300,0 200,0 100,100 0,100 0,0 100,0" />
+        </g>
+
+        <g transform="translate(90 140)">
+        <path d="M0,0 a100,100 0 0,0 100,100" 
+            style="stroke:gray;stroke-width: 12; fill:none"/>
+        <path d="M-30,0 a130,130 0 0,0 130,130" 
+            style="stroke:gray;stroke-width: 12; fill:none"/>
+        </g>
+	
+</svg>

@@ -1,0 +1,68 @@
+﻿<div class="agm-component-tradersgps fundamental-filter">
+    <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+        <h4 class="modal-title">
+            Apply Filters
+        </h4>
+    </div>
+
+    <div class="modal-body">
+        <table>
+            <tbody>
+                <tr class="fundamental-item"
+                    ng-repeat="fundamental in vm.fundamentalList">
+
+                    <td>
+                        <label>{{::fundamental.tradeVenueDetail.Label}}</label>
+                        <div class="flag-image" agms-image img-src="fundamental.tradeVenueDetail.ImageUrl"></div>
+                    </td>
+                    <!--<td ng-if="fundamental.marketCaps.length>1">
+                        <div>
+                            <label>Market Cap</label>
+                            <agmc-check-box-dropdown on-item-checked-state-changed="vm.onFilterChanged()"
+                                                     dropdown-items="fundamental.marketCaps"
+                                                     display-func="vm.showMarketCap"></agmc-check-box-dropdown>
+                        </div>
+                    </td>-->
+                    <td>
+                        <label>Price Range</label>
+                        <agmc-check-box-dropdown on-item-checked-state-changed="vm.onFilterChanged()"
+                                                 dropdown-items="fundamental.priceRanges"
+                                                 display-func="vm.showRange"></agmc-check-box-dropdown>
+                    </td>
+                    <!--<td ng-if="fundamental.peRatios.length>1">
+                        <div>
+                            <label>PE Ratio</label>
+                            <agmc-check-box-dropdown on-item-checked-state-changed="vm.onFilterChanged()"
+                                                     dropdown-items="fundamental.peRatios"
+                                                     display-func="vm.showRange"></agmc-check-box-dropdown>
+                        </div>
+                    </td>-->
+                    <!--<td ng-if="fundamental.earningGrowths.length>1">
+                        <div>
+                            <label>Earnings Growth (%)</label>
+                            <agmc-check-box-dropdown on-item-checked-state-changed="vm.onFilterChanged()"
+                                                     dropdown-items="fundamental.earningGrowths"
+                                                     display-func="vm.showRange"></agmc-check-box-dropdown>
+                        </div>
+                    </td>-->
+                    <td>
+                        <label>Volume Conditions</label>
+                        <agmc-check-box-dropdown on-item-checked-state-changed="vm.onVolumeFilterChanged()"
+                                                 dropdown-items="fundamental.volumeConditions"
+                                                 display-func="vm.showRange"></agmc-check-box-dropdown>
+                    </td>
+                    <!--<td ng-if="fundamental.marketCaps.length === 0"></td>
+                    <td ng-if="fundamental.peRatios.length === 0"></td>
+                    <td ng-if="fundamental.earningGrowths.length === 0"></td>-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary pull-right" ng-click="vm.closePanel()">SAVE</button>
+        <button class="hollow-blue m-right-10px pull-right" ng-click="vm.uibDismissPanel()">CANCEL</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

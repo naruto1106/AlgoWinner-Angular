@@ -1,0 +1,50 @@
+﻿<div class="mobile-orders box border">
+    <div class="panel-heading">Orders Log</div>
+    <div class="p-50px text-center" ng-if="vm.isLoadingOrders">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?"/>
+    </div>
+
+    <div class="alert alert-info" ng-if="vm.orders.length<=0 && !vm.isLoadingOrders">
+        <span>{{::vm.noOrderMessage}}</span>
+    </div>
+    <div ng-if="!vm.isLoadingOrders">
+        <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="5"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+        </ul>
+        <div class="order-item" ng-repeat="order in vm.getPagedOrders() track by order.OrderId">
+            <div>
+                <div class="product-info">
+                    <div class="product-icon" agms-image img-src="order.Product.ProductIconURL"></div>
+                    <div class="product-name">
+                        <div>{{order.Product.Symbol}}</div>
+                        <div>{{order.Product.ProductName}}</div>
+                    </div>
+                </div>
+                <div class="price-info">
+                    <div class="price">
+                        <span class="action">
+                            {{order.Action}}
+                        </span>
+                        {{order.Quantity}} UNITS
+                        @ {{order.OrderPrice | customCurrencyOrDashMinMax:order.Product.Currency:2:4}}
+                    </div>
+
+                    <div class="status">
+                        {{order.LatestStatus}}
+                    </div>
+                </div>
+            </div>
+            <div class="update-time">
+                last updated {{order.UpdateTime | timeSince}}
+            </div>
+        </div>
+        <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+            class="pagination-sm m-top-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="5"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+</div>

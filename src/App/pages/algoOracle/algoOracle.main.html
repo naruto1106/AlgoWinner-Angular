@@ -1,0 +1,8 @@
+﻿<div class="agm-component-algooracle">
+    <div class="robot" ng-show="vm.showRobot()"></div>
+    <div class="robot-preload"></div>
+    <div class="oracle-box-container" ng-show="vm.pAlgoOracleService.isOracleOpen">
+        <agms-algo-oracle-box></agms-algo-oracle-box>
+    </div>
+    <div class="oracle-bg" ng-if="vm.pAlgoOracleService.isOracleOpen"></div>
+</div>

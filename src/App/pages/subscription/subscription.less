@@ -1,0 +1,231 @@
+﻿.agm-component-subscription div {
+
+    .agree-payment-red {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        font-size: 14px;
+        border: 2px solid red;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .agree-payment-green {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        font-size: 14px;
+        border: 2px solid green;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    > .basic-info {
+        padding: 10px;
+        background: @grayLight1;
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            float: left;
+
+            &.tool-image {
+                background-size: cover;
+            }
+        }
+
+        .logo-md {
+            width: 100%;
+            margin-left: -40px;
+            padding-left: 40px;
+            float: right;
+            font-size: 14px;
+            .clickable-container;
+        }
+    }
+
+    > .select-pricing {
+        padding: 10px;
+
+        .pricing-package {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .button-group {
+            width: 100%;
+
+            > .child-button {
+                width: 50%;
+                height: 100px;
+
+                h3 {
+                    small {
+                        color: inherit;
+                        display: block;
+                        font-size: 50%;
+                    }
+                }
+            }
+        }
+
+        .basic {
+            h3.title {
+                background: @blueDarker2;
+            }
+
+            .button {
+                background: @blueDarker2;
+
+                &:hover {
+                    background: mix(@blueDarker2,white,90);
+                }
+            }
+        }
+
+        .premium {
+            h3.title {
+                background: @blueDarker3;
+            }
+
+            .button {
+                background: @blueDarker3;
+
+                &:hover {
+                    background: mix(@blueDarker3,white,90);
+                }
+            }
+        }
+
+        .preview {
+            h3.title {
+                background: @grayBlue;
+            }
+
+            .button {
+                background: @grayBlue;
+
+                &:hover {
+                    background: mix(@grayBlue,white,90);
+                }
+            }
+        }
+
+        .basic, .premium, .preview {
+            border: 1px solid @grayMed1;
+
+            .pricing {
+                color: @blueDarker1;
+                line-height: 40px;
+                font-size: 40px;
+                font-weight: 600;
+                height: 40px;
+            }
+
+            .pricing-period {
+                color: @grayMed1;
+                line-height: 30px;
+                font-size: 20px;
+                font-weight: 600;
+                height: 30px;
+                margin-bottom: 10px;
+            }
+
+            .selected-marker {
+                color: green;
+                font-size: 23px;
+                text-align: center;
+                line-height: 25px;
+            }
+
+            h3.title {
+                line-height: 40px;
+                color: white;
+                margin: 0;
+                text-align: center;
+            }
+        }
+
+        .preview .pricing {
+            color: @grayMed1;
+        }
+
+        .subscribe-strategy-item {
+            height: 65px;
+            width: 100%;
+            overflow-x: hidden;
+            .rel;
+
+            &.clickable {
+                cursor: pointer;
+            }
+
+            .strategy-icon {
+                width: 65px;
+                height: 65px;
+                top: 0px;
+                left: 0px;
+                padding: 0px;
+                margin-right: 10px;
+                .abs;
+            }
+
+            .strategy-name-header {
+                left: 75px;
+                top: 15px;
+                .abs;
+            }
+
+            .strategy-name {
+                left: 75px;
+                .abs;
+            }
+
+            .caret-right {
+                left: 260px;
+                top: 25px;
+                .abs;
+            }
+        }
+    }
+
+    > .add-ons {
+        padding: 15px;
+
+        .add-on-option {
+            margin: 5px;
+            border: 1px dashed #ccc;
+            border-radius: 10px;
+            padding: 3px 0;
+
+            .item {
+                font-weight: bold;
+                border: 2px solid #93a2b0;
+                background: @grayLight1;
+                color: black;
+                border-radius: 6px;
+                padding: 0 5px;
+            }
+
+            .add-on-fee {
+                padding: 12px 0 0 0;
+                font-style: italic;
+                text-align: center;
+            }
+
+            .total-fee {
+                font-size: 16px;
+                padding: 11px 0 0 0;
+                text-align: center;
+            }
+        }
+    }
+
+    > .credit-card-coupon {
+        padding: 10px;
+
+        .add-new-card-panel {
+            width: 100%;
+            max-width: 500px;
+        }
+    }
+}

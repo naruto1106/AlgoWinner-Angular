@@ -1,0 +1,9 @@
+﻿<div ng-class="{'active-toggle':vm.isComparisonMode()}"
+     class="btn-group chart-compare" ng-show="vm.showCompare()">
+    <button class="btn compare" ng-click="vm.openComparePanel()">
+        <label>COMPARE</label>
+    </button>
+    <button ng-show="vm.isComparisonMode()" class="close-comparison btn btn-link" ng-click="vm.cancelComparisonMode()">
+        <span class="glyphicon glyphicon-remove"></span>
+    </button>
+</div>

@@ -1,0 +1,19 @@
+﻿<div class="product-container">
+    <div class="input-group search-product">
+        <input type="text"
+               placeholder="Search..."
+               class="form-control last-input-group-item"
+               agmc-click-outside-light="vm.unfocusField()"
+               ng-model="vm.selectedProduct"
+               ng-model-options="{debounce: 200}"
+               uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+               typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+               typeahead-wait-ms="200"
+               typeahead-on-select="vm.onItemSelected()"
+               analytics-on="change" analytics-category="Chart" analytics-event="Add Stock" analytics-label="Search Box" agmc-analytics-timestamp />
+        <div></div>
+        <span class="glyphicon glyphicon-search"></span>
+    </div>
+    <div class="clearfix"></div>
+
+</div>

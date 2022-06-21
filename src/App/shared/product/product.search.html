@@ -1,0 +1,24 @@
+﻿<div>
+    <div class="pull-left rel" editor>
+        <input text-box type="text" class="search-product" ng-model="vm.text" ng-show="!vm.showSelectedModel()" placeholder="{{vm.placeholder}}"
+               ng-model-options="{debounce: 200}"
+               uib-typeahead="product as product.Symbol for product in vm.searchProductsThen($viewValue)"
+               typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+               typeahead-wait-ms="200"
+               typeahead-on-select="vm.onProductSelectedThenExit($item, $model, $label)"
+               typeahead-editable="false"
+               typeahead-select-on-blur="false" />
+        <div text-desc class="lh-30px strong border white-box p-left-10px p-right-10px w-160px ellipsis-nowrap" ng-show="vm.showSelectedModel()">
+            <span class="strong">{{vm.model.Symbol}} - </span>{{vm.model.ProductName}}
+        </div>
+    </div>
+    <div class="m-left-5px pull-left">
+        <img class="w-20px h-20px" ng-if="vm.isLoading && vm.isEditingModel" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        <div class="lh-30px f-16px glyphicon glyphicon-ok-circle green-profit" ng-if="!vm.isLoading && vm.isDirty &&  vm.model"></div>
+        <div class="lh-30px f-16px glyphicon glyphicon-alert red-loss" ng-if="!vm.isLoading  && vm.isDirty && !vm.isEditingModel && !vm.model && vm.lastText"></div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="red-loss" ng-if="!vm.isLoading && vm.isDirty  && !vm.isEditingModel && !vm.model && vm.lastText">
+        Invalid exchange symbol
+    </div>
+</div>

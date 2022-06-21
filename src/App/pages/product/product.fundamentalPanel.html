@@ -1,0 +1,84 @@
+﻿<section class="fundamental-panel">
+    <h1 class="title-section">FUNDAMENTALS</h1>
+    <div class="row-md-3 gap-20px">
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1 >PE Ratio</h1>
+                <h5 class="date-updated gray-text" ng-if="vm.chart.PERatio.asOfDate"><i>Last Updated {{vm.chart.PERatio.asOfDate | date:'mediumDate'}}</i></h5>
+                <div class="h-200px">
+                    <highchart ng-if="vm.showPeRatioChart()" config="vm.chart.PERatio"></highchart>
+                    <div ng-if="vm.invalidSectors() && vm.productDetail.CompanyOverview.PERatio && vm.productDetail.CompanyOverview.PERatio >= 0" class="single-fundamental"><h1>{{vm.productDetail.CompanyOverview.PERatio | valueOrDash:2}}</h1></div>
+                </div>
+                <p ng-if="vm.getPeRatioErrorMessage()">{{vm.getPeRatioErrorMessage()}}</p>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1 >Earnings growth</h1>
+                <h5 class="date-updated gray-text" ng-if="vm.chart.EarningGrowth.asOfDate"><i>Last Updated {{vm.chart.EarningGrowth.asOfDate | date:'mediumDate'}}</i></h5>
+                <div class="h-200px">
+                    <highchart ng-if="vm.showEarningGrowthChart()" config="vm.chart.EarningGrowth"></highchart>
+                    <div ng-if="vm.invalidSectors() && vm.productDetail.CompanyOverview.EarningsGrowth" class="single-fundamental"><h1>{{vm.productDetail.CompanyOverview.EarningsGrowth | valuePercentageOrDash:2}}</h1></div>
+                </div>
+                <p ng-if="vm.getEarningGrowthErrorMessage()">{{vm.getEarningGrowthErrorMessage()}}</p>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1 >Dividend yield</h1>
+                <h5 class="date-updated gray-text" ng-if="vm.chart.DividendYield.asOfDate"><i>Last Updated {{vm.chart.DividendYield.asOfDate | date:'mediumDate'}}</i></h5>
+                <div class="h-200px">
+                    <highchart ng-if="vm.showDividendYieldChart()" config="vm.chart.DividendYield"></highchart>
+                    <div ng-if="vm.invalidSectors() && vm.productDetail.CompanyOverview.DividendYield" class="single-fundamental"><h1>{{vm.productDetail.CompanyOverview.DividendYield | valuePercentageOrDash:2}}</h1></div>
+                </div>
+                <p ng-if="vm.getDividendYieldErrorMessage()">{{vm.getDividendYieldErrorMessage()}}</p>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1>Revenue</h1>
+                <div ng-if="vm.productDetail.CompanyOverview.Revenue && vm.getValidYearData(vm.productDetail.CompanyOverview.Revenue).length > 0">
+                    <highchart ng-if="vm.showFiveYearData(vm.productDetail.CompanyOverview.Revenue)" config="vm.chart.Revenue"></highchart>
+                    <div ng-if="!vm.showFiveYearData(vm.productDetail.CompanyOverview.Revenue)" class="single-fundamental">
+                        <h1>{{vm.getLatestYearData(vm.productDetail.CompanyOverview.Revenue).Value | valuePercentageOrDash:2}}</h1>
+                    </div>
+                </div>
+                <div ng-if="!vm.productDetail.CompanyOverview.Revenue || vm.getValidYearData(vm.productDetail.CompanyOverview.Revenue).length <= 0">
+                    <div class="h-200px"></div>
+                    <p>No Data Available</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1>Operating Profit Margin</h1>
+                <div ng-if="vm.productDetail.CompanyOverview.OperatingProfitMargin && vm.getValidYearData(vm.productDetail.CompanyOverview.OperatingProfitMargin).length > 0">
+                    <highchart ng-if="vm.showFiveYearData(vm.productDetail.CompanyOverview.OperatingProfitMargin)" config="vm.chart.OperationProfitMargin"></highchart>
+                    <div ng-if="!vm.showFiveYearData(vm.productDetail.CompanyOverview.OperatingProfitMargin)" class="single-fundamental">
+                        <h1>{{vm.getLatestYearData(vm.productDetail.CompanyOverview.OperatingProfitMargin).Value | valuePercentOrDash:2}}</h1>
+                    </div>
+                </div>
+                <div ng-if="!vm.productDetail.CompanyOverview.OperatingProfitMargin || vm.getValidYearData(vm.productDetail.CompanyOverview.OperatingProfitMargin).length <= 0">
+                    <div class="h-200px"></div>
+                    <p >No Data Available</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1>Long Term Debt</h1>
+                <div ng-if="vm.productDetail.CompanyOverview.LongTermDebt && vm.getValidYearData(vm.productDetail.CompanyOverview.LongTermDebt).length > 0">
+                    <highchart ng-if="vm.showFiveYearData(vm.productDetail.CompanyOverview.LongTermDebt)" config="vm.chart.LongTermDebt"></highchart>
+                    <div ng-if="!vm.showFiveYearData(vm.productDetail.CompanyOverview.LongTermDebt)" class="single-fundamental">
+                        <h1>{{vm.getLatestYearData(vm.productDetail.CompanyOverview.LongTermDebt).Value | valuePercentageOrDash:2}}</h1>
+                    </div>
+                </div>
+                <div ng-if="!vm.productDetail.CompanyOverview.LongTermDebt || vm.getValidYearData(vm.productDetail.CompanyOverview.LongTermDebt).length <= 0">
+                    <div class="h-200px"></div>
+                    <p>No Data Available</p>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>

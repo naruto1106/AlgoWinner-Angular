@@ -1,0 +1,58 @@
+﻿<div class="agms-directive position-summary">
+    <!--DIRECTIVE positions.summary.html + positions.summary.js -->
+    <div class="panel-heading">Position Summary</div>
+    <div class="content-container">
+        <div class="alert alert-info" ng-show="!(vm.positions && (vm.positions| filter:vm.positionFilter).length>0) && !vm.isLoadingPositions">
+            <span ng-if="vm.viewMode !== 'readonly'">{{::vm.noPositionMessage}}</span>
+            <span ng-if="vm.viewMode == 'readonly'">{{::vm.noPositionMessageForGroupStrategy}}</span>
+        </div>
+        <div class="loading-box text-center" ng-show="vm.isLoadingPositions">
+            <img src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="6"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+        <table class="table-large" ng-show="(vm.positions && (vm.positions| filter:vm.positionFilter).length>0) && !vm.isLoadingPositions">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Unrealized P/L</th>
+                    <th ng-if="vm.viewMode !== 'readonly'"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="position in vm.getPagedItems()">
+                    <td>
+                        <a ng-click="vm.goToProduct(position.Product)">
+                            <div class="w-100px ellipsis-nowrap" uib-tooltip="{{::position.Product.ProductName}}">
+                                <b>{{::position.Product.ProductName}}</b>
+                            </div>
+                            <div>
+                                ({{::position.Product.Symbol}})
+                            </div>
+                        </a>
+                    </td>
+                    <td>{{position.QuantityOnHold | positionQuantity:position.PositionType}}</td>
+                    <td ng-class="position.UnrealizedPL>=0?['green-profit']:['red-loss']">
+                        {{position.UnrealizedPL | customCurrencyOrDash:position.Product.Currency:2}}
+                        <br />({{position.UnrealizedPL_Percent | valuePercentageOrDash:2}})
+                    </td>
+                    <td ng-if="vm.viewMode !== 'readonly'" class="not-readonly">
+                        <button ng-if="!vm.isByAccount && !vm.canIncreaseDecrease"
+                                ng-click="vm.decreasePosition(position)"
+                                class="close-button mini-filled-red super-compact-button"
+                                analytics-on="click" analytics-category="Trade" analytics-event="ClosePosition" analytics-label="OrdersLog" agmc-analytics-timestamp>
+                            CLOSE
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+            class="pagination-sm m-bottom-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+            first-text="&laquo;" last-text="&raquo;" max-size="6"
+            num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+    </div>
+</div>

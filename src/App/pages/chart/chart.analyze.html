@@ -1,0 +1,47 @@
+﻿<div class="chart-analyze flex-v">
+    <div class="major-column">
+        <div agmc-custom-scrollbar class="scroll-box column-container">
+            <uib-accordion close-others="false">
+                <div uib-accordion-group>
+                    <uib-accordion-heading analytics-on="click" agmc-analytics-timestamp>
+                        SUBSCRIBED STRATEGIES
+                        <span class="glyphicon accordion-chevron" ng-class="{'glyphicon-chevron-up':$parent.isOpen, 'glyphicon-chevron-down':!$parent.isOpen}"></span>
+                    </uib-accordion-heading>
+                    <agmp-chart-signal-filter></agmp-chart-signal-filter>
+                </div>
+                <div uib-accordion-group>
+                    <uib-accordion-heading analytics-on="click" agmc-analytics-timestamp>
+                        MY TRADE PORTFOLIOS
+                        <span class="glyphicon accordion-chevron" ng-class="{'glyphicon-chevron-up':$parent.isOpen, 'glyphicon-chevron-down':!$parent.isOpen}"></span>
+                    </uib-accordion-heading>
+                    <agmp-chart-trade-portfolio-filter></agmp-chart-trade-portfolio-filter>
+                </div>
+                <div uib-accordion-group is-open="vm.pChartService.isStudyAccordionOpen">
+                    <uib-accordion-heading analytics-on="click" agmc-analytics-timestamp>
+                        STUDIES
+                        <span class="glyphicon accordion-chevron" ng-class="{'glyphicon-chevron-up':$parent.isOpen, 'glyphicon-chevron-down':!$parent.isOpen}"></span>
+                    </uib-accordion-heading>
+                    <agmp-chart-study-filter></agmp-chart-study-filter>
+                </div>
+                <div uib-accordion-group is-open="false" ng-if="vm.hasAlgoChartBundle()" class="fundamental-factset">
+                    <uib-accordion-heading analytics-on="click" analytics-category="Chart" analytics-event="Side Menu Filter" analytics-label="AddFundamental" agmc-analytics-timestamp>
+                        FUNDAMENTALS
+                        <span class="glyphicon accordion-chevron" ng-class="{'glyphicon-chevron-up':$parent.isOpen, 'glyphicon-chevron-down':!$parent.isOpen}"></span>
+                    </uib-accordion-heading>
+                    <agmp-chart-fundamental-filter></agmp-chart-fundamental-filter>
+                </div>
+            </uib-accordion>
+        </div>
+    </div>
+    <div class="minor-column">
+        <div class="row-md-2">
+            <div class="col-md-1">
+                <button class="filled-blue" ng-click="vm.saveCurrentView(true)">SAVE</button>                
+            </div>
+            <div class="col-md-1">
+                <button class="hollow-blue" ng-click="vm.loadTemplateList($event)">LOAD</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

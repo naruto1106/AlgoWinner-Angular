@@ -1,0 +1,143 @@
+﻿<div class="agm-components-mobile mobile-order-pad">
+    <agmc-loading is-loading="vm.isSubmitting"></agmc-loading>
+
+    <h4>Select Portfolio:</h4>
+    <div uib-dropdown is-open="status.isopen" class="strategy-selector m-bottom-10px">
+        <div uib-dropdown-toggle class="toggle">
+            <agms-strategy-commerce-portrait class="selected-strategy"
+                                             strategy="vm.selectedStrategy.DisplayInfo"
+                                             level-of-detail="6"
+                                             disable-click-strategy="true">
+            </agms-strategy-commerce-portrait>
+            <span class="glyphicon glyphicon-triangle-bottom"></span>
+        </div>
+        <div uib-dropdown-menu role="menu">
+            <agms-strategy-commerce-portrait ng-repeat="strategy in vm.strategySelections"
+                                             ng-click="vm.selectStrategyFunc(strategy)"
+                                             class="strategy"
+                                             strategy="strategy.DisplayInfo"
+                                             level-of-detail="6"
+                                             disable-click-strategy="true">
+            </agms-strategy-commerce-portrait>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <fieldset>
+        <dl class="">
+            <dt>Action</dt>
+            <dd>
+                <select ng-disabled="vm.isLoadingPrice" ng-model="vm.order.Action"
+                        ng-options="action for action in vm.actionTypes" ng-change="vm.onActionChangedFunc()" class="w-150px"></select>
+            </dd>
+        </dl>
+        <dl class="">
+            <dt>Product</dt>
+            <dd>
+                <agms-product-search model="vm.order.Product" listen-on-resolve="vm.listenOnProductResolve"
+                                     search-products="vm.searchProductsFunc" auto-select-on-single-search-result="true"
+                                     on-product-selected="vm.onProductSelectedFunc">
+                </agms-product-search>
+            </dd>
+        </dl>
+        <dl class="">
+            <dt>Quantity</dt>
+            <dd>
+                <input ng-model="vm.order.inputNominalQuantity" type="number" min="0"
+                       ng-model-options="{debounce: 200}" ng-change="vm.updateOrderQuantityFunc()"
+                       class="w-90px m-right-5px"/>
+                <select ng-disabled="!vm.order.Product || !vm.order.Product.ProductId" ng-model="vm.order.quantityType"
+                        ng-options="quantityType for quantityType in vm.quantityTypes" ng-change="vm.updateOrderQuantityFunc()"
+                        class="select-type"></select>
+                <i class="strong m-left-5px" ng-if="vm.order.quantityType=='Lot' && vm.order.Product">
+                    <br/>(1 Lot = {{vm.order.Product.LotSize}} units)
+                </i>
+                <i class="strong m-left-5px" ng-if="vm.order.quantityType=='K Lot' && vm.order.Product">
+                    <br/>(1 K Lot = 1000 units)
+                </i>
+            </dd>
+        </dl>
+        <dl class="">
+            <dt>Type</dt>
+            <dd>
+                <select ng-model="vm.order.OrderType" ng-options="orderType as orderType for orderType in vm.orderTypes"
+                        ng-change="vm.onOrderTypeChangedFunc()"></select>
+            </dd>
+        </dl>
+
+        <fieldset ng-disabled="!vm.order.Product || !vm.order.Product.ProductId">
+            <dl class="">
+                <dt ng-show="vm.order.OrderType==='Limit'">Limit Price</dt>
+                <dd ng-show="vm.order.OrderType==='Limit'">
+                    <span class="pull-left m-right-10px" ng-if="vm.order.Product != null">{{vm.order.Product.Currency | currencySymbol}}</span>
+                    <input ng-model-options="{debounce: 200}" type="number" step="0.0001" class="pull-left w-100px"
+                           ng-model="vm.order.LimitPrice" ng-change="vm.onPriceChangesFunc()"/>
+                    <div class="up-down-buttons pull-left">
+                        <button ng-click="vm.decreaseLimitPrice()" ng-disabled="!vm.order.Product || !vm.order.LimitPrice" class="mini-filled-red">
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                        </button>
+                        <button ng-click="vm.increaseLimitPrice()" ng-disabled="!vm.order.Product || !vm.order.LimitPrice" class="mini-filled-green">
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </dd>
+            </dl>
+            <dl class="">
+                <dt ng-show="vm.order.OrderType==='Stop'">Stop Price</dt>
+                <dd ng-show="vm.order.OrderType==='Stop'">
+                    <span class="lh-30px pull-left m-right-10px">{{vm.order.Product.Currency | currencySymbol}}</span>
+                    <input ng-model-options="{debounce: 200}" type="number" step="0.0001" class="pull-left w-100px"
+                           ng-model="vm.order.StopPrice" ng-change="vm.onPriceChangesFunc()"/>
+                    <div class="up-down-buttons pull-left">
+                        <button ng-click="vm.decreaseStopPrice()" ng-disabled="!vm.order.Product || !vm.order.StopPrice" class="mini-filled-red">
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                        </button>
+                        <button ng-click="vm.increaseStopPrice()" ng-disabled="!vm.order.Product || !vm.order.StopPrice" class="mini-filled-green">
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </dd>
+            </dl>
+        </fieldset>
+
+        <dl class="">
+            <dt>Validity</dt>
+            <dd>
+                <label><input type="radio" ng-model="vm.order.Validity" value="GTC" class="validity"/>GTC</label>
+                <label><input type="radio" ng-model="vm.order.Validity" value="Day"/>Day</label>
+            </dd>
+        </dl>
+
+        <div class="text-center red-loss" ng-if="vm.isCapitalMightExceed()">
+            Capital used will likely exceed trading capital. Your order may be rejected.
+        </div>
+        <div class="text-center red-loss" ng-if="vm.validationMessage">{{vm.validationMessage}}</div>
+        <div class="text-center red-loss" ng-if="vm.showActiveOrder()">
+            <div ng-if="!vm.isActiveOrderPendingCancellation()">
+                You have an active order for {{vm.currentActiveOrder.Product.ProductName}} ({{vm.currentActiveOrder.Product.Symbol}})
+            </div>
+            <div ng-if="vm.isActiveOrderPendingCancellation()">
+                You have an active order for {{vm.currentActiveOrder.Product.ProductName}} ({{vm.currentActiveOrder.Product.Symbol}}) which is pending cancellation
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="m-top-10px separator-top p-top-10px">
+            <button class="hollow-blue pull-left"
+                    ng-click="vm.clear(); vm.clearTransactionInfo();">
+                CLEAR
+            </button>
+
+            <button class="filled-blue pull-right"
+                    ng-disabled="vm.disableConfirm()"
+                    ng-click="vm.confirm(); vm.submit();"
+                    analytics-on analytics-category="Trade"
+                    analytics-event="ConfirmOrder"
+                    agmc-analytics-timestamp>
+                CONFIRM
+            </button>
+        </div>
+    </fieldset>
+</div>

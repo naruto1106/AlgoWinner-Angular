@@ -1,0 +1,42 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        Liquidate All Positions
+    </h4>
+</div>
+<div class="modal-body">
+    <h5>Liquidating all positions will result in the following transactions:</h5>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Strategy</th>
+                <th>Action</th>
+                <th>Qty</th>
+                <th>Order Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="portfolio in vm.positionsToLiquidate">
+                <td>{{portfolio.ProductName}} ({{portfolio.ProductSymbol}})</td>
+                <td>{{portfolio.StrategyName}}</td>
+                <td><span ng-if="portfolio.PositionType === 'Long'">SELL</span>
+                    <span ng-if="portfolio.PositionType === 'Short'">BUY</span></td>
+                <td>{{portfolio.QuantityOnHold | number:0}}</td>
+                <td>Market</td>
+            </tr>
+        </tbody>
+    </table>
+    <h5>
+        Approximate Realized P/L: 
+        <span ng-class="vm.accountUnrealizedPl>=0?['green-profit']:['red-loss']">
+            {{vm.accountUnrealizedPl | customCurrencyOrDash:vm.currency:2}}
+        </span><br />
+        (excluding exchange rate and transaction cost)
+    </h5>
+    <br />
+    <h5>Do you want to proceed?</h5>
+    <button class="pull-right filled-blue" ng-click="vm.liquidateAll()">CONFIRM</button>
+    <div class="clearfix"></div>
+</div>

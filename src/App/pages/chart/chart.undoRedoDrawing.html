@@ -1,0 +1,29 @@
+﻿<div class="btn-group-vertical drawing" ng-if="false">
+    <!--MaRa: Not ready, commented out first-->
+    <button type="button"
+            class="undoredo"
+            ng-click="vm.undo()"
+            ng-show="vm.showUndoRedo()"
+            uib-tooltip="Undo"
+            tooltip-placement="right"
+            analytics-on="click"
+            analytics-category="Chart"
+            analytics-event="Drawing"
+            analytics-label="Undo"
+            agmc-analytics-timestamp>
+        <span class="algoicon algoicons-undo"></span>
+    </button>
+    <button type="button"
+            class="undoredo"
+            ng-show="vm.showUndoRedo()"
+            ng-click="vm.redo()"
+            uib-tooltip="Redo"
+            tooltip-placement="right"
+            analytics-on="click"
+            analytics-category="Chart"
+            analytics-event="Drawing"
+            analytics-label="Redo"
+            agmc-analytics-timestamp>
+        <span class="algoicon algoicons-redo "></span>
+    </button>
+</div>

@@ -1,0 +1,68 @@
+﻿<div>
+    <!--DIRECTIVE agmActiveOrders.html + agm*ActiveOrders.js -->
+    <div ng-if="::(vm.levelOfDetail==='Preview')">
+        Your subscription package does not include viewing of Active Orders.
+    </div>
+    <div ng-if="::(vm.levelOfDetail!=='Preview')">
+        <div class="p-50px text-center" ng-show="vm.isLoadingOrders || !vm.isPageLoaded()">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+
+        <div class="alert alert-info" ng-if="(vm.activeOrders | filter:vm.initialOrderFilter).length <= 0 && !vm.isLoadingOrders && vm.isPageLoaded()">
+            <span ng-if="vm.viewMode !== 'readonly'">{{vm.noOrderMessage}}</span>
+            <span ng-if="vm.viewMode == 'readonly'">{{vm.noOrderMessageForGroupStrategy}}</span>
+        </div>
+
+        <div ng-if="(vm.activeOrders | filter:vm.initialOrderFilter).length > 0 && !vm.isLoadingOrders && vm.isPageLoaded()">
+            <div class="pull-right search">
+                <input type="text" placeholder="SEARCH STOCK" ng-model="vm.models.searchOrderText" ng-model-options="{debounce: 200}"
+                    analytics-on="change" analytics-category="{{vm.category}}" analytics-event="{{vm.event}}" analytics-label="SearchStock" agmc-analytics-timestamp />
+                <button type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+            <div class="pull-left m-left-50px m-bottom-15px">
+                ORDER STATUS:
+                <select class="m-left-5px" ng-model="vm.models.activeOrderViewFilter"
+                    ng-options="selection for selection in ::vm.activeOrderViewFilters"
+                    analytics-on="click" analytics-category="{{vm.category}}" analytics-event="{{vm.event}}" analytics-label="FilterOrderStatus" agmc-analytics-timestamp>
+                </select>
+            </div>
+            <div class="clearfix"></div>
+            <h4 class="text-center" ng-if="(vm.models.searchOrderText !== '' && vm.getPagedOrders().length == 0 && !vm.isLoadingOrders) || !vm.hasOrders()">no results found</h4>
+
+            <div ng-if="vm.hasOrders()">
+                <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                    class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="&laquo;" last-text="&raquo;" max-size="10"
+                    num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                </ul>
+                <div ng-repeat="order in vm.getPagedOrders() track by order.OrderId" class="border m-top-10px">
+                    <agms-orders-table-element
+                        ng-if="!order.BracketOrder"
+                        is-by-account="vm.isByAccount"
+                        is-preview="vm.isPreview"
+                        is-related-order-browsable="false"
+                        show-cancel-button="::vm.showCancelButton"
+                        order="order"
+                        has-bracket-order-func="::vm.hasBracketOrder"
+                        view-bracket-order-func="::vm.viewBracketOrder"
+                        subscriber-orders="vm.subscriberOrders"
+                        view-mode="vm.viewMode">
+                    </agms-orders-table-element>
+                    <agms-orders-bracket-active
+                        ng-if="order.BracketOrder"
+                        is-by-account="vm.isByAccount"
+                        show-cancel-button="::vm.showCancelButton"
+                        view-mode="vm.viewMode"
+                        order="order"></agms-orders-bracket-active>
+                </div>
+                <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                    class="pagination-sm m-top-10px" previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="&laquo;" last-text="&raquo;" max-size="10"
+                    num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

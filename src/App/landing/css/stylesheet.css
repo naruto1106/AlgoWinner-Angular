@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'sf_compact_displaybold';
+    src: url('/App/landing/fonts/bootstrap/sf-compact-display-bold.woff2') format('woff2'), url('/App/landing/fonts/bootstrap/sf-compact-display-bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'sf_compact_displayregular';
+    src: url('/App/landing/fonts/bootstrap/sf-compact-display-regular.woff2') format('woff2'), url('/App/landing/fonts/bootstrap/sf-compact-display-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'sf_compact_displayultralight';
+    src: url('/App/landing/fonts/bootstrap/sf-compact-display-ultralight.woff2') format('woff2'), url('/App/landing/fonts/bootstrap/sf-compact-display-ultralight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

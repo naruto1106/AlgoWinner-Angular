@@ -1,0 +1,47 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.cancel()">&times;</button>
+    <h4 class="modal-title">
+        UPLOAD IMAGE
+    </h4>
+</div>
+<div class="modal-body image-upload-dialog">
+    <div class="dropbox">
+        <agms-image-uploader on-file-loaded="vm.loadFile(result)" is-loading="vm.isImageBeingLoaded"
+                             select-file-function="vm.selectFile" on-file-upload-failed="vm.onFileUploadFailed(result)" validation-func="vm.constrainedImageFile.validationFunc">
+            <div class="m-bottom-30px text-center" ng-if="!vm.isImageBeingLoaded">
+                <h3>
+                    <button type="button" class="filled-green m-top-10px" ng-click="vm.selectFile()">SELECT IMAGE</button>
+                    <h1 class="m-top-50px gray-text">
+                        <span class="glyphicon glyphicon-arrow-down"></span> DROP THE IMAGE HERE
+                    </h1>
+                </h3>
+            </div>
+            <div class="p-50px text-center" ng-if="vm.isImageBeingLoaded">
+                <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                <h4>Please Wait..</h4>
+            </div>
+
+            <div class="text-center">
+                <div class="inline-block m-bottom-30px rel cropper" ng-if="vm.imageSource" ng-style="vm.customCssMask">
+                    <agms-image-cropper image-source="vm.imageSource" on-image-cropped="vm.loadImage(result)"
+                                        width="vm.targetWidth" height="vm.targetHeight">
+                    </agms-image-cropper>
+                    <div class="abs glyphicon glyphicon-fullscreen reposition"></div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="red-loss lh-20px m-bottom-10px strong" ng-if="vm.errorMessage">
+                    {{vm.errorMessage.message}}
+                    <button class="mini-filled-red" ng-if="vm.imageSource && false" ng-click="vm.errorMessage=null">CANCEL</button>
+                </div>
+
+                <div class="gray-text lh-40px m-bottom-20px"><i>{{vm.constrainedImageFile.message}}</i></div>
+            </div>
+        </agms-image-uploader>
+    </div>
+    <div class="m-top-5px m-bottom-5px">
+        <div class="separator-top m-top-20px h-10px"></div>
+        <button ng-click="vm.done()" ng-disabled="vm.isImageBeingLoaded || !vm.imageSource || vm.errorMessage != null" class="pull-right filled-blue m-left-10px w-100px">SAVE</button>
+        <button ng-click="vm.cancel()" class="hollow-blue pull-right w-100px m-left-1=px ">CANCEL</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

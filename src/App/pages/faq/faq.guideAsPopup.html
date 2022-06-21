@@ -1,0 +1,22 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        {{vm.guide.flowTitle}}
+    </h4>
+</div>
+<div class="agm-component-faq guide-popup modal-body">
+    <div class="main-screen">
+        <div class="step-pagination">
+            <button ng-click="vm.setSelectedStepIndex(vm.guide, vm.guide.selectedStepIndex-1)" ng-disabled="vm.guide.selectedStepIndex<=0">PREVIOUS</button>
+            <a ng-repeat="step in vm.guide.flowSteps" ng-class="{selected:vm.guide.selectedStep==step}" ng-click="vm.setSelectedStep(vm.guide,step)">{{$index+1}}</a>
+            <button ng-click="vm.setSelectedStepIndex(vm.guide, vm.guide.selectedStepIndex+1)" ng-disabled="vm.guide.selectedStepIndex>=vm.guide.flowSteps.length-1">NEXT</button>
+        </div>
+
+        <div class="scrollable-content" ng-bind-html="vm.guide.selectedStep.description"></div>
+
+        <div class="side-menu">
+            <h4>{{vm.title}}</h4>
+            <a ng-repeat="otherGuide in vm.relatedGuides" ng-click="vm.setAsCurrentGuide(otherGuide)" ng-class="{selected: vm.guide == otherGuide}">{{otherGuide.flowTitle}}</a>
+        </div>
+    </div>
+</div>

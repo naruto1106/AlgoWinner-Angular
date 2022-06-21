@@ -1,0 +1,48 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">
+        Today Trades
+    </h4>
+</div>
+<form class="modal-body" id="login-panel">
+    <agms-product-picture product='vm.product' changeable='true'></agms-product-picture>
+    <table class="m-top-10px">
+        <thead>
+            <tr>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Action
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="trade in vm.trades | orderBy:'UpdateTime'">
+                <td>
+                    <span class="strong lh-30px">$ {{trade.FillPrice}}</span>
+                </td>
+                <td>
+                    <span class="special-text strong lh-30px">{{trade.Quantity}}</span>
+                </td>
+                <td>
+                    <h4 class="lh-30px no-margin">{{trade.Action}}</h4>
+                </td>
+                <td>
+                    <span class="lh-30px">
+                        {{trade.UpdateTime | date:'short'}}
+                    </span>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</form>

@@ -1,0 +1,88 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title" ng-if="!vm.coreConfigService.AlgoLeader.HideForAlgoLeader">
+        Welcome to AlgoMerchant
+    </h4>
+    <h4 class="modal-title" ng-if="vm.coreConfigService.AlgoLeader.HideForAlgoLeader">
+        Welcome to AlgoLeader.com
+    </h4>
+</div>
+<form class="modal-body" name="resetPasswordForm" ng-submit="resetPasswordForm.$valid && vm.submit()">
+    <h5 ng-if="vm.showUserInfo">
+        <span ng-if="!vm.coreConfigService.AlgoLeader.HideForAlgoLeader">To start using all of the features AlgoMerchant has to offer, please fill in the following details:</span>
+        <span ng-if="vm.coreConfigService.AlgoLeader.HideForAlgoLeader">To start using all of the features AlgoLeader.com has to offer, please fill in the following details:</span>
+    </h5>
+    <h5 ng-if="vm.showTermsAndSignature && !vm.showUserInfo">
+        <span ng-if="!vm.coreConfigService.AlgoLeader.HideForAlgoLeader">To continue using all of the features AlgoMerchant has to offer, please fill in the following details:</span>
+        <span ng-if="vm.coreConfigService.AlgoLeader.HideForAlgoLeader">To continue using all of the features AlgoLeader.com has to offer, please fill in the following details:</span>
+    </h5>
+    <div ng-if="vm.showUserInfo">
+        <dl class="m-top-20px">
+            <dt>Profile Image (optional)</dt>
+            <dd>
+                <div class="clearfix m-bottom-5px"></div>
+                <img class="img-circle" agms-image-fallback="//am708403.azureedge.net/images/profilePicture/defaultavatar.jpg?" ng-src="{{vm.myProfile.ProfileImageUrl}}" height="100" width="100">
+                <button type="button" class="mini-filled-green m-top-20px" ng-click="vm.uploadImage()">UPLOAD IMAGE</button>
+            </dd>
+        </dl>
+        <dl>
+            <dt>UserName (6 - 25 chars)</dt>
+            <dd class="rel">
+                <input class="pull-left sw-300px lh-25px" type="text" maxlength="25" ng-model="vm.myProfile.UserName" ng-model-options="{debounce: 100}" />
+                <div class="loading pull-left m-left-10px" ng-if="vm.requestingState==1"></div>
+                <span class="glyphicon glyphicon-ok-sign pull-left m-left-10px lh-25px verified" ng-if="vm.userNameVerified && vm.requestingState == 3 && vm.myProfile.UserName.length >= 6"></span>
+                <div class="clearfix"></div>
+
+                <span style="color: red" ng-if="vm.myProfile.UserName.length < 6">Please enter a valid username</span>
+                <span style="color: red" ng-if="vm.userNameVerified && vm.requestingState == 2">Sorry, this username has already been taken. Please pick another username.</span>
+                <span style="color: red" ng-if="vm.myProfile.UserName.length >=6 &&  vm.requestingState == -1">We were unable to verify this username. Please refresh the page or try again later.</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                Phone
+            </dt>
+            <dd>
+                <input international-phone-number default-country="sg" preferred-countries="sg, us" skip-util-script-download
+                       ng-model="vm.myProfile.PhoneNumberDetails"
+                       type="text" name="phone" reqiured /><br />
+                <span style="color: red" ng-if="vm.myProfile.PhoneNumberDetails === ''">Phone number is required.</span>
+                <span style="color: red" ng-if="(resetPasswordForm.phone.$dirty || resetPasswordForm.$submitted) && resetPasswordForm.phone.$error['international-phone-number']">Phone is not in correct format.</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                Country of Residence
+            </dt>
+            <dd>
+                <select class="w-300px lh-25px" ng-model="vm.myProfile.Country.CountryId" ng-options="country.CountryId as country.CountryName for country in vm.myCountries"></select>
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                Time Zone
+            </dt>
+            <dd>
+                <select class="w-300px lh-25px" ng-model="vm.myProfile.Timezone.TimezoneId" ng-options="timezone.TimezoneId as timezone.TimezoneName for timezone in vm.myTimezones"></select>
+            </dd>
+        </dl>
+    </div>
+    <div ng-if="vm.showTermsAndSignature">
+        <div class="f-14px">
+            <input type="checkbox" style="margin-left: 0" ng-model="vm.myProfile.AcceptedTnC" />I acknowledge that I have read and understood all information provided in this
+            <a class="green-profit" href="//am708403.azureedge.net/pdf/AlgomerchantTerms&Conditions.pdf" target="_blank">Terms and Conditions</a>
+        </div>
+        <br />
+        <dl>
+            <dt>Signature*</dt>
+            <dd><input style="width: 100%; border: 2px solid green;" type="text" placeholder="Please type your name e.g. John Doe" ng-model="vm.myProfile.Signature" /></dd>
+        </dl>        
+        <div></div>
+        <div style="font-size: 13px;" ng-if="!vm.coreConfigService.AlgoLeader.HideForAlgoLeader">*By typing your signature and sending it via the internet, you acknowledge that you have read and understood all information provided during the application process; that you intend Algomerchant to rely upon it; that you intend to be bound thereby; and that you understand and agree that your electronic signature is equivalent of a manual written signature.</div>
+        <div style="font-size: 13px;" ng-if="vm.coreConfigService.AlgoLeader.HideForAlgoLeader">*By typing your signature and sending it via the internet, you acknowledge that you have read and understood all information provided during the application process; that you intend AlgoLeader.com to rely upon it; that you intend to be bound thereby; and that you understand and agree that your electronic signature is equivalent of a manual written signature.</div>
+    </div>
+    <div class="p-top-10px separator-top">
+        <button class="filled-blue pull-right m-left-10px" ng-disabled="vm.isSubmitDisabled() || !resetPasswordForm.$valid" ng-click="vm.saveChanges()">SAVE CHANGES</button>
+        <button class="hollow-blue pull-right" ng-click="vm.logout()">CANCEL & LOG OUT</button>
+    </div>
+    <div class="clearfix"></div>
+</form>

@@ -1,0 +1,370 @@
+#blackhole {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.centerHover {
+    width: 350px;
+    height: 350px;
+    background-color: rgba(0, 0, 0, 0.01);
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -175px;
+    margin-left: -175px;
+    z-index: 2;
+    cursor: pointer;
+    line-height: 255px;
+    text-align: center;
+    transition: all 500ms;
+}
+
+    .centerHover.open {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .centerHover:hover span {
+        color: #DDD;
+    }
+
+        .centerHover:hover span:before {
+            background-color: #DDD;
+        }
+
+        .centerHover:hover span:after {
+            background-color: #DDD;
+        }
+
+    .centerHover span {
+        color: #666;
+        font-family: serif;
+        font-size: 18px;
+        transition: all 500ms;
+        top: 43px;
+        position: absolute;
+        z-index: 5;
+        left: 46px;
+    }
+
+        .centerHover span:before {
+            content: '';
+            display: inline-block;
+            height: 1px;
+            width: 16px;
+            margin-right: 12px;
+            margin-bottom: 4px;
+            background-color: #fff;
+            transition: all 500ms;
+        }
+
+        .centerHover span:after {
+            content: '';
+            display: inline-block;
+            height: 1px;
+            width: 16px;
+            margin-left: 12px;
+            margin-bottom: 4px;
+            background-color: #fff;
+            transition: all 500ms;
+        }
+
+.centerHoverbg {
+    width: 350px;
+    height: 350px;
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    z-index: 1;
+    background: url(//am708403.azureedge.net/images/newLanding/AO-bg.gif) no-repeat center center;
+    background-size: 100%;
+    -webkit-filter: blur(1px);
+    filter: blur(1px);
+    border-radius: 50%;
+}
+
+.centerHover:hover .centerHoverbg {
+    background-size: 110%;
+    -webkit-transition: all 500ms ease-in-out; /* For Safari 3.1 to 6.0 */
+    transition: all 500ms ease-in-out;
+}
+
+.centerHover .centerHoverbg {
+    -webkit-transition: all 300ms ease-in-out; /* For Safari 3.1 to 6.0 */
+    transition: all 300ms ease-in-out;
+}
+
+canvas {
+    position: relative;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+}
+
+#target {
+    background: #0099cc;
+    width: 300px;
+    height: 300px;
+    height: 160px;
+    padding: 5px;
+    display: none;
+}
+
+.Hide {
+    display: none;
+}
+
+.background {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    overflow: hidden;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    height: 130vh;
+    width: 100%;
+    position: fixed;
+    -webkit-transform: translateY(20vh);
+    -ms-transform: translateY(20vh);
+    transform: translateY(20vh);
+    -webkit-transition: all 1.4s cubic-bezier(0.22, 0.44, 0, 1);
+    transition: all 1.4s cubic-bezier(0.22, 0.44, 0, 1);
+}
+
+    .background:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .background:first-child {
+        -webkit-transform: translateY(-10vh);
+        -ms-transform: translateY(-10vh);
+        transform: translateY(-10vh);
+    }
+
+        .background:first-child .content-wrapper {
+            -webkit-transform: translateY(10vh);
+            -ms-transform: translateY(10vh);
+            transform: translateY(10vh);
+            margin-top: 0px;
+        }
+
+    .background:last-child .content-wrapper {
+        margin-top: 238px;
+    }
+
+
+    .background:nth-child(2) {
+        background-image: url(//am708403.azureedge.net/images/newLanding/oract.jpg);
+    }
+
+    .background:nth-child(3) {
+    }
+
+    .background:nth-child(4) {
+        background: #14151a;
+    }
+    /* Set stacking context of slides */
+
+    .background:nth-child(1) {
+        z-index: 6;
+    }
+
+    .background:nth-child(2) {
+        z-index: 5;
+    }
+
+    .background:nth-child(3) {
+        z-index: 4;
+        background: black;
+    }
+
+    .background:nth-child(4) {
+        z-index: 3;
+    }
+
+    .background:nth-child(5) {
+        z-index: 2;
+        background: black;
+    }
+
+    .background:nth-child(6) {
+        z-index: 1;
+        background: #1a1a1a;
+    }
+
+.content-wrapper {
+    height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    color: #fff;
+    -webkit-transform: translateY(40vh);
+    -ms-transform: translateY(40vh);
+    transform: translateY(40vh);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: all 1.9s cubic-bezier(0.22, 0.44, 0, 1);
+    transition: all 1.9s cubic-bezier(0.22, 0.44, 0, 1);
+    margin-top: 100px;
+}
+
+#MSvideoContent video {
+    border-radius: 27px;
+}
+
+.content-title {
+    font-size: 12vh;
+    line-height: 1.4;
+}
+
+
+@media (max-width: 1024px) {
+    .black-bg-1 p, .black-bg-1 li {
+        text-align: center;
+    }
+
+    .background {
+        position: inherit;
+        overflow-y: hidden;
+        height: 100vh;
+    }
+
+        .background:first-child {
+            height: calc(100vh + 125px);
+            background: #000000;
+            position: absolute;
+        }
+
+        .background:nth-child(3) {
+            z-index: 4;
+            background: black;
+        }
+
+        .background:nth-child(2) {
+            z-index: 5;
+            margin-top: 10vh !important;
+            height: 130vh;
+        }
+
+        .background:nth-child(3) .content-wrapper {
+            margin-top: -315px;
+        }
+
+        .background:nth-child(4) .content-wrapper {
+            margin-top: -440px;
+        }
+
+        .background:nth-child(5) .content-wrapper {
+            margin-top: -380px;
+        }
+
+        .background:nth-child(6) .content-wrapper {
+            margin-top: -450px;
+        }
+
+        .background:last-child {
+            height: 55vh;
+        }
+
+
+            .background:last-child .content-wrapper {
+                margin-top: -74vh;
+            }
+
+
+    .oracle-text {
+        position: absolute;
+    }
+
+    .background .content-wrapper .f80 {
+        font-size: 50px;
+        line-height: 49px;
+        letter-spacing: -1px;
+    }
+}
+
+@media (max-width: 768px) {
+    .padding10p {
+        padding: 4% 9% !important;
+    }
+
+    .background {
+        position: inherit;
+        overflow-y: hidden;
+        height: 100vh;
+    }
+
+        .background:first-child {
+            height: calc(100vh + 125px);
+            background: #000000;
+            position: absolute;
+        }
+
+        .background:nth-child(3) {
+            z-index: 4;
+            background: black;
+        }
+
+        .background:nth-child(2) {
+            z-index: 5;
+            margin-top: 10vh !important;
+            height: 130vh;
+        }
+
+        .background:nth-child(3) .content-wrapper {
+            margin-top: -200px;
+        }
+
+        .background:nth-child(4) .content-wrapper {
+            margin-top: -240px;
+        }
+
+        .background:nth-child(5) .content-wrapper {
+            margin-top: -180px;
+        }
+
+        .background:nth-child(6) .content-wrapper {
+            margin-top: -210px;
+        }
+
+        .background:last-child {
+            height: 150vh;
+        }
+
+
+            .background:last-child .content-wrapper {
+                margin-top: -104px;
+            }
+
+
+    .oracle-text {
+        position: absolute;
+    }
+
+    .background .content-wrapper .f80 {
+        font-size: 25px;
+        line-height: 22px;
+        letter-spacing: -1px;
+    }
+}

@@ -1,0 +1,38 @@
+﻿<div class="btn-group-vertical drawing">
+    <button type="button"
+            uib-tooltip="{{::drawingType.DisplayName}}"
+            tooltip-placement="right"
+            ng-class="{active:vm.isCurrentDrawing(drawingType)}"
+            ng-repeat="drawingType in vm.drawingTypes"
+            ng-click="vm.setChartDrawingType(drawingType)">
+        <span class="algoicon" ng-class="[drawingType.Icon]"></span>
+    </button>
+
+    <button type="button"
+            class="special"
+            uib-tooltip="Desktop Drawing"
+            tooltip-placement="right"
+            ng-class="{active:vm.drawings.desktopDrawing}" ng-click="vm.toggleDesktopDrawing()">
+        <span class="algoicon algoicons-desktop-drawing"></span>
+    </button>
+    <button type="button"
+            class="special"
+            ng-click="vm.clearDrawings()"
+            uib-tooltip="Delete all drawings"
+            tooltip-placement="right"
+            analytics-on="click"
+            analytics-category="Chart"
+            analytics-event="Top Menu"
+            analytics-label="Erase"
+            agmc-analytics-timestamp>
+        <span class="algoicon  algoicons-trash"></span>
+    </button>
+    <button type="button" ng-if="vm.drawings.drawingType"
+            class="special"
+            ng-click="vm.stepDrawingCompleted()"
+            uib-tooltip="Stop Drawing"
+            tooltip-placement="right">
+        <span class="glyphicon glyphicon-ban-circle ban"></span>
+    </button>
+</div>
+

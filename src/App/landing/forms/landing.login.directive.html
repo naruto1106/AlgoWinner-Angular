@@ -1,0 +1,97 @@
+﻿<div>
+    <header class="fixed-header">
+        <div class="header-top-shop register">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="pull-center">
+                            <ul class="shop-top-nav">
+                                <li class=" hidden-xs ">
+                                    <a class="dropdown-toggle external" href="#!/"
+                                       analytics-on="click" analytics-category="Landing" analytics-event="LoginPage" analytics-label="ClickLogo" agmc-analytics-timestamp>
+                                        <img src="//am708403.azureedge.net/images/algowinner/logo.png" alt="Algomerchant Logo" class="algobrand">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="scroll" data-speed="700">Don't have an Account?</a>
+                                </li>
+                                <li>
+                                    <a href="#!/register"
+                                       analytics-on="click" analytics-category="Landing" analytics-event="LoginPage" analytics-label="ClickRegisterNow" agmc-analytics-timestamp>
+                                        <div class="register-btn">Register Now</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="login-form-container">
+        <div class="container">
+            <div class="row login-form">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="l-form-10-top">
+                        <h2 class="bold-h">Login</h2>
+                    </div>
+                    <div class="l-form-10-bottom">
+                        <div ng-switch="vm.state">
+                            <div ng-switch-when="1" class="alert alert-info">Authenticating...</div>
+                            <div ng-switch-when="2" class="alert alert-success">Login Successful</div>
+                            <div ng-switch-when="3" class="alert alert-warning">
+                                {{vm.message}}
+                                <div ng-if="vm.showResendEmail" class="cursor-pointer">
+                                    <a ng-click="vm.resendEmail()"
+                                       analytics-on="click" analytics-category="Landing" analytics-event="LoginPage" analytics-label="ClickResendEmail" agmc-analytics-timestamp>
+                                        Click here to send another verification email.
+                                    </a>
+                                </div>
+                                <div ng-if="vm.showAccountLocked" class="cursor-pointer">
+                                    <a href="#!/password" target="_blank"
+                                       analytics-on="click" analytics-category="Landing" analytics-event="LoginPage" analytics-label="ClickResetPassword" agmc-analytics-timestamp>
+                                        Click here to reset your password.
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form role="form" id="login-panel" name="loginPanel">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" placeholder="Your Email" class="form-control" ng-model="vm.loginModel.UserName" required
+                                       name="email"
+                                       agmc-custom-email
+                                       ng-change="vm.userNameChanges()"
+                                       ng-model-options="{debounce: 200}">
+                                <div class="error-input" ng-show="loginPanel.email.$dirty && loginPanel.email.$invalid">
+                                    Please put a valid email.
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="!vm.isPasswordExpired">
+                                <label>Password:</label>
+                                <input type="password" placeholder="Your password..." class="form-control" ng-model="vm.loginModel.Password">
+                            </div>
+
+                            <div class="form-group row" ng-if="vm.isPasswordExpired">
+                                As part of an enhancement to our security systems, you are required to change your password. We have sent an email to <b>{{vm.loginModel.UserName}}</b> with a unique link to update your password
+                                and re-activate your account. To resend this email, please click
+                                <a ng-click="vm.sendResetPassword()" href=""
+                                   analytics-on="click" analytics-category="Landing" analytics-event="LoginPage" analytics-label="ClickResetPassword" agmc-analytics-timestamp>here</a>.
+                            </div>
+                            <button class="login-btn btn btn-blue btn-lg" ng-click="vm.login()" ng-disabled="vm.preventSubmit()"
+                                    analytics-on="click" analytics-category="Landing" analytics-event="LoginPage" analytics-label="ClickLogin" agmc-analytics-timestamp>Login</button>
+                        </form>
+                        <div class="l-form-10-questions">
+                            <a href="#!/password"
+                               analytics-on="click" analytics-category="Landing" analytics-event="LoginPage" analytics-label="ClickForgotPassword" agmc-analytics-timestamp>Forgot your password?</a> -
+                            <a href="#!/register"
+                               analytics-on="click" analytics-category="Landing" analytics-event="LoginPage" analytics-label="ClickForgotPassword" agmc-analytics-timestamp>Not registered yet?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

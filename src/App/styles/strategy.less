@@ -1,0 +1,245 @@
+
+.strategy-sidebar {
+    margin-top: -30px;
+    width: 210px;
+}
+
+table.return-panel {
+    tr td {
+        padding: 2.5px 2px 2.5px 2px;
+    }
+
+    h4 {
+        padding: 0;
+        margin: 0;
+        font-weight: bold;
+        line-height: 14px;
+        font-size: 14px;
+    }
+}
+
+
+
+.strategy {
+    table tr.performance-value {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: bottom;
+        line-height: 20px;
+
+        td {
+            h4 {
+                font-weight: bold;
+                font-size: 14px;
+                margin: 0;
+                padding: 0;
+                margin-top: 10px;
+                line-height: 14px;
+            }
+        }
+    }
+
+    table tr.performance-title {
+        line-height: 12px;
+        text-align: center;
+        vertical-align: top;
+        font-size: 11px;
+        color: @grayMed1;
+
+        td {
+            padding: 5px 0px;
+        }
+    }
+
+    .description {
+        position: relative;
+        padding: 10px;
+        overflow: hidden;
+        /*&:after{
+          content: '';
+          height: 100%;
+          background: red;
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;        
+            background: -webkit-linear-gradient(rgba(255,255,255,0) 80%, rgba(255,255,255,1) 90%);
+            background: -o-linear-gradient(rgba(255,255,255,0) 80%, rgba(255,255,255,1) 90%);
+            background: -moz-linear-gradient(rgba(255,255,255,0) 80%, rgba(255,255,255,1) 90%);
+            background: linear-gradient(rgba(255,255,255,0) 80%, rgba(255,255,255,1) 90%);
+        }*/
+    }
+
+    .category-icon {
+        padding: 7px;
+
+        .category {
+            width: 21px;
+            height: 21px;
+            margin-right: 10px;
+            float: left;
+        }
+    }
+
+    .chart {
+        overflow: hidden;
+    }
+
+    .pricing {
+        color: @blueBasic;
+
+        & h5 {
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    .owner-message {
+        position: absolute;
+        bottom: 0px;
+        right: 15px;
+        line-height: 40px;
+        z-index: 1;
+    }
+}
+
+.top.developer {
+    .asset-class {
+        line-height: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border-radius: 10px;
+        background: @blueDarker1;
+        padding: 0 15px;
+        border: 1px solid @blueDarker2;
+        color: white;
+        margin-left: 0px;
+    }
+}
+
+.developer {
+    .asset-class {
+        line-height: 30px;
+        height: 30px;
+    }
+}
+
+.strategy-title {
+    h3 {
+        margin: 0px 30px;
+        padding: 0px;
+        line-height: 40px;
+        height: 35px;
+        font-weight: 600;
+    }
+
+    display: inline-block;
+}
+
+.strategy-detail {
+    .behavior {
+        .panel-body {
+            padding: 0px;
+
+            td h4, td h5 {
+                .no-margin;
+            }
+
+            td {
+                vertical-align: middle;
+            }
+
+            tr {
+                height: 50px;
+            }
+
+            td:first-child {
+                text-align: right;
+            }
+        }
+    }
+
+    .strategy-trading {
+        .panel-body {
+            padding: 0px;
+        }
+    }
+
+    .category-icon {
+        padding: 8px;
+
+        .category {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+            float: left;
+        }
+    }
+}
+
+.remarks {
+    width: 400px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: right;
+}
+/* Begin required CSS. */
+/*
+.line-clamp {
+    line-height: 20px;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 !important;
+}
+
+.line-clamp:after {
+    content: '...';
+    text-align: right;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    display: block;
+    position: absolute;
+    height: 20px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+@supports
+
+(-webkit-line-clamp: 1) {
+    .line-clamp:after {
+        display: none !important;
+    }
+}
+
+.line-clamp-1 {
+    -webkit-line-clamp: 1;
+    height: 20px;
+}
+
+.line-clamp-2 {
+    -webkit-line-clamp: 2;
+    height: 40px;
+}
+
+.line-clamp-3 {
+    -webkit-line-clamp: 3;
+    height: 60px;
+}
+
+.line-clamp-4 {
+    -webkit-line-clamp: 4;
+    height: 80px;
+}
+
+.line-clamp-5 {
+    -webkit-line-clamp: 5;
+    height: 100px;
+}*/

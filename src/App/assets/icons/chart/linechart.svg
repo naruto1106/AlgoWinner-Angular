@@ -1,0 +1,15 @@
+<svg class="algo-icon"  viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="102" height="102" id="canvas_background" fill="none"/>
+  <g id="canvasGrid" display="none">
+   <rect id="svg_5" width="100%" height="100%" x="0" y="0" stroke-width="0" fill="url(#gridpattern)"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_21" d="m4.215768,70.431336l16.37243,-24.549065l23.52937,28.823478l16.078403,-29.60779l13.529388,15.882325l19.215652,-40.392085" fill-opacity="null" stroke-opacity="null" stroke-width="4" stroke="#000000" fill="none"/>
+ </g>
+</svg>

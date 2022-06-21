@@ -1,0 +1,58 @@
+﻿<div class="agm-component-orderpad">
+    <section class="bracket rel">
+        <input class="check-all" type="checkbox" ng-model="vm.checkAll" ng-change="vm.onAllChecked()" />
+        <span>Include Bracket Order</span>
+        <canvas id="check-box-lines" class="check-box-lines"></canvas>
+        <dl>
+            <dt>
+                <input type="checkbox" ng-model="vm.order.HasAttachedTP" ng-change="vm.evaluateAll()" />
+                <span>Take Profit</span>
+            </dt>
+            <dd ng-if="vm.order.HasAttachedTP">
+                <span class="type">{{::vm.order.TakeProfitOrder.OrderType}}</span>
+                <div class="price-and-currency">
+                    <span class="currency">{{::vm.order.Product.Currency | currencySymbol}}
+                    </span>
+                    <input ng-model-options="{debounce: 200}" class="price" ng-model="vm.order.TakeProfitOrder.LimitPrice" type="number" placeholder="Price" step="0.0001" />
+                </div>
+                <div class="up-down-buttons pull-left">
+                    <button ng-click="vm.decreaseTakeProfitPrice(vm.order)" ng-disabled="!vm.order.HasAttachedTP" class="mini-filled-red"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                    <button ng-click="vm.increaseTakeProfitPrice(vm.order)" ng-disabled="!vm.order.HasAttachedTP" class="mini-filled-green"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                </div>
+                <span class="percentage green-profit" ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) >= 0">
+                    {{vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) | toPercentAllowingZero}} Gain
+                </span>
+                <span class="percentage red-loss" ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) < 0">
+                    {{vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) | toPercentAllowingZero}} Loss
+                </span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <input type="checkbox" ng-model="vm.order.HasAttachedSL" ng-change="vm.evaluateAll()" />
+                <span>Stop Loss</span>
+            </dt>
+            <dd ng-if="vm.order.HasAttachedSL">
+                <span class="type">{{::vm.order.StopLossOrder.OrderType}}</span>
+                <div class="price-and-currency">
+                    <span class="currency">{{::vm.order.Product.Currency | currencySymbol}}
+                    </span>
+                    <input ng-model-options="{debounce: 200}" class="price" ng-model="vm.order.StopLossOrder.StopPrice" type="number" placeholder="Price" step="0.0001" />
+                </div>
+                <div class="up-down-buttons pull-left">
+                    <button ng-click="vm.decreaseCutLossPrice(vm.order)" ng-disabled="!vm.order.HasAttachedSL" class="mini-filled-red"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                    <button ng-click="vm.increaseCutLossPrice(vm.order)" ng-disabled="!vm.order.HasAttachedSL" class="mini-filled-green"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                </div>
+                <span class="percentage green-profit" ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) >= 0">
+                    {{vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) | toPercentAllowingZero}} Gain
+                </span>
+                <span class="percentage red-loss" ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) < 0">
+                    {{vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) | toPercentAllowingZero}} Loss
+                </span>
+            </dd>
+        </dl>
+    </section>
+    <div class="text-center red-loss" ng-if="!vm.hideErrorMessage">
+        {{vm.getBracketOrderErrorMessage()}}
+    </div>
+</div>

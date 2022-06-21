@@ -1,0 +1,1 @@
+agmNgModuleWrapper('agms.manualFollowFirebase',[]);

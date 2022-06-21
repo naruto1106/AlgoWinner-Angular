@@ -1,0 +1,248 @@
+﻿.agm-component-orderstrades {
+    .order-element, .bracket-active {
+        .order-type-box {
+            float: left;
+            width: 36px;
+            border: 0;
+            display: inline-flex;
+
+            &.buy {
+                background-color: @seafoam;
+            }
+
+            &.sell {
+                background-color: @berry;
+            }
+
+            .order-type {
+                .rel;
+                text-transform: uppercase;
+                transform: rotate(-90deg);
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+                align-self: center;
+                -webkit-align-self: center;
+            }
+        }
+
+        .order-main-box {
+            width: 1100px;
+            float: left;
+        }
+    }
+
+    .order-element, .bracket-element {
+
+        .order-type-container {
+            height: 117px;
+
+            &.buy {
+                background-color: @seafoam;
+            }
+
+            &.sell {
+                background-color: @berry;
+            }
+
+            .order-type {
+                .rel;
+                text-transform: uppercase;
+                transform: rotate(-90deg);
+                top: 45px;
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+            }
+        }
+
+        .simple-box {
+            height: 70px;
+
+            .detail-button {
+                height: 100%;
+                width: 50px;
+                border-right: 1px solid @grayMed3;
+                margin-right: 10px;
+                padding-left: 17px;
+                padding-top: 20px;
+            }
+        }
+
+        .order-header {
+            height: 25px;
+            width: 100%;
+            line-height: 25px;
+
+            .bracket-button {
+                float: right;
+                height: 100%;
+                padding-top: 2px;
+                padding-right: 10px;
+            }
+
+            .bracket-order {
+                height: 25px;
+                width: 700px;
+
+                .price {
+                    line-height: 25px;
+                    width: 90px;
+                }
+
+                .status {
+                    line-height: 25px;
+                    width: 110px;
+                }
+
+                .take-profit {
+                    border-right: 1px solid white;
+                }
+
+                .order-name {
+                    padding-left: 10px;
+                    line-height: 25px;
+                    height: 25px;
+                    width: 105px;
+                }
+
+                .stop-loss {
+                    padding-left: 10px;
+                    line-height: 25px;
+                    height: 25px;
+                    width: 105px;
+                }
+
+                .cancel {
+                    height: 100%;
+                    padding-top: 2px;
+                }
+            }
+        }
+    }
+
+    .bracket-active {
+        display: flex;
+        display: -webkit-flex;
+
+        .bracket-order {
+            width: 50px;
+            padding-top: 20px;
+            padding-left: 5px;
+            height: 70px;
+            border-right: 1px solid @grayMed3;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        .order-date {
+            width: 120px;
+            padding-top: 10px;
+            height: 100%;
+            line-height: 15px;
+        }
+
+        .take-profit, .stop-loss {
+            height: 35px;
+            padding-top: 5px;
+            max-width: 350px;
+
+            .order-name {
+                width: 95px;
+                font-size: 14px;
+            }
+
+            .price {
+                width: 90px;
+                font-size: 14px;
+            }
+
+            .status {
+                width: 110px;
+                font-size: 14px;
+                margin-left: 10px;
+            }
+        }
+
+        .take-profit-status {
+            .abs;
+            top: 10px;
+            left: 10px;
+            width: 110px;
+            line-height: 14px;
+        }
+
+        .stop-loss-status {
+            .abs;
+            top: 40px;
+            left: 10px;
+            width: 110px;
+            line-height: 14px;
+        }
+
+        .cancel-button {
+            margin-top: 25px;
+            margin-right: 15px;
+
+            button {
+                width: 90px;
+            }
+        }
+    }
+}
+
+.agm-component-orderstrades {
+    .edit-bracket {
+        .remove-button {
+            margin-right: 10px;
+        }
+    }
+
+    .bracket-element {
+
+        .order-body {
+            height: 60px;
+            width: 100%;
+            padding-left: 10px;
+
+            .order-date {
+                width: 90px;
+                padding-top: 4px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            .product-container {
+                width: 190px;
+                margin: 10px 10px 0 0;
+            }
+
+            .intention {
+                width: 200px;
+                margin-top: 12px;
+            }
+
+            .quantity {
+                width: 110px;
+                height: 60px;
+                margin-right: 10px;
+            }
+        }
+
+        .order-footer {
+            height: 30px;
+            width: 100%;
+
+            .order-since {
+                height: 30px;
+                line-height: 30px;
+                margin-right: 10px;
+            }
+
+            .cancel-button {
+                padding: 5px;
+                width: 80px;
+            }
+        }
+    }
+}

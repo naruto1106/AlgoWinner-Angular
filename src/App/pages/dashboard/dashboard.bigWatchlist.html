@@ -1,0 +1,81 @@
+﻿<div class="agm-components-dashboard">
+    <agms-header-dashboard current-page="watchlist"></agms-header-dashboard>
+    <section class="big-watchlist-panel container">
+        <script type="text/ng-template" id="bigscreener/watchlist">
+        <button class="cell-botton-normal" uib-tooltip="Add Price Alert" tooltip-placement="left" ng-click="externalVm.addToPriceAlert(productContainer)"
+                ng-if="productContainer.ProductModel.TradeVenueLoc != 'HK'"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="BigWatchlist" analytics-label="AddPriceAlert" agmc-analytics-timestamp>
+            <span class="glyphicon glyphicon-bell"></span>
+        </button>
+        <button class="cell-botton-normal notes-button" uib-tooltip="Edit Notes" tooltip-placement="left" ng-click="externalVm.editNote(productContainer)"
+                ng-class="{'note-disable':productContainer.Notes == null || productContainer.Notes == ''}"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="BigWatchlist" analytics-label="EditNotes" agmc-analytics-timestamp>
+            <span class="algoicon algoicons-news-1"></span>
+        </button>
+        <button class="cell-botton-normal" uib-tooltip="Chart" tooltip-placement="left" ng-click="externalVm.gotoChart(productContainer)"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="BigWatchlist" analytics-label="GoToChart" agmc-analytics-timestamp>
+            <span class="glyphicon glyphicon-stats"></span>
+        </button>
+        <button class="cell-botton-alert" uib-tooltip="Delete Product" tooltip-placement="left" ng-click="externalVm.deleteProductOnWatchlist(productContainer)"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="BigWatchlist" analytics-label="DeleteFromWatchlist" agmc-analytics-timestamp>
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+    </script>
+
+        <div class="top-filter" ng-if="vm.sharedState.watchlists.length>0">
+            <div class="top-filter-content">
+                <div class="menu pull-left">
+                    <span class="title">Watchlist Name: </span>
+                    <select class="watchlist-selector" ng-options="item as item.WatchlistName for item in vm.sharedState.watchlists" ng-model="vm.sharedState.selectedWatchlist" ng-change="vm.onWatchlistChanged()"
+                            analytics-on="click" analytics-category="Dashboard" analytics-event="BigWatchlist" analytics-label="SelectWatchlist" agmc-analytics-timestamp></select>
+                </div>
+                <button class="hollow-blue watchlist-button" ng-if="vm.sharedState.selectedWatchlist" ng-click="vm.editWatchlist(vm.sharedState.selectedWatchlist)">EDIT</button>
+                <button class="filled-red watchlist-button" ng-if="vm.sharedState.selectedWatchlist" ng-click="vm.deleteWatchlist(vm.sharedState.selectedWatchlist)">DELETE</button>
+                <button class="filled-green pull-right" ng-click="vm.addWatchlist()"
+                        analytics-on="click" analytics-category="Dashboard" analytics-event="BigWatchlist" analytics-label="CreateNewWatchlist" agmc-analytics-timestamp>CREATE NEW WATCHLIST</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="top-filter" ng-if="vm.sharedState.watchlists.length<=0">
+            <div class="content">
+                <button class="filled-green pull-right" ng-click="vm.addWatchlist()"
+                        analytics-on="click" analytics-category="Dashboard" analytics-event="BigWatchlist" analytics-label="CreateNewWatchlist" agmc-analytics-timestamp>CREATE NEW WATCHLIST</button>
+                <div class="clearfix"></div>
+                <h3 class="alert alert-info">Create a new watchlist to get started</h3>
+            </div>
+        </div>
+        <div class="top-filter" ng-if="vm.sharedState.watchlists.length>0">
+            <div class="add-watchlist-product">
+                <div class="form-group has-feedback w-300px lh-20px">
+                    <input type="text" placeholder="ADD NEW SYMBOL" ng-model="vm.searchedProductOnWatchlist"
+                           ng-model-options="{debounce: 200}"
+                           uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                           typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                           typeahead-wait-ms="200"
+                           typeahead-on-select="vm.onProductSelected()"
+                           class="form-control"
+                           analytics-on="change" analytics-category="Dashboard" analytics-event="BigWatchlist" analytics-label="SearchStock" agmc-analytics-timestamp>
+                    <span class="form-control-feedback">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="add-product-success" ng-if="vm.addingProductSucceed">
+            <div>{{vm.AddedProductName}} has been added to watchlist</div>
+        </div>
+
+        <agmc-loading is-loading="vm.isLoading"></agmc-loading>
+
+        <div class="screener-panel" ng-if="vm.sharedState.watchlists.length>0 && !vm.isLoading">
+            <div class="overlay-message" ng-if="vm.sharedState.selectedWatchlist.WatchlistProducts.length<=0">
+                Add a product to get started
+            </div>
+            <div ng-if="vm.sharedState.selectedWatchlist.WatchlistProducts.length > 0">
+                <agms-product-list options="vm.watchlistProductListOptions" class="watchlist-product-list" product-container-list="vm.sharedState.selectedWatchlist.WatchlistProducts">
+                </agms-product-list>
+            </div>
+        </div>
+    </section>
+</div>

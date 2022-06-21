@@ -1,0 +1,187 @@
+﻿<div>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="ADD STUDIES" ng-model="vm.selectedStudy"
+               ng-model-options="{debounce: 200}"
+               uib-typeahead="study as study.label for study in vm.getFilteredStudy($viewValue)"
+               typeahead-wait-ms="200"
+               typeahead-on-select="vm.addStudyWithForm(vm.selectedStudy)">
+        <div class="input-group-btn">
+            <button ng-click="vm.showStudySelection()" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="tag-channel" ng-class="{included:study.included}" ng-repeat="study in vm.filterDescription.addedStudies|filter:vm.isStudyDialogCompleted">
+        <h5>
+            {{ vm.overrideStudyDisplay(study.stxxStudy) | uppercase }}
+        </h5>
+        <a class="pull-right remove" ng-click="vm.removeFromStudy(study)">
+            <span class="glyphicon glyphicon-remove pull-right"></span>
+        </a>
+        <div class="switch" ng-click="vm.toggleStudy(study)" ng-class="{checked:study.included}">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div ng-if="vm.pChartTgpsService.tradersGpsMode">
+        <div ng-if="vm.pChartTgpsService.tradersgps_swing.mode === 'Swing'">
+            <div class="tag-channel">
+                <h5>
+                    MA(10,CLOSE)
+                </h5>
+                <div class="switch"
+                     ng-click="vm.pChartTgpsService.tradersGPSSwingStudies.toggleMA10Visibility()"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSSwingStudies.ma10Visibility}">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    MA(20,CLOSE)
+                </h5>
+                <div class="switch"
+                     ng-click="vm.pChartTgpsService.tradersGPSSwingStudies.toggleMA20Visibility()"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSSwingStudies.ma20Visibility}">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    MA(40,CLOSE)
+                </h5>
+                <div class="switch"
+                     ng-click="vm.pChartTgpsService.tradersGPSSwingStudies.toggleMA40Visibility()"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSSwingStudies.ma40Visibility}">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    CCI
+                </h5>
+                <div class="switch"
+                     ng-click="vm.pChartTgpsService.tradersGPSSwingStudies.toggleCCIVisibility()"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSSwingStudies.cciVisibility}">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div ng-if="vm.pChartTgpsService.tradersgps_swing.mode === 'Position'">
+            <div class="tag-channel">
+                <h5>
+                    PEAK LINE
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPositionStudies.peakVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPositionStudies.togglePeakVisibility()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    TROUGH LINE
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPositionStudies.troughVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPositionStudies.toggleTroughVisibility()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPositionStudies.comVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPositionStudies.toggleComVisibility()">
+
+                </div>
+                <h5>
+                    CUMULATION OF MOMENTUM (COM)
+                </h5>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPositionStudies.tifVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPositionStudies.toggleTifVisibility()">
+
+                </div>
+                <h5>
+                    TREND IMPULSE FACTOR (TIF)
+                </h5>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div ng-if="vm.pChartTgpsService.tradersgps_swing.mode === 'Plus'">
+            <div class="tag-channel">
+                <h5>
+                    PEAK LINE
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPlusStudies.peakVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPlusStudies.togglePeakVisibility()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    TROUGH LINE
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPlusStudies.troughVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPlusStudies.toggleTroughVisibility()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    ADJUSTED SAR
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPlusStudies.psarVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPlusStudies.togglePsarVisibility()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    ODDS
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPlusStudies.oddsVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPlusStudies.toggleOddsVisibility()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    SIF
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPlusStudies.sifVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPlusStudies.toggleSifVisibility()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    TREND
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPlusStudies.trendVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPlusStudies.toggleTrendVisibility()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    MOMENTUM
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPlusStudies.momentumVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPlusStudies.toggleMomentumVisibility()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

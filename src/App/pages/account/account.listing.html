@@ -1,0 +1,204 @@
+﻿<div class="agm-component-accounts">
+    <!--DIRECTIVE agmAccountListing.html + agmAccountListing.js -->
+    <div ng-if="vm.myAccounts.length == 0">
+        Currently you do not have any brokerage accounts.
+        <div>
+            <button class="filled-blue m-top-10px" href="" ng-click="vm.openNewStrategy()" style="">
+                CREATE NEW ACCOUNT
+            </button>            
+        </div>
+    </div>
+    <div ng-if="vm.myAccounts.length > 0">
+        <section ng-repeat="account in vm.getFilteredAccounts()">
+            <div class="row-md-19 border white-box">
+                <div class="col-md-2">
+                    <div class="va-mid m-top-5px">
+                        <agms-account-brokerage-selector selected-broker="account.BasicInfo.BrokerageType"
+                                                         account-type="account.BasicInfo.AccountType"
+                                                         class="pull-left cross-border w-60px h-60px"></agms-account-brokerage-selector>                    
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" m-left-20px pull-left as-table h-60px w-200px m-top-5px">
+                        <div class="as-table-cell va-mid">
+                            <h4 class="no-margin">{{account.BasicInfo.BrokerageType}}</h4>
+                            <h5 class="no-margin lh-25px">({{account.BasicInfo.AccountNumber}})</h5>
+                        </div>
+                    </div>                
+                </div>
+                <div class="col-md-2">
+                    <div class="pull-left as-table h-60px w-120px m-top-5px">
+                        <div class="as-table-cell va-mid">
+                            <h5 class="no-margin lh-25px gray-text">Account Type</h5>
+                            <div>
+                                <h5 class="no-margin lh-25px"> {{account.BasicInfo.AccountType}} (Simulated)</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="pull-left h-70px separator-left m-right-10px">
+                    </div>                
+                    <div class="pull-left h-60px w-40px" ng-init="donutData=vm.generateDonutValues(account)">
+                        <agmc-rainbow-donut class="m-top-15px" data="donutData" colors="['#bbc','#049']" width="30" height="30" thickness="30"></agmc-rainbow-donut>
+                    </div>
+                    <div class="pull-right h-40px m-top-10px">
+                        <table class="table-small table-transparent">
+                            <tr>
+                                <td class="gray-text">
+                                    <agmc-bullet color="'transparent'" diameter="6"></agmc-bullet>{{account.BasicInfo.BalanceForTrading | customCurrencyOrDash:account.BasicInfo.Currency:2}}
+                                </td>
+                                <td>
+                                    ACCOUNT CAPITAL
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="gray-text">
+                                    <agmc-bullet color="'#049'" diameter=" 6"></agmc-bullet>{{account.BasicInfo.Remaining | customCurrencyOrDash:account.BasicInfo.Currency:2}}
+                                </td>
+                                <td>
+                                    AVAILABLE CAPITAL
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-2">
+                    <div class="pull-right h-60px">
+                        <a class="account-detail-button" ng-class="{active:vm.getAccountObject(account).showTabs==2}" ng-click="vm.viewAccountLink(account)">
+                            <h4 class="glyphicon glyphicon-list-alt"></h4>
+                            <span>DETAIL</span>
+                        </a>
+                    </div>
+                    <div class="pull-right h-70px separator-right m-right-10px">
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>      
+            <br />
+            <div ng-show="vm.getAccountObject(account).showTabs==1" class="white-box">
+                <div class="border m-top--20px m-bottom-20px p-20px p-top-10px">
+                    <div class="pull-left h-60px w-60px">
+                        <agmc-rainbow-donut class="m-top-5px"
+                                            colors="vm.getAccountObject(account).strategyAlocationColors"
+                                            data="vm.getAccountObject(account).strategyAllocationData"
+                                            width="50" height="50" thickness="40"></agmc-rainbow-donut>
+                    </div>
+                    <div class="pull-left">
+                        <table class="table-large">
+                            <thead>
+                            <tr>
+                                <th>
+                                    Strategy
+                                </th>
+                                <th>
+                                    Capital Allocation
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="strategy in vm.getAccountObject(account).strategies">
+                                <td>
+                                    <agmc-bullet color="vm.getAccountObject(account).strategyAlocationColors[$index]" diameter="10"></agmc-bullet>
+                                    {{strategy.DisplayInfo | strategyName}}
+                                </td>
+                                <td>
+                                    {{strategy.CapitalInfo.TradingCapital | customCurrencyOrDash:strategy.CapitalInfo.Currency:2}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <agmc-bullet color="vm.getAccountObject(account).strategyAlocationColors
+                                                                [vm.getAccountObject(account).strategyAlocationColors.length - 1]" diameter="10"></agmc-bullet>
+                                    Remaining
+                                </td>
+                                <td>
+                                    {{account.BasicInfo.Remaining | customCurrencyOrDash:account.BasicInfo.Currency:2}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <table class="pull-right  w-220px">
+                        <tr>
+                            <td class="gray-text">Unrealized P/L</td>
+                            <td ng-class="account.UnrealizedPL>=0?['green-profit']:['red-loss']">{{account.UnrealizedPL | customCurrencyOrDash:account.BasicInfo.Currency:2}}</td>
+                        </tr>
+                        <tr>
+                            <td class="gray-text">Realized P/L</td>
+                            <td ng-class="account.RealizedPL>=0?['green-profit']:['red-loss']">{{account.RealizedPL | customCurrencyOrDash:account.BasicInfo.Currency:2}}</td>
+                        </tr>
+                        <tr ng-if="account.BasicInfo.AccountType==='CFD'">
+                            <td class="gray-text">Margin Available</td>
+                            <td>{{account.MarginAvailable | customCurrencyOrDash:account.BasicInfo.Currency:2}}</td>
+                        </tr>
+                    </table>
+                    <table class="pull-right  w-220px m-right-10px">
+                        <tr>
+                            <td class="gray-text">Allocated</td>
+                            <td>{{account.BasicInfo.Allocated | customCurrencyOrDash:account.BasicInfo.Currency:2}}</td>
+                        </tr>
+                        <tr ng-if="account.BasicInfo.AccountType==='Cash'">
+                            <td class="gray-text">Exposure</td>
+                            <td>{{account.LongExposure | customCurrencyOrDash:account.BasicInfo.Currency:2}}</td>
+                        </tr>
+                        <tr ng-if="account.BasicInfo.AccountType==='CFD'">
+                            <td class="gray-text">Long Exposure</td>
+                            <td>{{account.LongExposure | customCurrencyOrDash:account.BasicInfo.Currency:2}}</td>
+                        </tr>
+                        <tr ng-if="account.BasicInfo.AccountType==='CFD'">
+                            <td class="gray-text">Short Exposure</td>
+                            <td>{{account.ShortExposure | customCurrencyOrDash:account.BasicInfo.Currency:2}}</td>
+                        </tr>
+                        <tr ng-if="account.BasicInfo.AccountType==='CFD'">
+                            <td class="gray-text">Margin Used</td>
+                            <td>{{account.MarginUsed | customCurrencyOrDash:account.BasicInfo.Currency:2}}</td>
+                        </tr>
+                    </table>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div ng-show="vm.getAccountObject(account).showTabs==2" class="white-box">
+                <div class="border m-top--20px m-bottom-20px p-20px p-top-10px">
+                    <div class="p-50px text-center" ng-show="!vm.myProfile.MarketInfo.Portrait && account.isLoadingAccountDetail">
+                        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                    </div>
+                    <div class="col-md-10 p-right-0px" ng-show="!account.isLoadingAccountDetail">
+                        <div ng-if="vm.getAccountObject(account).strategies.length <= 0">
+                            <h5 class="gray-text"><i>Currently you have not assigned any trade portfolios under this account</i></h5>
+                        </div>
+                        <div class="red-loss m-bottom-5px" ng-if="vm.getAccountObject(account).strategies.length > 0 && vm.hasDeficitStrategy(vm.getAccountObject(account).strategies, account)">*The total of your trade portfolios' capitals and available capital may not sum up to your account capital because one or more of the trade portfolios are in deficit</div>
+                        <div class="m-bottom-5px h-60px border" ng-repeat="strategy in vm.getAccountObject(account).strategies">
+                            <agms-strategy-commerce-portrait disable-clicking="true" class="account-strategy strategy-type2" strategy="strategy.DisplayInfo" level-of-detail="0"></agms-strategy-commerce-portrait>
+                            <div class="pull-left as-table h-60px w-140px">
+                                <div class="as-table-cell va-mid">
+                                    <span class="gray-text">Capital Available</span>
+                                    <br />
+                                    <span>{{strategy.CapitalInfo.TradingCapital | customCurrencyOrDash:strategy.CapitalInfo.Currency:2}}</span>
+                                </div>
+                            </div>
+                            <div class="pull-left as-table h-60px w-150px">
+                                <div class="as-table-cell va-mid">
+                                    <span class="gray-text"> Trade Portfolio Status</span>
+                                    <br />
+                                    <span>{{strategy.DisplayInfo.BasicInfo.Status | strategyStatus}}</span>
+                                </div>
+                            </div>
+                            <div class="pull-right p-15px">
+                                <button class="hollow-blue" ng-click="vm.viewDetails(1, strategy.DisplayInfo.BasicInfo.StrategyId)">DETAIL</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>                    
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!--<span ng-if="account.BasicInfo.StrategyLinkCount > 0">Developed<span class="glyphicon glyphicon-stats"></span></span>-->
+        </section>
+    </div>
+</div> 

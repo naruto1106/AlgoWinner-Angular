@@ -1,0 +1,318 @@
+﻿.agm-component-faq {
+    min-height: 80vh;
+    padding-top: 0px;
+
+    .container {
+        padding-top: 20px;
+    }
+
+    .option-switch {
+        margin-bottom: 20px;
+
+        > .button-group {
+            display: inline-block;
+        }
+    }
+
+    .step-pagination {
+        a, button {
+            text-align: center;
+            line-height: 25px;
+            margin: 5px;
+            width: 25px;
+            display: inline-block;
+            background: @grayLight1;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 15px;
+            color: @blueDarker3;
+            text-decoration: none;
+
+
+            &:hover, &.selected {
+                background: @blueBasic;
+                color: white;
+            }
+        }
+
+        button {
+            width: auto;
+            padding: 0 10px;
+            font-size: 12px;
+            border: none;
+
+            &[disabled] {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .contact {
+        background: @grayDark1;
+        color: white;
+        padding: 15px;
+
+        a {
+            color: white;
+
+            &:hover {
+                color: @grayLight4;
+            }
+        }
+    }
+
+    .list-topic {
+        background: @grayLight2;
+        padding-bottom: 20px;
+
+        > h3.title {
+            margin: 0;
+            padding: 20px;
+        }
+
+        > ul {
+            list-style: none;
+            padding-left: 0;
+
+            > li {
+                line-height: 30px;
+                padding: 0 20px;
+                margin-bottom: 1px;
+                color: @grayDark1;
+                font-weight: 600;
+                cursor: pointer;
+                letter-spacing: 0.05em;
+                font-size: 16px;
+
+                &:hover {
+                    color: @blueBasic;
+                }
+
+                &.selected {
+                    color: @blueBasic;
+                    border-left: 4px solid @blueBasic;
+                }
+            }
+        }
+    }
+
+    .menu-button {
+        margin: 0 -5px;
+
+        & > div {
+            padding: 0 5px;
+        }
+
+
+        & > div > button {
+            background: white;
+            opacity: 0.5;
+            border: none;
+            padding: 0 40px;
+            line-height: 75px;
+            font-size: 20px;
+            width: 100%;
+
+            &.selected, &:hover {
+                background: white;
+                opacity: 1;
+            }
+
+            &.follower {
+                background-image: url("//am708403.azureedge.net/images/landingnew/wow.jpg?v=10");
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: 0 0;
+            }
+
+            &.leader {
+                background-image: url("//am708403.azureedge.net/images/landingnew/congratulate.jpg?v=10");
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: 100% 0;
+            }
+
+            &.general {
+                background-image: url("//am708403.azureedge.net/images/landingnew/tele.jpg?v=10");
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: 0 0;
+            }
+        }
+    }
+
+    .content {
+        padding: 40px 20px;
+        background: white;
+        margin-bottom: 20px;
+
+
+        .panel-group {
+            > .panel.panel-default, *[uib-accordion-group], .question {
+                border: none;
+                background: none;
+                box-shadow: none;
+                margin-bottom: 20px;
+
+                &.highlighted {
+                    padding: 10px;
+                    border-radius: 10px;
+                    background: mix(yellow,transparent,20);
+
+                    .panel-body .answer {
+                        background: mix(yellow,transparent,30);
+                    }
+                }
+
+                .panel-body {
+                    border-top: 0;
+                    padding: 0 60px 0 40px;
+
+
+                    .answer {
+                        font-size: 16px;
+                        padding: 20px;
+                        background: mix(black,transparent,5);
+                    }
+
+                    p {
+                        margin: 0 0 30px;
+                    }
+                }
+
+                > .panel-heading {
+                    background: none;
+                    border-color: transparent;
+                    height: auto;
+                    margin-bottom: 10px;
+
+                    > h4 {
+                        line-height: 30px;
+                        letter-spacing: 0;
+                        font-size: 20px;
+
+                        a, a:hover {
+                            text-decoration: none;
+                        }
+
+                        .glyphicon {
+                            color: @grayMed3;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .guide-box {
+        width: 250px;
+        height: 250px;
+        float: left;
+        padding: 5px;
+        .rel;
+
+        > .pic {
+            background-color: black;
+            height: 150px;
+            width: 100%;
+            background-size: cover;
+            background-position: center center;
+            border: 1px solid black;
+            .rel;
+
+            > button {
+                .abs;
+                left: 40%;
+                width: 20%;
+                top: 50px;
+                height: 50px;
+                background: none;
+                border: none;
+                border-radius: 10px;
+                color: white;
+                background: mix(#111,transparent,90);
+                text-align: center;
+                font-size: 25px;
+                padding: 10px;
+
+                &:hover {
+                    color: red;
+                    background: white;
+                }
+            }
+        }
+
+
+
+        > h3 {
+            width: 100%;
+            font-size: 16px;
+            color: black;
+            line-height: 16px;
+            font-weight: 600;
+            padding: 5px 10px;
+            margin: 0;
+        }
+    }
+}
+
+.agm-component-faq.guide-popup {
+    .main-screen {
+        .rel;
+        padding-left: 250px;
+        height: 80vh;
+
+        .step-pagination {
+            padding: 15px;
+            height: 55px;
+            background: @grayLight3;
+
+            > a, > button {
+                margin: 0;
+            }
+        }
+
+        .scrollable-content {
+            padding: 15px;
+            height: ~'calc(80vh - 55px)';
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            img {
+                vertical-align: middle;
+                height: auto;
+                width: 100%;
+            }
+        }
+
+        .side-menu {
+            .abs;
+            width: 250px;
+            height: 100%;
+            background: @grayLight4;
+            top: 0;
+            left: 0;
+            border-right: 2px solid @grayLight1;
+
+            > h4 {
+                background: black;
+                color: white;
+                margin: 0;
+                padding: 5px 10px;
+            }
+
+            > a {
+                padding: 10px;
+                display: block;
+                font-weight: 600;
+                font-size: 14px;
+                color: black;
+
+                &.selected, &:hover {
+                    color: @blueBasic;
+                    background: white;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,137 @@
+﻿<section class="simple-alert">
+    <div class="simple-alert-buttons">
+        <div class="button-group mini inline-block pull-left">
+            <button class="child-button blue transition-superfast"
+                    uib-btn-radio="'Active'" ng-model="vm.activeTab"
+                    ng-class="{'active':vm.activeTab=='Active'}"
+                    analytics-on="click" analytics-category="Dashboard" analytics-event="SmallPriceAlert" analytics-label="ChooseActiveAlerts" agmc-analytics-timestamp>
+                ACTIVE
+            </button>
+            <button class="child-button blue transition-superfast"
+                    uib-btn-radio="'Triggered'" ng-model="vm.activeTab"
+                    ng-class="{'active':vm.activeTab=='Triggered'}"
+                    analytics-on="click" analytics-category="Dashboard" analytics-event="SmallPriceAlert" analytics-label="ChooseTriggeredAlerts" agmc-analytics-timestamp>
+                TRIGGERED
+            </button>
+        </div>
+
+        <button class="mini-filled-blue simple-alert-button" uib-tooltip="Add Price Alert" tooltip-placement="left" ng-click="vm.addPriceAlert()"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="SmallPriceAlert" analytics-label="AddPriceAlert" agmc-analytics-timestamp
+                ng-if="vm.activeTab=='Active'">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        <button class="mini-filled-red simple-alert-button" ng-click="vm.deleteAllTriggeredAlertsForUser()"
+                ng-if="vm.getTriggeredPriceAlert().length > 0 && vm.activeTab=='Triggered'"
+                analytics-on="click" analytics-category="Dashboard" analytics-event="SmallPriceAlert" analytics-label="ClearAll" agmc-analytics-timestamp>
+            Clear All
+        </button>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="active-alert" ng-if="vm.activeTab=='Active'">
+        <div class="text-center m-top-10px h-250px" ng-if="vm.isLoading">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+
+        <div ng-if="vm.activeAlerts.length <= 0 && !vm.isLoading" class="h-250px">
+            <div class="alert alert-info">
+                Add an alert to get started
+            </div>
+        </div>
+
+        <div class="alert-box" ng-if="vm.activeAlerts.length > 0">
+            <table class="price-alert-table">
+                <thead>
+                    <tr>
+                        <th class="trigger-stock">Product</th>
+                        <th class="trigger-price">Trigger</th>
+                        <th class="edit-delete-alert-column">&nbsp;</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="scrollbar-container">
+                <table class="price-alert-table">
+                    <tbody ng-repeat="alert in vm.activeAlerts">
+                        <tr ng-repeat="priceAlert in alert.Alerts">
+                            <td class="trigger-stock">
+                                <agms-product-picture class="complete-product-picture" product="priceAlert.Product" ng-if="priceAlert.ShowProduct"></agms-product-picture>
+                            </td>
+                            <td class="trigger-price">
+                                <span ng-if="priceAlert.Direction == 'Bull'">
+                                    Above 
+                                    <span class="green-profit">
+                                        {{priceAlert.AlertPrice | correctTickSizeDecimalPlacesWithCurrency:priceAlert.Product.Currency:priceAlert.Product.TradeVenueLoc}}
+                                    </span>
+                                </span>
+                                <span ng-if="priceAlert.Direction == 'Bear'">
+                                    Below
+                                    <span class="red-loss">
+                                        {{priceAlert.AlertPrice | correctTickSizeDecimalPlacesWithCurrency:priceAlert.Product.Currency:priceAlert.Product.TradeVenueLoc}}
+                                    </span>
+                                </span>
+                            </td>
+                            <td class="edit-delete-alert-column">
+                                <button class="cell-botton-normal" uib-tooltip="Edit Price Alert" tooltip-placement="left" ng-click="vm.editPriceAlert(priceAlert)"
+                                        analytics-on="click" analytics-category="Dashboard" analytics-event="SmallPriceAlert" analytics-label="ModifyPriceAlert" agmc-analytics-timestamp>
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                                <button class="cell-botton-alert" uib-tooltip="Delete Price Alert" tooltip-placement="left" ng-click="vm.deletePriceAlert(priceAlert)"
+                                        analytics-on="click" analytics-category="Dashboard" analytics-event="SmallPriceAlert" analytics-label="DeletePriceAlert" agmc-analytics-timestamp>
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="triggered-alert" ng-if="vm.activeTab=='Triggered'">
+        <div class="text-center m-top-10px" ng-if="vm.isLoading">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+
+        <div ng-if="vm.getTriggeredPriceAlert().length <= 0 && !vm.isLoading" class="alert alert-info">
+            No Triggered Alert
+        </div>
+
+        <div class="alert-box" ng-if="vm.getTriggeredPriceAlert().length > 0">
+            <table class="price-alert-table">
+                <thead>
+                    <tr>
+                        <th class="trigger-stock">Product</th>
+                        <th class="trigger-price">Triggered Price</th>
+                        <th class="delete-alert-column">&nbsp;</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="scrollbar-container">
+                <table class="price-alert-table">
+                    <tbody ng-repeat="priceAlert in vm.getTriggeredPriceAlert()" ng-if="priceAlert.TriggerTime != null">
+                        <tr>
+                            <td class="trigger-stock">
+                                <agms-product-picture class="complete-product-picture" product="priceAlert.Product"></agms-product-picture>
+                            </td>
+                            <td class="trigger-price">
+                                {{priceAlert.TriggeredPrice | correctTickSizeDecimalPlacesWithCurrency:priceAlert.Product.Currency:priceAlert.Product.TradeVenueLoc}}
+                            </td>
+                            <td class="delete-alert-column">
+                                <button class="cell-botton-alert" uib-tooltip="Delete Price Alert" tooltip-placement="left" ng-click="vm.deletePriceAlert(priceAlert)"
+                                        analytics-on="click" analytics-category="Dashboard" analytics-event="SmallPriceAlert" analytics-label="DeleteTriggeredAlert" agmc-analytics-timestamp>
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="trigger-time">
+                                Triggered on {{priceAlert.TriggerTime | date:'mediumDate'}}
+                                <span>{{priceAlert.TriggerTime | date:'shortTime'}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

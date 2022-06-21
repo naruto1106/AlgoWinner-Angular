@@ -1,0 +1,12 @@
+﻿<div class="agms-header">
+    <div class="sub-header">
+        <ul class="nav navbar-nav">
+            <li class="sub-item" ng-if="vm.pShopService.showSmartTools">
+                <a ng-click="vm.go('/analyze')" ng-class="{active:vm.isCurrentPage('analyze')}" analytics-on="click" analytics-category="ShopMenu" analytics-event="ClickSmartTools" agmc-analytics-timestamp>Smart Tools</a>
+            </li>
+            <li class="sub-item">
+                <a ng-click="vm.go('/bundle')" ng-class="{active:vm.isCurrentPage('bundle')}" analytics-on="click" analytics-category="ShopMenu" analytics-event="ClickBundles" agmc-analytics-timestamp>Bundles</a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿<section>
+    <div class="tag-channel" ng-if="vm.pChartStrategyOrderService.mySubscriptions.length>0">
+        <h5>
+            All
+        </h5>
+        <div class="switch" ng-click="vm.onAllVisibilityChanged(vm.pChartStrategyOrderService.mySubscriptions)" ng-class="{checked:vm.allVisible(vm.pChartStrategyOrderService.mySubscriptions)}">
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div ng-if="vm.pChartStrategyOrderService.mySubscriptions.length > 0">
+        <div class="tag-channel" ng-repeat="subscription in vm.pChartStrategyOrderService.mySubscriptions">
+            <div class="switch" ng-click="vm.onStrategyVisibilityChanged(subscription)" ng-class="{checked:vm.strategyVisibility(subscription)}">
+            </div>
+            <h5>
+                <div class="abs bullet" ng-style="vm.tradeBackgroundColor(subscription.color)"></div>
+                {{subscription.DisplayInfo | strategyName}}
+            </h5>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div ng-if="vm.pChartStrategyOrderService.mySubscriptions.length <= 0">
+        <div class="tag-channel">
+            No Strategies Subscribed            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>

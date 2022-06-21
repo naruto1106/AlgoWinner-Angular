@@ -1,0 +1,26 @@
+﻿
+<div class="modal-header" ng-class="getHeaderClass()">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">{{vm.getTitle()}}</h4>
+</div>
+
+
+<div class="modal-body agm-component-payment">
+    <div class="p-50px text-center" ng-if="vm.isSubmitting">
+        <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        <div class="clearfix m-bottom-5px"></div>
+        <span class="gray-text">Submitting Card ...</span>
+    </div>
+    <div ng-show="!vm.isSubmitting">
+        <agms-payment-form is-form-invalid="vm.isSubmitInvalid"
+                           is-edit="vm.isEdit"
+                           preset-card-value="vm.card"
+                           get-card-value="vm.getCardValue"
+                           generate-stripe-token="vm.getNewCardToken"
+                           show-add-card-button="false"></agms-payment-form>
+        <div class="separator-top m-top-20px h-10px"></div>
+        <button class="filled-blue pull-right m-left-10px" ng-disabled="vm.isSubmitInvalid()" agmc-button-wait-on-promise="vm.saveCard()">SUBMIT</button>
+        <button class="hollow-blue pull-right m-left-10px" ng-click="vm.dismissPanel()">CANCEL</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

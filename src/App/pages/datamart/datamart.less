@@ -1,0 +1,639 @@
+﻿.agm-components-datamart {
+    height: 100%;
+    padding: 5px 20px;
+
+    div.show-fundamental-filter > a {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    select {
+        border-radius: 16px;
+        border: 1px solid #b8c1cb;
+    }
+
+    .custom-screener {
+        background: @grayLight4;
+        display: flex;
+        flex-direction: column;
+
+        .custom-screener-panel {
+            flex: 1 auto;
+        }
+    }
+
+    .note-for-delay {
+        background: mix(@caramel,white,50);
+        padding: 10px;
+    }
+
+    .top-filter {
+        background: @grayLight4;
+        flex: 0 1 auto;
+        padding: 5px;
+
+        > .top-filter-content {
+            padding: 5px;
+
+            .dropdown-menu.industry-selection {
+                width: 300px;
+                border-radius: 0;
+                border: 1px solid #002d5a;
+                overflow-y: scroll;
+                max-height: 300px;
+                overflow-x: hidden;
+            }
+
+            > fieldset,
+            > .subsection > fieldset {
+                &[disabled] {
+                    opacity: 0.5;
+                }
+
+                padding: 5px;
+                background: white;
+                border: 1px solid @grayLight3;
+                border-radius: 5px;
+                height: 100%;
+                opacity: 1;
+            }
+
+            > .subsection > .big-radio {
+                width: 20px;
+                height: 20px;
+                top: 20px;
+                margin-right: 5px;
+            }
+
+            > .menu {
+
+                .market-selector {
+                    width: 50px;
+                }
+
+                .product-selector {
+                    width: 115px;
+                }
+
+                > .btn-group.dropdown > button {
+                    font-size: 12px;
+                    padding: 0 8px;
+                }
+
+                &.agms-directives.date-picker {
+                    > .from-date, > .to-date {
+                        > .date-picker.input-group {
+                            width: 130px;
+
+                            > .input-date {
+                                padding: 0 40px 0 10px;
+                                font-size: 12px;
+                                width: 125px;
+                            }
+                        }
+                    }
+                }
+
+                > select.date-dropdown-selector {
+                    width: 155px;
+                    font-size: 12px;
+                }
+            }
+
+            > .top-search-panel {
+                width: 140px;
+                font-size: 12px;
+
+                .dropdown-menu {
+                    width: 250px;
+                    margin-left: -100px;
+                    right: 0px;
+                }
+            }
+
+            > .menu,
+            > fieldset > .menu,
+            > .subsection > .menu,
+            > .subsection > fieldset > .menu {
+                float: left;
+                margin-right: 10px;
+
+                &.fundamental-filter {
+                    margin-right: 20px;
+                }
+
+                > label {
+                    display: block;
+                    line-height: 20px;
+                    font-weight: 600;
+                    font-size: 12px;
+                    float: none;
+                    margin: 0;
+                    display: block;
+                }
+
+                label.sublabel {
+                    line-height: 30px;
+                    margin-bottom: 0;
+                }
+
+                > select {
+                    min-width: 0;
+                    height: 30px;
+                }
+            }
+
+            > .agms-directives.date-picker,
+            > .subsection > .agms-directives.date-picker {
+                > .from-date, > .to-date {
+                    > .title {
+                        display: block;
+                        line-height: 20px;
+                        font-weight: 600;
+                        font-size: 12px;
+                        float: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .sidebar-container {
+        height: 100%;
+
+        .sidebar {
+            padding: 10px;
+
+            .tiny-alert {
+                font-size: 12px;
+            }
+
+            .event-combination-mode {
+                margin-bottom: 10px;
+
+                button {
+                    width: 50%;
+                }
+            }
+
+            .agms-directives.datamart-filter-selector {
+                .panel-body {
+                    background: white;
+                }
+            }
+
+            > div[agmc-custom-scrollbar] {
+                padding: 5px;
+
+                > .tree {
+                    padding: 10px;
+                }
+
+                height: 100%;
+            }
+
+            fieldset:disabled {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .big-screener-product-list {
+        .table-wrapper {
+            box-shadow: 0 0 15px @gray2;
+
+            table {
+                > tbody > tr {
+                    border-bottom: none;
+                    border-top: 1px solid @grayMed3;
+
+                    &.hide-products {
+                        border-top: none;
+
+                        > td.product-info, > td.compact-price-changes, > td.screener-column {
+                            * {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    td {
+                        &.bid-price, &.ask-price {
+                            button {
+                                background: transparent;
+                            }
+                        }
+                    }
+                }
+
+                > thead > tr > th, > tbody > tr > td {
+
+                    &.fundamental {
+                        width: 100px;
+                    }
+
+                    &.price-changes {
+                        width: 100px;
+                    }
+
+                    &.last-traded-price {
+                        width: 110px;
+                    }
+
+                    &.product-info {
+                        width: auto;
+
+                        > .product-picture {
+                            .rel;
+                            min-width: 100px;
+
+                            .product-icon {
+                                width: 20px;
+                                height: 20px;
+                                .abs;
+                                top: 4px;
+                                left: 0px;
+                                background-size: cover;
+                                box-shadow: 0 0 1px 1px mix(black, transparent,10);
+                                background-color: @grayLight1;
+                            }
+
+                            .product-text {
+                                > .product-symbol {
+                                    font-size: 14px;
+                                    margin-top: 2px;
+                                    margin-bottom: 0;
+                                    color: black;
+                                    line-height: 15px;
+                                }
+
+                                > .product-name {
+                                    display: block;
+                                    font-size: 12px;
+                                    line-height: 15px;
+                                    color: @medGray1;
+                                    margin-top: -2px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        table > thead > tr > th {
+            &.screener-algofeed-timestamp {
+                width: 20%;
+                text-align: left;
+            }
+
+            &.screener-algofeed-price {
+                width: 15%;
+                text-align: center;
+            }
+
+            &.screener-algofeed {
+                width: 25%;
+                min-width: 230px;
+                text-align: left;
+            }
+        }
+
+        table > tbody > tr > td {
+
+            &.screener-algofeed {
+                width: 25%;
+                min-width: 230px;
+                text-align: left;
+
+                > div {
+                    height: 100%;
+                }
+
+                .icon-datamart {
+                    width: 20px;
+                    height: 20px;
+                    .abs;
+                    left: 5px;
+                    top: 5px;
+                    background-color: @grayLight1;
+                    background-size: cover;
+                }
+
+                .event-name {
+                    padding-top: 3px;
+                    line-height: 12px;
+                    padding-left: 30px;
+                    font-size: 11px;
+                }
+            }
+
+            &.screener-algofeed-timestamp {
+                width: 20%;
+                line-height: 20px;
+                font-size: 12px;
+                font-style: italic;
+                color: @sunFlower;
+            }
+
+            &.screener-algofeed-price {
+                width: 15%;
+                line-height: 20px;
+                font-size: 12px;
+                font-style: italic;
+                color: @sunFlower;
+                text-align: center;
+            }
+        }
+    }
+
+    &.event-detail {
+        padding: 0px;
+    }
+
+    .datamart-description {
+        .rel;
+        height: 250px;
+
+        .feed-image {
+            margin-left: 40px;
+            height: 160px;
+            width: 160px;
+            background-size: cover;
+        }
+
+        .title {
+            .abs;
+            top: 20px;
+            left: 290px;
+            font-size: 20px;
+            text-decoration: underline;
+        }
+
+        .description {
+            .abs;
+            top: 50px;
+            left: 290px;
+            width: 400px;
+            font-size: 15px;
+        }
+
+        .description-image {
+            .abs;
+            top: 20px;
+            left: 720px;
+            margin-left: 10px;
+            height: 200px;
+            width: 300px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    }
+}
+
+.datamart-add-alert {
+    padding: 0px;
+
+    .title {
+        font-size: 20px;
+        padding: 10px 20px 5px 10px;
+    }
+
+    .datamart-selection {
+        margin: 10px;
+        text-align: center;
+        background: @gray1;
+
+        .datamart {
+            margin: 0;
+            padding: 5px;
+            cursor: pointer;
+
+            &:hover, &.selected {
+                color: @white;
+                background: @medGray1;
+            }
+
+            &.disabled {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+
+            .datamart-icon {
+                height: 50px;
+                width: 50px;
+                background-size: cover;
+                border-radius: 30px;
+                margin: auto;
+            }
+
+            .datamart-name {
+                min-height: 40px;
+            }
+        }
+    }
+
+    .datamart-event {
+        padding: 10px;
+
+        .single-event {
+            padding-bottom: 15px;
+
+            .datamart-name {
+                font-size: 20px;
+                padding-left: 15px;
+            }
+
+            .event-selection {
+                background: rgba(1,1,1,0.2);
+                padding: 5px;
+            }
+        }
+    }
+
+    .selected-data-mart {
+        padding-bottom: 10px;
+
+        .data-mart-name {
+            font-size: 20px;
+            margin: 5px 0;
+            padding: 5px 0 5px 10px;
+            background: rgba(1,1,1,0.2);
+        }
+
+        .data-mart-icon {
+            height: 60px;
+            width: 60px;
+            border-radius: 10px;
+            background-size: cover;
+            float: left;
+            margin-left: 10px;
+        }
+
+        .data-mart-description {
+            padding: 0 10px 0 80px;
+        }
+    }
+
+    .list-selection, .product-selection {
+        padding: 10px;
+
+        .selection-title {
+            font-size: 18px;
+            padding: 5px 0 5px 0;
+
+            input[type=radio] {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+    .list-selection {
+        .product-category, .watchlist {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 3px;
+            width: 500px;
+            margin: auto;
+            height: 30px;
+            margin-bottom: 3px;
+
+            .view-button {
+                float: right;
+                margin: 2px 10px;
+            }
+
+            input {
+                float: left;
+            }
+
+            .watchlist-name {
+                max-width: 400px;
+                float: left;
+                margin-top: 3px;
+            }
+        }
+    }
+
+    .product-selection {
+        .selected-products-list {
+            .selected-product {
+                background: rgba(0, 0, 0, 0.1);
+                padding: 5px;
+                width: 500px;
+                margin: auto;
+                height: 40px;
+                margin-bottom: 3px;
+
+                .glyphicon-minus-sign {
+                    color: red;
+                    float: right;
+                    font-size: 20px;
+                    margin-top: 5px;
+                }
+
+                .product-name {
+                    padding: 5px 0 0 10px;
+                    float: left;
+                }
+
+                .product-icon {
+                    height: 30px;
+                    width: 30px;
+                    background-size: cover;
+                    border-radius: 30px;
+                    float: left;
+                }
+            }
+        }
+
+        .product-search {
+            position: relative;
+            margin-top: 10px;
+
+            .form-control-feedback {
+                color: grey;
+            }
+        }
+    }
+
+    .success-result {
+        text-align: center;
+        padding-bottom: 10px;
+
+        .success {
+            font-size: 40px;
+            padding: 20px 0 0 0;
+            font-weight: 700;
+        }
+
+        .datamart-name {
+            color: #51a4f8;
+            font-size: 18px;
+            padding: 5px;
+            font-weight: 800;
+        }
+
+        .products {
+            font-size: 15px;
+        }
+
+        .ok-btn {
+            margin-top: 20px;
+        }
+    }
+}
+
+.datamart-product-list {
+    height: 500px;
+    overflow-y: scroll;
+
+    .product-in-list {
+        background: rgba(0, 0, 0, 0.1);
+        padding: 5px;
+        width: 100%;
+        margin: auto;
+        height: 40px;
+        margin-bottom: 3px;
+
+        .product-name {
+            padding: 5px 0 0 10px;
+            float: left;
+
+            .name {
+                width: 150px;
+                float: left;
+            }
+        }
+
+        .product-icon {
+            height: 30px;
+            width: 30px;
+            background-size: cover;
+            border-radius: 30px;
+            float: left;
+            background-color: grey;
+        }
+    }
+}
+
+@media(max-width: 1366px) {
+    .agm-components-datamart .table-wrapper table > tbody > tr > td {
+
+        &.product-info {
+
+            > .product-picture {
+                .rel;
+                padding-left: 0px;
+
+                .product-icon {
+                    display: none;
+                }
+
+                .product-text {
+                    padding-left: 0px;
+                }
+            }
+        }
+    }
+}

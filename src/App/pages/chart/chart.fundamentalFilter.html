@@ -1,0 +1,40 @@
+﻿<div>
+    <div class="input-group">
+        <input type="text" 
+               class="form-control"
+               placeholder="ADD FUNDAMENTALS" ng-model="vm.selectedFundamentals"
+               ng-model-options="{debounce: 200}"
+               uib-typeahead="fundamental as fundamental.displayName for fundamental in vm.searchFundamentals($viewValue)"
+               typeahead-wait-ms="200"
+               typeahead-on-select="vm.addToFundamentals(vm.selectedFundamentals)">
+        <div class="input-group-btn">
+            <button class="btn btn-primary" ng-click="vm.openFundamentalPanel()">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+    </div>
+
+    <div ng-repeat="fundamental in vm.filterDescription.addedFundamentals">
+        <div class="tag-channel">
+            <h5>
+                {{::fundamental.displayName}}
+            </h5>
+
+            <a class="pull-right remove" ng-click="vm.removeFromFundamentals(fundamental)">
+                <span class="glyphicon glyphicon-remove pull-right"></span>
+            </a>
+            <div class="switch" ng-click="vm.toggleFundamentalActivation(fundamental)" ng-class="{checked:fundamental.included}">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="light-text">Plot up to 2 fundamentals</div>
+    
+    <div class="factset pull-right">
+        Powered by
+        <img src="//am708403.azureedge.net/images/partners/factset.png" />
+    </div>
+    <div class="clearfix"></div>
+
+</div>

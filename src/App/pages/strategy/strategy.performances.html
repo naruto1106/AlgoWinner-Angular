@@ -1,0 +1,64 @@
+﻿<!-- TEMPLATE strategyPerformance.html + strategyPerformance.js -->
+<agms-header-trade current-page="PERFORMANCES"></agms-header-trade>
+<div class="p-50px text-center" ng-if="vm.isLoadingData">
+    <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+</div>
+<div class="container padless agm-component-strategyperformances">
+    <div ng-if="vm.strategies.length <= 0 && !vm.isLoadingData" class="m-left-15px">
+        <h4>
+            <a href="" ng-click="vm.openNewStrategy()" style=""><span class="no-content-color">To start trading, create your own trade portfolio by clicking </span> here</a>
+        </h4>
+    </div>
+    <div class="clearfix m-bottom-20px"></div>
+    <div ng-if="vm.strategies.length > 0 && vm.strategiesType === 0 && !vm.isLoadingData">
+        <div class="w-100pct box p-20px  m-bottom-20px">
+            <agms-strategy-commerce-circle-selection disable-all-selection="true"
+                                           strategy-selections="vm.strategySelections"
+                                           selected-strategy="vm.selectedStrategy"
+                                           event-name="strategySelectedFromScrollingSelection"
+                                           on-selected-strategy="vm.selectStrategy" slides-per-view="5"
+                                           analytics-on="click" analytics-category="Trade" analytics-event="Performance" analytics-label="Toggle Strategy" agmc-analytics-timestamp>
+            </agms-strategy-commerce-circle-selection>
+        </div>
+        <div class="border white-box panel">
+            <div class="panel-heading">
+                <span class="performance-summary">PERFORMANCE SUMMARY</span>
+            </div>
+            <div class="panel-body">
+                <div class="p-50px text-center" ng-if="vm.isLoadingPerformance">
+                    <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+                </div>
+                <table class="m-bottom-20px" ng-if="!vm.isLoadingPerformance">
+                    <tr>
+                        <td>Cumulative P/L <span class="glyphicon glyphicon-info-sign" uib-tooltip="Cumulative P/L = Realized P/L + Unrealized P/L - Brokerage Cost"></span></td>
+                        <td ng-class="vm.selectedStrategyPerformance.CumulativePl>=0?['green-profit']:['red-loss']">
+                            {{vm.selectedStrategyPerformance.CumulativePl | customCurrencyOrDash:vm.selectedStrategyPerformance.Currency:2}}
+                        </td>
+                        <td>Realized P/L</td>
+                        <td ng-class="vm.selectedStrategyPerformance.CumulativeRealizedPl>=0?['green-profit']:['red-loss']">{{vm.selectedStrategyPerformance.CumulativeRealizedPl | customCurrencyOrDash:vm.selectedStrategyPerformance.Currency:2}}</td>
+                        <td>Unrealized P/L</td>
+                        <td ng-class="vm.selectedStrategyPerformance.CumulativeUnrealizedPl>=0?['green-profit']:['red-loss']">{{vm.selectedStrategyPerformance.CumulativeUnrealizedPl | customCurrencyOrDash:vm.selectedStrategyPerformance.Currency:2}}</td>
+                    </tr>
+                    <tr>
+                        <td>No. of Exited Trades</td>
+                        <td>{{vm.selectedStrategyPerformance.ExitedTrades | valueOrDash:0}}</td>
+                        <td>No. of Winning</td>
+                        <td>{{vm.selectedStrategyPerformance.WinningNumber | valueOrDash:0}}</td>
+                        <td>No. of Losing</td>
+                        <td>{{vm.selectedStrategyPerformance.LosingNumber | valueOrDash:0}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <uib-tabset class="tab-type2">
+            <uib-tab heading="RETURN ANALYSIS" select="vm.resizeWindowAndChart()"
+                     analytics-on="click" analytics-category="Trade" analytics-event="Performance" analytics-label="Return Analysis" agmc-analytics-timestamp>
+                <agms-strategy-commerce-return-analysis my-item="vm.selectedStrategy"></agms-strategy-commerce-return-analysis>
+            </uib-tab>
+            <uib-tab heading="TRADES BEHAVIOR" select="vm.resizeWindowAndChart()"
+                     analytics-on="click" analytics-category="Trade" analytics-event="Performance" analytics-label="Trades Behaviour" agmc-analytics-timestamp>
+                <agms-trading-behavior my-item="vm.selectedStrategy" category="'Trade'"></agms-trading-behavior>
+            </uib-tab>
+        </uib-tabset>
+    </div>    
+</div>
