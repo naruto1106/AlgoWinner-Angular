@@ -8,27 +8,35 @@
                     title: {
                         text: ''
                     },
+
+                    credits: {
+                        enabled: false
+                    },
                 
                     subtitle: {
                         text: ''
                     },
                 
-                    // yAxis: {
-                    //     title: {
-                    //         text: '-'
-                    //     }
-                    // },
+                    yAxis: {
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            formatter: function () {
+                                return this.value + "%"
+                            }
+                        }
+                    },
                 
                     xAxis: {
                         accessibility: {
                             rangeDescription: ''
-                        }
+                        }                        
                     },
                 
                     legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
+                        layout: 'horizontal',
+                        align: 'center'
                     },
                 
                     plotOptions: {
@@ -42,7 +50,7 @@
                 
                     series: [{
                         name: 'Retail Buying Activity',
-                        data: [10, 8, 15, 12, 18, 19, 25]
+                        data: [0.1, 0.5, 0.10, 0.12, 0.3, 0.4, 0.10]
                     }],
                 
                     responsive: {
@@ -52,7 +60,7 @@
                             },
                             chartOptions: {
                                 legend: {
-                                    layout: 'horizontal',
+                                    layout: 'vertical',
                                     align: 'center',
                                     verticalAlign: 'bottom'
                                 }
@@ -62,11 +70,20 @@
                 });                
             }
 
+            var chartData = {
+                categories : ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell'],
+                analyst_rating : [10, 30, 50, 20, 8]
+            };
+
             function barCharts(container){
                 var chart = Highcharts.chart(container, {
 
                     chart: {
                         type: 'column'
+                    },
+
+                    credits: {
+                        enabled: false
                     },
                 
                     title: {
@@ -78,7 +95,7 @@
                     },
 
                     xAxis: {
-                        categories: ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell'],
+                        categories: chartData.categories,
                         labels: {
                             x: -10
                         }
@@ -93,7 +110,7 @@
                 
                     series: [{
                         name: 'Analyst Rating',
-                        data: [10, 30, 50, 20, 8]
+                        data: chartData.analyst_rating
                     }],
                 
                     responsive: {

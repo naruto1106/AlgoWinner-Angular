@@ -5,15 +5,9 @@
             <div class="white-box">
                 <h1>Earning</h1>
                 <div class="h-30px"></div>
-                <table style="border: 0;" border="1" class="bar-chart-table">
-                    <tr>
-                        <td>1 year Growth 0.1 (Average 0.05)</td>
-                    </tr>
-                    <tr>
-                        <td>3 years Growth 0.2 (Average 0.1)</td>
-                    </tr>
-                    <tr>
-                        <td>5 years Growth 0.5 (Average 0.02)</td>
+                <table border="1" class="bar-chart-table">
+                    <tr ng-repeat="grothTableObj in vm.grothTable">
+                        <td>{{grothTableObj}}</td>
                     </tr>
                 </table>
                 <div id="earning"></div>
@@ -23,15 +17,9 @@
             <div class="white-box">
                 <h1>Revenue</h1>
                 <div class="h-30px"></div>
-                <table style="border: 0;" border="1" class="bar-chart-table">
-                    <tr>
-                        <td>1 year Growth 0.1 (Average 0.05)</td>
-                    </tr>
-                    <tr>
-                        <td>3 years Growth 0.2 (Average 0.1)</td>
-                    </tr>
-                    <tr>
-                        <td>5 years Growth 0.5 (Average 0.02)</td>
+                <table border="1" class="bar-chart-table">
+                    <tr ng-repeat="grothTableObj in vm.grothTable">
+                        <td>{{grothTableObj}}</td>
                     </tr>
                 </table>
                 <div id="revenue"></div>
@@ -41,15 +29,9 @@
             <div class="white-box">
                 <h1>GrossProfit Margin</h1>
                 <div class="h-30px"></div>
-                <table style="border: 0;" border="1" class="bar-chart-table">
-                    <tr>
-                        <td>1 year Growth 0.1 (Average 0.05)</td>
-                    </tr>
-                    <tr>
-                        <td>3 years Growth 0.2 (Average 0.1)</td>
-                    </tr>
-                    <tr>
-                        <td>5 years Growth 0.5 (Average 0.02)</td>
+                <table border="1" class="bar-chart-table">
+                    <tr ng-repeat="grothTableObj in vm.grothTable">
+                        <td>{{grothTableObj}}</td>
                     </tr>
                 </table>
                 <div id="grossprofit_margin"></div>
@@ -59,15 +41,9 @@
             <div class="white-box">
                 <h1>PE</h1>
                 <div class="h-30px"></div>
-                <table style="border: 0;" border="1" class="bar-chart-table">
-                    <tr>
-                        <td>1 year Growth 0.1 (Average 0.05)</td>
-                    </tr>
-                    <tr>
-                        <td>3 years Growth 0.2 (Average 0.1)</td>
-                    </tr>
-                    <tr>
-                        <td>5 years Growth 0.5 (Average 0.02)</td>
+                <table border="1" class="bar-chart-table">
+                    <tr ng-repeat="grothTableObj in vm.grothTable">
+                        <td>{{grothTableObj}}</td>
                     </tr>
                 </table>
                 <div id="pe"></div>
@@ -77,15 +53,9 @@
             <div class="white-box">
                 <h1>PEG</h1>
                 <div class="h-30px"></div>
-                <table style="border: 0;" border="1" class="bar-chart-table">
-                    <tr>
-                        <td>1 year Growth 0.1 (Average 0.05)</td>
-                    </tr>
-                    <tr>
-                        <td>3 years Growth 0.2 (Average 0.1)</td>
-                    </tr>
-                    <tr>
-                        <td>5 years Growth 0.5 (Average 0.02)</td>
+                <table border="1" class="bar-chart-table">
+                    <tr ng-repeat="grothTableObj in vm.grothTable">
+                        <td>{{grothTableObj}}</td>
                     </tr>
                 </table>
                 <div id="peg"></div>
@@ -95,15 +65,9 @@
             <div class="white-box">
                 <h1>Debt to Equity Ratio</h1>
                 <div class="h-30px"></div>
-                <table style="border: 0;" border="1" class="bar-chart-table">
-                    <tr>
-                        <td>1 year Growth 0.1 (Average 0.05)</td>
-                    </tr>
-                    <tr>
-                        <td>3 years Growth 0.2 (Average 0.1)</td>
-                    </tr>
-                    <tr>
-                        <td>5 years Growth 0.5 (Average 0.02)</td>
+                <table border="1" class="bar-chart-table">
+                    <tr ng-repeat="grothTableObj in vm.grothTable">
+                        <td>{{grothTableObj}}</td>
                     </tr>
                 </table>
                 <div id="debt_to_equity_ratio"></div>
@@ -113,15 +77,9 @@
             <div class="white-box">
                 <h1>Z Score</h1>
                 <div class="h-30px"></div>
-                <table style="border: 0;" border="1" class="bar-chart-table">
-                    <tr>
-                        <td>1 year Growth 0.1 (Average 0.05)</td>
-                    </tr>
-                    <tr>
-                        <td>3 years Growth 0.2 (Average 0.1)</td>
-                    </tr>
-                    <tr>
-                        <td>5 years Growth 0.5 (Average 0.02)</td>
+                <table border="1" class="bar-chart-table">
+                    <tr ng-repeat="grothTableObj in vm.grothTable">
+                        <td>{{grothTableObj}}</td>
                     </tr>
                 </table>
                 <div id="z_score"></div>
@@ -131,15 +89,9 @@
             <div class="white-box">
                 <h1>Dividend Yield</h1>
                 <div class="h-30px"></div>
-                <table style="border: 0;" border="1" class="bar-chart-table">
-                    <tr>
-                        <td>1 year Growth 0.1 (Average 0.05)</td>
-                    </tr>
-                    <tr>
-                        <td>3 years Growth 0.2 (Average 0.1)</td>
-                    </tr>
-                    <tr>
-                        <td>5 years Growth 0.5 (Average 0.02)</td>
+                <table border="1" class="bar-chart-table">
+                    <tr ng-repeat="grothTableObj in vm.grothTable">
+                        <td>{{grothTableObj}}</td>
                     </tr>
                 </table>
                 <div id="dividend_yield"></div>

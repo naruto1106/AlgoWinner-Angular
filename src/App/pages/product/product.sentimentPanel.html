@@ -4,8 +4,7 @@
         <div class="col-md-1">
             <div class="white-box">
                 <h1>News Sentiment</h1>
-                <div class="h-30px"></div>
-                <table style="border: 0;" border="1">
+                <table border="1" class="sentiment-table">
                     <tr>
                         <td>&nbsp;</td>
                         <td>News Sentiment Score</td>
@@ -38,8 +37,7 @@
         <div class="col-md-1">
             <div class="white-box">
                 <h1>Analyst Target Price</h1>
-                <div class="h-30px"></div>
-                <table style="border: 0;" border="1">                    
+                <table border="1" class="sentiment-table">
                     <tr ng-repeat="analystTargetPriceObj in vm.analystTargetPrice">
                         <td>{{analystTargetPriceObj.title}}</td>
                         <td>{{analystTargetPriceObj.value}}</td>

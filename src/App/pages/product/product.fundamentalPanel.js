@@ -317,11 +317,21 @@
                 return pProductPageService.invalidSectors();
             }
 
+            var chartData = {
+                categories : ['2019', '2020', '2021', '2022'],
+                earnings : [2000000, 3000000, 4000000, 5000000],
+                industryaverage : [1000000, 2000000, 3000000, 4000000],
+                grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)']
+            };
+
             function barCharts(container){
                 var chart = Highcharts.chart(container, {
 
                     chart: {
                         type: 'column'
+                    },
+                    credits: {
+                        enabled: false
                     },
                 
                     title: {
@@ -331,15 +341,9 @@
                     subtitle: {
                         text: ''
                     },
-                
-                    // legend: {
-                    //     align: 'right',
-                    //     verticalAlign: 'middle',
-                    //     layout: 'vertical'
-                    // },
-                
+
                     xAxis: {
-                        categories: ['2019', '2020', '2021', '2022'],
+                        categories: chartData.categories,
                         labels: {
                             x: -10
                         }
@@ -354,10 +358,22 @@
                 
                     series: [{
                         name: 'Earning',
-                        data: [2000000, 3000000, 4000000, 5000000]
-                    }, {
+                        data: chartData.earnings,
+                        type: 'column',
+                    },{
+                        name: null,
+                        data: chartData.earnings,
+                        type: 'line',
+                        color: '#006AD4',
+                    },{
                         name: 'IndustryAverage',
-                        data: [1000000, 2000000, 3000000, 4000000]
+                        data: chartData.industryaverage,
+                        type: 'column',
+                    },{
+                        name: null,
+                        data: chartData.industryaverage,
+                        type: 'line',
+                        color: '#006AD4',
                     }],
                 
                     responsive: {
@@ -394,6 +410,29 @@
                 chart.setSize(null);                  
             }
 
+            // var allCharts = [
+            //     {
+            //         name: 'earning',
+            //         data1: [2000000, 3000000, 4000000, 5000000],
+            //         data2: [1000000, 2000000, 3000000, 4000000],
+            //         grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)']
+            //     },
+            //     {
+            //         name: 'revenue',
+            //         data1: [2000000, 3000000, 4000000, 5000000],
+            //         data2: [1000000, 2000000, 3000000, 4000000],
+            //         grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)']
+            //     },
+            // ]
+            barCharts('earning');
+            barCharts('revenue');
+            barCharts('grossprofit_margin');
+            barCharts('pe');
+            barCharts('peg');
+            barCharts('debt_to_equity_ratio');
+            barCharts('z_score');
+            barCharts('dividend_yield');
+
             tool.initialize(function () {
                 tool.setVmProperties({
                     chart: chart,
@@ -409,7 +448,8 @@
                     showFiveYearData: showFiveYearData,
                     getLatestYearData: getLatestYearData,
                     getValidYearData: getValidYearData,
-                    invalidSectors: invalidSectors
+                    invalidSectors: invalidSectors,
+                    grothTable: chartData.grothTable
                 });
 
                 pProductPageService.waitTillProductDetailLoaded().then(function () {
@@ -435,16 +475,7 @@
                     generateYearsHistory('LongTermDebt', productDetail.Product, productDetail.CompanyOverview.LongTermDebt);
                     formatLabels();
                     vm.productDetail = productDetail;
-                });
-
-                barCharts('earning');
-                barCharts('revenue');
-                barCharts('grossprofit_margin');
-                barCharts('pe');
-                barCharts('peg');
-                barCharts('debt_to_equity_ratio');
-                barCharts('z_score');
-                barCharts('dividend_yield');
+                });                
             });
         })
     .defineDirectiveForE('agmp-product-fundamental-panel', [],
