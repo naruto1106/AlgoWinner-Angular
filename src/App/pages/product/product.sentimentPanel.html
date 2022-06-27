@@ -1,0 +1,52 @@
+﻿<section class="sentiment-panel">
+    <h1 class="title-section">SENTIMENT</h1>
+    <div class="row-md-2 gap-20px">
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1>News Sentiment</h1>
+                <div class="h-30px"></div>
+                <table style="border: 0;" border="1">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>News Sentiment Score</td>
+                        <td>News Volume</td>
+                    </tr>
+                    <tr ng-repeat="newsSentimentObj in vm.newsSentiment">
+                        <td>{{newsSentimentObj.NewsSentimentType}}</td>
+                        <td>{{newsSentimentObj.SentimentScore}}</td>
+                        <td>{{newsSentimentObj.Volume}}
+                            <span ng-if="newsSentimentObj.IsVolumeBreakout"><button class="volume-button">Volume Breakout</button></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1>Retail Buying Activity</h1>
+                <div class="h-30px"></div>
+                <div id="retail_buying_activity"></div>
+            </div>
+        </div>       
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1>Analyst Rating</h1>
+                <div class="h-30px"></div>
+                <div id="analyst_rating"></div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="white-box">
+                <h1>Analyst Target Price</h1>
+                <div class="h-30px"></div>
+                <table style="border: 0;" border="1">                    
+                    <tr ng-repeat="analystTargetPriceObj in vm.analystTargetPrice">
+                        <td>{{analystTargetPriceObj.title}}</td>
+                        <td>{{analystTargetPriceObj.value}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>

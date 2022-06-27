@@ -317,6 +317,83 @@
                 return pProductPageService.invalidSectors();
             }
 
+            function barCharts(container){
+                var chart = Highcharts.chart(container, {
+
+                    chart: {
+                        type: 'column'
+                    },
+                
+                    title: {
+                        text: ''
+                    },
+                
+                    subtitle: {
+                        text: ''
+                    },
+                
+                    // legend: {
+                    //     align: 'right',
+                    //     verticalAlign: 'middle',
+                    //     layout: 'vertical'
+                    // },
+                
+                    xAxis: {
+                        categories: ['2019', '2020', '2021', '2022'],
+                        labels: {
+                            x: -10
+                        }
+                    },
+                
+                    yAxis: {
+                        allowDecimals: false,
+                        title: {
+                            text: 'PE'
+                        }
+                    },
+                
+                    series: [{
+                        name: 'Earning',
+                        data: [2000000, 3000000, 4000000, 5000000]
+                    }, {
+                        name: 'IndustryAverage',
+                        data: [1000000, 2000000, 3000000, 4000000]
+                    }],
+                
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 500
+                            },
+                            chartOptions: {
+                                legend: {
+                                    align: 'center',
+                                    verticalAlign: 'bottom',
+                                    layout: 'horizontal'
+                                },
+                                yAxis: {
+                                    labels: {
+                                        align: 'left',
+                                        x: 0,
+                                        y: -5
+                                    },
+                                    title: {
+                                        text: null
+                                    }
+                                },
+                                subtitle: {
+                                    text: null
+                                },
+                                credits: {
+                                    enabled: false
+                                }
+                            }
+                        }]
+                    }
+                });
+                chart.setSize(null);                  
+            }
+
             tool.initialize(function () {
                 tool.setVmProperties({
                     chart: chart,
@@ -359,6 +436,15 @@
                     formatLabels();
                     vm.productDetail = productDetail;
                 });
+
+                barCharts('earning');
+                barCharts('revenue');
+                barCharts('grossprofit_margin');
+                barCharts('pe');
+                barCharts('peg');
+                barCharts('debt_to_equity_ratio');
+                barCharts('z_score');
+                barCharts('dividend_yield');
             });
         })
     .defineDirectiveForE('agmp-product-fundamental-panel', [],
