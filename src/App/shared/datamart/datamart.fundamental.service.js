@@ -17,15 +17,11 @@
         }
 
         var coreServerCommunicationService = dep.coreServerCommunicationService;
-        var path = "/marketinfoapi/v1/Fundamental/";
+        var path = "/fundamentalapi/v1/Fundamental/";
 
         tool.setServiceObjectProperties({
             reevaluateSubList: reevaluateSubList,
-            GetFundamentalsForPeriod: coreServerCommunicationService.genGetFunctionWithNVar(path + 'GetFundamentalsForPeriod', function (args) {
-                return { filter: { ProductId: args[0], FundamentalType: args[1], StartDate: args[2], EndDate: args[3] } };
-            }),
-            IsFundamentalValid: coreServerCommunicationService.genGetFunctionWithNVar(path + 'IsFundamentalValid', function (args) {
-                return { request: { ProductId: args[0], FundamentalType: args[1] } };
-            })
+            GetFundamentalsForPeriod: coreServerCommunicationService.genPostFunction(path + 'GetFundamentalsForPeriod'),
+            IsFundamentalValid: coreServerCommunicationService.genPostFunction(path + 'IsFundamentalValid')
         });
     });

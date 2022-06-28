@@ -314,8 +314,11 @@
                     return tool.when(validityCache[key]);
                 }
 
-                return sDatamartFundamentalDataService.IsFundamentalValid(productId, fundamentalType)
-                    .then(function (res) {
+                var requestObj = {
+                    ProductId: productId,
+                    FundamentalType: fundamentalType
+                };
+                return sDatamartFundamentalDataService.IsFundamentalValid(requestObj).then(function (res) {
                         validityCache[key] = res.data;
                         return res.data;
                     }, function (res) {
