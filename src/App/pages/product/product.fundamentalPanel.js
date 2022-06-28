@@ -336,7 +336,7 @@
                     },
 
                     xAxis: {
-                        categories: createImageBitmap.categories,
+                        categories: itemObj.categories,
                         labels: {
                             x: -10
                         }
@@ -398,7 +398,7 @@
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'PE',
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'line',
                             color: '#006AD4',
@@ -407,10 +407,10 @@
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'Industry Average',
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#434348',
                         }
                     ]
                 },
@@ -425,7 +425,7 @@
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'PE',
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'line',
                             color: '#006AD4',
@@ -434,10 +434,10 @@
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'Industry Average',
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#434348',
                         }
                     ]
                 },
@@ -452,7 +452,7 @@
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'PE',
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'line',
                             color: '#006AD4',
@@ -461,10 +461,10 @@
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'Industry Average',
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#434348',
                         }
                     ]
                 },
@@ -479,7 +479,7 @@
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'PE',
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'line',
                             color: '#006AD4',
@@ -488,10 +488,10 @@
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'Industry Average',
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#434348',
                         }
                     ]
                 },
@@ -506,7 +506,7 @@
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'PE',
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'line',
                             color: '#006AD4',
@@ -515,10 +515,10 @@
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'Industry Average',
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#434348',
                         }
                     ]
                 },
@@ -533,7 +533,7 @@
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'PE',
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'line',
                             color: '#006AD4',
@@ -542,10 +542,10 @@
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'Industry Average',
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#434348',
                         }
                     ]
                 },
@@ -560,7 +560,7 @@
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'PE',
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'line',
                             color: '#006AD4',
@@ -569,10 +569,10 @@
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'Industry Average',
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#434348',
                         }
                     ]
                 },
@@ -587,7 +587,7 @@
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'PE',
                             data: [2000000, 3000000, 4000000, 5000000],
                             type: 'line',
                             color: '#006AD4',
@@ -596,10 +596,10 @@
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'column',
                         },{
-                            name: null,
+                            name: 'Industry Average',
                             data: [1000000, 2000000, 3000000, 4000000],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#434348',
                         }
                     ]
                 },
