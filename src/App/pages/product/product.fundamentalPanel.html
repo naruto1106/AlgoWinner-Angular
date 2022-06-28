@@ -1,102 +1,18 @@
 ﻿<section class="fundamental-panel">
     <h1 class="title-section">FUNDAMENTALS</h1>
     <div class="row-md-2 gap-20px">
-        <div class="col-md-1">
+        <div class="col-md-1" ng-repeat="barChartObj in vm.barCharts">
             <div class="white-box">
-                <h1>Earning</h1>
+                <h1>{{barChartObj.name}}</h1>
                 <div class="h-30px"></div>
                 <table border="1" class="bar-chart-table">
-                    <tr ng-repeat="grothTableObj in vm.grothTable">
+                    <tr ng-repeat="grothTableObj in barChartObj.grothTable">
                         <td>{{grothTableObj}}</td>
                     </tr>
                 </table>
-                <div id="earning"></div>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <div class="white-box">
-                <h1>Revenue</h1>
-                <div class="h-30px"></div>
-                <table border="1" class="bar-chart-table">
-                    <tr ng-repeat="grothTableObj in vm.grothTable">
-                        <td>{{grothTableObj}}</td>
-                    </tr>
-                </table>
-                <div id="revenue"></div>
-            </div>
-        </div> 
-        <div class="col-md-1">
-            <div class="white-box">
-                <h1>GrossProfit Margin</h1>
-                <div class="h-30px"></div>
-                <table border="1" class="bar-chart-table">
-                    <tr ng-repeat="grothTableObj in vm.grothTable">
-                        <td>{{grothTableObj}}</td>
-                    </tr>
-                </table>
-                <div id="grossprofit_margin"></div>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <div class="white-box">
-                <h1>PE</h1>
-                <div class="h-30px"></div>
-                <table border="1" class="bar-chart-table">
-                    <tr ng-repeat="grothTableObj in vm.grothTable">
-                        <td>{{grothTableObj}}</td>
-                    </tr>
-                </table>
-                <div id="pe"></div>
+                <div id={{barChartObj.container}}></div>
             </div>
         </div>        
-        <div class="col-md-1">
-            <div class="white-box">
-                <h1>PEG</h1>
-                <div class="h-30px"></div>
-                <table border="1" class="bar-chart-table">
-                    <tr ng-repeat="grothTableObj in vm.grothTable">
-                        <td>{{grothTableObj}}</td>
-                    </tr>
-                </table>
-                <div id="peg"></div>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <div class="white-box">
-                <h1>Debt to Equity Ratio</h1>
-                <div class="h-30px"></div>
-                <table border="1" class="bar-chart-table">
-                    <tr ng-repeat="grothTableObj in vm.grothTable">
-                        <td>{{grothTableObj}}</td>
-                    </tr>
-                </table>
-                <div id="debt_to_equity_ratio"></div>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <div class="white-box">
-                <h1>Z Score</h1>
-                <div class="h-30px"></div>
-                <table border="1" class="bar-chart-table">
-                    <tr ng-repeat="grothTableObj in vm.grothTable">
-                        <td>{{grothTableObj}}</td>
-                    </tr>
-                </table>
-                <div id="z_score"></div>
-            </div>
-        </div>        
-        <div class="col-md-1">
-            <div class="white-box">
-                <h1>Dividend Yield</h1>
-                <div class="h-30px"></div>
-                <table border="1" class="bar-chart-table">
-                    <tr ng-repeat="grothTableObj in vm.grothTable">
-                        <td>{{grothTableObj}}</td>
-                    </tr>
-                </table>
-                <div id="dividend_yield"></div>
-            </div>
-        </div>
         <div class="clearfix"></div>
     </div>
 </section>

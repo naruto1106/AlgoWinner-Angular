@@ -315,17 +315,10 @@
 
             function invalidSectors() {
                 return pProductPageService.invalidSectors();
-            }
+            }          
 
-            var chartData = {
-                categories : ['2019', '2020', '2021', '2022'],
-                earnings : [2000000, 3000000, 4000000, 5000000],
-                industryaverage : [1000000, 2000000, 3000000, 4000000],
-                grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)']
-            };
-
-            function barCharts(container){
-                var chart = Highcharts.chart(container, {
+            function barCharts(itemObj){
+                var chart = Highcharts.chart(itemObj.container, {
 
                     chart: {
                         type: 'column'
@@ -343,7 +336,7 @@
                     },
 
                     xAxis: {
-                        categories: chartData.categories,
+                        categories: createImageBitmap.categories,
                         labels: {
                             x: -10
                         }
@@ -356,25 +349,7 @@
                         }
                     },
                 
-                    series: [{
-                        name: 'Earning',
-                        data: chartData.earnings,
-                        type: 'column',
-                    },{
-                        name: null,
-                        data: chartData.earnings,
-                        type: 'line',
-                        color: '#006AD4',
-                    },{
-                        name: 'IndustryAverage',
-                        data: chartData.industryaverage,
-                        type: 'column',
-                    },{
-                        name: null,
-                        data: chartData.industryaverage,
-                        type: 'line',
-                        color: '#006AD4',
-                    }],
+                    series: itemObj.seriesArr,
                 
                     responsive: {
                         rules: [{
@@ -407,31 +382,237 @@
                         }]
                     }
                 });
-                chart.setSize(null);                  
+                //chart.setSize(null);                  
             }
+            
 
-            // var allCharts = [
-            //     {
-            //         name: 'earning',
-            //         data1: [2000000, 3000000, 4000000, 5000000],
-            //         data2: [1000000, 2000000, 3000000, 4000000],
-            //         grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)']
-            //     },
-            //     {
-            //         name: 'revenue',
-            //         data1: [2000000, 3000000, 4000000, 5000000],
-            //         data2: [1000000, 2000000, 3000000, 4000000],
-            //         grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)']
-            //     },
-            // ]
-            barCharts('earning');
-            barCharts('revenue');
-            barCharts('grossprofit_margin');
-            barCharts('pe');
-            barCharts('peg');
-            barCharts('debt_to_equity_ratio');
-            barCharts('z_score');
-            barCharts('dividend_yield');
+            var barChartsArr = [
+                {
+                    name: 'Earning',
+                    container: 'earning',
+                    categories : ['2019', '2020', '2021', '2022'],
+                    grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)'],
+                    seriesArr: [
+                        {
+                            name: 'Earning',
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        },{
+                            name: 'IndustryAverage',
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        }
+                    ]
+                },
+                {
+                    name: 'Revenue',
+                    container: 'revenue',
+                    categories : ['2019', '2020', '2021', '2022'],
+                    grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)'],
+                    seriesArr: [
+                        {
+                            name: 'Earning',
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        },{
+                            name: 'IndustryAverage',
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        }
+                    ]
+                },
+                {
+                    name: 'GrossProfit Margin',
+                    container: 'grossprofit_margin',
+                    categories : ['2019', '2020', '2021', '2022'],                    
+                    grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)'],
+                    seriesArr: [
+                        {
+                            name: 'Earning',
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        },{
+                            name: 'IndustryAverage',
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        }
+                    ]
+                },
+                {
+                    name: 'PE',
+                    container: 'pe',   
+                    categories : ['2019', '2020', '2021', '2022'],                 
+                    grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)'],
+                    seriesArr: [
+                        {
+                            name: 'Earning',
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        },{
+                            name: 'IndustryAverage',
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        }
+                    ]
+                },
+                {
+                    name: 'PEG',
+                    container: 'peg',   
+                    categories : ['2019', '2020', '2021', '2022'],                 
+                    grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)'],
+                    seriesArr: [
+                        {
+                            name: 'Earning',
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        },{
+                            name: 'IndustryAverage',
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        }
+                    ]
+                },
+                {
+                    name: 'Debt to Equity Ratio',
+                    container: 'debt_to_equity_ratio',
+                    categories : ['2019', '2020', '2021', '2022'],
+                    grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)'],
+                    seriesArr: [
+                        {
+                            name: 'Earning',
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        },{
+                            name: 'IndustryAverage',
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        }
+                    ]
+                },
+                {
+                    name: 'Z Score',
+                    container: 'z_score',
+                    categories : ['2019', '2020', '2021', '2022'],
+                    grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)'],
+                    seriesArr: [
+                        {
+                            name: 'Earning',
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        },{
+                            name: 'IndustryAverage',
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        }
+                    ]
+                },
+                {
+                    name: 'Dividend Yield',
+                    container: 'dividend_yield',
+                    categories : ['2019', '2020', '2021', '2022'],
+                    grothTable: ['1 year Growth 0.1 (Average 0.05)', '3 years Growth 0.2 (Average 0.1)', '5 years Growth 0.5 (Average 0.02)'],
+                    seriesArr: [
+                        {
+                            name: 'Earning',
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [2000000, 3000000, 4000000, 5000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        },{
+                            name: 'IndustryAverage',
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'column',
+                        },{
+                            name: null,
+                            data: [1000000, 2000000, 3000000, 4000000],
+                            type: 'line',
+                            color: '#006AD4',
+                        }
+                    ]
+                },
+            ]
+            
+            // barCharts('earning');
+            // barCharts('revenue');
+            // barCharts('grossprofit_margin');
+            // barCharts('pe');
+            // barCharts('peg');
+            // barCharts('debt_to_equity_ratio');
+            // barCharts('z_score');
+            // barCharts('dividend_yield');
 
             tool.initialize(function () {
                 tool.setVmProperties({
@@ -449,10 +630,15 @@
                     getLatestYearData: getLatestYearData,
                     getValidYearData: getValidYearData,
                     invalidSectors: invalidSectors,
-                    grothTable: chartData.grothTable
-                });
+                    barCharts: barChartsArr
+                });                
 
                 pProductPageService.waitTillProductDetailLoaded().then(function () {
+
+                    barChartsArr.forEach((item) => {
+                        barCharts(item);
+                    });
+                        
                     var productDetail = pProductPageService.productDetail;
                     var peRatio = productDetail.CompanyOverview.PERatio;
 
