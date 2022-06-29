@@ -318,7 +318,8 @@
                     ProductId: productId,
                     FundamentalType: fundamentalType
                 };
-                return sDatamartFundamentalDataService.IsFundamentalValid(requestObj).then(function (res) {
+                return sDatamartFundamentalDataService.IsFundamentalValid(requestObj)
+                    .then(function (res) {
                         validityCache[key] = res.data;
                         return res.data;
                     }, function (res) {
@@ -484,24 +485,24 @@
                         if (!yAxis.priceFormatter) {
                             if (renderer.params.yAxis === yAxis) {
                                 switch (i) {
-                                case "fundamentalsMarketCapitalization":
-                                case "fundamentalsEnterpriseValue":
-                                case "fundamentalsQuarterlyTotalAssets":
-                                case "fundamentalsQuarterlyLongTermDebt":
-                                case "fundamentalsQuarterlyRetainedEarnings":
-                                case "fundamentalsRevenueTtm":
-                                case "fundamentalsEbitda":
-                                case "fundamentalsEbitTtm":
-                                    yAxis.priceFormatter = priceFormatterInMillions;
-                                    break;
-                                case "fundamentalsSharesOutstanding":
-                                case "fundamentalsDailyVolume":
-                                    yAxis.priceFormatter = priceFormatter;
-                                    break;
-                                case "fundamentalsGrowthAtEarnings":
-                                case "fundamentalsRevenueGrowth":
-                                    yAxis.priceFormatter = priceFormatterPercentage;
-                                    break;
+                                    case "fundamentalsMarketCapitalization":
+                                    case "fundamentalsEnterpriseValue":
+                                    case "fundamentalsQuarterlyTotalAssets":
+                                    case "fundamentalsQuarterlyLongTermDebt":
+                                    case "fundamentalsQuarterlyRetainedEarnings":
+                                    case "fundamentalsRevenueTtm":
+                                    case "fundamentalsEbitda":
+                                    case "fundamentalsEbitTtm":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsSharesOutstanding":
+                                    case "fundamentalsDailyVolume":
+                                        yAxis.priceFormatter = priceFormatter;
+                                        break;
+                                    case "fundamentalsGrowthAtEarnings":
+                                    case "fundamentalsRevenueGrowth":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
                                 }
                             }
                         }
@@ -553,11 +554,166 @@
                 tool.on('onStxSeriesDeleted', removeHighligthedSeries);
                 tool.on('onStxDeleteHighlighted', removeProductFundamentalIfHighlighted);
 
-                pChartCmsContentLoader.getFundamentals().then(function (res) {
-                    fundamentalsKind = res;
-                    _.forEach(res, function (m) {
-                        fundamentalMapping['fundamentals' + m.name] = m.displayName;
-                    });
+                // Boyang: hardcode fundamental list
+                fundamentalsKind = [{
+                    name: "Revenue",
+                    description: "Revenue",
+                    displayName: "Revenue",
+                }, {
+                    name: "NetProfit",
+                    description: "Net Income",
+                    displayName: "NetProfit",
+                }, {
+                    name: "GrossProfit",
+                    description: "GrossProfit",
+                    displayName: "Gross Profit",
+                }, {
+                    name: "Equity",
+                    description: "Shareholders Equity",
+                    displayName: "Equity",
+                }, {
+                    name: "Cash",
+                    description: "Cash and Equivalents",
+                    displayName: "Cash",
+                }, {
+                    name: "TotalAssets",
+                    description: "Total Assets",
+                    displayName: "Total Assets",
+                }, {
+                    name: "Debt",
+                    description: "Total Debt",
+                    displayName: "Debt",
+                }, {
+                    name: "TotalLiabilities",
+                    description: "TotalLiabilities",
+                    displayName: "TotalLiabilities",
+                }, {
+                    name: "CurrAssets",
+                    description: "Current Assets",
+                    displayName: "Current Assets",
+                }, {
+                    name: "CurrLiabilities",
+                    description: "Current Liabilities",
+                    displayName: "Current Liabilities",
+                }, {
+                    name: "DivPerShare",
+                    description: "Dividends per Basic Common Share",
+                    displayName: "DivPerShare",
+                }, {
+                    description: "EBITDA returns earnings before interest, taxes, depreciation, and amortization in the trailing twelve months. It is used to assess a company's current operating performance. \n",
+                    displayName: "EBITDA",
+                    name: "EBITDA"
+                }, {
+                    name: "PeRatio",
+                    description: "P/E Ratio returns price divided by earnings per share in the trailing twelve months. It represents the price you pay for one dollar of earnings of the company.",
+                    displayName: "P/E Ratio",
+                }, {
+                    name: "PegRatio",
+                    description: "PEG Ratio takes into account the company's earnings growth and returns a stock's P/E Ratio divided by the annual trailing EPS growth rate.",
+                    displayName: "PEG Ratio",
+                }, {
+                    name: "FCF",
+                    description: "Free Cash Flow",
+                    displayName: "FCF",
+                }, {
+                    name: "Shares",
+                    description: "Basic Shares",
+                    displayName: "Shares",
+                }, {
+                    name: "SharesAvg",
+                    description: "Weighted Average Shares",
+                    displayName: "Weighted Avg Shares",
+                }, {
+                    name: "SharesAvgDil",
+                    description: "Weighted Average Shares Diluted",
+                    displayName: "Weighted Avg Shares Diluted",
+                }, {
+                    name: "ShareFactor",
+                    description: "Share Factor",
+                    displayName: "ShareFactor",
+                }, {
+                    name: "AverageEquity",
+                    description: "Average Equity",
+                    displayName: "Average Equity",
+                }, {
+                    name: "AverageAssets",
+                    description: "Average Assets",
+                    displayName: "Average Assets",
+                }, {
+                    name: "EPS",
+                    description: "Earnings Per Share",
+                    displayName: "EPS",
+                }, {
+                    name: "DilutedEPS",
+                    description: "Diluted Earnings Per Share",
+                    displayName: "Diluted EPS",
+                }, {
+                    name: "EPSGrowth",
+                    description: "Earnings Per Share Growth Rate",
+                    displayName: "EPS Growth",
+                }, {
+                    name: "FCFPerShare",
+                    description: "Free Cash Flow",
+                    displayName: "FCF Per Share",
+                }, {
+                    name: "BVPS",
+                    description: "Book Value Per Share",
+                    displayName: "Book Value Per Share",
+                }, {
+                    name: "ROE",
+                    description: "Return on Equity",
+                    displayName: "ROE",
+                }, {
+                    name: "ROA",
+                    description: "Return on Assets",
+                    displayName: "ROA",
+                }, {
+                    name: "GrossMargin",
+                    description: "Gross Margin",
+                    displayName: "GrossMargin",
+                }, {
+                    name: "NetMargin",
+                    description: "Net Margin",
+                    displayName: "NetMargin",
+                }, {
+                    name: "MarketCap",
+                    description: "Market Cap",
+                    displayName: "Market Cap",
+                }, {
+                    name: "EV",
+                    description: "Enterprise Value",
+                    displayName: "Enterprise Value",
+                }, {
+                    name: "PS",
+                    description: "Price to Sales Ratio",
+                    displayName: "P/S Ratio",
+                }, {
+                    name: "PB",
+                    description: "Price to Book Ratio",
+                    displayName: "P/B Ratio",
+                }, {
+                    name: "EVGP",
+                    description: "Enterprise Value to Gross Profit Ratio",
+                    displayName: "EV/Gross Profit Ratio",
+                }, {
+                    name: "DE",
+                    description: "Debt to Equity Ratio",
+                    displayName: "D/E Ratio",
+                }, {
+                    name: "CurrentRatio",
+                    description: "Current Ratio",
+                    displayName: "Current Ratio",
+                }, {
+                    name: "DivYield",
+                    description: "Dividend Yield",
+                    displayName: "Dividend Yield",
+                }, {
+                    name: "EarningsGrowth",
+                    description: "Earnings Growth",
+                    displayName: "Earnings Growth",
+                }];
+                _.forEach(fundamentalsKind, function (m) {
+                    fundamentalMapping['fundamentals' + m.name] = m.displayName;
                 });
 
                 tool.watch('pChartRenderingUtilsService', function () {
