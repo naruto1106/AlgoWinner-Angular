@@ -511,10 +511,8 @@
                     var yAxis = parameters.yAxis;                    
                     for (var i in stxx.chart.seriesRenderers) {                        
                         var renderer = stxx.chart.seriesRenderers[i];
-                        //if (!yAxis.priceFormatter) {
+                        if (!yAxis.priceFormatter) {
                             if (renderer.params.yAxis === yAxis) {
-                                // console.log("yAxis: ", yAxis);
-                                // console.log("renderer: ", renderer.params.yAxis);
                                 switch (i) {
                                     case "fundamentalsMarketCapitalization":
                                     case "fundamentalsEnterpriseValue":
@@ -522,7 +520,6 @@
                                     case "fundamentalsQuarterlyLongTermDebt":
                                     case "fundamentalsQuarterlyRetainedEarnings":
                                     case "fundamentalsRevenueTtm":
-                                    case "fundamentalsEbitda":
                                     case "fundamentalsEBITDA":
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
@@ -539,7 +536,7 @@
                                         break;
                                 }
                             }
-                        //}
+                        }
                     }
                 }
             }
