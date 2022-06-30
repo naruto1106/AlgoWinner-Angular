@@ -443,19 +443,48 @@
 
             function priceFormatterInMillions(stxx, panel, price) {
                 if (price) {
-                    var absValue = Math.abs(price);
-                    if (absValue >= 1000000.0)
-                        return (price / 1000000.0).toFixed(2) + "T";
-                    else if (absValue >= 100000.0)
-                        return (price / 1000.0).toFixed(1) + "B";
-                    else if (absValue >= 1000.0)
-                        return (price / 1000.0).toFixed(2) + "B";
-                    else {
-                        if (absValue.toFixed(2).length >= 6)
-                            return price.toFixed(1) + "M";
-                        else
-                            return (price).toFixed(2) + "M";
+                    var costOfIt = parseFloat(price).toFixed(0);
+                    var visualOfIt = 0;
+                    visualOfIt = costOfIt.toString();
+
+                    var visualLeng = 6;
+                    var maxLeng = 4;
+                    var letterArrayIndex = 0;
+
+                    //var letterArray = [" Thousand", " Million", " Billion", " Trillion", " Quadrillion", " Quintillion", " Sextillion", " Septillion", " Octillion", " Nonillion", " Decillion", " Undecillion", " Duodecillion", " Tredecillion", " Quatuordecillion", " Quindecillion", " Sexdecillion", " Septendecillion", " Octodecillion", " Novemdecillion", " Vigintillion", " Unvigintillion", " Duovigintillion", " Tresvigintillion", " Quatuorvigintillion", " Quinquavigintillion", " Sesvigintillion", " Septemvigintillion", " Octovigintillion", " Novemvigintillion", " Trigintillion", " Untrigintillion", " Duotrigintillion", " Trestrigintillion", " Quatuortrigintillion", " Quinquatrigintillion", " Sestrigintillion", " Septentrigintillion", " Octotrigintillion", " Novemtrigintillion", " Quadragintillion", " Unquadragintillion", " Duoquadragintillion", " Tresquadragintillion", " Quatuorquadragintillion", " Quinquaquadragintillion", " Sesquadragintillion", " Septemquadragintillion", " Octoquadragintillion", " Novemquadragintillion", " Quinquagintillion", " Unquinquagintillion", " Duoquinquagintillion", " Tresquinquagintillion", " Quatuorquinquagintillion", " Quinquaquinquagintillion", " Sesquinquagintillion", " Septenquinquagintillion", " Octoquinquagintillion", " Novemquinquagintillion", " Sexagintillion", " Unsexagintillion", " Duosexagintillion", " Tressexagintillion", " Quatuorsexagintillion", " Quinquasexagintillion", " Sexasexagintillion", " Septemsexagintillion", " Octosexagintillion", " Novemsexagintillion", " Septuagintillion", " Unseptuagintillion", " Duoseptuagintillion", " Tresseptuagintillion", " Quatuorseptuagintillion", " Quinquaseptuagintillion", " Sexaseptuagintillion", " Septenseptuagintillion", " Octoseptuagintillion", " Novemseptuagintillion", " Octogintillion", " Unoctogintillion", " Duooctogintillion", " Tresoctogintillion", " Quatuoroctogintillion", " Quinquaoctogintillion", " Sesoctogintillion", " Septemoctogintillion", " Octooctogintillion", " Novemoctogintillion", " Nonagintillion", " Unnonagintillion", " Duononagintillion", " Tresnonagintillion", " Quatuornonagintillion", " Quinquanonagintillion", " Sesnonagintillion", " Septemnonagintillion", " Octononagintillion", " Novemnonagintillion", " Centillion", " Uncentillion"];
+                    var letterArray = ["K", "M", "B", "T", "Q", "Q", "S"];
+
+                    var leng = 4;
+                    var slic = 1;
+
+                    for (var g = 0; g < visualOfIt.length; g++) {
+                        if (visualOfIt.length <= visualLeng) {
+                            if (leng < maxLeng) {
+                                leng = maxLeng;
+                            }
+                            if (visualOfIt.length === leng) {
+                                if (slic > 2) {
+                                    visualOfIt = costOfIt.toString().slice(0, slic) + letterArray[letterArrayIndex];
+                                    break;
+                                } else {
+                                    if(parseInt(costOfIt.toString().slice(slic, 3)) > 0){
+                                        visualOfIt = costOfIt.toString().slice(0, slic) + "." + costOfIt.toString().slice(slic, 3) + letterArray[letterArrayIndex];
+                                    } else {
+                                        visualOfIt = costOfIt.toString().slice(0, slic) + letterArray[letterArrayIndex];
+                                    }                                    
+                                    break;
+                                }
+                            } else {
+                                leng++;
+                                slic++;
+                            }
+                        } else {
+                            maxLeng += 3;
+                            visualLeng += 3;
+                            letterArrayIndex++;
+                        }
                     }
+                    return visualOfIt;
                 }
                 return "0";
             }
@@ -476,14 +505,16 @@
                     return (price / 1000000.0).toFixed(2) + "B";
             }
 
-            function appendCreateYAxis() {
+            function appendCreateYAxis(panel, parameters) {
                 if (parameters.yAxis) {
                     var stxx = pChartRenderingUtilsService.stxx;
-                    var yAxis = parameters.yAxis;
-                    for (var i in stxx.chart.seriesRenderers) {
+                    var yAxis = parameters.yAxis;                    
+                    for (var i in stxx.chart.seriesRenderers) {                        
                         var renderer = stxx.chart.seriesRenderers[i];
-                        if (!yAxis.priceFormatter) {
+                        //if (!yAxis.priceFormatter) {
                             if (renderer.params.yAxis === yAxis) {
+                                // console.log("yAxis: ", yAxis);
+                                // console.log("renderer: ", renderer.params.yAxis);
                                 switch (i) {
                                     case "fundamentalsMarketCapitalization":
                                     case "fundamentalsEnterpriseValue":
@@ -492,6 +523,9 @@
                                     case "fundamentalsQuarterlyRetainedEarnings":
                                     case "fundamentalsRevenueTtm":
                                     case "fundamentalsEbitda":
+                                    case "fundamentalsEBITDA":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
                                     case "fundamentalsEbitTtm":
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
@@ -505,7 +539,7 @@
                                         break;
                                 }
                             }
-                        }
+                        //}
                     }
                 }
             }
