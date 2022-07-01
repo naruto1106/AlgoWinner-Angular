@@ -1131,6 +1131,7 @@ agmNgModuleWrapper("agms.tgps")
 
                 directions: ['All', 'Bullish', 'Bearish', 'None'],
                 comCrossover: ['All', 'UP', 'DOWN', 'NONE'],
+                payoutStrategy: ['Near (below)', 'Near (above)', 'Cross above', 'Cross below', 'Above', 'Below'],
                 modeOptions: ["Position", "Swing"],
                 barSizeOptions: [{ label: "Daily", value: "1 day" }, { label: "Weekly", value: "1 week" }],    
                 tradeVenueLocList: [{
@@ -1218,7 +1219,8 @@ agmNgModuleWrapper("agms.tgps")
                 fundamentals: {},
                 searchProductFilter: null,
                 barSize: vm.barSizeOptions[0],
-                crossover: vm.comCrossover[0]
+                crossover: vm.comCrossover[0],
+                payoutstrategy: vm.payoutStrategy[0]
             };
             
             resetAllFundamentals();

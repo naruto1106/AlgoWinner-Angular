@@ -234,6 +234,10 @@
                 <label>COM Crossover</label>
                 <select ng-model="vm.filter.crossover" ng-change="vm.onFrontEndFilterChanged()" ng-options="d as d for d in vm.comCrossover"></select>
             </div>
+            <div class="menu" ng-if="vm.mode==='Position'">
+                <label>Payout Strategy</label>
+                <select ng-model="vm.filter.payoutstrategy" ng-change="vm.onFrontEndFilterChanged()" ng-options="d as d for d in vm.payoutStrategy"></select>
+            </div>
             <div class="show-fundamental-filter pull-right" ng-if="vm.mode !== 'Plus' && vm.hasFundamentalFilterSelections()">
                 <div class="filter-number" ng-if="vm.sTgpsScreenerService.fundamentalFilterNumber > 0">{{vm.sTgpsScreenerService.fundamentalFilterNumber}}</div>
                 <button class="filled-blue" ng-click="vm.showFundamentalFilter()">SHOW FILTERS</button>
