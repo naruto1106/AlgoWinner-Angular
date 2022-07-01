@@ -520,7 +520,118 @@
                                     case "fundamentalsQuarterlyLongTermDebt":
                                     case "fundamentalsQuarterlyRetainedEarnings":
                                     case "fundamentalsRevenueTtm":
+                                    case "fundamentalsAverageEquity":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsBVPS":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsCash":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsCurrAssets":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsCurrLiabilities":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsCurrentRatio":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsDE":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsDebt":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsDilutedEPS":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsDivPerShare":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsDivYield":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
                                     case "fundamentalsEBITDA":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsEPS":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsEPSGrowth":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsEVGP":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsEarningsGrowth":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsEV":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsEquity":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsFCF":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsFCFPerShare":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsGrossProfit":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsGrossMargin":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsMarketCap":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsNetMargin":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsNetProfit":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsPB":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsPeRatio":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsPS":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsPegRatio":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsROA":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsROE":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsRevenue":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsShareFactor":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsShares":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsTotalAssets":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsTotalLiabilities":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsSharesAvg":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsSharesAvgDil":
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
                                     case "fundamentalsEbitTtm":
