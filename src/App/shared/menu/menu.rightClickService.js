@@ -61,10 +61,10 @@
                     }
                 },
                 {
-                    label: "View Stack Info",
+                    label: "View Stock Info",
                     action: function (productContainer) {
                         if (isEodTradeVenue(productContainer.ProductModel.TradeVenueLoc)) {
-                            coreNotificationService.notifyError("Not Supported", "Stack Info is not supported for this product");
+                            coreNotificationService.notifyError("Not Supported", "Stock Info is not supported for this product");
                         } else {
                             commonLocationHistoryService.goToNewTab('/Home/Inside#/product-detail/' + productContainer.ProductModel.TradeVenueLoc
                                 + '/' + productContainer.ProductModel.Symbol + "#chart-section");
