@@ -401,6 +401,7 @@ agmNgModuleWrapper("agms.tgps")
                 return sMenuRightClickService.gotoChart(productContainer.ProductModel, vm.mode, vm.filter.barSize.label);
             },
             getIndicatorColor: function (productContainer) {
+                //console.log("productContainer: ", productContainer);
                 switch (productContainer.Direction) {
                     case "Bull":
                         return ['green-profit'];
@@ -844,11 +845,53 @@ agmNgModuleWrapper("agms.tgps")
                     sortingFunc: createSortingFunc('Month')
                 },
                 {
-                    templateId: 'bigscreener/tgps.Quarter',
-                    title: "QUARTER",
-                    classNames: 'mid-column',
-                    sortingFunc: createSortingFunc('Quarter')
+                    templateId: 'bigscreener/tgps.payoutAlertMA150',
+                    title: "Payout Alert MA 150",
+                    classNames: 'mid-column product-payout-alert-MA150',
+                    //sortingFunc: createSortingFunc('payoutAlertMA150')
                 },
+                {
+                    templateId: 'bigscreener/tgps.noise',
+                    title: "Noise",
+                    classNames: 'mid-column',
+                    //sortingFunc: createSortingFunc('noise')
+                },
+                {
+                    templateId: 'bigscreener/tgps.marketCap',
+                    title: "Market Cap",
+                    classNames: 'mid-column',
+                    sortingFunc: createSortingFunc('marketCap')
+                },
+                {
+                    templateId: 'bigscreener/tgps.sector',
+                    title: "Sector",
+                    classNames: 'mid-column product-sector',
+                    //sortingFunc: createSortingFunc('sector')
+                },
+                {
+                    templateId: 'bigscreener/tgps.industry',
+                    title: "Industry",
+                    classNames: 'mid-column product-industry',
+                    //sortingFunc: createSortingFunc('industry')
+                },
+                {
+                    templateId: 'bigscreener/tgps.turnover',
+                    title: "Turnover",
+                    classNames: 'mid-column product-turnover',
+                    //sortingFunc: createSortingFunc('turnover')
+                },
+                {
+                    templateId: 'bigscreener/tgps.analystRating',
+                    title: "Analyst rating",
+                    classNames: 'mid-column product-analyst-rating',
+                    //sortingFunc: createSortingFunc('analystRating')
+                },
+                // {
+                //     templateId: 'bigscreener/tgps.Quarter',
+                //     title: "QUARTER",
+                //     classNames: 'mid-column',
+                //     sortingFunc: createSortingFunc('Quarter')
+                // },
                 closePriceColumnDef,
                 closePriceColumnNoCurrencyDef,
                 //lastPriceColumnDef,
@@ -896,7 +939,7 @@ agmNgModuleWrapper("agms.tgps")
                 {
                     templateId: 'bigscreener/tgps.ComCrossover',
                     title: "COM Crossover",
-                    classNames: 'mid-column',
+                    classNames: 'mid-column product-comCrossover',
                     sortingFunc: createSortingFunc('COMDiff')
                 },
                 {

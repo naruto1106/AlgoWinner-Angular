@@ -682,6 +682,7 @@
         display: flex;
         display: -webkit-flex; /* Safari */
         flex-direction: column;
+        overflow: auto;
 
         > .table-header {
             flex: 0 1 auto;
@@ -691,6 +692,16 @@
         > .table-body {
             flex: 1 auto;
             -webkit-flex: 1 auto; /* Safari 6.1+ */
+        }
+
+        > .table-body .scrollbar-container{
+            overflow: scroll;
+            overflow-y: visible;
+            overflow-x: visible;
+        }
+
+        .table-ref{
+            width: 100% !important;
         }
     }
 
@@ -708,17 +719,112 @@
         border: none;
         table-layout: fixed;
 
+        .product-sticky {
+            position: absolute;
+            top: auto;
+            margin-top: -17px;
+            text-align: left;
+            width: 160px;
+            background-color: white;
+            padding-top: 9px;
+            z-index: 999999;
+            padding-left: 10px;
+            padding-bottom: 10px;
+        }
+        
+        .product-sticky-symbol {
+            position: absolute;
+            top: auto;
+            margin-top: -17px;
+            text-align: center;
+            width: 100px;
+            background-color: white;
+            padding-top: 9px;
+            z-index: 999999;
+            padding-left: 10px;
+            padding-bottom: 10px;
+        }
+        
+        .product-sticky-white-bg {
+            background-color: white;
+        }
+        
+        .product-sticky-last {            
+            position: absolute;
+            top: auto;
+            margin-top: -17px;
+            text-align: center;
+            width: 130px;
+            right: 0px;
+            background-color: white;
+            padding-top: 9px;
+            height: 34px;
+        }
+
+        tbody tr:nth-child(odd) .product-sticky{
+            background-color: #fff !important;
+        }
+        tbody tr:nth-child(even) .product-sticky{
+            background-color: #F6F8F9 !important;
+        }
+        
+        tbody tr:nth-child(odd) .product-sticky-symbol{
+            background-color: #fff !important;
+        }
+        tbody tr:nth-child(even) .product-sticky-symbol{
+            background-color: #F6F8F9 !important;
+        }
+        
+        tbody tr:nth-child(odd) .product-sticky-last{
+            background-color: #fff !important;
+        }
+        tbody tr:nth-child(even) .product-sticky-last{
+            background-color: #F6F8F9 !important;
+        }
+          
+
+        .product-left-scroll-icon{
+            position: absolute;
+            top: 9px;
+            left: 140px;
+            font-size: 20px;
+        }
+        .product-right-scroll-icon{
+            position: absolute;
+            top: 7px;
+            right: 90px;
+            font-size: 20px;
+        }
+
         > thead > tr > th {
             padding: 2.5px 5px;
+
+            div.product-sticky{
+                background: #EEEEEE;
+                margin-top: -18px;
+            }
+            div.product-sticky-symbol{
+                background: #EEEEEE;
+                margin-top: -17px;
+            }
+            
+            div.product-sticky-last{
+                background: #EEEEEE;
+            }
         }
 
         > tbody > tr {
             &:hover {
                 background: mix(@blueBasic,white,30);
-            }
+            }            
         }
 
         > thead > tr > th, > tbody > tr > td {
+
+            &.mid-column {
+                text-align: center;
+                width: 100px;
+            }                        
 
             &.not-available, .not-available {
                 line-height: 30px;
@@ -733,13 +839,49 @@
             &.product-name {
                 text-align: left;
                 width: 150px;
+                padding-left: 0px;
+                padding-top: 0px;
+                text-transform: uppercase;
+            }            
+            
+            &.product-payout-alert-MA150 {
+                text-align: center;
+                width: 200px;
+                padding-left: 5px;
+                text-transform: uppercase;
+            }
+            
+            &.product-sector {
+                text-align: center;
+                width: 200px;
+                padding-left: 5px;
+                text-transform: uppercase;
+            }
+            
+            &.product-industry {
+                text-align: center;
+                width: 200px;
+                padding-left: 5px;
+                text-transform: uppercase;
+            }
+            
+            &.product-turnover {
+                text-align: center;
+                width: 100px !important;
+                padding-left: 5px;
+                text-transform: uppercase;
+            }
+            
+            &.product-analyst-rating {
+                text-align: center;
+                width: 100px !important;
                 padding-left: 5px;
                 text-transform: uppercase;
             }
 
             &.product-symbol {
-                text-align: left;
-                width: 70px;
+                text-align: center;
+                width: 120px;
                 padding-left: 5px;
                 text-transform: uppercase;
             }
@@ -771,6 +913,17 @@
                 text-align: right;
                 width: 90px;
             }
+            
+            &.product-comCrossover {
+                padding-right: 20px;
+                text-align: center;
+                width: 150px;
+            }
+            
+            &.screener-column {                
+                width: 130px;
+            }
+            
 
             &.last-traded-price {
                 padding-right: 15px;
@@ -780,11 +933,7 @@
                 &.left-side {
                     text-align: left;
                 }
-            }
-
-            &.mid-column {
-                text-align: center;
-            }
+            }            
         }
 
         > tbody > tr {

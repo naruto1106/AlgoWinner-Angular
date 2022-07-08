@@ -24,9 +24,30 @@
     <script type="text/ng-template" id="bigscreener/tgps.Month">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Month|number:2}}</h5>
     </script>
-    <script type="text/ng-template" id="bigscreener/tgps.Quarter">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Quarter|number:2}}</h5>
+    <script type="text/ng-template" id="bigscreener/tgps.payoutAlertMA150">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">Near (below)</h5>
     </script>
+    <script type="text/ng-template" id="bigscreener/tgps.noise">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">1</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.marketCap">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.MarketCap|number:2}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.sector">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Sector.SectorName}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.industry">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Industry.IndustryName}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.turnover">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">-</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.analystRating">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">-</h5>
+    </script>
+    <!-- <script type="text/ng-template" id="bigscreener/tgps.Quarter">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Quarter|number:2}}</h5>
+    </script> -->
     <script type="text/ng-template" id="bigscreener/tgps.Close">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Close|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}</h5>
     </script>

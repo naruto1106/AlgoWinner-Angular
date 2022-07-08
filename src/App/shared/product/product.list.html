@@ -108,11 +108,13 @@
                         </thead>
                         <thead ng-if="(vm.visibility.showHeader || vm.headerOnly) && vm.readyToRender">
                             <tr>
-                                <th ng-repeat="col in ::vm.options.columns" class="clickable" ng-if="!col.visibility || col.visibility()" ng-class="::col.classNames" ng-click="vm.sortByThisColumn(col)">
-                                    <div>
+                                <th ng-repeat="col in ::vm.options.columns" class="clickable" ng-if="!col.visibility || col.visibility()" ng-class="::col.classNames">
+                                    <div ng-class="{'product-sticky': col.title == 'PRODUCT', 'product-sticky-symbol': col.title == 'SYMBOL', 'product-sticky-last': col.title == ''}">                                        
                                         {{::col.title}}
-                                        <span class="glyphicon glyphicon-triangle-bottom" ng-if="vm.isSelectedColumnForSortDesc(col)" ng-class="{'pull-right': col.title == 'Volume'}"></span>
-                                        <span class="glyphicon glyphicon-triangle-top" ng-if="vm.isSelectedColumnForSortAsc(col)" ng-class="{'pull-right': col.title == 'Volume'}"></span>
+                                        <span class="glyphicon glyphicon-triangle-left product-left-scroll-icon" ng-click="vm.scrollRight()" ng-if="col.title=='PRODUCT'"></span>
+                                        <span class="glyphicon glyphicon-triangle-right product-right-scroll-icon" ng-click="vm.scrollLeft()" ng-if="col.title==''"></span>
+                                        <span class="glyphicon glyphicon-triangle-bottom" ng-click="vm.sortByThisColumn(col)" ng-if="vm.isSelectedColumnForSortDesc(col)" ng-class="{'pull-right': col.title == 'Volume'}"></span>
+                                        <span class="glyphicon glyphicon-triangle-top" ng-click="vm.sortByThisColumn(col)" ng-if="vm.isSelectedColumnForSortAsc(col)" ng-class="{'pull-right': col.title == 'Volume'}"></span>
                                     </div>
                                 </th>
                             </tr>
@@ -132,7 +134,9 @@
                                         agmc-right-click="::vm.openPopup(productContainer,$event)"
                                         ng-repeat="productContainer in vm.getListedStocks()"
                                         ng-if="vm.getProduct(productContainer).Symbol">
-                                        <td ng-repeat="col in ::vm.options.columns" ng-if="!col.visibility || col.visibility()" ng-class="::col.classNames" ng-include src="::col.templateId"></td>
+                                        <td ng-repeat="col in ::vm.options.columns" ng-if="!col.visibility || col.visibility()" ng-class="::col.classNames">
+                                            <div ng-include src="::col.templateId" ng-class="{'product-sticky': col.title == 'PRODUCT', 'product-sticky-symbol': col.title == 'SYMBOL', 'product-sticky-last': col.title == ''}"></div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -145,7 +149,9 @@
                                 <tr ng-class="vm.getRowClass(productContainer)" oncontextmenu="return false;" agmc-click-outside-light="vm.closePopup()" agmc-right-click="::vm.openPopup(productContainer,$event)"
                                     ng-repeat="productContainer in vm.getListedStocks() track by $index"
                                     ng-if="vm.getProduct(productContainer).Symbol">
-                                    <td ng-repeat="col in ::vm.options.columns" ng-if="!col.visibility || col.visibility()" ng-class="::col.classNames" ng-include src="::col.templateId"></td>
+                                    <td ng-repeat="col in ::vm.options.columns" ng-if="!col.visibility || col.visibility()" ng-class="::col.classNames">
+                                        <div ng-include src="::col.templateId" ng-class="{'product-sticky': col.title == 'PRODUCT', 'product-sticky-symbol': col.title == 'SYMBOL', 'product-sticky-last': col.title == ''}"></div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
