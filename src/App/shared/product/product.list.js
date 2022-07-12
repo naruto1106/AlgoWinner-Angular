@@ -188,7 +188,6 @@
                 if (vm.options.externalVm) {
                     dep.$scope.externalVm = vm.options.externalVm;
                 }
-
                 vm.options.columns.forEach(function (col) {
                     if (col.defaultSorting) {
                         sortByThisColumn(col, col.defaultSorting);

@@ -34,10 +34,10 @@
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.MarketCap|number:2}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.sector">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Sector.SectorName}}</h5>
+        <h5 title="{{productContainer.ProductModel.Sector.SectorName}}" ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Sector.SectorName}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.industry">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Industry.IndustryName}}</h5>
+        <h5 title="{{productContainer.ProductModel.Industry.IndustryName}}" ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Industry.IndustryName}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.turnover">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">-</h5>

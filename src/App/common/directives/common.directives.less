@@ -724,8 +724,8 @@
             top: auto;
             margin-top: -17px;
             text-align: left;
-            width: 160px;
-            background-color: white;
+            width: 210px;
+            // background-color: white;
             padding-top: 9px;
             padding-left: 10px;
             padding-bottom: 10px;
@@ -737,14 +737,14 @@
             margin-top: -17px;
             text-align: center;
             width: 100px;
-            background-color: white;
+            // background-color: white;
             padding-top: 9px;
             padding-left: 10px;
             padding-bottom: 10px;
         }
         
         .product-sticky-white-bg {
-            background-color: white;
+            // background-color: white;
         }
         
         .product-sticky-last {            
@@ -754,7 +754,7 @@
             text-align: center;
             width: 130px;
             right: 0px;
-            background-color: white;
+            // background-color: white;
             padding-top: 9px;
             height: 34px;
         }
@@ -763,6 +763,12 @@
             background-color: #fff !important;
         }
         tbody tr:nth-child(even) .product-sticky{
+            background-color: #F6F8F9 !important;
+        }
+        tbody tr:nth-child(odd) td{
+            background-color: #fff !important;
+        }
+        tbody tr:nth-child(even) td{
             background-color: #F6F8F9 !important;
         }
         
@@ -784,7 +790,7 @@
         .product-left-scroll-icon{
             position: absolute;
             top: 9px;
-            left: 140px;
+            left: 180px;
             font-size: 20px;
         }
         .product-right-scroll-icon{
@@ -825,7 +831,14 @@
             &.mid-column {
                 text-align: center;
                 width: 100px;
-            }                        
+            }  
+            
+            &.mid-column h5 {
+                width: auto;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }            
 
             &.not-available, .not-available {
                 line-height: 30px;
@@ -839,10 +852,17 @@
 
             &.product-name {
                 text-align: left;
-                width: 150px;
+                width: 200px;
                 padding-left: 0px;
                 padding-top: 0px;
                 text-transform: uppercase;
+            }            
+            
+            &.product-name h3 {
+                width: 180px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }            
             
             &.product-payout-alert-MA150 {
@@ -947,6 +967,8 @@
 
                 &.mid-column {
                     text-align: center;
+                    padding: 10px;
+                    word-break: break-all;
 
                     h1, h2, h3, h4, h5 {
                         margin: 0;

@@ -643,6 +643,10 @@ agmNgModuleWrapper("agms.tgps")
         function isWorldIndices() {
             return vm.filter.tradeVenueLoc && vm.filter.tradeVenueLoc.label === 'Global Indices';
         }
+        
+        function isUSMarket() {
+            return vm.filter.tradeVenueLoc && vm.filter.tradeVenueLoc.label !== 'SG' && vm.filter.tradeVenueLoc.label !== 'HK' && vm.filter.tradeVenueLoc.label !== 'MY' && vm.filter.tradeVenueLoc.label !== 'CHN';
+        }
 
         function isNotWorldIndices() {
             return !isWorldIndices();
@@ -884,6 +888,7 @@ agmNgModuleWrapper("agms.tgps")
                     templateId: 'bigscreener/tgps.analystRating',
                     title: "Analyst rating",
                     classNames: 'mid-column product-analyst-rating',
+                    visibility: isUSMarket
                     //sortingFunc: createSortingFunc('analystRating')
                 },
                 // {
