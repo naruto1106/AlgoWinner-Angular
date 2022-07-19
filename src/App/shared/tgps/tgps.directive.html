@@ -262,6 +262,9 @@
             <div class="show-fundamental-filter pull-right" ng-if="vm.mode !== 'Plus' && vm.hasFundamentalFilterSelections()">
                 <div class="filter-number" ng-if="vm.sTgpsScreenerService.fundamentalFilterNumber > 0">{{vm.sTgpsScreenerService.fundamentalFilterNumber}}</div>
                 <button class="filled-blue" ng-click="vm.showFundamentalFilter()">SHOW FILTERS</button>
+                <div class="pt-5">
+                    <button class="filled-blue" ng-click="vm.showColumnsFilter()">SHOW COLUMNS</button>
+                </div>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -290,21 +293,21 @@
             </div>
             <div class="available-date-paladin" ng-if="vm.mode === 'Plus' && vm.lastPaladinEvaluationDate">
                 *Last Analysis as of {{vm.lastPaladinEvaluationDate | date:'medium'}}
-            </div>
+            </div>            
             <div class="clearfix"></div>
         </div>
-    </div>
+    </div>    
 
     <div ng-if="vm.mode==='Position'" class="tgps-position ">
         <div ng-if="vm.filter.barSize.value==='1 day'">
-            <agms-product-list options="vm.productListOptionForPosition" product-container-list="vm.filteredStocksForPosition"
+            <agms-tgps-product-list options="vm.productListOptionForPosition" product-container-list="vm.filteredStocksForPosition"
                                ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
-            </agms-product-list>
+            </agms-tgps-product-list>
         </div>
         <div ng-if="vm.filter.barSize.value==='1 week'">
-            <agms-product-list options="vm.productListOptionForWeeklyPosition" product-container-list="vm.filteredStocksForPosition"
+            <agms-tgps-product-list options="vm.productListOptionForWeeklyPosition" product-container-list="vm.filteredStocksForPosition"
                                ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
-            </agms-product-list>
+            </agms-tgps-product-list>
         </div>
         <h4 class="m-20px text-center" ng-if="vm.filteredStocksForPosition.length == 0 && !vm.isLoading">{{vm.noResultMessage}}</h4>
         <h4 class="m-20px text-center" ng-if="vm.filteredStocksForPosition.length > 0 && vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length == 0 && !vm.isLoading">No results found.</h4>

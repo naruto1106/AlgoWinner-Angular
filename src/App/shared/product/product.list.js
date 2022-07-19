@@ -439,14 +439,6 @@
                 return _.includes(eodTradeVenues, tradeVenue);
             }
 
-            function scrollLeft(){
-                document.querySelector('.table-wrapper').scrollLeft -= 80;
-            }
-            
-            function scrollRight(){
-                document.querySelector('.table-wrapper').scrollLeft += 80;
-            }
-
             tool.setVmProperties({
                 scrollOptions: scrollOptions,
                 getPriceChangesCss: getPriceChangesCss,
@@ -470,8 +462,6 @@
                 pagination: defaultPagination,
                 showPagination: showPagination,
                 getListedStocks: getListedStocks,
-                isEodTradeVenue: isEodTradeVenue,
-                scrollLeft: scrollLeft,
-                scrollRight: scrollRight
+                isEodTradeVenue: isEodTradeVenue
             });
         });

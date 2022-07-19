@@ -648,6 +648,10 @@ agmNgModuleWrapper("agms.tgps")
             return vm.filter.tradeVenueLoc && vm.filter.tradeVenueLoc.label !== 'SG' && vm.filter.tradeVenueLoc.label !== 'HK' && vm.filter.tradeVenueLoc.label !== 'MY' && vm.filter.tradeVenueLoc.label !== 'CHN';
         }
 
+        function isVisible(checked) {
+            return false;
+        }
+
         function isNotWorldIndices() {
             return !isWorldIndices();
         }
@@ -898,7 +902,7 @@ agmNgModuleWrapper("agms.tgps")
                 //     sortingFunc: createSortingFunc('Quarter')
                 // },
                 closePriceColumnDef,
-                closePriceColumnNoCurrencyDef,
+                //closePriceColumnNoCurrencyDef,
                 //lastPriceColumnDef,
                 //lastPriceColumnNoCurrencyDef,
                 volumeColumnDef,
@@ -1162,6 +1166,28 @@ agmNgModuleWrapper("agms.tgps")
             });
         }
 
+        function showColumnsFilter() {
+            var productListOptionForPositionClone = {... productListOptionForPosition};
+            productListOptionForPositionClone.columns.forEach(function (itemPosition, indexPosition) {
+                if(productListOptionForPositionClone.columns[indexPosition].checked === undefined){
+                    productListOptionForPositionClone.columns[indexPosition].checked = true;
+                }
+            });
+            
+            tool.openModalByDefinition('s.tgps.ColumnFilterController', {
+                productListOptionForPosition: productListOptionForPositionClone
+            }).result.then(function (response) {
+                response.columns.forEach(function (itemResp, indexResp) {
+                    if(productListOptionForPosition.columns[indexResp].checked !== undefined && !productListOptionForPosition.columns[indexResp].checked){
+                        productListOptionForPosition.columns[indexResp].visibility = isVisible;
+                    } else {
+                        delete productListOptionForPosition.columns[indexResp].visibility;
+                    }                    
+                });
+                loadStockList();
+            });
+        }
+
         function showLastAvailableDay() {
             return vm.filter.dateSelectionMode === 0 &&
                 (vm.filter.watchlist != null || vm.filter.tradeVenueLoc.label !== 'Global Indices') &&
@@ -1232,6 +1258,7 @@ agmNgModuleWrapper("agms.tgps")
 
                 showLastAvailableDay: showLastAvailableDay,
                 showFundamentalFilter: showFundamentalFilter,
+                showColumnsFilter: showColumnsFilter,
                 showProduct: showProduct,
                 hasFundamentalFilterSelections: hasFundamentalFilterSelections,
 

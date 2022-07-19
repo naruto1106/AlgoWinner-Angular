@@ -7,6 +7,9 @@
         max-height: 300px;
         overflow-x: hidden;
     }
+    .dropdown-menu-selection-tabs {
+        width: 400px;
+    }
 }
 
 .agms-directive.pixel-positioning-system {
@@ -682,6 +685,299 @@
         display: flex;
         display: -webkit-flex; /* Safari */
         flex-direction: column;
+
+        > .table-header {
+            flex: 0 1 auto;
+            -webkit-flex: 0 1 auto; /* Safari 6.1+ */
+        }
+
+        > .table-body {
+            flex: 1 auto;
+            -webkit-flex: 1 auto; /* Safari 6.1+ */
+        }
+    }
+
+    .virtual-table-scrollbox-container {
+        overflow: hidden;
+
+        .virtual-table-scrollbox {
+            .table-ref {
+                .abs;
+            }
+        }
+    }
+
+    table {
+        border: none;
+        table-layout: fixed;
+
+        > thead > tr > th {
+            padding: 2.5px 5px;
+        }
+
+        > tbody > tr {
+            &:hover {
+                background: mix(@blueBasic,white,30);
+            }
+        }
+
+        > thead > tr > th, > tbody > tr > td {
+
+            &.not-available, .not-available {
+                line-height: 30px;
+                color: @grayLight1;
+            }
+
+            &.product-info {
+                text-align: left;
+                padding-left: 5px;
+            }
+
+            &.product-name {
+                text-align: left;
+                width: 150px;
+                padding-left: 5px;
+                text-transform: uppercase;
+            }
+
+            &.product-symbol {
+                text-align: left;
+                width: 70px;
+                padding-left: 5px;
+                text-transform: uppercase;
+            }
+
+            &.trade-volume {
+                text-align: right;
+                padding-right: 15px;
+                width: 90px;
+            }
+
+            &.bid-price, &.ask-price {
+                width: 120px;
+                text-align: center;
+            }
+
+            &.bid-volume, &.ask-volume {
+                width: 80px;
+                text-align: center;
+            }
+
+            &.compact-price-changes {
+                padding-right: 15px;
+                text-align: right;
+                width: 100px;
+            }
+
+            &.price-changes {
+                padding-right: 20px;
+                text-align: right;
+                width: 90px;
+            }
+
+            &.last-traded-price {
+                padding-right: 15px;
+                text-align: right;
+                width: 100px;
+
+                &.left-side {
+                    text-align: left;
+                }
+            }
+
+            &.mid-column {
+                text-align: center;
+            }
+        }
+
+        > tbody > tr {
+            border-bottom: 1px solid @grayLight1;
+            height: 35px;
+
+            > td {
+                height: 30px;
+                padding: 0;
+
+                &.mid-column {
+                    text-align: center;
+
+                    h1, h2, h3, h4, h5 {
+                        margin: 0;
+                    }
+                }
+
+                &.product-name, &.product-symbol {
+                    h3 {
+                        margin: 0;
+                        font-size: 14px;
+                        text-transform: uppercase;
+                    }
+                }
+
+                &.product-info {
+
+                    > .product-picture {
+                        .rel;
+                        min-width: 50px;
+
+                        .product-icon {
+                            width: 30px;
+                            height: 30px;
+                            .abs;
+                            top: 5px;
+                            left: 0px;
+                            background-size: cover;
+                            box-shadow: 0 0 1px 1px mix(black, transparent,10);
+                            background-color: @grayLight1;
+                        }
+
+                        .product-text {
+                            padding-left: 25px;
+
+                            > .product-symbol {
+                                font-weight: 600;
+                                font-size: 16px;
+                                color: black;
+                            }
+
+                            > .product-name {
+                                display: block;
+                                font-size: 12px;
+                                line-height: 15px;
+                                color: @grayMed1;
+                                margin-top: -2px;
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+                }
+
+                &.price-changes {
+                    .rel;
+                    color: red;
+                    padding-left: 20px;
+
+                    &.up {
+                        color: green;
+                    }
+
+                    .glyphicon {
+                        display: block;
+                        .abs;
+                        top: 0px;
+                        right: 0px;
+                        font-size: 14px;
+                        line-height: 20px;
+                    }
+
+                    .nominal-price-changes {
+                        font-size: 12px;
+                        line-height: 15px;
+                        font-weight: 600;
+                        margin-top: 0px;
+                    }
+
+                    .percentage-price-changes {
+                        font-size: 12px;
+                        line-height: 15px;
+                        font-weight: 600;
+                    }
+                }
+
+                &.last-traded-price {
+                    height: 30px;
+                    line-height: 20px;
+                    font-weight: 600;
+                    color: black;
+                    font-size: 14px;
+                    text-align: right;
+                }
+
+                &.bid-price, &.ask-price {
+
+                    > button {
+                        width: 100%;
+                        border: none;
+                        display: block;
+                        line-height: 20px;
+                        font-size: 14px;
+                        background: mix(black, transparent,2);
+                        height: 30px;
+                        font-weight: 600;
+                        color: black;
+
+                        &.up {
+                            background: green;
+                            color: white;
+                        }
+
+                        &.down {
+                            background: red;
+                            color: white;
+                        }
+                    }
+                }
+
+                &.bid-volume, &.ask-volume {
+                    line-height: 20px;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                &.trade-volume {
+                    line-height: 20px;
+                    font-size: 16px;
+                }
+
+                &.compact-price-changes {
+
+                    > .last-traded-price {
+                        height: 13px;
+                        margin-top: 0px;
+                        line-height: 13px;
+                        font-weight: 600;
+                        color: black;
+                        font-size: 12px;
+                        text-align: right;
+                    }
+
+                    > .price-changes {
+                        .rel;
+                        color: @berry;
+
+                        &.up {
+                            color: @seafoam;
+                        }
+
+                        .glyphicon {
+                            display: inline;
+                            line-height: 15px;
+                            font-size: 12px;
+                        }
+
+                        .percentage-price-changes {
+                            display: inline;
+                            font-size: 11px;
+                            line-height: 15px;
+                            font-weight: 600;
+                            letter-spacing: -0.5px;
+                            margin-top: -2px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.agms-directive.tgps-product-list {
+
+    .table-wrapper {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        display: -webkit-flex; /* Safari */
+        flex-direction: column;
         overflow: auto;
 
         > .table-header {
@@ -805,11 +1101,11 @@
 
             div.product-sticky{
                 background: #EEEEEE;
-                margin-top: -18px;
+                margin-top: -19px;
             }
             div.product-sticky-symbol{
                 background: #EEEEEE;
-                margin-top: -17px;
+                margin-top: -19px;
             }
             
             div.product-sticky-last{
@@ -831,6 +1127,7 @@
             &.mid-column {
                 text-align: center;
                 width: 100px;
+                text-transform: uppercase;
             }  
             
             &.mid-column h5 {
@@ -848,7 +1145,7 @@
             &.product-info {
                 text-align: left;
                 padding-left: 5px;
-            }
+            }          
 
             &.product-name {
                 text-align: left;
@@ -867,7 +1164,7 @@
             
             &.product-payout-alert-MA150 {
                 text-align: center;
-                width: 200px;
+                width: 150px;
                 padding-left: 5px;
                 text-transform: uppercase;
             }
@@ -938,7 +1235,7 @@
             &.product-comCrossover {
                 padding-right: 20px;
                 text-align: center;
-                width: 150px;
+                width: 100px;
             }
             
             &.screener-column {                
