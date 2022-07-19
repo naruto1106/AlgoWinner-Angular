@@ -1,7 +1,7 @@
 ﻿<section class="fundamental-panel">
     <h1 class="title-section">FUNDAMENTALS</h1>
     <div class="row-md-2 gap-20px">
-        <div class="col-md-1" ng-repeat="barChartObj in vm.barCharts">
+        <div class="col-md-1" ng-repeat="barChartObj in vm.barChartsArr">
             <div class="white-box">
                 <h1>{{barChartObj.name}}</h1>
                 <div class="h-30px"></div>
@@ -14,5 +14,808 @@
             </div>
         </div>        
         <div class="clearfix"></div>
+    </div>
+    <div style="margin: 20px 5px;">
+        <div>
+            <button
+                ng-class="{'mini-filled-blue': vm.selectedTable === 'income', 'mini-hollow-blue': vm.selectedTable != 'income'}"
+                style="margin-right: 5px" ng-click="vm.setSelectedTable('income')">
+                Income statement
+            </button>
+            <button
+                ng-class="{'mini-filled-blue': vm.selectedTable === 'balance', 'mini-hollow-blue': vm.selectedTable != 'balance'}"
+                style="margin-right: 5px" ng-click="vm.setSelectedTable('balance')">
+                Balance sheet
+            </button>
+            <button
+                ng-class="{'mini-filled-blue': vm.selectedTable === 'cash', 'mini-hollow-blue': vm.selectedTable != 'cash'}"
+                style="margin-right: 5px" ng-click="vm.setSelectedTable('cash')">
+                Cash flow
+            </button>
+            <button
+                ng-class="{'mini-filled-blue': vm.selectedTable === 'stats', 'mini-hollow-blue': vm.selectedTable != 'stats'}"
+                style="margin-right: 5px" ng-click="vm.setSelectedTable('stats')">
+                Statistics
+            </button>
+        </div>
+    </div>
+    <div ng-if="vm.selectedTable === 'income'">
+        <table class="table-large">
+            <thead>
+                <td>Currency: {{vm.productDetail.Product.Currency}}</td>
+                <td>2017</td>
+                <td>2018</td>
+                <td>2019</td>
+                <td>2020</td>
+                <td>2021</td>
+                <td>TTM</td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Total revenue</td>
+                    <td>
+                        <div>228.57B</div>
+                        <div class="green-profit">+6.70%</div>
+                    </td>
+                    <td>
+                        <div>265.81B</div>
+                        <div class="green-profit">+16.29%</div>
+                    </td>
+                    <td>
+                        <div>259.97B</div>
+                        <div class="red-loss">-2.20%</div>
+                    </td>
+                    <td>
+                        <div>274.15B</div>
+                        <div class="green-profit">+5.46%</div>
+                    </td>
+                    <td>
+                        <div>365.82B</div>
+                        <div class="green-profit">+33.44%</div>
+                    </td>
+                    <td>386.08B</td>
+                </tr>
+                <tr>
+                    <td>Cost of goods sold</td>
+                    <td>
+                        <div>-141.70B</div>
+                    </td>
+                    <td>
+                        <div>-163.83B</div>
+                    </td>
+                    <td>
+                        <div>-162.26B</div>
+                    </td>
+                    <td>
+                        <div>-170.14B</div>
+                    </td>
+                    <td>
+                        <div>-212.98B</div>
+                    </td>
+                    <td>-218.69B</td>
+                </tr>
+                <tr>
+                    <td>Gross proft</td>
+                    <td>
+                        <div>86.87B</div>
+                        <div class="green-profit">+5.02%</div>
+                    </td>
+                    <td>
+                        <div>101.98B</div>
+                        <div class="green-profit">+17.40%</div>
+                    </td>
+                    <td>
+                        <div>97.70B</div>
+                        <div class="red-loss">-4.20%</div>
+                    </td>
+                    <td>
+                        <div>104.01B</div>
+                        <div class="green-profit">+6.45%</div>
+                    </td>
+                    <td>
+                        <div>152.84B</div>
+                        <div class="green-profit">+46.95%</div>
+                    </td>
+                    <td>167.39B</td>
+                </tr>
+                <tr>
+                    <td>Operating expenses (excl. COGS)</td>
+                    <td>
+                        <div>-26.84B</div>
+                    </td>
+                    <td>
+                        <div>-30.94B</div>
+                    </td>
+                    <td>
+                        <div>-34.46B</div>
+                    </td>
+                    <td>
+                        <div>-38.67B</div>
+                    </td>
+                    <td>
+                        <div>-43.89B</div>
+                    </td>
+                    <td>-47.85B</td>
+                </tr>
+                <tr>
+                    <td>Operating income</td>
+                    <td>
+                        <div>60.03B</div>
+                        <div class="green-profit">+2.65%</div>
+                    </td>
+                    <td>
+                        <div>71.04B</div>
+                        <div class="green-profit">+18.35%</div>
+                    </td>
+                    <td>
+                        <div>63.24B</div>
+                        <div class="red-loss">-10.98%</div>
+                    </td>
+                    <td>
+                        <div>65.34B</div>
+                        <div class="green-profit">+3.32%</div>
+                    </td>
+                    <td>
+                        <div>108.95B</div>
+                        <div class="green-profit">+66.74%</div>
+                    </td>
+                    <td>119.54B</td>
+                </tr>
+                <tr>
+                    <td>Non-operating income</td>
+                    <td>
+                        <div>4.06B</div>
+                    </td>
+                    <td>
+                        <div>1.86B</div>
+                    </td>
+                    <td>
+                        <div>2.50B</div>
+                    </td>
+                    <td>
+                        <div>1.75B</div>
+                    </td>
+                    <td>
+                        <div>258.00M</div>
+                    </td>
+                    <td>-543.00M</td>
+                </tr>
+                <tr>
+                    <td>Pretax income</td>
+                    <td>
+                        <div>64.09B</div>
+                        <div class="green-profit">+4.43%</div>
+                    </td>
+                    <td>
+                        <div>72.90B</div>
+                        <div class="green-profit">+13.75%</div>
+                    </td>
+                    <td>
+                        <div>65.74B</div>
+                        <div class="red-loss">-9.83%</div>
+                    </td>
+                    <td>
+                        <div>67.09B</div>
+                        <div class="green-profit">+2.06%</div>
+                    </td>
+                    <td>
+                        <div>109.21B</div>
+                        <div class="green-profit">+62.77%</div>
+                    </td>
+                    <td>119.00B</td>
+                </tr>
+                <tr>
+                    <td>Taxes</td>
+                    <td>
+                        <div>-15.74B</div>
+                    </td>
+                    <td>
+                        <div>-13.37B</div>
+                    </td>
+                    <td>
+                        <div>-10.48B</div>
+                    </td>
+                    <td>
+                        <div>-9.68B</div>
+                    </td>
+                    <td>
+                        <div>-14.53B</div>
+                    </td>
+                    <td>-17.06B</td>
+                </tr>
+                <tr>
+                    <td>Net income</td>
+                    <td>
+                        <div>48.35B</div>
+                        <div class="green-profit">+5.83%</div>
+                    </td>
+                    <td>
+                        <div>59.53B</div>
+                        <div class="green-profit">+23.12%</div>
+                    </td>
+                    <td>
+                        <div>55.26B</div>
+                        <div class="red-loss">-7.18%</div>
+                    </td>
+                    <td>
+                        <div>57.41B</div>
+                        <div class="green-profit">+3.90%</div>
+                    </td>
+                    <td>
+                        <div>94.68B</div>
+                        <div class="green-profit">+64.92%</div>
+                    </td>
+                    <td>101.94B</td>
+                </tr>
+                <tr>
+                    <td>EBITDA</td>
+                    <td>
+                        <div>69.43B</div>
+                        <div class="green-profit">+1.68%</div>
+                    </td>
+                    <td>
+                        <div>80.34B</div>
+                        <div class="green-profit">+15.72%</div>
+                    </td>
+                    <td>
+                        <div>74.54B</div>
+                        <div class="red-loss">-7.22%</div>
+                    </td>
+                    <td>
+                        <div>76.39B</div>
+                        <div class="green-profit">+2.49%</div>
+                    </td>
+                    <td>
+                        <div>120.23B</div>
+                        <div class="green-profit">+57.38%</div>
+                    </td>
+                    <td>130.79B</td>
+                </tr>
+                <tr>
+                    <td>EBIT</td>
+                    <td>
+                        <div>60.03B</div>
+                        <div class="green-profit">+2.65%</div>
+                    </td>
+                    <td>
+                        <div>71.04B</div>
+                        <div class="green-profit">+18.35%</div>
+                    </td>
+                    <td>
+                        <div>63.24B</div>
+                        <div class="red-loss">-10.98%</div>
+                    </td>
+                    <td>
+                        <div>65.34B</div>
+                        <div class="green-profit">+3.32%</div>
+                    </td>
+                    <td>
+                        <div>108.95B</div>
+                        <div class="green-profit">+66.74%</div>
+                    </td>
+                    <td>119.54B</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-if="vm.selectedTable === 'balance'">
+        <table class="table-large">
+            <thead>
+                <td>Currency: {{vm.productDetail.Product.Currency}}</td>
+                <td>2017</td>
+                <td>2018</td>
+                <td>2019</td>
+                <td>2020</td>
+                <td>2021</td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Total assets</td>
+                    <td>
+                        <div>375.32B</div>
+                        <div class="green-profit">+16.67%</div>
+                    </td>
+                    <td>
+                        <div>365.73B</div>
+                        <div class="red-loss">-2.56%</div>
+                    </td>
+                    <td>
+                        <div>338.52B</div>
+                        <div class="red-loss">-7.44%</div>
+                    </td>
+                    <td>
+                        <div>323.89B</div>
+                        <div class="red-loss">-4.32%</div>
+                    </td>
+                    <td>
+                        <div>351.00B</div>
+                        <div class="green-profit">+8.37%</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total liabilities</td>
+                    <td>
+                        <div>241.27B</div>
+                        <div class="green-profit">+24.73%</div>
+                    </td>
+                    <td>
+                        <div>258.58B</div>
+                        <div class="green-profit">+7.17%</div>
+                    </td>
+                    <td>
+                        <div>248.03B</div>
+                        <div class="red-loss">-4.08%</div>
+                    </td>
+                    <td>
+                        <div>258.55B</div>
+                        <div class="green-profit">+4.24%</div>
+                    </td>
+                    <td>
+                        <div>287.91B</div>
+                        <div class="green-profit">+11.36%</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total equity</td>
+                    <td>
+                        <div>134.05B</div>
+                        <div class="green-profit">+4.52%</div>
+                    </td>
+                    <td>
+                        <div>107.15B</div>
+                        <div class="red-loss">-20.07%</div>
+                    </td>
+                    <td>
+                        <div>90.49B</div>
+                        <div class="red-loss">-15.55%</div>
+                    </td>
+                    <td>
+                        <div>65.34B</div>
+                        <div class="red-loss">-27.79%</div>
+                    </td>
+                    <td>
+                        <div>63.09B</div>
+                        <div class="red-loss">-3.44%</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total debt</td>
+                    <td>
+                        <div>115.68B</div>
+                    </td>
+                    <td>
+                        <div>114.48B</div>
+                    </td>
+                    <td>
+                        <div>108.05B</div>
+                    </td>
+                    <td>
+                        <div>122.28B</div>
+                    </td>
+                    <td>
+                        <div>136.52B</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Net debt</td>
+                    <td>
+                        <div>41.50B</div>
+                    </td>
+                    <td>
+                        <div>48.18B</div>
+                    </td>
+                    <td>
+                        <div>7.47B</div>
+                    </td>
+                    <td>
+                        <div>31.30B</div>
+                    </td>
+                    <td>
+                        <div>73.88B</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Book value per share</td>
+                    <td>
+                        <div>6.54</div>
+                    </td>
+                    <td>
+                        <div>5.63</div>
+                    </td>
+                    <td>
+                        <div>5.09</div>
+                    </td>
+                    <td>
+                        <div>3.85</div>
+                    </td>
+                    <td>
+                        <div>3.84</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-if="vm.selectedTable === 'cash'">
+        <table class="table-large">
+            <thead>
+                <td>Currency: {{vm.productDetail.Product.Currency}}</td>
+                <td>2017</td>
+                <td>2018</td>
+                <td>2019</td>
+                <td>2020</td>
+                <td>2021</td>
+                <td>TTM</td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cash from operating activities</td>
+                    <td>
+                        <div>63.60B</div>
+                        <div class="red-loss">-3.38%</div>
+                    </td>
+                    <td>
+                        <div>77.43B</div>
+                        <div class="green-profit">+21.76%</div>
+                    </td>
+                    <td>
+                        <div>69.39B</div>
+                        <div class="red-loss">-10.39%</div>
+                    </td>
+                    <td>
+                        <div>80.67B</div>
+                        <div class="green-profit">+16.26%</div>
+                    </td>
+                    <td>
+                        <div>104.04B</div>
+                        <div class="green-profit">+28.96%</div>
+                    </td>
+                    <td>116.43B</td>
+                </tr>
+                <tr>
+                    <td>Cash from investing activities</td>
+                    <td>
+                        <div>-46.45B</div>
+                        <div class="red-loss">-1.02%</div>
+                    </td>
+                    <td>
+                        <div>16.07B</div>
+                        <div class="green-profit">+134.59%</div>
+                    </td>
+                    <td>
+                        <div>45.90B</div>
+                        <div class="green-profit">+185.67%</div>
+                    </td>
+                    <td>
+                        <div>-4.29B</div>
+                        <div class="red-loss">-109.35%</div>
+                    </td>
+                    <td>
+                        <div>-14.54B</div>
+                        <div class="red-loss">-239.12%</div>
+                    </td>
+                    <td>-20.96B</td>
+                </tr>
+                <tr>
+                    <td>Cash from financing activities</td>
+                    <td>
+                        <div>-17.35B</div>
+                        <div class="green-profit">+15.31%</div>
+                    </td>
+                    <td>
+                        <div>-87.88B</div>
+                        <div class="red-loss">-406.58%</div>
+                    </td>
+                    <td>
+                        <div>-90.98B</div>
+                        <div class="red-loss">-3.53%</div>
+                    </td>
+                    <td>
+                        <div>-86.82B</div>
+                        <div class="green-profit">+4.57%</div>
+                    </td>
+                    <td>
+                        <div>-93.35B</div>
+                        <div class="red-loss">-7.52%</div>
+                    </td>
+                    <td>-106.29B</td>
+                </tr>
+                <tr>
+                    <td>Free cash flow</td>
+                    <td>
+                        <div>51.15B</div>
+                        <div class="red-loss">-3.66%</div>
+                    </td>
+                    <td>
+                        <div>64.12B</div>
+                        <div class="green-profit">+25.37%</div>
+                    </td>
+                    <td>
+                        <div>58.90B</div>
+                        <div class="red-loss">-8.15%</div>
+                    </td>
+                    <td>
+                        <div>73.36B</div>
+                        <div class="green-profit">+24.57%</div>
+                    </td>
+                    <td>
+                        <div>92.95B</div>
+                        <div class="green-profit">+26.70%</div>
+                    </td>
+                    <td>105.79B</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-if="vm.selectedTable === 'stats'">
+        <table class="table-large">
+            <thead>
+                <td>Currency: {{vm.productDetail.Product.Currency}}</td>
+                <td>2017</td>
+                <td>2018</td>
+                <td>2019</td>
+                <td>2020</td>
+                <td>2021</td>
+                <td>Current</td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="7">
+                        <h4><bold>Key stats</bold></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total common shares outstanding</td>
+                    <td>
+                        <div>20.50B</div>
+                    </td>
+                    <td>
+                        <div>19.02B</div>
+                    </td>
+                    <td>
+                        <div>17.77B</div>
+                    </td>
+                    <td>
+                        <div>16.98B</div>
+                    </td>
+                    <td>
+                        <div>16.43B</div>
+                    </td>
+                    <td>16.19B</td>
+                </tr>
+                <tr>
+                    <td>Float shares outstanding</td>
+                    <td>
+                        <div>20.48B</div>
+                    </td>
+                    <td>
+                        <div>18.99B</div>
+                    </td>
+                    <td>
+                        <div>17.75B</div>
+                    </td>
+                    <td>
+                        <div>16.96B</div>
+                    </td>
+                    <td>
+                        <div>16.41B</div>
+                    </td>
+                    <td>16.17B</td>
+                </tr>
+                <tr>
+                    <td>Number of employees</td>
+                    <td>
+                        <div>123.00K</div>
+                    </td>
+                    <td>
+                        <div>132.00K</div>
+                    </td>
+                    <td>
+                        <div>137.00K</div>
+                    </td>
+                    <td>
+                        <div>147.00K</div>
+                    </td>
+                    <td>
+                        <div>154.00K</div>
+                    </td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Number of shareholders</td>
+                    <td>
+                        <div>23.50K</div>
+                    </td>
+                    <td>
+                        <div>23.50K</div>
+                    </td>
+                    <td>
+                        <div>23.50K</div>
+                    </td>
+                    <td>
+                        <div>23.50K</div>
+                    </td>
+                    <td>
+                        <div>23.50K</div>
+                    </td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        <h4><bold>Ratios</bold></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Price to earnings ratio</td>
+                    <td>
+                        <div>16.73</div>
+                    </td>
+                    <td>
+                        <div>18.95</div>
+                    </td>
+                    <td>
+                        <div>18.41</div>
+                    </td>
+                    <td>
+                        <div>34.28</div>
+                    </td>
+                    <td>
+                        <div>26.17</div>
+                    </td>
+                    <td>21.14</td>
+                </tr>
+                <tr>
+                    <td>Price to book ratio</td>
+                    <td>
+                        <div>5.89</div>
+                    </td>
+                    <td>
+                        <div>10.02</div>
+                    </td>
+                    <td>
+                        <div>10.74</div>
+                    </td>
+                    <td>
+                        <div>29.17</div>
+                    </td>
+                    <td>
+                        <div>38.25</div>
+                    </td>
+                    <td>31.28</td>
+                </tr>
+                <tr>
+                    <td>Return on assets %</td>
+                    <td>
+                        <div>13.87</div>
+                    </td>
+                    <td>
+                        <div>16.07</div>
+                    </td>
+                    <td>
+                        <div>15.69</div>
+                    </td>
+                    <td>
+                        <div>17.33</div>
+                    </td>
+                    <td>
+                        <div>28.06</div>
+                    </td>
+                    <td>29.64</td>
+                </tr>
+                <tr>
+                    <td>Return on equity %</td>
+                    <td>
+                        <div>36.87</div>
+                    </td>
+                    <td>
+                        <div>49.36</div>
+                    </td>
+                    <td>
+                        <div>55.92</div>
+                    </td>
+                    <td>
+                        <div>73.69</div>
+                    </td>
+                    <td>
+                        <div>147.44</div>
+                    </td>
+                    <td>149.27</td>
+                </tr>
+                <tr>
+                    <td>Gross margin %</td>
+                    <td>
+                        <div>38.01</div>
+                    </td>
+                    <td>
+                        <div>38.37</div>
+                    </td>
+                    <td>
+                        <div>37.58</div>
+                    </td>
+                    <td>
+                        <div>37.94</div>
+                    </td>
+                    <td>
+                        <div>41.78</div>
+                    </td>
+                    <td>43.75</td>
+                </tr>
+                <tr>
+                    <td>Quick ratio</td>
+                    <td>
+                        <div>1.23</div>
+                    </td>
+                    <td>
+                        <div>1.09</div>
+                    </td>
+                    <td>
+                        <div>1.50</div>
+                    </td>
+                    <td>
+                        <div>1.33</div>
+                    </td>
+                    <td>
+                        <div>1.02</div>
+                    </td>
+                    <td>0.88</td>
+                </tr>
+                <tr>
+                    <td>Current ratio</td>
+                    <td>
+                        <div>1.28</div>
+                    </td>
+                    <td>
+                        <div>1.12</div>
+                    </td>
+                    <td>
+                        <div>1.54</div>
+                    </td>
+                    <td>
+                        <div>1.36</div>
+                    </td>
+                    <td>
+                        <div>1.07</div>
+                    </td>
+                    <td>0.93</td>
+                </tr>
+                <tr>
+                    <td>Debt to assets ratio</td>
+                    <td>
+                        <div>0.31</div>
+                    </td>
+                    <td>
+                        <div>0.31</div>
+                    </td>
+                    <td>
+                        <div>0.32</div>
+                    </td>
+                    <td>
+                        <div>0.38</div>
+                    </td>
+                    <td>
+                        <div>0.39</div>
+                    </td>
+                    <td>0.34</td>
+                </tr>
+                <tr>
+                    <td>Debt to equity ratio</td>
+                    <td>
+                        <div>0.86</div>
+                    </td>
+                    <td>
+                        <div>1.07</div>
+                    </td>
+                    <td>
+                        <div>1.19</div>
+                    </td>
+                    <td>
+                        <div>1.87</div>
+                    </td>
+                    <td>
+                        <div>2.16</div>
+                    </td>
+                    <td>1.78</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </section>
