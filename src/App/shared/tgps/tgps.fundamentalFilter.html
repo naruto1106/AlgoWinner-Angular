@@ -46,7 +46,7 @@
                         <agmc-check-box-dropdown on-item-checked-state-changed="vm.onFilterChanged()"
                                                  dropdown-items="fundamental.priceRanges"
                                                  display-func="vm.showRange"></agmc-check-box-dropdown>
-                    </td>              
+                    </td>                                                                                           
                     <td ng-if="fundamental.marketCaps.length>1">
                         <div>
                             <label>Market Cap</label>
@@ -54,7 +54,10 @@
                                                         dropdown-items="fundamental.marketCaps"
                                                         display-func="vm.showMarketCap"></agmc-check-box-dropdown>
                         </div>
-                    </td>                    
+                    </td>
+                    <td ng-if="fundamental.marketCaps.length==0">
+                        <div>&nbsp;</div>
+                    </td> 
                     <td ng-if="fundamental.TradeVenue == 'US'">
                         <div>
                             <label>Analyst rating</label>
@@ -62,7 +65,16 @@
                                                         dropdown-items="fundamental.analystRating"
                                                         display-func="vm.showMarketCap"></agmc-check-box-dropdown>
                         </div>
-                    </td>                    
+                    </td>
+                    <td ng-if="fundamental.TradeVenue != 'US'">
+                        <div>&nbsp;</div>
+                    </td>
+                    <td>
+                        <label>Volume Conditions</label>
+                        <agmc-check-box-dropdown on-item-checked-state-changed="vm.onVolumeFilterChanged()"
+                                                 dropdown-items="fundamental.volumeConditions"
+                                                 display-func="vm.showRange"></agmc-check-box-dropdown>
+                    </td>  
                     <!--<td ng-if="fundamental.peRatios.length>1">
                         <div>
                             <label>PE Ratio</label>
@@ -78,13 +90,7 @@
                                                      dropdown-items="fundamental.earningGrowths"
                                                      display-func="vm.showRange"></agmc-check-box-dropdown>
                         </div>
-                    </td>-->
-                    <td>
-                        <label>Volume Conditions</label>
-                        <agmc-check-box-dropdown on-item-checked-state-changed="vm.onVolumeFilterChanged()"
-                                                 dropdown-items="fundamental.volumeConditions"
-                                                 display-func="vm.showRange"></agmc-check-box-dropdown>
-                    </td>
+                    </td>-->                    
                     <!--<td ng-if="fundamental.marketCaps.length === 0"></td>
                     <td ng-if="fundamental.peRatios.length === 0"></td>
                     <td ng-if="fundamental.earningGrowths.length === 0"></td>-->
