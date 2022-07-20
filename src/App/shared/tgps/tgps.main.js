@@ -1167,7 +1167,7 @@ agmNgModuleWrapper("agms.tgps")
         }
 
         function showColumnsFilter() {
-            var productListOptionForPositionClone = {... productListOptionForPosition};
+            var productListOptionForPositionClone = angular.copy(productListOptionForPosition);
             productListOptionForPositionClone.columns.forEach(function (itemPosition, indexPosition) {
                 if(productListOptionForPositionClone.columns[indexPosition].checked === undefined){
                     productListOptionForPositionClone.columns[indexPosition].checked = true;
