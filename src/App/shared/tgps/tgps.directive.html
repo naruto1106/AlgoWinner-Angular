@@ -262,7 +262,7 @@
             <div class="show-fundamental-filter pull-right" ng-if="vm.mode !== 'Plus' && vm.hasFundamentalFilterSelections()">
                 <div class="filter-number" ng-if="vm.sTgpsScreenerService.fundamentalFilterNumber > 0">{{vm.sTgpsScreenerService.fundamentalFilterNumber}}</div>
                 <button class="filled-blue" ng-click="vm.showFundamentalFilter()">SHOW FILTERS</button>
-                <div class="pt-5">
+                <div class="pt-5" ng-if="vm.mode === 'Position'">
                     <button class="filled-blue" ng-click="vm.showColumnsFilter()">SHOW COLUMNS</button>
                 </div>
             </div>
