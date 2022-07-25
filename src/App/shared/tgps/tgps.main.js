@@ -977,12 +977,12 @@ agmNgModuleWrapper("agms.tgps")
                     classNames: 'mid-column',
                     sortingFunc: createSortingFunc('Month')
                 },
-                {
-                    templateId: 'bigscreener/tgps.Quarter',
-                    title: "QUARTER",
-                    classNames: 'mid-column',
-                    sortingFunc: createSortingFunc('Quarter')
-                },
+                // {
+                //     templateId: 'bigscreener/tgps.Quarter',
+                //     title: "QUARTER",
+                //     classNames: 'mid-column',
+                //     sortingFunc: createSortingFunc('Quarter')
+                // },
                 closePriceColumnDef,
                 closePriceColumnNoCurrencyDef,
                 //lastPriceColumnDef,
@@ -1167,25 +1167,48 @@ agmNgModuleWrapper("agms.tgps")
         }
 
         function showColumnsFilter() {
-            var productListOptionForPositionClone = angular.copy(productListOptionForPosition);
-            productListOptionForPositionClone.columns.forEach(function (itemPosition, indexPosition) {
-                if(productListOptionForPositionClone.columns[indexPosition].checked === undefined){
-                    productListOptionForPositionClone.columns[indexPosition].checked = true;
-                }
-            });
-            
-            tool.openModalByDefinition('s.tgps.ColumnFilterController', {
-                productListOptionForPosition: productListOptionForPositionClone
-            }).result.then(function (response) {
-                response.columns.forEach(function (itemResp, indexResp) {
-                    if(productListOptionForPosition.columns[indexResp].checked !== undefined && !productListOptionForPosition.columns[indexResp].checked){
-                        productListOptionForPosition.columns[indexResp].visibility = isVisible;
-                    } else {
-                        delete productListOptionForPosition.columns[indexResp].visibility;
-                    }                    
+            if(vm.filter.barSize.label === "Daily"){
+                var productListOptionForPositionClone = {...productListOptionForPosition};
+                productListOptionForPositionClone.columns.forEach(function (itemPosition, indexPosition) {
+                    if(productListOptionForPositionClone.columns[indexPosition].checked === undefined){
+                        productListOptionForPositionClone.columns[indexPosition].checked = true;
+                    }
                 });
-                loadStockList();
-            });
+    
+                tool.openModalByDefinition('s.tgps.ColumnFilterController', {
+                    productListOptionForPosition: productListOptionForPositionClone
+                }).result.then(function (response) {
+                    response.columns.forEach(function (itemResp, indexResp) {
+                        if(productListOptionForPosition.columns[indexResp].checked !== undefined && !productListOptionForPosition.columns[indexResp].checked){
+                            productListOptionForPosition.columns[indexResp].visibility = isVisible;
+                        } else {
+                            delete productListOptionForPosition.columns[indexResp].visibility;
+                        }                    
+                    });
+                    loadStockList();
+                });
+            }
+            if(vm.filter.barSize.label === "Weekly"){
+                var productListOptionForWeeklyPositionClone = {...productListOptionForWeeklyPosition};
+                productListOptionForWeeklyPositionClone.columns.forEach(function (itemPosition, indexPosition) {
+                    if(productListOptionForWeeklyPositionClone.columns[indexPosition].checked === undefined){
+                        productListOptionForWeeklyPositionClone.columns[indexPosition].checked = true;
+                    }
+                });
+
+                tool.openModalByDefinition('s.tgps.ColumnFilterController', {
+                    productListOptionForPosition: productListOptionForWeeklyPositionClone
+                }).result.then(function (response) {
+                    response.columns.forEach(function (itemResp, indexResp) {
+                        if(productListOptionForWeeklyPosition.columns[indexResp].checked !== undefined && !productListOptionForWeeklyPosition.columns[indexResp].checked){
+                            productListOptionForWeeklyPosition.columns[indexResp].visibility = isVisible;
+                        } else {
+                            delete productListOptionForWeeklyPosition.columns[indexResp].visibility;
+                        }                    
+                    });
+                    loadStockList();
+                });
+            }            
         }
 
         function showLastAvailableDay() {

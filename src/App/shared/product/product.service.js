@@ -3,6 +3,16 @@
         var marketInfoPath = '/marketinfoapi/v1/ProductDetail';
         var marketInfoTickPath = '/marketinfoapi/v1/TickSize';
         var productPath = '/productapi/v1/Product';
+        var ratingPath = '/ratingapi/v1/Rating';
+        var fundamentalPath = '/fundamentalapi/v1/Fundamental';
+
+// https://www.algomerchant.com/fundamentalapi/v1/Fundamental/GetQuarterlyPageMetrics?productId=188&venue=1
+
+// https://www.algomerchant.com/fundamentalapi/v1/Fundamental/GetAnnualPageMetrics?productId=188&venue=1
+
+// https://www.algomerchant.com/ratingapi/v1/Rating/GetLatestAnalystRating?productId=188&venue=1
+
+// https://www.algomerchant.com/ratingapi/v1/TargetPrice/GetTargetPrice?productId=188&venue=1
 
         var $window = dep.$window,
             coreConfigService = dep.coreConfigService,
@@ -44,6 +54,17 @@
                     return '';
             }
         }
+        
+        function translateTradeVenueToName(tradeVenueLoc) {
+            switch (tradeVenueLoc) {
+                case 'SG':
+                    return 'Singapore';
+                case 'US':
+                    return 'UnitedStates';
+                default:
+                    return 'Singapore';
+            }
+        }
 
         function createGoogleFinanceUrl(product) {
             return "//www.google.com/finance?q=" + translateTradeVenue(product.TradeVenueLoc) + product.Symbol;
@@ -66,6 +87,25 @@
             goToProduct: goToProduct,            
             updateProductTickSizeValueIfBelongToGroup: updateProductTickSizeValueIfBelongToGroup,
 
+            GetLatestAnalystRating: coreServerCommunicationService.genGetFunctionWithNVar(ratingPath + '/GetLatestAnalystRating', function (args) {
+                return {
+                    productId: args[0],
+                    venue: translateTradeVenueToName(args[1]),
+                };
+            }),
+            
+            GetFundamentalQuarterlyPageMetrics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyPageMetrics', function (args) {
+                return {
+                    productId: args[0]
+                };
+            }),
+            
+            GetFundamentalAnnualPageMetrics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualPageMetrics', function (args) {
+                return {
+                    productId: args[0]
+                };
+            }),
+            
             GetProductDetail: coreServerCommunicationService.genGetFunctionWithNVar(marketInfoPath + '/GetProductDetail', function (args) {
                 return {
                     productId: args[0]

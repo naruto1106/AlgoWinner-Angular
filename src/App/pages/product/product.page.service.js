@@ -27,6 +27,50 @@
             });
             return deferred.promise;
         }
+        
+        function getLatestAnalystRating(productId, TradeVenueLoc) {
+            dep.sProductService.GetLatestAnalystRating(productId, TradeVenueLoc).then(function (res) {                
+                //serviceObj.productDetail.RelatedCompanies = res.data.RelatedCompanies;
+                deferred.resolve();
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                deferred.reject();
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+            return deferred.promise;
+        }
+        
+        function getFundamentalQuarterlyPageMetrics(productId) {
+            dep.sProductService.GetFundamentalQuarterlyPageMetrics(productId).then(function (res) {                
+                console.log("getFundamentalQuarterlyPageMetrics res: ", res);
+                //serviceObj.productDetail.RelatedCompanies = res.data.RelatedCompanies;
+                deferred.resolve();
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                deferred.reject();
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+            return deferred.promise;
+        }
+        
+        function getFundamentalAnnualPageMetrics(productId) {
+            dep.sProductService.GetFundamentalAnnualPageMetrics(productId).then(function (res) {                
+                console.log("GetFundamentalAnnualPageMetrics res: ", res);
+                //serviceObj.productDetail.RelatedCompanies = res.data.RelatedCompanies;
+                deferred.resolve();
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                deferred.reject();
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+            return deferred.promise;
+        }
 
         function placeOrder(action, stock) {
             return tool.openModalByDefinition('s.orders.PadDeveloperPopupController', {
@@ -156,6 +200,9 @@
                                 serviceObj.productDetail.MarketData, sMarketDataService.calculateLastTradedPricePct(ress[2]));
                             serviceObj.isLoadingPrice = false;
                             getPriceDeferred.resolve();
+                            getLatestAnalystRating(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc)
+                            getFundamentalQuarterlyPageMetrics(serviceObj.currentProduct.ProductId)
+                            getFundamentalAnnualPageMetrics(serviceObj.currentProduct.ProductId)
                             return getProductDetail(serviceObj.currentProduct.ProductId);
                         }, function (ress) {
                             tool.logError("Error invoking get Market Data for Product Page");
@@ -193,6 +240,7 @@
             showErrorMessage: false,
             setHeaderVisibility: setHeaderVisibility,
             currentProduct: {},
+            latestAnalystRating: {},
             productDetail: {
                 ProductModel: {},
                 MarketData: {},
