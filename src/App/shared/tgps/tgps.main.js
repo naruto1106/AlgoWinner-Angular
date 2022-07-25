@@ -1168,7 +1168,7 @@ agmNgModuleWrapper("agms.tgps")
 
         function showColumnsFilter() {
             if(vm.filter.barSize.label === "Daily"){
-                var productListOptionForPositionClone = Object.assign({}, productListOptionForPosition);
+                var productListOptionForPositionClone = Object.assign({}, productListOptionForPosition);                
                 productListOptionForPositionClone.columns.forEach(function (itemPosition, indexPosition) {
                     if(productListOptionForPositionClone.columns[indexPosition].checked === undefined){
                         productListOptionForPositionClone.columns[indexPosition].checked = true;
