@@ -1168,7 +1168,7 @@ agmNgModuleWrapper("agms.tgps")
 
         function showColumnsFilter() {
             if(vm.filter.barSize.label === "Daily"){
-                var productListOptionForPositionClone = {...productListOptionForPosition};
+                var productListOptionForPositionClone = Object.assign({}, productListOptionForPosition);
                 productListOptionForPositionClone.columns.forEach(function (itemPosition, indexPosition) {
                     if(productListOptionForPositionClone.columns[indexPosition].checked === undefined){
                         productListOptionForPositionClone.columns[indexPosition].checked = true;
@@ -1189,7 +1189,7 @@ agmNgModuleWrapper("agms.tgps")
                 });
             }
             if(vm.filter.barSize.label === "Weekly"){
-                var productListOptionForWeeklyPositionClone = {...productListOptionForWeeklyPosition};
+                var productListOptionForWeeklyPositionClone = Object.assign({}, productListOptionForWeeklyPosition);
                 productListOptionForWeeklyPositionClone.columns.forEach(function (itemPosition, indexPosition) {
                     if(productListOptionForWeeklyPositionClone.columns[indexPosition].checked === undefined){
                         productListOptionForWeeklyPositionClone.columns[indexPosition].checked = true;
