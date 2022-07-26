@@ -159,12 +159,120 @@
 				];
 			}
 
+			function getAnalystRating(){
+				return [
+					{
+						name: "1 >= to <= 1.5",
+						checked: true
+					},
+					{
+						name: ">1.5 to <= 2.5",
+						checked: true
+					},
+					{
+						name: "> 2.5 to < 3.5",
+						checked: true
+					},
+					{
+						name: ">= 3.5 to < 4.5",
+						checked: true
+					},
+					{
+						name: ">= 4.5 to <= 5",
+						checked: true
+					}
+				]
+			}
+
+			function getTurnover(){
+				return [
+					{
+						name: "< 1 M",
+						checked: true
+					},
+					{
+						name: "1 M - 10 M",
+						checked: true
+					},
+					{
+						name: "> 10 M",
+						checked: true
+					}
+				]
+			}
+
+			function getNoise(){
+				return [
+					{
+						name: "<5",
+						checked: true
+					},
+					{
+						name: "5 to 10",
+						checked: true
+					},
+					{
+						name: "10 to 15",
+						checked: true
+					},
+					{
+						name: ">95",
+						checked: true
+					}
+				]
+			}
+
+			function getSectorIndustry(){
+				return [
+					{
+						name: "Sector",
+						checked: true,
+						data : [
+							{
+								name: "Energy",
+								checked: true
+							},
+							{
+								name: "Financials",
+								checked: true
+							},
+							{
+								name: "Consumer Staples",
+								checked: true
+							}
+						]
+					},
+					{
+						name: "Industry",
+						checked: false,
+						data : [
+							{
+								name: "Energy I",
+								checked: true
+							},
+							{
+								name: "Financials I",
+								checked: true
+							},
+							{
+								name: "Consumer Staples I",
+								checked: true
+							}
+						]
+					}
+				]
+			}
+
 			function getDefaultFundamentalSelections() {
 				return {
 					peRatios: getDefaultPeRatios(),
 					earningGrowths: getDefaultEarningGrowths(),
 					priceRanges: getDefaultPriceRanges(),
-					marketCaps: getDefaultMarketCaps()
+					marketCaps: getDefaultMarketCaps(),
+					analystRating: getAnalystRating(),
+					turnover: getTurnover(),
+					noise: getNoise(),
+					sectorIndustry: getSectorIndustry()
 				}
 			}
 
@@ -174,7 +282,11 @@
 					earningGrowths: getDefaultEarningGrowths(),
 					priceRanges: getDefaultPriceRanges(),
 					marketCaps: getDefaultMarketCaps(),
-					volumeConditions: getDefaultVolumeCondition()
+					volumeConditions: getDefaultVolumeCondition(),
+					analystRating: getAnalystRating(),
+					turnover: getTurnover(),
+					noise: getNoise(),
+					sectorIndustry: getSectorIndustry()
 				}
 			}
 
@@ -184,7 +296,11 @@
 					marketCaps: [],
 					earningGrowths: [],
 					priceRanges: getDefaultPriceRanges(),
-					volumeConditions: getDefaultVolumeCondition()
+					volumeConditions: getDefaultVolumeCondition(),
+					analystRating: getAnalystRating(),
+					turnover: getTurnover(),
+					noise: getNoise(),
+					sectorIndustry: getSectorIndustry()
 				}
 			}
 

@@ -60,6 +60,10 @@ agmNgModuleWrapper("agms.tgps")
                     (f.MarketCapTypes.length > 0 ? 1 : 0) +
                     (f.PeRatios.length > 0 ? 1 : 0) +
                     (f.PriceRanges.length > 0 ? 1 : 0) +
+                    (f.AnalystRatings.length > 0 ? 1 : 0) + 
+                    (f.Noise.length > 0 ? 1 : 0) +
+                    (f.Turnover.length > 0 ? 1 : 0) +
+                    (f.SectorIndustry.length > 0 ? 1 : 0) + 
                     (f.VolumeRanges.length > 0 ? 1 : 0);
             });
             return count;
@@ -342,12 +346,11 @@ agmNgModuleWrapper("agms.tgps")
                 if (hasFundamental) {
                     var res = sDatamartItemService.evaluateFundamentalAndReturnMergedObjects(vm.filter.fundamentals[key]);
                     res.TradeVenue = sMarketEntitlementService.tradeVenuesDict[key].TradeVenue;
-                    if (vm.filter.watchlist || (vm.filter.tradeVenueLoc && vm.filter.tradeVenueLoc.label === key)) {
+                    //if (vm.filter.watchlist || (vm.filter.tradeVenueLoc && vm.filter.tradeVenueLoc.label === key)) {
                         fundamentalParamsList.push(res);
-                    }
+                    //}
                 }
             }
-
             sTgpsScreenerService.fundamentalFilterNumber = calculateFundamentalFilterNumber(fundamentalParamsList);
 
             var promise = null;
@@ -856,13 +859,13 @@ agmNgModuleWrapper("agms.tgps")
                     templateId: 'bigscreener/tgps.payoutAlertMA150',
                     title: "Payout Alert MA 150",
                     classNames: 'mid-column product-payout-alert-MA150',
-                    //sortingFunc: createSortingFunc('payoutAlertMA150')
+                    sortingFunc: createSortingFunc('payoutAlertMA150')
                 },
                 {
                     templateId: 'bigscreener/tgps.noise',
                     title: "Noise",
                     classNames: 'mid-column',
-                    //sortingFunc: createSortingFunc('noise')
+                    sortingFunc: createSortingFunc('noise')
                 },
                 {
                     templateId: 'bigscreener/tgps.marketCap',
@@ -874,26 +877,26 @@ agmNgModuleWrapper("agms.tgps")
                     templateId: 'bigscreener/tgps.sector',
                     title: "Sector",
                     classNames: 'mid-column product-sector',
-                    //sortingFunc: createSortingFunc('sector')
+                    sortingFunc: createSortingFunc('sector')
                 },
                 {
                     templateId: 'bigscreener/tgps.industry',
                     title: "Industry",
                     classNames: 'mid-column product-industry',
-                    //sortingFunc: createSortingFunc('industry')
+                    sortingFunc: createSortingFunc('industry')
                 },
                 {
                     templateId: 'bigscreener/tgps.turnover',
                     title: "Turnover",
                     classNames: 'mid-column product-turnover',
-                    //sortingFunc: createSortingFunc('turnover')
+                    sortingFunc: createSortingFunc('turnover')
                 },
                 {
                     templateId: 'bigscreener/tgps.analystRating',
                     title: "Analyst rating",
                     classNames: 'mid-column product-analyst-rating',
-                    visibility: isUSMarket
-                    //sortingFunc: createSortingFunc('analystRating')
+                    visibility: isUSMarket,
+                    sortingFunc: createSortingFunc('analystRating')
                 },
                 // {
                 //     templateId: 'bigscreener/tgps.Quarter',

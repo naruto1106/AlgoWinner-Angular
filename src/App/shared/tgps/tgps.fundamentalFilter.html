@@ -22,7 +22,7 @@
                             <agmc-check-box-dropdown-tabs on-item-checked-state-changed="vm.onFilterChanged()"
                                                         fundamental="fundamental"
                                                         dropdown-items="fundamental.sectorIndustry"
-                                                        display-func="vm.showMarketCap"></agmc-check-box-dropdown-tabs>
+                                                        display-func="vm.showSectorIndustry"></agmc-check-box-dropdown-tabs>
                         </div>
                     </td>
                     <td>
@@ -30,7 +30,7 @@
                             <label>Turnover</label>
                             <agmc-check-box-dropdown on-item-checked-state-changed="vm.onFilterChanged()"
                                                         dropdown-items="fundamental.turnover"
-                                                        display-func="vm.showMarketCap"></agmc-check-box-dropdown>
+                                                        display-func="vm.showTurnover"></agmc-check-box-dropdown>
                         </div>
                     </td>
                     <td>
@@ -38,7 +38,7 @@
                             <label>Noise</label>
                             <agmc-check-box-dropdown on-item-checked-state-changed="vm.onFilterChanged()"
                                                         dropdown-items="fundamental.noise"
-                                                        display-func="vm.showMarketCap"></agmc-check-box-dropdown>
+                                                        display-func="vm.showNoise"></agmc-check-box-dropdown>
                         </div>
                     </td>   
                     <td>
@@ -47,7 +47,7 @@
                                                  dropdown-items="fundamental.priceRanges"
                                                  display-func="vm.showRange"></agmc-check-box-dropdown>
                     </td>                                                                                           
-                    <td ng-if="fundamental.marketCaps.length>1">
+                    <td ng-if="fundamental.marketCaps.length>0">
                         <div>
                             <label>Market Cap</label>
                             <agmc-check-box-dropdown on-item-checked-state-changed="vm.onFilterChanged()"
@@ -60,10 +60,10 @@
                     </td> 
                     <td ng-if="fundamental.TradeVenue == 'US'">
                         <div>
-                            <label>Analyst rating</label>
+                            <label>Analyst Rating</label>
                             <agmc-check-box-dropdown on-item-checked-state-changed="vm.onFilterChanged()"
                                                         dropdown-items="fundamental.analystRating"
-                                                        display-func="vm.showMarketCap"></agmc-check-box-dropdown>
+                                                        display-func="vm.showAnalystRating"></agmc-check-box-dropdown>
                         </div>
                     </td>
                     <td ng-if="fundamental.TradeVenue != 'US'">

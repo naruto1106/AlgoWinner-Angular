@@ -22,7 +22,11 @@
             var usePriceRangeFilter = false;
             var usePeRatioFilter = false;
             var useEgRatioFilter = false;
-
+            var useAnalystRatingFilter = false;
+            var useNoiseFilter = false;
+            var useSectorIndustryFilter = false;
+            var useTurnoverFilter = false;
+            
             //market cap filter
             var marketCaps = [];
             obj.marketCaps.forEach(function (mc) {
@@ -75,6 +79,54 @@
             if (earningGrowths.length > 0 && earningGrowths.length < obj.earningGrowths.length) {
                 useEgRatioFilter = true;
             }
+            
+            //analyst rating filter
+            var analystRatings = [];
+            obj.analystRating.forEach(function (ar) {
+                if (ar.checked) {
+                    analystRatings.push(ar.name);
+                }
+            });
+            if (analystRatings.length > 0 && analystRatings.length < obj.analystRating.length) {
+                useAnalystRatingFilter = true;
+            }
+            
+            //noise filter
+            var noise = [];
+            obj.noise.forEach(function (n) {
+                if (n.checked) {
+                    noise.push(n.name);
+                }
+            });
+            if (noise.length > 0 && noise.length < obj.noise.length) {
+                useNoiseFilter = true;
+            }
+            
+            //turnover filter
+            var turnover = [];
+            obj.turnover.forEach(function (t) {
+                if (t.checked) {
+                    turnover.push(t.name);
+                }
+            });
+            if (turnover.length > 0 && turnover.length < obj.turnover.length) {
+                useTurnoverFilter = true;
+            }
+            
+            //sector industry filter
+            var sectorIndustry = [];
+            obj.sectorIndustry.forEach(function (si) {
+                if (si.checked) {
+                    si.data.forEach(function (siObj) {
+                        if (siObj.checked) {
+                            sectorIndustry.push(siObj.name);
+                        }
+                    });
+                }
+            });
+            if (sectorIndustry.length > 0 && sectorIndustry.length < obj.sectorIndustry.length) {
+                useSectorIndustryFilter = true;
+            }
 
             var returnedObject = {
                 UsePriceRangeFilter: usePriceRangeFilter,
@@ -84,7 +136,15 @@
                 UsePeRatioFilter: usePeRatioFilter,
                 PeRatios: usePeRatioFilter ? peRatios : [],
                 UseEgRatioFilter: useEgRatioFilter,
-                EgRatios: useEgRatioFilter ? earningGrowths : []
+                EgRatios: useEgRatioFilter ? earningGrowths : [],
+                AnalystRatings: useAnalystRatingFilter ? analystRatings : [],
+                UseAnalystRatingFilter: useAnalystRatingFilter,
+                Noise: useNoiseFilter ? noise : [],
+                UseNoiseFilter: useNoiseFilter,
+                Turnover: useTurnoverFilter ? turnover : [],
+                UseTurnoverFilter: useTurnoverFilter,
+                SectorIndustry: useSectorIndustryFilter ? sectorIndustry : [],
+                UseSectorIndustryFilter: useSectorIndustryFilter
             };
             if (obj.volumeConditions) {
                 var volumeRanges = [];
