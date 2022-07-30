@@ -70,12 +70,7 @@
                 });                
             }
 
-            var chartData = {
-                categories : ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell'],
-                analyst_rating : [10, 30, 50, 20, 8]
-            };
-
-            function barCharts(container){
+            function barCharts(container, chartData){
                 var chart = Highcharts.chart(container, {
 
                     chart: {
@@ -164,24 +159,51 @@
                 SentimentScore: 0.88,
                 Volume: 50,
                 IsVolumeBreakout: false
-            }];
-            
-            var analystTargetPrice = [{
-                title: "Past 1 Hour",
-                value: 'USD 120.00'
-            },{
-                title: "Current Price",
-                value: 'USD 90.12'
-            }];
+            }];                        
 
             tool.initialize(function () {
                 tool.setVmProperties({
-                    newsSentiment: newsSentiments,
-                    analystTargetPrice: analystTargetPrice
+                    newsSentiment: newsSentiments
                 });
 
-                lineCharts('retail_buying_activity');
-                barCharts('analyst_rating');
+                pProductPageService.waitTillProductDetailLoaded().then(function () {
+
+                    lineCharts('retail_buying_activity');                    
+
+                    var productDetail = pProductPageService.productDetail;
+                    console.log("productDetail: ", productDetail);
+                    vm.productDetail = productDetail;
+                    vm.isLoading = pProductPageService.isLoading;
+
+                    //Set Analyst Rating chat values for US market only
+                    if(productDetail.Product.TradeVenueLoc == 'US'){
+                        pProductPageService.getLatestAnalystRating().then(function(){
+                                var latestAnalystRating = pProductPageService.latestAnalystRating;
+                                var chartData = {
+                                    categories : ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell'],
+                                    analyst_rating : [
+                                        latestAnalystRating.CountStrongBuy, 
+                                        latestAnalystRating.CountBuy, 
+                                        latestAnalystRating.CountHold, 
+                                        latestAnalystRating.CountSell, 
+                                        latestAnalystRating.CountStrongSell
+                                    ]
+                                };
+                                barCharts('analyst_rating', chartData);                        
+                        });
+                    }
+
+                    pProductPageService.getAnalystTargetPrice().then(function(){
+                        var analystTargetPrices = pProductPageService.analystTargetPrice;
+                        vm.analystTargetPrice = [{
+                            title: "Past 1 Hour",
+                            value: "USD "+analystTargetPrices.AnalystTargetPrice
+                        },{
+                            title: "Current Price",
+                            value: "USD "+analystTargetPrices.CurrentPrice
+                        }];
+                    });                    
+                });
             });
         })
     .defineDirectiveForE('agmp-product-sentiment-panel', [],

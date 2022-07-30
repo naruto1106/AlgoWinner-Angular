@@ -4,6 +4,18 @@
         <div class="col-md-1" ng-repeat="barChartObj in vm.barChartsArr">
             <div class="white-box">
                 <h1>{{barChartObj.name}}</h1>
+                <div class="row">
+                    <div class="col-100" style="float: right;">
+                        <div>
+                            <button ng-class="{'mini-filled-blue': barChartObj.selectedType === 'annualy', 'mini-hollow-blue': barChartObj.selectedType !== 'annualy'}" style="margin-right: 5px" ng-click="vm.setSelectedType($index, 'annualy')" class="mini-filled-blue">
+                                Annualy
+                            </button>
+                            <button ng-class="{'mini-filled-blue': barChartObj.selectedType == 'quarter', 'mini-hollow-blue': barChartObj.selectedType !== 'quarter'}" style="margin-right: 5px" ng-click="vm.setSelectedType($index, 'quarter')" class="mini-hollow-blue">
+                                Quarterly
+                            </button>                    
+                        </div>
+                    </div>
+                </div>
                 <div class="h-30px"></div>
                 <table border="1" class="bar-chart-table">
                     <tr ng-repeat="grothTableObj in barChartObj.grothTable">

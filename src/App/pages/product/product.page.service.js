@@ -28,49 +28,49 @@
             return deferred.promise;
         }
         
-        function getLatestAnalystRating(productId, TradeVenueLoc) {
-            dep.sProductService.GetLatestAnalystRating(productId, TradeVenueLoc).then(function (res) {                
-                //serviceObj.productDetail.RelatedCompanies = res.data.RelatedCompanies;
-                deferred.resolve();
+        function getLatestAnalystRating() {
+            return dep.sProductService.GetLatestAnalystRating(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {                                
+                serviceObj.latestAnalystRating = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
             }, function () {
-                deferred.reject();
                 serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
-            return deferred.promise;
+        }
+
+        function getAnalystTargetPrice() {
+            return dep.sProductService.GetAnalystTargetPrice(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.analystTargetPrice = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+        }                
+        
+        function getFundamentalQuarterlyPageMetrics() {
+            return dep.sProductService.GetFundamentalQuarterlyPageMetrics(serviceObj.currentProduct.ProductId).then(function (res) {
+                serviceObj.fundamentalQuarterlyPageMetrics = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
         }
         
-        function getFundamentalQuarterlyPageMetrics(productId) {
-            dep.sProductService.GetFundamentalQuarterlyPageMetrics(productId).then(function (res) {                
-                console.log("getFundamentalQuarterlyPageMetrics res: ", res);
-                //serviceObj.productDetail.RelatedCompanies = res.data.RelatedCompanies;
-                deferred.resolve();
+        function getFundamentalAnnualPageMetrics() {
+            return dep.sProductService.GetFundamentalAnnualPageMetrics(serviceObj.currentProduct.ProductId).then(function (res) {
+                serviceObj.fundamentalAnnualPageMetrics = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
             }, function () {
-                deferred.reject();
                 serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
-            return deferred.promise;
-        }
-        
-        function getFundamentalAnnualPageMetrics(productId) {
-            dep.sProductService.GetFundamentalAnnualPageMetrics(productId).then(function (res) {                
-                console.log("GetFundamentalAnnualPageMetrics res: ", res);
-                //serviceObj.productDetail.RelatedCompanies = res.data.RelatedCompanies;
-                deferred.resolve();
-                serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
-            }, function () {
-                deferred.reject();
-                serviceObj.showErrorMessage = true;
-                serviceObj.isLoading = false;
-            });
-            return deferred.promise;
-        }
+        }       
 
         function placeOrder(action, stock) {
             return tool.openModalByDefinition('s.orders.PadDeveloperPopupController', {
@@ -177,6 +177,11 @@
                         serviceObj.currentProduct = result;
                         serviceObj.isLoadingPrice = true;
 
+                        // getLatestAnalystRating(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc);
+                        // getAnalystTargetPrice(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc);
+                        // getFundamentalQuarterlyPageMetrics(serviceObj.currentProduct.ProductId);
+                        // getFundamentalAnnualPageMetrics(serviceObj.currentProduct.ProductId);
+
                         tool.onceAll([
                             tradeDataService.GetBid(serviceObj.productDetail.ProductModel),
                             tradeDataService.GetAsk(serviceObj.productDetail.ProductModel),
@@ -197,12 +202,9 @@
                             serviceObj.productDetail.MarketData.PrevClose = ress[2].data.PrevClose;    
                             serviceObj.productDetail.MarketData.CumulativeVolume = ress[2].data.CumulativeVolume;    
                             serviceObj.productDetail.MarketData = angular.extend(
-                                serviceObj.productDetail.MarketData, sMarketDataService.calculateLastTradedPricePct(ress[2]));
+                            serviceObj.productDetail.MarketData, sMarketDataService.calculateLastTradedPricePct(ress[2]));
                             serviceObj.isLoadingPrice = false;
                             getPriceDeferred.resolve();
-                            getLatestAnalystRating(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc)
-                            getFundamentalQuarterlyPageMetrics(serviceObj.currentProduct.ProductId)
-                            getFundamentalAnnualPageMetrics(serviceObj.currentProduct.ProductId)
                             return getProductDetail(serviceObj.currentProduct.ProductId);
                         }, function (ress) {
                             tool.logError("Error invoking get Market Data for Product Page");
@@ -240,7 +242,24 @@
             showErrorMessage: false,
             setHeaderVisibility: setHeaderVisibility,
             currentProduct: {},
-            latestAnalystRating: {},
+            getLatestAnalystRating: getLatestAnalystRating,            
+            latestAnalystRating: {
+                CountBuy: 0,
+                CountHold: 0,
+                CountSell: 0,
+                CountStrongBuy: 0,
+                CountStrongSell: 0,
+                ObservationDate: ""
+            },
+            getAnalystTargetPrice: getAnalystTargetPrice,
+            analystTargetPrice: {
+                AnalystTargetPrice: 0,
+                CurrentPrice: 0
+            },
+            getFundamentalQuarterlyPageMetrics: getFundamentalQuarterlyPageMetrics,
+            fundamentalQuarterlyPageMetrics: {},
+            getFundamentalAnnualPageMetrics: getFundamentalAnnualPageMetrics,
+            fundamentalAnnualPageMetrics: {},
             productDetail: {
                 ProductModel: {},
                 MarketData: {},

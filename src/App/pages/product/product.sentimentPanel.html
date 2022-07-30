@@ -32,6 +32,10 @@
                 <h1>Analyst Rating</h1>
                 <div class="h-30px"></div>
                 <div id="analyst_rating"></div>
+                <!-- <highchart class="m-top-20px" config="vm.chartConfig"></highchart> -->
+                <div ng-if="vm.productDetail.Product.TradeVenueLoc !== 'US'">
+                    <h4 class="text-center">Data is not available</h4>
+                </div>
             </div>
         </div>
         <div class="col-md-1">

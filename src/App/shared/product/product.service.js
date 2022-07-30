@@ -3,7 +3,8 @@
         var marketInfoPath = '/marketinfoapi/v1/ProductDetail';
         var marketInfoTickPath = '/marketinfoapi/v1/TickSize';
         var productPath = '/productapi/v1/Product';
-        var ratingPath = '/ratingapi/v1/Rating';
+        var ratingLatestAnalystPath = '/ratingapi/v1/Rating';
+        var targetPricePath = '/ratingapi/v1/TargetPrice';
         var fundamentalPath = '/fundamentalapi/v1/Fundamental';
 
 // https://www.algomerchant.com/fundamentalapi/v1/Fundamental/GetQuarterlyPageMetrics?productId=188&venue=1
@@ -87,7 +88,14 @@
             goToProduct: goToProduct,            
             updateProductTickSizeValueIfBelongToGroup: updateProductTickSizeValueIfBelongToGroup,
 
-            GetLatestAnalystRating: coreServerCommunicationService.genGetFunctionWithNVar(ratingPath + '/GetLatestAnalystRating', function (args) {
+            GetLatestAnalystRating: coreServerCommunicationService.genGetFunctionWithNVar(ratingLatestAnalystPath + '/GetLatestAnalystRating', function (args) {
+                return {
+                    productId: args[0],
+                    venue: translateTradeVenueToName(args[1]),
+                };
+            }),
+            
+            GetAnalystTargetPrice: coreServerCommunicationService.genGetFunctionWithNVar(targetPricePath + '/GetTargetPrice', function (args) {
                 return {
                     productId: args[0],
                     venue: translateTradeVenueToName(args[1]),
