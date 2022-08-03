@@ -15,7 +15,8 @@ agmNgModuleWrapper("agms.tgps")
         'sMenuRightClickService',
         'sTradingHolidayService',
         'sTgpsService',
-        'coreUserStateService'
+        'coreUserStateService',
+        'coreUtil'
     ],
     function (vm, dep, tool) {
 
@@ -34,6 +35,7 @@ agmNgModuleWrapper("agms.tgps")
             sMenuRightClickService = dep.sMenuRightClickService,
             sTradingHolidayService = dep.sTradingHolidayService,
             sTgpsService = dep.sTgpsService;
+            coreUtil = dep.coreUtil;
 
         var allStocksForPosition = [];
         var allStocksForSwing = [];
@@ -755,14 +757,16 @@ agmNgModuleWrapper("agms.tgps")
             title: "CLOSE",
             classNames: 'mid-column',
             sortingFunc: createSortingFunc('Close'),
-            visibility: isNotWorldIndices
+            visibility: isNotWorldIndices,
+            sortingDirection: -1
         };
         var closePriceColumnNoCurrencyDef = {
             templateId: 'bigscreener/tgps.Close_NoCurr',
             title: "CLOSE",
             classNames: 'mid-column',
             sortingFunc: createSortingFunc('Close'),
-            visibility: isWorldIndices
+            visibility: isWorldIndices,
+            sortingDirection: -1
         };
 
         var volumeColumnDef = {
@@ -770,7 +774,8 @@ agmNgModuleWrapper("agms.tgps")
             title: "VOLUME",
             classNames: 'mid-column',
             sortingFunc: createSortingFunc('Volume'),
-            visibility: isNotWorldIndices
+            visibility: isNotWorldIndices,
+            sortingDirection: -1
         };
         var triggerPriceColumnDef = {
             templateId: 'bigscreener/tgps.TriggerPrice',
@@ -781,7 +786,8 @@ agmNgModuleWrapper("agms.tgps")
                 var y = b.TriggerPrice || -1;
                 return x - y;
             },
-            visibility: isNotWorldIndices
+            visibility: isNotWorldIndices,
+            sortingDirection: -1
         };
         var directionColumnDef = {
             templateId: 'bigscreener/tgps.Direction',
@@ -791,7 +797,8 @@ agmNgModuleWrapper("agms.tgps")
                 var x = getBullBearSortingValue(a);
                 var y = getBullBearSortingValue(b);
                 return x - y;
-            }
+            },
+            sortingDirection: -1
         };
 
         var productListOptionForSwing = {
@@ -874,57 +881,81 @@ agmNgModuleWrapper("agms.tgps")
                     title: "WEEK",
                     classNames: 'mid-column',
                     sortingFunc: createSortingFunc('Week'),
-                    defaultSorting: -1
+                    defaultSorting: -1,
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.Month',
                     title: "MONTH",
                     classNames: 'mid-column',
-                    sortingFunc: createSortingFunc('Month')
+                    sortingFunc: createSortingFunc('Month'),
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.payoutAlertMA150',
                     title: "Payout Alert MA 150",
                     classNames: 'mid-column product-payout-alert-MA150',
-                    sortingFunc: createSortingFunc('payoutAlertMA150')
+                    sortingFunc: function (a, b) {
+                        if (a.Payout && b.Payout) {
+                            return coreUtil.sortName(a.Payout, b.Payout);
+                        }
+                        return 0;
+                    },
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.noise',
                     title: "Noise",
                     classNames: 'mid-column',
-                    sortingFunc: createSortingFunc('noise')
+                    sortingFunc: createSortingFunc('Noise'),
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.marketCap',
                     title: "Market Cap",
                     classNames: 'mid-column',
-                    sortingFunc: createSortingFunc('marketCap'),
-                    visibility: isNotMYMarket
+                    sortingFunc: createSortingFunc('MarketCap'),
+                    visibility: isNotMYMarket,
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.sector',
                     title: "Sector",
                     classNames: 'mid-column product-sector',
-                    sortingFunc: createSortingFunc('sector')
+                    sortingFunc: function (a, b) {
+                        if (a.ProductModel && b.ProductModel) {
+                            return coreUtil.sortName(a.ProductModel.Sector.SectorName, b.ProductModel.Sector.SectorName);
+                        }
+                        return 0;
+                    },
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.industry',
                     title: "Industry",
                     classNames: 'mid-column product-industry',
-                    sortingFunc: createSortingFunc('industry')
+                    sortingFunc: function (a, b) {
+                        if (a.ProductModel && b.ProductModel) {
+                            return coreUtil.sortName(a.ProductModel.Industry.IndustryName, b.ProductModel.Industry.IndustryName);
+                        }
+                        return 0;
+                    },
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.turnover',
                     title: "Turnover",
                     classNames: 'mid-column product-turnover',
-                    sortingFunc: createSortingFunc('turnover')
+                    sortingFunc: createSortingFunc('Turnover'),
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.analystRating',
                     title: "Analyst rating",
                     classNames: 'mid-column product-analyst-rating',
                     visibility: isUSMarket,
-                    sortingFunc: createSortingFunc('analystRating')
+                    sortingFunc: createSortingFunc('Rating'),
+                    sortingDirection: -1
                 },
                 // {
                 //     templateId: 'bigscreener/tgps.Quarter',
@@ -949,7 +980,8 @@ agmNgModuleWrapper("agms.tgps")
                         }
                         return 0;
                     },
-                    visibility: isWorldIndices
+                    visibility: isWorldIndices,
+                    sortingDirection: -1
                 },
                 triggerPriceColumnDef,
                 {
@@ -961,26 +993,30 @@ agmNgModuleWrapper("agms.tgps")
                         var y = b.TriggerPrice || -1;
                         return x - y;
                     },
-                    visibility: isWorldIndices
+                    visibility: isWorldIndices,
+                    sortingDirection: -1
                 },
                 directionColumnDef,
                 {
                     templateId: 'bigscreener/tgps.NumTriggers',
                     title: "# ARROWS",
                     classNames: 'mid-column',
-                    sortingFunc: createSortingFunc('NumTriggers')
+                    sortingFunc: createSortingFunc('NumTriggers'),
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.TIF',
                     title: "TIF",
                     classNames: 'mid-column',
-                    sortingFunc: createSortingFunc('TIF')
+                    sortingFunc: createSortingFunc('TIF'),
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps.ComCrossover',
                     title: "COM Crossover",
                     classNames: 'mid-column product-comCrossover',
-                    sortingFunc: createSortingFunc('COMDiff')
+                    sortingFunc: createSortingFunc('COMDiff'),
+                    sortingDirection: -1
                 },
                 {
                     templateId: 'bigscreener/tgps',

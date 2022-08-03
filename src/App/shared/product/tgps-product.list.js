@@ -25,7 +25,8 @@
                     return coreUtil.sortName(a.ProductModel.ProductName, b.ProductModel.ProductName);
                 }
                 return 0;
-            }
+            },
+            sortingDirection: -1
         };
         defaultColumns.productName = {
             templateId: 'default-product-list/product-name',
@@ -36,7 +37,8 @@
                     return coreUtil.sortName(a.ProductModel.ProductName, b.ProductModel.ProductName);
                 }
                 return 0;
-            }
+            },
+            sortingDirection: -1
         };
         defaultColumns.productSymbol = {
             templateId: 'default-product-list/product-symbol',
@@ -47,7 +49,8 @@
                     return coreUtil.sortName(a.ProductModel.Symbol, b.ProductModel.Symbol);
                 }
                 return 0;
-            }
+            },
+            sortingDirection: -1
         };
         defaultColumns.bidPrice = {
             templateId: 'default-product-list/bid-price',
@@ -191,6 +194,9 @@
                 vm.options.columns.forEach(function (col) {
                     if (col.defaultSorting) {
                         sortByThisColumn(col, col.defaultSorting);
+                    }
+                    if (col.sortingDirection) {
+                        sortByThisColumn(col, col.sortingDirection);
                     }
                 });
                 if (vm.visibility.enableVirtualization) {
@@ -399,11 +405,13 @@
             }
 
             function isSelectedColumnForSortDesc(col) {
-                return col.sortingDirection === -1 && vm.selectedColumnForSort === col;
+                //return col.sortingDirection === -1 && vm.selectedColumnForSort === col;
+                return col.sortingDirection === -1;
             };
 
             function isSelectedColumnForSortAsc(col) {
-                return col.sortingDirection === 1 && vm.selectedColumnForSort === col;
+                //return col.sortingDirection === 1 && vm.selectedColumnForSort === col;
+                return col.sortingDirection === 1;
             };
 
             function sortByThisColumn(col, direction) {
