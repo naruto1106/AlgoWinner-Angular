@@ -70,7 +70,51 @@
                 serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
-        }       
+        }
+        
+        function getAnnualIncomeStatement() {
+            return dep.sProductService.GetAnnualIncomeStatement(serviceObj.currentProduct.ProductId).then(function (res) {
+                serviceObj.annualIncomeStatement = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getAnnualBalanceSheet() {
+            return dep.sProductService.GetAnnualBalanceSheet(serviceObj.currentProduct.ProductId).then(function (res) {
+                serviceObj.annualBalanceSheet = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getAnnualCashFlow() {
+            return dep.sProductService.GetAnnualCashFlow(serviceObj.currentProduct.ProductId).then(function (res) {
+                serviceObj.annualCashFlow = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getAnnualStatistics() {
+            return dep.sProductService.GetAnnualStatistics(serviceObj.currentProduct.ProductId).then(function (res) {
+                serviceObj.annualStatistics = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+        }
 
         function placeOrder(action, stock) {
             return tool.openModalByDefinition('s.orders.PadDeveloperPopupController', {
@@ -260,6 +304,14 @@
             fundamentalQuarterlyPageMetrics: {},
             getFundamentalAnnualPageMetrics: getFundamentalAnnualPageMetrics,
             fundamentalAnnualPageMetrics: {},
+            getAnnualIncomeStatement: getAnnualIncomeStatement,
+            annualIncomeStatement: {},
+            getAnnualBalanceSheet: getAnnualBalanceSheet,
+            annualBalanceSheet: {},
+            getAnnualCashFlow: getAnnualCashFlow,
+            annualCashFlow: {},
+            getAnnualStatistics: getAnnualStatistics,
+            annualStatistics: {},
             productDetail: {
                 ProductModel: {},
                 MarketData: {},

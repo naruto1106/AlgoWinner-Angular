@@ -171,7 +171,7 @@
                     lineCharts('retail_buying_activity');                    
 
                     var productDetail = pProductPageService.productDetail;
-                    console.log("productDetail: ", productDetail);
+                    //console.log("productDetail: ", productDetail);
                     vm.productDetail = productDetail;
                     vm.isLoading = pProductPageService.isLoading;
 

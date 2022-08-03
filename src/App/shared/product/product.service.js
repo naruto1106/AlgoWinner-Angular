@@ -7,14 +7,6 @@
         var targetPricePath = '/ratingapi/v1/TargetPrice';
         var fundamentalPath = '/fundamentalapi/v1/Fundamental';
 
-// https://www.algomerchant.com/fundamentalapi/v1/Fundamental/GetQuarterlyPageMetrics?productId=188&venue=1
-
-// https://www.algomerchant.com/fundamentalapi/v1/Fundamental/GetAnnualPageMetrics?productId=188&venue=1
-
-// https://www.algomerchant.com/ratingapi/v1/Rating/GetLatestAnalystRating?productId=188&venue=1
-
-// https://www.algomerchant.com/ratingapi/v1/TargetPrice/GetTargetPrice?productId=188&venue=1
-
         var $window = dep.$window,
             coreConfigService = dep.coreConfigService,
             coreServerCommunicationService = dep.coreServerCommunicationService;
@@ -109,6 +101,30 @@
             }),
             
             GetFundamentalAnnualPageMetrics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualPageMetrics', function (args) {
+                return {
+                    productId: args[0]
+                };
+            }),
+            
+            GetAnnualIncomeStatement: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualIncomeStatement', function (args) {
+                return {
+                    productId: args[0]
+                };
+            }),
+            
+            GetAnnualBalanceSheet: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualBalanceSheet', function (args) {
+                return {
+                    productId: args[0]
+                };
+            }),
+           
+            GetAnnualCashFlow: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualCashFlow', function (args) {
+                return {
+                    productId: args[0]
+                };
+            }),
+            
+            GetAnnualStatistics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualStatistics', function (args) {
                 return {
                     productId: args[0]
                 };

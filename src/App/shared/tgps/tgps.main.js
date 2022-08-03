@@ -650,6 +650,10 @@ agmNgModuleWrapper("agms.tgps")
         function isUSMarket() {
             return vm.filter.tradeVenueLoc && vm.filter.tradeVenueLoc.label !== 'SG' && vm.filter.tradeVenueLoc.label !== 'HK' && vm.filter.tradeVenueLoc.label !== 'MY' && vm.filter.tradeVenueLoc.label !== 'CHN';
         }
+        
+        function isNotMYMarket() {
+            return vm.filter.tradeVenueLoc && vm.filter.tradeVenueLoc.label === 'SG' || vm.filter.tradeVenueLoc.label === 'HK' || vm.filter.tradeVenueLoc.label === 'US' || vm.filter.tradeVenueLoc.label === 'CHN';
+        }
 
         function isVisible(checked) {
             return false;
@@ -871,7 +875,8 @@ agmNgModuleWrapper("agms.tgps")
                     templateId: 'bigscreener/tgps.marketCap',
                     title: "Market Cap",
                     classNames: 'mid-column',
-                    sortingFunc: createSortingFunc('marketCap')
+                    sortingFunc: createSortingFunc('marketCap'),
+                    visibility: isNotMYMarket
                 },
                 {
                     templateId: 'bigscreener/tgps.sector',

@@ -28,10 +28,10 @@
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Payout}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.noise">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Noise|number:2}}</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Noise}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.marketCap">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.MarketCap|number:2}}</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.MarketCap > 0 ? (productContainer.MarketCap|priceNumberFormatter) : '-'}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.sector">
         <h5 title="{{productContainer.ProductModel.Sector.SectorName}}" ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Sector.SectorName}}</h5>
@@ -40,10 +40,10 @@
         <h5 title="{{productContainer.ProductModel.Industry.IndustryName}}" ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Industry.IndustryName}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.turnover">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Turnover|number:2}}</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Turnover > 0 ? (productContainer.Turnover|priceNumberFormatter) : '-'}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.analystRating">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Rating}}</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Rating > 0 ? (productContainer.Rating) : '-'}}</h5>
     </script>
     <!-- <script type="text/ng-template" id="bigscreener/tgps.Quarter">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Quarter|number:2}}</h5>
@@ -65,7 +65,7 @@
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.TriggerPrice">
         <h5 ng-if="productContainer.Direction == 0">-</h5>
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="productContainer.Direction != 0">{{productContainer.TriggerPrice|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="productContainer.Direction != 0">{{productContainer.TriggerPrice > 0 ? (productContainer.TriggerPrice|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc) : '-'}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.StopPrice">
         <h5 ng-if="!productContainer.StopPrice">-</h5>

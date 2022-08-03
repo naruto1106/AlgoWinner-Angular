@@ -315,17 +315,17 @@
             function setSelectedType(index, type) {
                 var selectedChartObj = barChartsArr[index];
                 selectedChartObj.selectedType = type;
-                setFundamentalChartValues(selectedChartObj, type);
+                setFundamentalChartValues(selectedChartObj);
             }
 
-            function setFundamentalChartValues(chartConfigObj, type = 'annualy'){
+            function setFundamentalChartValues(chartConfigObj){
                 var fundamentalPageMetrics = pProductPageService.getFundamentalAnnualPageMetrics();
-                if(type == 'quarter'){
+                if(chartConfigObj.type == 'quarter'){
                     fundamentalPageMetrics = pProductPageService.getFundamentalQuarterlyPageMetrics();
                 }
                 fundamentalPageMetrics.then(function(){
                     var fundamentalPageMetricsResp = pProductPageService.fundamentalAnnualPageMetrics;
-                    if(type == 'quarter'){
+                    if(chartConfigObj.type == 'quarter'){
                         fundamentalPageMetricsResp = pProductPageService.fundamentalQuarterlyPageMetrics;
                     }
                     
@@ -341,7 +341,7 @@
                         '3 years Growth 20% (Average 10%)', 
                         '5 years Growth 50% (Average 20%)'
                     ];
-                    if(type == 'quarter'){
+                    if(chartConfigObj.type == 'quarter'){
                         chartConfigObj.grothTable = [
                             '1 quarter Growth 10% (Average 5%)', 
                             '3 quarter Growth 20% (Average 10%)', 
@@ -351,10 +351,10 @@
                     IndustryMetricArr.forEach((elementObj, elementKey) => {
                         var IndustryMetricObjectKeys = Object.keys(elementObj);
                         if((IndustryMetricObjectKeys).includes(chartConfigObj.key)){                            
-                            if(type == 'annualy'){
+                            if(chartConfigObj.type == 'annualy'){
                                 chartConfigObj.categories.push(moment(IndustryMetricArr[elementKey].StatementDate).format("YYYY"));
                             }
-                            if(type == 'quarter'){
+                            if(chartConfigObj.type == 'quarter'){
                                 chartConfigObj.categories.push(moment(IndustryMetricArr[elementKey].StatementDate).format("YYYY-MMM"));
                             }
                             chartConfigObj.seriesArr[0].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
@@ -367,13 +367,46 @@
                 });                
             }
 
+            function getStatementName(objectKey) {
+                switch (objectKey) {
+                    case "Revenue":
+                        return 'Total revenue';
+                    case "Cogs":
+                        return 'Cost of goods sold';
+                    case "GrossProfit":
+                        return 'Gross proft';
+                    case "OperatingExpenses":
+                        return 'Operating expenses (excl. COGS)';
+                    case "OperatingIncome":
+                        return 'Operating income';
+                    case "NonOperatingIncome":
+                        return 'Non-operating income';
+                    case "PretaxIncome":
+                        return 'Pretax income';
+                    case "Tax":
+                        return 'Taxes';
+                    case "NetIncome":
+                        return 'Net income';
+                    case "Ebitda":
+                        return 'EBITDA';
+                    case "Ebit":
+                        return 'EBIT';
+                    default:
+                        return '';
+                }
+            }
+
             tool.initialize(function () {
                 tool.setVmProperties({
                     // temp
                     selectedTable: "income",
                     setSelectedTable: setSelectedTable,
                     setSelectedType: setSelectedType,
-                    barChartsArr: barChartsArr
+                    barChartsArr: barChartsArr,
+                    getStatementName: getStatementName,
+                    annualIncomeStatementTableHeadings: [],
+                    annualIncomeStatementTableName: [],
+                    annualIncomeStatements: []
                 });
 
                 pProductPageService.waitTillProductDetailLoaded().then(function () {
@@ -412,6 +445,20 @@
                             //console.log("chartConfigObj: ", chartConfigObj);
                             setChart(chartConfigObj);
                         });
+                    });
+
+                    pProductPageService.getAnnualIncomeStatement().then(function(){
+                        var annualIncomeStatement = pProductPageService.annualIncomeStatement;
+                        console.log("annualIncomeStatement: ", annualIncomeStatement);                        
+                        
+                        var annualIncomeStatementTableHeadings = annualIncomeStatement.map((itemObj, itemKey) => (itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM'));
+                        var annualIncomeStatementTableName = Object.keys(annualIncomeStatement[0]);
+                        var annualIncomeStatements = annualIncomeStatement;
+                        vm.annualIncomeStatementTableData = {
+                            headings: annualIncomeStatementTableHeadings,
+                            name : annualIncomeStatementTableName,
+                            data : annualIncomeStatements,
+                        };
                     });
 
                 });

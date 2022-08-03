@@ -361,8 +361,7 @@
             };
 
             function getListedStocks() {
-                var newList = preprocessFilterList(vm.productContainerList);;
-
+                var newList = preprocessFilterList(vm.productContainerList);                
                 if (vm.selectedColumnForSort && vm.selectedColumnForSort.sortingFunc && vm.selectedColumnForSort.sortingDirection !== 0) {
                     newList = [].concat(newList);
                     newList.sort(function (a, b) {
@@ -439,12 +438,36 @@
                 return _.includes(eodTradeVenues, tradeVenue);
             }
 
+            vm.isVisibleLeftArrow = false;
+            vm.isVisibleRightArrow = true;
+            vm.setScrollNumber = 0;
             function scrollLeft(){
                 document.querySelector('.table-wrapper').scrollLeft -= 80;
+                if(document.querySelector('.table-wrapper').scrollLeft > 0){
+                    vm.isVisibleLeftArrow = true;
+                    vm.isVisibleRightArrow = true;
+                } else {
+                    vm.isVisibleLeftArrow = false;
+                }
+                if(document.querySelector('.table-wrapper').scrollLeft == 0){
+                    vm.isVisibleRightArrow = true;
+                }
+                vm.setScrollNumber = document.querySelector('.table-wrapper').scrollLeft;
             }
-            
-            function scrollRight(){
+                        
+            function scrollRight(){                
                 document.querySelector('.table-wrapper').scrollLeft += 80;
+                if(document.querySelector('.table-wrapper').scrollLeft > 0){
+                    vm.isVisibleLeftArrow = true;
+                } else {
+                    vm.isVisibleLeftArrow = false;
+                }
+                if(vm.setScrollNumber == document.querySelector('.table-wrapper').scrollLeft){
+                    vm.isVisibleRightArrow = false;
+                } else {
+                    vm.isVisibleRightArrow = true;
+                }                
+                vm.setScrollNumber = document.querySelector('.table-wrapper').scrollLeft;
             }
 
             tool.setVmProperties({
