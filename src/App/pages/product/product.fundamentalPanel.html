@@ -56,33 +56,16 @@
             <thead>
                 <tr>
                     <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                    <td ng-repeat="annualIncomeStatementTableHeading in vm.annualIncomeStatementTableData.headings">{{annualIncomeStatementTableHeading}}</td>                    
+                    <td ng-repeat="annualIncomeStatementTableHeading in vm.annualIncomeStatementTableData.headings">{{annualIncomeStatementTableHeading}}</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="annualIncomeStatementTableName in vm.annualIncomeStatementTableData.name" ng-if="annualIncomeStatementTableName !== 'StatementDate'">
-                    <td>{{vm.getStatementName(annualIncomeStatementTableName)}}</td>
-                    <td ng-repeat="annualIncomeStatementTableData in vm.annualIncomeStatementTableData.data">
-                        <div>{{annualIncomeStatementTableData[annualIncomeStatementTableName]}}B</div>
-                        <div class="green-profit">+6.70%</div>
+                <tr ng-repeat="annualIncomeStatementTableName in vm.annualIncomeStatementTableData.name">
+                    <td ng-if="annualIncomeStatementTableName !== 'StatementDate'">{{vm.getFullNameFromKey(annualIncomeStatementTableName)}}</td>
+                    <td ng-if="annualIncomeStatementTableName !== 'StatementDate'" ng-repeat="annualIncomeStatementTableData in vm.annualIncomeStatementTableData.data">
+                        <div>{{annualIncomeStatementTableData[annualIncomeStatementTableName]|priceNumberFormatter}}</div>
+                        <div ng-if="annualIncomeStatementTableData.StatementDate !== null" class="green-profit">+6.70%</div>
                     </td>
-                    <!-- <td>
-                        <div>265.81B</div>
-                        <div class="green-profit">+16.29%</div>
-                    </td>
-                    <td>
-                        <div>259.97B</div>
-                        <div class="red-loss">-2.20%</div>
-                    </td>
-                    <td>
-                        <div>274.15B</div>
-                        <div class="green-profit">+5.46%</div>
-                    </td>
-                    <td>
-                        <div>365.82B</div>
-                        <div class="green-profit">+33.44%</div>
-                    </td> -->
-                    <!-- <td>386.08B</td> -->
                 </tr>
             </tbody>
         </table>
@@ -91,246 +74,34 @@
         <table class="table-large">
             <thead>
                 <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                <td>2017</td>
-                <td>2018</td>
-                <td>2019</td>
-                <td>2020</td>
-                <td>2021</td>
+                <td ng-repeat="annualBalanceSheetTableDataHeading in vm.annualBalanceSheetTableData.headings">{{annualBalanceSheetTableDataHeading}}</td>
             </thead>
             <tbody>
-                <tr>
-                    <td>Total assets</td>
-                    <td>
-                        <div>375.32B</div>
-                        <div class="green-profit">+16.67%</div>
+                <tr ng-repeat="annualBalanceSheetTableName in vm.annualBalanceSheetTableData.name" ng-if="annualBalanceSheetTableName !== 'StatementDate'">
+                    <td >{{vm.getFullNameFromKey(annualBalanceSheetTableName)}}</td>
+                    <td ng-repeat="annualBalanceSheetTableData in vm.annualBalanceSheetTableData.data">
+                        <div>{{annualBalanceSheetTableData[annualBalanceSheetTableName]|priceNumberFormatter}}</div>
+                        <div class="green-profit">+6.70%</div>
                     </td>
-                    <td>
-                        <div>365.73B</div>
-                        <div class="red-loss">-2.56%</div>
-                    </td>
-                    <td>
-                        <div>338.52B</div>
-                        <div class="red-loss">-7.44%</div>
-                    </td>
-                    <td>
-                        <div>323.89B</div>
-                        <div class="red-loss">-4.32%</div>
-                    </td>
-                    <td>
-                        <div>351.00B</div>
-                        <div class="green-profit">+8.37%</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Total liabilities</td>
-                    <td>
-                        <div>241.27B</div>
-                        <div class="green-profit">+24.73%</div>
-                    </td>
-                    <td>
-                        <div>258.58B</div>
-                        <div class="green-profit">+7.17%</div>
-                    </td>
-                    <td>
-                        <div>248.03B</div>
-                        <div class="red-loss">-4.08%</div>
-                    </td>
-                    <td>
-                        <div>258.55B</div>
-                        <div class="green-profit">+4.24%</div>
-                    </td>
-                    <td>
-                        <div>287.91B</div>
-                        <div class="green-profit">+11.36%</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Total equity</td>
-                    <td>
-                        <div>134.05B</div>
-                        <div class="green-profit">+4.52%</div>
-                    </td>
-                    <td>
-                        <div>107.15B</div>
-                        <div class="red-loss">-20.07%</div>
-                    </td>
-                    <td>
-                        <div>90.49B</div>
-                        <div class="red-loss">-15.55%</div>
-                    </td>
-                    <td>
-                        <div>65.34B</div>
-                        <div class="red-loss">-27.79%</div>
-                    </td>
-                    <td>
-                        <div>63.09B</div>
-                        <div class="red-loss">-3.44%</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Total debt</td>
-                    <td>
-                        <div>115.68B</div>
-                    </td>
-                    <td>
-                        <div>114.48B</div>
-                    </td>
-                    <td>
-                        <div>108.05B</div>
-                    </td>
-                    <td>
-                        <div>122.28B</div>
-                    </td>
-                    <td>
-                        <div>136.52B</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Net debt</td>
-                    <td>
-                        <div>41.50B</div>
-                    </td>
-                    <td>
-                        <div>48.18B</div>
-                    </td>
-                    <td>
-                        <div>7.47B</div>
-                    </td>
-                    <td>
-                        <div>31.30B</div>
-                    </td>
-                    <td>
-                        <div>73.88B</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Book value per share</td>
-                    <td>
-                        <div>6.54</div>
-                    </td>
-                    <td>
-                        <div>5.63</div>
-                    </td>
-                    <td>
-                        <div>5.09</div>
-                    </td>
-                    <td>
-                        <div>3.85</div>
-                    </td>
-                    <td>
-                        <div>3.84</div>
-                    </td>
-                </tr>
+                </tr>                
             </tbody>
         </table>
     </div>
     <div ng-if="vm.selectedTable === 'cash'">
         <table class="table-large">
             <thead>
-                <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                <td>2017</td>
-                <td>2018</td>
-                <td>2019</td>
-                <td>2020</td>
-                <td>2021</td>
-                <td>TTM</td>
+                <tr>
+                    <td>Currency: {{vm.productDetail.Product.Currency}}</td>
+                    <td ng-repeat="annualCashFlowTableHeading in vm.annualCashFlowTableData.headings">{{annualCashFlowTableHeading}}</td>
+                </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Cash from operating activities</td>
-                    <td>
-                        <div>63.60B</div>
-                        <div class="red-loss">-3.38%</div>
+                <tr ng-repeat="annualCashFlowTableName in vm.annualCashFlowTableData.name">
+                    <td ng-if="annualCashFlowTableName !== 'StatementDate'">{{vm.getFullNameFromKey(annualCashFlowTableName)}}</td>
+                    <td ng-if="annualCashFlowTableName !== 'StatementDate'" ng-repeat="annualCashFlowTableData in vm.annualCashFlowTableData.data">
+                        <div>{{annualCashFlowTableData[annualCashFlowTableName]|priceNumberFormatter}}</div>
+                        <div ng-if="annualCashFlowTableData.StatementDate !== null" class="green-profit">+6.70%</div>
                     </td>
-                    <td>
-                        <div>77.43B</div>
-                        <div class="green-profit">+21.76%</div>
-                    </td>
-                    <td>
-                        <div>69.39B</div>
-                        <div class="red-loss">-10.39%</div>
-                    </td>
-                    <td>
-                        <div>80.67B</div>
-                        <div class="green-profit">+16.26%</div>
-                    </td>
-                    <td>
-                        <div>104.04B</div>
-                        <div class="green-profit">+28.96%</div>
-                    </td>
-                    <td>116.43B</td>
-                </tr>
-                <tr>
-                    <td>Cash from investing activities</td>
-                    <td>
-                        <div>-46.45B</div>
-                        <div class="red-loss">-1.02%</div>
-                    </td>
-                    <td>
-                        <div>16.07B</div>
-                        <div class="green-profit">+134.59%</div>
-                    </td>
-                    <td>
-                        <div>45.90B</div>
-                        <div class="green-profit">+185.67%</div>
-                    </td>
-                    <td>
-                        <div>-4.29B</div>
-                        <div class="red-loss">-109.35%</div>
-                    </td>
-                    <td>
-                        <div>-14.54B</div>
-                        <div class="red-loss">-239.12%</div>
-                    </td>
-                    <td>-20.96B</td>
-                </tr>
-                <tr>
-                    <td>Cash from financing activities</td>
-                    <td>
-                        <div>-17.35B</div>
-                        <div class="green-profit">+15.31%</div>
-                    </td>
-                    <td>
-                        <div>-87.88B</div>
-                        <div class="red-loss">-406.58%</div>
-                    </td>
-                    <td>
-                        <div>-90.98B</div>
-                        <div class="red-loss">-3.53%</div>
-                    </td>
-                    <td>
-                        <div>-86.82B</div>
-                        <div class="green-profit">+4.57%</div>
-                    </td>
-                    <td>
-                        <div>-93.35B</div>
-                        <div class="red-loss">-7.52%</div>
-                    </td>
-                    <td>-106.29B</td>
-                </tr>
-                <tr>
-                    <td>Free cash flow</td>
-                    <td>
-                        <div>51.15B</div>
-                        <div class="red-loss">-3.66%</div>
-                    </td>
-                    <td>
-                        <div>64.12B</div>
-                        <div class="green-profit">+25.37%</div>
-                    </td>
-                    <td>
-                        <div>58.90B</div>
-                        <div class="red-loss">-8.15%</div>
-                    </td>
-                    <td>
-                        <div>73.36B</div>
-                        <div class="green-profit">+24.57%</div>
-                    </td>
-                    <td>
-                        <div>92.95B</div>
-                        <div class="green-profit">+26.70%</div>
-                    </td>
-                    <td>105.79B</td>
                 </tr>
             </tbody>
         </table>

@@ -7,6 +7,55 @@
                                  
             function setSelectedTable(table) {
                 vm.selectedTable = table;
+                setTableValue(vm.selectedTable);
+            }
+
+            function setTableValue(table = 'income'){
+                if(table === 'income'){
+                    pProductPageService.getAnnualIncomeStatement().then(function(){
+                        var annualIncomeStatement = pProductPageService.annualIncomeStatement;
+                        //console.log("annualIncomeStatement: ", annualIncomeStatement);
+                        
+                        var annualIncomeStatementTableHeadings = annualIncomeStatement.map((itemObj, itemKey) => (itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM'));
+                        var annualIncomeStatementTableName = Object.keys(annualIncomeStatement[0]);
+                        var annualIncomeStatements = annualIncomeStatement;
+                        vm.annualIncomeStatementTableData = {
+                            headings: annualIncomeStatementTableHeadings,
+                            name : annualIncomeStatementTableName,
+                            data : annualIncomeStatements,
+                        };
+                    });
+                }
+                if(table === 'balance'){
+                    pProductPageService.getAnnualBalanceSheet().then(function(){
+                        var annualBalanceSheet = pProductPageService.annualBalanceSheet;
+                        //console.log("annualBalanceSheet: ", annualBalanceSheet);
+                        
+                        var annualBalanceSheetTableHeadings = annualBalanceSheet.map((itemObj, itemKey) => (itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : ''));
+                        var annualBalanceSheetTableName = Object.keys(annualBalanceSheet[0]);
+                        var annualBalanceSheets = annualBalanceSheet;
+                        vm.annualBalanceSheetTableData = {
+                            headings: annualBalanceSheetTableHeadings,
+                            name : annualBalanceSheetTableName,
+                            data : annualBalanceSheets,
+                        };
+                    });
+                }
+                if(table === 'cash'){
+                    pProductPageService.getAnnualCashFlow().then(function(){
+                        var annualCashFlow = pProductPageService.annualCashFlow;
+                        console.log("annualCashFlow: ", annualCashFlow);
+                        
+                        var annualCashFlowTableHeadings = annualCashFlow.map((itemObj, itemKey) => (itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM'));
+                        var annualCashFlowTableName = Object.keys(annualCashFlow[0]);
+                        var annualCashFlows = annualCashFlow;
+                        vm.annualCashFlowTableData = {
+                            headings: annualCashFlowTableHeadings,
+                            name : annualCashFlowTableName,
+                            data : annualCashFlows,
+                        };
+                    });
+                }
             }
 
             function setChart(itemObj) {
@@ -367,8 +416,9 @@
                 });                
             }
 
-            function getStatementName(objectKey) {
+            function getFullNameFromKey(objectKey) {
                 switch (objectKey) {
+                    //Income statement
                     case "Revenue":
                         return 'Total revenue';
                     case "Cogs":
@@ -391,6 +441,30 @@
                         return 'EBITDA';
                     case "Ebit":
                         return 'EBIT';
+
+                    //Balance sheet
+                    case "BookValuePerShare":
+                        return 'Book value per share';
+                    case "NetDebt":
+                        return 'Net debt';
+                    case "TotalAssets":
+                        return 'Total assets';
+                    case "TotalDebt":
+                        return 'Total debt';
+                    case "TotalEquity":
+                        return 'Total equity';
+                    case "TotalLiabilities":
+                        return 'Total liabilities';
+                    
+                    //Cash flow
+                    case "CashFinancing":
+                        return 'Cash from financing activities';
+                    case "CashInvesting":
+                        return 'Cash from investing activities';
+                    case "CashOperating":
+                        return 'Cash from operating activities';
+                    case "FreeCashFlow":
+                        return 'Free cash flow';
                     default:
                         return '';
                 }
@@ -403,7 +477,7 @@
                     setSelectedTable: setSelectedTable,
                     setSelectedType: setSelectedType,
                     barChartsArr: barChartsArr,
-                    getStatementName: getStatementName,
+                    getFullNameFromKey: getFullNameFromKey,
                     annualIncomeStatementTableHeadings: [],
                     annualIncomeStatementTableName: [],
                     annualIncomeStatements: []
@@ -445,21 +519,9 @@
                             //console.log("chartConfigObj: ", chartConfigObj);
                             setChart(chartConfigObj);
                         });
-                    });
-
-                    pProductPageService.getAnnualIncomeStatement().then(function(){
-                        var annualIncomeStatement = pProductPageService.annualIncomeStatement;
-                        console.log("annualIncomeStatement: ", annualIncomeStatement);                        
-                        
-                        var annualIncomeStatementTableHeadings = annualIncomeStatement.map((itemObj, itemKey) => (itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM'));
-                        var annualIncomeStatementTableName = Object.keys(annualIncomeStatement[0]);
-                        var annualIncomeStatements = annualIncomeStatement;
-                        vm.annualIncomeStatementTableData = {
-                            headings: annualIncomeStatementTableHeadings,
-                            name : annualIncomeStatementTableName,
-                            data : annualIncomeStatements,
-                        };
-                    });
+                    });  
+                    
+                    setTableValue('income');
 
                 });
             });
