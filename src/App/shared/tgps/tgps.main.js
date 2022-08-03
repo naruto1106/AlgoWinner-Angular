@@ -69,7 +69,7 @@ agmNgModuleWrapper("agms.tgps")
             return count;
         }
 
-        function onFrontEndFilterChanged() {
+        function onFrontEndFilterChanged() {            
             if (vm.mode === 'Position') {
                 vm.filteredStocksForPosition = allStocksForPosition.filter(function (s) {
                     if (vm.filter.direction === "All") {
@@ -98,6 +98,29 @@ agmNgModuleWrapper("agms.tgps")
                     if (vm.filter.crossover === 'NONE') {
                         return !s.COMDiff;
                     }
+                    return true;
+                }).filter(function (s) {
+                    if (vm.filter.payoutstrategy === "All") {
+                        return true;
+                    }
+                    if (vm.filter.payoutstrategy === "Near (below)") {
+                        return s.Payout == "Near (below)";
+                    }
+                    if (vm.filter.payoutstrategy === "Near (above)") {
+                        return s.Payout == "Near (above)";
+                    }
+                    if (vm.filter.payoutstrategy === "Cross above") {
+                        return s.Payout == "Cross above";
+                    }
+                    if (vm.filter.payoutstrategy === "Cross below") {
+                        return s.Payout == "Cross below";
+                    }
+                    if (vm.filter.payoutstrategy === "Above") {
+                        return s.Payout == "Above";
+                    }
+                    if (vm.filter.payoutstrategy === "Below") {
+                        return s.Payout === "Below";
+                    }                    
                     return true;
                 });
             } else if (vm.mode === 'Swing') {
@@ -1236,7 +1259,7 @@ agmNgModuleWrapper("agms.tgps")
 
                 directions: ['All', 'Bullish', 'Bearish', 'None'],
                 comCrossover: ['All', 'UP', 'DOWN', 'NONE'],
-                payoutStrategy: ['Near (below)', 'Near (above)', 'Cross above', 'Cross below', 'Above', 'Below'],
+                payoutStrategy: ['All', 'Near (below)', 'Near (above)', 'Cross above', 'Cross below', 'Above', 'Below'],
                 modeOptions: ["Position", "Swing"],
                 barSizeOptions: [{ label: "Daily", value: "1 day" }, { label: "Weekly", value: "1 week" }],    
                 tradeVenueLocList: [{
