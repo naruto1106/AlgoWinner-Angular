@@ -59,13 +59,13 @@
                 if(table === 'stats'){
                     pProductPageService.getAnnualStatistics().then(function (){
                         var annualStatistics = pProductPageService.annualStatistics;
-                        let keySatesDataJSON = {
+                        var keySatesDataJSON = {
                             SharesOutstanding : [],
                             SharesFloating : [],
                             Employees : [],
                             Shareholders : [],
                         }
-                        let ratiosDataJSON = {
+                        var ratiosDataJSON = {
                             PeRatio : [],
                             PbRatio : [],
                             Roa : [],
