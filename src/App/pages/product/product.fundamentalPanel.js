@@ -14,8 +14,6 @@
                 if (table === 'income') {
                     pProductPageService.getAnnualIncomeStatement().then(function () {
                         var annualIncomeStatement = pProductPageService.annualIncomeStatement;
-                        //console.log("annualIncomeStatement: ", annualIncomeStatement);
-
                         var annualIncomeStatementTableHeadings = annualIncomeStatement.map(function (itemObj, itemKey) {
                             return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM';
                         });
@@ -31,8 +29,6 @@
                 if (table === 'balance') {
                     pProductPageService.getAnnualBalanceSheet().then(function () {
                         var annualBalanceSheet = pProductPageService.annualBalanceSheet;
-                        //console.log("annualBalanceSheet: ", annualBalanceSheet);
-
                         var annualBalanceSheetTableHeadings = annualBalanceSheet.map(function (itemObj, itemKey) {
                             return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : '';
                         });
@@ -48,8 +44,6 @@
                 if (table === 'cash') {
                     pProductPageService.getAnnualCashFlow().then(function () {
                         var annualCashFlow = pProductPageService.annualCashFlow;
-                        console.log("annualCashFlow: ", annualCashFlow);
-
                         var annualCashFlowTableHeadings = annualCashFlow.map(function (itemObj, itemKey) {
                             return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM';
                         });
@@ -60,6 +54,90 @@
                             name: annualCashFlowTableName,
                             data: annualCashFlows,
                         };
+                    });
+                }
+                if(table === 'stats'){
+                    pProductPageService.getAnnualStatistics().then(function (){
+                        var annualStatistics = pProductPageService.annualStatistics;
+                        let keySatesDataJSON = {
+                            SharesOutstanding : [],
+                            SharesFloating : [],
+                            Employees : [],
+                            Shareholders : [],
+                        }
+                        let ratiosDataJSON = {
+                            PeRatio : [],
+                            PbRatio : [],
+                            Roa : [],
+                            Roe : [],
+                            GrossMargin : [],
+                            QuickRatio : [],
+                            CurrentRatio : [],
+                            DaRatio : [],
+                            DeRatio : [],
+                        }
+                        var annualStatisticsTableHeadings = annualStatistics.map(function (itemObj, itemKey){
+                            // keySates data
+                            if(itemObj.SharesOutstanding !== undefined && itemObj.SharesOutstanding !== null){
+                                keySatesDataJSON.SharesOutstanding.push(itemObj.SharesOutstanding);
+                            }
+                            if(itemObj.SharesFloating !== undefined && itemObj.SharesFloating !== null){
+                                keySatesDataJSON.SharesFloating.push(itemObj.SharesFloating);
+                            }
+                            if(itemObj.Employees !== undefined && itemObj.Employees !== null){
+                                keySatesDataJSON.Employees.push(itemObj.Employees);
+                            }
+                            if(itemObj.Shareholders !== undefined && itemObj.Shareholders !== null){
+                                keySatesDataJSON.Shareholders.push(itemObj.Shareholders);
+                            }                            
+                            // ratios data
+                            if(itemObj.PeRatio !== undefined && itemObj.PeRatio !== null){
+                                ratiosDataJSON.PeRatio.push(itemObj.PeRatio);
+                            }
+                            if(itemObj.PbRatio !== undefined && itemObj.PbRatio !== null){
+                                ratiosDataJSON.PbRatio.push(itemObj.PbRatio);
+                            }
+                            if(itemObj.Roa !== undefined && itemObj.Roa !== null){
+                                ratiosDataJSON.Roa.push(itemObj.Roa);
+                            }
+                            if(itemObj.Roe !== undefined && itemObj.Roe !== null){
+                                ratiosDataJSON.Roe.push(itemObj.Roe);
+                            }
+                            if(itemObj.GrossMargin !== undefined && itemObj.GrossMargin !== null){
+                                ratiosDataJSON.GrossMargin.push(itemObj.GrossMargin);
+                            }
+                            if(itemObj.QuickRatio !== undefined && itemObj.QuickRatio !== null){
+                                ratiosDataJSON.QuickRatio.push(itemObj.QuickRatio);
+                            }
+                            if(itemObj.CurrentRatio !== undefined && itemObj.CurrentRatio !== null){
+                                ratiosDataJSON.CurrentRatio.push(itemObj.CurrentRatio);
+                            }
+                            if(itemObj.DaRatio !== undefined && itemObj.DaRatio !== null){
+                                ratiosDataJSON.DaRatio.push(itemObj.DaRatio);
+                            }
+                            if(itemObj.DeRatio !== undefined && itemObj.DeRatio !== null){
+                                ratiosDataJSON.DeRatio.push(itemObj.DeRatio);
+                            }
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'Current';
+                        });
+                        var annualStatisticsTableName = Object.keys(annualStatistics[0]);
+                        var allStatisticsData = {
+                            keySates: {
+                                title: 'Key Stats',
+                                data: keySatesDataJSON,
+                                headings: Object.keys(keySatesDataJSON)
+                            },
+                            ratios: {
+                                title: 'Ratios',
+                                data: ratiosDataJSON,
+                                headings: Object.keys(ratiosDataJSON)
+                            }
+                        }
+                        vm.annualStatisticsTableData =  {
+                            headings: annualStatisticsTableHeadings,
+                            name : annualStatisticsTableName,
+                            data : allStatisticsData,
+                        }                        
                     });
                 }
             }
@@ -471,6 +549,34 @@
                         return 'Cash from operating activities';
                     case "FreeCashFlow":
                         return 'Free cash flow';
+                    
+                    //Statistics
+                    case "SharesOutstanding":
+                        return 'Total common shares outstanding';
+                    case "SharesFloating":
+                        return 'Float shares outstanding';
+                    case "Employees":
+                        return 'Number of employees';
+                    case "Shareholders":
+                        return 'Number of shareholders';
+                    case "PeRatio":
+                        return 'Price to earnings ratio';
+                    case "PbRatio":
+                        return 'Price to book ratio';
+                    case "Roa":
+                        return 'Return on assets %';
+                    case "Roe":
+                        return 'Return on equity %';
+                    case "GrossMargin":
+                        return 'Gross margin %';
+                    case "QuickRatio":
+                        return 'Quick ratio';
+                    case "CurrentRatio":
+                        return 'Current ratio';
+                    case "DaRatio":
+                        return 'Debt to assets ratio';
+                    case "DeRatio":
+                        return 'Debt to equity ratio';                    
                     default:
                         return '';
                 }

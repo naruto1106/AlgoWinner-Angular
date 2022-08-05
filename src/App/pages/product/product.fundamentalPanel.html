@@ -83,7 +83,7 @@
                         <div>{{annualBalanceSheetTableData[annualBalanceSheetTableName]|priceNumberFormatter}}</div>
                         <div class="green-profit">+6.70%</div>
                     </td>
-                </tr>                
+                </tr>
             </tbody>
         </table>
     </div>
@@ -110,271 +110,31 @@
         <table class="table-large">
             <thead>
                 <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                <td>2017</td>
-                <td>2018</td>
-                <td>2019</td>
-                <td>2020</td>
-                <td>2021</td>
-                <td>Current</td>
+                <td ng-repeat="annualStatisticsTableHeading in vm.annualStatisticsTableData.headings track by $index">{{annualStatisticsTableHeading}}</td>               
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="7">
-                        <h4><bold>Key stats</bold></h4>
+                    <td colspan="{{vm.annualStatisticsTableData.headings.length + 1}}">
+                        <h4><bold>{{vm.annualStatisticsTableData.data.keySates.title}}</bold></h4>
                     </td>
+                </tr>
+                <tr ng-repeat="annualStatisticsKeyStateTableName in vm.annualStatisticsTableData.data.keySates.data track by $index">
+                    <td>{{vm.getFullNameFromKey(vm.annualStatisticsTableData.data.keySates.headings[$index])}}</td>
+                    <td ng-repeat="annualStatisticsKeyStateValues in annualStatisticsKeyStateTableName track by $index">
+                        <div>{{annualStatisticsKeyStateValues|priceNumberFormatter}}</div>
+                    </td>                 
                 </tr>
                 <tr>
-                    <td>Total common shares outstanding</td>
-                    <td>
-                        <div>20.50B</div>
-                    </td>
-                    <td>
-                        <div>19.02B</div>
-                    </td>
-                    <td>
-                        <div>17.77B</div>
-                    </td>
-                    <td>
-                        <div>16.98B</div>
-                    </td>
-                    <td>
-                        <div>16.43B</div>
-                    </td>
-                    <td>16.19B</td>
-                </tr>
-                <tr>
-                    <td>Float shares outstanding</td>
-                    <td>
-                        <div>20.48B</div>
-                    </td>
-                    <td>
-                        <div>18.99B</div>
-                    </td>
-                    <td>
-                        <div>17.75B</div>
-                    </td>
-                    <td>
-                        <div>16.96B</div>
-                    </td>
-                    <td>
-                        <div>16.41B</div>
-                    </td>
-                    <td>16.17B</td>
-                </tr>
-                <tr>
-                    <td>Number of employees</td>
-                    <td>
-                        <div>123.00K</div>
-                    </td>
-                    <td>
-                        <div>132.00K</div>
-                    </td>
-                    <td>
-                        <div>137.00K</div>
-                    </td>
-                    <td>
-                        <div>147.00K</div>
-                    </td>
-                    <td>
-                        <div>154.00K</div>
-                    </td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>Number of shareholders</td>
-                    <td>
-                        <div>23.50K</div>
-                    </td>
-                    <td>
-                        <div>23.50K</div>
-                    </td>
-                    <td>
-                        <div>23.50K</div>
-                    </td>
-                    <td>
-                        <div>23.50K</div>
-                    </td>
-                    <td>
-                        <div>23.50K</div>
-                    </td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td colspan="7">
-                        <h4><bold>Ratios</bold></h4>
+                    <td colspan="{{vm.annualStatisticsTableData.headings.length + 1}}">
+                        <h4><bold>{{vm.annualStatisticsTableData.data.ratios.title}}</bold></h4>
                     </td>
                 </tr>
-                <tr>
-                    <td>Price to earnings ratio</td>
-                    <td>
-                        <div>16.73</div>
-                    </td>
-                    <td>
-                        <div>18.95</div>
-                    </td>
-                    <td>
-                        <div>18.41</div>
-                    </td>
-                    <td>
-                        <div>34.28</div>
-                    </td>
-                    <td>
-                        <div>26.17</div>
-                    </td>
-                    <td>21.14</td>
-                </tr>
-                <tr>
-                    <td>Price to book ratio</td>
-                    <td>
-                        <div>5.89</div>
-                    </td>
-                    <td>
-                        <div>10.02</div>
-                    </td>
-                    <td>
-                        <div>10.74</div>
-                    </td>
-                    <td>
-                        <div>29.17</div>
-                    </td>
-                    <td>
-                        <div>38.25</div>
-                    </td>
-                    <td>31.28</td>
-                </tr>
-                <tr>
-                    <td>Return on assets %</td>
-                    <td>
-                        <div>13.87</div>
-                    </td>
-                    <td>
-                        <div>16.07</div>
-                    </td>
-                    <td>
-                        <div>15.69</div>
-                    </td>
-                    <td>
-                        <div>17.33</div>
-                    </td>
-                    <td>
-                        <div>28.06</div>
-                    </td>
-                    <td>29.64</td>
-                </tr>
-                <tr>
-                    <td>Return on equity %</td>
-                    <td>
-                        <div>36.87</div>
-                    </td>
-                    <td>
-                        <div>49.36</div>
-                    </td>
-                    <td>
-                        <div>55.92</div>
-                    </td>
-                    <td>
-                        <div>73.69</div>
-                    </td>
-                    <td>
-                        <div>147.44</div>
-                    </td>
-                    <td>149.27</td>
-                </tr>
-                <tr>
-                    <td>Gross margin %</td>
-                    <td>
-                        <div>38.01</div>
-                    </td>
-                    <td>
-                        <div>38.37</div>
-                    </td>
-                    <td>
-                        <div>37.58</div>
-                    </td>
-                    <td>
-                        <div>37.94</div>
-                    </td>
-                    <td>
-                        <div>41.78</div>
-                    </td>
-                    <td>43.75</td>
-                </tr>
-                <tr>
-                    <td>Quick ratio</td>
-                    <td>
-                        <div>1.23</div>
-                    </td>
-                    <td>
-                        <div>1.09</div>
-                    </td>
-                    <td>
-                        <div>1.50</div>
-                    </td>
-                    <td>
-                        <div>1.33</div>
-                    </td>
-                    <td>
-                        <div>1.02</div>
-                    </td>
-                    <td>0.88</td>
-                </tr>
-                <tr>
-                    <td>Current ratio</td>
-                    <td>
-                        <div>1.28</div>
-                    </td>
-                    <td>
-                        <div>1.12</div>
-                    </td>
-                    <td>
-                        <div>1.54</div>
-                    </td>
-                    <td>
-                        <div>1.36</div>
-                    </td>
-                    <td>
-                        <div>1.07</div>
-                    </td>
-                    <td>0.93</td>
-                </tr>
-                <tr>
-                    <td>Debt to assets ratio</td>
-                    <td>
-                        <div>0.31</div>
-                    </td>
-                    <td>
-                        <div>0.31</div>
-                    </td>
-                    <td>
-                        <div>0.32</div>
-                    </td>
-                    <td>
-                        <div>0.38</div>
-                    </td>
-                    <td>
-                        <div>0.39</div>
-                    </td>
-                    <td>0.34</td>
-                </tr>
-                <tr>
-                    <td>Debt to equity ratio</td>
-                    <td>
-                        <div>0.86</div>
-                    </td>
-                    <td>
-                        <div>1.07</div>
-                    </td>
-                    <td>
-                        <div>1.19</div>
-                    </td>
-                    <td>
-                        <div>1.87</div>
-                    </td>
-                    <td>
-                        <div>2.16</div>
-                    </td>
-                    <td>1.78</td>
-                </tr>
+                <tr ng-repeat="annualStatisticsRatiosTableName in vm.annualStatisticsTableData.data.ratios.data track by $index">
+                    <td>{{vm.getFullNameFromKey(vm.annualStatisticsTableData.data.ratios.headings[$index])}}</td>
+                    <td ng-repeat="annualStatisticsRatiosValues in annualStatisticsRatiosTableName track by $index">
+                        <div>{{annualStatisticsRatiosValues}}</div>
+                    </td>                 
+                </tr>                
             </tbody>
         </table>
     </div>
