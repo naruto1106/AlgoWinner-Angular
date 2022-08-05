@@ -163,7 +163,14 @@
                 vm.invalidPrice = false;
                 sProductService.updateProductTickSizeValueIfBelongToGroup(product);
                 vm.product = product;
-                tradeDataService.GetLast(product).then(function (res) {
+                var requestObj = {
+                    ProductId: product.ProductId,
+                    Symbol: product.Symbol,
+                    TradeVenueLoc: product.TradeVenueLoc,
+                    AssetType: product.AssetType,
+                    Currency: product.Currency
+                };
+                tradeDataService.GetLast(requestObj).then(function (res) {
                     vm.currentPrice = res.data.LastTradedPrice;
                     vm.alertPrice = vm.currentPrice;
                     tickSize = dep.ticksizeService.getTickSize(vm.alertPrice,

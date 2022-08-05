@@ -2,16 +2,11 @@
     .defineService("sNewsService", [],
     function (serviceObj, dep, tool) {
         var coreServerCommunicationService = dep.coreServerCommunicationService;
-        var path = '/marketinfoapi/v1/AlgoNews/';
+        var path = '/newsapi/v1/News/';
 
         tool.setServiceObjectProperties({
             AddAlgoNews: coreServerCommunicationService.genPostFunction(path + 'AddAlgoNews'),
-            GetAlgoNewsByFilter: coreServerCommunicationService.genGetFunctionWithNVar(path + 'GetAlgoNewsByFilterV2',
-                function (args) {
-                    return {
-                        filter: args[0]
-                    }
-                }),
+            GetAlgoNewsByFilter: coreServerCommunicationService.genPostFunction(path + 'GetAlgoNewsByFilterV2'),
             GetBreakingNews: coreServerCommunicationService.genGetFunctionWithNVar(path + 'GetBreakingNews',
                 function (args) {
                     return {

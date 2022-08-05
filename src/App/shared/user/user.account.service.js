@@ -17,7 +17,7 @@
                     email: args[0]
                 };
             }),
-            VerifyUserName: coreServerCommunicationService.genGetFunctionWithNVar(userInfoAccountPath + 'VerifyUserName', function (args) {
+            VerifyUserName: coreServerCommunicationService.genGetFunctionWithNVar(userInfoPath + 'VerifyUserName', function (args) {
                 return {
                     userName: args[0]
                 };

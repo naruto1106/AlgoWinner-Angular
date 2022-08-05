@@ -148,13 +148,12 @@
                         StartDate: params.startDate,
                         EndDate: params.endDate
                     };
-
                     $rootScope.$broadcast('beginFetchHistoricalData', null);
                     return sDatamartFundamentalDataService.GetFundamentalsForPeriod(requestObj).then(function (res) {
                         if (res.data && res.data.length > 0) {
                             // for now, we only load single product - fundamental pair each time
                             var newData = res.data.map(function (d) {
-                                var recordTimeInBrowserTimezone = d.Timestamp.substring(0, d.Timestamp.indexOf('T')); // moment(d.RecordTime).format('YYYY-MM-DD');                                
+                                var recordTimeInBrowserTimezone = d.Timestamp.substring(0, d.Timestamp.indexOf('T')); // moment(d.RecordTime).format('YYYY-MM-DD');
                                 return {
                                     Date: recordTimeInBrowserTimezone,
                                     Close: d.Value

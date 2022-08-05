@@ -8,10 +8,10 @@ agmNgModuleWrapper("agms.tgps")
         'coreConfigService',
         'sProductService',
         "pChartService",
-        'pDatamartStatesService',
+        'pTgpsStatesService',
         'sMarketEntitlementService',
         'commonTimeZoneService',
-        'sDatamartItemService',
+        'sTgpsItemService',
         'sMenuRightClickService',
         'sTradingHolidayService',
         'sTgpsService',
@@ -28,10 +28,10 @@ agmNgModuleWrapper("agms.tgps")
             coreDataStorageService = dep.coreDataStorageService,
             sWatchlistService = dep.sWatchlistService,
             pChartService = dep.pChartService,
-            pDatamartStatesService = dep.pDatamartStatesService,
+            pTgpsStatesService = dep.pTgpsStatesService,
             sMarketEntitlementService = dep.sMarketEntitlementService,
             commonTimeZoneService = dep.commonTimeZoneService,
-            sDatamartItemService = dep.sDatamartItemService,
+            sTgpsItemService = dep.sTgpsItemService,
             sMenuRightClickService = dep.sMenuRightClickService,
             sTradingHolidayService = dep.sTradingHolidayService,
             sTgpsService = dep.sTgpsService;
@@ -369,7 +369,7 @@ agmNgModuleWrapper("agms.tgps")
             for (var key in vm.filter.fundamentals) {
                 var hasFundamental = sMarketEntitlementService.tradeVenuesDict[key];
                 if (hasFundamental) {
-                    var res = sDatamartItemService.evaluateFundamentalAndReturnMergedObjects(vm.filter.fundamentals[key]);
+                    var res = sTgpsItemService.evaluateFundamentalAndReturnMergedObjects(vm.filter.fundamentals[key]);
                     res.TradeVenue = sMarketEntitlementService.tradeVenuesDict[key].TradeVenue;
                     //if (vm.filter.watchlist || (vm.filter.tradeVenueLoc && vm.filter.tradeVenueLoc.label === key)) {
                         fundamentalParamsList.push(res);
@@ -690,9 +690,9 @@ agmNgModuleWrapper("agms.tgps")
 
         function resetFundamentalFilter(market) {
             if (_.contains(sMarketEntitlementService.tradeVenuesThatHasFundamentals, market)) {
-                vm.filter.fundamentals[market] = pDatamartStatesService.getDefaultFundamentalWithVolumeSelections();
+                vm.filter.fundamentals[market] = pTgpsStatesService.getDefaultFundamentalWithVolumeSelections();
             } else {
-                vm.filter.fundamentals[market] = pDatamartStatesService.getPriceAndVolumeFilterContent();
+                vm.filter.fundamentals[market] = pTgpsStatesService.getPriceAndVolumeFilterContent();
             }
         }
 

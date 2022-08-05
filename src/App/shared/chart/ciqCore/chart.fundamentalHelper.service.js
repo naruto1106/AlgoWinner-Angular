@@ -498,7 +498,7 @@
 
             function priceFormatter(stxx, panel, price) {
                 if (price < 1000)
-                    return price;
+                    return price.toString();
                 else if (price < 1000000)
                     return (price / 1000.0).toFixed(2) + "M";
                 else
@@ -514,12 +514,6 @@
                         if (!yAxis.priceFormatter) {
                             if (renderer.params.yAxis === yAxis) {
                                 switch (i) {
-                                    case "fundamentalsMarketCapitalization":
-                                    case "fundamentalsEnterpriseValue":
-                                    case "fundamentalsQuarterlyTotalAssets":
-                                    case "fundamentalsQuarterlyLongTermDebt":
-                                    case "fundamentalsQuarterlyRetainedEarnings":
-                                    case "fundamentalsRevenueTtm":
                                     case "fundamentalsAverageEquity":
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
@@ -536,37 +530,37 @@
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
                                     case "fundamentalsCurrentRatio":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                     case "fundamentalsDE":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                     case "fundamentalsDebt":
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
                                     case "fundamentalsDilutedEPS":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatter;
                                         break;
                                     case "fundamentalsDivPerShare":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatter;
                                         break;
                                     case "fundamentalsDivYield":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                     case "fundamentalsEBITDA":
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
                                     case "fundamentalsEPS":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatter;
                                         break;
                                     case "fundamentalsEPSGrowth":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                     case "fundamentalsEVGP":
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
                                     case "fundamentalsEarningsGrowth":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                     case "fundamentalsEV":
                                         yAxis.priceFormatter = priceFormatterInMillions;
@@ -578,19 +572,19 @@
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
                                     case "fundamentalsFCFPerShare":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatter;
                                         break;
                                     case "fundamentalsGrossProfit":
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
                                     case "fundamentalsGrossMargin":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                     case "fundamentalsMarketCap":
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
                                     case "fundamentalsNetMargin":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                     case "fundamentalsNetProfit":
                                         yAxis.priceFormatter = priceFormatterInMillions;
@@ -608,10 +602,10 @@
                                         yAxis.priceFormatter = priceFormatterInMillions;
                                         break;
                                     case "fundamentalsROA":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                     case "fundamentalsROE":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                     case "fundamentalsRevenue":
                                         yAxis.priceFormatter = priceFormatterInMillions;
@@ -633,17 +627,6 @@
                                         break;
                                     case "fundamentalsSharesAvgDil":
                                         yAxis.priceFormatter = priceFormatterInMillions;
-                                        break;
-                                    case "fundamentalsEbitTtm":
-                                        yAxis.priceFormatter = priceFormatterInMillions;
-                                        break;
-                                    case "fundamentalsSharesOutstanding":
-                                    case "fundamentalsDailyVolume":
-                                        yAxis.priceFormatter = priceFormatter;
-                                        break;
-                                    case "fundamentalsGrowthAtEarnings":
-                                    case "fundamentalsRevenueGrowth":
-                                        yAxis.priceFormatter = priceFormatterPercentage;
                                         break;
                                 }
                             }

@@ -154,7 +154,14 @@
                         if (position.MarketData) {
                             recalcPortfolioPropertyFunc(position.MarketData);
                         } else {
-                            tradeDataService.GetLast(position.Product).then(function(res) {
+                            var requestObj = {
+                                ProductId: position.Product.ProductId,
+                                Symbol: position.Product.Symbol,
+                                TradeVenueLoc: position.Product.TradeVenueLoc,
+                                AssetType: position.Product.AssetType,
+                                Currency: position.Product.Currency
+                            };
+                            tradeDataService.GetLast(requestObj).then(function(res) {
                                 position.MarketData = res.data;
                                 recalcPortfolioPropertyFunc(position.MarketData);
                             });

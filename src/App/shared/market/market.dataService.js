@@ -144,13 +144,24 @@
 
             return tool.onceAll(_.map(_.chunk(watchlistProducts, 30),
                 function (productsChunk) {
+                    var mappedChunk = _.map(productsChunk, function(x) {
+                        var requestObj = {
+                            ProductId: x.ProductModel.ProductId,
+                            Symbol: x.ProductModel.Symbol,
+                            TradeVenueLoc: x.ProductModel.TradeVenueLoc,
+                            AssetType: x.ProductModel.AssetType,
+                            Currency: x.ProductModel.Currency
+                        };
+                        return requestObj;
+                    });
+
                     return tool.onceAll([
-                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(_.map(productsChunk, 'ProductModel'), "SG") }),
-                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(_.map(productsChunk, 'ProductModel'), "US") }),
-                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(_.map(productsChunk, 'ProductModel'), "HK") }),
-                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(_.map(productsChunk, 'ProductModel'), "MY") }),
-                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(_.map(productsChunk, 'ProductModel'), "CHN") }),
-                        tradeDataService.GetMultipleDataCfd({ Products: getStocksFromProductChunk(_.map(productsChunk, 'ProductModel'), "OTC (Oanda)") })
+                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(mappedChunk, "SG") }),
+                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(mappedChunk, "US") }),
+                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(mappedChunk, "HK") }),
+                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(mappedChunk, "MY") }),
+                        tradeDataService.GetMultipleData({ Products: getStocksFromProductChunk(mappedChunk, "CHN") }),
+                        tradeDataService.GetMultipleDataCfd({ Products: getStocksFromProductChunk(mappedChunk, "OTC (Oanda)") })
                     ]).then(function (resultArr) {
                         var results = _.flatten(_.map(resultArr, function (r) { return r.data; }) );
                         for (var i = 0; i < results.length; i++) {

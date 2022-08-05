@@ -161,10 +161,18 @@
         }
 
         function resolveWatchlistProduct(watchlistProduct, resourceOwner) {
+            var requestObj = {
+                ProductId: watchlistProduct.ProductModel.ProductId,
+                Symbol: watchlistProduct.ProductModel.Symbol,
+                TradeVenueLoc: watchlistProduct.ProductModel.TradeVenueLoc,
+                AssetType: watchlistProduct.ProductModel.AssetType,
+                Currency: watchlistProduct.ProductModel.Currency
+            };
+
             tool.onceAll([
-                tradeDataService.GetBid(watchlistProduct.ProductModel),
-                tradeDataService.GetAsk(watchlistProduct.ProductModel),
-                tradeDataService.GetLast(watchlistProduct.ProductModel)
+                tradeDataService.GetBid(requestObj),
+                tradeDataService.GetAsk(requestObj),
+                tradeDataService.GetLast(requestObj)
             ]).then(function (ress) {
                 watchlistProduct.MarketData.BidPrice = ress[0].data.BidPrice;
                 watchlistProduct.MarketData.BidSize = ress[0].data.BidSize;

@@ -1,10 +1,10 @@
 ﻿<div>
 
-    <div class="tag-channel" ng-repeat="cat in vm.corporateActionsTypes">
+    <div class="tag-channel">
         <h5>
-            {{::cat.displayName}}
+            CORPORATE ACTION
         </h5>
-        <div class="switch" ng-click="vm.toggleEvent(cat.name)" ng-class="{checked:vm.filterDescription.eventVisibility[cat.name]}">
+        <div class="switch" ng-click="vm.toggleEvent('CORP_ACT')" ng-class="{checked:vm.filterDescription.eventVisibility['CORP_ACT']}">
 
         </div>
         <div class="clearfix"></div>

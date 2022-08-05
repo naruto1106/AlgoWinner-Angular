@@ -27,7 +27,7 @@
         <dl>
             <dt>UserName (6 - 25 chars)</dt>
             <dd class="rel">
-                <input class="pull-left sw-300px lh-25px" type="text" maxlength="25" ng-model="vm.myProfile.UserName" ng-model-options="{debounce: 100}" />
+                <input class="pull-left sw-300px lh-25px" type="text" maxlength="25" ng-model="vm.myProfile.UserName" ng-model-options="{debounce: 200}" />
                 <div class="loading pull-left m-left-10px" ng-if="vm.requestingState==1"></div>
                 <span class="glyphicon glyphicon-ok-sign pull-left m-left-10px lh-25px verified" ng-if="vm.userNameVerified && vm.requestingState == 3 && vm.myProfile.UserName.length >= 6"></span>
                 <div class="clearfix"></div>

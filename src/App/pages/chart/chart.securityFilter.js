@@ -80,7 +80,14 @@
                     ProductModel: product,
                     MarketData: {}
                 };
-                tradeDataService.GetLast(product).then(function (res) {
+                var requestObj = {
+                    ProductId: product.ProductId,
+                    Symbol: product.Symbol,
+                    TradeVenueLoc: product.TradeVenueLoc,
+                    AssetType: product.AssetType,
+                    Currency: product.Currency
+                };
+                tradeDataService.GetLast(requestObj).then(function (res) {
                     item.MarketData = res.data;
                     item.MarketData = angular.extend(item.MarketData, sMarketDataService.calculateLastTradedPricePct(res));
                     tool.openModalByDefinition('s.watchlist.PriceAlertPopupController', {

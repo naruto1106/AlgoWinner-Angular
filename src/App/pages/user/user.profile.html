@@ -20,7 +20,7 @@
                             UserName <span class="smaller">(6-25 chars)</span>
                         </dt>
                         <dd class="rel">
-                            <input class="w-300px lh-25px pull-left" type="text" ng-model="vm.myProfile.NewUserName" ng-disabled="vm.isSubmitting" />
+                            <input class="w-300px lh-25px pull-left" type="text" ng-model="vm.myProfile.NewUserName" ng-disabled="vm.isSubmitting" ng-model-options="{debounce: 200}"/>
                             <span class="loading pull-left m-left-10px" ng-if="vm.userNameVerifyState == 1"></span>
                             <span class="glyphicon glyphicon-ok-sign pull-left m-left-10px lh-25px verified" ng-if="vm.userNameVerifyState == 2"></span>
                             <span class="pull-left m-left-10px" style="color: red" ng-if="vm.userNameVerifyState == 3">Username cannot be empty</span>
