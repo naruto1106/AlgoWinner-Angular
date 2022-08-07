@@ -96,37 +96,43 @@
             
             GetFundamentalQuarterlyPageMetrics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyPageMetrics', function (args) {
                 return {
-                    productId: args[0]
+                    productId: args[0],
+                    venue: args[1]
                 };
             }),
             
             GetFundamentalAnnualPageMetrics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualPageMetrics', function (args) {
                 return {
-                    productId: args[0]
+                    productId: args[0],
+                    venue: args[1]
                 };
             }),
             
             GetAnnualIncomeStatement: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualIncomeStatement', function (args) {
                 return {
-                    productId: args[0]
+                    productId: args[0],
+                    venue: args[1]
                 };
             }),
             
             GetAnnualBalanceSheet: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualBalanceSheet', function (args) {
                 return {
-                    productId: args[0]
+                    productId: args[0],
+                    venue: args[1]
                 };
             }),
            
             GetAnnualCashFlow: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualCashFlow', function (args) {
                 return {
-                    productId: args[0]
+                    productId: args[0],
+                    venue: args[1]
                 };
             }),
             
             GetAnnualStatistics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualStatistics', function (args) {
                 return {
-                    productId: args[0]
+                    productId: args[0],
+                    venue: args[1]
                 };
             }),
             

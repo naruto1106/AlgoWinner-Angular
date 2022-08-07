@@ -51,7 +51,7 @@
         }                
         
         function getFundamentalQuarterlyPageMetrics() {
-            return dep.sProductService.GetFundamentalQuarterlyPageMetrics(serviceObj.currentProduct.ProductId).then(function (res) {
+            return dep.sProductService.GetFundamentalQuarterlyPageMetrics(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.fundamentalQuarterlyPageMetrics = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
@@ -62,7 +62,7 @@
         }
         
         function getFundamentalAnnualPageMetrics() {
-            return dep.sProductService.GetFundamentalAnnualPageMetrics(serviceObj.currentProduct.ProductId).then(function (res) {
+            return dep.sProductService.GetFundamentalAnnualPageMetrics(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.fundamentalAnnualPageMetrics = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
@@ -73,7 +73,7 @@
         }
         
         function getAnnualIncomeStatement() {
-            return dep.sProductService.GetAnnualIncomeStatement(serviceObj.currentProduct.ProductId).then(function (res) {
+            return dep.sProductService.GetAnnualIncomeStatement(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.annualIncomeStatement = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
@@ -84,7 +84,7 @@
         }
         
         function getAnnualBalanceSheet() {
-            return dep.sProductService.GetAnnualBalanceSheet(serviceObj.currentProduct.ProductId).then(function (res) {
+            return dep.sProductService.GetAnnualBalanceSheet(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.annualBalanceSheet = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
@@ -95,7 +95,7 @@
         }
         
         function getAnnualCashFlow() {
-            return dep.sProductService.GetAnnualCashFlow(serviceObj.currentProduct.ProductId).then(function (res) {
+            return dep.sProductService.GetAnnualCashFlow(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.annualCashFlow = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
@@ -106,7 +106,7 @@
         }
         
         function getAnnualStatistics() {
-            return dep.sProductService.GetAnnualStatistics(serviceObj.currentProduct.ProductId).then(function (res) {
+            return dep.sProductService.GetAnnualStatistics(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.annualStatistics = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
