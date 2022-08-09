@@ -115,7 +115,21 @@
                 };
             }),
             
+            GetQuarterlyIncomeStatement: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyIncomeStatement', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
             GetAnnualBalanceSheet: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualBalanceSheet', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetQuarterlyBalanceSheet: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyBalanceSheet', function (args) {
                 return {
                     productId: args[0],
                     venue: args[1]
@@ -129,7 +143,21 @@
                 };
             }),
             
+            GetQuarterlyCashFlow: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyCashFlow', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
             GetAnnualStatistics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualStatistics', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetQuarterlyStatistics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyStatistics', function (args) {
                 return {
                     productId: args[0],
                     venue: args[1]

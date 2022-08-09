@@ -27,8 +27,8 @@
         </div>        
         <div class="clearfix"></div>
     </div>
-    <div style="margin: 20px 5px;">
-        <div>
+    <div style="margin: 20px 5px; width: 100%; float: left;">
+        <div style="width: 50%; float: left;">
             <button
                 ng-class="{'mini-filled-blue': vm.selectedTable === 'income', 'mini-hollow-blue': vm.selectedTable != 'income'}"
                 style="margin-right: 5px" ng-click="vm.setSelectedTable('income')">
@@ -50,21 +50,33 @@
                 Statistics
             </button>
         </div>
+        <div style="width: 50%; float: right; text-align: right;">
+            <button
+                ng-class="{'mini-filled-blue': vm.selectedTableType === 'annualy', 'mini-hollow-blue': vm.selectedTableType != 'annualy'}"
+                style="margin-right: 5px" ng-click="vm.setSelectedTableType('annualy')">
+                Annualy
+            </button>
+            <button
+                ng-class="{'mini-filled-blue': vm.selectedTableType === 'quarterly', 'mini-hollow-blue': vm.selectedTableType != 'quarterly'}"
+                style="margin-right: 5px" ng-click="vm.setSelectedTableType('quarterly')">
+                Quarterly
+            </button>            
+        </div>
     </div>
     <div ng-if="vm.selectedTable === 'income'">
         <table class="table-large">
             <thead>
                 <tr>
                     <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                    <td ng-repeat="annualIncomeStatementTableHeading in vm.annualIncomeStatementTableData.headings">{{annualIncomeStatementTableHeading}}</td>
+                    <td ng-repeat="incomeStatementTableHeading in vm.incomeStatementTableData.headings track by $index">{{incomeStatementTableHeading}}</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="annualIncomeStatementTableName in vm.annualIncomeStatementTableData.name">
-                    <td ng-if="annualIncomeStatementTableName !== 'StatementDate'">{{vm.getFullNameFromKey(annualIncomeStatementTableName)}}</td>
-                    <td ng-if="annualIncomeStatementTableName !== 'StatementDate'" ng-repeat="annualIncomeStatementTableData in vm.annualIncomeStatementTableData.data">
-                        <div>{{annualIncomeStatementTableData[annualIncomeStatementTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="annualIncomeStatementTableData.StatementDate !== null" class="green-profit">+6.70%</div>
+                <tr ng-repeat="incomeStatementTableName in vm.incomeStatementTableData.name">
+                    <td ng-if="incomeStatementTableName !== 'StatementDate'">{{vm.getFullNameFromKey(incomeStatementTableName)}}</td>
+                    <td ng-if="incomeStatementTableName !== 'StatementDate'" ng-repeat="incomeStatementTableData in vm.incomeStatementTableData.data">
+                        <div>{{incomeStatementTableData[incomeStatementTableName]|priceNumberFormatter}}</div>
+                        <div ng-if="incomeStatementTableData.StatementDate !== null" class="green-profit">+6.70%</div>
                     </td>
                 </tr>
             </tbody>
@@ -74,13 +86,13 @@
         <table class="table-large">
             <thead>
                 <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                <td ng-repeat="annualBalanceSheetTableDataHeading in vm.annualBalanceSheetTableData.headings">{{annualBalanceSheetTableDataHeading}}</td>
+                <td ng-repeat="balanceSheetTableDataHeading in vm.balanceSheetTableData.headings track by $index">{{balanceSheetTableDataHeading}}</td>
             </thead>
             <tbody>
-                <tr ng-repeat="annualBalanceSheetTableName in vm.annualBalanceSheetTableData.name" ng-if="annualBalanceSheetTableName !== 'StatementDate'">
-                    <td >{{vm.getFullNameFromKey(annualBalanceSheetTableName)}}</td>
-                    <td ng-repeat="annualBalanceSheetTableData in vm.annualBalanceSheetTableData.data">
-                        <div>{{annualBalanceSheetTableData[annualBalanceSheetTableName]|priceNumberFormatter}}</div>
+                <tr ng-repeat="balanceSheetTableName in vm.balanceSheetTableData.name track by $index" ng-if="balanceSheetTableName !== 'StatementDate'">
+                    <td >{{vm.getFullNameFromKey(balanceSheetTableName)}}</td>
+                    <td ng-repeat="balanceSheetTableData in vm.balanceSheetTableData.data">
+                        <div>{{balanceSheetTableData[balanceSheetTableName]|priceNumberFormatter}}</div>
                         <div class="green-profit">+6.70%</div>
                     </td>
                 </tr>
@@ -92,15 +104,15 @@
             <thead>
                 <tr>
                     <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                    <td ng-repeat="annualCashFlowTableHeading in vm.annualCashFlowTableData.headings">{{annualCashFlowTableHeading}}</td>
+                    <td ng-repeat="cashFlowTableHeading in vm.cashFlowTableData.headings track by $index">{{cashFlowTableHeading}}</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="annualCashFlowTableName in vm.annualCashFlowTableData.name">
-                    <td ng-if="annualCashFlowTableName !== 'StatementDate'">{{vm.getFullNameFromKey(annualCashFlowTableName)}}</td>
-                    <td ng-if="annualCashFlowTableName !== 'StatementDate'" ng-repeat="annualCashFlowTableData in vm.annualCashFlowTableData.data">
-                        <div>{{annualCashFlowTableData[annualCashFlowTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="annualCashFlowTableData.StatementDate !== null" class="green-profit">+6.70%</div>
+                <tr ng-repeat="cashFlowTableName in vm.cashFlowTableData.name">
+                    <td ng-if="cashFlowTableName !== 'StatementDate'">{{vm.getFullNameFromKey(cashFlowTableName)}}</td>
+                    <td ng-if="cashFlowTableName !== 'StatementDate'" ng-repeat="cashFlowTableData in vm.cashFlowTableData.data track by $index">
+                        <div>{{cashFlowTableData[cashFlowTableName]|priceNumberFormatter}}</div>
+                        <div ng-if="cashFlowTableData.StatementDate !== null" class="green-profit">+6.70%</div>
                     </td>
                 </tr>
             </tbody>
@@ -110,29 +122,29 @@
         <table class="table-large">
             <thead>
                 <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                <td ng-repeat="annualStatisticsTableHeading in vm.annualStatisticsTableData.headings track by $index">{{annualStatisticsTableHeading}}</td>               
+                <td ng-repeat="statisticsTableHeading in vm.statisticsTableData.headings track by $index">{{statisticsTableHeading}}</td>               
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="{{vm.annualStatisticsTableData.headings.length + 1}}">
-                        <h4><bold>{{vm.annualStatisticsTableData.data.keySates.title}}</bold></h4>
+                    <td colspan="{{vm.statisticsTableData.headings.length + 1}}">
+                        <h4><bold>{{vm.statisticsTableData.data.keySates.title}}</bold></h4>
                     </td>
                 </tr>
-                <tr ng-repeat="annualStatisticsKeyStateTableName in vm.annualStatisticsTableData.data.keySates.data track by $index">
-                    <td>{{vm.getFullNameFromKey(vm.annualStatisticsTableData.data.keySates.headings[$index])}}</td>
-                    <td ng-repeat="annualStatisticsKeyStateValues in annualStatisticsKeyStateTableName track by $index">
-                        <div>{{annualStatisticsKeyStateValues|priceNumberFormatter}}</div>
+                <tr ng-repeat="statisticsKeyStateTableName in vm.statisticsTableData.data.keySates.data track by $index">
+                    <td>{{vm.getFullNameFromKey(vm.statisticsTableData.data.keySates.headings[$index])}}</td>
+                    <td ng-repeat="statisticsKeyStateValues in statisticsKeyStateTableName track by $index">
+                        <div>{{statisticsKeyStateValues|priceNumberFormatter}}</div>
                     </td>                 
                 </tr>
                 <tr>
-                    <td colspan="{{vm.annualStatisticsTableData.headings.length + 1}}">
-                        <h4><bold>{{vm.annualStatisticsTableData.data.ratios.title}}</bold></h4>
+                    <td colspan="{{vm.statisticsTableData.headings.length + 1}}">
+                        <h4><bold>{{vm.statisticsTableData.data.ratios.title}}</bold></h4>
                     </td>
                 </tr>
-                <tr ng-repeat="annualStatisticsRatiosTableName in vm.annualStatisticsTableData.data.ratios.data track by $index">
-                    <td>{{vm.getFullNameFromKey(vm.annualStatisticsTableData.data.ratios.headings[$index])}}</td>
-                    <td ng-repeat="annualStatisticsRatiosValues in annualStatisticsRatiosTableName track by $index">
-                        <div>{{annualStatisticsRatiosValues}}</div>
+                <tr ng-repeat="statisticsRatiosTableName in vm.statisticsTableData.data.ratios.data track by $index">
+                    <td>{{vm.getFullNameFromKey(vm.statisticsTableData.data.ratios.headings[$index])}}</td>
+                    <td ng-repeat="statisticsRatiosValues in statisticsRatiosTableName track by $index">
+                        <div>{{statisticsRatiosValues|number:2}}</div>
                     </td>                 
                 </tr>                
             </tbody>

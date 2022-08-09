@@ -72,9 +72,16 @@
             });
         }
         
-        function getAnnualIncomeStatement() {
-            return dep.sProductService.GetAnnualIncomeStatement(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
-                serviceObj.annualIncomeStatement = res.data;
+        function getIncomeStatement(type) {
+            var statementType = '';
+            if(type == 'annualy'){
+                statementType = dep.sProductService.GetAnnualIncomeStatement;
+            }
+            if(type == 'quarterly'){
+                statementType = dep.sProductService.GetQuarterlyIncomeStatement;
+            }
+            return statementType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.incomeStatement = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
             }, function () {
@@ -83,9 +90,16 @@
             });
         }
         
-        function getAnnualBalanceSheet() {
-            return dep.sProductService.GetAnnualBalanceSheet(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
-                serviceObj.annualBalanceSheet = res.data;
+        function getBalanceSheet(type) {
+            var balanceSheetType = '';
+            if(type == 'annualy'){
+                balanceSheetType = dep.sProductService.GetAnnualBalanceSheet;
+            }
+            if(type == 'quarterly'){
+                balanceSheetType = dep.sProductService.GetQuarterlyBalanceSheet;
+            }
+            return balanceSheetType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.balanceSheet = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
             }, function () {
@@ -94,9 +108,16 @@
             });
         }
         
-        function getAnnualCashFlow() {
-            return dep.sProductService.GetAnnualCashFlow(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
-                serviceObj.annualCashFlow = res.data;
+        function getCashFlow(type) {
+            var cashFlowType = '';
+            if(type == 'annualy'){
+                cashFlowType = dep.sProductService.GetAnnualCashFlow;
+            }
+            if(type == 'quarterly'){
+                cashFlowType = dep.sProductService.GetQuarterlyCashFlow;
+            }
+            return cashFlowType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.cashFlow = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
             }, function () {
@@ -105,9 +126,16 @@
             });
         }
         
-        function getAnnualStatistics() {
-            return dep.sProductService.GetAnnualStatistics(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
-                serviceObj.annualStatistics = res.data;
+        function getStatistics(type) {
+            var statisticsType = '';
+            if(type == 'annualy'){
+                statisticsType = dep.sProductService.GetAnnualStatistics;
+            }
+            if(type == 'quarterly'){
+                statisticsType = dep.sProductService.GetQuarterlyStatistics;
+            }
+            return statisticsType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.statistics = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
             }, function () {
@@ -115,7 +143,7 @@
                 serviceObj.isLoading = false;
             });
         }
-
+       
         function placeOrder(action, stock) {
             return tool.openModalByDefinition('s.orders.PadDeveloperPopupController', {
                 selectedStrategy: null,
@@ -304,14 +332,14 @@
             fundamentalQuarterlyPageMetrics: {},
             getFundamentalAnnualPageMetrics: getFundamentalAnnualPageMetrics,
             fundamentalAnnualPageMetrics: {},
-            getAnnualIncomeStatement: getAnnualIncomeStatement,
-            annualIncomeStatement: {},
-            getAnnualBalanceSheet: getAnnualBalanceSheet,
-            annualBalanceSheet: {},
-            getAnnualCashFlow: getAnnualCashFlow,
-            annualCashFlow: {},
-            getAnnualStatistics: getAnnualStatistics,
-            annualStatistics: {},
+            getIncomeStatement: getIncomeStatement,
+            incomeStatement: {},            
+            getBalanceSheet: getBalanceSheet,
+            balanceSheet: {},            
+            getCashFlow: getCashFlow,
+            cashFlow: {},
+            getStatistics: getStatistics,
+            statistics: {},
             productDetail: {
                 ProductModel: {},
                 MarketData: {},

@@ -9,63 +9,68 @@
                 vm.selectedTable = table;
                 setTableValue(vm.selectedTable);
             }
+            
+            function setSelectedTableType(type) {
+                vm.selectedTableType = type;
+                setTableValue(vm.selectedTable);
+            }
 
             function setTableValue(table) {
-                if (table === 'income') {
-                    pProductPageService.getAnnualIncomeStatement().then(function () {
-                        var annualIncomeStatement = pProductPageService.annualIncomeStatement;
-                        var annualIncomeStatementTableHeadings = annualIncomeStatement.map(function (itemObj, itemKey) {
+                if (table === 'income') {                    
+                    pProductPageService.getIncomeStatement(vm.selectedTableType).then(function () {
+                        var incomeStatement = pProductPageService.incomeStatement;                        
+                        var incomeStatementTableHeadings = incomeStatement.map(function (itemObj, itemKey) {
                             return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM';
                         });
-                        var annualIncomeStatementTableName = Object.keys(annualIncomeStatement[0]);
-                        var annualIncomeStatements = annualIncomeStatement;
-                        vm.annualIncomeStatementTableData = {
-                            headings: annualIncomeStatementTableHeadings,
-                            name: annualIncomeStatementTableName,
-                            data: annualIncomeStatements,
+                        var incomeStatementTableName = Object.keys(incomeStatement[0]);
+                        var incomeStatements = incomeStatement;
+                        vm.incomeStatementTableData = {
+                            headings: incomeStatementTableHeadings,
+                            name: incomeStatementTableName,
+                            data: incomeStatements,
                         };
                     });
                 }
                 if (table === 'balance') {
-                    pProductPageService.getAnnualBalanceSheet().then(function () {
-                        var annualBalanceSheet = pProductPageService.annualBalanceSheet;
-                        var annualBalanceSheetTableHeadings = annualBalanceSheet.map(function (itemObj, itemKey) {
+                    pProductPageService.getBalanceSheet(vm.selectedTableType).then(function () {
+                        var balanceSheet = pProductPageService.balanceSheet;
+                        var balanceSheetTableHeadings = balanceSheet.map(function (itemObj, itemKey) {
                             return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : '';
                         });
-                        var annualBalanceSheetTableName = Object.keys(annualBalanceSheet[0]);
-                        var annualBalanceSheets = annualBalanceSheet;
-                        vm.annualBalanceSheetTableData = {
-                            headings: annualBalanceSheetTableHeadings,
-                            name: annualBalanceSheetTableName,
-                            data: annualBalanceSheets,
+                        var balanceSheetTableName = Object.keys(balanceSheet[0]);
+                        var balanceSheets = balanceSheet;
+                        vm.balanceSheetTableData = {
+                            headings: balanceSheetTableHeadings,
+                            name: balanceSheetTableName,
+                            data: balanceSheets,
                         };
                     });
                 }
                 if (table === 'cash') {
-                    pProductPageService.getAnnualCashFlow().then(function () {
-                        var annualCashFlow = pProductPageService.annualCashFlow;
-                        var annualCashFlowTableHeadings = annualCashFlow.map(function (itemObj, itemKey) {
+                    pProductPageService.getCashFlow(vm.selectedTableType).then(function () {
+                        var cashFlow = pProductPageService.cashFlow;
+                        var cashFlowTableHeadings = cashFlow.map(function (itemObj, itemKey) {
                             return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM';
                         });
-                        var annualCashFlowTableName = Object.keys(annualCashFlow[0]);
-                        var annualCashFlows = annualCashFlow;
-                        vm.annualCashFlowTableData = {
-                            headings: annualCashFlowTableHeadings,
-                            name: annualCashFlowTableName,
-                            data: annualCashFlows,
+                        var cashFlowTableName = Object.keys(cashFlow[0]);
+                        var cashFlows = cashFlow;
+                        vm.cashFlowTableData = {
+                            headings: cashFlowTableHeadings,
+                            name: cashFlowTableName,
+                            data: cashFlows,
                         };
                     });
                 }
                 if(table === 'stats'){
-                    pProductPageService.getAnnualStatistics().then(function (){
-                        var annualStatistics = pProductPageService.annualStatistics;
-                        var keySatesDataJSON = {
+                    pProductPageService.getStatistics(vm.selectedTableType).then(function (){
+                        var statistics = pProductPageService.statistics;
+                        let keySatesDataJSON = {
                             SharesOutstanding : [],
                             SharesFloating : [],
                             Employees : [],
                             Shareholders : [],
                         }
-                        var ratiosDataJSON = {
+                        let ratiosDataJSON = {
                             PeRatio : [],
                             PbRatio : [],
                             Roa : [],
@@ -76,7 +81,7 @@
                             DaRatio : [],
                             DeRatio : [],
                         }
-                        var annualStatisticsTableHeadings = annualStatistics.map(function (itemObj, itemKey){
+                        var statisticsTableHeadings = statistics.map(function (itemObj, itemKey){
                             // keySates data
                             if(itemObj.SharesOutstanding !== undefined && itemObj.SharesOutstanding !== null){
                                 keySatesDataJSON.SharesOutstanding.push(itemObj.SharesOutstanding);
@@ -120,7 +125,7 @@
                             }
                             return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'Current';
                         });
-                        var annualStatisticsTableName = Object.keys(annualStatistics[0]);
+                        var statisticsTableName = Object.keys(statistics[0]);
                         var allStatisticsData = {
                             keySates: {
                                 title: 'Key Stats',
@@ -133,9 +138,9 @@
                                 headings: Object.keys(ratiosDataJSON)
                             }
                         }
-                        vm.annualStatisticsTableData =  {
-                            headings: annualStatisticsTableHeadings,
-                            name : annualStatisticsTableName,
+                        vm.statisticsTableData =  {
+                            headings: statisticsTableHeadings,
+                            name : statisticsTableName,
                             data : allStatisticsData,
                         }                        
                     });
@@ -508,7 +513,7 @@
                     case "Cogs":
                         return 'Cost of goods sold';
                     case "GrossProfit":
-                        return 'Gross proft';
+                        return 'Gross profit';
                     case "OperatingExpenses":
                         return 'Operating expenses (excl. COGS)';
                     case "OperatingIncome":
@@ -585,7 +590,9 @@
             tool.initialize(function () {
                 tool.setVmProperties({
                     // temp
+                    selectedTableType: "annualy",
                     selectedTable: "income",
+                    setSelectedTableType: setSelectedTableType,
                     setSelectedTable: setSelectedTable,
                     setSelectedType: setSelectedType,
                     barChartsArr: barChartsArr,
