@@ -23,7 +23,14 @@
         <div class="col-md-1">
             <div class="white-box">
                 <h1>Retail Interest</h1>
-                <div style="text-align: right; margin-right: 20px;">Retail Sentiment: 60</div>
+                <div class="row-md-2">
+                    <div class="col-md-1">
+                        <select ng-model="vm.selectedPeriod" ng-options="m for m in vm.periods"></select>
+                    </div>
+                    <div class="col-md-1">
+                        <div style="text-align: right; margin-right: 20px;">Retail Sentiment: 60</div>
+                    </div>
+                </div>
                 <div class="h-30px"></div>
                 <div id="retail_buying_activity"></div>
             </div>

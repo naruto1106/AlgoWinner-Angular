@@ -163,7 +163,9 @@
 
             tool.initialize(function () {
                 tool.setVmProperties({
-                    newsSentiment: newsSentiments
+                    newsSentiment: newsSentiments,
+                    selectedPeriod: "1 Week",
+                    periods: ["1 Week", "1 Month", "3 Month", "6 Months", "1 Year"],
                 });
 
                 pProductPageService.waitTillProductDetailLoaded().then(function () {
