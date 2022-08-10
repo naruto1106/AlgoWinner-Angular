@@ -4,6 +4,7 @@
             var pProductPageService = dep.pProductPageService;
             var $filter = dep.$filter;
             var chart = {};
+            Highcharts.setOptions({lang: {numericSymbols: [ 'k', 'M', 'B' ]}});
 
             function setSelectedTable(table) {
                 vm.selectedTable = table;
@@ -20,7 +21,8 @@
                     pProductPageService.getIncomeStatement(vm.selectedTableType).then(function () {
                         var incomeStatement = pProductPageService.incomeStatement;                        
                         var incomeStatementTableHeadings = incomeStatement.map(function (itemObj, itemKey) {
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM';
+                            itemKey = itemKey + 1;
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+itemKey : '') : 'TTM';
                         });
                         var incomeStatementTableName = Object.keys(incomeStatement[0]);
                         var incomeStatements = incomeStatement;
@@ -35,7 +37,8 @@
                     pProductPageService.getBalanceSheet(vm.selectedTableType).then(function () {
                         var balanceSheet = pProductPageService.balanceSheet;
                         var balanceSheetTableHeadings = balanceSheet.map(function (itemObj, itemKey) {
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : '';
+                            itemKey = itemKey + 1;
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+itemKey : '') : '';
                         });
                         var balanceSheetTableName = Object.keys(balanceSheet[0]);
                         var balanceSheets = balanceSheet;
@@ -50,7 +53,8 @@
                     pProductPageService.getCashFlow(vm.selectedTableType).then(function () {
                         var cashFlow = pProductPageService.cashFlow;
                         var cashFlowTableHeadings = cashFlow.map(function (itemObj, itemKey) {
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'TTM';
+                            itemKey = itemKey + 1;
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+itemKey : '') : 'TTM';
                         });
                         var cashFlowTableName = Object.keys(cashFlow[0]);
                         var cashFlows = cashFlow;
@@ -123,7 +127,8 @@
                             if(itemObj.DeRatio !== undefined && itemObj.DeRatio !== null){
                                 ratiosDataJSON.DeRatio.push(itemObj.DeRatio);
                             }
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") : 'Current';
+                            itemKey = itemKey + 1;
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+itemKey : '') : 'Current';
                         });
                         var statisticsTableName = Object.keys(statistics[0]);
                         var allStatisticsData = {
@@ -173,10 +178,17 @@
                     },
 
                     yAxis: {
-                        allowDecimals: false,
+                        allowDecimals: true,
                         title: {
                             text: itemObj.name
-                        }
+                        },
+                        formatter: function() {
+                            if ( this.value > 1000 ) return Highcharts.numberFormat( this.value/1000, 1) + "k";
+                            return Highcharts.numberFormat(this.value,0);
+                          }         
+                        // labels: {
+                        //     format: '{value}'
+                        // }
                     },
 
                     series: itemObj.seriesArr,
@@ -456,17 +468,9 @@
                 setFundamentalChartValues(selectedChartObj);
             }
 
-            function setFundamentalChartValues(chartConfigObj) {
-                var fundamentalPageMetrics = pProductPageService.getFundamentalAnnualPageMetrics();
-                if (chartConfigObj.type == 'quarter') {
-                    fundamentalPageMetrics = pProductPageService.getFundamentalQuarterlyPageMetrics();
-                }
-                fundamentalPageMetrics.then(function () {
-                    var fundamentalPageMetricsResp = pProductPageService.fundamentalAnnualPageMetrics;
-                    if (chartConfigObj.type == 'quarter') {
-                        fundamentalPageMetricsResp = pProductPageService.fundamentalQuarterlyPageMetrics;
-                    }
-
+            function setFundamentalChartValues(chartConfigObj) {                
+                pProductPageService.getFundamentalPageMetrics(chartConfigObj.selectedType).then(function () {
+                    var fundamentalPageMetricsResp = pProductPageService.fundamentalPageMetrics;
                     var IndustryMetricArr = fundamentalPageMetricsResp.IndustryMetric;
                     var MetricArr = fundamentalPageMetricsResp.Metric;
                     chartConfigObj.seriesArr[0].data = [];
@@ -479,7 +483,7 @@
                         '3 years Growth 20% (Average 10%)',
                         '5 years Growth 50% (Average 20%)'
                     ];
-                    if (chartConfigObj.type == 'quarter') {
+                    if (chartConfigObj.selectedType == 'quarter') {
                         chartConfigObj.grothTable = [
                             '1 quarter Growth 10% (Average 5%)',
                             '3 quarter Growth 20% (Average 10%)',
@@ -489,10 +493,10 @@
                     IndustryMetricArr.forEach(function (elementObj, elementKey) {
                         var IndustryMetricObjectKeys = Object.keys(elementObj);
                         if ((IndustryMetricObjectKeys).includes(chartConfigObj.key)) {
-                            if (chartConfigObj.type == 'annualy') {
+                            if (chartConfigObj.selectedType == 'annualy') {
                                 chartConfigObj.categories.push(moment(IndustryMetricArr[elementKey].StatementDate).format("YYYY"));
                             }
-                            if (chartConfigObj.type == 'quarter') {
+                            if (chartConfigObj.selectedType == 'quarter') {
                                 chartConfigObj.categories.push(moment(IndustryMetricArr[elementKey].StatementDate).format("YYYY-MMM"));
                             }
                             chartConfigObj.seriesArr[0].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
@@ -605,16 +609,12 @@
                 pProductPageService.waitTillProductDetailLoaded().then(function () {
 
                     var productDetail = pProductPageService.productDetail;
-                    //console.log("productDetail: ", productDetail);
                     vm.productDetail = productDetail;
-
-                    pProductPageService.getFundamentalAnnualPageMetrics().then(function () {
-                        var fundamentalAnnualPageMetrics = pProductPageService.fundamentalAnnualPageMetrics;
-                        //console.log("fundamentalAnnualPageMetrics", fundamentalAnnualPageMetrics);
-
+                    pProductPageService.getFundamentalPageMetrics('annualy').then(function () {
+                        var fundamentalPageMetrics = pProductPageService.fundamentalPageMetrics;                        
                         barChartsArr.filter(function (chartConfigObj) {
-                            var IndustryMetricArr = fundamentalAnnualPageMetrics.IndustryMetric;
-                            var MetricArr = fundamentalAnnualPageMetrics.Metric;
+                            var IndustryMetricArr = fundamentalPageMetrics.IndustryMetric;
+                            var MetricArr = fundamentalPageMetrics.Metric;
                             chartConfigObj.seriesArr[0].data = [];
                             chartConfigObj.seriesArr[1].data = [];
                             chartConfigObj.seriesArr[2].data = [];

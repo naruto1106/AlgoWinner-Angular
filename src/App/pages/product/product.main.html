@@ -4,6 +4,7 @@
     <div ng-if="!vm.isLoading() && vm.showErrorMessage()" class="invalid-product">
         <h4 class="m-0px p-top-20px">No results found for this product: {{vm.symbol}}</h4>
     </div>
+    <h4 class="m-0px p-top-20px">No results found for this product: {{vm.symbol}}</h4>
 
     <div ng-if="!vm.showErrorMessage()">
         <agmp-product-price-panel id="price-section" class="p-20px"></agmp-product-price-panel>
@@ -12,7 +13,7 @@
         <div class="clearfix"></div>
         <agmp-product-sentiment-panel id="sentiment-section" class="p-20px"></agmp-product-sentiment-panel>
         <div class="clearfix"></div>
-        <agmp-product-fundamental-panel id="fundamental-section" class="p-20px" ng-if="!vm.isWarrants()"></agmp-product-fundamental-panel>
+        <agmp-product-fundamental-panel id="fundamental-section" class="p-20px" ng-if="vm.TradeVenueLoc == 'US'"></agmp-product-fundamental-panel>
         <div class="clearfix"></div>
         <div class="p-20px" ng-if="!vm.isWarrants()">
             <div class="row-md-2 gap-20px">

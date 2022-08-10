@@ -50,27 +50,23 @@
             });
         }                
         
-        function getFundamentalQuarterlyPageMetrics() {
-            return dep.sProductService.GetFundamentalQuarterlyPageMetrics(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
-                serviceObj.fundamentalQuarterlyPageMetrics = res.data;
+        function getFundamentalPageMetrics(type) {
+            var fundamentalPageMetricsType = '';
+            if(type == 'annualy'){
+                fundamentalPageMetricsType = dep.sProductService.GetFundamentalAnnualPageMetrics;
+            }
+            if(type == 'quarter'){
+                fundamentalPageMetricsType = dep.sProductService.GetFundamentalQuarterlyPageMetrics;
+            }
+            return fundamentalPageMetricsType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.fundamentalPageMetrics = res.data;
                 serviceObj.isLoading = false;
                 serviceObj.showErrorMessage = false;
             }, function () {
                 serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
-        }
-        
-        function getFundamentalAnnualPageMetrics() {
-            return dep.sProductService.GetFundamentalAnnualPageMetrics(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
-                serviceObj.fundamentalAnnualPageMetrics = res.data;
-                serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
-            }, function () {
-                serviceObj.showErrorMessage = true;
-                serviceObj.isLoading = false;
-            });
-        }
+        }               
         
         function getIncomeStatement(type) {
             var statementType = '';
@@ -328,10 +324,8 @@
                 AnalystTargetPrice: 0,
                 CurrentPrice: 0
             },
-            getFundamentalQuarterlyPageMetrics: getFundamentalQuarterlyPageMetrics,
-            fundamentalQuarterlyPageMetrics: {},
-            getFundamentalAnnualPageMetrics: getFundamentalAnnualPageMetrics,
-            fundamentalAnnualPageMetrics: {},
+            getFundamentalPageMetrics: getFundamentalPageMetrics,
+            fundamentalPageMetrics: {},
             getIncomeStatement: getIncomeStatement,
             incomeStatement: {},            
             getBalanceSheet: getBalanceSheet,

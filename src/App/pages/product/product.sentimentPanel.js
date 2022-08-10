@@ -168,17 +168,16 @@
                     periods: ["1 Week", "1 Month", "3 Month", "6 Months", "1 Year"],
                 });
 
-                pProductPageService.waitTillProductDetailLoaded().then(function () {
+                var productDetail = pProductPageService.productDetail;
+                vm.productDetail = productDetail;
+                vm.isLoading = pProductPageService.isLoading;
 
-                    lineCharts('retail_buying_activity');                    
-
-                    var productDetail = pProductPageService.productDetail;
-                    //console.log("productDetail: ", productDetail);
-                    vm.productDetail = productDetail;
-                    vm.isLoading = pProductPageService.isLoading;
+                pProductPageService.waitTillProductDetailLoaded().then(function () {                    
 
                     //Set Analyst Rating chat values for US market only
                     if(productDetail.Product.TradeVenueLoc == 'US'){
+                        lineCharts('retail_buying_activity');
+                        
                         pProductPageService.getLatestAnalystRating().then(function(){
                                 var latestAnalystRating = pProductPageService.latestAnalystRating;
                                 var chartData = {
@@ -193,18 +192,18 @@
                                 };
                                 barCharts('analyst_rating', chartData);                        
                         });
-                    }
 
-                    pProductPageService.getAnalystTargetPrice().then(function(){
-                        var analystTargetPrices = pProductPageService.analystTargetPrice;
-                        vm.analystTargetPrice = [{
-                            title: "Target Price",
-                            value: "USD "+analystTargetPrices.AnalystTargetPrice
-                        },{
-                            title: "Current Price",
-                            value: "USD "+analystTargetPrices.CurrentPrice
-                        }];
-                    });                    
+                        pProductPageService.getAnalystTargetPrice().then(function(){
+                            var analystTargetPrices = pProductPageService.analystTargetPrice;
+                            vm.analystTargetPrice = [{
+                                title: "Target Price",
+                                value: "USD "+analystTargetPrices.AnalystTargetPrice
+                            },{
+                                title: "Current Price",
+                                value: "USD "+analystTargetPrices.CurrentPrice
+                            }];
+                        });
+                    }
                 });
             });
         })

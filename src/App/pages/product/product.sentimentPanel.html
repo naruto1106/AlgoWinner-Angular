@@ -20,7 +20,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-1" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
             <div class="white-box">
                 <h1>Retail Interest</h1>
                 <div class="row-md-2">
@@ -35,7 +35,7 @@
                 <div id="retail_buying_activity"></div>
             </div>
         </div>       
-        <div class="col-md-1">
+        <div class="col-md-1" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
             <div class="white-box">
                 <h1>Analyst Rating</h1>
                 <div class="h-30px"></div>
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-1" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
             <div class="white-box">
                 <h1>Analyst Target Price</h1>
                 <table border="1" class="sentiment-table">

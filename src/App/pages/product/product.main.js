@@ -35,6 +35,7 @@
             });
 
             pProductPageService.loadProductWithParam(dep.venue, dep.symbol).then(function() {
+                vm.TradeVenueLoc = pProductPageService.currentProduct.TradeVenueLoc;
                 document.title = pProductPageService.currentProduct.ProductName + ' (' + vm.symbol + ') - ' + dep.venue + ' Product';
             });
 
