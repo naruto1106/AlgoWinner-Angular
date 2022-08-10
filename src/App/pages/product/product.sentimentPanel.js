@@ -49,7 +49,7 @@
                     },
                 
                     series: [{
-                        name: 'Retail Buying Activity',
+                        name: 'Retail Interest',
                         data: [0.1, 0.5, 0.10, 0.12, 0.3, 0.4, 0.10]
                     }],
                 
@@ -196,7 +196,7 @@
                     pProductPageService.getAnalystTargetPrice().then(function(){
                         var analystTargetPrices = pProductPageService.analystTargetPrice;
                         vm.analystTargetPrice = [{
-                            title: "Past 1 Hour",
+                            title: "Target Price",
                             value: "USD "+analystTargetPrices.AnalystTargetPrice
                         },{
                             title: "Current Price",
