@@ -25,10 +25,10 @@
                 <h1>Retail Interest</h1>
                 <div class="row-md-2">
                     <div class="col-md-1">
-                        <select ng-model="vm.selectedPeriod" ng-options="m for m in vm.periods"></select>
+                        <select ng-change="vm.changeRetailActivityChartPeriod()" ng-model="vm.selectedPeriod" ng-options="m for m in vm.periods"></select>
                     </div>
                     <div class="col-md-1">
-                        <div style="text-align: right; margin-right: 20px;">Retail Sentiment: 60</div>
+                        <div style="text-align: right; margin-right: 20px;">Retail Sentiment: {{vm.retailSentimentScore}}</div>
                     </div>
                 </div>
                 <div class="h-30px"></div>

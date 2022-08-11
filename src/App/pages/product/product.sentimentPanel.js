@@ -3,7 +3,7 @@
         function (vm, dep, tool) {
             var pProductPageService = dep.pProductPageService;
 
-            function lineCharts(container){
+            function lineCharts(container, chartData){
                 Highcharts.chart(container, {
                     title: {
                         text: ''
@@ -27,11 +27,9 @@
                             }
                         }
                     },
-                
+
                     xAxis: {
-                        accessibility: {
-                            rangeDescription: ''
-                        }                        
+                        categories: chartData.categories
                     },
                 
                     legend: {
@@ -39,18 +37,9 @@
                         align: 'center'
                     },
                 
-                    plotOptions: {
-                        series: {
-                            label: {
-                                connectorAllowed: true
-                            },
-                            pointStart: 2016
-                        }
-                    },
-                
                     series: [{
                         name: 'Retail Interest',
-                        data: [0.1, 0.5, 0.10, 0.12, 0.3, 0.4, 0.10]
+                        data: chartData.data
                     }],
                 
                     responsive: {
@@ -142,10 +131,37 @@
                 chart.setSize(null);                                               
             }
 
+            function changeRetailActivityChartPeriod(){
+                retailActivityChart(vm.selectedPeriod);
+            }
+
+            function retailActivityChart(period){
+                pProductPageService.getRetailActivity(period).then(function(){
+                    var retailActivity = pProductPageService.retailActivity;
+                    vm.retailSentimentScore = retailActivity.Score;
+                    var categories = [];
+                    var data = [];
+                    retailActivity.Sentiments.map(function(itemObj, itemKey){
+                        if(itemObj.RecordDate !== undefined && itemObj.RecordDate !== null && itemObj.RecordDate !== ''){
+                            categories.push(moment(itemObj.RecordDate).format("YYYY-MM-DD"));
+                        }
+                        if(itemObj.Value !== undefined && itemObj.Value !== null && itemObj.Value !== ''){
+                            data.push(itemObj.Value);
+                        }
+                    });
+                    var chartData = {
+                        categories : categories,
+                        data : data,
+                    };
+                    lineCharts('retail_buying_activity', chartData);
+                });
+            }
+
             tool.initialize(function () {
                 tool.setVmProperties({
-                    selectedPeriod: "1 Week",
+                    selectedPeriod: "1 Week",                    
                     periods: ["1 Week", "1 Month", "3 Month", "6 Months", "1 Year"],
+                    changeRetailActivityChartPeriod: changeRetailActivityChartPeriod,
                 });
 
                 var productDetail = pProductPageService.productDetail;
@@ -174,11 +190,11 @@
                             Volume: newsSentiment.Past1WeekVolume,
                             IsVolumeBreakout: newsSentiment.Is1WeekBreakout
                         }]
-                    });
+                    });                                        
 
                     //Set Analyst Rating chat values for US market only
                     if(productDetail.Product.TradeVenueLoc == 'US'){
-                        lineCharts('retail_buying_activity');
+                        retailActivityChart(vm.selectedPeriod);                        
                         
                         pProductPageService.getLatestAnalystRating().then(function(){
                                 var latestAnalystRating = pProductPageService.latestAnalystRating;
