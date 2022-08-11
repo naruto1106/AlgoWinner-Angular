@@ -142,28 +142,8 @@
                 chart.setSize(null);                                               
             }
 
-            var newsSentiments = [{
-                NewsSentimentType: "Past 1 Hour",
-                SentimentScore: -0.33,
-                Volume: 5,
-                IsVolumeBreakout: false
-            },
-            {
-                NewsSentimentType: "Past 24 Hours",
-                SentimentScore: 0.55,
-                Volume: 30,
-                IsVolumeBreakout: true
-            },
-            {
-                NewsSentimentType: "Past 1 Week",
-                SentimentScore: 0.88,
-                Volume: 50,
-                IsVolumeBreakout: false
-            }];                        
-
             tool.initialize(function () {
                 tool.setVmProperties({
-                    newsSentiment: newsSentiments,
                     selectedPeriod: "1 Week",
                     periods: ["1 Week", "1 Month", "3 Month", "6 Months", "1 Year"],
                 });
@@ -172,7 +152,29 @@
                 vm.productDetail = productDetail;
                 vm.isLoading = pProductPageService.isLoading;
 
-                pProductPageService.waitTillProductDetailLoaded().then(function () {                    
+                pProductPageService.waitTillProductDetailLoaded().then(function () {
+
+                    pProductPageService.getNewsSentiment().then(function(){
+                        var newsSentiment = pProductPageService.newsSentiment;
+                        vm.newsSentiment = [{
+                            NewsSentimentType: "Past 1 Hour",
+                            SentimentScore: newsSentiment.Past1HourScore,
+                            Volume: newsSentiment.Past1HourVolume,
+                            IsVolumeBreakout: newsSentiment.Is1HourBreakout
+                        },
+                        {
+                            NewsSentimentType: "Past 24 Hours",
+                            SentimentScore: newsSentiment.Past24HourScore,
+                            Volume: newsSentiment.Past24HourVolume,
+                            IsVolumeBreakout: newsSentiment.Is24HourBreakout
+                        },
+                        {
+                            NewsSentimentType: "Past 1 Week",
+                            SentimentScore: newsSentiment.Past1WeekScore,
+                            Volume: newsSentiment.Past1WeekVolume,
+                            IsVolumeBreakout: newsSentiment.Is1WeekBreakout
+                        }]
+                    });
 
                     //Set Analyst Rating chat values for US market only
                     if(productDetail.Product.TradeVenueLoc == 'US'){

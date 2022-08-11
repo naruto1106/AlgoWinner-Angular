@@ -12,8 +12,8 @@
                     </tr>
                     <tr ng-repeat="newsSentimentObj in vm.newsSentiment">
                         <td>{{newsSentimentObj.NewsSentimentType}}</td>
-                        <td>{{newsSentimentObj.SentimentScore}}</td>
-                        <td>{{newsSentimentObj.Volume}}
+                        <td>{{newsSentimentObj.SentimentScore|number:2}}</td>
+                        <td>{{newsSentimentObj.Volume|number:2}}
                             <span ng-if="newsSentimentObj.IsVolumeBreakout"><button class="volume-button">Volume Breakout</button></span>
                         </td>
                     </tr>

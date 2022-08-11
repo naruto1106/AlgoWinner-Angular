@@ -38,6 +38,17 @@
                 serviceObj.isLoading = false;
             });
         }
+        
+        function getNewsSentiment() {
+            return dep.sProductService.GetNewsSentiment(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {                                
+                serviceObj.newsSentiment = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+        }
 
         function getAnalystTargetPrice() {
             return dep.sProductService.GetAnalystTargetPrice(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
@@ -244,12 +255,7 @@
                         serviceObj.productDetail.Product = result;
                         serviceObj.currentProduct = result;
                         serviceObj.isLoadingPrice = true;
-
-                        // getLatestAnalystRating(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc);
-                        // getAnalystTargetPrice(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc);
-                        // getFundamentalQuarterlyPageMetrics(serviceObj.currentProduct.ProductId);
-                        // getFundamentalAnnualPageMetrics(serviceObj.currentProduct.ProductId);
-
+                        
                         tool.onceAll([
                             tradeDataService.GetBid(serviceObj.productDetail.ProductModel),
                             tradeDataService.GetAsk(serviceObj.productDetail.ProductModel),
@@ -318,6 +324,18 @@
                 CountStrongBuy: 0,
                 CountStrongSell: 0,
                 ObservationDate: ""
+            },
+            getNewsSentiment: getNewsSentiment,
+            newsSentiment: {
+                Past1HourScore: 0,
+                Past1HourVolume: 0,
+                Is1HourBreakout: false,
+                Past24HourScore: 0,
+                Past24HourVolume: 0,
+                Is24HourBreakout: false,
+                Past1WeekScore: 0,
+                Past1WeekVolume: 0,
+                Is1WeekBreakout: false
             },
             getAnalystTargetPrice: getAnalystTargetPrice,
             analystTargetPrice: {

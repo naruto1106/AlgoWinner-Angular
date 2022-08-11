@@ -4,6 +4,7 @@
         var marketInfoTickPath = '/marketinfoapi/v1/TickSize';
         var productPath = '/productapi/v1/Product';
         var ratingLatestAnalystPath = '/ratingapi/v1/Rating';
+        var newsPath = '/newsapi/v1/News';
         var targetPricePath = '/ratingapi/v1/TargetPrice';
         var fundamentalPath = '/fundamentalapi/v1/Fundamental';
 
@@ -84,6 +85,13 @@
                 return {
                     productId: args[0],
                     venue: translateTradeVenueToName(args[1]),
+                };
+            }),
+            
+            GetNewsSentiment: coreServerCommunicationService.genGetFunctionWithNVar(newsPath + '/GetNewsSentiment', function (args) {
+                return {
+                    productId: args[0],
+                    market: args[1],
                 };
             }),
             
