@@ -68,13 +68,13 @@
                 if(table === 'stats'){
                     pProductPageService.getStatistics(vm.selectedTableType).then(function (){
                         var statistics = pProductPageService.statistics;
-                        let keySatesDataJSON = {
+                        var keySatesDataJSON = {
                             SharesOutstanding : [],
                             SharesFloating : [],
                             Employees : [],
                             Shareholders : [],
                         }
-                        let ratiosDataJSON = {
+                        var ratiosDataJSON = {
                             PeRatio : [],
                             PbRatio : [],
                             Roa : [],
