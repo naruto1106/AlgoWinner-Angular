@@ -4,8 +4,7 @@
     <div ng-if="!vm.isLoading() && vm.showErrorMessage()" class="invalid-product">
         <h4 class="m-0px p-top-20px">No results found for this product: {{vm.symbol}}</h4>
     </div>
-    <h4 class="m-0px p-top-20px">No results found for this product: {{vm.symbol}}</h4>
-
+    
     <div ng-if="!vm.showErrorMessage()">
         <agmp-product-price-panel id="price-section" class="p-20px"></agmp-product-price-panel>
         <div class="clearfix"></div>

@@ -11,7 +11,7 @@
     <button ng-click="vm.gotoSection('sentiment-section')" uib-tooltip="Sentiment" tooltip-placement="right" ng-if="!vm.isWarrants()" ng-disabled="vm.showErrorMessage()">
         <span agmc-svg-loader svg-src="'/App/assets/icons/product/fundamentals.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('fundamental-section')" uib-tooltip="Fundamentals" tooltip-placement="right" ng-if="!vm.isWarrants()" ng-disabled="vm.showErrorMessage()">
+    <button ng-click="vm.gotoSection('fundamental-section')" uib-tooltip="Fundamentals" tooltip-placement="right" ng-if="vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
         <span agmc-svg-loader svg-src="'/App/assets/icons/product/fundamentals.svg'"></span>
     </button>    
     <button ng-click="vm.gotoSection('overview-section')" uib-tooltip="Overview" tooltip-placement="right" ng-if="!vm.isWarrants()" ng-disabled="vm.showErrorMessage()">

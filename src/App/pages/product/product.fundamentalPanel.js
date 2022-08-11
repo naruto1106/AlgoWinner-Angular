@@ -70,9 +70,9 @@
                         var statistics = pProductPageService.statistics;
                         let keySatesDataJSON = {
                             SharesOutstanding : [],
-                            SharesFloating : [],
-                            Employees : [],
-                            Shareholders : [],
+                            // SharesFloating : [],
+                            // Employees : [],
+                            // Shareholders : [],
                         }
                         let ratiosDataJSON = {
                             PeRatio : [],
@@ -80,7 +80,7 @@
                             Roa : [],
                             Roe : [],
                             GrossMargin : [],
-                            QuickRatio : [],
+                            // QuickRatio : [],
                             CurrentRatio : [],
                             DaRatio : [],
                             DeRatio : [],
@@ -90,15 +90,15 @@
                             if(itemObj.SharesOutstanding !== undefined && itemObj.SharesOutstanding !== null){
                                 keySatesDataJSON.SharesOutstanding.push(itemObj.SharesOutstanding);
                             }
-                            if(itemObj.SharesFloating !== undefined && itemObj.SharesFloating !== null){
-                                keySatesDataJSON.SharesFloating.push(itemObj.SharesFloating);
-                            }
-                            if(itemObj.Employees !== undefined && itemObj.Employees !== null){
-                                keySatesDataJSON.Employees.push(itemObj.Employees);
-                            }
-                            if(itemObj.Shareholders !== undefined && itemObj.Shareholders !== null){
-                                keySatesDataJSON.Shareholders.push(itemObj.Shareholders);
-                            }                            
+                            // if(itemObj.SharesFloating !== undefined && itemObj.SharesFloating !== null){
+                            //     keySatesDataJSON.SharesFloating.push(itemObj.SharesFloating);
+                            // }
+                            // if(itemObj.Employees !== undefined && itemObj.Employees !== null){
+                            //     keySatesDataJSON.Employees.push(itemObj.Employees);
+                            // }
+                            // if(itemObj.Shareholders !== undefined && itemObj.Shareholders !== null){
+                            //     keySatesDataJSON.Shareholders.push(itemObj.Shareholders);
+                            // }
                             // ratios data
                             if(itemObj.PeRatio !== undefined && itemObj.PeRatio !== null){
                                 ratiosDataJSON.PeRatio.push(itemObj.PeRatio);
@@ -115,9 +115,9 @@
                             if(itemObj.GrossMargin !== undefined && itemObj.GrossMargin !== null){
                                 ratiosDataJSON.GrossMargin.push(itemObj.GrossMargin);
                             }
-                            if(itemObj.QuickRatio !== undefined && itemObj.QuickRatio !== null){
-                                ratiosDataJSON.QuickRatio.push(itemObj.QuickRatio);
-                            }
+                            // if(itemObj.QuickRatio !== undefined && itemObj.QuickRatio !== null){
+                            //     ratiosDataJSON.QuickRatio.push(itemObj.QuickRatio);
+                            // }
                             if(itemObj.CurrentRatio !== undefined && itemObj.CurrentRatio !== null){
                                 ratiosDataJSON.CurrentRatio.push(itemObj.CurrentRatio);
                             }
@@ -181,14 +181,7 @@
                         allowDecimals: true,
                         title: {
                             text: itemObj.name
-                        },
-                        formatter: function() {
-                            if ( this.value > 1000 ) return Highcharts.numberFormat( this.value/1000, 1) + "k";
-                            return Highcharts.numberFormat(this.value,0);
-                          }         
-                        // labels: {
-                        //     format: '{value}'
-                        // }
+                        }
                     },
 
                     series: itemObj.seriesArr,
@@ -232,7 +225,7 @@
                     name: 'Earnings',
                     key: 'Earnings',
                     container: 'earning',
-                    selectedType: 'annualy',
+                    selectedType: 'annually',
                     categories: [],
                     grothTable: [],
                     seriesArr: [
@@ -261,7 +254,7 @@
                     name: 'Revenue',
                     key: 'Revenue',
                     container: 'revenue',
-                    selectedType: 'annualy',
+                    selectedType: 'annually',
                     categories: [],
                     grothTable: [],
                     seriesArr: [
@@ -290,7 +283,7 @@
                     name: 'GrossProfit Margin',
                     key: 'GrossProfitMargin',
                     container: 'grossprofit_margin',
-                    selectedType: 'annualy',
+                    selectedType: 'annually',
                     categories: [],
                     grothTable: [],
                     seriesArr: [
@@ -319,7 +312,7 @@
                     name: 'PE Ratio',
                     key: 'PeRatio',
                     container: 'pe',
-                    selectedType: 'annualy',
+                    selectedType: 'annually',
                     categories: [],
                     grothTable: [],
                     seriesArr: [
@@ -348,7 +341,7 @@
                     name: 'PEG Ratio',
                     key: 'PegRatio',
                     container: 'peg',
-                    selectedType: 'annualy',
+                    selectedType: 'annually',
                     categories: [],
                     grothTable: [],
                     seriesArr: [
@@ -377,7 +370,7 @@
                     name: 'Debt to Equity Ratio',
                     key: 'DebtToEquityRatio',
                     container: 'debt_to_equity_ratio',
-                    selectedType: 'annualy',
+                    selectedType: 'annually',
                     categories: [],
                     grothTable: [],
                     seriesArr: [
@@ -406,7 +399,7 @@
                     name: 'Z Score',
                     key: 'ZScore',
                     container: 'z_score',
-                    selectedType: 'annualy',
+                    selectedType: 'annually',
                     categories: [],
                     grothTable: [],
                     seriesArr: [
@@ -435,7 +428,7 @@
                     name: 'Dividend Yield',
                     key: 'DividendYield',
                     container: 'dividend_yield',
-                    selectedType: 'annualy',
+                    selectedType: 'annually',
                     categories: [],
                     grothTable: [],
                     seriesArr: [
@@ -493,7 +486,7 @@
                     IndustryMetricArr.forEach(function (elementObj, elementKey) {
                         var IndustryMetricObjectKeys = Object.keys(elementObj);
                         if ((IndustryMetricObjectKeys).includes(chartConfigObj.key)) {
-                            if (chartConfigObj.selectedType == 'annualy') {
+                            if (chartConfigObj.selectedType == 'annually') {
                                 chartConfigObj.categories.push(moment(IndustryMetricArr[elementKey].StatementDate).format("YYYY"));
                             }
                             if (chartConfigObj.selectedType == 'quarter') {
@@ -594,7 +587,7 @@
             tool.initialize(function () {
                 tool.setVmProperties({
                     // temp
-                    selectedTableType: "annualy",
+                    selectedTableType: "annually",
                     selectedTable: "income",
                     setSelectedTableType: setSelectedTableType,
                     setSelectedTable: setSelectedTable,
@@ -610,7 +603,7 @@
 
                     var productDetail = pProductPageService.productDetail;
                     vm.productDetail = productDetail;
-                    pProductPageService.getFundamentalPageMetrics('annualy').then(function () {
+                    pProductPageService.getFundamentalPageMetrics('annually').then(function () {
                         var fundamentalPageMetrics = pProductPageService.fundamentalPageMetrics;                        
                         barChartsArr.filter(function (chartConfigObj) {
                             var IndustryMetricArr = fundamentalPageMetrics.IndustryMetric;
@@ -630,7 +623,11 @@
                                 if ((IndustryMetricObjectKeys).includes(chartConfigObj.key)) {
                                     chartConfigObj.categories.push(moment(IndustryMetricArr[elementKey].StatementDate).format("YYYY"));
                                     chartConfigObj.seriesArr[0].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
-                                    chartConfigObj.seriesArr[1].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
+                                    if(chartConfigObj.key == 'GrossProfitMargin'){
+                                        chartConfigObj.seriesArr[1].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]+"%");
+                                    } else {
+                                        chartConfigObj.seriesArr[1].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
+                                    }
                                     chartConfigObj.seriesArr[2].data.push(MetricArr[elementKey][chartConfigObj.key]);
                                     chartConfigObj.seriesArr[3].data.push(MetricArr[elementKey][chartConfigObj.key]);
                                 }

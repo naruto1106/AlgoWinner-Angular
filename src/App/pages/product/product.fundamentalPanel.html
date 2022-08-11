@@ -7,8 +7,8 @@
                 <div class="row">
                     <div class="col-100" style="float: right;">
                         <div>
-                            <button ng-class="{'mini-filled-blue': barChartObj.selectedType === 'annualy', 'mini-hollow-blue': barChartObj.selectedType !== 'annualy'}" style="margin-right: 5px" ng-click="vm.setSelectedType($index, 'annualy')" class="mini-filled-blue">
-                                Annualy
+                            <button ng-class="{'mini-filled-blue': barChartObj.selectedType === 'annually', 'mini-hollow-blue': barChartObj.selectedType !== 'annually'}" style="margin-right: 5px" ng-click="vm.setSelectedType($index, 'annually')" class="mini-filled-blue">
+                                Annually
                             </button>
                             <button ng-class="{'mini-filled-blue': barChartObj.selectedType == 'quarter', 'mini-hollow-blue': barChartObj.selectedType !== 'quarter'}" style="margin-right: 5px" ng-click="vm.setSelectedType($index, 'quarter')" class="mini-hollow-blue">
                                 Quarterly
@@ -52,9 +52,9 @@
         </div>
         <div style="width: 50%; float: right; text-align: right;">
             <button
-                ng-class="{'mini-filled-blue': vm.selectedTableType === 'annualy', 'mini-hollow-blue': vm.selectedTableType != 'annualy'}"
-                style="margin-right: 5px" ng-click="vm.setSelectedTableType('annualy')">
-                Annualy
+                ng-class="{'mini-filled-blue': vm.selectedTableType === 'annually', 'mini-hollow-blue': vm.selectedTableType != 'annually'}"
+                style="margin-right: 5px" ng-click="vm.setSelectedTableType('annually')">
+                Annually
             </button>
             <button
                 ng-class="{'mini-filled-blue': vm.selectedTableType === 'quarterly', 'mini-hollow-blue': vm.selectedTableType != 'quarterly'}"

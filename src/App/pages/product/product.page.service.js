@@ -52,7 +52,7 @@
         
         function getFundamentalPageMetrics(type) {
             var fundamentalPageMetricsType = '';
-            if(type == 'annualy'){
+            if(type == 'annually'){
                 fundamentalPageMetricsType = dep.sProductService.GetFundamentalAnnualPageMetrics;
             }
             if(type == 'quarter'){
@@ -70,7 +70,7 @@
         
         function getIncomeStatement(type) {
             var statementType = '';
-            if(type == 'annualy'){
+            if(type == 'annually'){
                 statementType = dep.sProductService.GetAnnualIncomeStatement;
             }
             if(type == 'quarterly'){
@@ -88,7 +88,7 @@
         
         function getBalanceSheet(type) {
             var balanceSheetType = '';
-            if(type == 'annualy'){
+            if(type == 'annually'){
                 balanceSheetType = dep.sProductService.GetAnnualBalanceSheet;
             }
             if(type == 'quarterly'){
@@ -106,7 +106,7 @@
         
         function getCashFlow(type) {
             var cashFlowType = '';
-            if(type == 'annualy'){
+            if(type == 'annually'){
                 cashFlowType = dep.sProductService.GetAnnualCashFlow;
             }
             if(type == 'quarterly'){
@@ -124,7 +124,7 @@
         
         function getStatistics(type) {
             var statisticsType = '';
-            if(type == 'annualy'){
+            if(type == 'annually'){
                 statisticsType = dep.sProductService.GetAnnualStatistics;
             }
             if(type == 'quarterly'){
