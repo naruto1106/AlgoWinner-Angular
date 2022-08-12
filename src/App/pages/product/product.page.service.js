@@ -49,6 +49,17 @@
                 serviceObj.isLoading = false;
             });
         }
+        
+        function getRetailActivity(period) {
+            return dep.sProductService.GetRetailActivity(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc, period).then(function (res) {                                
+                serviceObj.retailActivity = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+        }
 
         function getAnalystTargetPrice() {
             return dep.sProductService.GetAnalystTargetPrice(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
@@ -337,6 +348,8 @@
                 Past1WeekVolume: 0,
                 Is1WeekBreakout: false
             },
+            getRetailActivity: getRetailActivity,
+            retailActivity: {},
             getAnalystTargetPrice: getAnalystTargetPrice,
             analystTargetPrice: {
                 AnalystTargetPrice: 0,

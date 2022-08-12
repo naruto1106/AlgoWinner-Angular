@@ -21,8 +21,7 @@
                     pProductPageService.getIncomeStatement(vm.selectedTableType).then(function () {
                         var incomeStatement = pProductPageService.incomeStatement;                        
                         var incomeStatementTableHeadings = incomeStatement.map(function (itemObj, itemKey) {
-                            itemKey = itemKey + 1;
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+itemKey : '') : 'TTM';
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+(moment(itemObj.StatementDate).format("MM")/3) : '') : 'TTM';
                         });
                         var incomeStatementTableName = Object.keys(incomeStatement[0]);
                         var incomeStatements = incomeStatement;
@@ -37,8 +36,7 @@
                     pProductPageService.getBalanceSheet(vm.selectedTableType).then(function () {
                         var balanceSheet = pProductPageService.balanceSheet;
                         var balanceSheetTableHeadings = balanceSheet.map(function (itemObj, itemKey) {
-                            itemKey = itemKey + 1;
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+itemKey : '') : '';
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+(moment(itemObj.StatementDate).format("MM")/3) : '') : '';
                         });
                         var balanceSheetTableName = Object.keys(balanceSheet[0]);
                         var balanceSheets = balanceSheet;
@@ -53,8 +51,7 @@
                     pProductPageService.getCashFlow(vm.selectedTableType).then(function () {
                         var cashFlow = pProductPageService.cashFlow;
                         var cashFlowTableHeadings = cashFlow.map(function (itemObj, itemKey) {
-                            itemKey = itemKey + 1;
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+itemKey : '') : 'TTM';
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+(moment(itemObj.StatementDate).format("MM")/3) : '') : 'TTM';
                         });
                         var cashFlowTableName = Object.keys(cashFlow[0]);
                         var cashFlows = cashFlow;
@@ -127,8 +124,7 @@
                             if(itemObj.DeRatio !== undefined && itemObj.DeRatio !== null){
                                 ratiosDataJSON.DeRatio.push(itemObj.DeRatio);
                             }
-                            itemKey = itemKey + 1;
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+itemKey : '') : 'Current';
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+(moment(itemObj.StatementDate).format("MM")/3) : '') : 'Current';
                         });
                         var statisticsTableName = Object.keys(statistics[0]);
                         var allStatisticsData = {

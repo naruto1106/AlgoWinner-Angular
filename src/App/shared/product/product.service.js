@@ -3,7 +3,8 @@
         var marketInfoPath = '/marketinfoapi/v1/ProductDetail';
         var marketInfoTickPath = '/marketinfoapi/v1/TickSize';
         var productPath = '/productapi/v1/Product';
-        var ratingLatestAnalystPath = '/ratingapi/v1/Rating';
+        var ratingPath = '/ratingapi/v1/Rating';
+        var retailActivityPath = '/ratingapi/v1/RetailActivity';
         var newsPath = '/newsapi/v1/News';
         var targetPricePath = '/ratingapi/v1/TargetPrice';
         var fundamentalPath = '/fundamentalapi/v1/Fundamental';
@@ -81,7 +82,7 @@
             goToProduct: goToProduct,            
             updateProductTickSizeValueIfBelongToGroup: updateProductTickSizeValueIfBelongToGroup,
 
-            GetLatestAnalystRating: coreServerCommunicationService.genGetFunctionWithNVar(ratingLatestAnalystPath + '/GetLatestAnalystRating', function (args) {
+            GetLatestAnalystRating: coreServerCommunicationService.genGetFunctionWithNVar(ratingPath + '/GetLatestAnalystRating', function (args) {
                 return {
                     productId: args[0],
                     venue: translateTradeVenueToName(args[1]),
@@ -92,6 +93,14 @@
                 return {
                     productId: args[0],
                     market: args[1],
+                };
+            }),
+            
+            GetRetailActivity: coreServerCommunicationService.genGetFunctionWithNVar(retailActivityPath + '/GetActivity', function (args) {
+                return {
+                    productId: args[0],
+                    venue: translateTradeVenueToName(args[1]),
+                    period: args[2],
                 };
             }),
             
