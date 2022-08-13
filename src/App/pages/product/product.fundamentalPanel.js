@@ -457,8 +457,8 @@
                 setFundamentalChartValues(selectedChartObj);
             }
 
-            function setFundamentalChartValues(chartConfigObj) {                
-                pProductPageService.getFundamentalPageMetrics(chartConfigObj.selectedType).then(function () {
+            function setFundamentalChartValues(chartConfigObj) {
+                pProductPageService.getFundamentalPageMetrics(chartConfigObj.selectedType).then(function (){
                     var fundamentalPageMetricsResp = pProductPageService.fundamentalPageMetrics;
                     var IndustryMetricArr = fundamentalPageMetricsResp.IndustryMetric;
                     var MetricArr = fundamentalPageMetricsResp.Metric;
@@ -467,18 +467,65 @@
                     chartConfigObj.seriesArr[2].data = [];
                     chartConfigObj.seriesArr[3].data = [];
                     chartConfigObj.categories = [];
-                    chartConfigObj.grothTable = [
-                        '1 year Growth 10% (Average 5%)',
-                        '3 years Growth 20% (Average 10%)',
-                        '5 years Growth 50% (Average 20%)'
-                    ];
-                    if (chartConfigObj.selectedType == 'quarter') {
-                        chartConfigObj.grothTable = [
-                            '1 quarter Growth 10% (Average 5%)',
-                            '3 quarter Growth 20% (Average 10%)',
-                            '5 quarter Growth 50% (Average 20%)'
-                        ];
+
+                    var firstYearGrowth = 0;
+                    var secondYearGrowth = 0;
+                    var thirdYearGrowth = 0;
+                    var forthYearGrowth = 0;
+                    var fifthYearGrowth = 0;
+                    
+                    var is1Year = false;
+                    var is3Year = false;
+                    var is5Year = false;
+                    
+                    if(MetricArr[MetricArr.length - 2] !== undefined && MetricArr[MetricArr.length - 2] !== null && MetricArr[MetricArr.length - 2] !== ''){
+                        firstYearGrowth = (MetricArr[MetricArr.length - 1][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 2][chartConfigObj.key]) - 100;
+                        is1Year = true;
                     }
+                    if(MetricArr[MetricArr.length - 3] !== undefined && MetricArr[MetricArr.length - 3] !== null && MetricArr[MetricArr.length - 3] !== ''){
+                        secondYearGrowth = (MetricArr[MetricArr.length - 2][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 3][chartConfigObj.key]) - 100;
+                    }
+                    if(MetricArr[MetricArr.length - 4] !== undefined && MetricArr[MetricArr.length - 4] !== null && MetricArr[MetricArr.length - 4] !== ''){
+                        thirdYearGrowth = (MetricArr[MetricArr.length - 1][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 4][chartConfigObj.key]) - 100;
+                        is3Year = true;
+                    }
+                    if(MetricArr[MetricArr.length - 5] !== undefined && MetricArr[MetricArr.length - 5] !== null && MetricArr[MetricArr.length - 5] !== ''){
+                        forthYearGrowth = (MetricArr[MetricArr.length - 4][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 5][chartConfigObj.key]) - 100;
+                    }
+                    if(MetricArr[MetricArr.length - 6] !== undefined && MetricArr[MetricArr.length - 6] !== null && MetricArr[MetricArr.length - 6] !== ''){
+                        fifthYearGrowth = (MetricArr[MetricArr.length - 1][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 6][chartConfigObj.key]) - 100;
+                        is5Year = true;
+                    }
+                    
+                    var oneYearGrowth = firstYearGrowth;
+                    var threeYearGrowth = thirdYearGrowth;
+                    var fiveYearGrowth = fifthYearGrowth;
+
+                    var oneYearAvg = firstYearGrowth + secondYearGrowth;
+                    var threeYearAvg = 0;
+                    var fiveYearAvg = 0;
+
+                    var display1Year = '1 year Growth '+(oneYearGrowth).toFixed(0)+'% (Average '+(oneYearAvg / 2).toFixed(0)+'%)';
+                    var display3Year = '3 years Growth '+(threeYearGrowth).toFixed(0)+'% (Average '+(threeYearAvg / 3).toFixed(0)+'%)';
+                    var display5Year = '5 years Growth '+(fiveYearGrowth).toFixed(0)+'% (Average '+(fiveYearAvg / 5).toFixed(0)+'%)';
+
+                    if (chartConfigObj.selectedType == 'quarter') {
+                        display1Year = '1 quarter Growth '+(oneYearGrowth).toFixed(0)+'% (Average '+(oneYearAvg / 2).toFixed(0)+'%)';
+                        display3Year = '3 quarter Growth '+(threeYearGrowth).toFixed(0)+'% (Average '+(threeYearAvg / 3).toFixed(0)+'%)';
+                        display5Year = '5 quarter Growth '+(fiveYearGrowth).toFixed(0)+'% (Average '+(fiveYearAvg / 5).toFixed(0)+'%)';
+                    }
+                    
+                    chartConfigObj.grothTable = [];
+                    if(is1Year){
+                        chartConfigObj.grothTable.push(display1Year);
+                    }
+                    if(is3Year){
+                        chartConfigObj.grothTable.push(display3Year);
+                    }
+                    if(is5Year){
+                        chartConfigObj.grothTable.push(display5Year);
+                    }
+
                     IndustryMetricArr.forEach(function (elementObj, elementKey) {
                         var IndustryMetricObjectKeys = Object.keys(elementObj);
                         if ((IndustryMetricObjectKeys).includes(chartConfigObj.key)) {
@@ -488,10 +535,10 @@
                             if (chartConfigObj.selectedType == 'quarter') {
                                 chartConfigObj.categories.push(moment(IndustryMetricArr[elementKey].StatementDate).format("YYYY-MMM"));
                             }
-                            chartConfigObj.seriesArr[0].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
-                            chartConfigObj.seriesArr[1].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
-                            chartConfigObj.seriesArr[2].data.push(MetricArr[elementKey][chartConfigObj.key]);
-                            chartConfigObj.seriesArr[3].data.push(MetricArr[elementKey][chartConfigObj.key]);
+                            chartConfigObj.seriesArr[0].data.push(MetricArr[elementKey][chartConfigObj.key]);
+                            chartConfigObj.seriesArr[1].data.push(MetricArr[elementKey][chartConfigObj.key]);
+                            chartConfigObj.seriesArr[2].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
+                            chartConfigObj.seriesArr[3].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
                         }
                     });
                     setChart(chartConfigObj);
@@ -595,12 +642,12 @@
                     annualIncomeStatements: []
                 });
 
-                pProductPageService.waitTillProductDetailLoaded().then(function () {
+                pProductPageService.waitTillProductDetailLoaded().then(function (){
 
                     var productDetail = pProductPageService.productDetail;
                     vm.productDetail = productDetail;
                     pProductPageService.getFundamentalPageMetrics('annually').then(function () {
-                        var fundamentalPageMetrics = pProductPageService.fundamentalPageMetrics;                        
+                        var fundamentalPageMetrics = pProductPageService.fundamentalPageMetrics;
                         barChartsArr.filter(function (chartConfigObj) {
                             var IndustryMetricArr = fundamentalPageMetrics.IndustryMetric;
                             var MetricArr = fundamentalPageMetrics.Metric;
@@ -609,26 +656,73 @@
                             chartConfigObj.seriesArr[2].data = [];
                             chartConfigObj.seriesArr[3].data = [];
                             chartConfigObj.categories = [];
-                            chartConfigObj.grothTable = [
-                                '1 year Growth 10% (Average 5%)',
-                                '3 years Growth 20% (Average 10%)',
-                                '5 years Growth 50% (Average 20%)'
-                            ];
+
+                            var firstYearGrowth = 0;
+                            var secondYearGrowth = 0;
+                            var thirdYearGrowth = 0;
+                            var forthYearGrowth = 0;
+                            var fifthYearGrowth = 0;
+                            
+                            var is1Year = false;
+                            var is3Year = false;
+                            var is5Year = false;
+                            
+                            if(MetricArr[MetricArr.length - 2] !== undefined && MetricArr[MetricArr.length - 2] !== null && MetricArr[MetricArr.length - 2] !== ''){
+                                firstYearGrowth = (MetricArr[MetricArr.length - 1][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 2][chartConfigObj.key]) - 100;
+                                is1Year = true;
+                            }
+                            if(MetricArr[MetricArr.length - 3] !== undefined && MetricArr[MetricArr.length - 3] !== null && MetricArr[MetricArr.length - 3] !== ''){
+                                secondYearGrowth = (MetricArr[MetricArr.length - 2][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 3][chartConfigObj.key]) - 100;
+                            }
+                            if(MetricArr[MetricArr.length - 4] !== undefined && MetricArr[MetricArr.length - 4] !== null && MetricArr[MetricArr.length - 4] !== ''){
+                                thirdYearGrowth = (MetricArr[MetricArr.length - 1][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 4][chartConfigObj.key]) - 100;
+                                is3Year = true;
+                            }
+                            if(MetricArr[MetricArr.length - 5] !== undefined && MetricArr[MetricArr.length - 5] !== null && MetricArr[MetricArr.length - 5] !== ''){
+                                forthYearGrowth = (MetricArr[MetricArr.length - 4][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 5][chartConfigObj.key]) - 100;
+                            }
+                            if(MetricArr[MetricArr.length - 6] !== undefined && MetricArr[MetricArr.length - 6] !== null && MetricArr[MetricArr.length - 6] !== ''){
+                                fifthYearGrowth = (MetricArr[MetricArr.length - 1][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 6][chartConfigObj.key]) - 100;
+                                is5Year = true;
+                            }
+                            
+                            var oneYearGrowth = firstYearGrowth;
+                            var threeYearGrowth = thirdYearGrowth;
+                            var fiveYearGrowth = fifthYearGrowth;
+
+                            var oneYearAvg = firstYearGrowth + secondYearGrowth;
+                            var threeYearAvg = 0;
+                            var fiveYearAvg = 0;
+
+                            var display1Year = '1 year Growth '+(oneYearGrowth).toFixed(0)+'% (Average '+(oneYearAvg / 2).toFixed(0)+'%)';
+                            var display3Year = '3 years Growth '+(threeYearGrowth).toFixed(0)+'% (Average '+(threeYearAvg / 3).toFixed(0)+'%)';
+                            var display5Year = '5 years Growth '+(fiveYearGrowth).toFixed(0)+'% (Average '+(fiveYearAvg / 5).toFixed(0)+'%)';
+                            
+                            chartConfigObj.grothTable = [];
+                            if(is1Year){
+                                chartConfigObj.grothTable.push(display1Year);
+                            }
+                            if(is3Year){
+                                chartConfigObj.grothTable.push(display3Year);
+                            }
+                            if(is5Year){
+                                chartConfigObj.grothTable.push(display5Year);
+                            }
+
                             IndustryMetricArr.forEach(function (elementObj, elementKey) {
                                 var IndustryMetricObjectKeys = Object.keys(elementObj);
-                                if ((IndustryMetricObjectKeys).includes(chartConfigObj.key)) {
+                                if ((IndustryMetricObjectKeys).includes(chartConfigObj.key)) {                                    
                                     chartConfigObj.categories.push(moment(IndustryMetricArr[elementKey].StatementDate).format("YYYY"));
-                                    chartConfigObj.seriesArr[0].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
+                                    chartConfigObj.seriesArr[0].data.push(MetricArr[elementKey][chartConfigObj.key]);
                                     if(chartConfigObj.key == 'GrossProfitMargin'){
-                                        chartConfigObj.seriesArr[1].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]+"%");
+                                        chartConfigObj.seriesArr[1].data.push(MetricArr[elementKey][chartConfigObj.key]+"%");
                                     } else {
-                                        chartConfigObj.seriesArr[1].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
+                                        chartConfigObj.seriesArr[1].data.push(MetricArr[elementKey][chartConfigObj.key]);
                                     }
-                                    chartConfigObj.seriesArr[2].data.push(MetricArr[elementKey][chartConfigObj.key]);
-                                    chartConfigObj.seriesArr[3].data.push(MetricArr[elementKey][chartConfigObj.key]);
+                                    chartConfigObj.seriesArr[2].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
+                                    chartConfigObj.seriesArr[3].data.push(IndustryMetricArr[elementKey][chartConfigObj.key]);
                                 }
                             });
-                            //console.log("chartConfigObj: ", chartConfigObj);
                             setChart(chartConfigObj);
                         });
                     });
