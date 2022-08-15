@@ -478,22 +478,22 @@
                     var is3Year = false;
                     var is5Year = false;
                     
-                    if(MetricArr[MetricArr.length - 2] !== undefined && MetricArr[MetricArr.length - 2] !== null && MetricArr[MetricArr.length - 2] !== ''){
-                        firstYearGrowth = (MetricArr[MetricArr.length - 1][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 2][chartConfigObj.key]) - 100;
+                    if(IndustryMetricArr[IndustryMetricArr.length - 2] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 2] !== null && IndustryMetricArr[IndustryMetricArr.length - 2] !== ''){
+                        firstYearGrowth = (IndustryMetricArr[IndustryMetricArr.length - 1][chartConfigObj.key] * 100) / (IndustryMetricArr[IndustryMetricArr.length - 2][chartConfigObj.key]) - 100;
                         is1Year = true;
                     }
-                    if(MetricArr[MetricArr.length - 3] !== undefined && MetricArr[MetricArr.length - 3] !== null && MetricArr[MetricArr.length - 3] !== ''){
-                        secondYearGrowth = (MetricArr[MetricArr.length - 2][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 3][chartConfigObj.key]) - 100;
+                    if(IndustryMetricArr[IndustryMetricArr.length - 3] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 3] !== null && IndustryMetricArr[IndustryMetricArr.length - 3] !== ''){
+                        secondYearGrowth = (IndustryMetricArr[IndustryMetricArr.length - 2][chartConfigObj.key] * 100) / (IndustryMetricArr[IndustryMetricArr.length - 3][chartConfigObj.key]) - 100;
                     }
-                    if(MetricArr[MetricArr.length - 4] !== undefined && MetricArr[MetricArr.length - 4] !== null && MetricArr[MetricArr.length - 4] !== ''){
-                        thirdYearGrowth = (MetricArr[MetricArr.length - 1][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 4][chartConfigObj.key]) - 100;
+                    if(IndustryMetricArr[IndustryMetricArr.length - 4] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 4] !== null && IndustryMetricArr[IndustryMetricArr.length - 4] !== ''){
+                        thirdYearGrowth = (IndustryMetricArr[IndustryMetricArr.length - 1][chartConfigObj.key] * 100) / (IndustryMetricArr[IndustryMetricArr.length - 4][chartConfigObj.key]) - 100;
                         is3Year = true;
                     }
-                    if(MetricArr[MetricArr.length - 5] !== undefined && MetricArr[MetricArr.length - 5] !== null && MetricArr[MetricArr.length - 5] !== ''){
-                        forthYearGrowth = (MetricArr[MetricArr.length - 4][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 5][chartConfigObj.key]) - 100;
+                    if(IndustryMetricArr[IndustryMetricArr.length - 5] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 5] !== null && IndustryMetricArr[IndustryMetricArr.length - 5] !== ''){
+                        forthYearGrowth = (IndustryMetricArr[IndustryMetricArr.length - 4][chartConfigObj.key] * 100) / (IndustryMetricArr[IndustryMetricArr.length - 5][chartConfigObj.key]) - 100;
                     }
-                    if(MetricArr[MetricArr.length - 6] !== undefined && MetricArr[MetricArr.length - 6] !== null && MetricArr[MetricArr.length - 6] !== ''){
-                        fifthYearGrowth = (MetricArr[MetricArr.length - 1][chartConfigObj.key] * 100) / (MetricArr[MetricArr.length - 6][chartConfigObj.key]) - 100;
+                    if(IndustryMetricArr[IndustryMetricArr.length - 6] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 6] !== null && IndustryMetricArr[IndustryMetricArr.length - 6] !== ''){
+                        fifthYearGrowth = (IndustryMetricArr[IndustryMetricArr.length - 1][chartConfigObj.key] * 100) / (IndustryMetricArr[IndustryMetricArr.length - 6][chartConfigObj.key]) - 100;
                         is5Year = true;
                     }
                     
@@ -502,18 +502,12 @@
                     var fiveYearGrowth = fifthYearGrowth;
 
                     var oneYearAvg = firstYearGrowth + secondYearGrowth;
-                    var threeYearAvg = 0;
-                    var fiveYearAvg = 0;
+                    var threeYearAvg = firstYearGrowth - thirdYearGrowth / thirdYearGrowth;
+                    var fiveYearAvg = firstYearGrowth - fifthYearGrowth / fifthYearGrowth;
 
                     var display1Year = '1 year Growth '+(oneYearGrowth).toFixed(0)+'% (Average '+(oneYearAvg / 2).toFixed(0)+'%)';
                     var display3Year = '3 years Growth '+(threeYearGrowth).toFixed(0)+'% (Average '+(threeYearAvg / 3).toFixed(0)+'%)';
                     var display5Year = '5 years Growth '+(fiveYearGrowth).toFixed(0)+'% (Average '+(fiveYearAvg / 5).toFixed(0)+'%)';
-
-                    if (chartConfigObj.selectedType == 'quarter') {
-                        display1Year = '1 quarter Growth '+(oneYearGrowth).toFixed(0)+'% (Average '+(oneYearAvg / 2).toFixed(0)+'%)';
-                        display3Year = '3 quarter Growth '+(threeYearGrowth).toFixed(0)+'% (Average '+(threeYearAvg / 3).toFixed(0)+'%)';
-                        display5Year = '5 quarter Growth '+(fiveYearGrowth).toFixed(0)+'% (Average '+(fiveYearAvg / 5).toFixed(0)+'%)';
-                    }
                     
                     chartConfigObj.grothTable = [];
                     if(is1Year){
