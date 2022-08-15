@@ -213,7 +213,7 @@
                         }]
                     }
                 });
-                //chart.setSize(null);                  
+                chart.setSize(null, 400);
             }
 
             var barChartsArr = [
