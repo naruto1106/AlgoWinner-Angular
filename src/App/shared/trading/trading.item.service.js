@@ -23,67 +23,10 @@
             quantityLiquidatedChartValues: [],
             groupedPositions: [],
             capitalSummary: {},
-            resolveHoldingSummary: resolveHoldingSummary,
             populateSectorDirective: populateSectorDirective,
             populatePositionDirective: populatePositionDirective
         });
-
-        function resolveHoldingSummary(positions, isPreview) {
-            if (positions) {
-                var totalLong = 0;
-                var totalShort = 0;
-
-                if (isPreview) {
-                    positions.forEach(function (position) {
-                        var idx = position.Orders.length - 1;
-                        if (position.Orders[idx].Intention !== "Full Exit") {
-                            if (position.PositionType === 'Long') {
-                                totalLong++;
-                            }
-                            if (position.PositionType === 'Short') {
-                                totalShort++;
-                            }
-                        }
-                        position.PreviewExposure = position.Exposure_Percent;
-                    });
-                } else {
-                    positions.forEach(function (position) {
-                        if (position.QuantityOnHold > 0) {
-                            if (position.PositionType === 'Long') {
-                                totalLong++;
-                            }
-                            if (position.PositionType === 'Short') {
-                                totalShort++;
-                            }
-                        }
-                    });
-                }
-                return {
-                    totalLong: totalLong,
-                    totalShort: totalShort
-                }
-
-            }
-        };
-
-        function isActive(position) {
-            if (position.QuantityOnHold != null) {
-                return position.QuantityOnHold !== 0;
-            } else {
-                var lastOrder = position.Orders[position.Orders.length - 1];
-                return (lastOrder && lastOrder.Intention !== 'Full Exit');
-            }
-        }
-
-        function isHistorical(position) {
-            if (position.QuantityLiquidated != null) {
-                return position.QuantityLiquidated !== 0;
-            } else {
-                var lastOrder = position.Orders[position.Orders.length - 1];
-                return (lastOrder && lastOrder.Intention === 'Full Exit');
-            }
-        }
-
+        
         function populateSectorDirective(sectorCapitalsSource) {
             commonColorGeneratorService.generateColorsByReference(serviceObj.sectorCapitalDonutColors, sectorCapitalsSource.length);
             serviceObj.sectorCapitals.splice(0, serviceObj.sectorCapitals.length);
