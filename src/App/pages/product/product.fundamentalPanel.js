@@ -17,9 +17,9 @@
             }
 
             function setTableValue(table) {
-                if (table === 'income') {                    
+                if (table === 'income') {
                     pProductPageService.getIncomeStatement(vm.selectedTableType).then(function () {
-                        var incomeStatement = pProductPageService.incomeStatement;                        
+                        var incomeStatement = pProductPageService.incomeStatement;
                         var incomeStatementTableHeadings = incomeStatement.map(function (itemObj, itemKey) {
                             return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+(moment(itemObj.StatementDate).format("MM")/3) : '') : 'TTM';
                         });

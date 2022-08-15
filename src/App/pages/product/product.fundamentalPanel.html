@@ -73,10 +73,12 @@
             </thead>
             <tbody>
                 <tr ng-repeat="incomeStatementTableName in vm.incomeStatementTableData.name">
-                    <td ng-if="incomeStatementTableName !== 'StatementDate'">{{vm.getFullNameFromKey(incomeStatementTableName)}}</td>
-                    <td ng-if="incomeStatementTableName !== 'StatementDate'" ng-repeat="incomeStatementTableData in vm.incomeStatementTableData.data">
+                    <td ng-if="incomeStatementTableName !== 'StatementDate'">{{vm.getFullNameFromKey(incomeStatementTableName)}}</td>                    
+                    <td ng-if="incomeStatementTableName !== 'StatementDate'" ng-repeat="incomeStatementTableData in vm.incomeStatementTableData.data track by $index">
                         <div>{{incomeStatementTableData[incomeStatementTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="incomeStatementTableData.StatementDate !== null" class="green-profit">+6.70%</div>
+                        <div ng-if="incomeStatementTableData.StatementDate !== null && $index !== 0" ng-class="{'green-profit' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) <= 0}">
+                            {{((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2)}}%
+                        </div>
                     </td>
                 </tr>
             </tbody>
