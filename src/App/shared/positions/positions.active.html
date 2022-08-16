@@ -40,15 +40,8 @@
                     <div class="border row-md-10">
                         <div class="col-md-3 p-20px box" style="min-height: 400px">
                             <agms-positions-sector-summary-developer is-loading-positions="vm.isLoadingPositions"
-                                ng-if="vm.activeDisplayKind === 'Developer'"
                                 show-turnover="false"
                                 currency="vm.currency"></agms-positions-sector-summary-developer>
-
-                            <agms-positions-sector-summary-signal is-loading-positions="vm.isLoadingPositions"
-                                ng-if="vm.activeDisplayKind === 'Signal'"
-                                is-preview="false"
-                                show-turnover="false"
-                                currency="vm.currency"></agms-positions-sector-summary-signal>
                         </div>
                         <div class="col-md-7 p-20px">
                             <div ng-if="vm.quantityOnHoldChartValues" class="col-md-6 p-bottom-20px text-center">

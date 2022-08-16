@@ -1,12 +1,11 @@
 ﻿agmNgModuleWrapper('agms.positions')
     .defineController("DeveloperPositionSummaryController",
-        ['sTradingItemService', 'sProductService', 'coreConfigService', 'orderByFilter'],
+        ['sTradingItemService', 'sProductService', 'orderByFilter'],
         function (vm, dep, tool) {
             // --- DEPENDENCY RESOLVER
             var orderByFilter = dep.orderByFilter,
                 sTradingItemService = dep.sTradingItemService,
-                sProductService = dep.sProductService,
-                coreConfigService = dep.coreConfigService;
+                sProductService = dep.sProductService;
 
             // --- LOCAL VAR DECLARATION
             var filteredItems = [];
@@ -29,21 +28,11 @@
             };
 
             // --- LOCAL SERVICE FUNC 
-            function filterByProduct(position) {
-                var keyword = vm.models.searchStockText;
-                if (!keyword) {
-                    return true;
-                }
-
-                keyword = keyword.toLowerCase();
-                return position.Product.ProductName.toLowerCase().indexOf(keyword) > -1 ||
-                    position.Product.Symbol.toLowerCase().indexOf(keyword) > -1;
-            }
-
             function handlePortfolioUpdated() {
                 vm.positions = sTradingItemService.activePositions;
 
-                filteredItems = orderByFilter(vm.positions.filter(filterByProduct), '-LastExitTime');
+                filteredItems = orderByFilter(vm.positions, '-LastExitTime');
+                filteredItems = filteredItems.filter(function(x) { return x.QuantityOnHold > 0; });
                 sTradingItemService.populatePositionDirective();
 
                 sortPositions(vm.models.overviewSorting);
@@ -59,15 +48,7 @@
             function showPagination() {
                 return vm.models.numPages > 1;
             }
-
-            function showExposurePagination() {
-                return vm.exposureModels.numPages > 1;
-            }
-
-            function setDefaultSortReverse() {
-                vm.sortReverse = [{ "Product": false }, { "Allocated Exposure": false }, { "Margin Used": false }, { "Unrealized P/L (%)": false }, { "Position": false }, { "Holding Duration": false }];
-            }
-
+            
             function sortPositions(sortingType) {
                 vm.models.overviewSorting = sortingType;
                 if (filteredItems.length > 0) {
@@ -146,23 +127,11 @@
             function getPagedItems() {
                 return _.take(_.drop(filteredItems, (vm.models.currentPage - 1) * vm.itemsPerPage), vm.itemsPerPage);
             }
-
-            function getExposurePagedItems() {
-                return _.take(_.drop(filteredItems, (vm.exposureModels.currentPage - 1) * vm.itemsPerPage), vm.itemsPerPage);
-            }
-
+            
             function getTotalItems() {
                 return filteredItems.length;
             }
-
-            function hasPositions() {
-                return getTotalItems() > 0;
-            }
-
-            function hasPositionsWithFilter(positions, filter) {
-                return _.any(positions, filter);
-            }
-
+            
             // --- EVENT HANDLERS
             function processBracketOrder(data) {
                 if (data.ParentPortfolioId != null) {
@@ -210,64 +179,33 @@
 
             tool.initialize(function () {
                 tool.setVmProperties({
-                    activeDisplayKind: 'Developer',
                     category: "Trade",
                     event: "Orders",
                     noPositionMessage: "You have no position to display",
                     noPositionMessageForGroupStrategy: "No position to display",
-                    levelOfDetail: 'Premium',
-                    copyPosition: null,
-                    activePositions: sTradingItemService.activePositions,
                     increasePosition: increasePosition,
                     decreasePosition: decreasePosition,
                     marker: "open",
                     positionFilter: isActive,
-                    coreConfigService: coreConfigService,
-                    positionChartColors: sTradingItemService.activePositionChartColors,
-                    quantityOnHoldChartValues: sTradingItemService.quantityOnHoldChartValues,
-                    exposureChartValues: sTradingItemService.exposureChartValues,
                     positions: sTradingItemService.positions,
-                    currentStrategy: sTradingItemService.currentStrategy,
-                    holdingSummary: sTradingItemService.holdingSummary,
-                    hasPositionsWithFilter: hasPositionsWithFilter,
-                    hasPositions: hasPositions,
                     handlePortfolioUpdated: handlePortfolioUpdated,
                     models: {
                         currentPage: 1,
                         numPages: 0,
-                        searchStockText: "",
                         overviewSorting: "Holding Duration"
                     },
                     sortReverse: [{ "Product": false }, { "Allocated Exposure": false }, { "Margin Used": false }, { "Unrealized P/L (%)": false }, { "Position": false }, { "Holding Duration": false }],
-                    exposureModels: {
-                        currentPage: 1,
-                        numPages: 0
-                    },
-
                     itemsPerPage: 10,
                     getTotalItems: getTotalItems,
                     getPagedItems: getPagedItems,
                     showPagination: showPagination,
-                    showExposurePagination: showExposurePagination,
-                    getExposurePagedItems: getExposurePagedItems,
-                    sortPositions: sortPositions,
-                    setDefaultSortReverse: setDefaultSortReverse,
                     goToProduct: sProductService.goToProduct
                 });
 
                 tool.signalRNotification('DeveloperOrderCreated', processBracketOrder);
                 tool.signalRNotification('DeveloperOrderUpdated', processBracketOrder);
                 tool.signalRNotification('DeveloperOrderMarkedForCancellation', processBracketOrder);
-
-                tool.watch('vm.models.searchStockText', function () {
-                    vm.models.currentPage = 1;
-                    vm.handlePortfolioUpdated();
-                });
-
-                tool.watch('vm.models.overviewSorting', function () {
-                    sortPositions(vm.models.overviewSorting);
-                });
-
+                
                 tool.eventToObservable('portfolioCleared')
                     .subscribe(function (evt) {
                         tool.evalAsync(function () {

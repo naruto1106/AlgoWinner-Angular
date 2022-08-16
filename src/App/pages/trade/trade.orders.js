@@ -275,14 +275,7 @@
                     vm.isLoadingActiveOrders = false;
                     vm.isLoadingOrders = vm.isLoadingActiveOrders || vm.isLoadingHistoricalOrders;
                 });
-
-            //sOrdersClientService.getHistoricalOrdersCount(
-            //    vm.selectedStrategy.DisplayInfo.BasicInfo.StrategyId,
-            //    function (quantity) {
-            //        sTradingItemService.historicalOrdersAmount = quantity;
-            //    }
-            //)
-
+            
             sOrdersClientService.initializeHistoricalPagedOrders(
                 vm.selectedStrategy.DisplayInfo.BasicInfo.StrategyId,
                 null,

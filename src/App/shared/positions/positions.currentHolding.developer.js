@@ -1,12 +1,10 @@
 ﻿agmNgModuleWrapper('agms.positions')
-    .defineController("s.positions.CurrentHoldingDeveloperController", ['sTradingItemService', 'coreConfigService',
-            'orderByFilter', 'sProductService'],
+    .defineController("s.positions.CurrentHoldingDeveloperController", ['sTradingItemService', 
+            'orderByFilter'],
         function (vm, dep, tool) {
             // --- DEPENDENCY RESOLVER
             var orderByFilter = dep.orderByFilter,
-                sTradingItemService = dep.sTradingItemService,
-                sProductService = dep.sProductService,
-                coreConfigService = dep.coreConfigService;
+                sTradingItemService = dep.sTradingItemService;
 
             // --- LOCAL VAR DECLARATION
             var filteredItems = [];
@@ -55,15 +53,6 @@
                     }
                 }
             }
-
-            function isActive(position) {
-                if (position.QuantityOnHold != null) {
-                    return position.QuantityOnHold !== 0;
-                } else {
-                    var lastOrder = position.Orders[position.Orders.length - 1];
-                    return (lastOrder && lastOrder.Intention !== 'Full Exit');
-                }
-            };
             
             // --- LOCAL SERVICE FUNC 
             function filterByProduct(position) {
@@ -81,6 +70,7 @@
                 vm.positions = sTradingItemService.activePositions;
 
                 filteredItems = orderByFilter(vm.positions.filter(filterByProduct), '-LastExitTime');
+                filteredItems = filteredItems.filter(function (x) { return x.QuantityOnHold > 0; });
                 sTradingItemService.populatePositionDirective();
 
                 sortPositions(vm.models.overviewSorting);
@@ -95,10 +85,6 @@
             // --- SCOPE FUNC
             function showPagination() {
                 return vm.models.numPages > 1;
-            }
-
-            function showExposurePagination() {
-                return vm.exposureModels.numPages > 1;
             }
 
             function setDefaultSortReverse() {
@@ -183,21 +169,13 @@
             function getPagedItems() {
                 return _.take(_.drop(filteredItems, (vm.models.currentPage - 1) * vm.itemsPerPage), vm.itemsPerPage);
             }
-
-            function getExposurePagedItems() {
-                return _.take(_.drop(filteredItems, (vm.exposureModels.currentPage - 1) * vm.itemsPerPage), vm.itemsPerPage);
-            }
-
+            
             function getTotalItems() {
                 return filteredItems.length;
             }
 
             function hasPositions() {
                 return getTotalItems() > 0;
-            }
-
-            function hasPositionsWithFilter(positions, filter) {
-                return _.any(positions, filter);
             }
 
             // --- EVENT HANDLERS
@@ -251,23 +229,13 @@
                     event: "Orders",
                     noPositionMessage: "You have no position to display",
                     noPositionMessageForGroupStrategy: "No position to display",
-                    levelOfDetail: 'Premium',
-                    copyPosition: null,
-                    positionFilterFunc: vm.positionFilter,
                     overviewSortings: ["Product", "Allocated Exposure", "Margin Used", "Unrealized P/L (%)", "Position", "Holding Duration"],
                     marker: "open",
                     showPositionDetail: showPositionDetail,
                     viewPositionDetailFunc: viewPositionDetailFunc,
                     capitals: sTradingItemService.capitalSummary,
-                    positionFilter: isActive,
-                    coreConfigService: coreConfigService,
-                    positionChartColors: sTradingItemService.activePositionChartColors,
-                    quantityOnHoldChartValues: sTradingItemService.quantityOnHoldChartValues,
-                    exposureChartValues: sTradingItemService.exposureChartValues,
                     positions: sTradingItemService.positions,
-                    currentStrategy: sTradingItemService.currentStrategy,
                     holdingSummary: sTradingItemService.holdingSummary,
-                    hasPositionsWithFilter: hasPositionsWithFilter,
                     hasPositions: hasPositions,
                     handlePortfolioUpdated: handlePortfolioUpdated,
                     models: {
@@ -277,20 +245,12 @@
                         overviewSorting: "Holding Duration"
                     },
                     sortReverse: [{ "Product": false }, { "Allocated Exposure": false }, { "Margin Used": false }, { "Unrealized P/L (%)": false }, { "Position": false }, { "Holding Duration": false }],
-                    exposureModels: {
-                        currentPage: 1,
-                        numPages: 0
-                    },
-
                     itemsPerPage: 10,
                     getTotalItems: getTotalItems,
                     getPagedItems: getPagedItems,
                     showPagination: showPagination,
-                    showExposurePagination: showExposurePagination,
-                    getExposurePagedItems: getExposurePagedItems,
                     sortPositions: sortPositions,
-                    setDefaultSortReverse: setDefaultSortReverse,
-                    goToProduct: sProductService.goToProduct
+                    setDefaultSortReverse: setDefaultSortReverse
                 });
 
                 vm.resolveHoldingSummary = function () {
