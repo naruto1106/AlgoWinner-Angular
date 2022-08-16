@@ -91,11 +91,13 @@
                 <td ng-repeat="balanceSheetTableDataHeading in vm.balanceSheetTableData.headings track by $index">{{balanceSheetTableDataHeading}}</td>
             </thead>
             <tbody>
-                <tr ng-repeat="balanceSheetTableName in vm.balanceSheetTableData.name track by $index" ng-if="balanceSheetTableName !== 'StatementDate'">
-                    <td >{{vm.getFullNameFromKey(balanceSheetTableName)}}</td>
-                    <td ng-repeat="balanceSheetTableData in vm.balanceSheetTableData.data">
+                <tr ng-repeat="balanceSheetTableName in vm.balanceSheetTableData.name">
+                    <td ng-if="balanceSheetTableName !== 'StatementDate'">{{vm.getFullNameFromKey(balanceSheetTableName)}}</td>
+                    <td ng-if="balanceSheetTableName !== 'StatementDate'" ng-repeat="balanceSheetTableData in vm.balanceSheetTableData.data track by $index">
                         <div>{{balanceSheetTableData[balanceSheetTableName]|priceNumberFormatter}}</div>
-                        <div class="green-profit">+6.70%</div>
+                        <div ng-if="balanceSheetTableData.StatementDate !== null && $index !== 0" ng-class="{'green-profit' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) <= 0}">
+                            {{((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2)}}%
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -114,7 +116,9 @@
                     <td ng-if="cashFlowTableName !== 'StatementDate'">{{vm.getFullNameFromKey(cashFlowTableName)}}</td>
                     <td ng-if="cashFlowTableName !== 'StatementDate'" ng-repeat="cashFlowTableData in vm.cashFlowTableData.data track by $index">
                         <div>{{cashFlowTableData[cashFlowTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="cashFlowTableData.StatementDate !== null" class="green-profit">+6.70%</div>
+                        <div ng-if="cashFlowTableData.StatementDate !== null && $index !== 0" ng-class="{'green-profit' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) <= 0}">
+                            {{((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2)}}%
+                        </div>
                     </td>
                 </tr>
             </tbody>
