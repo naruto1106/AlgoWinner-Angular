@@ -110,7 +110,7 @@
                             <tr>
                                 <th ng-repeat="col in ::vm.options.columns" class="clickable" ng-if="!col.visibility || col.visibility()"ng-class="::col.classNames">
                                     <div ng-class="{'product-sticky': col.title == 'PRODUCT', 'product-sticky-symbol': col.title == 'SYMBOL', 'product-sticky-last': col.title == ''}">                                        
-                                        {{::col.title}}
+                                        <span ng-click="vm.activateSorting(col)">{{::col.title}}</span>
                                         <span class="glyphicon glyphicon-triangle-left product-left-scroll-icon" ng-click="vm.scrollLeft()" ng-if="col.title=='PRODUCT' && vm.isVisibleLeftArrow"></span>
                                         <span class="glyphicon glyphicon-triangle-right product-right-scroll-icon" ng-click="vm.scrollRight()" ng-if="col.title=='' && vm.isVisibleRightArrow"></span>
                                         <span class="glyphicon glyphicon-triangle-bottom" ng-click="vm.sortByThisColumn(col)" ng-if="vm.isSelectedColumnForSortDesc(col)" ng-class="{'pull-right': col.title == 'Volume'}"></span>

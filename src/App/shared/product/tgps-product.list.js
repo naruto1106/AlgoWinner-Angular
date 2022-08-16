@@ -405,14 +405,18 @@
             }
 
             function isSelectedColumnForSortDesc(col) {
-                //return col.sortingDirection === -1 && vm.selectedColumnForSort === col;
-                return col.sortingDirection === -1;
+                return col.sortingDirection === -1 && vm.selectedColumnForSort === col;
+                //return col.sortingDirection === -1;
             };
 
             function isSelectedColumnForSortAsc(col) {
-                //return col.sortingDirection === 1 && vm.selectedColumnForSort === col;
-                return col.sortingDirection === 1;
+                return col.sortingDirection === 1 && vm.selectedColumnForSort === col;
+                //return col.sortingDirection === 1;
             };
+
+            function activateSorting(col){
+                vm.selectedColumnForSort = col;
+            }
 
             function sortByThisColumn(col, direction) {
 
@@ -503,6 +507,7 @@
                 getListedStocks: getListedStocks,
                 isEodTradeVenue: isEodTradeVenue,
                 scrollLeft: scrollLeft,
-                scrollRight: scrollRight
+                scrollRight: scrollRight,
+                activateSorting: activateSorting
             });
         });
