@@ -2,7 +2,7 @@
     .defineControllerAsPopup("s.tgps.ColumnFilterController",
         {
             templateUrl: '/App/shared/tgps/tgps.columnFilter.html',
-            windowClass: 'default-modal tgps-fundamental-filter-popup'
+            windowClass: 'default-modal tgps-fundamental-filter-popup tgps-fundamental-filter-column-popup'
         },
         ['productListOptionForPosition'],
         function (vm, dep, tool) {

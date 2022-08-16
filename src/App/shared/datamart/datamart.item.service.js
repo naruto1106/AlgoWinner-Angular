@@ -24,7 +24,8 @@
             var useEgRatioFilter = false;
             var useAnalystRatingFilter = false;
             var useNoiseFilter = false;
-            var useSectorIndustryFilter = false;
+            var useSectorFilter = false;
+            var useIndustryFilter = false;
             var useTurnoverFilter = false;
             
             //market cap filter
@@ -84,7 +85,23 @@
             var analystRatings = [];
             obj.analystRating.forEach(function (ar) {
                 if (ar.checked) {
-                    analystRatings.push(ar.name);
+                    var fromVal = (ar.name).split("to")[0];
+                    var toVal = (ar.name).split("to")[1];
+                    if(fromVal !== undefined && fromVal !== null && fromVal !== ''){
+                        fromVal = (fromVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
+                    } else {
+                        fromVal = null;
+                    }
+                    if(toVal !== undefined && toVal !== null && toVal !== ''){
+                        toVal = (toVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
+                    } else {
+                        toVal = null;
+                    }
+                    var analystRatingJSON = {
+                        From: parseFloat(fromVal),
+                        To: parseFloat(toVal)
+                    }
+                    analystRatings.push(analystRatingJSON);
                 }
             });
             if (analystRatings.length > 0 && analystRatings.length < obj.analystRating.length) {
@@ -95,7 +112,23 @@
             var noise = [];
             obj.noise.forEach(function (n) {
                 if (n.checked) {
-                    noise.push(n.name);
+                    var fromVal = (n.name).split("to")[0];
+                    var toVal = (n.name).split("to")[1];
+                    if(fromVal !== undefined && fromVal !== null && fromVal !== ''){
+                        fromVal = (fromVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
+                    } else {
+                        fromVal = null;
+                    }
+                    if(toVal !== undefined && toVal !== null && toVal !== ''){
+                        toVal = (toVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
+                    } else {
+                        toVal = null;
+                    }
+                    var noiseJSON = {
+                        From: parseFloat(fromVal),
+                        To: parseFloat(toVal)
+                    }
+                    noise.push(noiseJSON);
                 }
             });
             if (noise.length > 0 && noise.length < obj.noise.length) {
@@ -106,7 +139,23 @@
             var turnover = [];
             obj.turnover.forEach(function (t) {
                 if (t.checked) {
-                    turnover.push(t.name);
+                    var fromVal = (t.name).split("to")[0];
+                    var toVal = (t.name).split("to")[1];
+                    if(fromVal !== undefined && fromVal !== null && fromVal !== ''){
+                        fromVal = (fromVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
+                    } else {
+                        fromVal = null;
+                    }
+                    if(toVal !== undefined && toVal !== null && toVal !== ''){
+                        toVal = (toVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
+                    } else {
+                        toVal = null;
+                    }
+                    var turnoverJSON = {
+                        From: parseFloat(fromVal),
+                        To: parseFloat(toVal)
+                    }
+                    turnover.push(turnoverJSON);
                 }
             });
             if (turnover.length > 0 && turnover.length < obj.turnover.length) {
@@ -114,18 +163,33 @@
             }
             
             //sector industry filter
-            var sectorIndustry = [];
-            obj.sectorIndustry.forEach(function (si) {
-                if (si.checked) {
-                    si.data.forEach(function (siObj) {
-                        if (siObj.checked) {
-                            sectorIndustry.push(siObj.name);
+            var sector = [];
+            var sectorAllData = [];
+            var industry = [];
+            var industryAllData = [];
+            obj.sectorIndustry.forEach(function (object) {
+                if(object.name === 'Sector'){
+                    object.data.forEach(function (sObj) {
+                        sectorAllData.push(sObj);
+                        if (sObj.checked) {
+                            sector.push(sObj.name);
+                        }
+                    });
+                }
+                if(object.name === 'Industry'){                    
+                    object.data.forEach(function (iObj) {
+                        industryAllData.push(iObj);
+                        if (iObj.checked) {
+                            industry.push(iObj.name);
                         }
                     });
                 }
             });
-            if (sectorIndustry.length > 0 && sectorIndustry.length < obj.sectorIndustry.length) {
-                useSectorIndustryFilter = true;
+            if (sector.length > 0 && sector.length < sectorAllData.length) {
+                useSectorFilter = true;
+            }
+            if (industry.length > 0 && industry.length < industryAllData.length) {
+                useIndustryFilter = true;
             }
 
             var returnedObject = {
@@ -143,8 +207,10 @@
                 UseNoiseFilter: useNoiseFilter,
                 Turnover: useTurnoverFilter ? turnover : [],
                 UseTurnoverFilter: useTurnoverFilter,
-                SectorIndustry: useSectorIndustryFilter ? sectorIndustry : [],
-                UseSectorIndustryFilter: useSectorIndustryFilter
+                Sector: useSectorFilter ? sector : [],
+                Industry: useIndustryFilter ? industry : [],
+                UseSectorFilter: useSectorFilter,
+                UseIndustryFilter: useIndustryFilter
             };
             if (obj.volumeConditions) {
                 var volumeRanges = [];

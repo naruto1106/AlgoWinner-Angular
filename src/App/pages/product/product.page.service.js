@@ -28,6 +28,28 @@
             return deferred.promise;
         }
         
+        function getSector(market) {
+            return dep.sProductService.GetSector(market).then(function (res) {                                
+                serviceObj.sector = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getIndustry(market) {
+            return dep.sProductService.GetIndustry(market).then(function (res) {                                
+                serviceObj.industry = res.data;
+                serviceObj.isLoading = false;
+                serviceObj.showErrorMessage = false;
+            }, function () {
+                serviceObj.showErrorMessage = true;
+                serviceObj.isLoading = false;
+            });
+        }
+        
         function getLatestAnalystRating() {
             return dep.sProductService.GetLatestAnalystRating(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {                                
                 serviceObj.latestAnalystRating = res.data;
@@ -327,6 +349,10 @@
             showErrorMessage: false,
             setHeaderVisibility: setHeaderVisibility,
             currentProduct: {},
+            getSector: getSector,
+            sector: {},
+            getIndustry: getIndustry,
+            industry: {},
             getLatestAnalystRating: getLatestAnalystRating,            
             latestAnalystRating: {
                 CountBuy: 0,
@@ -358,9 +384,9 @@
             getFundamentalPageMetrics: getFundamentalPageMetrics,
             fundamentalPageMetrics: {},
             getIncomeStatement: getIncomeStatement,
-            incomeStatement: {},            
+            incomeStatement: {},
             getBalanceSheet: getBalanceSheet,
-            balanceSheet: {},            
+            balanceSheet: {},
             getCashFlow: getCashFlow,
             cashFlow: {},
             getStatistics: getStatistics,

@@ -56,6 +56,12 @@
                     return 'Singapore';
                 case 'US':
                     return 'UnitedStates';
+                case 'HK':
+                    return 'Hongkong';
+                case 'MY':
+                    return 'Malaysia';
+                case 'CHN':
+                    return 'China';
                 default:
                     return 'Singapore';
             }
@@ -82,6 +88,18 @@
             goToProduct: goToProduct,            
             updateProductTickSizeValueIfBelongToGroup: updateProductTickSizeValueIfBelongToGroup,
 
+            GetSector: coreServerCommunicationService.genGetFunctionWithNVar(productPath + '/GetSectorSelections', function (args) {
+                return {
+                    venue: translateTradeVenueToName(args[0]),
+                };
+            }),
+            
+            GetIndustry: coreServerCommunicationService.genGetFunctionWithNVar(productPath + '/GetIndustrySelections', function (args) {
+                return {
+                    venue: translateTradeVenueToName(args[0]),
+                };
+            }),
+            
             GetLatestAnalystRating: coreServerCommunicationService.genGetFunctionWithNVar(ratingPath + '/GetLatestAnalystRating', function (args) {
                 return {
                     productId: args[0],

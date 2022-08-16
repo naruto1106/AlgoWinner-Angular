@@ -110,18 +110,33 @@
             }
 
             //sector industry filter
-            var sectorIndustry = [];
-            obj.sectorIndustry.forEach(function (si) {
-                if (si.checked) {
-                    si.data.forEach(function (siObj) {
-                        if (siObj.checked) {
-                            sectorIndustry.push(siObj.name);
+            var sector = [];
+            var sectorAllData = [];
+            var industry = [];
+            var industryAllData = [];
+            obj.sectorIndustry.forEach(function (object) {
+                if(object.name === 'Sector'){
+                    object.data.forEach(function (sObj) {
+                        sectorAllData.push(sObj);
+                        if (sObj.checked) {
+                            sector.push(sObj.name);
                         }
                     });
                 }
-            });
-            if (sectorIndustry.length > 0 && sectorIndustry.length < obj.sectorIndustry.length) {
-                useSectorIndustryFilter = true;
+                if(object.name === 'Industry'){                    
+                    object.data.forEach(function (iObj) {
+                        industryAllData.push(iObj);
+                        if (iObj.checked) {
+                            industry.push(iObj.name);
+                        }
+                    });
+                }                
+            });                        
+            if (sector.length > 0 && sector.length < sectorAllData.length) {
+                useSectorFilter = true;
+            }
+            if (industry.length > 0 && industry.length < industryAllData.length) {
+                useIndustryFilter = true;
             }
 
             var returnedObject = {
@@ -138,8 +153,10 @@
                 UseNoiseFilter: useNoiseFilter,
                 Turnover: useTurnoverFilter ? turnover : [],
                 UseTurnoverFilter: useTurnoverFilter,
-                SectorIndustry: useSectorIndustryFilter ? sectorIndustry : [],
-                UseSectorIndustryFilter: useSectorIndustryFilter
+                Sector: useSectorFilter ? sector : [],
+                Industry: useIndustryFilter ? industry : [],
+                UseSectorFilter: useSectorFilter,
+                UseIndustryFilter: useIndustryFilter
             };
             if (obj.volumeConditions) {
                 var volumeRanges = [];

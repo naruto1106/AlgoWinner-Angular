@@ -16,7 +16,8 @@ agmNgModuleWrapper("agms.tgps")
         'sTradingHolidayService',
         'sTgpsService',
         'coreUserStateService',
-        'coreUtil'
+        'coreUtil',
+        'pProductPageService'
     ],
     function (vm, dep, tool) {
 
@@ -35,6 +36,7 @@ agmNgModuleWrapper("agms.tgps")
             sMenuRightClickService = dep.sMenuRightClickService,
             sTradingHolidayService = dep.sTradingHolidayService,
             sTgpsService = dep.sTgpsService;
+            pProductPageService = dep.pProductPageService;
             coreUtil = dep.coreUtil;
 
         var allStocksForPosition = [];
@@ -65,7 +67,8 @@ agmNgModuleWrapper("agms.tgps")
                     (f.AnalystRatings.length > 0 ? 1 : 0) + 
                     (f.Noise.length > 0 ? 1 : 0) +
                     (f.Turnover.length > 0 ? 1 : 0) +
-                    (f.SectorIndustry.length > 0 ? 1 : 0) + 
+                    (f.Sector.length > 0 ? 1 : 0) + 
+                    (f.Industry.length > 0 ? 1 : 0) + 
                     (f.VolumeRanges.length > 0 ? 1 : 0);
             });
             return count;
@@ -164,6 +167,12 @@ agmNgModuleWrapper("agms.tgps")
             return date;
         }
 
+        function getSelectedMarketFundamentalFilterObject(fundamentalFilterArray){
+            return fundamentalFilterArray.filter(function (itemObj, itemKey) {
+                return itemObj.TradeVenue === vm.filter.tradeVenueLoc.label;
+            });
+        }
+
         var previousLoadPositionPromise = null;
         function loadPositionStockList(fundamentalParamsList) {
             if (previousLoadPositionPromise !== null && previousLoadPositionPromise.cancel) {
@@ -236,7 +245,7 @@ agmNgModuleWrapper("agms.tgps")
                             GetByLastTradingDate: vm.filter.dateSelectionMode === 0,
                             TriggerDate: date,
                             UseFundamentalFilter: sTgpsScreenerService.fundamentalFilterNumber > 0,
-                            FundamentalFilter: fundamentalParamsList[0]
+                            FundamentalFilter: getSelectedMarketFundamentalFilterObject(fundamentalParamsList)[0]
                         };
                         p = sTgpsService.getTradersGPSPositionScreenerNew(request2);
                     }
@@ -305,7 +314,7 @@ agmNgModuleWrapper("agms.tgps")
                         FromDate: fromDate,
                         ToDate: toDate,
                         UseFundamentalFilter: sTgpsScreenerService.fundamentalFilterNumber > 0,
-                        FundamentalFilter: fundamentalParamsList[0]
+                        FundamentalFilter: getSelectedMarketFundamentalFilterObject(fundamentalParamsList)[0]
                     };
                     p = sTgpsService.getTradersGPSSwingScreenerNew(request2);
                 }
@@ -389,7 +398,7 @@ agmNgModuleWrapper("agms.tgps")
                 promise = loadPaladinStockList(fundamentalParamsList);
             }
             if (promise) {
-                return promise.then(function () {
+                return promise.then(function () {                    
                     onFrontEndFilterChanged();
                 }).finally(function () {
                     vm.isLoading = false;
@@ -523,7 +532,7 @@ agmNgModuleWrapper("agms.tgps")
                 resetAllFundamentals();
             } else {
                 var serializedContent = coreDataStorageService.get("fundamental-filter");
-                if (serializedContent) {
+                if (serializedContent) {                    
                     var obj = angular.fromJson(serializedContent);
                     angular.merge(vm.filter.fundamentals, obj);
                 } else {
@@ -688,11 +697,11 @@ agmNgModuleWrapper("agms.tgps")
             return !isWorldIndices();
         }
 
-        function resetFundamentalFilter(market) {
+        function resetFundamentalFilter(market) {            
             if (_.contains(sMarketEntitlementService.tradeVenuesThatHasFundamentals, market)) {
-                vm.filter.fundamentals[market] = pDatamartStatesService.getDefaultFundamentalWithVolumeSelections();
+                vm.filter.fundamentals[market] = pDatamartStatesService.getDefaultFundamentalWithVolumeSelections(market);
             } else {
-                vm.filter.fundamentals[market] = pDatamartStatesService.getPriceAndVolumeFilterContent();
+                vm.filter.fundamentals[market] = pDatamartStatesService.getPriceAndVolumeFilterContent(market);
             }
         }
 
@@ -1221,6 +1230,29 @@ agmNgModuleWrapper("agms.tgps")
             return restrictedTradeVenues;
         }
 
+        async function setSectorIndustryFilterData(){            
+            for (var key in vm.filter.fundamentals) {
+                var TradeVenue = key;
+                var sectorData = [];
+                await pProductPageService.getSector(TradeVenue).then(async function () {
+                    var sector = pProductPageService.sector;
+                    await sector.Data.map(function (itemObj, itemKey){
+                        sectorData.push({ name: itemObj.SectorName, checked: true })
+                    });                    
+                    coreDataStorageService.set("fundamental-filter-sector_"+[key], angular.toJson(sectorData));
+                });
+
+                var industryData = [];
+                await pProductPageService.getIndustry(TradeVenue).then(async function () {
+                    var industry = pProductPageService.industry;
+                    await industry.Data.map(function (itemObj, itemKey){
+                        industryData.push({ name: itemObj.IndustryName, checked: true })
+                    });                    
+                    coreDataStorageService.set("fundamental-filter-industry_"+[key], angular.toJson(industryData));
+                });
+            }
+        }
+
         function showFundamentalFilter() {
             var restrictedTradeVenues = getAvailableTradeVenueCodeList();
             tool.openModalByDefinition('s.tgps.FundamentalFilterController', {
@@ -1284,7 +1316,7 @@ agmNgModuleWrapper("agms.tgps")
                 !vm.isLoading && (vm.filteredStocksForPosition.length > 0 || vm.filteredStocksForSwing.length > 0);
         }
 
-        tool.initialize(function () {
+        tool.initialize(function () {            
             tool.setVmProperties({
                 name: "TradersGPS",
                 isLoading: false,
@@ -1390,8 +1422,9 @@ agmNgModuleWrapper("agms.tgps")
             
             resetAllFundamentals();
 
-            tool.watch('vm.mode', function () {
+            tool.watch('vm.mode', async function () {
                 vm.isLoading = true;
+                await setSectorIndustryFilterData();
                 updateDateSelections();
             });
 
