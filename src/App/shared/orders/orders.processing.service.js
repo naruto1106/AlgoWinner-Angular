@@ -35,44 +35,7 @@
             }
             return order;
         }
-
-        function mergeActiveAndHistorical(active, historical) {
-            var result = [];
-
-            var activeHead = 0;
-            var historicalHead = 0;
-            var fillWithPlaceHolders = false;
-
-            while (result.length !== active.length + historical.length && activeHead < active.length && historicalHead < historical.length) {
-                if (isPlaceHolder(historical[historicalHead])) {
-                    fillWithPlaceHolders = true;
-                    break;
-                }
-                if (Date.parse(active[activeHead].CreatedTime) > Date.parse(historical[historicalHead].CreatedTime)) {
-                    result.push(active[activeHead++]);
-                } else {
-                    result.push(historical[historicalHead++]);
-                }
-            }
-
-            if (fillWithPlaceHolders) {
-                i = 0;
-                while (result.length !== active.length + historical.length) {
-                    result.push({ "OrderId": "placeholder" + i });
-                    i += 1;
-                }
-            } else {
-                for (var i = activeHead; i < active.length; ++i) {
-                    result.push(active[i])
-                }
-                for (var i = historicalHead; i < historical.length; ++i) {
-                    result.push(historical[i])
-                }
-            }
-
-            return result;
-        }
-
+        
         function isActive(order) {
             return activeStatuses.indexOf(order.LatestStatus) !== -1 || activeStatuses.indexOf(order.LastOrderStatus) !== -1;
         }
@@ -113,7 +76,6 @@
             isPlaceHolder: isPlaceHolder,
             handleOrderResponse: handleOrderResponse,
             isCancellableOrder: isCancellableOrder,
-            mergeActiveAndHistorical: mergeActiveAndHistorical,
             isTodays: isTodays
         });
 

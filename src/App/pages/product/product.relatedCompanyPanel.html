@@ -4,7 +4,7 @@
         <div class="col-md-1" ng-repeat="relatedCompany in vm.relatedCompanies">
             <div class="white-box">
                 <div class="company-header rel">
-                    <h1>{{relatedCompany.Name}}</h1>
+                    <h1 class="ellipsis-nowrap" uib-tooltip="{{relatedCompany.Name}}">{{relatedCompany.Product.Symbol}} ({{relatedCompany.Name}})</h1>
                     <div class="m-top-10px" ng-if="false">
                         <h4 class="pull-left no-margin m-right-10px">{{relatedCompany.Rating}}</h4>
                         <agmc-rating rating-value="3.5" class="pull-left lh-20px"></agmc-rating>

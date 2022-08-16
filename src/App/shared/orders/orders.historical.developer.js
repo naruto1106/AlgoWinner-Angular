@@ -1,12 +1,11 @@
 ﻿agmNgModuleWrapper('agms.orders')
     .defineController('s.orders.HistoricalDeveloperController', ['orderProcessing', 'coreConfigService',
-        'sProductService', 'sOrdersClientService', 'sOrdersDetailService', 'orderByFilter', 'sTradingItemService'],
+        'sProductService', 'sOrdersClientService', 'sOrdersDetailService', 'sTradingItemService'],
         function(vm, dep, tool) {
             // --- DEPENDENCY RESOLVER
             var sOrdersClientService = dep.sOrdersClientService;
             var sOrdersDetailService = dep.sOrdersDetailService;
             var sProductService = dep.sProductService;
-            var orderByFilter = dep.orderByFilter;
             var orderProcessing = dep.orderProcessing;
             var sTradingItemService = dep.sTradingItemService;
             var coreConfigService = dep.coreConfigService;
@@ -17,80 +16,19 @@
 
             var filteredOrders = [];
             var filledFilteredOrders = [];
-            var activeInMixed = 0;
 
             var previousSearchPromise = null;
             var productSearchMap = new Map();
 
-            // --- LOCAL SERVICE FUNC 
-            function isNotOrderCancel(order) {
-                return order.Action !== 'Cancel' && order.LatestStatus !== 'Cancelled';
-            }
-
-            function notFilled(order) {
-                return order.LatestStatus !== "Filled";
-            }
-
-            function filterByProduct(order) {
-                var keyword = vm.models.searchOrderText;
-                if (!keyword) {
-                    return true;
-                }
-
-                keyword = keyword.toLowerCase();
-                return order.Product.ProductName.toLowerCase().indexOf(keyword) > -1 ||
-                    order.Product.Symbol.toLowerCase().indexOf(keyword) > -1;
-            }
-
             // --- EVENT HANDLERS
-            function activeBasedFiltering(orders, viewFilter) {
-                if (viewFilter !== 'No Filter') {
-                    orders = orders.filter(function (item) {
-                        return (vm.orderType === 'active' ? item.LatestStatus : item.Intention) === viewFilter;
-                    });
-                }
-
-                orders = orders.filter(filterByProduct).filter(isNotOrderCancel);
-
-                return orderByFilter(orders, '-UpdateTime')
-            }
-
-            function filterOrders(orders) {
-                if (vm.orderType === 'active') {
-                    orders = orders.filter(notFilled);
-                    return activeBasedFiltering(orders, vm.models.activeOrderViewFilter);
-                }
-                if (vm.orderType === 'today') {
-                    return activeBasedFiltering(orders, vm.models.todaysTradeFilter);
-                }
-                return orders;
-            }
-
             function getCorrectOrders() {
-                if (vm.orderType === 'active') {
-                    return orderByFilter(vm.activeOrders.filter(orderProcessing.isActive), '-CreatedTime');
-                }
-
-                if (vm.orderType === 'today') {
-                    var result = vm.historicalOrders.filter(function (item) {
-                        return !orderProcessing.isPlaceHolder(item) && orderProcessing.isTodays(item);
-                    }).concat(vm.activeOrders.filter(function (item) {
-                        return !orderProcessing.isPlaceHolder(item) && orderProcessing.isTodays(item);
-                    }));
-                    return orderByFilter(result, '-CreatedTime');
-                }
-
                 var productId = vm.models.searchProduct ? vm.models.searchProduct.ProductId : null;
 
                 var historicalOrders = [];
-                var activeOrders = [];
                 if (productId) {
                     var values = productSearchMap.get(productId);
                     if (values) {
                         historicalOrders = values;
-                        activeOrders = vm.activeOrders.filter(function (item) {
-                            return item.ProductId === productId;
-                        })
                     } else {
                         vm.isLoadingOrders = true;
                         values = new Array();
@@ -106,23 +44,13 @@
                     }
                 } else {
                     historicalOrders = vm.historicalOrders;
-                    activeOrders = orderByFilter(vm.activeOrders, '-CreatedTime');
                 }
 
-
-                if (vm.orderType === 'historical') {
-                    return historicalOrders;
-                }
-
-                if (vm.orderType === 'mixed') {
-                    activeInMixed = activeOrders.length;
-                    return orderProcessing.mergeActiveAndHistorical(activeOrders, historicalOrders);
-                }
-
+                return historicalOrders;
             }
 
             function refreshFilteredOrders() {
-                filteredOrders = filterOrders(getCorrectOrders());
+                filteredOrders = getCorrectOrders();
                 filledFilteredOrders = [];
 
                 //for bracket orders
@@ -134,7 +62,6 @@
             function handleStrategySelected() {
                 vm.models.currentPage = 1;
                 vm.models.searchProduct = null;
-                vm.models.searchOrderText = null;
                 productSearchMap = new Map();
                 filteredOrders = [];
             }
@@ -152,10 +79,6 @@
                 return _.take(_.drop(filteredOrders, (vm.models.currentPage - 1) * ordersPerPage), ordersPerPage);
             }
 
-            function getDisplayedOrders() {
-                return filteredOrders;
-            }
-
             function isPageLoaded() {
                 return !vm.getPagedOrders().some(orderProcessing.isPlaceHolder);
             }
@@ -165,7 +88,7 @@
             }
 
             function hasOrders() {
-                return filteredOrders.length > 0 || vm.models.searchOrderText || vm.models.searchProduct;
+                return filteredOrders.length > 0 || vm.models.searchProduct;
             }
 
             /** for bracket orders **/
@@ -214,19 +137,7 @@
             tool.on("orderUpdateHasHappened", refreshFilteredOrders);
             tool.on("orderCancellationHasHappened", refreshFilteredOrders);
             tool.on("singleStrategySelected", handleStrategySelected);
-
-            tool.watch('vm.models.searchOrderText', function () {
-                refreshFilteredOrders();
-            });
-
-            tool.watch('vm.models.todaysTradeFilter', function () {
-                refreshFilteredOrders();
-            });
-
-            tool.watch('vm.models.activeOrderViewFilter', function () {
-                refreshFilteredOrders();
-            });
-
+            
             tool.watch('vm.isLoadingOrders', function () {
                 if (!vm.isLoadingOrders) {
                     refreshFilteredOrders();
@@ -237,10 +148,6 @@
             tool.watch('vm.models.currentPage', function () {
                 if (!isPageLoaded()) {
                     skip = (vm.models.currentPage - 1) * ordersPerPage;
-
-                    if (vm.orderType === 'mixed') {
-                        skip -= activeInMixed;
-                    }
 
                     arrayToSet = vm.models.searchProduct
                         ? productSearchMap.get(vm.models.searchProduct.ProductId)
@@ -253,20 +160,17 @@
                         skip,
                         take,
                         vm.models.searchProduct ? vm.models.searchProduct.ProductId : null,
-                        function (loaded) {
+                        function(loaded) {
                             to = Math.min(arrayToSet.length, skip + take);
                             for (var i = skip; i < to; ++i) {
-                                arrayToSet[i] = loaded[i - skip]
+                                arrayToSet[i] = loaded[i - skip];
                             }
                             refreshFilteredOrders();
                         }
-                    )
+                    );
                 }
             });
-
-            function viewDetail(position) {
-            }
-
+            
             tool.initialize(function () {
                 tool.setVmProperties({
                     noOrderMessage: "You have no order to display",
@@ -275,19 +179,9 @@
                     category: "Trade",
                     event: "Orders",
                     historicalDisplayKind: 'Developer',
-                    orderFilter: orderProcessing.isHistorical,
-                    coreConfigService: coreConfigService,
-                    orderType: 'historical',
-                    activeOrders: sTradingItemService.activeOrders,
                     historicalOrders: sTradingItemService.historicalOrders,
-                    historicalOrdersAmount: sTradingItemService.historicalOrdersAmount,
-                    historicalPagesLoaded: sTradingItemService.historicalPagesLoaded,
-
                     models: {
-                        searchOrderText: null,
                         searchProduct: null,
-                        activeOrderViewFilter: 'No Filter',
-                        todaysTradeFilter: "No Filter",
                         currentPage: 1,
                         numPages: 1
                     },
@@ -298,14 +192,11 @@
                     hasBracketOrder: hasBracketOrder,
                     viewBracketOrder: viewBracketOrder,
                     editBracketOrder: editBracketOrder,
-                    viewDetail: viewDetail,
                     getTotalItems: getTotalItems,
-                    getDisplayedOrders: getDisplayedOrders,
                     getPagedOrders: getPagedOrders,
                     showPagination: showPagination,
                     getPagedFilledOrders: getPagedFilledOrders,
                     getTotalFilledItems: getTotalFilledItems,
-                    currentHistoricalLoaded: 1,
                     searchProducts: searchProducts
                 });
 

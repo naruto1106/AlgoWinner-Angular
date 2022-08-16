@@ -27,7 +27,7 @@
         </div>
         <div class="clearfix"></div>
         <h4 class="text-center" ng-if="(vm.models.searchOrderText !== '' && vm.getPagedOrders().length == 0 && !vm.isLoadingOrders) || !vm.hasOrders()">no results found</h4>
-        <div ng-if="vm.hasOrdersFunc(vm.orders,vm.orderFilter)">
+        <div ng-if="vm.hasOrders()">
             <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
                 class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
                 first-text="&laquo;" last-text="&raquo;" max-size="10"

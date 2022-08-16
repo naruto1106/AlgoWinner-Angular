@@ -1,12 +1,11 @@
 ﻿agmNgModuleWrapper('agms.positions')
-    .defineController('s.positions.HistoricalDeveloperController', ['sProductService', 'sTradingItemService', "sTradingClientPortfolioService", 'coreConfigService',
+    .defineController('s.positions.HistoricalDeveloperController', ['sProductService', 'sTradingItemService', "sTradingClientPortfolioService", 
             'orderByFilter'],
         function (vm, dep, tool) {
             // --- DEPENDENCY RESOLVER
             var sTradingItemService = dep.sTradingItemService,
                 sProductService = dep.sProductService,
                 sTradingClientPortfolioService = dep.sTradingClientPortfolioService,
-                coreConfigService = dep.coreConfigService,
                 orderByFilter = dep.orderByFilter;
 
             // --- LOCAL VAR DECLARATION
@@ -15,25 +14,7 @@
             var searchMap = new Map();
 
             // --- LOCAL SERVICE FUNC 
-            function filterByProduct(position) {
-                var keyword = vm.models.searchStockText;
-                if (!keyword) {
-                    return true;
-                }
-
-                keyword = keyword.toLowerCase();
-                return position.Product.ProductName.toLowerCase().indexOf(keyword) > -1 ||
-                    position.Product.Symbol.toLowerCase().indexOf(keyword) > -1;
-            }
-
             function handlePortfolioUpdated() {
-                //vm.positions = sTradingItemService.activePositions;
-
-                //filteredItems = orderByFilter(vm.positions.filter(filterByProduct), '-LastExitTime');
-                //sTradingItemService.populatePositionDirective();
-
-                //sortPositions(vm.models.overviewSorting);
-
                 var productId = vm.searchProduct ? vm.searchProduct.ProductId : null;
                 if (productId) {
                     var values = searchMap.get(productId);
@@ -68,98 +49,11 @@
             function showPagination() {
                 return vm.models.numPages > 1;
             }
-
-            function showExposurePagination() {
-                return vm.exposureModels.numPages > 1;
-            }
-
-            function setDefaultSortReverse() {
-                vm.sortReverse = [{ "Product": false }, { "Allocated Exposure": false }, { "Margin Used": false }, { "Unrealized P/L (%)": false }, { "Position": false }, { "Holding Duration": false }];
-            }
-
-            function sortPositions(sortingType) {
-                vm.models.overviewSorting = sortingType;
-                if (filteredItems.length > 0) {
-                    var activePositions = filteredItems;
-                    switch (sortingType) {
-                        case "Holding Duration":
-                            if (vm.sortReverse[sortingType]) {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.EntryTime;
-                                });
-                            } else {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.EntryTime;
-                                }).reverse();
-                            }
-                            break;
-                        case "Product":
-                            if (vm.sortReverse[sortingType]) {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.Product.ProductName;
-                                }).reverse();
-                            } else {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.Product.ProductName;
-                                });
-                            }
-                            break;
-                        case "Allocated Exposure":
-                            if (vm.sortReverse[sortingType]) {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.Exposure;
-                                });
-                            } else {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.Exposure;
-                                }).reverse();
-                            }
-                            break;
-                        case "Unrealized P/L (%)":
-                            if (vm.sortReverse[sortingType]) {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.UnrealizedPL_Percent;
-                                });
-                            } else {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.UnrealizedPL_Percent;
-                                }).reverse();
-                            }
-                            break;
-                        case "Position":
-                            if (vm.sortReverse[sortingType]) {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.PositionType;
-                                }).reverse();
-                            } else {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.PositionType;
-                                });
-                            }
-                            break;
-                        case "Margin Used":
-                            if (vm.sortReverse[sortingType]) {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.MarginValue;
-                                });
-                            } else {
-                                filteredItems = _.sortBy(activePositions, function (n) {
-                                    return n.MarginValue;
-                                }).reverse();
-                            }
-                            break;
-                    }
-                }
-            }
-
+            
             function getPagedItems() {
                 return _.take(_.drop(filteredItems, (vm.models.currentPage - 1) * vm.itemsPerPage), vm.itemsPerPage);
             }
-
-            function getExposurePagedItems() {
-                return _.take(_.drop(filteredItems, (vm.exposureModels.currentPage - 1) * vm.itemsPerPage), vm.itemsPerPage);
-            }
-
+            
             function getTotalItems() {
                 return filteredItems.length;
             }
@@ -167,11 +61,7 @@
             function hasPositions() {
                 return getTotalItems() > 0;
             }
-
-            function hasPositionsWithFilter(positions, filter) {
-                return _.any(positions, filter);
-            }
-
+            
             // --- EVENT HANDLERS
             function processBracketOrder(data) {
                 if (data.ParentPortfolioId != null) {
@@ -214,16 +104,7 @@
             function handleStrategySelected() {
                 vm.models.currentPage = 1;
             }
-
-            function isHistorical(position) {
-                if (position.QuantityLiquidated != null) {
-                    return position.QuantityLiquidated !== 0;
-                } else {
-                    var lastOrder = position.Orders[position.Orders.length - 1];
-                    return (lastOrder && lastOrder.Intention === 'Full Exit');
-                }
-            };
-
+            
             function isPageLoaded() {
                 return !vm.getPagedItems().some(function (x) { return typeof (x) === 'string' && x.includes('placeholder'); });
             }
@@ -254,44 +135,21 @@
                     noPositionMessage: "You have no position to display",
                     noPositionMessageForGroupStrategy: "No position to display",
                     levelOfDetail: 'Premium',
-                    copyPosition: null,
                     positions: sTradingItemService.positions,
-                    currentStrategy: sTradingItemService.currentStrategy,
-                    holdingSummary: sTradingItemService.holdingSummary,
-                    hasPositionsWithFilter: hasPositionsWithFilter,
                     models: {
-                        currentPage: 1,
-                        numPages: 0,
-                        searchStockText: "",
-                        overviewSorting: "Holding Duration"
-                    },
-                    sortReverse: [{ "Product": false }, { "Allocated Exposure": false }, { "Margin Used": false }, { "Unrealized P/L (%)": false }, { "Position": false }, { "Holding Duration": false }],
-                    exposureModels: {
                         currentPage: 1,
                         numPages: 0
                     },
-
                     itemsPerPage: 10,
                     showPagination: showPagination,
-                    showExposurePagination: showExposurePagination,
-                    getExposurePagedItems: getExposurePagedItems,
-                    sortPositions: sortPositions,
-                    setDefaultSortReverse: setDefaultSortReverse,
-                    goToProduct: sProductService.goToProduct,
                     searchProduct: null,
                     onProductSelected: onProductSelected,
                     searchProducts: searchProducts,
                     isPageLoaded: isPageLoaded,
                     hasPositions: hasPositions,
-                    positionFilter: isHistorical,
-                    customPortfolioHandler: handlePortfolioUpdated,
                     getTotalItems: getTotalItems,
                     getPagedItems: getPagedItems,
-                    coreConfigService: coreConfigService,
-                    handlePortfolioUpdated: handlePortfolioUpdated,
-                    positionChartColors: sTradingItemService.historicalPositionChartColors,
-                    positionChartValues: sTradingItemService.quantityLiquidatedChartValues,
-                    groupedPositions: sTradingItemService.groupedPositions
+                    handlePortfolioUpdated: handlePortfolioUpdated
                 });
 
                 tool.on("singleStrategySelected", handleStrategySelected);
@@ -299,16 +157,7 @@
                 tool.signalRNotification('DeveloperOrderCreated', processBracketOrder);
                 tool.signalRNotification('DeveloperOrderUpdated', processBracketOrder);
                 tool.signalRNotification('DeveloperOrderMarkedForCancellation', processBracketOrder);
-
-                tool.watch('vm.models.searchStockText', function () {
-                    vm.models.currentPage = 1;
-                    vm.handlePortfolioUpdated();
-                });
-
-                tool.watch('vm.models.overviewSorting', function () {
-                    sortPositions(vm.models.overviewSorting);
-                });
-
+                
                 tool.eventToObservable('portfolioCleared')
                     .subscribe(function (evt) {
                         tool.evalAsync(function () {
@@ -350,14 +199,14 @@
                             vm.models.currentPage - 1,
                             vm.itemsPerPage,
                             vm.searchProduct ? vm.searchProduct.ProductId : null,
-                            function (loaded) {
+                            function(loaded) {
                                 var diff = (vm.models.currentPage - 1) * vm.itemsPerPage;
                                 for (var i = 0; i < loaded.length; ++i) {
-                                    filteredItems[diff + i] = loaded[i]
+                                    filteredItems[diff + i] = loaded[i];
                                 }
                                 tool.broadcast('portfolioUpdated');
                             }
-                        )
+                        );
                     }
                 });
 
