@@ -10,7 +10,8 @@ var q = require('q');
 
 var less = require('gulp-less');
 var path = require('path');
-var uglify = require('gulp-uglify');
+//var uglify = require('gulp-uglify');
+var gulpTerser = require('gulp-terser');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var concatCss = require('gulp-concat-css');
@@ -66,7 +67,7 @@ function processBundles(production, cb) {
                 if (production) {
                     counter++;
                     gulp.src(includes, { base: "." }).pipe(sourcemaps.init())
-                                      .pipe(uglify()).on('error', onError)
+                                      .pipe(gulpTerser()).on('error', onError)
                                       .pipe(concat(name + ".js")).on('error', onError)
                                       .pipe(sourcemaps.write("../srcmap/" + (process.env.VERSION || "0.1.0.0"), {
                                           sourceMappingURLPrefix: "http://srcmap.algomerchant.com",
