@@ -59,17 +59,19 @@ agmNgModuleWrapper("agms.tgps")
         function calculateFundamentalFilterNumber(fundamentalParamsList) {
             var count = 0;
             fundamentalParamsList.forEach(function (f) {
-                count = count +
-                    (f.EgRatios.length > 0 ? 1 : 0) +
-                    (f.MarketCapTypes.length > 0 ? 1 : 0) +
-                    (f.PeRatios.length > 0 ? 1 : 0) +
-                    (f.PriceRanges.length > 0 ? 1 : 0) +
-                    (f.AnalystRatings.length > 0 ? 1 : 0) + 
-                    (f.Noise.length > 0 ? 1 : 0) +
-                    (f.Turnover.length > 0 ? 1 : 0) +
-                    (f.Sector.length > 0 ? 1 : 0) + 
-                    (f.Industry.length > 0 ? 1 : 0) + 
-                    (f.VolumeRanges.length > 0 ? 1 : 0);
+                if(f.TradeVenue === vm.filter.tradeVenueLoc.label){
+                    count = count +
+                        (f.EgRatios.length > 0 ? 1 : 0) +
+                        (f.MarketCapTypes.length > 0 ? 1 : 0) +
+                        (f.PeRatios.length > 0 ? 1 : 0) +
+                        (f.PriceRanges.length > 0 ? 1 : 0) +
+                        (f.AnalystRatings.length > 0 ? 1 : 0) + 
+                        (f.Noise.length > 0 ? 1 : 0) +
+                        (f.Turnover.length > 0 ? 1 : 0) +
+                        (f.Sector.length > 0 ? 1 : 0) + 
+                        (f.Industry.length > 0 ? 1 : 0) + 
+                        (f.VolumeRanges.length > 0 ? 1 : 0);
+                }
             });
             return count;
         }
@@ -1419,7 +1421,7 @@ agmNgModuleWrapper("agms.tgps")
                 crossover: vm.comCrossover[0],
                 payoutstrategy: vm.payoutStrategy[0]
             };
-            
+
             resetAllFundamentals();
             vm.isLoading = true;
             await setSectorIndustryFilterData();            
