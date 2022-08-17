@@ -1316,7 +1316,7 @@ agmNgModuleWrapper("agms.tgps")
                 !vm.isLoading && (vm.filteredStocksForPosition.length > 0 || vm.filteredStocksForSwing.length > 0);
         }
 
-        tool.initialize(function () {            
+        tool.initialize(async function () {            
             tool.setVmProperties({
                 name: "TradersGPS",
                 isLoading: false,
@@ -1421,10 +1421,11 @@ agmNgModuleWrapper("agms.tgps")
             };
             
             resetAllFundamentals();
+            vm.isLoading = true;
+            await setSectorIndustryFilterData();            
 
-            tool.watch('vm.mode', async function () {
+            tool.watch('vm.mode', function () {
                 vm.isLoading = true;
-                await setSectorIndustryFilterData();
                 updateDateSelections();
             });
 
