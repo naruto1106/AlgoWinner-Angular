@@ -107,27 +107,54 @@ agmNgModuleWrapper("agms.tgps")
                     }
                     return true;
                 }).filter(function (s) {
-                    if (vm.filter.payoutstrategy === "All") {
-                        return true;
+                    if (vm.filter.tid === 0) {
+                        return s.TID === vm.filter.tid;
                     }
-                    if (vm.filter.payoutstrategy === "Near (below)") {
-                        return s.Payout == "Near (below)";
+                    if (vm.filter.tid === 1) {
+                        return s.TID === vm.filter.tid;
                     }
-                    if (vm.filter.payoutstrategy === "Near (above)") {
-                        return s.Payout == "Near (above)";
+                    if (vm.filter.tid === 2) {
+                        return s.TID === vm.filter.tid;
                     }
-                    if (vm.filter.payoutstrategy === "Cross above") {
-                        return s.Payout == "Cross above";
+                    if (vm.filter.tid === 3) {
+                        return s.TID === vm.filter.tid;
                     }
-                    if (vm.filter.payoutstrategy === "Cross below") {
-                        return s.Payout == "Cross below";
+                    if (vm.filter.tid === 4) {
+                        return s.TID === vm.filter.tid;
                     }
-                    if (vm.filter.payoutstrategy === "Above") {
-                        return s.Payout == "Above";
+                    if (vm.filter.tid === -1) {
+                        return s.TID === vm.filter.tid;
                     }
-                    if (vm.filter.payoutstrategy === "Below") {
-                        return s.Payout === "Below";
+                    if (vm.filter.tid === -2) {
+                        return s.TID === vm.filter.tid;
+                    }
+                    if (vm.filter.tid === -3) {
+                        return s.TID === vm.filter.tid;
+                    }
+                    if (vm.filter.tid === -4) {
+                        return s.TID === vm.filter.tid;
                     }                    
+                    // if (vm.filter.payoutstrategy === "All") {
+                    //     return true;
+                    // }
+                    // if (vm.filter.payoutstrategy === "Near (below)") {
+                    //     return s.Payout == "Near (below)";
+                    // }
+                    // if (vm.filter.payoutstrategy === "Near (above)") {
+                    //     return s.Payout == "Near (above)";
+                    // }
+                    // if (vm.filter.payoutstrategy === "Cross above") {
+                    //     return s.Payout == "Cross above";
+                    // }
+                    // if (vm.filter.payoutstrategy === "Cross below") {
+                    //     return s.Payout == "Cross below";
+                    // }
+                    // if (vm.filter.payoutstrategy === "Above") {
+                    //     return s.Payout == "Above";
+                    // }
+                    // if (vm.filter.payoutstrategy === "Below") {
+                    //     return s.Payout === "Below";
+                    // }                    
                     return true;
                 });
             } else if (vm.mode === 'Swing') {
@@ -902,13 +929,25 @@ agmNgModuleWrapper("agms.tgps")
                     sortingFunc: createSortingFunc('Month'),
                     sortingDirection: -1
                 },
+                // {
+                //     templateId: 'bigscreener/tgps.payoutAlertMA150',
+                //     title: "Payout Alert MA 150",
+                //     classNames: 'mid-column product-payout-alert-MA150',
+                //     sortingFunc: function (a, b) {
+                //         if (a.Payout && b.Payout) {
+                //             return coreUtil.sortName(a.Payout, b.Payout);
+                //         }
+                //         return 0;
+                //     },
+                //     sortingDirection: -1
+                // },
                 {
-                    templateId: 'bigscreener/tgps.payoutAlertMA150',
-                    title: "Payout Alert MA 150",
-                    classNames: 'mid-column product-payout-alert-MA150',
+                    templateId: 'bigscreener/tgps.TID',
+                    title: "TID",
+                    classNames: 'mid-column product-TID',
                     sortingFunc: function (a, b) {
-                        if (a.Payout && b.Payout) {
-                            return coreUtil.sortName(a.Payout, b.Payout);
+                        if (a.TID && b.TID) {
+                            return coreUtil.sortName(a.TID, b.TID);
                         }
                         return 0;
                     },
@@ -1330,6 +1369,7 @@ agmNgModuleWrapper("agms.tgps")
                 directions: ['All', 'Bullish', 'Bearish', 'None'],
                 comCrossover: ['All', 'UP', 'DOWN', 'NONE'],
                 payoutStrategy: ['All', 'Near (below)', 'Near (above)', 'Cross above', 'Cross below', 'Above', 'Below'],
+                tid: [{name: 'None', value : 0},  {name: 'Very Weak Uptrend', value : 1}, {name: 'Weak Uptrend', value : 2}, {name: 'Uptrend', value : 3}, {name: 'Uptrend Reversal', value : 4}, {name: 'Very Weak Downtrend', value : -1},{name: 'Weak Downtrend', value : -2}, {name: 'Downtrend', value : -3}, {name: 'Downtrend Reversal', value : -4}],
                 modeOptions: ["Position", "Swing"],
                 barSizeOptions: [{ label: "Daily", value: "1 day" }, { label: "Weekly", value: "1 week" }],    
                 tradeVenueLocList: [{
@@ -1419,7 +1459,8 @@ agmNgModuleWrapper("agms.tgps")
                 searchProductFilter: null,
                 barSize: vm.barSizeOptions[0],
                 crossover: vm.comCrossover[0],
-                payoutstrategy: vm.payoutStrategy[0]
+                //payoutstrategy: vm.payoutStrategy[0],
+                tid: vm.tid[0].value
             };
 
             resetAllFundamentals();
