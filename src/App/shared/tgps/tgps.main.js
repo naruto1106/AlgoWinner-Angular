@@ -107,6 +107,9 @@ agmNgModuleWrapper("agms.tgps")
                     }
                     return true;
                 }).filter(function (s) {
+                    if (vm.filter.tid === 'all') {
+                        return true;
+                    }
                     if (vm.filter.tid === 0) {
                         return s.TID === vm.filter.tid;
                     }
@@ -451,6 +454,7 @@ agmNgModuleWrapper("agms.tgps")
         }
 
         var externalVm = {
+            getTIDFullNameByValue: getTIDFullNameByValue,
             isNotRealTimeIndices: function (productContainer) {
                 if (!productContainer || !productContainer.ProductModel) {
                     return false;
@@ -1357,6 +1361,31 @@ agmNgModuleWrapper("agms.tgps")
                 !vm.isLoading && (vm.filteredStocksForPosition.length > 0 || vm.filteredStocksForSwing.length > 0);
         }
 
+        function getTIDFullNameByValue(TIDValue) {
+            switch (TIDValue) {
+                case -4:
+                    return 'Downtrend Reversal';
+                case -3:
+                    return 'Downtrend';
+                case -2:
+                    return 'Weak Downtrend';
+                case -1:
+                    return 'Very Weak Downtrend';
+                case 0:
+                    return 'None';
+                case 1:
+                    return 'Very Weak Uptrend';
+                case 2:
+                    return 'Weak Uptrend';
+                case 3:
+                    return 'Uptrend';
+                case 4:
+                    return 'Uptrend Reversal';
+                default:
+                    return 'All';
+            }
+        }
+
         tool.initialize(async function () {            
             tool.setVmProperties({
                 name: "TradersGPS",
@@ -1368,8 +1397,8 @@ agmNgModuleWrapper("agms.tgps")
 
                 directions: ['All', 'Bullish', 'Bearish', 'None'],
                 comCrossover: ['All', 'UP', 'DOWN', 'NONE'],
-                payoutStrategy: ['All', 'Near (below)', 'Near (above)', 'Cross above', 'Cross below', 'Above', 'Below'],
-                tid: [{name: 'None', value : 0},  {name: 'Very Weak Uptrend', value : 1}, {name: 'Weak Uptrend', value : 2}, {name: 'Uptrend', value : 3}, {name: 'Uptrend Reversal', value : 4}, {name: 'Very Weak Downtrend', value : -1},{name: 'Weak Downtrend', value : -2}, {name: 'Downtrend', value : -3}, {name: 'Downtrend Reversal', value : -4}],
+                //payoutStrategy: ['All', 'Near (below)', 'Near (above)', 'Cross above', 'Cross below', 'Above', 'Below'],
+                tid: [{name: 'All', value : 'all'}, {name: 'None', value : 0},  {name: 'Very Weak Uptrend', value : 1}, {name: 'Weak Uptrend', value : 2}, {name: 'Uptrend', value : 3}, {name: 'Uptrend Reversal', value : 4}, {name: 'Very Weak Downtrend', value : -1},{name: 'Weak Downtrend', value : -2}, {name: 'Downtrend', value : -3}, {name: 'Downtrend Reversal', value : -4}],
                 modeOptions: ["Position", "Swing"],
                 barSizeOptions: [{ label: "Daily", value: "1 day" }, { label: "Weekly", value: "1 week" }],    
                 tradeVenueLocList: [{

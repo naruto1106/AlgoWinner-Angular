@@ -28,7 +28,7 @@
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Payout}}</h5>
     </script> -->
     <script type="text/ng-template" id="bigscreener/tgps.TID">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.TID}}</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{externalVm.getTIDFullNameByValue(productContainer.TID)}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.noise">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Noise}}</h5>
