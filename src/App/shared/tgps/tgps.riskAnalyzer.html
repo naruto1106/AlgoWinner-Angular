@@ -1,0 +1,143 @@
+﻿<div class="agm-component-tradersgps fundamental-filter">
+    <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+        <h4 class="modal-title">
+            TradersGPS Risk Analysis
+        </h4>
+    </div>
+
+    <div class="modal-body" style="width: 100%; float: left;">
+        <div style="width: 100%; float: left;">
+            <div style="width: 20%; float: left;">
+                <button ng-click="vm.setTab('stock_risk')" ng-class="{ 'btn-primary' : vm.currentTab == 'stock_risk' }" class="hollow-blue pull-left">STOCK RISK</button>        
+            </div>
+            <div style="width: 25%; float: left;">
+                <button ng-click="vm.setTab('portfolio_risk')" ng-class="{ 'btn-primary' : vm.currentTab == 'portfolio_risk' }" class="hollow-blue pull-left">PORTFOLIO RISK</button>        
+            </div>
+            <div style="width: 30%; float: left;">
+                <button ng-click="vm.setTab('momentum_profiler')" ng-class="{ 'btn-primary' : vm.currentTab == 'momentum_profiler' }" class="hollow-blue pull-left">MOMENTUM PROFILER</button>        
+            </div>
+            <div style="width: 25%; float: left;">
+                <button ng-click="vm.setTab('trade_sizing')" ng-class="{ 'btn-primary' : vm.currentTab == 'trade_sizing' }" class="hollow-blue pull-left">TRADE SIZING</button>        
+            </div>
+        </div>
+
+        <div style="width: 100%; float: left; padding-top: 30px;">            
+            <div class="" ng-if="vm.currentTab == 'stock_risk'">
+                <div style="width: 100%; float: left;">
+                    <div style="width: 38%;float: left;">
+                        <div style="width: 100%;border: 1px solid #d3d3d3;float: left;padding: 10px;border-radius: 20px;padding-top: 20px;padding-bottom: 20px;">
+                            <div style="width: 100%; float: left; margin-bottom: 20px;">
+                                <div style="width: 40%; float: left;">
+                                    Symbol
+                                </div>
+                                <div style="width: 60%;float: right;">
+                                    <input type="text" name="symbol" style="float: right;">
+                                </div>
+                            </div>
+                            <div style="width: 100%; float: left; margin-bottom: 20px;">
+                                <div style="width: 40%; float: left;">
+                                    Benchmark
+                                </div>
+                                <div style="width: 60%;float: right;">
+                                    <input type="text" name="symbol" style="float: right;">
+                                </div>
+                            </div>
+                            <div style="width: 100%; float: left; margin-bottom: 20px;">
+                                <div style="width: 40%; float: left;">
+                                    Analysis Date
+                                </div>
+                                <div style="width: 60%;float: right;">
+                                    <input type="text" name="symbol" style="float: right;">
+                                </div>
+                            </div>
+                            <div style="width: 100%; float: left;">
+                                <div style="width: 40%; float: left;">
+                                    Lookback horizon
+                                </div>
+                                <div style="width: 60%;float: right;">
+                                    <input type="text" name="symbol" style="float: right;">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div style="width: 60%;float: right;">
+                        <table>
+                            <thead>
+                                <tr>
+                                <th></th>
+                                <th>Apple</th>
+                                <th>SPY</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Correlation</td>
+                                    <td>0.2</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Beta</td>
+                                    <td>1.1</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Sharpe Ratio</td>
+                                    <td>0.8</td>
+                                    <td>0.4</td>
+                                </tr>
+                                <tr>
+                                    <td>Return</td>
+                                    <td>25%</td>
+                                    <td>16%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="" ng-if="vm.currentTab == 'portfolio_risk'">
+                PORTFOLIO RISK TAB
+            </div>
+            <div class="" ng-if="vm.currentTab == 'momentum_profiler'">
+                MOMENTUM PROFILER TAB
+            </div>
+            <div class="" ng-if="vm.currentTab == 'trade_sizing'">
+                <div style="width: 100%; float: left;">
+                    <div style="width: 38%;float: left;">
+                        <div style="width: 100%;border: 1px solid #d3d3d3;float: left;padding: 10px;border-radius: 20px;padding-top: 20px;padding-bottom: 20px;">
+                            <div style="width: 100%; float: left; margin-bottom: 20px;">
+                                <div style="width: 40%; float: left;">
+                                    Symbol
+                                </div>
+                                <div style="width: 60%;float: right;">
+                                    <input type="text" name="symbol" style="float: right;">
+                                </div>
+                            </div>
+                            <div style="width: 100%; float: left;">
+                                <div style="width: 40%; float: left;">
+                                    Regular size
+                                </div>
+                                <div style="width: 60%;float: right;">
+                                    <select style="float: right;">
+                                        <option>-</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 60%;float: right;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="modal-footer">
+        <!-- <button class="btn btn-primary pull-right" ng-click="vm.closePanel()">SAVE</button>
+        <button class="hollow-blue m-right-10px pull-right" ng-click="vm.uibDismissPanel()">CANCEL</button>
+        <div class="clearfix"></div> -->
+    </div>
+</div>

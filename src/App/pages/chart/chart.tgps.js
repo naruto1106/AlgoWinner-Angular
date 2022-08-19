@@ -18,6 +18,12 @@
                     mode: vm.pChartTgpsService.tradersgps_swing.mode
                 });
             }
+            
+            function loadRiskAnalyzer() {
+                tool.openModalByDefinition('s.tgps.RiskAnalyzerController', {
+                    mode: vm.pChartTgpsService.tradersgps_swing.mode
+                });
+            }
 
             function toggleTradersGps() {
                 if (filterDescription.myProducts.length > 0) {
@@ -57,7 +63,8 @@
                 pChartRenderingUtilsService: pChartRenderingUtilsService,
                 pChartTgpsService: pChartTgpsService,
                 toggleTradersGps: toggleTradersGps,
-                loadTradersGps: loadTradersGps
+                loadTradersGps: loadTradersGps,
+                loadRiskAnalyzer: loadRiskAnalyzer
             });
         })
     .defineDirectiveForE('agmp-chart-tgps',

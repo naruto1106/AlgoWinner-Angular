@@ -17,4 +17,9 @@
             analytics-on="click" analytics-category="Chart" analytics-event="TGPS" analytics-label="TGPSScreener" agmc-analytics-timestamp>
         <span>Screener</span>
     </button>
+    
+    <button class="btn-xs btn-success" ng-click="vm.loadRiskAnalyzer()" ng-if="vm.pChartTgpsService.tradersGpsMode"
+            analytics-on="click" analytics-category="Chart" analytics-event="RiskAnalyzer" analytics-label="TGPSRiskAnalyzer" agmc-analytics-timestamp>
+        <span>Risk Analyzer</span>
+    </button>
 </div>
