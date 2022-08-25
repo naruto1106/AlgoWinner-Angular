@@ -69,13 +69,37 @@
             });
         });
     })
-    .defineController('s.header.TradeSubmenuController', ['sStrategyCommerceService'],
+    .defineController('s.header.TradeSubmenuController', [
+        'commonLocationHistoryService', 'sStrategyCommerceService', "sHeaderService", "pShopService"],
     function (vm, dep, tool) {
-        var sStrategyCommerceService = dep.sStrategyCommerceService;
+        var sStrategyCommerceService = dep.sStrategyCommerceService,
+            sHeaderService = dep.sHeaderService,
+            pShopService = dep.pShopService;
 
-        tool.inheritVmController('s.header.SubmenuController');
+        function isCurrentPage(comparer) {
+            if (typeof comparer === "string") {
+                return comparer === vm.currentPage;
+            }
+            return comparer.indexOf(vm.currentPage) >= 0;
+        }
+
+        function showFollowPage() {
+            return !vm.coreUserStateService.isInvestmentLeader() && sHeaderService.showTrackSubscribedStrategies();
+        }
 
         tool.initialize(function () {
+            tool.setVmProperties({
+                pShopService: pShopService,
+                sHeaderService: sHeaderService,
+                openNewStrategy: sStrategyCommerceService.openNewStrategy,
+                canHaveMoreStrategy: false,
+                go: dep.commonLocationHistoryService.go,
+                coreUserStateService: dep.coreUserStateService,
+                isCurrentPage: isCurrentPage,
+                showFollowPage: showFollowPage,
+                coreConfigService: dep.coreConfigService
+            });
+
             sStrategyCommerceService.GetOwnedStrategiesCount().then(function (res) {
                 vm.canHaveMoreStrategy = res.data < 50;
             }, function () {

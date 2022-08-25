@@ -1,6 +1,10 @@
 ﻿agmNgModuleWrapper('agms.datamart')
-    .defineController('s.datamart.EventDetailsBaseController',
-    [],
+    .defineControllerAsPopup('s.datamart.EventDetailsPopupController',
+    {
+        templateUrl: '/App/shared/datamart/datamart.eventDetails.html',
+        windowClass: 'full-size-modal'
+    },
+    ['feed'],
     function (vm, dep, tool) {
         vm.feed = dep.feed;
 
@@ -12,14 +16,4 @@
                 }
             });
         };
-    })
-    .defineControllerAsPopup('s.datamart.EventDetailsPopupController',
-    {
-        templateUrl: '/App/shared/datamart/datamart.eventDetails.html',
-        windowClass: 'full-size-modal'
-    },
-    ['feed'],
-    function (vm, dep, tool) {
-        tool.inheritVmController('s.datamart.EventDetailsBaseController');
-        vm.feed = dep.feed;
     });
