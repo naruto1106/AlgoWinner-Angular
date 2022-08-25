@@ -8,17 +8,17 @@
 
     <div class="modal-body" style="width: 100%; float: left;" ng-if="vm.mode !== null">
         <div class="main-tabs">
-            <div class="tab-1">
-                <button ng-click="vm.setTab('stock_risk')" ng-class="{ 'btn-primary' : vm.currentTab == 'stock_risk' }" class="hollow-blue pull-left">STOCK RISK</button>        
+            <div class="tab-1 hollow-blue" ng-class="{ 'btn-primary' : vm.currentTab == 'stock_risk' }">
+                <button ng-click="vm.setTab('stock_risk')">STOCK RISK</button>        
             </div>
-            <div class="tab-2">
-                <button ng-click="vm.setTab('portfolio_risk')" ng-class="{ 'btn-primary' : vm.currentTab == 'portfolio_risk' }" class="hollow-blue pull-left">PORTFOLIO RISK</button>        
+            <div class="tab-2 hollow-blue" ng-class="{ 'btn-primary' : vm.currentTab == 'portfolio_risk' }">
+                <button ng-click="vm.setTab('portfolio_risk')">PORTFOLIO RISK</button>        
             </div>
-            <div class="tab-3">
-                <button ng-click="vm.setTab('momentum_profiler')" ng-class="{ 'btn-primary' : vm.currentTab == 'momentum_profiler' }" class="hollow-blue pull-left">MOMENTUM PROFILER</button>        
+            <div class="tab-3 hollow-blue" ng-class="{ 'btn-primary' : vm.currentTab == 'momentum_profiler' }">
+                <button ng-click="vm.setTab('momentum_profiler')">MOMENTUM PROFILER</button>        
             </div>
-            <div class="tab-4">
-                <button ng-click="vm.setTab('trade_sizing')" ng-class="{ 'btn-primary' : vm.currentTab == 'trade_sizing' }" class="hollow-blue pull-left">TRADE SIZING</button>        
+            <div class="tab-4 hollow-blue" ng-class="{ 'btn-primary' : vm.currentTab == 'trade_sizing' }">
+                <button ng-click="vm.setTab('trade_sizing')">TRADE SIZING</button>        
             </div>
         </div>
 
@@ -32,7 +32,15 @@
                                     Symbol
                                 </div>
                                 <div class="w-60 f-r">
-                                    <input type="text" name="stock_risk_symbol" ng-model="vm.stock_risk.symbol" class="f-r">
+                                    <input class="f-r" 
+                                        type="text" 
+                                        placeholder="Search product" 
+                                        ng-model="vm.stock_risk.symbol"
+                                        ng-model-options="{debounce: 200}"
+                                        uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                                        typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                                        typeahead-wait-ms="200"
+                                        typeahead-on-select="vm.showProduct(vm.stock_risk.symbol, 'stock_risk')">
                                 </div>
                             </div>
                             <div class="w-100 f-l mb-20">
@@ -62,7 +70,7 @@
                             </div>
                             <div class="w-100 f-l">
                                 <div class="w-40 f-l">
-                                    Lookback horizon
+                                    Lookback Horizon
                                 </div>
                                 <div class="w-60 f-r">
                                     <input type="text" name="stock_risk_lookback_horizon" ng-model="vm.stock_risk.lookback_horizon" class="f-r">
@@ -71,7 +79,7 @@
 
                             <div class="w-100 f-l">
                                 <div class="button-main">
-                                    <button ng-click="vm.submitStockRisk()" class="btn-primary hollow-blue pull-left">ACCESS</button>
+                                    <button ng-click="vm.submitStockRisk()" class="btn-primary hollow-blue pull-left">ASSESS</button>
                                 </div>
                             </div>
                             
@@ -96,8 +104,8 @@
                         </table>
                         <div class="main-box">
                             <div class="main-box-container">
-                                <div class="main-box-1">{{vm.stock_risk.volacity}}%</div>
-                                <div class="main-box-2">VOLTALITY</div>
+                                <div class="main-box-1">{{vm.stock_risk.volatility}}%</div>
+                                <div class="main-box-2">VOLATILITY</div>
                             </div>
                         </div>
                     </div>
@@ -152,7 +160,7 @@
 
                             <div class="w-100 f-l">
                                 <div class="button-main">
-                                    <button ng-click="vm.submitPortfolioRisk()" class="btn-primary hollow-blue pull-left">ACCESS</button>
+                                    <button ng-click="vm.submitPortfolioRisk()" class="btn-primary hollow-blue pull-left">ASSESS</button>
                                 </div>
                             </div>
                             
@@ -193,7 +201,15 @@
                                     Symbol
                                 </div>
                                 <div class="w-60 f-r">
-                                    <input type="text" name="trade_sizing_symbol" ng-model="vm.momentum_profiler.symbol" class="f-r">
+                                    <input class="f-r" 
+                                        type="text" 
+                                        placeholder="Search product" 
+                                        ng-model="vm.momentum_profiler.symbol"
+                                        ng-model-options="{debounce: 200}"
+                                        uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                                        typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                                        typeahead-wait-ms="200"
+                                        typeahead-on-select="vm.showProduct(vm.momentum_profiler.symbol, 'momentum_profiler')">
                                 </div>
                             </div>
                             <div class="w-100 f-l mb-20">
@@ -201,9 +217,7 @@
                                     Direction
                                 </div>
                                 <div class="w-60 f-r">
-                                    <select class="select-box" name="momentum_profiler_direction" ng-model="vm.momentum_profiler.direction">
-                                        <option>-</option>
-                                    </select>
+                                    <select class="select-box" name="momentum_profiler_direction" ng-model="vm.momentum_profiler.direction" ng-options="d as d for d in vm.direction"></select>
                                 </div>
                             </div>
                             <div class="w-100 f-l mb-20">
@@ -228,15 +242,15 @@
                                     Lookback Horizon
                                 </div>
                                 <div class="w-60 f-r">
-                                    <select class="select-box" name="momentum_profiler_lookback_horizon" ng-model="vm.momentum_profiler.lookback_horizon">
-                                        <option>-</option>
-                                    </select>
+                                    <div class="w-60 f-r">
+                                        <input type="text" name="momentum_profiler_lookback_horizon" ng-model="vm.momentum_profiler.lookback_horizon" class="f-r">
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="w-100 f-l">
                                 <div class="button-main">
-                                    <button ng-click="vm.submitMomentumProfiler()" class="btn-primary hollow-blue pull-left">ACCESS</button>
+                                    <button ng-click="vm.submitMomentumProfiler()" class="btn-primary hollow-blue pull-left">ASSESS</button>
                                 </div>
                             </div>
                             
@@ -270,23 +284,31 @@
                                     Symbol
                                 </div>
                                 <div class="w-60 f-r">
-                                    <input type="text" name="trade_sizing_symbol" ng-model="vm.trade_sizing.symbol" class="f-r">
+                                    <input class="f-r" 
+                                        type="text" 
+                                        placeholder="Search product" 
+                                        ng-model="vm.trade_sizing.symbol"
+                                        ng-model-options="{debounce: 200}"
+                                        uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                                        typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                                        typeahead-wait-ms="200"
+                                        typeahead-on-select="vm.showProduct(vm.trade_sizing.symbol, 'trade_sizing')">
                                 </div>
                             </div>
                             <div class="w-100 f-l">
                                 <div class="w-40 f-l">
-                                    Regular size
+                                    Regular Size
                                 </div>
                                 <div class="w-60 f-r">
-                                    <select class="select-box" name="trade_sizing_regular_size" ng-model="vm.trade_sizing.regular_size">
-                                        <option>-</option>
-                                    </select>
+                                    <div class="w-60 f-r">
+                                        <input type="text" name="trade_sizing_regular_size" ng-model="vm.trade_sizing.regular_size" class="f-r">
+                                    </div>                                    
                                 </div>
                             </div>
 
                             <div class="w-100 f-l">
                                 <div class="button-main">
-                                    <button ng-click="vm.submitTradeSizing()" class="btn-primary hollow-blue pull-left">ACCESS</button>
+                                    <button ng-click="vm.submitTradeSizing()" class="btn-primary hollow-blue pull-left">ASSESS</button>
                                 </div>
                             </div>
                         </div>

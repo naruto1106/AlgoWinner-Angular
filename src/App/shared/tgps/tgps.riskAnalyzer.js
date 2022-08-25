@@ -3,10 +3,12 @@
         {
             templateUrl: '/App/shared/tgps/tgps.riskAnalyzer.html',
             windowClass: 'default-modal tgps-risk-analyze-popup'
-        }, ['mode'],
+        }, ['mode', 'sProductService', 'sTradingHolidayService'],
         function (vm, dep, tool) {
+            var sProductService = dep.sProductService, 
+            sTradingHolidayService = dep.sTradingHolidayService;
             
-            vm.mode = dep.mode;            
+            vm.mode = dep.mode;
 
             function closePanel() {
                 vm.uibClosePanel();
@@ -35,8 +37,37 @@
                 return (param.mode === 'day' && (param.date.getDay() === 0 || param.date.getDay() === 6));
             }
 
-            function submitStockRisk(){
+            function getTradeVenueString(tradeVenueLoc){
+                var tradeVenueString = null;
+                switch (tradeVenueLoc) {
+                    case "SG":
+                        tradeVenueString = "Singapore";
+                        break;
+                    case "HK":
+                        tradeVenueString = "Hongkong";
+                        break;
+                    case "MY":
+                        tradeVenueString = "Malaysia";
+                        break;
+                    case "CHN":
+                        tradeVenueString = "China";
+                        break;
+                    case "US":
+                    case "Global Indices":
+                        tradeVenueString = "UnitedStates";
+                        break;
+                }
 
+                return tradeVenueString;
+            }
+
+            function getLatestEndTradingDate(tradeVenue) {
+                return sTradingHolidayService.GetLatestMarketEndTime(tradeVenue).then(function (res) {
+                    return res.data;
+                });
+            }
+
+            function submitStockRisk(){                
             }
             function loadConstructPortfolio() {
                 tool.openModalByDefinition('s.tgps.riskAnalyzerConstructPortfolioController', {
@@ -50,8 +81,23 @@
 
             }
             function submitTradeSizing(){
-
+                var tradeVenueString = getTradeVenueString(vm.trade_sizing.tradeVenueLoc);
+                getLatestEndTradingDate(tradeVenueString).then(function (date) {
+                    if (date) {
+                        vm.trade_sizing.Today = new Date(date.substring(0, date.indexOf("T")));
+                    }
+                });
             }
+            
+            function searchProducts(keyword) {
+                return sProductService.SearchPlottableProduct(keyword).then(function (res) {
+                    return res.data.Data;
+                });
+            }
+
+            function showProduct(item, type) {
+                vm[type].tradeVenueLoc = item.TradeVenueLoc;                
+            }            
             
             tool.initialize(function () {
                 tool.setVmProperties({
@@ -59,15 +105,19 @@
                     currentTab: 'stock_risk',
                     setTab: setTab, 
                     submitStockRisk: submitStockRisk,
+                    direction: ['Long', 'Short'],
                     loadConstructPortfolio: loadConstructPortfolio,
                     submitPortfolioRisk: submitPortfolioRisk,
                     submitMomentumProfiler: submitMomentumProfiler,
                     submitTradeSizing: submitTradeSizing,
+                    showProduct: showProduct,
+                    searchProducts: searchProducts,
                     stock_risk: {
-                        symbol: '',
-                        benchmark: '',
-                        analysisDate: '',
-                        lookback_horizon: '',
+                        symbol: 'AAPL',
+                        tradeVenueLoc: 'US',
+                        benchmark: 'SPY',
+                        analysisDate: new Date(),
+                        lookback_horizon: '500',
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setStockRiskAnalysisDateSelectionOpen: setStockRiskAnalysisDateSelectionOpen,
@@ -93,12 +143,12 @@
                                 spy: '16%',
                             }
                         ],
-                        volacity: 27
+                        volatility: 0
                     },
                     portfolio_risk: {
-                        benchmark: '',
-                        analysisDate: '',
-                        lookback_horizon: '',
+                        benchmark: 'SPY',
+                        analysisDate: new Date(),
+                        lookback_horizon: '500',
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setPortfolioRiskAnalysisDateSelectionOpen: setPortfolioRiskAnalysisDateSelectionOpen,
@@ -127,10 +177,11 @@
                         volacity: 27
                     },
                     momentum_profiler: {
-                        symbol: '',
+                        symbol: 'AAPL',
+                        tradeVenueLoc: 'US',
                         direction: '',
-                        analysisDate: '',
-                        lookback_horizon: '',
+                        analysisDate: new Date(),
+                        lookback_horizon: '500',
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setMomentumProfilerAnalysisDateSelectionOpen: setMomentumProfilerAnalysisDateSelectionOpen,
@@ -138,8 +189,10 @@
                         contrarian: 75
                     },
                     trade_sizing: {
-                        symbol: '',
-                        regular_size: '',
+                        symbol: 'AAPL',
+                        tradeVenueLoc: 'US',
+                        Today: '',
+                        regular_size: '0.05',
                         trade_size: 2
                     },
                     dateOptions: {
@@ -150,5 +203,7 @@
                         maxDate: new Date(moment().endOf('day').format())
                     }
                 });
+
+                vm.momentum_profiler.direction = vm.direction[0];
             });
         });

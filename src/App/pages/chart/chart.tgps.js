@@ -21,7 +21,8 @@
             
             function loadRiskAnalyzer() {
                 tool.openModalByDefinition('s.tgps.RiskAnalyzerController', {
-                    mode: vm.pChartTgpsService.tradersgps_swing.mode
+                    mode: vm.pChartTgpsService.tradersgps_swing.mode,
+                    mode: vm.pChartTgpsService.tradersgps_swing.mode,
                 });
             }
 
