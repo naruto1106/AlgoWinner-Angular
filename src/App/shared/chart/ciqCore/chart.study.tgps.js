@@ -216,6 +216,56 @@
                         },
                         "calculateFN": null
                     },
+                    "tid": {
+                        "name": "TID",
+                        "display": "TID",
+                        "edit": null,
+                        "panelHeight": 120,
+                        "inputs": {},
+                        "outputs": {
+                            "Positive Bar": "#32912b",
+                            "Negative Bar": "#a4d6a0",
+                        },
+                        "yAxis": {
+                            "displayGridLines": true,
+                        },
+                        "seriesFN": function (stx, sd, quotes) {
+                            var panel = stx.panels[sd.panel];
+                            STX.Studies.createYAxis(stx, sd, quotes, panel);
+                            //STX.Studies.createHistogram(stx, sd, quotes, false, 1);
+                            stxx.startClip(sd.panel);
+                            quotes.forEach(function (i) {
+                                generateTidBar(stx, sd, panel, i);
+                            });
+                            stxx.endClip();
+                        },
+                        "calculateFN": null
+                    },
+                    "weeklytid": {
+                        "name": "Weekly TID",
+                        "display": "TID",
+                        "edit": null,
+                        "panelHeight": 120,
+                        "inputs": {},
+                        "outputs": {
+                            "Positive Bar": "#32912b",
+                            "Negative Bar": "#a4d6a0",
+                        },
+                        "yAxis": {
+                            "displayGridLines": true,
+                        },
+                        "seriesFN": function (stx, sd, quotes) {
+                            var panel = stx.panels[sd.panel];
+                            STX.Studies.createYAxis(stx, sd, quotes, panel);
+                            //STX.Studies.createHistogram(stx, sd, quotes, false, 1);
+                            stxx.startClip(sd.panel);
+                            quotes.forEach(function (i) {
+                                generateWeeklyTidBar(stx, sd, panel, i);
+                            });
+                            stxx.endClip();
+                        },
+                        "calculateFN": null
+                    },
                     "cci5": {
                         "name": "cci5",
                         "display": "CCI (5)",
@@ -539,6 +589,106 @@
                     study.yAxis.initialMarginBottom = pChartRenderingUtilsService.standardPanelMargin.bottom;
                 }
                 STX.Studies.studyLibrary = STX.extend(STX.Studies.studyLibrary,studies);
+            }
+
+            function generateTidBar(stx, sd, panel, val) {
+                var canvasContext = stx.chart.context;
+                var barWidth = stx.pixelFromBar(1) - stx.pixelFromBar(0);
+                if (barWidth > 3) {
+                    barWidth = barWidth - 1.5;
+                }
+                if (!val) {
+                    return;
+                }
+                var value = val["tid_hist"];
+                if (!value) {
+                    return;
+                }
+                var y0 = stx.pixelFromPrice(0, panel);
+                var y1 = stx.pixelFromPrice(value, panel);
+                if (value > 0) {
+                    y1 = stx.pixelFromPrice(1, panel)
+                } else if (value < 0) {
+                    y1 = stx.pixelFromPrice(-1, panel)
+                }
+
+                var y = Math.min(y1, y0);
+                var height = Math.abs(y1 - y0);
+                var x = stx.pixelFromDate(val.DT) - barWidth / 2;
+                switch (value) {
+                    case 1:
+                        canvasContext.fillStyle = "red";
+                        break;
+                    case 2:
+                        canvasContext.fillStyle = "#66EE66";
+                        break;
+                    case 3:
+                        canvasContext.fillStyle = "green";
+                        break;
+                    case -1:
+                        canvasContext.fillStyle = "red";
+                        break;
+                    case -2:
+                        canvasContext.fillStyle = "#66EE66";
+                        break;
+                    case -3:
+                        canvasContext.fillStyle = "green";
+                        break;
+                    default:
+                        return;
+                }
+
+                STX.rect(canvasContext, x, y, barWidth, height, 0, true, false);
+            }
+
+            function generateWeeklyTidBar(stx, sd, panel, val) {
+                var canvasContext = stx.chart.context;
+                var barWidth = stx.pixelFromBar(1) - stx.pixelFromBar(0);
+                if (barWidth > 3) {
+                    barWidth = barWidth - 1.5;
+                }
+                if (!val) {
+                    return;
+                }
+                var value = val["weeklytid_hist"];
+                if (!value) {
+                    return;
+                }
+                var y0 = stx.pixelFromPrice(0, panel);
+                var y1 = stx.pixelFromPrice(value, panel);
+                if (value > 0) {
+                    y1 = stx.pixelFromPrice(1, panel)
+                } else if (value < 0) {
+                    y1 = stx.pixelFromPrice(-1, panel)
+                }
+
+                var y = Math.min(y1, y0);
+                var height = Math.abs(y1 - y0);
+                var x = stx.pixelFromDate(val.DT) - barWidth / 2;
+                switch (value) {
+                    case 1:
+                        canvasContext.fillStyle = "red";
+                        break;
+                    case 2:
+                        canvasContext.fillStyle = "#66EE66";
+                        break;
+                    case 3:
+                        canvasContext.fillStyle = "green";
+                        break;
+                    case -1:
+                        canvasContext.fillStyle = "red";
+                        break;
+                    case -2:
+                        canvasContext.fillStyle = "#66EE66";
+                        break;
+                    case -3:
+                        canvasContext.fillStyle = "green";
+                        break;
+                    default:
+                        return;
+                }
+
+                STX.rect(canvasContext, x, y, barWidth, height, 0, true, false);
             }
 
             tool.setServiceObjectProperties({

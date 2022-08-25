@@ -110,6 +110,17 @@
                 </h5>
                 <div class="clearfix"></div>
             </div>
+            <div class="tag-channel">
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPositionStudies.tidVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPositionStudies.toggleTidVisibility()">
+
+                </div>
+                <h5>
+                    TREND IMPULSE DETECTOR (TID)
+                </h5>
+                <div class="clearfix"></div>
+            </div>
         </div>
         <div ng-if="vm.pChartTgpsService.tradersgps_swing.mode === 'Plus'">
             <div class="tag-channel">

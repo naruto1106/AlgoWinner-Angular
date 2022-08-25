@@ -187,6 +187,42 @@
                 },
                 toggleTifVisibility: function () {
                     tradersGPSPositionStudies.setTifVisibility(!tradersGPSPositionStudies.tifVisibility);
+                },
+                tidVisibility: false,
+                setTidVisibility: function (visibility) {
+                    tradersGPSPositionStudies.tidVisibility = visibility;
+                    var studyName = getTradersGpsTidStudiesName();
+                    if (visibility) {
+                        // Histogram convention is "(studyname)" + "_hist"
+                        pChartRenderingUtilsService.stxx.addSeries(studyName[0] + "_hist", {
+                            display: "TID",
+                            data: { useDefaultQuoteFeed: true },
+                            symbolObject: {
+                                tgps: "TID",
+                                product: filterDescription.primaryProduct,
+                                symbol: filterDescription.primaryProduct.Symbol
+                            },
+                            isComparison: false
+                        }, function () {
+                            tool.log(studyName[0] + ' to be attached to renderer');
+                            // Call this when changing master data
+                            pChartRenderingUtilsService.stxx.createDataSet();
+
+                            sChartStudyService.addStudy({
+                                propName: studyName[0]
+                            });
+                        });
+                    } else {
+                        // remove the dormant series
+                        pChartRenderingUtilsService.stxx.removeSeries(studyName[0] + "_hist", false);
+                        pChartRenderingUtilsService.stxx.panelClose(pChartRenderingUtilsService.stxx.panels[studyName[0]]);
+                    }
+                    // remove the dormant series
+                    pChartRenderingUtilsService.stxx.removeSeries(studyName[1] + "_hist", false);
+                    pChartRenderingUtilsService.stxx.panelClose(pChartRenderingUtilsService.stxx.panels[studyName[1]]);
+                },
+                toggleTidVisibility: function () {
+                    tradersGPSPositionStudies.setTidVisibility(!tradersGPSPositionStudies.tidVisibility);
                 }
             };
 
@@ -343,6 +379,10 @@
                     case "tif":
                         tradersGPSPositionStudies.tifVisibility = false;
                         break;
+                    case "weeklytid":
+                    case "tid":
+                        tradersGPSPositionStudies.tidVisibility = false;
+                        break;
                     case "weeklycom":
                     case "com":
                         tradersGPSPositionStudies.comVisibility = false;
@@ -366,7 +406,8 @@
                 tradersGPSPositionStudies.setPeakVisibility(true);
                 tradersGPSPositionStudies.setTroughVisibility(true);
                 tradersGPSPositionStudies.setComVisibility(true);
-                tradersGPSPositionStudies.setTifVisibility(true);
+                //tradersGPSPositionStudies.setTifVisibility(false);
+                tradersGPSPositionStudies.setTidVisibility(true);
 
                 // Display position markers
                 positionMarkers = [];
@@ -389,6 +430,7 @@
                 tradersGPSPositionStudies.setTroughVisibility(false);
                 tradersGPSPositionStudies.setComVisibility(false);
                 tradersGPSPositionStudies.setTifVisibility(false);
+                tradersGPSPositionStudies.setTidVisibility(false);
 
                 positionMarkers = [];
 
@@ -462,6 +504,14 @@
                     return ["weeklytif", "tif"];
                 } else {
                     return ["tif", "weeklytif"];
+                }
+            }
+
+            function getTradersGpsTidStudiesName() {
+                if (filterDescription.barSize === '1 W') {
+                    return ["weeklytid", "tid"];
+                } else {
+                    return ["tid", "weeklytid"];
                 }
             }
 
@@ -697,6 +747,36 @@
                             cb(cbParam);
                             //tgps_cache[key] = cbParam;
                             $log.log("Loaded TGPS Position TIF data: " + params.symbolObject.product.Symbol +
+                                " (" + params.startDate + " " + params.endDate + ") ");
+                        } else {
+                            cb({ quotes: [], moreAvailable: false });
+                        }
+                    }).finally(function () {
+                        $rootScope.$broadcast('endFetchHistoricalData', null);
+                    });
+                }
+                if (params.symbolObject.tgps === 'TID') {
+                    return sTgpsService.getPositionIndicatorData(request).then(function (res) {
+                        if (res.data && res.data.TID[0]) {
+                            // for now, we only load single product - fundamental pair each time
+                            var newData = res.data.TID.map(function (d) {
+                                var recordTimeInBrowserTimezone;
+                                //if (barSize === '1 week') {
+                                //    var oldDate = new Date(Date.parse(d.Timestamp));
+                                //    var shiftedDate = new Date(oldDate.setDate(oldDate.getDate() + 5));
+                                //    recordTimeInBrowserTimezone = shiftedDate.toISOString().slice(0, 10);
+                                //} else {
+                                recordTimeInBrowserTimezone = d.Timestamp.substring(0, d.Timestamp.indexOf('T'));
+                                //}                               
+                                return {
+                                    Date: recordTimeInBrowserTimezone,
+                                    Close: d.Value
+                                };
+                            });
+                            var cbParam = { quotes: newData, moreAvailable: newData.length > 0 };
+                            cb(cbParam);
+                            //tgps_cache[key] = cbParam;
+                            $log.log("Loaded TGPS Position TID data: " + params.symbolObject.product.Symbol +
                                 " (" + params.startDate + " " + params.endDate + ") ");
                         } else {
                             cb({ quotes: [], moreAvailable: false });
