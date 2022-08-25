@@ -26,6 +26,9 @@
                     previousGetSwingIndicatorPromises[[request.ProductId, request.BarSize]] = coreServerCommunicationService.genPostFunction(newTgpsPath + '/GetSwingIndicatorData')(request);
                     return previousGetSwingIndicatorPromises[[request.ProductId, request.BarSize]];
                 },
+                getTradersGPSPositionGroupingScreener: coreServerCommunicationService.genPostFunction(newTgpsPath + '/GetPositionGroupingScreenerByDate'),
+                getTradersGPSSwingGroupingScreener: coreServerCommunicationService.genPostFunction(newTgpsPath + '/GetSwingGroupingScreenerByDate'),
+
                 getTradersGPSPositionTriggerNew: coreServerCommunicationService.genPostFunction(newTgpsPath + '/GetPositionTriggers'),
                 getTradersGPSSwingTriggerNew: coreServerCommunicationService.genPostFunction(newTgpsPath + '/GetSwingTriggers'),               
                 getTradersGPSPositionScreenerNew: coreServerCommunicationService.genPostFunction(newTgpsPath + '/GetPositionScreenerByDate'),

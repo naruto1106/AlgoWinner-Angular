@@ -12,6 +12,28 @@
                     {{venue.label}}
                 </a>
             </li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-header">Groups</li>
+            <li>
+                <a ng-click="vm.selectPredefinedWatchlist('US Blue Chips')">
+                    US Blue Chips
+                </a>
+            </li>
+            <li>
+                <a ng-click="vm.selectPredefinedWatchlist('SG Liquid')">
+                    SG Liquid
+                </a>
+            </li>
+            <li>
+                <a ng-click="vm.selectPredefinedWatchlist('US Potential Play')">
+                    US Potential Play
+                </a>
+            </li>
+            <li>
+                <a ng-click="vm.selectPredefinedWatchlist('HK Potential Play')">
+                    HK Potential Play
+                </a>
+            </li>
             <li ng-if="vm.watchlists.length>0"
                 role="separator" class="divider"></li>
             <li ng-if="vm.watchlists.length>0"
