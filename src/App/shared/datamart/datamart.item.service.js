@@ -114,16 +114,22 @@
                 if (n.checked) {
                     var fromVal = (n.name).split("to")[0];
                     var toVal = (n.name).split("to")[1];
-                    if(fromVal !== undefined && fromVal !== null && fromVal !== ''){
-                        fromVal = (fromVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
-                    } else {
+                    if (n.name == "<5") {
                         fromVal = null;
-                    }
-                    if(toVal !== undefined && toVal !== null && toVal !== ''){
-                        toVal = (toVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
+                        toVal = 5;
                     } else {
-                        toVal = null;
+                        if (fromVal !== undefined && fromVal !== null && fromVal !== '') {
+                            fromVal = (fromVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
+                        } else {
+                            fromVal = null;
+                        }
+                        if (toVal !== undefined && toVal !== null && toVal !== '') {
+                            toVal = (toVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
+                        } else {
+                            toVal = null;
+                        }
                     }
+
                     var noiseJSON = {
                         From: parseFloat(fromVal),
                         To: parseFloat(toVal)
@@ -139,23 +145,10 @@
             var turnover = [];
             obj.turnover.forEach(function (t) {
                 if (t.checked) {
-                    var fromVal = (t.name).split("to")[0];
-                    var toVal = (t.name).split("to")[1];
-                    if(fromVal !== undefined && fromVal !== null && fromVal !== ''){
-                        fromVal = (fromVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
-                    } else {
-                        fromVal = null;
-                    }
-                    if(toVal !== undefined && toVal !== null && toVal !== ''){
-                        toVal = (toVal).replace(/[&\/\\#,+()$~%'":*?<>{}=]/g, '');
-                    } else {
-                        toVal = null;
-                    }
-                    var turnoverJSON = {
-                        From: parseFloat(fromVal),
-                        To: parseFloat(toVal)
-                    }
-                    turnover.push(turnoverJSON);
+                    turnover.push({
+                        From: t.from,
+                        To: t.to
+                    });
                 }
             });
             if (turnover.length > 0 && turnover.length < obj.turnover.length) {
