@@ -2,6 +2,16 @@
     .defineController("s.tgps.ComplexSelectorController", [],
     function (vm, dep, tool) {
 
+        function selectPredefinedWatchlist(predefinedName) {
+            vm.displayedLabel = predefinedName;
+            vm.updateSelection({
+                param: {
+                    type: "PredefinedWatchlist",
+                    value: predefinedName
+                }
+            });
+        }
+
         function selectWatchlist(watchlist) {
             vm.displayedLabel = watchlist.WatchlistName;
             vm.updateSelection({
@@ -25,6 +35,7 @@
         tool.initialize(function () {
             tool.setVmProperties({
                 displayedLabel: vm.tradeVenueLocList[0].label,
+                selectPredefinedWatchlist: selectPredefinedWatchlist,
                 selectWatchlist: selectWatchlist,
                 selectVenue: selectVenue
             });

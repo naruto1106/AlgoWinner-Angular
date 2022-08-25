@@ -189,14 +189,18 @@
 				return [
 					{
 						name: "< 1 M",
+						to: 1000000,
 						checked: true
 					},
 					{
 						name: "1 M - 10 M",
+						from: 1000000,
+						to: 10000000,
 						checked: true
 					},
 					{
 						name: "> 10 M",
+						from: 1000000,
 						checked: true
 					}
 				]
