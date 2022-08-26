@@ -103,17 +103,55 @@
                     }
                 });
             }
+
             function loadConstructPortfolio() {
                 tool.openModalByDefinition('s.tgps.riskAnalyzerConstructPortfolioController', {
                     mode: vm.mode
+                }).result.then(function (response) {
+                    vm.portfolio_risk.Portfolio = response;
+                });                
+            }
+
+            function submitPortfolioRisk(){
+                if(vm.portfolio_risk.Portfolio.length == 0){
+                    alert("Please select portfolio");
+                    return;
+                }
+                sProductService.PriskCompute({
+                    Portfolio: vm.portfolio_risk.Portfolio,
+                    Benchmark: vm.portfolio_risk.benchmark,
+                    ObsDate: moment(vm.portfolio_risk.analysisDate).format("YYYY-MM-DD"),
+                    Lookback: vm.portfolio_risk.lookback_horizon
+                }).then(function (res) {
+                    if(res.status === 500){
+                        alert('We are currently unable to serve this request, please try again later');
+                    }
+                    if(res.status === 200){
+                        vm.portfolio_risk.tableHeadings[1] = '-';
+                        vm.portfolio_risk.tableHeadings[2] = vm.portfolio_risk.benchmark;
+                        vm.portfolio_risk.table = res.data;
+                    }
                 });
             }
-            function submitPortfolioRisk(){
 
-            }
             function submitMomentumProfiler(){
-
+                sProductService.MomentumCompute({
+                    Market: vm.momentum_profiler.tradeVenueLoc,
+                    Symbol: vm.momentum_profiler.symbol,
+                    Direction: vm.momentum_profiler.direction,
+                    ObsDate: moment(vm.momentum_profiler.analysisDate).format("YYYY-MM-DD"),
+                    Lookback: vm.momentum_profiler.lookback_horizon
+                }).then(function (res) {
+                    if(res.status === 500){
+                        alert('We are currently unable to serve this request, please try again later');
+                    }
+                    if(res.status === 200){
+                        vm.momentum_profiler.momentum = res.data.Momentum;
+                        vm.momentum_profiler.contrarian = res.data.Contrarian;
+                    }
+                });
             }
+
             function submitTradeSizing(){
                 vm.trade_sizing.trade_size = 0;
                 var tradeVenueString = getTradeVenueString(vm.trade_sizing.tradeVenueLoc);
@@ -197,45 +235,35 @@
                     portfolio_risk: {
                         benchmark: 'SPY',
                         analysisDate: new Date(),
+                        Portfolio: [],
                         lookback_horizon: 500,
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setPortfolioRiskAnalysisDateSelectionOpen: setPortfolioRiskAnalysisDateSelectionOpen,
-                        table: [
-                            {
-                                name: 'Correlation',
-                                apple: '0.2',
-                                spy: '-',
-                            },
-                            {
-                                name: 'Beta',
-                                apple: '1.1',
-                                spy: '-',
-                            },
-                            {
-                                name: 'Sharpe Ratio',
-                                apple: '0.8	',
-                                spy: '0.4',
-                            },
-                            {
-                                name: 'Return',
-                                apple: '25%',
-                                spy: '16%',
-                            }
-                        ],
-                        volacity: 27
+                        tableHeadings:[' ', 'AAPL', 'SPY'],
+                        table:{
+                            BenchmarkReturn: 0,
+                            BenchmarkRisk: 0,
+                            BenchmarkSharpeRatio: 0,
+                            Beta: 0,
+                            ExpectedCorrelation: 0,
+                            PortfolioReturn: 0,
+                            PortfolioRisk: 0,
+                            PortfolioSharpeRatio: 2
+                        },
+                        volatility: 0
                     },
                     momentum_profiler: {
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
                         direction: '',
                         analysisDate: new Date(),
-                        lookback_horizon: '500',
+                        lookback_horizon: 500,
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setMomentumProfilerAnalysisDateSelectionOpen: setMomentumProfilerAnalysisDateSelectionOpen,
-                        momentum: 25,
-                        contrarian: 75
+                        momentum: 0,
+                        contrarian: 100
                     },
                     trade_sizing: {
                         symbol: 'AAPL',

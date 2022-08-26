@@ -90,6 +90,10 @@
             updateProductTickSizeValueIfBelongToGroup: updateProductTickSizeValueIfBelongToGroup,
 
             SriskComputePost: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/sriskCompute'),
+
+            PriskCompute: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/priskCompute'),
+
+            MomentumCompute: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/momentumCompute'),
             
             SizingComputePost: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/sizingCompute'),
 

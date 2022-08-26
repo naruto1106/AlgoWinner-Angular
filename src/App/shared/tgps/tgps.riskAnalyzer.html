@@ -146,9 +146,17 @@
                             <div class="w-100 f-l mb-20">
                                 <div class="w-40 f-l">
                                     Benchmark
-                                </div>
+                                </div>                                
                                 <div class="w-60 f-r">
-                                    <input type="text" name="portfolio_risk_benchmark" ng-model="vm.portfolio_risk.benchmark" class="f-r">
+                                    <input class="f-r" 
+                                        type="text" 
+                                        placeholder="Search product" 
+                                        ng-model="vm.portfolio_risk.benchmark"
+                                        ng-model-options="{debounce: 200}"
+                                        uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                                        typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                                        typeahead-wait-ms="200"
+                                        typeahead-on-select="vm.showProductBenchMark(vm.portfolio_risk.benchmark, 'portfolio_risk')">
                                 </div>
                             </div>
                             <div class="w-100 f-l mb-20">
@@ -171,10 +179,10 @@
                             </div>
                             <div class="w-100 f-l">
                                 <div class="w-40 f-l">
-                                    Lookback horizon
+                                    Lookback Horizon
                                 </div>
                                 <div class="w-60 f-r">
-                                    <input type="text" name="portfolio_risk_lookback_horizon" ng-model="vm.portfolio_risk.lookback_horizon" class="f-r">
+                                    <input type="number" name="portfolio_risk_lookback_horizon" ng-model="vm.portfolio_risk.lookback_horizon" class="f-r">
                                 </div>
                             </div>
 
@@ -190,22 +198,35 @@
                         <table>
                             <thead>
                                 <tr>
-                                <th></th>
-                                <th>APPLE</th>
-                                <th>SPY</th>
+                                    <th ng-repeat="tableHeading in vm.portfolio_risk.tableHeadings">{{tableHeading}}</th>                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="tableObj in vm.portfolio_risk.table">
-                                    <td>{{tableObj.name}}</td>
-                                    <td>{{tableObj.apple}}</td>
-                                    <td>{{tableObj.spy}}</td>
+                                <tr>
+                                    <td>Correlation</td>
+                                    <td>{{vm.convertToFixed(vm.portfolio_risk.table.ExpectedCorrelation)}}</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Beta</td>
+                                    <td>{{vm.convertToFixed(vm.portfolio_risk.table.Beta)}}</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Sharpe Ratio</td>
+                                    <td>{{vm.convertToFixed(vm.portfolio_risk.table.PortfolioSharpeRatio)}}</td>
+                                    <td>{{vm.convertToFixed(vm.portfolio_risk.table.BenchmarkSharpeRatio)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Return</td>
+                                    <td>{{vm.convertToFixed(vm.portfolio_risk.table.PortfolioReturn)}}%</td>
+                                    <td>{{vm.convertToFixed(vm.portfolio_risk.table.BenchmarkReturn)}}%</td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="main-box">
                             <div class="main-box-container">
-                                <div class="main-box-1">{{vm.portfolio_risk.volacity}}%</div>
+                                <div class="main-box-1">{{vm.portfolio_risk.volatility}}%</div>
                                 <div class="main-box-2">VOLTALITY</div>
                             </div>
                         </div>
@@ -318,9 +339,7 @@
                                     Relative Size
                                 </div>
                                 <div class="w-60 f-r">
-                                    <div class="w-60 f-r">
-                                        <select class="select-box" name="trade_sizing_relative_size" ng-model="vm.trade_sizing.relative_size" ng-options="rs as rs for rs in vm.relative_sizes"></select>
-                                    </div>
+                                    <select class="select-box" name="trade_sizing_relative_size" ng-model="vm.trade_sizing.relative_size" ng-options="rs as rs for rs in vm.relative_sizes"></select>                                    
                                 </div>
                             </div>
 

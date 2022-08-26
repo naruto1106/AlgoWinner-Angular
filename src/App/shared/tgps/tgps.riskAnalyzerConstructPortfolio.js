@@ -18,7 +18,7 @@
                     Symbol: 'AAPL',
                     Market: 'US',
                     Direction: 'Long',
-                    Quantity: '',
+                    Amount: 0,
                 };
                 vm.constructPortfolios.push(portfolioJSON);
             }
@@ -28,7 +28,7 @@
             }
 
             function submitPortfolio(){
-                console.log(vm.constructPortfolios);
+                vm.uibClosePanel(vm.constructPortfolios);
             }
 
             function searchProducts(keyword) {
@@ -56,7 +56,7 @@
                             Symbol: 'AAPL',
                             Market: 'US',
                             Direction: 'Long',
-                            Quantity: '',
+                            Amount: 0,
                         }
                     ]
                 });
