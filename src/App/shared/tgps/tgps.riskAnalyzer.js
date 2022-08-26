@@ -57,8 +57,26 @@
                         tradeVenueString = "UnitedStates";
                         break;
                 }
-
                 return tradeVenueString;
+            }
+            
+            function getRelativeSizeIntValues(sizeString){
+                var sizeInt = 0.05;
+                switch (sizeString) {
+                    case "5%":
+                        sizeInt = 0.05;
+                        break;
+                    case "10%":
+                        sizeInt = 0.1;
+                        break;
+                    case "15%":
+                        sizeInt = 0.15;
+                        break;
+                    case "20%":
+                        sizeInt = 0.2;
+                        break;                    
+                }
+                return sizeInt;
             }
 
             function getLatestEndTradingDate(tradeVenue) {
@@ -98,7 +116,7 @@
                     if (date) {
                         vm.trade_sizing.Today = date;
                         sProductService.SizingComputePost({
-                            StdSize: vm.trade_sizing.regular_size,
+                            StdSize: getRelativeSizeIntValues(vm.trade_sizing.relative_size),
                             Symbol: vm.trade_sizing.symbol,
                             Market: vm.trade_sizing.tradeVenueLoc,
                             Today: moment(vm.trade_sizing.Today).format("YYYY-MM-DD")
@@ -129,6 +147,7 @@
                     setTab: setTab, 
                     submitStockRisk: submitStockRisk,
                     direction: ['Long', 'Short'],
+                    relative_sizes: ['5%', '10%', '15%', '20%'],
                     loadConstructPortfolio: loadConstructPortfolio,
                     submitPortfolioRisk: submitPortfolioRisk,
                     submitMomentumProfiler: submitMomentumProfiler,
@@ -215,7 +234,7 @@
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
                         Today: '',
-                        regular_size: 0.05,
+                        relative_size: '5%',
                         trade_size: 0
                     },
                     dateOptions: {

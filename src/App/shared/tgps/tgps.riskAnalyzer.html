@@ -297,11 +297,11 @@
                             </div>
                             <div class="w-100 f-l">
                                 <div class="w-40 f-l">
-                                    Regular Size
+                                    Relative Size
                                 </div>
                                 <div class="w-60 f-r">
                                     <div class="w-60 f-r">
-                                        <input type="number" name="trade_sizing_regular_size" ng-model="vm.trade_sizing.regular_size" class="f-r">
+                                        <select class="select-box" name="trade_sizing_relative_size" ng-model="vm.trade_sizing.relative_size" ng-options="rs as rs for rs in vm.relative_sizes"></select>
                                     </div>                                    
                                 </div>
                             </div>
