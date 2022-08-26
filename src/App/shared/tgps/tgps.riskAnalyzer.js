@@ -118,9 +118,9 @@
             }
 
             function showProduct(item, type) {
-                vm[type].tradeVenueLoc = item.TradeVenueLoc;                
+                vm[type].tradeVenueLoc = item.TradeVenueLoc;
                 vm[type].symbol = item.Symbol;
-            }            
+            }
             
             tool.initialize(function () {
                 tool.setVmProperties({
@@ -140,7 +140,7 @@
                         tradeVenueLoc: 'US',
                         benchmark: 'SPY',
                         analysisDate: new Date(),
-                        lookback_horizon: '500',
+                        lookback_horizon: 500,
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setStockRiskAnalysisDateSelectionOpen: setStockRiskAnalysisDateSelectionOpen,
@@ -171,7 +171,7 @@
                     portfolio_risk: {
                         benchmark: 'SPY',
                         analysisDate: new Date(),
-                        lookback_horizon: '500',
+                        lookback_horizon: 500,
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setPortfolioRiskAnalysisDateSelectionOpen: setPortfolioRiskAnalysisDateSelectionOpen,
@@ -215,7 +215,7 @@
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
                         Today: '',
-                        regular_size: '0.05',
+                        regular_size: 0.05,
                         trade_size: 0
                     },
                     dateOptions: {

@@ -8,13 +8,21 @@
 
     <div class="modal-body" style="width: 100%; float: left;" ng-if="vm.mode !== null">
         <div class="main-section">
-            <div class="main-section-inner">
+            <div class="main-section-inner" ng-repeat="cp in vm.constructPortfolios track by $index">
                 <div class="w-30 f-l">
                     <div class="w-30 f-l">
                         Symbol
                     </div>
-                    <div class="w-60 f-l">
-                        <input type="text" name="trade_sizing_symbol" ng-model="vm.momentum_profiler.symbol" class="f-r">
+                    <div class="w-60 f-l">                        
+                        <input class="f-r" 
+                        type="text" 
+                        placeholder="Search product"
+                        ng-model="vm.constructPortfolios[$index].Symbol"
+                        ng-model-options="{debounce: 200}"
+                        uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                        typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                        typeahead-wait-ms="200"
+                        typeahead-on-select="vm.showProduct(vm.constructPortfolios[$index].Symbol, $index)">
                     </div>
                 </div>
                 <div class="w-30 f-l">
@@ -22,9 +30,7 @@
                         Direction
                     </div>
                     <div class="w-60 f-l">
-                        <select class="select-box" name="momentum_profiler_direction" ng-model="vm.momentum_profiler.direction">
-                            <option>-</option>
-                        </select>
+                        <select class="select-box" name="vm.constructPortfolios[$index].Direction" ng-model="vm.constructPortfolios[$index].Direction" ng-options="d as d for d in vm.direction"></select>                        
                     </div>
                 </div>
                 <div class="w-30 f-l">
@@ -32,56 +38,27 @@
                         Quantity
                     </div>
                     <div class="w-60 f-l">
-                        <input type="text" name="trade_sizing_symbol" ng-model="vm.momentum_profiler.symbol" class="f-r">
+                        <input type="text" name="vm.constructPortfolios[$index].Quantity" ng-model="vm.constructPortfolios[$index].Quantity" class="f-r">
                     </div>
                 </div>
                 <div class="w-10 f-l" style="text-align: center;">
-                    <button class="btn btn-danger btn-circle add-remove-row-icon">
-                        <i class="fa fa-minus" style="font-size: 20px;"></i>
-                    </button>
-                    <!-- <button class="btn btn-success btn-circle add-remove-row-icon">
-                        <i class="fa fa-plus" style="font-size: 20px;"></i>
-                    </button> -->
+                    <span ng-if="$index > 0">
+                        <button ng-click="vm.removeRow($index)" class="btn btn-danger btn-circle add-remove-row-icon">
+                            <i class="fa fa-minus" style="font-size: 20px;"></i>
+                        </button>
+                    </span>
+                    <span ng-if="$index == 0">
+                        <button ng-click="vm.addRow($index)" class="btn btn-success btn-circle add-remove-row-icon">
+                            <i class="fa fa-plus" style="font-size: 20px;"></i>
+                        </button>
+                    </span>
                 </div>
-            </div>
-            <div class="main-section-inner">
-                <div class="w-30 f-l">
-                    <div class="w-30 f-l">
-                        Symbol
-                    </div>
-                    <div class="w-60 f-l">
-                        <input type="text" name="trade_sizing_symbol" ng-model="vm.momentum_profiler.symbol" class="f-r">
-                    </div>
-                </div>
-                <div class="w-30 f-l">
-                    <div class="w-30 f-l">
-                        Direction
-                    </div>
-                    <div class="w-60 f-l">
-                        <select class="select-box" name="momentum_profiler_direction" ng-model="vm.momentum_profiler.direction">
-                            <option>-</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="w-30 f-l">
-                    <div class="w-30 f-l">
-                        Quantity
-                    </div>
-                    <div class="w-60 f-l">
-                        <input type="text" name="trade_sizing_symbol" ng-model="vm.momentum_profiler.symbol" class="f-r">
-                    </div>
-                </div>
-                <div class="w-10 f-l" style="text-align: center;">                    
-                    <button class="btn btn-success btn-circle add-remove-row-icon">
-                        <i class="fa fa-plus" style="font-size: 20px;"></i>
-                    </button>
-                </div>
-            </div>
+            </div>           
        </div>
     </div>
 
     <div class="modal-footer">
-        <button class="hollow-blue m-right-10px pull-right" style="margin-top: 10px;" ng-click="vm.closePanel()">CONFIRM</button>
+        <button class="hollow-blue m-right-10px pull-right" style="margin-top: 10px;" ng-click="vm.submitPortfolio()">CONFIRM</button>
         <div class="clearfix"></div>
     </div>
 </div>
