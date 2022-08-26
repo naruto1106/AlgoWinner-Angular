@@ -66,27 +66,7 @@
                     return res.data;
                 });
             }
-
-            // return dep.sProductService.GetGlobalIndicesBySymbols({
-            //     Symbols: symbols
-            // }).then(function (res) {
-            //     var products = res.data.Data;
-            //     var indicesList = [];
-            
-            //     products.forEach(function (p) {
-            //         indicesList.push({
-            //             ProductModel: p
-            //         });
-            //     });
-            
-            //     sWatchlistUpdateManagerService.changeWatchlist([], { WatchlistProducts: indicesList });
-            //     sWatchlistUpdateManagerService.setMarketDataUpdateHandlerOnListOfWatchlistProducts(function () {
-            //         return indicesList;
-            //     }, tool);
-            
-            //     return indicesList;
-            // });
-
+           
             function submitStockRisk(){
                 sProductService.SriskComputePost({
                     Market: vm.stock_risk.tradeVenueLoc,
@@ -95,8 +75,9 @@
                     ObsDate: moment(vm.stock_risk.analysisDate).format("YYYY-MM-DD"),
                     Lookback: vm.stock_risk.lookback_horizon
                 }).then(function (res) {
-                    console.log("res: ", res);
-                    //var response = res.data.Data;
+                    if(res.status === 200){
+
+                    }                    
                 });
             }
             function loadConstructPortfolio() {
@@ -111,10 +92,21 @@
 
             }
             function submitTradeSizing(){
+                vm.trade_sizing.trade_size = 0;
                 var tradeVenueString = getTradeVenueString(vm.trade_sizing.tradeVenueLoc);
                 getLatestEndTradingDate(tradeVenueString).then(function (date) {
                     if (date) {
-                        vm.trade_sizing.Today = new Date(date.substring(0, date.indexOf("T")));
+                        vm.trade_sizing.Today = date;
+                        sProductService.SizingComputePost({
+                            StdSize: vm.trade_sizing.regular_size,
+                            Symbol: vm.trade_sizing.symbol,
+                            Market: vm.trade_sizing.tradeVenueLoc,
+                            Today: moment(vm.trade_sizing.Today).format("YYYY-MM-DD")
+                        }).then(function (res) {
+                            if(res.status === 200){
+                                vm.trade_sizing.trade_size = (parseFloat(res.data)).toFixed(2);
+                            }
+                        });
                     }
                 });
             }
@@ -127,6 +119,7 @@
 
             function showProduct(item, type) {
                 vm[type].tradeVenueLoc = item.TradeVenueLoc;                
+                vm[type].symbol = item.Symbol;
             }            
             
             tool.initialize(function () {
@@ -223,7 +216,7 @@
                         tradeVenueLoc: 'US',
                         Today: '',
                         regular_size: '0.05',
-                        trade_size: 2
+                        trade_size: 0
                     },
                     dateOptions: {
                         formatYear: 'yyyy',

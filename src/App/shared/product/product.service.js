@@ -90,6 +90,8 @@
             updateProductTickSizeValueIfBelongToGroup: updateProductTickSizeValueIfBelongToGroup,
 
             SriskComputePost: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/sriskCompute'),
+            
+            SizingComputePost: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/sizingCompute'),
 
             GetSector: coreServerCommunicationService.genGetFunctionWithNVar(productPath + '/GetSectorSelections', function (args) {
                 return {
