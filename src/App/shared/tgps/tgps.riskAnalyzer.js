@@ -93,9 +93,14 @@
                     ObsDate: moment(vm.stock_risk.analysisDate).format("YYYY-MM-DD"),
                     Lookback: vm.stock_risk.lookback_horizon
                 }).then(function (res) {
+                    if(res.status === 500){
+                        alert('We are currently unable to serve this request, please try again later');
+                    }
                     if(res.status === 200){
-
-                    }                    
+                        vm.stock_risk.tableHeadings[1] = vm.stock_risk.symbol;
+                        vm.stock_risk.tableHeadings[2] = vm.stock_risk.benchmark;
+                        vm.stock_risk.table = res.data;
+                    }
                 });
             }
             function loadConstructPortfolio() {
@@ -121,6 +126,9 @@
                             Market: vm.trade_sizing.tradeVenueLoc,
                             Today: moment(vm.trade_sizing.Today).format("YYYY-MM-DD")
                         }).then(function (res) {
+                            if(res.status === 500){
+                                alert('We are currently unable to serve this request, please try again later');
+                            }
                             if(res.status === 200){
                                 vm.trade_sizing.trade_size = (parseFloat(res.data)).toFixed(2);
                             }
@@ -140,6 +148,14 @@
                 vm[type].symbol = item.Symbol;
             }
             
+            function showProductBenchMark(item, type) {
+                vm[type].benchmark = item.Symbol;
+            }
+
+            function convertToFixed(int){
+                return (parseFloat(int)).toFixed(2);
+            }
+            
             tool.initialize(function () {
                 tool.setVmProperties({
                     closePanel:closePanel,
@@ -153,7 +169,9 @@
                     submitMomentumProfiler: submitMomentumProfiler,
                     submitTradeSizing: submitTradeSizing,
                     showProduct: showProduct,
+                    showProductBenchMark: showProductBenchMark,
                     searchProducts: searchProducts,
+                    convertToFixed: convertToFixed,
                     stock_risk: {
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
@@ -163,28 +181,17 @@
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setStockRiskAnalysisDateSelectionOpen: setStockRiskAnalysisDateSelectionOpen,
-                        table: [
-                            {
-                                name: 'Correlation',
-                                apple: '0.2',
-                                spy: '-',
-                            },
-                            {
-                                name: 'Beta',
-                                apple: '1.1',
-                                spy: '-',
-                            },
-                            {
-                                name: 'Sharpe Ratio',
-                                apple: '0.8	',
-                                spy: '0.4',
-                            },
-                            {
-                                name: 'Return',
-                                apple: '25%',
-                                spy: '16%',
-                            }
-                        ],
+                        tableHeadings:[' ', 'AAPL', 'SPY'],
+                        table:{
+                            BenchmarkReturn: 0,
+                            BenchmarkRisk: 0,
+                            BenchmarkSharpeRatio: 0,
+                            Beta: 0,
+                            ExpectedCorrelation: 0,
+                            StockReturn: 0,
+                            StockRisk: 0,
+                            StockSharpeRatio: 0
+                        },
                         volatility: 0
                     },
                     portfolio_risk: {

@@ -9,16 +9,16 @@
     <div class="modal-body" style="width: 100%; float: left;" ng-if="vm.mode !== null">
         <div class="main-tabs">
             <div class="tab-1 hollow-blue" ng-class="{ 'btn-primary' : vm.currentTab == 'stock_risk' }">
-                <button ng-click="vm.setTab('stock_risk')">STOCK RISK</button>        
+                <button ng-click="vm.setTab('stock_risk')">STOCK RISK</button>
             </div>
             <div class="tab-2 hollow-blue" ng-class="{ 'btn-primary' : vm.currentTab == 'portfolio_risk' }">
-                <button ng-click="vm.setTab('portfolio_risk')">PORTFOLIO RISK</button>        
+                <button ng-click="vm.setTab('portfolio_risk')">PORTFOLIO RISK</button>
             </div>
             <div class="tab-3 hollow-blue" ng-class="{ 'btn-primary' : vm.currentTab == 'momentum_profiler' }">
-                <button ng-click="vm.setTab('momentum_profiler')">MOMENTUM PROFILER</button>        
+                <button ng-click="vm.setTab('momentum_profiler')">MOMENTUM PROFILER</button>
             </div>
             <div class="tab-4 hollow-blue" ng-class="{ 'btn-primary' : vm.currentTab == 'trade_sizing' }">
-                <button ng-click="vm.setTab('trade_sizing')">TRADE SIZING</button>        
+                <button ng-click="vm.setTab('trade_sizing')">TRADE SIZING</button>
             </div>
         </div>
 
@@ -48,7 +48,15 @@
                                     Benchmark
                                 </div>
                                 <div class="w-60 f-r">
-                                    <input type="text" name="stock_risk_benchmark" ng-model="vm.stock_risk.benchmark" class="f-r">
+                                    <input class="f-r" 
+                                        type="text" 
+                                        placeholder="Search product" 
+                                        ng-model="vm.stock_risk.benchmark"
+                                        ng-model-options="{debounce: 200}"
+                                        uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                                        typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                                        typeahead-wait-ms="200"
+                                        typeahead-on-select="vm.showProductBenchMark(vm.stock_risk.benchmark, 'stock_risk')">
                                 </div>
                             </div>
                             <div class="w-100 f-l mb-20">
@@ -56,7 +64,7 @@
                                     Analysis Date
                                 </div>
                                 <div class="w-60 f-r">
-                                    <div class="date-picker input-group pull-right risk-analyzer-date" style="width: 82%;">
+                                    <div class="date-picker input-group pull-right risk-analyzer-date" style="width: 100%;">
                                         <input type="text" class="va-middle"
                                                uib-datepicker-popup="mediumDate" ng-model="vm.stock_risk.analysisDate" is-open="vm.stock_risk.dateOpened"
                                                datepicker-options="vm.dateOptions"
@@ -80,25 +88,37 @@
                             <div class="w-100 f-l">
                                 <div class="button-main">
                                     <button ng-click="vm.submitStockRisk()" class="btn-primary hollow-blue pull-left">ASSESS</button>                                    
-                                </div>                                
+                                </div>
                             </div>
-                            
                         </div>
                     </div>
                     <div class="right-section">
                         <table>
                             <thead>
                                 <tr>
-                                <th></th>
-                                <th>APPLE</th>
-                                <th>SPY</th>
+                                    <th ng-repeat="tableHeading in vm.stock_risk.tableHeadings">{{tableHeading}}</th>                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="tableObj in vm.stock_risk.table">
-                                    <td>{{tableObj.name}}</td>
-                                    <td>{{tableObj.apple}}</td>
-                                    <td>{{tableObj.spy}}</td>
+                                <tr>
+                                    <td>Correlation</td>
+                                    <td>{{vm.convertToFixed(vm.stock_risk.table.ExpectedCorrelation)}}</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Beta</td>
+                                    <td>{{vm.convertToFixed(vm.stock_risk.table.Beta)}}</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Sharpe Ratio</td>
+                                    <td>{{vm.convertToFixed(vm.stock_risk.table.StockSharpeRatio)}}</td>
+                                    <td>{{vm.convertToFixed(vm.stock_risk.table.BenchmarkSharpeRatio)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Return</td>
+                                    <td>{{vm.convertToFixed(vm.stock_risk.table.StockSharpeRatio)}}%</td>
+                                    <td>{{vm.convertToFixed(vm.stock_risk.table.BenchmarkReturn)}}%</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -130,13 +150,13 @@
                                 <div class="w-60 f-r">
                                     <input type="text" name="portfolio_risk_benchmark" ng-model="vm.portfolio_risk.benchmark" class="f-r">
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="w-100 f-l mb-20">
                                 <div class="w-40 f-l">
                                     Analysis Date
                                 </div>
                                 <div class="w-60 f-r">
-                                    <div class="date-picker input-group pull-right risk-analyzer-date" style="width: 82%;">
+                                    <div class="date-picker input-group pull-right risk-analyzer-date" style="width: 100%;">
                                         <input type="text" class="va-middle"
                                                style="border: 1px solid #93a2b0; border-radius: 0;"
                                                uib-datepicker-popup="mediumDate" ng-model="vm.portfolio_risk.analysisDate" is-open="vm.portfolio_risk.dateOpened"
@@ -225,7 +245,7 @@
                                     Analysis Date
                                 </div>
                                 <div class="w-60 f-r">
-                                    <div class="date-picker input-group pull-right risk-analyzer-date" style="width: 82%;">
+                                    <div class="date-picker input-group pull-right risk-analyzer-date" style="width: 100%;">
                                         <input type="text" class="va-middle"
                                                uib-datepicker-popup="mediumDate" ng-model="vm.momentum_profiler.analysisDate" is-open="vm.momentum_profiler.dateOpened"
                                                datepicker-options="vm.dateOptions"
@@ -242,9 +262,7 @@
                                     Lookback Horizon
                                 </div>
                                 <div class="w-60 f-r">
-                                    <div class="w-60 f-r">
-                                        <input type="number" name="momentum_profiler_lookback_horizon" ng-model="vm.momentum_profiler.lookback_horizon" class="f-r">
-                                    </div>
+                                    <input type="number" name="momentum_profiler_lookback_horizon" ng-model="vm.momentum_profiler.lookback_horizon" class="f-r">                                    
                                 </div>
                             </div>
 
@@ -265,7 +283,7 @@
                             <div class="main-slider-section-2">
                                 <span style="margin-right: 30px;">CONTRARIAN</span>
                                 <div class="main-slider-section-2-text">{{vm.momentum_profiler.contrarian}}%</div>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="main-slider">
                             <div class="progress">
@@ -302,7 +320,7 @@
                                 <div class="w-60 f-r">
                                     <div class="w-60 f-r">
                                         <select class="select-box" name="trade_sizing_relative_size" ng-model="vm.trade_sizing.relative_size" ng-options="rs as rs for rs in vm.relative_sizes"></select>
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
 
@@ -319,7 +337,7 @@
                                 <div class="main-box-1">{{vm.trade_sizing.trade_size}}%</div>
                                 <div class="main-box-2">TRADE SIZE</div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
