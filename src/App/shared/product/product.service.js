@@ -8,6 +8,7 @@
         var newsPath = '/newsapi/v1/News';
         var targetPricePath = '/ratingapi/v1/TargetPrice';
         var fundamentalPath = '/fundamentalapi/v1/Fundamental';
+        var riskAnalysisPath = '/riskazapi/v1';
 
         var $window = dep.$window,
             coreConfigService = dep.coreConfigService,
@@ -87,6 +88,8 @@
             createProductPageUrl: createProductPageUrl,
             goToProduct: goToProduct,            
             updateProductTickSizeValueIfBelongToGroup: updateProductTickSizeValueIfBelongToGroup,
+
+            SriskComputePost: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/sriskCompute'),
 
             GetSector: coreServerCommunicationService.genGetFunctionWithNVar(productPath + '/GetSectorSelections', function (args) {
                 return {

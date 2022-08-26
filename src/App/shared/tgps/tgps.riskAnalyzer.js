@@ -67,7 +67,37 @@
                 });
             }
 
-            function submitStockRisk(){                
+            // return dep.sProductService.GetGlobalIndicesBySymbols({
+            //     Symbols: symbols
+            // }).then(function (res) {
+            //     var products = res.data.Data;
+            //     var indicesList = [];
+            
+            //     products.forEach(function (p) {
+            //         indicesList.push({
+            //             ProductModel: p
+            //         });
+            //     });
+            
+            //     sWatchlistUpdateManagerService.changeWatchlist([], { WatchlistProducts: indicesList });
+            //     sWatchlistUpdateManagerService.setMarketDataUpdateHandlerOnListOfWatchlistProducts(function () {
+            //         return indicesList;
+            //     }, tool);
+            
+            //     return indicesList;
+            // });
+
+            function submitStockRisk(){
+                sProductService.SriskComputePost({
+                    Market: vm.stock_risk.tradeVenueLoc,
+                    Symbol: vm.stock_risk.symbol,
+                    Benchmark: vm.stock_risk.benchmark,
+                    ObsDate: moment(vm.stock_risk.analysisDate).format("YYYY-MM-DD"),
+                    Lookback: vm.stock_risk.lookback_horizon
+                }).then(function (res) {
+                    console.log("res: ", res);
+                    //var response = res.data.Data;
+                });
             }
             function loadConstructPortfolio() {
                 tool.openModalByDefinition('s.tgps.riskAnalyzerConstructPortfolioController', {
