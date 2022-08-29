@@ -1,19 +1,18 @@
 ﻿agmNgModuleWrapper("agms.tgps")
-    .defineControllerAsPopup("s.tgps.RiskAnalyzerController",
-        {
+    .defineControllerAsPopup("s.tgps.RiskAnalyzerController", {
             templateUrl: '/App/shared/tgps/tgps.riskAnalyzer.html',
             windowClass: 'default-modal tgps-risk-analyze-popup'
         }, ['mode', 'sProductService', 'sTradingHolidayService'],
         function (vm, dep, tool) {
-            var sProductService = dep.sProductService, 
-            sTradingHolidayService = dep.sTradingHolidayService;
-            
+            var sProductService = dep.sProductService,
+                sTradingHolidayService = dep.sTradingHolidayService;
+
             vm.mode = dep.mode;
 
             function closePanel() {
                 vm.uibClosePanel();
             }
-            
+
             function setTab(tabName) {
                 vm.currentTab = tabName;
             }
@@ -22,22 +21,17 @@
                 vm.stock_risk.dateSelectionMode = 1;
                 vm.stock_risk.dateOpened = true;
             }
-            
+
             function setPortfolioRiskAnalysisDateSelectionOpen() {
                 vm.portfolio_risk.dateSelectionMode = 1;
                 vm.portfolio_risk.dateOpened = true;
-            }
-            
-            function setMomentumProfilerAnalysisDateSelectionOpen() {
-                vm.momentum_profiler.dateSelectionMode = 1;
-                vm.momentum_profiler.dateOpened = true;
             }
 
             function disabled(param) {
                 return (param.mode === 'day' && (param.date.getDay() === 0 || param.date.getDay() === 6));
             }
 
-            function getTradeVenueString(tradeVenueLoc){
+            function getTradeVenueString(tradeVenueLoc) {
                 var tradeVenueString = null;
                 switch (tradeVenueLoc) {
                     case "SG":
@@ -59,8 +53,8 @@
                 }
                 return tradeVenueString;
             }
-            
-            function getRelativeSizeIntValues(sizeString){
+
+            function getRelativeSizeIntValues(sizeString) {
                 var sizeInt = 0.05;
                 switch (sizeString) {
                     case "5%":
@@ -74,7 +68,7 @@
                         break;
                     case "20%":
                         sizeInt = 0.2;
-                        break;                    
+                        break;
                 }
                 return sizeInt;
             }
@@ -84,8 +78,9 @@
                     return res.data;
                 });
             }
-           
-            function submitStockRisk(){
+
+            function submitStockRisk() {
+                vm.stock_risk.isLoding = true;
                 sProductService.SriskComputePost({
                     Market: vm.stock_risk.tradeVenueLoc,
                     Symbol: vm.stock_risk.symbol,
@@ -93,14 +88,15 @@
                     ObsDate: moment(vm.stock_risk.analysisDate).format("YYYY-MM-DD"),
                     Lookback: vm.stock_risk.lookback_horizon
                 }).then(function (res) {
-                    if(res.status === 500){
+                    if (res.status === 500) {
                         alert('We are currently unable to serve this request, please try again later');
                     }
-                    if(res.status === 200){
+                    if (res.status === 200) {
                         vm.stock_risk.tableHeadings[1] = vm.stock_risk.symbol;
                         vm.stock_risk.tableHeadings[2] = vm.stock_risk.benchmark;
                         vm.stock_risk.table = res.data;
                     }
+                    vm.stock_risk.isLoding = false;
                 });
             }
 
@@ -109,50 +105,51 @@
                     mode: vm.mode
                 }).result.then(function (response) {
                     vm.portfolio_risk.Portfolio = response;
-                });                
+                });
             }
 
-            function submitPortfolioRisk(){
-                if(vm.portfolio_risk.Portfolio.length == 0){
+            function submitPortfolioRisk() {
+                if (vm.portfolio_risk.Portfolio.length == 0) {
                     alert("Please select portfolio");
                     return;
                 }
+                vm.portfolio_risk.isLoding = true;
                 sProductService.PriskCompute({
                     Portfolio: vm.portfolio_risk.Portfolio,
                     Benchmark: vm.portfolio_risk.benchmark,
                     ObsDate: moment(vm.portfolio_risk.analysisDate).format("YYYY-MM-DD"),
                     Lookback: vm.portfolio_risk.lookback_horizon
                 }).then(function (res) {
-                    if(res.status === 500){
+                    if (res.status === 500) {
                         alert('We are currently unable to serve this request, please try again later');
                     }
-                    if(res.status === 200){
-                        vm.portfolio_risk.tableHeadings[1] = '-';
+                    if (res.status === 200) {
+                        vm.portfolio_risk.tableHeadings[1] = 'Portfolio';
                         vm.portfolio_risk.tableHeadings[2] = vm.portfolio_risk.benchmark;
                         vm.portfolio_risk.table = res.data;
                     }
+                    vm.portfolio_risk.isLoding = false;
                 });
             }
 
-            function submitMomentumProfiler(){
+            function submitMomentumProfiler() {
+                vm.momentum_profiler.isLoding = true;
                 sProductService.MomentumCompute({
                     Market: vm.momentum_profiler.tradeVenueLoc,
                     Symbol: vm.momentum_profiler.symbol,
-                    Direction: vm.momentum_profiler.direction,
-                    ObsDate: moment(vm.momentum_profiler.analysisDate).format("YYYY-MM-DD"),
-                    Lookback: vm.momentum_profiler.lookback_horizon
                 }).then(function (res) {
-                    if(res.status === 500){
+                    if (res.status === 500) {
                         alert('We are currently unable to serve this request, please try again later');
                     }
-                    if(res.status === 200){
-                        vm.momentum_profiler.momentum = res.data.Momentum;
-                        vm.momentum_profiler.contrarian = res.data.Contrarian;
+                    if (res.status === 200) {
+                        vm.momentum_profiler.table = res.data;
                     }
+                    vm.momentum_profiler.isLoding = false;
                 });
             }
 
-            function submitTradeSizing(){
+            function submitTradeSizing() {
+                vm.trade_sizing.isLoding = true;
                 vm.trade_sizing.trade_size = 0;
                 var tradeVenueString = getTradeVenueString(vm.trade_sizing.tradeVenueLoc);
                 getLatestEndTradingDate(tradeVenueString).then(function (date) {
@@ -164,17 +161,18 @@
                             Market: vm.trade_sizing.tradeVenueLoc,
                             Today: moment(vm.trade_sizing.Today).format("YYYY-MM-DD")
                         }).then(function (res) {
-                            if(res.status === 500){
+                            if (res.status === 500) {
                                 alert('We are currently unable to serve this request, please try again later');
                             }
-                            if(res.status === 200){
+                            if (res.status === 200) {
                                 vm.trade_sizing.trade_size = (parseFloat(res.data)).toFixed(2);
                             }
+                            vm.trade_sizing.isLoding = false;
                         });
                     }
                 });
             }
-            
+
             function searchProducts(keyword) {
                 return sProductService.SearchPlottableProduct(keyword).then(function (res) {
                     return res.data.Data;
@@ -185,20 +183,20 @@
                 vm[type].tradeVenueLoc = item.TradeVenueLoc;
                 vm[type].symbol = item.Symbol;
             }
-            
+
             function showProductBenchMark(item, type) {
                 vm[type].benchmark = item.Symbol;
             }
 
-            function convertToFixed(int){
+            function convertToFixed(int) {
                 return (parseFloat(int)).toFixed(2);
             }
-            
+
             tool.initialize(function () {
                 tool.setVmProperties({
-                    closePanel:closePanel,
+                    closePanel: closePanel,
                     currentTab: 'stock_risk',
-                    setTab: setTab, 
+                    setTab: setTab,
                     submitStockRisk: submitStockRisk,
                     direction: ['Long', 'Short'],
                     relative_sizes: ['5%', '10%', '15%', '20%'],
@@ -211,6 +209,7 @@
                     searchProducts: searchProducts,
                     convertToFixed: convertToFixed,
                     stock_risk: {
+                        isLoding: false,
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
                         benchmark: 'SPY',
@@ -219,8 +218,8 @@
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setStockRiskAnalysisDateSelectionOpen: setStockRiskAnalysisDateSelectionOpen,
-                        tableHeadings:[' ', 'AAPL', 'SPY'],
-                        table:{
+                        tableHeadings: [' ', 'AAPL', 'SPY'],
+                        table: {
                             BenchmarkReturn: 0,
                             BenchmarkRisk: 0,
                             BenchmarkSharpeRatio: 0,
@@ -233,6 +232,7 @@
                         volatility: 0
                     },
                     portfolio_risk: {
+                        isLoding: false,
                         benchmark: 'SPY',
                         analysisDate: new Date(),
                         Portfolio: [],
@@ -240,8 +240,8 @@
                         dateOpened: false,
                         dateSelectionMode: 0,
                         setPortfolioRiskAnalysisDateSelectionOpen: setPortfolioRiskAnalysisDateSelectionOpen,
-                        tableHeadings:[' ', 'AAPL', 'SPY'],
-                        table:{
+                        tableHeadings: [' ', 'Portfolio', 'SPY'],
+                        table: {
                             BenchmarkReturn: 0,
                             BenchmarkRisk: 0,
                             BenchmarkSharpeRatio: 0,
@@ -249,23 +249,34 @@
                             ExpectedCorrelation: 0,
                             PortfolioReturn: 0,
                             PortfolioRisk: 0,
-                            PortfolioSharpeRatio: 2
+                            PortfolioSharpeRatio: 0
                         },
                         volatility: 0
                     },
                     momentum_profiler: {
+                        isLoding: false,
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
-                        direction: '',
-                        analysisDate: new Date(),
-                        lookback_horizon: 500,
-                        dateOpened: false,
-                        dateSelectionMode: 0,
-                        setMomentumProfilerAnalysisDateSelectionOpen: setMomentumProfilerAnalysisDateSelectionOpen,
-                        momentum: 0,
-                        contrarian: 100
+                        tableHeadings: [' ', 'LONG', 'SHORT'],
+                        table: {
+                            LongStats: {
+                                Accuracy: 0,
+                                RelativeAlpha: 0,
+                                StockReturn: 0,
+                                TGPSReturn: 0,
+                            },
+                            ShortStats: {
+                                Accuracy: 0,
+                                RelativeAlpha: 0,
+                                StockReturn: 0,
+                                TGPSReturn: 0,
+                            },
+                            Message: '',
+                            Model: 0
+                        },
                     },
                     trade_sizing: {
+                        isLoding: false,
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
                         Today: '',

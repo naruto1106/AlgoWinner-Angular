@@ -8,8 +8,8 @@
             ng-if="vm.pChartTgpsService.tradersGpsMode"
             ng-change="vm.toggleTradersGps()"
             ng-options="opt as opt for opt in vm.swingModeOptions"
-            analytics-on="click" analytics-category="Chart" analytics-event="TGPS" 
-            analytics-label="TGPSType" dimension-value="{{vm.pChartTgpsService.tradersgps_swing.mode === 'Swing'}}" 
+            analytics-on="click" analytics-category="Chart" analytics-event="TGPS"
+            analytics-label="TGPSType" dimension-value="{{vm.pChartTgpsService.tradersgps_swing.mode === 'Swing'}}"
             agmc-anal agmc-analytics-timestamp agmc-analytics-custom-dimension="dimension4"></select>
 
     &nbsp;
@@ -17,8 +17,8 @@
             analytics-on="click" analytics-category="Chart" analytics-event="TGPS" analytics-label="TGPSScreener" agmc-analytics-timestamp>
         <span>Screener</span>
     </button>
-    
-    <button class="btn-xs btn-success" ng-click="vm.loadRiskAnalyzer()" ng-if="vm.pChartTgpsService.tradersGpsMode"
+
+    <button class="btn-xs btn-success btn-blue" ng-click="vm.loadRiskAnalyzer()" ng-if="vm.pChartTgpsService.tradersGpsMode"
             analytics-on="click" analytics-category="Chart" analytics-event="RiskAnalyzer" analytics-label="TGPSRiskAnalyzer" agmc-analytics-timestamp>
         <span>Risk Analyzer</span>
     </button>
