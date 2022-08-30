@@ -81,6 +81,7 @@
 
             function submitStockRisk() {
                 vm.stock_risk.isLoding = true;
+                vm.stock_risk.isDataLoaded = false;
                 sProductService.SriskComputePost({
                     Market: vm.stock_risk.tradeVenueLoc,
                     Symbol: vm.stock_risk.symbol,
@@ -95,6 +96,7 @@
                         vm.stock_risk.tableHeadings[1] = vm.stock_risk.symbol;
                         vm.stock_risk.tableHeadings[2] = vm.stock_risk.benchmark;
                         vm.stock_risk.table = res.data;
+                        vm.stock_risk.isDataLoaded = true;
                     }
                     vm.stock_risk.isLoding = false;
                 });
@@ -114,6 +116,7 @@
                     return;
                 }
                 vm.portfolio_risk.isLoding = true;
+                vm.portfolio_risk.isDataLoaded = false;
                 sProductService.PriskCompute({
                     Portfolio: vm.portfolio_risk.Portfolio,
                     Benchmark: vm.portfolio_risk.benchmark,
@@ -127,6 +130,7 @@
                         vm.portfolio_risk.tableHeadings[1] = 'Portfolio';
                         vm.portfolio_risk.tableHeadings[2] = vm.portfolio_risk.benchmark;
                         vm.portfolio_risk.table = res.data;
+                        vm.portfolio_risk.isDataLoaded = true;
                     }
                     vm.portfolio_risk.isLoding = false;
                 });
@@ -134,6 +138,7 @@
 
             function submitMomentumProfiler() {
                 vm.momentum_profiler.isLoding = true;
+                vm.momentum_profiler.isDataLoaded = false;
                 sProductService.MomentumCompute({
                     Market: vm.momentum_profiler.tradeVenueLoc,
                     Symbol: vm.momentum_profiler.symbol,
@@ -143,6 +148,7 @@
                     }
                     if (res.status === 200) {
                         vm.momentum_profiler.table = res.data;
+                        vm.momentum_profiler.isDataLoaded = true;
                     }
                     vm.momentum_profiler.isLoding = false;
                 });
@@ -150,6 +156,7 @@
 
             function submitTradeSizing() {
                 vm.trade_sizing.isLoding = true;
+                vm.trade_sizing.isDataLoaded = false;
                 vm.trade_sizing.trade_size = 0;
                 var tradeVenueString = getTradeVenueString(vm.trade_sizing.tradeVenueLoc);
                 getLatestEndTradingDate(tradeVenueString).then(function (date) {
@@ -166,6 +173,7 @@
                             }
                             if (res.status === 200) {
                                 vm.trade_sizing.trade_size = (parseFloat(res.data)).toFixed(2);
+                                vm.trade_sizing.isDataLoaded = true;
                             }
                             vm.trade_sizing.isLoding = false;
                         });
@@ -209,6 +217,7 @@
                     searchProducts: searchProducts,
                     convertToFixed: convertToFixed,
                     stock_risk: {
+                        isDataLoaded: false,
                         isLoding: false,
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
@@ -231,6 +240,7 @@
                         }
                     },
                     portfolio_risk: {
+                        isDataLoaded: false,
                         isLoding: false,
                         benchmark: 'SPY',
                         analysisDate: new Date(),
@@ -252,6 +262,7 @@
                         }
                     },
                     momentum_profiler: {
+                        isDataLoaded: false,
                         isLoding: false,
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
@@ -274,11 +285,12 @@
                         },
                     },
                     trade_sizing: {
+                        isDataLoaded: false,
                         isLoding: false,
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
                         Today: '',
-                        relative_size: '5%',
+                        relative_size: '10%',
                         trade_size: 0
                     },
                     dateOptions: {

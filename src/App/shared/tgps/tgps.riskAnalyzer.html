@@ -85,16 +85,16 @@
                             <div class="w-100 f-l">
                                 <div class="button-main">
                                     <button ng-click="vm.submitStockRisk()"
-                                        class="btn-primary hollow-blue pull-left">ASSESS</button>
-                                </div>
-                                <div class="w-100 f-l loding-data" ng-if="vm.stock_risk.isLoding">
-                                    <span>Data is loading...</span>
+                                        class="btn-primary hollow-blue pull-left">COMPUTE</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="right-section">
-                        <table>
+                        <div class="w-100 f-l mb-20" ng-if="vm.stock_risk.isLoding">
+                            <span class="w-100 f-l message text-center">Processing...</span>
+                        </div>
+                        <table ng-if="vm.stock_risk.isDataLoaded">
                             <thead>
                                 <tr>
                                     <th ng-repeat="tableHeading in vm.stock_risk.tableHeadings">{{tableHeading}}</th>
@@ -123,7 +123,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="main-box">
+                        <div class="main-box" ng-if="vm.stock_risk.isDataLoaded">
                             <div class="main-box-container">
                                 <div class="main-box-1">
                                     {{((vm.stock_risk.table.StockRisk) * 100).toFixed(2)}}%
@@ -194,17 +194,17 @@
                             <div class="w-100 f-l">
                                 <div class="button-main">
                                     <button ng-click="vm.submitPortfolioRisk()"
-                                        class="btn-primary hollow-blue pull-left">ASSESS</button>
-                                </div>
-                                <div class="w-100 f-l loding-data" ng-if="vm.portfolio_risk.isLoding">
-                                    <span>Data is loading...</span>
+                                        class="btn-primary hollow-blue pull-left">COMPUTE</button>
                                 </div>
                             </div>
 
                         </div>
                     </div>
                     <div class="right-section">
-                        <table>
+                        <div class="w-100 f-l mb-20" ng-if="vm.portfolio_risk.isLoding">
+                            <span class="w-100 f-l message text-center">Processing...</span>
+                        </div>
+                        <table ng-if="vm.portfolio_risk.isDataLoaded">
                             <thead>
                                 <tr>
                                     <th ng-repeat="tableHeading in vm.portfolio_risk.tableHeadings">{{tableHeading}}
@@ -234,7 +234,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="main-box">
+                        <div class="main-box" ng-if="vm.portfolio_risk.isDataLoaded">
                             <div class="main-box-container">
                                 <div class="main-box-1">
                                     {{((vm.portfolio_risk.table.PortfolioRisk) * 100).toFixed(2)}}%
@@ -267,59 +267,61 @@
                             <div class="w-100 f-l">
                                 <div class="button-main">
                                     <button ng-click="vm.submitMomentumProfiler()"
-                                        class="btn-primary hollow-blue pull-left">ASSESS</button>
-                                </div>
-                                <div class="w-100 f-l loding-data" ng-if="vm.momentum_profiler.isLoding">
-                                    <span>Data is loading...</span>
+                                        class="btn-primary hollow-blue pull-left">COMPUTE</button>
                                 </div>
                             </div>
 
                         </div>
                     </div>
                     <div class="right-section">
-                        <div class="w-100 f-l mb-20" ng-if="vm.momentum_profiler.table.Model === 1">
-                            <div class="w-20 f-l">
-                                <img src="https://am708403.blob.core.windows.net/images/momentum.png" />
-                            </div>
-                            <div class="w-80 f-l" ng-if="vm.momentum_profiler.table.Message !== ''">
-                                <span class="message ml--30">{{vm.momentum_profiler.table.Message}}</span>
-                            </div>
+                        <div class="w-100 f-l mb-20" ng-if="vm.momentum_profiler.isLoding">
+                            <span class="w-100 f-l message text-center">Processing...</span>
                         </div>
-                        <div class="w-100 f-l mb-20" ng-if="vm.momentum_profiler.table.Model === 0">
-                            <span class="w-100 f-l message text-center">{{vm.momentum_profiler.table.Message}}</span>
-                        </div>
-                        <table ng-if="vm.momentum_profiler.table.Model === 1">
-                            <thead>
-                                <tr>
-                                    <th ng-repeat="tableHeading in vm.momentum_profiler.tableHeadings">
-                                        {{tableHeading}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>TradersGPS Return per Period (annualized)</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.TGPSReturn * 100)}}%</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.TGPSReturn * 100)}}%</td>
-                                </tr>
-                                <tr>
-                                    <td>TradersGPS Accuracy</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.Accuracy * 100)}}%</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.Accuracy * 100)}}%</td>
-                                </tr>
-                                <tr>
-                                    <td>Stock Return per Period (annualized)</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.StockReturn * 100)}}%</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.StockReturn * 100)}}%</td>
-                                </tr>
-                                <tr>
-                                    <td>Relative Alpha per Period (annualized)</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.RelativeAlpha * 100)}}%</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.RelativeAlpha * 100)}}%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="w-100 f-l mt-20" ng-if="vm.momentum_profiler.table.Model === 1">
-                            <span>*period can be between 10 days to 30 days depending on the specific test</span>
+                        <div ng-if="vm.momentum_profiler.isDataLoaded">
+                            <div class="w-100 f-l mb-20" ng-if="vm.momentum_profiler.table.Model === 1">
+                                <div class="w-20 f-l">
+                                    <img src="https://am708403.blob.core.windows.net/images/momentum.png" />
+                                </div>
+                                <div class="w-80 f-l" ng-if="vm.momentum_profiler.table.Message !== ''">
+                                    <span class="message ml--30">{{vm.momentum_profiler.table.Message}}</span>
+                                </div>
+                            </div>
+                            <div class="w-100 f-l mb-20" ng-if="vm.momentum_profiler.table.Model === 0">
+                                <span class="w-100 f-l message text-center">{{vm.momentum_profiler.table.Message}}</span>
+                            </div>
+                            <table ng-if="vm.momentum_profiler.table.Model === 1">
+                                <thead>
+                                    <tr>
+                                        <th ng-repeat="tableHeading in vm.momentum_profiler.tableHeadings">
+                                            {{tableHeading}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>TradersGPS Return per Period (annualized)</td>
+                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.TGPSReturn * 100)}}%</td>
+                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.TGPSReturn * 100)}}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TradersGPS Accuracy</td>
+                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.Accuracy * 100)}}%</td>
+                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.Accuracy * 100)}}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Stock Return per Period (annualized)</td>
+                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.StockReturn * 100)}}%</td>
+                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.StockReturn * 100)}}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Relative Alpha per Period (annualized)</td>
+                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.RelativeAlpha * 100)}}%</td>
+                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.RelativeAlpha * 100)}}%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="w-100 f-l mt-20" ng-if="vm.momentum_profiler.table.Model === 1">
+                                <span>*period can be between 10 days to 30 days depending on the specific test</span>
+                            </div>
                         </div>
 
                     </div>
@@ -356,16 +358,16 @@
                             <div class="w-100 f-l">
                                 <div class="button-main">
                                     <button ng-click="vm.submitTradeSizing()"
-                                        class="btn-primary hollow-blue pull-left">ASSESS</button>
-                                </div>
-                                <div class="w-100 f-l loding-data" ng-if="vm.trade_sizing.isLoding">
-                                    <span>Data is loading...</span>
+                                        class="btn-primary hollow-blue pull-left">COMPUTE</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="right-section">
-                        <div class="main-box">
+                        <div class="w-100 f-l mb-20" ng-if="vm.trade_sizing.isLoding">
+                            <span class="w-100 f-l message text-center">Processing...</span>
+                        </div>
+                        <div class="main-box" ng-if="vm.trade_sizing.isDataLoaded">
                             <div class="main-box-container">
                                 <div class="main-box-1">{{vm.trade_sizing.trade_size}}%</div>
                                 <div class="main-box-2">TRADE SIZE</div>
