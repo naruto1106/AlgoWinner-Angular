@@ -125,7 +125,7 @@
                         </table>
                         <div class="main-box">
                             <div class="main-box-container">
-                                <div class="main-box-1">{{vm.stock_risk.volatility}}%</div>
+                                <div class="main-box-1">{{vm.convertToFixed(vm.stock_risk.volatility)}}%</div>
                                 <div class="main-box-2">VOLATILITY</div>
                             </div>
                         </div>
@@ -233,7 +233,7 @@
                         </table>
                         <div class="main-box">
                             <div class="main-box-container">
-                                <div class="main-box-1">{{vm.portfolio_risk.volatility}}%</div>
+                                <div class="main-box-1">{{vm.convertToFixed(vm.portfolio_risk.volatility)}}%</div>
                                 <div class="main-box-2">VOLATILITY</div>
                             </div>
                         </div>
@@ -271,15 +271,18 @@
                         </div>
                     </div>
                     <div class="right-section">
-                        <div class="w-100 f-l mb-20">
-                            <div class="w-20 f-l" ng-if="vm.momentum_profiler.table.Model === 1">
+                        <div class="w-100 f-l mb-20" ng-if="vm.momentum_profiler.table.Model === 1">
+                            <div class="w-20 f-l">
                                 <img src="https://am708403.blob.core.windows.net/images/momentum.png" />
                             </div>
                             <div class="w-80 f-l" ng-if="vm.momentum_profiler.table.Message !== ''">
-                                <span class="message">{{vm.momentum_profiler.table.Message}}</span>
+                                <span class="message ml--30">{{vm.momentum_profiler.table.Message}}</span>
                             </div>
                         </div>
-                        <table>
+                        <div class="w-100 f-l mb-20" ng-if="vm.momentum_profiler.table.Model === 0">
+                            <span class="w-100 f-l message text-center">{{vm.momentum_profiler.table.Message}}</span>
+                        </div>
+                        <table ng-if="vm.momentum_profiler.table.Model === 1">
                             <thead>
                                 <tr>
                                     <th ng-repeat="tableHeading in vm.momentum_profiler.tableHeadings">
@@ -309,7 +312,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="w-100 f-l mt-20">
+                        <div class="w-100 f-l mt-20" ng-if="vm.momentum_profiler.table.Model === 1">
                             <span>*period can be between 10 days to 30 days depending on the specific test</span>
                         </div>
 

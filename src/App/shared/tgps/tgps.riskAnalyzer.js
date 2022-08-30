@@ -95,6 +95,7 @@
                         vm.stock_risk.tableHeadings[1] = vm.stock_risk.symbol;
                         vm.stock_risk.tableHeadings[2] = vm.stock_risk.benchmark;
                         vm.stock_risk.table = res.data;
+                        vm.stock_risk.volatility = (res.data.StockRisk + res.data.BenchmarkRisk) * 100;
                     }
                     vm.stock_risk.isLoding = false;
                 });
@@ -127,6 +128,7 @@
                         vm.portfolio_risk.tableHeadings[1] = 'Portfolio';
                         vm.portfolio_risk.tableHeadings[2] = vm.portfolio_risk.benchmark;
                         vm.portfolio_risk.table = res.data;
+                        vm.portfolio_risk.volatility = (res.data.PortfolioRisk + res.data.BenchmarkRisk) * 100;
                     }
                     vm.portfolio_risk.isLoding = false;
                 });
