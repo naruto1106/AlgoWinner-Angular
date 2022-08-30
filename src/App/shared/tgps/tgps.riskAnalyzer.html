@@ -125,7 +125,10 @@
                         </table>
                         <div class="main-box">
                             <div class="main-box-container">
-                                <div class="main-box-1">{{vm.convertToFixed(vm.stock_risk.volatility)}}%</div>
+                                <div class="main-box-1">
+                                    {{((vm.stock_risk.table.StockRisk) * 100).toFixed(2)}}%
+                                    <div class="text-1">vs Benchmark: {{((vm.stock_risk.table.BenchmarkRisk) * 100).toFixed(2)}}%</div>
+                                </div>
                                 <div class="main-box-2">VOLATILITY</div>
                             </div>
                         </div>
@@ -233,7 +236,10 @@
                         </table>
                         <div class="main-box">
                             <div class="main-box-container">
-                                <div class="main-box-1">{{vm.convertToFixed(vm.portfolio_risk.volatility)}}%</div>
+                                <div class="main-box-1">
+                                    {{((vm.portfolio_risk.table.PortfolioRisk) * 100).toFixed(2)}}%
+                                    <div class="text-1">vs Benchmark: {{((vm.portfolio_risk.table.BenchmarkRisk) * 100).toFixed(2)}}%</div>
+                                </div>
                                 <div class="main-box-2">VOLATILITY</div>
                             </div>
                         </div>
