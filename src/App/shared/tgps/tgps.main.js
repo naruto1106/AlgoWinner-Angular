@@ -111,10 +111,8 @@ agmNgModuleWrapper("agms.tgps")
                                 return true;
                             }
                             if (vm.filter.tid === 0) {
-                                return s.TID === vm.filter.tid;
-                            }
-                            if (vm.filter.tid === 1) {
-                                return s.TID === vm.filter.tid;
+                                // MaRa: Quickhack. Borrow 0 value to expand range filter for Uncertain Trend
+                                return s.TID >= -1 && s.TID <= 1;
                             }
                             if (vm.filter.tid === 2) {
                                 return s.TID === vm.filter.tid;
@@ -123,9 +121,6 @@ agmNgModuleWrapper("agms.tgps")
                                 return s.TID === vm.filter.tid;
                             }
                             if (vm.filter.tid === 4) {
-                                return s.TID === vm.filter.tid;
-                            }
-                            if (vm.filter.tid === -1) {
                                 return s.TID === vm.filter.tid;
                             }
                             if (vm.filter.tid === -2) {
@@ -1436,7 +1431,7 @@ agmNgModuleWrapper("agms.tgps")
                 function getTIDFullNameByValue(TIDValue) {
                     switch (TIDValue) {
                         case -1:
-                            return 'Downtrend Reversal';
+                            return 'Trend Uncertain';
                         case -2:
                             return 'Weak Downtrend';
                         case -3:
@@ -1444,9 +1439,9 @@ agmNgModuleWrapper("agms.tgps")
                         case -4:
                             return 'Strong Downtrend';
                         case 0:
-                            return 'None';
+                            return 'Trend Uncertain';
                         case 1:
-                            return 'Uptrend Reversal';
+                            return 'Trend Uncertain';
                         case 2:
                             return 'Weak Uptrend';
                         case 3:
@@ -1470,7 +1465,7 @@ agmNgModuleWrapper("agms.tgps")
 
                         directions: ['All', 'Bullish', 'Bearish', 'None'],
                         comCrossover: ['All', 'UP', 'DOWN', 'NONE'],
-                        tid: [{ name: 'All', value: 'all' }, { name: 'None', value: 0 }, { name: 'Uptrend Reversal', value: 1 }, { name: 'Weak Uptrend', value: 2 }, { name: 'Uptrend', value: 3 }, { name: 'Strong Uptrend', value: 4 }, { name: 'Downtrend Reversal', value: -1 }, { name: 'Weak Downtrend', value: -2 }, { name: 'Downtrend', value: -3 }, { name: 'Strong Downtrend', value: -4 }],
+                        tid: [{ name: 'All', value: 'all' }, { name: 'Trend Uncertain', value: 0 }, { name: 'Weak Uptrend', value: 2 }, { name: 'Uptrend', value: 3 }, { name: 'Strong Uptrend', value: 4 }, { name: 'Weak Downtrend', value: -2 }, { name: 'Downtrend', value: -3 }, { name: 'Strong Downtrend', value: -4 }],
                         tidChange: ['All', -1, 0, 1],
                         modeOptions: ["Position", "Swing"],
                         barSizeOptions: [{ label: "Daily", value: "1 day" }, { label: "Weekly", value: "1 week" }],
