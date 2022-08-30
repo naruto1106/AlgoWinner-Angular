@@ -664,7 +664,6 @@ agmNgModuleWrapper("agms.tgps")
                             var tradeVenueString = null;
                             switch (vm.filter.predefinedWatchlist) {
                                 case "US Blue Chips":
-                                case "US Potential Play":
                                     tradeVenueString = "UnitedStates";
                                     break;
                                 case "SG Liquid":
@@ -672,6 +671,12 @@ agmNgModuleWrapper("agms.tgps")
                                     break;
                                 case "HK Potential Play":
                                     tradeVenueString = "Hongkong";
+                                    break;
+                                case "CN Blue Chips":
+                                    tradeVenueString = "China";
+                                    break;
+                                case "MY Liquid":
+                                    tradeVenueString = "Malaysia";
                                     break;
                             }
 
@@ -1322,7 +1327,6 @@ agmNgModuleWrapper("agms.tgps")
                         var tradeVenueString = null;
                         switch (vm.filter.predefinedWatchlist) {
                             case "US Blue Chips":
-                            case "US Potential Play":
                                 tradeVenueString = "UnitedStates";
                                 break;
                             case "SG Liquid":
@@ -1330,6 +1334,12 @@ agmNgModuleWrapper("agms.tgps")
                                 break;
                             case "HK Potential Play":
                                 tradeVenueString = "Hongkong";
+                                break;
+                            case "CN Blue Chips":
+                                tradeVenueString = "China";
+                                break;
+                            case "MY Liquid":
+                                tradeVenueString = "Malaysia";
                                 break;
                         }
                         restrictedTradeVenues = [tradeVenueString];
