@@ -178,7 +178,7 @@
                                 alert('We are currently unable to serve this request, please try again later');
                             }
                             if (res.status === 200) {
-                                vm.trade_sizing.trade_size = (parseFloat(res.data)).toFixed(2);
+                                vm.trade_sizing.trade_size = (parseFloat(res.data) * 100).toFixed(2);
                                 vm.trade_sizing.isDataLoaded = true;
                             }
                             vm.trade_sizing.isLoding = false;
