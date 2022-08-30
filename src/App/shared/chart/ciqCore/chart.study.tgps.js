@@ -607,35 +607,41 @@
                 var y0 = stx.pixelFromPrice(0, panel);
                 var y1 = stx.pixelFromPrice(value, panel);
                 if (value > 0) {
-                    y1 = stx.pixelFromPrice(1, panel)
+                    y1 = stx.pixelFromPrice(1, panel);
                 } else if (value < 0) {
-                    y1 = stx.pixelFromPrice(-1, panel)
+                    y1 = stx.pixelFromPrice(-1, panel);
                 }
 
                 var y = Math.min(y1, y0);
                 var height = Math.abs(y1 - y0);
                 var x = stx.pixelFromDate(val.DT) - barWidth / 2;
                 switch (value) {
-                    case 1:
-                        canvasContext.fillStyle = "red";
-                        break;
-                    case 2:
-                        canvasContext.fillStyle = "#66EE66";
-                        break;
-                    case 3:
-                        canvasContext.fillStyle = "green";
-                        break;
-                    case -1:
-                        canvasContext.fillStyle = "red";
-                        break;
-                    case -2:
-                        canvasContext.fillStyle = "#66EE66";
-                        break;
-                    case -3:
-                        canvasContext.fillStyle = "green";
-                        break;
-                    default:
-                        return;
+                case 1:
+                    canvasContext.fillStyle = "#DCDCDC";
+                    break;
+                case 2:
+                    canvasContext.fillStyle = "red";
+                    break;
+                case 3:
+                    canvasContext.fillStyle = "#e8af11";
+                    break;
+                case 4:
+                    canvasContext.fillStyle = "green";
+                    break;
+                case -1:
+                    canvasContext.fillStyle = "#DCDCDC";
+                    break;
+                case -2:
+                    canvasContext.fillStyle = "green";
+                    break;
+                case -3:
+                    canvasContext.fillStyle = "#e8af11";
+                    break;
+                case -4:
+                    canvasContext.fillStyle = "red";
+                    break;
+                default:
+                    return;
                 }
 
                 STX.rect(canvasContext, x, y, barWidth, height, 0, true, false);
@@ -657,35 +663,41 @@
                 var y0 = stx.pixelFromPrice(0, panel);
                 var y1 = stx.pixelFromPrice(value, panel);
                 if (value > 0) {
-                    y1 = stx.pixelFromPrice(1, panel)
+                    y1 = stx.pixelFromPrice(1, panel);
                 } else if (value < 0) {
-                    y1 = stx.pixelFromPrice(-1, panel)
+                    y1 = stx.pixelFromPrice(-1, panel);
                 }
 
                 var y = Math.min(y1, y0);
                 var height = Math.abs(y1 - y0);
                 var x = stx.pixelFromDate(val.DT) - barWidth / 2;
                 switch (value) {
-                    case 1:
-                        canvasContext.fillStyle = "red";
-                        break;
-                    case 2:
-                        canvasContext.fillStyle = "#66EE66";
-                        break;
-                    case 3:
-                        canvasContext.fillStyle = "green";
-                        break;
-                    case -1:
-                        canvasContext.fillStyle = "red";
-                        break;
-                    case -2:
-                        canvasContext.fillStyle = "#66EE66";
-                        break;
-                    case -3:
-                        canvasContext.fillStyle = "green";
-                        break;
-                    default:
-                        return;
+                case 1:
+                    canvasContext.fillStyle = "#DCDCDC";
+                    break;
+                case 2:
+                    canvasContext.fillStyle = "red";
+                    break;
+                case 3:
+                    canvasContext.fillStyle = "#e8af11";
+                    break;
+                case 4:
+                    canvasContext.fillStyle = "green";
+                    break;
+                case -1:
+                    canvasContext.fillStyle = "#DCDCDC";
+                    break;
+                case -2:
+                    canvasContext.fillStyle = "green";
+                    break;
+                case -3:
+                    canvasContext.fillStyle = "#e8af11";
+                    break;
+                case -4:
+                    canvasContext.fillStyle = "red";
+                    break;
+                default:
+                    return;
                 }
 
                 STX.rect(canvasContext, x, y, barWidth, height, 0, true, false);

@@ -30,6 +30,9 @@
     <script type="text/ng-template" id="bigscreener/tgps.TID">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{externalVm.getTIDFullNameByValue(productContainer.TID)}}</h5>
     </script>
+    <script type="text/ng-template" id="bigscreener/tgps.TIDChange">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.TIDChange}}</h5>
+    </script>
     <script type="text/ng-template" id="bigscreener/tgps.noise">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Noise}}</h5>
     </script>
@@ -184,20 +187,20 @@
                 </div>
             </div>
             <!--
-    <div class="menu" ng-if="vm.mode === 'Plus'">
-        <label>Horizon</label>
-        <select ng-model="vm.paladinHorizon" ng-options="o.id as o.label for o in vm.horizonOptions"></select>
-    </div>
-    <div class="menu filter-strength" ng-if="vm.mode === 'Plus'">
-        <label>Filter Strength</label>
-        <div class="filter-text">
-            <span class="text">Basic</span>
-            <span class="text">Moderate</span>
-            <span class="text">Strong</span>
-        </div>
-        <div ui-slider min="0" max="2" step="1" ng-model="vm.filterStrength"></div>
-    </div>
-    -->
+            <div class="menu" ng-if="vm.mode === 'Plus'">
+                <label>Horizon</label>
+                <select ng-model="vm.paladinHorizon" ng-options="o.id as o.label for o in vm.horizonOptions"></select>
+            </div>
+            <div class="menu filter-strength" ng-if="vm.mode === 'Plus'">
+                <label>Filter Strength</label>
+                <div class="filter-text">
+                    <span class="text">Basic</span>
+                    <span class="text">Moderate</span>
+                    <span class="text">Strong</span>
+                </div>
+                <div ui-slider min="0" max="2" step="1" ng-model="vm.filterStrength"></div>
+            </div>
+            -->
             <div class="menu" ng-if="vm.mode !== 'Plus'">
                 <label>Market/Watchlist</label>
                 <agms-tgps-complex-selector watchlists="vm.watchlists"
@@ -300,20 +303,20 @@
             </div>
             <div class="available-date-paladin" ng-if="vm.mode === 'Plus' && vm.lastPaladinEvaluationDate">
                 *Last Analysis as of {{vm.lastPaladinEvaluationDate | date:'medium'}}
-            </div>            
+            </div>
             <div class="clearfix"></div>
         </div>
-    </div>    
+    </div>
 
     <div ng-if="vm.mode==='Position'" class="tgps-position ">
         <div ng-if="vm.filter.barSize.value==='1 day'">
             <agms-tgps-product-list options="vm.productListOptionForPosition" product-container-list="vm.filteredStocksForPosition"
-                               ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
+                                    ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
             </agms-tgps-product-list>
         </div>
         <div ng-if="vm.filter.barSize.value==='1 week'">
             <agms-tgps-product-list options="vm.productListOptionForWeeklyPosition" product-container-list="vm.filteredStocksForPosition"
-                               ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
+                                    ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
             </agms-tgps-product-list>
         </div>
         <h4 class="m-20px text-center" ng-if="vm.filteredStocksForPosition.length == 0 && !vm.isLoading">{{vm.noResultMessage}}</h4>

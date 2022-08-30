@@ -1022,6 +1022,13 @@ agmNgModuleWrapper("agms.tgps")
                             sortingDirection: -1
                         },
                         {
+                            templateId: 'bigscreener/tgps.TIDChange',
+                            title: "TID Change",
+                            classNames: 'mid-column',
+                            sortingFunc: createSortingFunc('TIDChange'),
+                            sortingDirection: -1
+                        },
+                        {
                             templateId: 'bigscreener/tgps.noise',
                             title: "Noise",
                             classNames: 'mid-column',
@@ -1442,24 +1449,24 @@ agmNgModuleWrapper("agms.tgps")
 
                 function getTIDFullNameByValue(TIDValue) {
                     switch (TIDValue) {
-                        case -4:
-                            return 'Downtrend Reversal';
-                        case -3:
-                            return 'Weak Downtrend';
-                        case -2:
-                            return 'Downtrend';
                         case -1:
+                            return 'Downtrend Reversal';
+                        case -2:
+                            return 'Weak Downtrend';
+                        case -3:
+                            return 'Downtrend';
+                        case -4:
                             return 'Strong Downtrend';
                         case 0:
                             return 'None';
                         case 1:
-                            return 'Weak Uptrend';
-                        case 2:
-                            return 'Uptrend';
-                        case 3:
-                            return 'Strong Uptrend';
-                        case 4:
                             return 'Uptrend Reversal';
+                        case 2:
+                            return 'Weak Uptrend';
+                        case 3:
+                            return 'Uptrend';
+                        case 4:
+                            return 'Strong Uptrend';
                         default:
                             return 'All';
                     }
@@ -1478,7 +1485,7 @@ agmNgModuleWrapper("agms.tgps")
                         directions: ['All', 'Bullish', 'Bearish', 'None'],
                         comCrossover: ['All', 'UP', 'DOWN', 'NONE'],
                         //payoutStrategy: ['All', 'Near (below)', 'Near (above)', 'Cross above', 'Cross below', 'Above', 'Below'],
-                        tid: [{ name: 'All', value: 'all' }, { name: 'None', value: 0 }, { name: 'Weak Uptrend', value: 1 }, { name: 'Uptrend', value: 2 }, { name: 'Strong Uptrend', value: 3 }, { name: 'Uptrend Reversal', value: 4 }, { name: 'Strong Downtrend', value: -1 }, { name: 'Downtrend', value: -2 }, { name: 'Weak Downtrend', value: -3 }, { name: 'Downtrend Reversal', value: -4 }],
+                        tid: [{ name: 'All', value: 'all' }, { name: 'None', value: 0 }, { name: 'Uptrend Reversal', value: 1 }, { name: 'Weak Uptrend', value: 2 }, { name: 'Uptrend', value: 3 }, { name: 'Strong Uptrend', value: 4 }, { name: 'Downtrend Reversal', value: -1 }, { name: 'Weak Downtrend', value: -2 }, { name: 'Downtrend', value: -3 }, { name: 'Strong Downtrend', value: -4 }],
                         modeOptions: ["Position", "Swing"],
                         barSizeOptions: [{ label: "Daily", value: "1 day" }, { label: "Weekly", value: "1 week" }],
                         tradeVenueLocList: [{
