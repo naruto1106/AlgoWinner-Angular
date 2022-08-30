@@ -24,9 +24,6 @@
     <script type="text/ng-template" id="bigscreener/tgps.Month">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Month|number:2}}</h5>
     </script>
-    <!-- <script type="text/ng-template" id="bigscreener/tgps.payoutAlertMA150">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Payout}}</h5>
-    </script> -->
     <script type="text/ng-template" id="bigscreener/tgps.TID">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{externalVm.getTIDFullNameByValue(productContainer.TID)}}</h5>
     </script>
@@ -261,13 +258,13 @@
                 <label>COM Crossover</label>
                 <select ng-model="vm.filter.crossover" ng-change="vm.onFrontEndFilterChanged()" ng-options="c as c for c in vm.comCrossover"></select>
             </div>
-            <!-- <div class="menu" ng-if="vm.mode==='Position'">
-                <label>Payout Strategy</label>
-                <select ng-model="vm.filter.payoutstrategy" ng-change="vm.onFrontEndFilterChanged()" ng-options="v as v for v in vm.payoutStrategy"></select>
-            </div> -->
             <div class="menu" ng-if="vm.mode==='Position'">
                 <label>TID</label>
-                <select style="width: 120px;" ng-model="vm.filter.tid" ng-change="vm.onFrontEndFilterChanged()" ng-options="t.value as t.name for t in vm.tid"></select>
+                <select style="width: 50px;" ng-model="vm.filter.tid" ng-change="vm.onFrontEndFilterChanged()" ng-options="t.value as t.name for t in vm.tid"></select>
+            </div>
+            <div class="menu" ng-if="vm.mode==='Position'">
+                <label>TID Change</label>
+                <select style="width: 40px;" ng-model="vm.filter.tidChange" ng-change="vm.onFrontEndFilterChanged()" ng-options="tc as tc for tc in vm.tidChange"></select>
             </div>
             <div class="show-fundamental-filter pull-right" ng-if="vm.mode !== 'Plus' && vm.hasFundamentalFilterSelections()">
                 <div class="filter-number" ng-if="vm.sTgpsScreenerService.fundamentalFilterNumber > 0">{{vm.sTgpsScreenerService.fundamentalFilterNumber}}</div>

@@ -137,34 +137,27 @@ agmNgModuleWrapper("agms.tgps")
                             if (vm.filter.tid === -4) {
                                 return s.TID === vm.filter.tid;
                             }
-                            // if (vm.filter.payoutstrategy === "All") {
-                            //     return true;
-                            // }
-                            // if (vm.filter.payoutstrategy === "Near (below)") {
-                            //     return s.Payout == "Near (below)";
-                            // }
-                            // if (vm.filter.payoutstrategy === "Near (above)") {
-                            //     return s.Payout == "Near (above)";
-                            // }
-                            // if (vm.filter.payoutstrategy === "Cross above") {
-                            //     return s.Payout == "Cross above";
-                            // }
-                            // if (vm.filter.payoutstrategy === "Cross below") {
-                            //     return s.Payout == "Cross below";
-                            // }
-                            // if (vm.filter.payoutstrategy === "Above") {
-                            //     return s.Payout == "Above";
-                            // }
-                            // if (vm.filter.payoutstrategy === "Below") {
-                            //     return s.Payout === "Below";
-                            // }                    
+                            return true;
+                        }).filter(function (s) {
+                            if (vm.filter.tidChange === 'All') {
+                                return true;
+                            }
+                            if (vm.filter.tidChange === -1) {
+                                return s.TIDChange === vm.filter.tidChange;
+                            }
+                            if (vm.filter.tidChange === 0) {
+                                return s.TIDChange === vm.filter.tidChange;
+                            }
+                            if (vm.filter.tidChange === 1) {
+                                return s.TIDChange === vm.filter.tidChange;
+                            }
                             return true;
                         });
                     } else if (vm.mode === 'Swing') {
                         vm.filteredStocksForSwing = allStocksForSwing;
                         vm.uniqueFilteredProductCount = _.unique(_.map(vm.filteredStocksForSwing, function (p) { return p.ProductId; })).length;
                     } else if (vm.mode === 'Plus') {
-                        // vm.filteredStockPaladinEntry = 
+                        // vm.filteredStockPaladinEntry =
                     }
                 }
 
@@ -997,28 +990,11 @@ agmNgModuleWrapper("agms.tgps")
                             sortingFunc: createSortingFunc('Month'),
                             sortingDirection: -1
                         },
-                        // {
-                        //     templateId: 'bigscreener/tgps.payoutAlertMA150',
-                        //     title: "Payout Alert MA 150",
-                        //     classNames: 'mid-column product-payout-alert-MA150',
-                        //     sortingFunc: function (a, b) {
-                        //         if (a.Payout && b.Payout) {
-                        //             return coreUtil.sortName(a.Payout, b.Payout);
-                        //         }
-                        //         return 0;
-                        //     },
-                        //     sortingDirection: -1
-                        // },
                         {
                             templateId: 'bigscreener/tgps.TID',
                             title: "TID",
                             classNames: 'mid-column product-TID',
-                            sortingFunc: function (a, b) {
-                                if (a.TID && b.TID) {
-                                    return coreUtil.sortName(a.TID, b.TID);
-                                }
-                                return 0;
-                            },
+                            sortingFunc: createSortingFunc('TID'),
                             sortingDirection: -1
                         },
                         {
@@ -1484,8 +1460,8 @@ agmNgModuleWrapper("agms.tgps")
 
                         directions: ['All', 'Bullish', 'Bearish', 'None'],
                         comCrossover: ['All', 'UP', 'DOWN', 'NONE'],
-                        //payoutStrategy: ['All', 'Near (below)', 'Near (above)', 'Cross above', 'Cross below', 'Above', 'Below'],
                         tid: [{ name: 'All', value: 'all' }, { name: 'None', value: 0 }, { name: 'Uptrend Reversal', value: 1 }, { name: 'Weak Uptrend', value: 2 }, { name: 'Uptrend', value: 3 }, { name: 'Strong Uptrend', value: 4 }, { name: 'Downtrend Reversal', value: -1 }, { name: 'Weak Downtrend', value: -2 }, { name: 'Downtrend', value: -3 }, { name: 'Strong Downtrend', value: -4 }],
+                        tidChange: ['All', -1, 0, 1],
                         modeOptions: ["Position", "Swing"],
                         barSizeOptions: [{ label: "Daily", value: "1 day" }, { label: "Weekly", value: "1 week" }],
                         tradeVenueLocList: [{
@@ -1575,8 +1551,8 @@ agmNgModuleWrapper("agms.tgps")
                         searchProductFilter: null,
                         barSize: vm.barSizeOptions[0],
                         crossover: vm.comCrossover[0],
-                        //payoutstrategy: vm.payoutStrategy[0],
-                        tid: vm.tid[0].value
+                        tid: vm.tid[0].value,
+                        tidChange: vm.tidChange[0]
                     };
 
                     resetAllFundamentals();
