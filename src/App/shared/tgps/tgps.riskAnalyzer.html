@@ -293,7 +293,7 @@
                                     <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.TGPSReturn * 100)}}%</td>
                                 </tr>
                                 <tr>
-                                    <td>TraderaGPS Accuracy</td>
+                                    <td>TradersGPS Accuracy</td>
                                     <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.Accuracy * 100)}}%</td>
                                     <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.Accuracy * 100)}}%</td>
                                 </tr>
@@ -304,8 +304,8 @@
                                 </tr>
                                 <tr>
                                     <td>Relative Alpha per Period (annualized)</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.RelativeAlpha)}}</td>
-                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.RelativeAlpha)}}</td>
+                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.RelativeAlpha * 100)}}%</td>
+                                    <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.RelativeAlpha * 100)}}%</td>
                                 </tr>
                             </tbody>
                         </table>
