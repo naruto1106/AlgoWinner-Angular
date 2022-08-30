@@ -103,10 +103,16 @@
             }
 
             function loadConstructPortfolio() {
+                console.log("vm.portfolio_risk.Portfolio", vm.portfolio_risk.Portfolio);
                 tool.openModalByDefinition('s.tgps.riskAnalyzerConstructPortfolioController', {
-                    mode: vm.mode
+                    mode: vm.mode,
+                    portfolio : vm.portfolio_risk.Portfolio
                 }).result.then(function (response) {
-                    vm.portfolio_risk.Portfolio = response;
+                    if(response.length === 1 && response[0].Amount === 0){
+                        vm.portfolio_risk.Portfolio = [];
+                    } else {
+                        vm.portfolio_risk.Portfolio = response;
+                    }
                 });
             }
 

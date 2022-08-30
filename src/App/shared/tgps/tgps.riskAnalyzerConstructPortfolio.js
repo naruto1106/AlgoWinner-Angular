@@ -2,7 +2,7 @@
     .defineControllerAsPopup("s.tgps.riskAnalyzerConstructPortfolioController", {
             templateUrl: '/App/shared/tgps/tgps.riskAnalyzerConstructPortfolio.html',
             windowClass: 'default-modal tgps-risk-analyze-popup tgps-risk-analyze-construct-portfolio-popup'
-        }, ['mode', 'sProductService'],
+        }, ['mode', 'portfolio', 'sProductService'],
         function (vm, dep, tool) {
 
             var sProductService = dep.sProductService;
@@ -12,7 +12,7 @@
                 vm.uibClosePanel();
             }
 
-            function addRow(index) {
+            function addRow() {
                 var portfolioJSON = {
                     Symbol: 'AAPL',
                     Market: 'US',
@@ -20,6 +20,11 @@
                     Amount: 0,
                 };
                 vm.constructPortfolios.push(portfolioJSON);
+            }
+
+            function clearPortfolio() {
+                vm.constructPortfolios = [];
+                addRow();
             }
 
             function removeRow(index) {
@@ -41,21 +46,30 @@
                 vm.constructPortfolios[index].Market = item.TradeVenueLoc;
             }
 
+            function setDefaultValues() {
+                if (dep.portfolio.length > 0) {
+                    return dep.portfolio;
+                } else {
+                    return [{
+                        Symbol: 'AAPL',
+                        Market: 'US',
+                        Direction: 'Long',
+                        Amount: 0,
+                    }]
+                }
+            }
+
             tool.initialize(function () {
                 tool.setVmProperties({
                     closePanel: closePanel,
+                    clearPortfolio: clearPortfolio,
                     addRow: addRow,
                     removeRow: removeRow,
                     searchProducts: searchProducts,
                     showProduct: showProduct,
                     direction: ['Long', 'Short'],
                     submitPortfolio: submitPortfolio,
-                    constructPortfolios: [{
-                        Symbol: 'AAPL',
-                        Market: 'US',
-                        Direction: 'Long',
-                        Amount: 0,
-                    }]
+                    constructPortfolios: setDefaultValues()
                 });
             });
         });
