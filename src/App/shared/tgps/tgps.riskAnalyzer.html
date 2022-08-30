@@ -300,23 +300,23 @@
                                 <tbody>
                                     <tr>
                                         <td>TradersGPS Return per Period (annualized)</td>
-                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.TGPSReturn * 100)}}%</td>
-                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.TGPSReturn * 100)}}%</td>
+                                        <td ng-class="{'green-profit' : vm.convertToFixed(vm.momentum_profiler.table.LongStats.TGPSReturn * 100) > 0, 'red-loss' : vm.convertToFixed(vm.momentum_profiler.table.LongStats.TGPSReturn * 100) < 0}">{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.TGPSReturn * 100)}}%</td>
+                                        <td ng-class="{'green-profit' : vm.convertToFixed(vm.momentum_profiler.table.ShortStats.TGPSReturn * 100) > 0, 'red-loss' : vm.convertToFixed(vm.momentum_profiler.table.ShortStats.TGPSReturn * 100) < 0}">{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.TGPSReturn * 100)}}%</td>
                                     </tr>
                                     <tr>
                                         <td>TradersGPS Accuracy</td>
-                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.Accuracy * 100)}}%</td>
-                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.Accuracy * 100)}}%</td>
+                                        <td ng-class="{'green-profit' : vm.convertToFixed(vm.momentum_profiler.table.LongStats.Accuracy * 100) > 0, 'red-loss' : vm.convertToFixed(vm.momentum_profiler.table.LongStats.Accuracy * 100) < 0}" >{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.Accuracy * 100)}}%</td>
+                                        <td ng-class="{'green-profit' : vm.convertToFixed(vm.momentum_profiler.table.ShortStats.Accuracy * 100) > 0, 'red-loss' : vm.convertToFixed(vm.momentum_profiler.table.ShortStats.Accuracy * 100) < 0}" >{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.Accuracy * 100)}}%</td>
                                     </tr>
                                     <tr>
                                         <td>Stock Return per Period (annualized)</td>
-                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.StockReturn * 100)}}%</td>
-                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.StockReturn * 100)}}%</td>
+                                        <td ng-class="{'green-profit' : vm.convertToFixed(vm.momentum_profiler.table.LongStats.StockReturn * 100) > 0, 'red-loss' : vm.convertToFixed(vm.momentum_profiler.table.LongStats.StockReturn * 100) < 0}" >{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.StockReturn * 100)}}%</td>
+                                        <td ng-class="{'green-profit' : vm.convertToFixed(vm.momentum_profiler.table.ShortStats.StockReturn * 100) > 0, 'red-loss' : vm.convertToFixed(vm.momentum_profiler.table.ShortStats.StockReturn * 100) < 0}" >{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.StockReturn * 100)}}%</td>
                                     </tr>
                                     <tr>
                                         <td>Relative Alpha per Period (annualized)</td>
-                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.RelativeAlpha * 100)}}%</td>
-                                        <td>{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.RelativeAlpha * 100)}}%</td>
+                                        <td ng-class="{'green-profit' : vm.convertToFixed(vm.momentum_profiler.table.LongStats.RelativeAlpha * 100) > 0, 'red-loss' : vm.convertToFixed(vm.momentum_profiler.table.LongStats.RelativeAlpha * 100) < 0}" >{{vm.convertToFixed(vm.momentum_profiler.table.LongStats.RelativeAlpha * 100)}}%</td>
+                                        <td ng-class="{'green-profit' : vm.convertToFixed(vm.momentum_profiler.table.ShortStats.RelativeAlpha * 100) > 0, 'red-loss' : vm.convertToFixed(vm.momentum_profiler.table.ShortStats.RelativeAlpha * 100) < 0}" >{{vm.convertToFixed(vm.momentum_profiler.table.ShortStats.RelativeAlpha * 100)}}%</td>
                                     </tr>
                                 </tbody>
                             </table>
