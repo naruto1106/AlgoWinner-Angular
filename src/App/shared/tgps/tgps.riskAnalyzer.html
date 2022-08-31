@@ -369,7 +369,7 @@
                             <span class="w-100 f-l message text-center">Processing...</span>
                         </div>
                         <div class="main-box" ng-if="vm.trade_sizing.isDataLoaded">
-                            <div class="main-box-container">
+                            <div class="main-box-container" ng-style="{width: (vm.trade_sizing.trade_size.length * 8)+'%' }">
                                 <div class="main-box-1">{{vm.trade_sizing.trade_size}}%</div>
                                 <div class="main-box-2">TRADE SIZE</div>
                             </div>
