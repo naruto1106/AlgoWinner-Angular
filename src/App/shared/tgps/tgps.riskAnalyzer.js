@@ -169,7 +169,7 @@
                     if (date) {
                         vm.trade_sizing.Today = date;
                         sProductService.SizingComputePost({
-                            StdSize: getRelativeSizeIntValues(vm.trade_sizing.relative_size),
+                            StdSize: parseInt(vm.trade_sizing.relative_size),
                             Symbol: vm.trade_sizing.symbol,
                             Market: vm.trade_sizing.tradeVenueLoc,
                             Today: moment(vm.trade_sizing.Today).format("YYYY-MM-DD")
@@ -213,7 +213,7 @@
                     setTab: setTab,
                     submitStockRisk: submitStockRisk,
                     direction: ['Long', 'Short'],
-                    relative_sizes: ['5%', '10%', '15%', '20%'],
+                    relative_sizes: ['20', '15', '10', '5'],
                     loadConstructPortfolio: loadConstructPortfolio,
                     submitPortfolioRisk: submitPortfolioRisk,
                     submitMomentumProfiler: submitMomentumProfiler,
@@ -296,7 +296,7 @@
                         symbol: 'AAPL',
                         tradeVenueLoc: 'US',
                         Today: '',
-                        relative_size: '10%',
+                        relative_size: '20',
                         trade_size: 0
                     },
                     dateOptions: {

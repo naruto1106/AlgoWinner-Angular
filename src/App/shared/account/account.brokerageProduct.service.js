@@ -4,8 +4,6 @@
         var path = '/mantpmsapi/BrokerProduct/';
 
         tool.setServiceObjectProperties({
-            IsProductShortable: coreServerCommunicationService.genGetFunctionWithNVar(path + 'IsProductShortable', function (args) {
-                return { request: args[0] };
-            })
+            IsProductShortable: coreServerCommunicationService.genPostFunction(path + 'IsTheProductShortable')
         });
     });

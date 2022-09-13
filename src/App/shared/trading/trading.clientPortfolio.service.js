@@ -57,7 +57,7 @@
             tool.signalRMarketData("RT", 'LastMarketDataUpdated', recalcPortfolioProperty);
             coreSignalRNotificationService.turnOn('DeveloperPortfolioUpdated', processDeveloperPortfolioUpdate);
 
-            var promise = portfolioService.GetActivePortfolio([selectedStrategy.DisplayInfo.BasicInfo.StrategyId]);
+            var promise = portfolioService.GetActivePortfolio({ StrategyIds: [selectedStrategy.DisplayInfo.BasicInfo.StrategyId]});
 
             getOpenPositions(promise, previousGetActivePositionPromise, activePositions, onActivePositionsUpdate);
 

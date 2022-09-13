@@ -19,10 +19,8 @@
                 serviceObj.productDetail.RelatedCompanies = res.data.RelatedCompanies;
                 deferred.resolve();
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
                 deferred.reject();
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
             return deferred.promise;
@@ -32,9 +30,7 @@
             return dep.sProductService.GetSector(market).then(function (res) {                                
                 serviceObj.sector = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -43,9 +39,7 @@
             return dep.sProductService.GetIndustry(market).then(function (res) {                                
                 serviceObj.industry = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -54,9 +48,7 @@
             return dep.sProductService.GetLatestAnalystRating(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {                                
                 serviceObj.latestAnalystRating = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -65,9 +57,7 @@
             return dep.sProductService.GetNewsSentiment(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {                                
                 serviceObj.newsSentiment = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -76,9 +66,7 @@
             return dep.sProductService.GetRetailActivity(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc, period).then(function (res) {                                
                 serviceObj.retailActivity = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -87,9 +75,7 @@
             return dep.sProductService.GetAnalystTargetPrice(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.analystTargetPrice = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }                
@@ -105,9 +91,7 @@
             return fundamentalPageMetricsType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.fundamentalPageMetrics = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }               
@@ -123,9 +107,7 @@
             return statementType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.incomeStatement = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -141,9 +123,7 @@
             return balanceSheetType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.balanceSheet = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -159,9 +139,7 @@
             return cashFlowType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.cashFlow = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -177,9 +155,7 @@
             return statisticsType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.statistics = res.data;
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -319,13 +295,11 @@
                     });
 
                 } else {
-                    serviceObj.showErrorMessage = true;
                     serviceObj.isLoading = false;
                 }
 
             }, function () {
                 dep.coreNotificationService.notifyError("Error loading products", "Sorry, there are no results for " + symbol);
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -346,7 +320,6 @@
             isLoadingPrice: false,
             hasHeader: false,
             isWarrants: false,
-            showErrorMessage: false,
             setHeaderVisibility: setHeaderVisibility,
             currentProduct: {},
             getSector: getSector,

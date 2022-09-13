@@ -15,6 +15,26 @@
             var filterDescription = pChartFilterDescriptionService;
             var positionMarkers = [];
             var tradersGPSPositionStudies = {
+                showPrimaryArrow: true,
+                toggleShowPrimaryArrow: function () {
+                    tradersGPSPositionStudies.setShowPrimaryArrow(!tradersGPSPositionStudies.showPrimaryArrow);
+                },
+                setShowPrimaryArrow: function (visibility) {
+                    tradersGPSPositionStudies.showPrimaryArrow = visibility;
+                    if (!filterDescription.primaryProduct) {
+                        return;
+                    }
+                },
+                showAllArrow: false,
+                toggleShowAllArrow: function () {
+                    tradersGPSPositionStudies.setShowAllArrow(!tradersGPSPositionStudies.showAllArrow);
+                },
+                setShowAllArrow: function (visibility) {
+                    tradersGPSPositionStudies.showAllArrow = visibility;
+                    if (!filterDescription.primaryProduct) {
+                        return;
+                    }
+                },
                 peakVisibility: false,
                 setPeakVisibility: function (visibility) {
                     tradersGPSPositionStudies.peakVisibility = visibility;
@@ -357,14 +377,28 @@
                         var price;
                         var x = stxx.pixelFromDate(quote.Date, stxx.chart);
                         var y;
-                        if (marker.Direction === "Bull") {
-                            price = quote.Low;
-                            y = stxx.pixelFromPriceTransform(price, panel, yAxis) + 20;
-                            drawUpwardArrow(ctx, x, y);
-                        } else {
-                            price = quote.High;
-                            y = stxx.pixelFromPriceTransform(price, panel, yAxis) - 30;
-                            drawDownwardArrow(ctx, x, y);
+                        if (tradersGPSPositionStudies.showAllArrow) {
+                            if (marker.Direction === "Bull") {
+                                price = quote.Low;
+                                y = stxx.pixelFromPriceTransform(price, panel, yAxis) + 20;
+                                drawUpwardArrow(ctx, x, y);
+                            } else {
+                                price = quote.High;
+                                y = stxx.pixelFromPriceTransform(price, panel, yAxis) - 30;
+                                drawDownwardArrow(ctx, x, y);
+                            }
+                        } else if (tradersGPSPositionStudies.showPrimaryArrow) {
+                            if (marker.ArrowCount === 1) {
+                                if (marker.Direction === "Bull") {
+                                    price = quote.Low;
+                                    y = stxx.pixelFromPriceTransform(price, panel, yAxis) + 20;
+                                    drawUpwardArrow(ctx, x, y);
+                                } else {
+                                    price = quote.High;
+                                    y = stxx.pixelFromPriceTransform(price, panel, yAxis) - 30;
+                                    drawDownwardArrow(ctx, x, y);
+                                }
+                            }
                         }
                         break;
                     }
@@ -403,6 +437,9 @@
                 }
 
                 pChartRenderingUtilsService.stxx.setChartType('candle');
+                tradersGPSPositionStudies.setShowPrimaryArrow(true);
+                tradersGPSPositionStudies.setShowAllArrow(false);
+                tradersGPSPositionStudies.setPeakVisibility(true);
                 tradersGPSPositionStudies.setPeakVisibility(true);
                 tradersGPSPositionStudies.setTroughVisibility(true);
                 tradersGPSPositionStudies.setComVisibility(true);
@@ -426,6 +463,8 @@
             }
 
             function exitTradersPosition() {
+                tradersGPSPositionStudies.setShowPrimaryArrow(false);
+                tradersGPSPositionStudies.setShowAllArrow(false);
                 tradersGPSPositionStudies.setPeakVisibility(false);
                 tradersGPSPositionStudies.setTroughVisibility(false);
                 tradersGPSPositionStudies.setComVisibility(false);

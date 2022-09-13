@@ -1,6 +1,6 @@
 ﻿agmNgModuleWrapper('agmp.product')
     .defineController('p.product.MainController', ['commonHeaderModeService', 'commonScreenResizerService', 'pProductPageService', 'sProductService', 'symbol', 'venue',
-    'sDroidHelperSbsFrameworkService'],
+        'sDroidHelperSbsFrameworkService'],
         function (vm, dep, tool) {
             var pProductPageService = dep.pProductPageService,
                 sDroidHelperSbsFrameworkService = dep.sDroidHelperSbsFrameworkService;
@@ -13,10 +13,6 @@
                 return pProductPageService.showRelatedCompanies();
             }
 
-            function showErrorMessage() {
-                return pProductPageService.showErrorMessage;
-            }
-
             function isLoading() {
                 return pProductPageService.isLoading;
             }
@@ -25,16 +21,20 @@
                 return pProductPageService.isWarrants;
             }
 
+            function showErrorMessage() {
+                return false;
+            }
+
             tool.setVmProperties({
+                showErrorMessage: showErrorMessage,
                 hasHeader: hasHeader,
                 showRelatedCompanies: showRelatedCompanies,
-                showErrorMessage: showErrorMessage,
                 isLoading: isLoading,
                 isWarrants: isWarrants,
                 symbol: dep.symbol
             });
 
-            pProductPageService.loadProductWithParam(dep.venue, dep.symbol).then(function() {
+            pProductPageService.loadProductWithParam(dep.venue, dep.symbol).then(function () {
                 vm.TradeVenueLoc = pProductPageService.currentProduct.TradeVenueLoc;
                 document.title = pProductPageService.currentProduct.ProductName + ' (' + vm.symbol + ') - ' + dep.venue + ' Product';
             });
@@ -44,7 +44,7 @@
                     flowControl.highlightAndCommentItems([
                         {
                             itemId: 'productPage.sidebarMenu',
-                            cssClassForBox:'    '
+                            cssClassForBox: '    '
                         }
                     ]);
                     //flowControl.putRobotAtLocation('100px', '200px');

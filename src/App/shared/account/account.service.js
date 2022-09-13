@@ -9,10 +9,7 @@
         tool.setServiceObjectProperties({
             HasBroker: coreServerCommunicationService.genGetFunctionWithNVar(path + 'HasBroker'),
             CreateBroker: coreServerCommunicationService.genPostFunction(path + 'CreateBroker'),
-            GetBrokerageAccountsForStrategyLinking: coreServerCommunicationService.genGetFunctionWithNVar(path +
-                'GetBrokerageAccountsForStrategyLinking', function (args) {
-                    return { marketInfo: args[0] };
-                }),
+            GetBrokerageAccountsForStrategyLinking: coreServerCommunicationService.genPostFunction(path + 'GetBrokerageAccountsForStrategyLinkingStep'),
             GetBrokerageAccountsSelectionUsedForTrading: coreServerCommunicationService.genGetFunctionWithNVar(path + 'GetBrokerageAccountsSelectionUsedForTrading'),
             GetBrokerageAccountsDetail: coreServerCommunicationService.genGetFunctionWithNVar(path + 'GetBrokerageAccountsDetail'),
         });

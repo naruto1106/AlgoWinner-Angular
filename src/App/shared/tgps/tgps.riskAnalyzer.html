@@ -118,7 +118,7 @@
                                 </tr>
                                 <tr>
                                     <td>Return</td>
-                                    <td>{{((vm.stock_risk.table.StockSharpeRatio) * 100).toFixed(0)}}%</td>
+                                    <td>{{((vm.stock_risk.table.StockReturn) * 100).toFixed(0)}}%</td>
                                     <td>{{((vm.stock_risk.table.BenchmarkReturn) * 100).toFixed(0)}}%</td>
                                 </tr>
                             </tbody>
@@ -347,7 +347,7 @@
                             </div>
                             <div class="w-100 f-l">
                                 <div class="w-40 f-l">
-                                    Relative Size
+                                    No of Stocks
                                 </div>
                                 <div class="w-60 f-r">
                                     <select class="select-box" name="trade_sizing_relative_size"
@@ -369,7 +369,7 @@
                             <span class="w-100 f-l message text-center">Processing...</span>
                         </div>
                         <div class="main-box" ng-if="vm.trade_sizing.isDataLoaded">
-                            <div class="main-box-container" ng-style="{width: (vm.trade_sizing.trade_size.length * 8)+'%' }">
+                            <div class="main-box-container">
                                 <div class="main-box-1">{{vm.trade_sizing.trade_size}}%</div>
                                 <div class="main-box-2">TRADE SIZE</div>
                             </div>

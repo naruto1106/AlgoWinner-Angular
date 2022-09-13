@@ -229,16 +229,7 @@
                         "yAxis": {
                             "displayGridLines": true,
                         },
-                        "seriesFN": function (stx, sd, quotes) {
-                            var panel = stx.panels[sd.panel];
-                            STX.Studies.createYAxis(stx, sd, quotes, panel);
-                            //STX.Studies.createHistogram(stx, sd, quotes, false, 1);
-                            stxx.startClip(sd.panel);
-                            quotes.forEach(function (i) {
-                                generateTidBar(stx, sd, panel, i);
-                            });
-                            stxx.endClip();
-                        },
+                        "seriesFN": displayTid,
                         "calculateFN": null
                     },
                     "weeklytid": {
@@ -254,16 +245,7 @@
                         "yAxis": {
                             "displayGridLines": true,
                         },
-                        "seriesFN": function (stx, sd, quotes) {
-                            var panel = stx.panels[sd.panel];
-                            STX.Studies.createYAxis(stx, sd, quotes, panel);
-                            //STX.Studies.createHistogram(stx, sd, quotes, false, 1);
-                            stxx.startClip(sd.panel);
-                            quotes.forEach(function (i) {
-                                generateWeeklyTidBar(stx, sd, panel, i);
-                            });
-                            stxx.endClip();
-                        },
+                        "seriesFN": displayTid,
                         "calculateFN": null
                     },
                     "cci5": {
@@ -590,117 +572,76 @@
                 }
                 STX.Studies.studyLibrary = STX.extend(STX.Studies.studyLibrary,studies);
             }
+            
+            function displayTid(stx, sd, quotes) {
+                var panel = stx.panels[sd.panel];
+                panel.min = -1.5;
+                panel.max = 1.5;
+                STX.Studies.createYAxis(stx, sd, quotes, panel);
 
-            function generateTidBar(stx, sd, panel, val) {
-                var canvasContext = stx.chart.context;
-                var barWidth = stx.pixelFromBar(1) - stx.pixelFromBar(0);
-                if (barWidth > 3) {
-                    barWidth = barWidth - 1.5;
-                }
-                if (!val) {
-                    return;
-                }
-                var value = val["tid_hist"];
-                if (!value) {
-                    return;
-                }
-                var y0 = stx.pixelFromPrice(0, panel);
-                var y1 = stx.pixelFromPrice(value, panel);
-                if (value > 0) {
-                    y1 = stx.pixelFromPrice(1, panel);
-                } else if (value < 0) {
-                    y1 = stx.pixelFromPrice(-1, panel);
-                }
+                var context = stx.chart.context;
+                stx.startClip(panel.name);
+                var myWidth = stx.layout.candleWidth - 2;
+                if (myWidth < 2) myWidth = 1;
+                var field = sd.name + "_hist";
+                for (var i = 0; i < quotes.length; i++) {
+                    var quote = quotes[i];
+                    if (!quote)
+                        continue;
 
-                var y = Math.min(y1, y0);
-                var height = Math.abs(y1 - y0);
-                var x = stx.pixelFromDate(val.DT) - barWidth / 2;
-                switch (value) {
-                case 1:
-                    canvasContext.fillStyle = "#DCDCDC";
-                    break;
-                case 2:
-                    canvasContext.fillStyle = "red";
-                    break;
-                case 3:
-                    canvasContext.fillStyle = "#e8af11";
-                    break;
-                case 4:
-                    canvasContext.fillStyle = "green";
-                    break;
-                case -1:
-                    canvasContext.fillStyle = "#DCDCDC";
-                    break;
-                case -2:
-                    canvasContext.fillStyle = "green";
-                    break;
-                case -3:
-                    canvasContext.fillStyle = "#e8af11";
-                    break;
-                case -4:
-                    canvasContext.fillStyle = "red";
-                    break;
-                default:
-                    return;
-                }
+                    if (quote.candleWidth) myWidth = Math.floor(Math.max(1, quote.candleWidth - 2));
+                    var x0 = Math.floor(stx.pixelFromBar(i, panel.chart) - myWidth / 2);
+                    var x1 = Math.floor(myWidth);
 
-                STX.rect(canvasContext, x, y, barWidth, height, 0, true, false);
-            }
+                    var drawRect = false;
+                    var y0;
+                    var y1;
+                    var value = quote[field];
+                    if (value > 0) {
+                        y0 = stx.pixelFromPrice(0, panel);
+                        y1 = (stx.pixelFromPrice(1, panel) - stx.pixelFromPrice(0, panel));
+                        drawRect = true;
+                    } else if (value < 0) {
+                        y0 = stx.pixelFromPrice(-1, panel);
+                        y1 = (stx.pixelFromPrice(1, panel) - stx.pixelFromPrice(0, panel));
+                        drawRect = true;
+                    } 
+                    
+                    switch (value) {
+                    case 1:
+                        context.fillStyle = "#DCDCDC";
+                        break;
+                    case 2:
+                        context.fillStyle = "red";
+                        break;
+                    case 3:
+                        context.fillStyle = "#e8af11";
+                        break;
+                    case 4:
+                        context.fillStyle = "green";
+                        break;
+                    case -1:
+                        context.fillStyle = "#DCDCDC";
+                        break;
+                    case -2:
+                        context.fillStyle = "green";
+                        break;
+                    case -3:
+                        context.fillStyle = "#e8af11";
+                        break;
+                    case -4:
+                        context.fillStyle = "red";
+                        break;
+                    default:
+                        break;
+                    }
 
-            function generateWeeklyTidBar(stx, sd, panel, val) {
-                var canvasContext = stx.chart.context;
-                var barWidth = stx.pixelFromBar(1) - stx.pixelFromBar(0);
-                if (barWidth > 3) {
-                    barWidth = barWidth - 1.5;
+                    if (drawRect) {
+                        context.fillRect(x0, y0, x1, y1);
+                    }
                 }
-                if (!val) {
-                    return;
-                }
-                var value = val["weeklytid_hist"];
-                if (!value) {
-                    return;
-                }
-                var y0 = stx.pixelFromPrice(0, panel);
-                var y1 = stx.pixelFromPrice(value, panel);
-                if (value > 0) {
-                    y1 = stx.pixelFromPrice(1, panel);
-                } else if (value < 0) {
-                    y1 = stx.pixelFromPrice(-1, panel);
-                }
+                stx.endClip();
 
-                var y = Math.min(y1, y0);
-                var height = Math.abs(y1 - y0);
-                var x = stx.pixelFromDate(val.DT) - barWidth / 2;
-                switch (value) {
-                case 1:
-                    canvasContext.fillStyle = "#DCDCDC";
-                    break;
-                case 2:
-                    canvasContext.fillStyle = "red";
-                    break;
-                case 3:
-                    canvasContext.fillStyle = "#e8af11";
-                    break;
-                case 4:
-                    canvasContext.fillStyle = "green";
-                    break;
-                case -1:
-                    canvasContext.fillStyle = "#DCDCDC";
-                    break;
-                case -2:
-                    canvasContext.fillStyle = "green";
-                    break;
-                case -3:
-                    canvasContext.fillStyle = "#e8af11";
-                    break;
-                case -4:
-                    canvasContext.fillStyle = "red";
-                    break;
-                default:
-                    return;
-                }
-
-                STX.rect(canvasContext, x, y, barWidth, height, 0, true, false);
             }
 
             tool.setServiceObjectProperties({

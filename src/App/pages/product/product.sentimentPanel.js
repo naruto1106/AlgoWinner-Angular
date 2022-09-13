@@ -3,7 +3,7 @@
         function (vm, dep, tool) {
             var pProductPageService = dep.pProductPageService;
 
-            function lineCharts(container, chartData){
+            function lineCharts(container, chartData) {
                 Highcharts.chart(container, {
                     title: {
                         text: ''
@@ -12,11 +12,11 @@
                     credits: {
                         enabled: false
                     },
-                
+
                     subtitle: {
                         text: ''
                     },
-                
+
                     yAxis: {
                         title: {
                             text: null
@@ -31,17 +31,17 @@
                     xAxis: {
                         categories: chartData.categories
                     },
-                
+
                     legend: {
                         layout: 'horizontal',
                         align: 'center'
                     },
-                
+
                     series: [{
                         name: 'Retail Interest',
                         data: chartData.data
                     }],
-                
+
                     responsive: {
                         rules: [{
                             condition: {
@@ -56,10 +56,10 @@
                             }
                         }]
                     }
-                });                
+                });
             }
 
-            function barCharts(container, chartData){
+            function barCharts(container, chartData) {
                 var chart = Highcharts.chart(container, {
 
                     chart: {
@@ -69,11 +69,11 @@
                     credits: {
                         enabled: false
                     },
-                
+
                     title: {
                         text: ''
                     },
-                
+
                     subtitle: {
                         text: ''
                     },
@@ -84,19 +84,19 @@
                             x: -10
                         }
                     },
-                
+
                     yAxis: {
                         allowDecimals: false,
                         title: {
                             text: null
                         }
                     },
-                
+
                     series: [{
                         name: 'Analyst Rating',
                         data: chartData.analyst_rating
                     }],
-                
+
                     responsive: {
                         rules: [{
                             condition: {
@@ -128,30 +128,30 @@
                         }]
                     }
                 });
-                chart.setSize(null);                                               
+                chart.setSize(null);
             }
 
-            function changeRetailActivityChartPeriod(){
+            function changeRetailActivityChartPeriod() {
                 retailActivityChart(vm.selectedPeriod);
             }
 
-            function retailActivityChart(period){
-                pProductPageService.getRetailActivity(period).then(function(){
+            function retailActivityChart(period) {
+                pProductPageService.getRetailActivity(period).then(function () {
                     var retailActivity = pProductPageService.retailActivity;
                     vm.retailSentimentScore = retailActivity.Score;
                     var categories = [];
                     var data = [];
-                    retailActivity.Sentiments.map(function(itemObj, itemKey){
-                        if(itemObj.RecordDate !== undefined && itemObj.RecordDate !== null && itemObj.RecordDate !== ''){
+                    retailActivity.Sentiments.map(function (itemObj, itemKey) {
+                        if (itemObj.RecordDate !== undefined && itemObj.RecordDate !== null && itemObj.RecordDate !== '') {
                             categories.push(moment(itemObj.RecordDate).format("YYYY-MM-DD"));
                         }
-                        if(itemObj.Value !== undefined && itemObj.Value !== null && itemObj.Value !== ''){
+                        if (itemObj.Value !== undefined && itemObj.Value !== null && itemObj.Value !== '') {
                             data.push(itemObj.Value);
                         }
                     });
                     var chartData = {
-                        categories : categories,
-                        data : data,
+                        categories: categories,
+                        data: data,
                     };
                     lineCharts('retail_buying_activity', chartData);
                 });
@@ -159,7 +159,7 @@
 
             tool.initialize(function () {
                 tool.setVmProperties({
-                    selectedPeriod: "1 Week",                    
+                    selectedPeriod: "1 Week",
                     periods: ["1 Week", "1 Month", "3 Month", "6 Months", "1 Year"],
                     changeRetailActivityChartPeriod: changeRetailActivityChartPeriod,
                 });
@@ -170,7 +170,7 @@
 
                 pProductPageService.waitTillProductDetailLoaded().then(function () {
 
-                    pProductPageService.getNewsSentiment().then(function(){
+                    pProductPageService.getNewsSentiment().then(function () {
                         var newsSentiment = pProductPageService.newsSentiment;
                         vm.newsSentiment = [{
                             NewsSentimentType: "Past 1 Hour",
@@ -190,36 +190,32 @@
                             Volume: newsSentiment.Past1WeekVolume,
                             IsVolumeBreakout: newsSentiment.Is1WeekBreakout
                         }]
-                    });                                        
+                    });
 
                     //Set Analyst Rating chat values for US market only
-                    if(productDetail.Product.TradeVenueLoc == 'US'){
-                        retailActivityChart(vm.selectedPeriod);                        
-                        
-                        pProductPageService.getLatestAnalystRating().then(function(){
-                                var latestAnalystRating = pProductPageService.latestAnalystRating;
-                                var chartData = {
-                                    categories : ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell'],
-                                    analyst_rating : [
-                                        latestAnalystRating.CountStrongBuy, 
-                                        latestAnalystRating.CountBuy, 
-                                        latestAnalystRating.CountHold, 
-                                        latestAnalystRating.CountSell, 
-                                        latestAnalystRating.CountStrongSell
-                                    ]
-                                };
-                                barCharts('analyst_rating', chartData);                        
+                    if (productDetail.Product.TradeVenueLoc == 'US') {
+                        retailActivityChart(vm.selectedPeriod);
+
+                        pProductPageService.getLatestAnalystRating().then(function () {
+                            var latestAnalystRating = pProductPageService.latestAnalystRating;
+                            var chartData = {
+                                categories: ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell'],
+                                analyst_rating: [
+                                    latestAnalystRating.CountStrongBuy,
+                                    latestAnalystRating.CountBuy,
+                                    latestAnalystRating.CountHold,
+                                    latestAnalystRating.CountSell,
+                                    latestAnalystRating.CountStrongSell
+                                ]
+                            };
+                            barCharts('analyst_rating', chartData);
                         });
 
-                        pProductPageService.getAnalystTargetPrice().then(function(){
-                            var analystTargetPrices = pProductPageService.analystTargetPrice;
-                            vm.analystTargetPrice = [{
-                                title: "Target Price",
-                                value: "USD "+analystTargetPrices.AnalystTargetPrice
-                            },{
-                                title: "Current Price",
-                                value: "USD "+analystTargetPrices.CurrentPrice
-                            }];
+                        pProductPageService.getAnalystTargetPrice().then(function () {
+                            vm.analystTargetPrice = pProductPageService.analystTargetPrice;
+                            if (vm.analystTargetPrice && vm.analystTargetPrice.AnalystTargetPrice) {
+                                vm.analystTargetPrice.AnalystTargetPrice = vm.analystTargetPrice.AnalystTargetPrice.toFixed(2);
+                            }
                         });
                     }
                 });

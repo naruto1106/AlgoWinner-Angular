@@ -13,6 +13,26 @@
             var filterDescription = pChartFilterDescriptionService;
             var swingMarkers = [];
             var tradersGPSSwingStudies = {
+                showPrimaryArrow: true,
+                toggleShowPrimaryArrow: function () {
+                    tradersGPSSwingStudies.setShowPrimaryArrow(!tradersGPSSwingStudies.showPrimaryArrow);
+                },
+                setShowPrimaryArrow: function (visibility) {
+                    tradersGPSSwingStudies.showPrimaryArrow = visibility;
+                    if (!filterDescription.primaryProduct) {
+                        return;
+                    }
+                },
+                showAllArrow: false,
+                toggleShowAllArrow: function () {
+                    tradersGPSSwingStudies.setShowAllArrow(!tradersGPSSwingStudies.showAllArrow);
+                },
+                setShowAllArrow: function (visibility) {
+                    tradersGPSSwingStudies.showAllArrow = visibility;
+                    if (!filterDescription.primaryProduct) {
+                        return;
+                    }
+                },
                 ma10Visibility: false,
                 setMA10Visibility: function (visibility) {
                     tradersGPSSwingStudies.ma10Visibility = visibility;
@@ -316,14 +336,29 @@
                         var price;
                         var x = stxx.pixelFromDate(quote.Date, stxx.chart);
                         var y;
-                        if (marker.Direction === "Bull") {
-                            price = quote.Low;
-                            y = stxx.pixelFromPriceTransform(price, panel, yAxis) + 20;
-                            drawUpwardArrow(ctx, x, y);
-                        } else {
-                            price = quote.High;
-                            y = stxx.pixelFromPriceTransform(price, panel, yAxis) - 30;
-                            drawDownwardArrow(ctx, x, y);
+                        if (tradersGPSSwingStudies.showAllArrow) {
+                            if (marker.Direction === "Bull") {
+                                price = quote.Low;
+                                y = stxx.pixelFromPriceTransform(price, panel, yAxis) + 20;
+                                drawUpwardArrow(ctx, x, y);
+                            } else {
+                                price = quote.High;
+                                y = stxx.pixelFromPriceTransform(price, panel, yAxis) - 30;
+                                drawDownwardArrow(ctx, x, y);
+                            }
+                        }
+                        else if (tradersGPSSwingStudies.showPrimaryArrow) {
+                            if (marker.ArrowCount === 1) {
+                                if (marker.Direction === "Bull") {
+                                    price = quote.Low;
+                                    y = stxx.pixelFromPriceTransform(price, panel, yAxis) + 20;
+                                    drawUpwardArrow(ctx, x, y);
+                                } else {
+                                    price = quote.High;
+                                    y = stxx.pixelFromPriceTransform(price, panel, yAxis) - 30;
+                                    drawDownwardArrow(ctx, x, y);
+                                }
+                            }
                         }
                         break;
                     }
@@ -347,7 +382,9 @@
                 if (!filterDescription.primaryProduct) {
                     return;
                 }
-                
+
+                tradersGPSSwingStudies.setShowPrimaryArrow(true);
+                tradersGPSSwingStudies.setShowAllArrow(false);
                 tradersGPSSwingStudies.setMA10Visibility(true);
                 tradersGPSSwingStudies.setMA20Visibility(true);
                 tradersGPSSwingStudies.setMA40Visibility(true);
@@ -367,6 +404,8 @@
             }
 
             function exitTradersSwing() {
+                tradersGPSSwingStudies.setShowPrimaryArrow(false);
+                tradersGPSSwingStudies.setShowAllArrow(false);
                 tradersGPSSwingStudies.setMA10Visibility(false);
                 tradersGPSSwingStudies.setMA20Visibility(false);
                 tradersGPSSwingStudies.setMA40Visibility(false);

@@ -64,6 +64,14 @@
             });
         }
 
+        function searchProductsInHeader(keyword) {
+            return sProductService.SearchProduct(keyword).then(function (res) {
+                return res.data.filter(function (product) {
+                    return product.AssetType !== "Index Futures" && product.AssetType !== "Index Futures CFD";
+                });
+            });
+        }
+
         function showContactUs() {
             tool.openModalByDefinition('s.misc.ContactUsController');
         }
@@ -141,7 +149,8 @@
                 showConfirmEmailBox: showConfirmEmailBox,
                 goToAmAuto: sHeaderService.goToAmAuto,
                 goToNewTab: commonLocationHistoryService.goToNewTab,
-                openAcademy: openAcademy
+                openAcademy: openAcademy,
+                searchProductsInHeader: searchProductsInHeader
             });
 
             sGatewayTokenRefreshService.start();
