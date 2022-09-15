@@ -130,6 +130,14 @@
                     period: args[2],
                 };
             }),
+
+            GetRetailSentiment: coreServerCommunicationService.genGetFunctionWithNVar(retailActivityPath + '/GetSentiment', function (args) {
+                return {
+                    productId: args[0],
+                    venue: translateTradeVenueToName(args[1]),
+                    period: args[2],
+                };
+            }),
             
             GetAnalystTargetPrice: coreServerCommunicationService.genGetFunctionWithNVar(targetPricePath + '/GetTargetPrice', function (args) {
                 return {

@@ -3,7 +3,7 @@
         function (vm, dep, tool) {
             var pProductPageService = dep.pProductPageService;
 
-            function lineCharts(container, chartData) {
+            function lineCharts(container, chartData, name) {
                 Highcharts.chart(container, {
                     title: {
                         text: ''
@@ -38,7 +38,7 @@
                     },
 
                     series: [{
-                        name: 'Retail Interest',
+                        name: name,
                         data: chartData.data
                     }],
 
@@ -132,16 +132,19 @@
             }
 
             function changeRetailActivityChartPeriod() {
-                retailActivityChart(vm.selectedPeriod);
+                retailInterestChart(vm.selectedInterestPeriod);
             }
 
-            function retailActivityChart(period) {
+            function changeRetailSentimentChartPeriod() {
+                retailSentimentChart(vm.selectedSentimentPeriod);
+            }
+
+            function retailInterestChart(period) {
                 pProductPageService.getRetailActivity(period).then(function () {
-                    var retailActivity = pProductPageService.retailActivity;
-                    vm.retailSentimentScore = retailActivity.Score;
+                    var result = pProductPageService.retailActivity;
                     var categories = [];
                     var data = [];
-                    retailActivity.Sentiments.map(function (itemObj, itemKey) {
+                    result.map(function (itemObj, itemKey) {
                         if (itemObj.RecordDate !== undefined && itemObj.RecordDate !== null && itemObj.RecordDate !== '') {
                             categories.push(moment(itemObj.RecordDate).format("YYYY-MM-DD"));
                         }
@@ -153,15 +156,39 @@
                         categories: categories,
                         data: data,
                     };
-                    lineCharts('retail_buying_activity', chartData);
+                    lineCharts('retail_interest', chartData, 'Retail Interest');
+                });
+            }
+
+            function retailSentimentChart(period) {
+                pProductPageService.getRetailSentiment(period).then(function () {
+                    var result = pProductPageService.retailSentiment;
+                    var categories = [];
+                    var data = [];
+                    result.map(function (itemObj, itemKey) {
+                        if (itemObj.RecordDate !== undefined && itemObj.RecordDate !== null && itemObj.RecordDate !== '') {
+                            categories.push(moment(itemObj.RecordDate).format("YYYY-MM-DD"));
+                        }
+                        if (itemObj.Value !== undefined && itemObj.Value !== null && itemObj.Value !== '') {
+                            data.push(itemObj.Value);
+                        }
+                    });
+                    var chartData = {
+                        categories: categories,
+                        data: data,
+                    };
+                    lineCharts('retail_sentiment', chartData, 'Retail Sentiment');
                 });
             }
 
             tool.initialize(function () {
                 tool.setVmProperties({
-                    selectedPeriod: "1 Week",
-                    periods: ["1 Week", "1 Month", "3 Month", "6 Months", "1 Year"],
+                    selectedInterestPeriod: "1 Month",
+                    selectedSentimentPeriod: "1 Month",
+                    retailInterestPeriods: ["1 Week", "1 Month", "3 Month", "6 Month", "1 Year"],
+                    retailSentimentPeriods: ["1 Week", "1 Month", "3 Month", "6 Month", "1 Year"],
                     changeRetailActivityChartPeriod: changeRetailActivityChartPeriod,
+                    changeRetailSentimentChartPeriod: changeRetailSentimentChartPeriod,
                 });
 
                 var productDetail = pProductPageService.productDetail;
@@ -194,7 +221,7 @@
 
                     //Set Analyst Rating chat values for US market only
                     if (productDetail.Product.TradeVenueLoc == 'US') {
-                        retailActivityChart(vm.selectedPeriod);
+                        retailInterestChart(vm.selectedInterestPeriod);
 
                         pProductPageService.getLatestAnalystRating().then(function () {
                             var latestAnalystRating = pProductPageService.latestAnalystRating;

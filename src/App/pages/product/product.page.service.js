@@ -71,6 +71,16 @@
             });
         }
 
+        function getRetailSentiment(period) {
+            return dep.sProductService.GetRetailSentiment(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc, period).then(function (res) {
+                serviceObj.retailSentiment = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.retailSentiment = null;
+                serviceObj.isLoading = false;
+            });
+        }
+
         function getAnalystTargetPrice() {
             return dep.sProductService.GetAnalystTargetPrice(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
                 serviceObj.analystTargetPrice = res.data;
@@ -348,7 +358,9 @@
                 Is1WeekBreakout: false
             },
             getRetailActivity: getRetailActivity,
-            retailActivity: {},
+            retailActivity: null,
+            getRetailSentiment: getRetailSentiment,
+            retailSentiment: null,
             getAnalystTargetPrice: getAnalystTargetPrice,
             analystTargetPrice: {
                 AnalystTargetPrice: 0,
