@@ -14,7 +14,10 @@
                         <td>{{newsSentimentObj.NewsSentimentType}}</td>
                         <td>{{newsSentimentObj.SentimentScore|number:2}}</td>
                         <td>{{newsSentimentObj.Volume|number:2}}
-                            <span ng-if="newsSentimentObj.IsVolumeBreakout"><button class="volume-button">Volume Breakout</button></span>
+                            <span ng-if="newsSentimentObj.IsVolumeBreakout" class="volume-icon" agmc-svg-loader
+                                svg-src="'/App/assets/icons/product/information.svg'" uib-tooltip="A Spike of Interest"
+                                tooltip-placement="top">
+                            </span>
                         </td>
                     </tr>
                 </table>
@@ -25,19 +28,23 @@
                 <uib-tabset>
                     <uib-tab heading="Retail Interest" ng-click="vm.changeRetailActivityChartPeriod()">
                         <div style="text-align: right; padding: 5px 5px 0 0;">
-                            <select ng-change="vm.changeRetailActivityChartPeriod()" ng-model="vm.selectedInterestPeriod" ng-options="m for m in vm.retailInterestPeriods"></select>
+                            <select ng-change="vm.changeRetailActivityChartPeriod()"
+                                ng-model="vm.selectedInterestPeriod"
+                                ng-options="m for m in vm.retailInterestPeriods"></select>
                         </div>
                         <div id="retail_interest"></div>
                     </uib-tab>
                     <uib-tab heading="Retail Sentiment" ng-click="vm.changeRetailSentimentChartPeriod()">
                         <div style="text-align: right; padding: 5px 5px 0 0;">
-                            <select ng-change="vm.changeRetailSentimentChartPeriod()" ng-model="vm.selectedSentimentPeriod" ng-options="m for m in vm.retailSentimentPeriods"></select>
+                            <select ng-change="vm.changeRetailSentimentChartPeriod()"
+                                ng-model="vm.selectedSentimentPeriod"
+                                ng-options="m for m in vm.retailSentimentPeriods"></select>
                         </div>
                         <div id="retail_sentiment"></div>
                     </uib-tab>
                 </uib-tabset>
             </div>
-        </div>   
+        </div>
         <div class="col-md-1" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
             <div class="white-box">
                 <h1>Analyst Rating</h1>
@@ -45,7 +52,8 @@
                 <div id="analyst_rating"></div>
             </div>
         </div>
-        <div class="col-md-1" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US' && vm.analystTargetPrice && vm.analystTargetPrice.AnalystTargetPrice">
+        <div class="col-md-1"
+            ng-if="vm.productDetail.Product.TradeVenueLoc === 'US' && vm.analystTargetPrice && vm.analystTargetPrice.AnalystTargetPrice">
             <div class="white-box">
                 <h1>Analyst Target Price</h1>
                 <table border="1" class="sentiment-table">
