@@ -1,0 +1,26 @@
+﻿<div class="agm-component-tradersgps fundamental-filter">
+    <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+        <h4 class="modal-title">
+            Columns to Display
+        </h4>
+    </div>
+
+    <div class="modal-body">
+        <table>
+            <tbody>
+                <tr class="fundamental-item" ng-repeat="productListOptionForPositionObj in vm.productListOptionForPosition.columns">
+                    <td ng-if="productListOptionForPositionObj.title !== 'PRODUCT' && productListOptionForPositionObj.title !=='SYMBOL' && productListOptionForPositionObj.title !=='' ">
+                        <input type="checkbox" ng-model="productListOptionForPositionObj.checked" ng-change="vm.onChange(productListOptionForPositionObj)"/><label>{{::productListOptionForPositionObj.title}}</label>                        
+                    </td>                                        
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary pull-right" ng-click="vm.closePanel()">SAVE</button>
+        <button class="hollow-blue m-right-10px pull-right" ng-click="vm.uibDismissPanel()">CANCEL</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

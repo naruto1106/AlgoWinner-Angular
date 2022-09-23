@@ -19,15 +19,157 @@
                 serviceObj.productDetail.RelatedCompanies = res.data.RelatedCompanies;
                 deferred.resolve();
                 serviceObj.isLoading = false;
-                serviceObj.showErrorMessage = false;
             }, function () {
                 deferred.reject();
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
             return deferred.promise;
         }
+        
+        function getSector(market) {
+            return dep.sProductService.GetSector(market).then(function (res) {                                
+                serviceObj.sector = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getIndustry(market) {
+            return dep.sProductService.GetIndustry(market).then(function (res) {                                
+                serviceObj.industry = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getLatestAnalystRating() {
+            return dep.sProductService.GetLatestAnalystRating(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {                                
+                serviceObj.latestAnalystRating = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getNewsSentiment() {
+            return dep.sProductService.GetNewsSentiment(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {                                
+                serviceObj.newsSentiment = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getRetailActivity(period) {
+            return dep.sProductService.GetRetailActivity(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc, period).then(function (res) {                                
+                serviceObj.retailActivity = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }
 
+        function getRetailSentiment(period) {
+            return dep.sProductService.GetRetailSentiment(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc, period).then(function (res) {
+                serviceObj.retailSentiment = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.retailSentiment = null;
+                serviceObj.isLoading = false;
+            });
+        }
+
+        function getAnalystTargetPrice() {
+            return dep.sProductService.GetAnalystTargetPrice(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.analystTargetPrice = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }                
+        
+        function getFundamentalPageMetrics(type) {
+            var fundamentalPageMetricsType = '';
+            if(type == 'annually'){
+                fundamentalPageMetricsType = dep.sProductService.GetFundamentalAnnualPageMetrics;
+            }
+            if(type == 'quarter'){
+                fundamentalPageMetricsType = dep.sProductService.GetFundamentalQuarterlyPageMetrics;
+            }
+            return fundamentalPageMetricsType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.fundamentalPageMetrics = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }               
+        
+        function getIncomeStatement(type) {
+            var statementType = '';
+            if(type == 'annually'){
+                statementType = dep.sProductService.GetAnnualIncomeStatement;
+            }
+            if(type == 'quarterly'){
+                statementType = dep.sProductService.GetQuarterlyIncomeStatement;
+            }
+            return statementType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.incomeStatement = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getBalanceSheet(type) {
+            var balanceSheetType = '';
+            if(type == 'annually'){
+                balanceSheetType = dep.sProductService.GetAnnualBalanceSheet;
+            }
+            if(type == 'quarterly'){
+                balanceSheetType = dep.sProductService.GetQuarterlyBalanceSheet;
+            }
+            return balanceSheetType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.balanceSheet = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getCashFlow(type) {
+            var cashFlowType = '';
+            if(type == 'annually'){
+                cashFlowType = dep.sProductService.GetAnnualCashFlow;
+            }
+            if(type == 'quarterly'){
+                cashFlowType = dep.sProductService.GetQuarterlyCashFlow;
+            }
+            return cashFlowType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.cashFlow = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }
+        
+        function getStatistics(type) {
+            var statisticsType = '';
+            if(type == 'annually'){
+                statisticsType = dep.sProductService.GetAnnualStatistics;
+            }
+            if(type == 'quarterly'){
+                statisticsType = dep.sProductService.GetQuarterlyStatistics;
+            }
+            return statisticsType(serviceObj.currentProduct.ProductId, serviceObj.currentProduct.TradeVenueLoc).then(function (res) {
+                serviceObj.statistics = res.data;
+                serviceObj.isLoading = false;
+            }, function () {
+                serviceObj.isLoading = false;
+            });
+        }
+       
         function placeOrder(action, stock) {
             return tool.openModalByDefinition('s.orders.PadDeveloperPopupController', {
                 selectedStrategy: null,
@@ -132,7 +274,7 @@
                         serviceObj.productDetail.Product = result;
                         serviceObj.currentProduct = result;
                         serviceObj.isLoadingPrice = true;
-
+                        
                         tool.onceAll([
                             tradeDataService.GetBid(serviceObj.productDetail.ProductModel),
                             tradeDataService.GetAsk(serviceObj.productDetail.ProductModel),
@@ -153,7 +295,7 @@
                             serviceObj.productDetail.MarketData.PrevClose = ress[2].data.PrevClose;    
                             serviceObj.productDetail.MarketData.CumulativeVolume = ress[2].data.CumulativeVolume;    
                             serviceObj.productDetail.MarketData = angular.extend(
-                                serviceObj.productDetail.MarketData, sMarketDataService.calculateLastTradedPricePct(ress[2]));
+                            serviceObj.productDetail.MarketData, sMarketDataService.calculateLastTradedPricePct(ress[2]));
                             serviceObj.isLoadingPrice = false;
                             getPriceDeferred.resolve();
                             return getProductDetail(serviceObj.currentProduct.ProductId);
@@ -163,13 +305,11 @@
                     });
 
                 } else {
-                    serviceObj.showErrorMessage = true;
                     serviceObj.isLoading = false;
                 }
 
             }, function () {
                 dep.coreNotificationService.notifyError("Error loading products", "Sorry, there are no results for " + symbol);
-                serviceObj.showErrorMessage = true;
                 serviceObj.isLoading = false;
             });
         }
@@ -190,9 +330,52 @@
             isLoadingPrice: false,
             hasHeader: false,
             isWarrants: false,
-            showErrorMessage: false,
             setHeaderVisibility: setHeaderVisibility,
             currentProduct: {},
+            getSector: getSector,
+            sector: {},
+            getIndustry: getIndustry,
+            industry: {},
+            getLatestAnalystRating: getLatestAnalystRating,            
+            latestAnalystRating: {
+                CountBuy: 0,
+                CountHold: 0,
+                CountSell: 0,
+                CountStrongBuy: 0,
+                CountStrongSell: 0,
+                ObservationDate: ""
+            },
+            getNewsSentiment: getNewsSentiment,
+            newsSentiment: {
+                Past1HourScore: 0,
+                Past1HourVolume: 0,
+                Is1HourBreakout: false,
+                Past24HourScore: 0,
+                Past24HourVolume: 0,
+                Is24HourBreakout: false,
+                Past1WeekScore: 0,
+                Past1WeekVolume: 0,
+                Is1WeekBreakout: false
+            },
+            getRetailActivity: getRetailActivity,
+            retailActivity: null,
+            getRetailSentiment: getRetailSentiment,
+            retailSentiment: null,
+            getAnalystTargetPrice: getAnalystTargetPrice,
+            analystTargetPrice: {
+                AnalystTargetPrice: 0,
+                CurrentPrice: 0
+            },
+            getFundamentalPageMetrics: getFundamentalPageMetrics,
+            fundamentalPageMetrics: {},
+            getIncomeStatement: getIncomeStatement,
+            incomeStatement: {},
+            getBalanceSheet: getBalanceSheet,
+            balanceSheet: {},
+            getCashFlow: getCashFlow,
+            cashFlow: {},
+            getStatistics: getStatistics,
+            statistics: {},
             productDetail: {
                 ProductModel: {},
                 MarketData: {},

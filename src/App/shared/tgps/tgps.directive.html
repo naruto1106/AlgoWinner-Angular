@@ -24,9 +24,33 @@
     <script type="text/ng-template" id="bigscreener/tgps.Month">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Month|number:2}}</h5>
     </script>
-    <script type="text/ng-template" id="bigscreener/tgps.Quarter">
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Quarter|number:2}}</h5>
+    <script type="text/ng-template" id="bigscreener/tgps.TID">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{externalVm.getTIDFullNameByValue(productContainer.TID)}}</h5>
     </script>
+    <script type="text/ng-template" id="bigscreener/tgps.TIDChange">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.TIDChange}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.noise">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Noise}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.marketCap">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.MarketCap > 0 ? (productContainer.MarketCap|priceNumberFormatter) : '-'}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.sector">
+        <h5 title="{{productContainer.ProductModel.Sector.SectorName}}" ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Sector.SectorName}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.industry">
+        <h5 title="{{productContainer.ProductModel.Industry.IndustryName}}" ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.ProductModel.Industry.IndustryName}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.turnover">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Turnover > 0 ? (productContainer.Turnover|priceNumberFormatter) : '-'}}</h5>
+    </script>
+    <script type="text/ng-template" id="bigscreener/tgps.analystRating">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Rating > 0 ? (productContainer.Rating) : '-'}}</h5>
+    </script>
+    <!-- <script type="text/ng-template" id="bigscreener/tgps.Quarter">
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Quarter|number:2}}</h5>
+    </script> -->
     <script type="text/ng-template" id="bigscreener/tgps.Close">
         <h5 ng-class="externalVm.getIndicatorColor(productContainer)">{{productContainer.Close|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}</h5>
     </script>
@@ -44,7 +68,7 @@
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.TriggerPrice">
         <h5 ng-if="productContainer.Direction == 0">-</h5>
-        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="productContainer.Direction != 0">{{productContainer.TriggerPrice|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc}}</h5>
+        <h5 ng-class="externalVm.getIndicatorColor(productContainer)" ng-if="productContainer.Direction != 0">{{productContainer.TriggerPrice > 0 ? (productContainer.TriggerPrice|correctTickSizeDecimalPlacesWithCurrency:productContainer.ProductModel.Currency:productContainer.ProductModel.TradeVenueLoc) : '-'}}</h5>
     </script>
     <script type="text/ng-template" id="bigscreener/tgps.StopPrice">
         <h5 ng-if="!productContainer.StopPrice">-</h5>
@@ -160,20 +184,20 @@
                 </div>
             </div>
             <!--
-    <div class="menu" ng-if="vm.mode === 'Plus'">
-        <label>Horizon</label>
-        <select ng-model="vm.paladinHorizon" ng-options="o.id as o.label for o in vm.horizonOptions"></select>
-    </div>
-    <div class="menu filter-strength" ng-if="vm.mode === 'Plus'">
-        <label>Filter Strength</label>
-        <div class="filter-text">
-            <span class="text">Basic</span>
-            <span class="text">Moderate</span>
-            <span class="text">Strong</span>
-        </div>
-        <div ui-slider min="0" max="2" step="1" ng-model="vm.filterStrength"></div>
-    </div>
-    -->
+            <div class="menu" ng-if="vm.mode === 'Plus'">
+                <label>Horizon</label>
+                <select ng-model="vm.paladinHorizon" ng-options="o.id as o.label for o in vm.horizonOptions"></select>
+            </div>
+            <div class="menu filter-strength" ng-if="vm.mode === 'Plus'">
+                <label>Filter Strength</label>
+                <div class="filter-text">
+                    <span class="text">Basic</span>
+                    <span class="text">Moderate</span>
+                    <span class="text">Strong</span>
+                </div>
+                <div ui-slider min="0" max="2" step="1" ng-model="vm.filterStrength"></div>
+            </div>
+            -->
             <div class="menu" ng-if="vm.mode !== 'Plus'">
                 <label>Market/Watchlist</label>
                 <agms-tgps-complex-selector watchlists="vm.watchlists"
@@ -232,11 +256,22 @@
             </div>
             <div class="menu" ng-if="vm.mode==='Position'">
                 <label>COM Crossover</label>
-                <select ng-model="vm.filter.crossover" ng-change="vm.onFrontEndFilterChanged()" ng-options="d as d for d in vm.comCrossover"></select>
+                <select ng-model="vm.filter.crossover" ng-change="vm.onFrontEndFilterChanged()" ng-options="c as c for c in vm.comCrossover"></select>
+            </div>
+            <div class="menu" ng-if="vm.mode==='Position'">
+                <label>TID</label>
+                <select style="width: 50px;" ng-model="vm.filter.tid" ng-change="vm.onFrontEndFilterChanged()" ng-options="t.value as t.name for t in vm.tid"></select>
+            </div>
+            <div class="menu" ng-if="vm.mode==='Position'">
+                <label>TID Change</label>
+                <select style="width: 40px;" ng-model="vm.filter.tidChange" ng-change="vm.onFrontEndFilterChanged()" ng-options="tc as tc for tc in vm.tidChange"></select>
             </div>
             <div class="show-fundamental-filter pull-right" ng-if="vm.mode !== 'Plus' && vm.hasFundamentalFilterSelections()">
                 <div class="filter-number" ng-if="vm.sTgpsScreenerService.fundamentalFilterNumber > 0">{{vm.sTgpsScreenerService.fundamentalFilterNumber}}</div>
                 <button class="filled-blue" ng-click="vm.showFundamentalFilter()">SHOW FILTERS</button>
+                <div class="pt-5" ng-if="vm.mode === 'Position'">
+                    <button class="filled-blue" ng-click="vm.showColumnsFilter()">SHOW COLUMNS</button>
+                </div>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -272,14 +307,14 @@
 
     <div ng-if="vm.mode==='Position'" class="tgps-position ">
         <div ng-if="vm.filter.barSize.value==='1 day'">
-            <agms-product-list options="vm.productListOptionForPosition" product-container-list="vm.filteredStocksForPosition"
-                               ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
-            </agms-product-list>
+            <agms-tgps-product-list options="vm.productListOptionForPosition" product-container-list="vm.filteredStocksForPosition"
+                                    ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
+            </agms-tgps-product-list>
         </div>
         <div ng-if="vm.filter.barSize.value==='1 week'">
-            <agms-product-list options="vm.productListOptionForWeeklyPosition" product-container-list="vm.filteredStocksForPosition"
-                               ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
-            </agms-product-list>
+            <agms-tgps-product-list options="vm.productListOptionForWeeklyPosition" product-container-list="vm.filteredStocksForPosition"
+                                    ng-if="vm.filteredStocksForPosition.length>0 && !vm.isLoading" ng-show="vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length > 0">
+            </agms-tgps-product-list>
         </div>
         <h4 class="m-20px text-center" ng-if="vm.filteredStocksForPosition.length == 0 && !vm.isLoading">{{vm.noResultMessage}}</h4>
         <h4 class="m-20px text-center" ng-if="vm.filteredStocksForPosition.length > 0 && vm.preprocessFilterListFunc(vm.filteredStocksForPosition).length == 0 && !vm.isLoading">No results found.</h4>

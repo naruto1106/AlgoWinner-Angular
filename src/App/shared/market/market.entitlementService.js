@@ -4,7 +4,7 @@
         var coreUserStateService = dep.coreUserStateService,
             coreConfigService = dep.coreConfigService;
 
-        var tradeVenuesThatHasFundamentals = ['HK', 'SG', 'US'];
+        var tradeVenuesThatHasFundamentals = ['HK', 'SG', 'US', 'CHN'];
         var indexWithRealTimeData = ["$SPX", "$STI-SES", "$HSI-HKG", "$HSCEI-HKG", "$XIN9-FTSE"];
         var availableTradeVenues = {
             SG: {

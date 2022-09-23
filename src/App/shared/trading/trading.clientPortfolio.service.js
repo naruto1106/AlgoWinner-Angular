@@ -57,7 +57,7 @@
             tool.signalRMarketData("RT", 'LastMarketDataUpdated', recalcPortfolioProperty);
             coreSignalRNotificationService.turnOn('DeveloperPortfolioUpdated', processDeveloperPortfolioUpdate);
 
-            var promise = portfolioService.GetActivePortfolio([selectedStrategy.DisplayInfo.BasicInfo.StrategyId]);
+            var promise = portfolioService.GetActivePortfolio({ StrategyIds: [selectedStrategy.DisplayInfo.BasicInfo.StrategyId]});
 
             getOpenPositions(promise, previousGetActivePositionPromise, activePositions, onActivePositionsUpdate);
 
@@ -154,7 +154,14 @@
                         if (position.MarketData) {
                             recalcPortfolioPropertyFunc(position.MarketData);
                         } else {
-                            tradeDataService.GetLast(position.Product).then(function(res) {
+                            var requestObj = {
+                                ProductId: position.Product.ProductId,
+                                Symbol: position.Product.Symbol,
+                                TradeVenueLoc: position.Product.TradeVenueLoc,
+                                AssetType: position.Product.AssetType,
+                                Currency: position.Product.Currency
+                            };
+                            tradeDataService.GetLast(requestObj).then(function(res) {
                                 position.MarketData = res.data;
                                 recalcPortfolioPropertyFunc(position.MarketData);
                             });

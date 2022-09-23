@@ -216,6 +216,38 @@
                         },
                         "calculateFN": null
                     },
+                    "tid": {
+                        "name": "TID",
+                        "display": "TID",
+                        "edit": null,
+                        "panelHeight": 120,
+                        "inputs": {},
+                        "outputs": {
+                            "Positive Bar": "#32912b",
+                            "Negative Bar": "#a4d6a0",
+                        },
+                        "yAxis": {
+                            "displayGridLines": true,
+                        },
+                        "seriesFN": displayTid,
+                        "calculateFN": null
+                    },
+                    "weeklytid": {
+                        "name": "Weekly TID",
+                        "display": "TID",
+                        "edit": null,
+                        "panelHeight": 120,
+                        "inputs": {},
+                        "outputs": {
+                            "Positive Bar": "#32912b",
+                            "Negative Bar": "#a4d6a0",
+                        },
+                        "yAxis": {
+                            "displayGridLines": true,
+                        },
+                        "seriesFN": displayTid,
+                        "calculateFN": null
+                    },
                     "cci5": {
                         "name": "cci5",
                         "display": "CCI (5)",
@@ -539,6 +571,77 @@
                     study.yAxis.initialMarginBottom = pChartRenderingUtilsService.standardPanelMargin.bottom;
                 }
                 STX.Studies.studyLibrary = STX.extend(STX.Studies.studyLibrary,studies);
+            }
+            
+            function displayTid(stx, sd, quotes) {
+                var panel = stx.panels[sd.panel];
+                panel.min = -1.5;
+                panel.max = 1.5;
+                STX.Studies.createYAxis(stx, sd, quotes, panel);
+
+                var context = stx.chart.context;
+                stx.startClip(panel.name);
+                var myWidth = stx.layout.candleWidth - 2;
+                if (myWidth < 2) myWidth = 1;
+                var field = sd.name + "_hist";
+                for (var i = 0; i < quotes.length; i++) {
+                    var quote = quotes[i];
+                    if (!quote)
+                        continue;
+
+                    if (quote.candleWidth) myWidth = Math.floor(Math.max(1, quote.candleWidth - 2));
+                    var x0 = Math.floor(stx.pixelFromBar(i, panel.chart) - myWidth / 2);
+                    var x1 = Math.floor(myWidth);
+
+                    var drawRect = false;
+                    var y0;
+                    var y1;
+                    var value = quote[field];
+                    if (value > 0) {
+                        y0 = stx.pixelFromPrice(0, panel);
+                        y1 = (stx.pixelFromPrice(1, panel) - stx.pixelFromPrice(0, panel));
+                        drawRect = true;
+                    } else if (value < 0) {
+                        y0 = stx.pixelFromPrice(-1, panel);
+                        y1 = (stx.pixelFromPrice(1, panel) - stx.pixelFromPrice(0, panel));
+                        drawRect = true;
+                    } 
+                    
+                    switch (value) {
+                    case 1:
+                        context.fillStyle = "#DCDCDC";
+                        break;
+                    case 2:
+                        context.fillStyle = "red";
+                        break;
+                    case 3:
+                        context.fillStyle = "#e8af11";
+                        break;
+                    case 4:
+                        context.fillStyle = "green";
+                        break;
+                    case -1:
+                        context.fillStyle = "#DCDCDC";
+                        break;
+                    case -2:
+                        context.fillStyle = "green";
+                        break;
+                    case -3:
+                        context.fillStyle = "#e8af11";
+                        break;
+                    case -4:
+                        context.fillStyle = "red";
+                        break;
+                    default:
+                        break;
+                    }
+
+                    if (drawRect) {
+                        context.fillRect(x0, y0, x1, y1);
+                    }
+                }
+                stx.endClip();
+
             }
 
             tool.setServiceObjectProperties({

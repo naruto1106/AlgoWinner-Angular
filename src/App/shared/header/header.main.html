@@ -256,7 +256,7 @@
                 <input type="text" class="form-control" placeholder="Search Stock..."
                        ng-model="vm.selectedProduct"
                        ng-model-options="{debounce: 200}"
-                       uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                       uib-typeahead="product as product.Symbol for product in vm.searchProductsInHeader($viewValue)"
                        typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
                        typeahead-wait-ms="200"
                        typeahead-on-select="vm.goToProduct(vm.selectedProduct)"

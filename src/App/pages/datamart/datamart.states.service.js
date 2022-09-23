@@ -1,9 +1,10 @@
 ﻿agmNgModuleWrapper('agmp.datamart')
-	.defineService('pDatamartStatesService', ["coreConfigService"],
+	.defineService('pDatamartStatesService', ["coreConfigService", "coreDataStorageService"],
 		function (serviceObj, dep, tool) {
 
 			var coreConfigService = dep.coreConfigService;
-
+			var coreDataStorageService = dep.coreDataStorageService;
+			
 			function getAssetClasses() {
 				if (serviceObj.dataMartFilter && serviceObj.dataMartFilter.selectedTradeVenue === "SG") {
 					return coreConfigService.MarketScreener.AssetClasses.split(',');
@@ -159,32 +160,118 @@
 				];
 			}
 
+			function getAnalystRating(){
+				return [
+					{
+						name: "1 >= to <= 1.5",
+						checked: true
+					},
+					{
+						name: ">1.5 to <= 2.5",
+						checked: true
+					},
+					{
+						name: "> 2.5 to < 3.5",
+						checked: true
+					},
+					{
+						name: ">= 3.5 to < 4.5",
+						checked: true
+					},
+					{
+						name: ">= 4.5 to <= 5",
+						checked: true
+					}
+				]
+			}
+
+			function getTurnover(){
+				return [
+					{
+						name: "< 1 M",
+						to: 1000000,
+						checked: true
+					},
+					{
+						name: "1 M - 10 M",
+						from: 1000000,
+						to: 10000000,
+						checked: true
+					},
+					{
+						name: "> 10 M",
+						from: 1000000,
+						checked: true
+					}
+				]
+			}
+
+			function getNoise(){
+				var n_left = 5;
+				var n_right = 10;
+				var dynamicNoise = [];
+				dynamicNoise.push({name: "<5", checked: true});
+				for (i = 1; i <= 18; i++) {
+					dynamicNoise.push({name: n_left + " to " + n_right, checked: true});
+					n_left =+ n_left+5;
+					n_right =+ n_right+5;
+					if(i === 18){
+						dynamicNoise.push({name: ">95", checked: true});
+						return dynamicNoise;
+					}
+				}
+			}
+
+			function getSectorIndustry(market){
+				return [{
+					name: "Sector",
+					checked: true,
+					data : (coreDataStorageService.get("fundamental-filter-sector_"+[market]) ? angular.fromJson(coreDataStorageService.get("fundamental-filter-sector_"+[market])) : [])
+				},{
+					name: "Industry",
+					checked: false,
+					data : (coreDataStorageService.get("fundamental-filter-industry_"+[market]) ? angular.fromJson(coreDataStorageService.get("fundamental-filter-industry_"+[market])) : [])
+				}]
+			}
+
 			function getDefaultFundamentalSelections() {
 				return {
 					peRatios: getDefaultPeRatios(),
 					earningGrowths: getDefaultEarningGrowths(),
 					priceRanges: getDefaultPriceRanges(),
-					marketCaps: getDefaultMarketCaps()
+					marketCaps: getDefaultMarketCaps(),
+					analystRating: getAnalystRating(),
+					turnover: getTurnover(),
+					noise: getNoise(),
+					sectorIndustry: getSectorIndustry()
 				}
 			}
 
-			function getDefaultFundamentalWithVolumeSelections() {
+			function getDefaultFundamentalWithVolumeSelections(market) {
 				return {
 					peRatios: getDefaultPeRatios(),
 					earningGrowths: getDefaultEarningGrowths(),
 					priceRanges: getDefaultPriceRanges(),
 					marketCaps: getDefaultMarketCaps(),
-					volumeConditions: getDefaultVolumeCondition()
+					volumeConditions: getDefaultVolumeCondition(),
+					analystRating: getAnalystRating(),
+					turnover: getTurnover(),
+					noise: getNoise(),
+					sectorIndustry: getSectorIndustry(market)
 				}
 			}
 
-			function getPriceAndVolumeFilterContent() {
+			function getPriceAndVolumeFilterContent(market) {
 				return {
 					peRatios: [],
 					marketCaps: [],
 					earningGrowths: [],
 					priceRanges: getDefaultPriceRanges(),
-					volumeConditions: getDefaultVolumeCondition()
+					volumeConditions: getDefaultVolumeCondition(),
+					analystRating: getAnalystRating(),
+					turnover: getTurnover(),
+					noise: getNoise(),
+					sectorIndustry: getSectorIndustry(market)
 				}
 			}
 

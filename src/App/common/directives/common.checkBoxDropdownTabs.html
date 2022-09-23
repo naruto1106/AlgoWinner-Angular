@@ -1,0 +1,26 @@
+﻿<div class="agms-directive checkbox-dropdown">
+    <div class="btn-group" uib-dropdown auto-close="outsideClick" on-toggle="vm.onToggle(open)" is-open="vm.isOpen">
+        <button id="opener" type="button" class="btn btn-primary" uib-dropdown-toggle>
+            {{vm.getCheckboxName()}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu-selection dropdown-menu-selection-tabs" uib-dropdown-menu role="menu" aria-labelledby="opener">            
+            <li role="menuitem">
+                <div class="dropdown-menu-main">
+                    <div class="dropdown-menu-header" ng-repeat="item in vm.dropdownItems">
+                        <div class="dropdown-menu-header-text">
+                            <p><input type="radio" name="sector-industry[{{vm.fundamentalObj.TradeVenue}}]" ng-model="vm.selectedRadio" ng-value="item.name" ng-click="vm.onClickRadio(item, $index)" /> {{::item.name}}</p>
+                        </div>                        
+                    </div>
+                    <div ng-repeat="item in vm.dropdownItems">
+                        <div ng-if="vm.selectedRadio == item.name">
+                            <input type="checkbox" ng-model="vm.allOptionsSelected" ng-change="vm.onAllOptionsToggled()" /><label>All</label>
+                            <div ng-repeat="itemData in item.data">
+                                <input type="checkbox" ng-model="itemData.checked" ng-change="vm.onChange(itemData)"/><label> {{::vm.displayFunc(itemData)}}</label>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>                
+            </li>
+        </ul>
+    </div>
+</div>

@@ -2,16 +2,8 @@
     .ngApp
     .service('portfolioService', ['coreServerCommunicationService', function (coreServerCommunicationService) {
         var developerPath = '/mantpmsapi/DeveloperPortfolio/';
-
-        var generateDeveloperFunction = function(name) {
-            return coreServerCommunicationService.genGetFunctionWithNVar(developerPath + name, function (args) {
-                return {
-                    filter: { StrategyIds: args[0] }
-                };
-            });
-        };
-
-        this.GetActivePortfolio = generateDeveloperFunction('GetActivePortfolio');
+        
+        this.GetActivePortfolio = coreServerCommunicationService.genPostFunction(developerPath + 'GetActivePortfolios');
         this.GetHistoricalPortfolio = coreServerCommunicationService.genGetFunctionWithNVar(developerPath + "GetHistoricalPortfolio", function (args) {
             return {
                 strategyId: args[0],

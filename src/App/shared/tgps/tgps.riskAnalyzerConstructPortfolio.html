@@ -1,0 +1,65 @@
+﻿<div class="agm-component-tradersgps">
+    <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+        <h4 class="modal-title">
+            Construct Portfolio
+        </h4>
+    </div>
+
+    <div class="modal-body" style="width: 100%; float: left;" ng-if="vm.mode !== null">
+        <div class="main-section">
+            <div class="main-section-inner" ng-repeat="cp in vm.constructPortfolios track by $index">
+                <div class="w-30 f-l">
+                    <div class="w-30 f-l">
+                        Symbol
+                    </div>
+                    <div class="w-60 f-l">
+                        <input class="f-r"
+                        type="text"
+                        placeholder="Search product"
+                        ng-model="vm.constructPortfolios[$index].Symbol"
+                        ng-model-options="{debounce: 200}"
+                        uib-typeahead="product as product.Symbol for product in vm.searchProducts($viewValue)"
+                        typeahead-template-url="/App/shared/templates/shared.productSearch.generic.template.html"
+                        typeahead-wait-ms="200"
+                        typeahead-on-select="vm.showProduct(vm.constructPortfolios[$index].Symbol, $index)">
+                    </div>
+                </div>
+                <div class="w-30 f-l">
+                    <div class="w-30 f-l">
+                        Direction
+                    </div>
+                    <div class="w-60 f-l">
+                        <select class="select-box" name="vm.constructPortfolios[$index].Direction" ng-model="vm.constructPortfolios[$index].Direction" ng-options="d as d for d in vm.direction"></select>
+                    </div>
+                </div>
+                <div class="w-30 f-l">
+                    <div class="w-40 f-l">
+                        Amount (in USD)
+                    </div>
+                    <div class="w-60 f-l">
+                        <input type="number" name="vm.constructPortfolios[$index].Amount" ng-model="vm.constructPortfolios[$index].Amount" class="f-r">
+                    </div>
+                </div>
+                <div class="w-10 f-l" style="text-align: center;">
+                    <span ng-if="$index > 0">
+                        <button ng-click="vm.removeRow($index)" class="btn btn-danger btn-circle add-remove-row-icon">
+                            <i class="fa fa-minus" style="font-size: 20px;"></i>
+                        </button>
+                    </span>
+                    <span ng-if="$index == 0">
+                        <button ng-click="vm.addRow($index)" class="btn btn-success btn-circle add-remove-row-icon">
+                            <i class="fa fa-plus" style="font-size: 20px;"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+       </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="hollow-blue m-right-10px pull-right" style="margin-top: 10px;" ng-click="vm.submitPortfolio()">CONFIRM</button>
+        <button class="btn-primary m-right-10px pull-right" style="margin-top: 10px;"  ng-click="vm.clearPortfolio()">CLEAR</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

@@ -5,7 +5,7 @@
         </agms-product-picture>
     </script>
     <script type="text/ng-template" id="default-product-list/product-name">
-        <h3>{{vm.getProduct(productContainer).ProductName}}</h3>
+        <h3 title="{{vm.getProduct(productContainer).ProductName}}">{{vm.getProduct(productContainer).ProductName}}</h3>
     </script>
     <script type="text/ng-template" id="default-product-list/product-symbol">
         <h3>{{vm.getProduct(productContainer).Symbol}}</h3>
@@ -108,11 +108,11 @@
                         </thead>
                         <thead ng-if="(vm.visibility.showHeader || vm.headerOnly) && vm.readyToRender">
                             <tr>
-                                <th ng-repeat="col in ::vm.options.columns" class="clickable" ng-if="!col.visibility || col.visibility()" ng-class="::col.classNames" ng-click="vm.sortByThisColumn(col)">
+                                <th ng-repeat="col in ::vm.options.columns" class="clickable" ng-if="!col.visibility || col.visibility()" ng-class="::col.classNames">
                                     <div>
                                         {{::col.title}}
-                                        <span class="glyphicon glyphicon-triangle-bottom" ng-if="vm.isSelectedColumnForSortDesc(col)" ng-class="{'pull-right': col.title == 'Volume'}"></span>
-                                        <span class="glyphicon glyphicon-triangle-top" ng-if="vm.isSelectedColumnForSortAsc(col)" ng-class="{'pull-right': col.title == 'Volume'}"></span>
+                                        <span class="glyphicon glyphicon-triangle-bottom" ng-click="vm.sortByThisColumn(col)" ng-if="vm.isSelectedColumnForSortDesc(col)" ng-class="{'pull-right': col.title == 'Volume'}"></span>
+                                        <span class="glyphicon glyphicon-triangle-top" ng-click="vm.sortByThisColumn(col)" ng-if="vm.isSelectedColumnForSortAsc(col)" ng-class="{'pull-right': col.title == 'Volume'}"></span>
                                     </div>
                                 </th>
                             </tr>

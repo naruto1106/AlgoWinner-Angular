@@ -154,9 +154,7 @@
             }
 
             function getCorporateActions() {
-                return sTradingCorporateActionsService.corporateActionsTypes.filter(function (ca) {
-                    return viewTemplate.filterDescription.eventVisibility[ca.name];
-                });
+                return viewTemplate.filterDescription.eventVisibility["CORP_ACT"];
             }
 
             function getCorporateActionsLabel(corporateActions) {

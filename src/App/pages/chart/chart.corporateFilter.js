@@ -25,18 +25,13 @@
                         return tool.reject();
                     }
                     var productId = vm.filterDescription.primaryProduct.ProductId;
-                    var cachedResult = cachedResults[corporateActionType + " " + productId];
+                    var cachedResult = cachedResults["CORP_ACT " + productId];
                     if (cachedResult) {
                         return tool.when(cachedResult);
                     }
 
-                    var request = {
-                        ProductIds: [productId],
-                        CorporateActionTypes: [corporateActionType]
-                    }
-
                     //TODO show corporate actions on all included products, for now it's only the primary
-                    return sTradingCorporateActionsService.GetCorporateActionsForProducts(request)
+                    return sTradingCorporateActionsService.GetCorporateActionsForProduct(productId)
                         .then(function (res) {
                             for (var i = 0; i < res.data.length; i++) {
                                 var d = res.data[i];
@@ -52,8 +47,8 @@
                                     }
                                 }
                             }
-                            cachedResults[corporateActionType + " " + productId] = res.data;
-                            return res.data;
+                            cachedResults["CORP_ACT " + productId] = res.data;
+                            return res.data.filter(function (a) { return a.Type === corporateActionType});
                         });
                 };
             }
@@ -74,9 +69,15 @@
                 });
             }
 
+            function toggleEvent() {
+                pChartEventVisibilityService.toggleEvent('corporate-actions.CD');
+                pChartEventVisibilityService.toggleEvent('corporate-actions.S');
+                pChartEventVisibilityService.toggleEvent('CORP_ACT');
+            }
+
             tool.setVmProperties({
                 corporateActionsTypes: corporateActionsTypes,
-                toggleEvent: pChartEventVisibilityService.toggleEvent,
+                toggleEvent: toggleEvent,
                 filterDescription: filterDescription,
                 checkAndRespondToVisibility: pChartEventVisibilityService.checkAndRespondToVisibility
             });

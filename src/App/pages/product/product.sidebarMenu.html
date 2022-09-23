@@ -8,16 +8,19 @@
     <button ng-click="vm.gotoSection('chart-section')" uib-tooltip="Chart" tooltip-placement="right" ng-disabled="vm.showErrorMessage()">
         <span agmc-svg-loader svg-src="'/App/assets/icons/product/charts.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('fundamental-section')" uib-tooltip="Fundamentals" tooltip-placement="right" ng-if="!vm.isWarrants()" ng-disabled="vm.showErrorMessage()">
-        <span agmc-svg-loader svg-src="'/App/assets/icons/product/fundamentals.svg'"></span>
+    <button ng-click="vm.gotoSection('sentiment-section')" uib-tooltip="Sentiment" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
+        <span agmc-svg-loader svg-src="'/App/assets/icons/product/prospect.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('overview-section')" uib-tooltip="Overview" tooltip-placement="right" ng-if="!vm.isWarrants()" ng-disabled="vm.showErrorMessage()">
+    <button ng-click="vm.gotoSection('fundamental-section')" uib-tooltip="Fundamentals" tooltip-placement="right" ng-if="vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
+        <span agmc-svg-loader svg-src="'/App/assets/icons/product/fundamentals.svg'"></span>
+    </button>    
+    <button ng-click="vm.gotoSection('overview-section')" uib-tooltip="Overview" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
         <span agmc-svg-loader svg-src="'/App/assets/icons/product/information.svg'"></span>
     </button>
     <button ng-click="vm.gotoSection('prospects-section')" ng-if="false && !vm.isWarrants()" uib-tooltip="Prospect" tooltip-placement="right" ng-disabled="vm.showErrorMessage()">
         <span agmc-svg-loader svg-src="'/App/assets/icons/product/prospect.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('competitors-section')" uib-tooltip="Related Companies" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.showRelatedCompanies()" ng-disabled="vm.showErrorMessage()">
+    <button ng-click="vm.gotoSection('competitors-section')" uib-tooltip="Related Companies" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.showRelatedCompanies() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
         <span agmc-svg-loader svg-src="'/App/assets/icons/product/competitor.svg'"></span>
     </button>
 </div>

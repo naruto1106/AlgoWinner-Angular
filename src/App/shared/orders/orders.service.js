@@ -9,9 +9,7 @@
             var bracketOrderOmsPath = '/omsapi/DeveloperBracketOrder/';
 
             // GET FUNCTION
-            serviceObj.GetDeveloperAllOrdersForTradeReview = coreServerCommunicationService.genGetFunctionWithNVar(developerTpmsPath + "GetAllOrdersForTradeReview", function (args) {
-                return { filter: args[0] };
-            });
+            serviceObj.GetDeveloperAllOrdersForTradeReview = coreServerCommunicationService.genPostFunction(developerTpmsPath + "GetOrdersForTradeReview");
 
             serviceObj.GetTradesForChart = coreServerCommunicationService.genGetFunctionWithNVar(developerTpmsPath + "GetTradesForChart", function (args) {
                 return {

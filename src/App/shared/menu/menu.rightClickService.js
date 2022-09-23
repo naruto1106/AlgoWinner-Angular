@@ -61,10 +61,10 @@
                     }
                 },
                 {
-                    label: "View Simple Chart",
+                    label: "View Stock Info",
                     action: function (productContainer) {
                         if (isEodTradeVenue(productContainer.ProductModel.TradeVenueLoc)) {
-                            coreNotificationService.notifyError("Not Supported", "Simple chart is not supported for this product");
+                            coreNotificationService.notifyError("Not Supported", "Stock Info is not supported for this product");
                         } else {
                             commonLocationHistoryService.goToNewTab('/Home/Inside#/product-detail/' + productContainer.ProductModel.TradeVenueLoc
                                 + '/' + productContainer.ProductModel.Symbol + "#chart-section");
@@ -72,7 +72,7 @@
                     }
                 },
                 {
-                    label: "View Advanced Chart",
+                    label: "View Chart",
                     action: function (productContainer) {
                         gotoChart(productContainer.ProductModel, tgpsMode);
                     }

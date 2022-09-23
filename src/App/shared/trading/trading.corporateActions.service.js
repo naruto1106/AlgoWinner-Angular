@@ -2,9 +2,12 @@
     .defineService('sTradingCorporateActionsService', [],
     function (serviceObj, dep, tool) {
         var coreServerCommunicationService = dep.coreServerCommunicationService;
-        var path = "/marketinfoapi/v1/CorporateAction/";
+        var path = "/corpapi/v1/Corporate/";
 
-        serviceObj.GetCorporateActionsForProducts = coreServerCommunicationService.genPostFunction(path + 'GetCorporateActionsForProducts');
+        serviceObj.GetSplitsForProducts = coreServerCommunicationService.genPostFunction(path + 'GetSplitsForProducts');
+        serviceObj.GetCorporateActionsForProduct = coreServerCommunicationService.genGetFunctionWithNVar(path + 'GetCorporateActionsForProduct', function (args) {
+            return { productId: args[0] };
+        }),
         serviceObj.corporateActionsTypes = [
             { name: 'corporate-actions.SD', displayName: 'Scrip Dividend', type: 'Scrip Dividend' },
             { name: 'corporate-actions.B', displayName: 'Bonus', type: 'Bonus' },

@@ -2,7 +2,7 @@
     .defineControllerAsPopup("s.tgps.FundamentalFilterController",
         {
             templateUrl: '/App/shared/tgps/tgps.fundamentalFilter.html',
-            windowClass: 'default-modal'
+            windowClass: 'default-modal tgps-fundamental-filter-popup'
         },
         ['fundamentals', 'sMarketEntitlementService', 'sTgpsScreenerService'],
         function (vm, dep, tool) {
@@ -21,6 +21,22 @@
             function showMarketCap(mc) {
                 return mc.name;
             }
+            
+            function showSectorIndustry(si) {
+                return si.name;
+            }
+            
+            function showTurnover(t) {
+                return t.name;
+            }
+            
+            function showNoise(n) {
+                return n.name;
+            }
+            
+            function showAnalystRating(ar) {
+                return ar.name;
+            }
 
             function generateFundamentalList(fundamentals) {
                 var fundamentalList = [];
@@ -31,7 +47,7 @@
                         fundamental.tradeVenueDetail = sMarketEntitlementService.tradeVenuesDict[key];
                         fundamental.TradeVenue = sMarketEntitlementService.tradeVenuesDict[key].TradeVenue;
                         fundamentalList.push(fundamental);
-                    }
+                    }                    
                 }
                 return fundamentalList;
             }
@@ -41,7 +57,11 @@
                     closePanel:closePanel,
                     fundamentalList: generateFundamentalList(dep.fundamentals),
                     showRange: sTgpsScreenerService.showRange,
-                    showMarketCap: showMarketCap
+                    showMarketCap: showMarketCap,
+                    showSectorIndustry: showSectorIndustry,
+                    showTurnover: showTurnover,
+                    showNoise: showNoise,
+                    showAnalystRating: showAnalystRating,
                 });
             });
         });

@@ -144,13 +144,20 @@
             }
 
             var action = order.Action;
+            var requestObj = {
+                ProductId: order.Product.ProductId,
+                Symbol: order.Product.Symbol,
+                TradeVenueLoc: order.Product.TradeVenueLoc,
+                AssetType: order.Product.AssetType,
+                Currency: order.Product.Currency
+            };
             if (action === 'Sell') {
-                return tradeDataService.GetAsk(order.Product).then(
+                return tradeDataService.GetAsk(requestObj).then(
                     function (res) {
                         return res.data.AskPrice;
                     }, function () { return null });
             } else if (action === 'Buy') {
-                return tradeDataService.GetBid(order.Product).then(
+                return tradeDataService.GetBid(requestObj).then(
                     function (res) {
                         return res.data.BidPrice;
                     }, function () { return null });
@@ -163,13 +170,20 @@
             }
 
             var action = order.Action;
+            var requestObj = {
+                ProductId: order.Product.ProductId,
+                Symbol: order.Product.Symbol,
+                TradeVenueLoc: order.Product.TradeVenueLoc,
+                AssetType: order.Product.AssetType,
+                Currency: order.Product.Currency
+            };
             if (action === 'Buy') {
-                return tradeDataService.GetAsk(order.Product).then(
+                return tradeDataService.GetAsk(requestObj).then(
                     function (res) {
                         return res.data.AskPrice;
                     }, function () { return null });
             } else if (action === 'Sell') {
-                return tradeDataService.GetBid(order.Product).then(
+                return tradeDataService.GetBid(requestObj).then(
                     function (res) {
                         return res.data.BidPrice;
                     }, function () { return null });
@@ -589,12 +603,19 @@
         }
 
         function updateMarketPriceForProduct(product) {
-            var p1 = tradeDataService.GetAsk(product).then(
+            var requestObj = {
+                ProductId: product.ProductId,
+                Symbol: product.Symbol,
+                TradeVenueLoc: product.TradeVenueLoc,
+                AssetType: product.AssetType,
+                Currency: product.Currency
+            };
+            var p1 = tradeDataService.GetAsk(requestObj).then(
                 function (res) {
                     product.askSize = res.data.AskSize;
                     product.askPrice = res.data.AskPrice;
                 });
-            var p2 = tradeDataService.GetBid(product).then(
+            var p2 = tradeDataService.GetBid(requestObj).then(
                 function (res) {
                     product.bidPrice = res.data.BidPrice;
                     product.bidSize = res.data.BidSize;

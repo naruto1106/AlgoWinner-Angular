@@ -95,7 +95,14 @@
         function launchOrderPad() {
             var bracketOrder;
             if (coreConfigService.Trading.ShowBracketOrder) {
-                tradeDataService.GetAsk(serviceObj.selectedProduct).then(function (res) {
+                var requestObj = {
+                    ProductId: serviceObj.selectedProduct.ProductId,
+                    Symbol: serviceObj.selectedProduct.Symbol,
+                    TradeVenueLoc: serviceObj.selectedProduct.TradeVenueLoc,
+                    AssetType: serviceObj.selectedProduct.AssetType,
+                    Currency: serviceObj.selectedProduct.Currency
+                };
+                tradeDataService.GetAsk(requestObj).then(function (res) {
                     var stopLossPrice = parseFloat(res.data.LastTradedPrice) *
                         (1 - parseFloat(comfortableLevel) / 100);
                     bracketOrder = {

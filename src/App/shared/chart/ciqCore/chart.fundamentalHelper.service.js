@@ -314,7 +314,11 @@
                     return tool.when(validityCache[key]);
                 }
 
-                return sDatamartFundamentalDataService.IsFundamentalValid(productId, fundamentalType)
+                var requestObj = {
+                    ProductId: productId,
+                    FundamentalType: fundamentalType
+                };
+                return sDatamartFundamentalDataService.IsFundamentalValid(requestObj)
                     .then(function (res) {
                         validityCache[key] = res.data;
                         return res.data;
@@ -439,19 +443,48 @@
 
             function priceFormatterInMillions(stxx, panel, price) {
                 if (price) {
-                    var absValue = Math.abs(price);
-                    if (absValue >= 1000000.0)
-                        return (price / 1000000.0).toFixed(2) + "T";
-                    else if (absValue >= 100000.0)
-                        return (price / 1000.0).toFixed(1) + "B";
-                    else if (absValue >= 1000.0)
-                        return (price / 1000.0).toFixed(2) + "B";
-                    else {
-                        if (absValue.toFixed(2).length >= 6)
-                            return price.toFixed(1) + "M";
-                        else
-                            return (price).toFixed(2) + "M";
+                    var costOfIt = parseFloat(price).toFixed(0);
+                    var visualOfIt = 0;
+                    visualOfIt = costOfIt.toString();
+
+                    var visualLeng = 6;
+                    var maxLeng = 4;
+                    var letterArrayIndex = 0;
+
+                    //var letterArray = [" Thousand", " Million", " Billion", " Trillion", " Quadrillion", " Quintillion", " Sextillion", " Septillion", " Octillion", " Nonillion", " Decillion", " Undecillion", " Duodecillion", " Tredecillion", " Quatuordecillion", " Quindecillion", " Sexdecillion", " Septendecillion", " Octodecillion", " Novemdecillion", " Vigintillion", " Unvigintillion", " Duovigintillion", " Tresvigintillion", " Quatuorvigintillion", " Quinquavigintillion", " Sesvigintillion", " Septemvigintillion", " Octovigintillion", " Novemvigintillion", " Trigintillion", " Untrigintillion", " Duotrigintillion", " Trestrigintillion", " Quatuortrigintillion", " Quinquatrigintillion", " Sestrigintillion", " Septentrigintillion", " Octotrigintillion", " Novemtrigintillion", " Quadragintillion", " Unquadragintillion", " Duoquadragintillion", " Tresquadragintillion", " Quatuorquadragintillion", " Quinquaquadragintillion", " Sesquadragintillion", " Septemquadragintillion", " Octoquadragintillion", " Novemquadragintillion", " Quinquagintillion", " Unquinquagintillion", " Duoquinquagintillion", " Tresquinquagintillion", " Quatuorquinquagintillion", " Quinquaquinquagintillion", " Sesquinquagintillion", " Septenquinquagintillion", " Octoquinquagintillion", " Novemquinquagintillion", " Sexagintillion", " Unsexagintillion", " Duosexagintillion", " Tressexagintillion", " Quatuorsexagintillion", " Quinquasexagintillion", " Sexasexagintillion", " Septemsexagintillion", " Octosexagintillion", " Novemsexagintillion", " Septuagintillion", " Unseptuagintillion", " Duoseptuagintillion", " Tresseptuagintillion", " Quatuorseptuagintillion", " Quinquaseptuagintillion", " Sexaseptuagintillion", " Septenseptuagintillion", " Octoseptuagintillion", " Novemseptuagintillion", " Octogintillion", " Unoctogintillion", " Duooctogintillion", " Tresoctogintillion", " Quatuoroctogintillion", " Quinquaoctogintillion", " Sesoctogintillion", " Septemoctogintillion", " Octooctogintillion", " Novemoctogintillion", " Nonagintillion", " Unnonagintillion", " Duononagintillion", " Tresnonagintillion", " Quatuornonagintillion", " Quinquanonagintillion", " Sesnonagintillion", " Septemnonagintillion", " Octononagintillion", " Novemnonagintillion", " Centillion", " Uncentillion"];
+                    var letterArray = ["K", "M", "B", "T", "Q", "Q", "S"];
+
+                    var leng = 4;
+                    var slic = 1;
+
+                    for (var g = 0; g < visualOfIt.length; g++) {
+                        if (visualOfIt.length <= visualLeng) {
+                            if (leng < maxLeng) {
+                                leng = maxLeng;
+                            }
+                            if (visualOfIt.length === leng) {
+                                if (slic > 2) {
+                                    visualOfIt = costOfIt.toString().slice(0, slic) + letterArray[letterArrayIndex];
+                                    break;
+                                } else {
+                                    if(parseInt(costOfIt.toString().slice(slic, 3)) > 0){
+                                        visualOfIt = costOfIt.toString().slice(0, slic) + "." + costOfIt.toString().slice(slic, 3) + letterArray[letterArrayIndex];
+                                    } else {
+                                        visualOfIt = costOfIt.toString().slice(0, slic) + letterArray[letterArrayIndex];
+                                    }                                    
+                                    break;
+                                }
+                            } else {
+                                leng++;
+                                slic++;
+                            }
+                        } else {
+                            maxLeng += 3;
+                            visualLeng += 3;
+                            letterArrayIndex++;
+                        }
                     }
+                    return visualOfIt;
                 }
                 return "0";
             }
@@ -465,40 +498,136 @@
 
             function priceFormatter(stxx, panel, price) {
                 if (price < 1000)
-                    return price;
+                    return price.toString();
                 else if (price < 1000000)
                     return (price / 1000.0).toFixed(2) + "M";
                 else
                     return (price / 1000000.0).toFixed(2) + "B";
             }
 
-            function appendCreateYAxis() {
+            function appendCreateYAxis(panel, parameters) {
                 if (parameters.yAxis) {
                     var stxx = pChartRenderingUtilsService.stxx;
-                    var yAxis = parameters.yAxis;
-                    for (var i in stxx.chart.seriesRenderers) {
+                    var yAxis = parameters.yAxis;                    
+                    for (var i in stxx.chart.seriesRenderers) {                        
                         var renderer = stxx.chart.seriesRenderers[i];
                         if (!yAxis.priceFormatter) {
                             if (renderer.params.yAxis === yAxis) {
                                 switch (i) {
-                                case "fundamentalsMarketCapitalization":
-                                case "fundamentalsEnterpriseValue":
-                                case "fundamentalsQuarterlyTotalAssets":
-                                case "fundamentalsQuarterlyLongTermDebt":
-                                case "fundamentalsQuarterlyRetainedEarnings":
-                                case "fundamentalsRevenueTtm":
-                                case "fundamentalsEbitda":
-                                case "fundamentalsEbitTtm":
-                                    yAxis.priceFormatter = priceFormatterInMillions;
-                                    break;
-                                case "fundamentalsSharesOutstanding":
-                                case "fundamentalsDailyVolume":
-                                    yAxis.priceFormatter = priceFormatter;
-                                    break;
-                                case "fundamentalsGrowthAtEarnings":
-                                case "fundamentalsRevenueGrowth":
-                                    yAxis.priceFormatter = priceFormatterPercentage;
-                                    break;
+                                    case "fundamentalsAverageEquity":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsBVPS":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsCash":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsCurrAssets":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsCurrLiabilities":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsCurrentRatio":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
+                                    case "fundamentalsDE":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
+                                    case "fundamentalsDebt":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsDilutedEPS":
+                                        yAxis.priceFormatter = priceFormatter;
+                                        break;
+                                    case "fundamentalsDivPerShare":
+                                        yAxis.priceFormatter = priceFormatter;
+                                        break;
+                                    case "fundamentalsDivYield":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
+                                    case "fundamentalsEBITDA":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsEPS":
+                                        yAxis.priceFormatter = priceFormatter;
+                                        break;
+                                    case "fundamentalsEPSGrowth":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
+                                    case "fundamentalsEVGP":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsEarningsGrowth":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
+                                    case "fundamentalsEV":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsEquity":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsFCF":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsFCFPerShare":
+                                        yAxis.priceFormatter = priceFormatter;
+                                        break;
+                                    case "fundamentalsGrossProfit":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsGrossMargin":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
+                                    case "fundamentalsMarketCap":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsNetMargin":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
+                                    case "fundamentalsNetProfit":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsPB":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsPeRatio":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsPS":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsPegRatio":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsROA":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
+                                    case "fundamentalsROE":
+                                        yAxis.priceFormatter = priceFormatterPercentage;
+                                        break;
+                                    case "fundamentalsRevenue":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsShareFactor":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsShares":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsTotalAssets":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsTotalLiabilities":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsSharesAvg":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
+                                    case "fundamentalsSharesAvgDil":
+                                        yAxis.priceFormatter = priceFormatterInMillions;
+                                        break;
                                 }
                             }
                         }
@@ -550,11 +679,166 @@
                 tool.on('onStxSeriesDeleted', removeHighligthedSeries);
                 tool.on('onStxDeleteHighlighted', removeProductFundamentalIfHighlighted);
 
-                pChartCmsContentLoader.getFundamentals().then(function (res) {
-                    fundamentalsKind = res;
-                    _.forEach(res, function (m) {
-                        fundamentalMapping['fundamentals' + m.name] = m.displayName;
-                    });
+                // Boyang: hardcode fundamental list
+                fundamentalsKind = [{
+                    name: "Revenue",
+                    description: "Revenue",
+                    displayName: "Revenue",
+                }, {
+                    name: "NetProfit",
+                    description: "Net Income",
+                    displayName: "NetProfit",
+                }, {
+                    name: "GrossProfit",
+                    description: "GrossProfit",
+                    displayName: "Gross Profit",
+                }, {
+                    name: "Equity",
+                    description: "Shareholders Equity",
+                    displayName: "Equity",
+                }, {
+                    name: "Cash",
+                    description: "Cash and Equivalents",
+                    displayName: "Cash",
+                }, {
+                    name: "TotalAssets",
+                    description: "Total Assets",
+                    displayName: "Total Assets",
+                }, {
+                    name: "Debt",
+                    description: "Total Debt",
+                    displayName: "Debt",
+                }, {
+                    name: "TotalLiabilities",
+                    description: "TotalLiabilities",
+                    displayName: "TotalLiabilities",
+                }, {
+                    name: "CurrAssets",
+                    description: "Current Assets",
+                    displayName: "Current Assets",
+                }, {
+                    name: "CurrLiabilities",
+                    description: "Current Liabilities",
+                    displayName: "Current Liabilities",
+                }, {
+                    name: "DivPerShare",
+                    description: "Dividends per Basic Common Share",
+                    displayName: "DivPerShare",
+                }, {
+                    description: "EBITDA returns earnings before interest, taxes, depreciation, and amortization in the trailing twelve months. It is used to assess a company's current operating performance. \n",
+                    displayName: "EBITDA",
+                    name: "EBITDA"
+                }, {
+                    name: "PeRatio",
+                    description: "P/E Ratio returns price divided by earnings per share in the trailing twelve months. It represents the price you pay for one dollar of earnings of the company.",
+                    displayName: "P/E Ratio",
+                }, {
+                    name: "PegRatio",
+                    description: "PEG Ratio takes into account the company's earnings growth and returns a stock's P/E Ratio divided by the annual trailing EPS growth rate.",
+                    displayName: "PEG Ratio",
+                }, {
+                    name: "FCF",
+                    description: "Free Cash Flow",
+                    displayName: "FCF",
+                }, {
+                    name: "Shares",
+                    description: "Basic Shares",
+                    displayName: "Shares",
+                }, {
+                    name: "SharesAvg",
+                    description: "Weighted Average Shares",
+                    displayName: "Weighted Avg Shares",
+                }, {
+                    name: "SharesAvgDil",
+                    description: "Weighted Average Shares Diluted",
+                    displayName: "Weighted Avg Shares Diluted",
+                }, {
+                    name: "ShareFactor",
+                    description: "Share Factor",
+                    displayName: "ShareFactor",
+                }, {
+                    name: "AverageEquity",
+                    description: "Average Equity",
+                    displayName: "Average Equity",
+                }, {
+                    name: "AverageAssets",
+                    description: "Average Assets",
+                    displayName: "Average Assets",
+                }, {
+                    name: "EPS",
+                    description: "Earnings Per Share",
+                    displayName: "EPS",
+                }, {
+                    name: "DilutedEPS",
+                    description: "Diluted Earnings Per Share",
+                    displayName: "Diluted EPS",
+                }, {
+                    name: "EPSGrowth",
+                    description: "Earnings Per Share Growth Rate",
+                    displayName: "EPS Growth",
+                }, {
+                    name: "FCFPerShare",
+                    description: "Free Cash Flow",
+                    displayName: "FCF Per Share",
+                }, {
+                    name: "BVPS",
+                    description: "Book Value Per Share",
+                    displayName: "Book Value Per Share",
+                }, {
+                    name: "ROE",
+                    description: "Return on Equity",
+                    displayName: "ROE",
+                }, {
+                    name: "ROA",
+                    description: "Return on Assets",
+                    displayName: "ROA",
+                }, {
+                    name: "GrossMargin",
+                    description: "Gross Margin",
+                    displayName: "GrossMargin",
+                }, {
+                    name: "NetMargin",
+                    description: "Net Margin",
+                    displayName: "NetMargin",
+                }, {
+                    name: "MarketCap",
+                    description: "Market Cap",
+                    displayName: "Market Cap",
+                }, {
+                    name: "EV",
+                    description: "Enterprise Value",
+                    displayName: "Enterprise Value",
+                }, {
+                    name: "PS",
+                    description: "Price to Sales Ratio",
+                    displayName: "P/S Ratio",
+                }, {
+                    name: "PB",
+                    description: "Price to Book Ratio",
+                    displayName: "P/B Ratio",
+                }, {
+                    name: "EVGP",
+                    description: "Enterprise Value to Gross Profit Ratio",
+                    displayName: "EV/Gross Profit Ratio",
+                }, {
+                    name: "DE",
+                    description: "Debt to Equity Ratio",
+                    displayName: "D/E Ratio",
+                }, {
+                    name: "CurrentRatio",
+                    description: "Current Ratio",
+                    displayName: "Current Ratio",
+                }, {
+                    name: "DivYield",
+                    description: "Dividend Yield",
+                    displayName: "Dividend Yield",
+                }, {
+                    name: "EarningsGrowth",
+                    description: "Earnings Growth",
+                    displayName: "Earnings Growth",
+                }];
+                _.forEach(fundamentalsKind, function (m) {
+                    fundamentalMapping['fundamentals' + m.name] = m.displayName;
                 });
 
                 tool.watch('pChartRenderingUtilsService', function () {

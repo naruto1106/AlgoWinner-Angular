@@ -139,7 +139,8 @@
                 UrlLink: vm.userPost.postUrl,
                 Title: vm.newsModel.Title,
                 Description: vm.userPost.postDescription,
-                ProductIds: productIds
+                ProductIds: productIds,
+                Venue: "SG"
             };
 
             return sNewsService.AddAlgoNews(algoNewsPostRequest).then(function () {

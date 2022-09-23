@@ -56,12 +56,11 @@
                             });
 
                             var request = {
-                                ProductIds: _.map(vm.exposureList, 'ProductId'),
-                                CorporateActionTypes: ["Stock Split"]
+                                ProductIds: _.map(vm.exposureList, 'ProductId')
                             }
 
                             sTradingCorporateActionsService
-                                .GetCorporateActionsForProducts(request)
+                                .GetSplitsForProducts(request)
                                 .then(function(res) {
                                     var splits = res.data;
                                     sTradingExitAggregatorService.adjustTradesUsingStockSplitAndConsolidation(orders, splits);

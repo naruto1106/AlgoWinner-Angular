@@ -27,6 +27,26 @@
         <div ng-if="vm.pChartTgpsService.tradersgps_swing.mode === 'Swing'">
             <div class="tag-channel">
                 <h5>
+                    SHOW PRIMARY ARROW
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSSwingStudies.showPrimaryArrow}"
+                     ng-click="vm.pChartTgpsService.tradersGPSSwingStudies.toggleShowPrimaryArrow()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    SHOW ALL ARROWS
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSSwingStudies.showAllArrow}"
+                     ng-click="vm.pChartTgpsService.tradersGPSSwingStudies.toggleShowAllArrow()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
                     MA(10,CLOSE)
                 </h5>
                 <div class="switch"
@@ -69,6 +89,26 @@
         <div ng-if="vm.pChartTgpsService.tradersgps_swing.mode === 'Position'">
             <div class="tag-channel">
                 <h5>
+                    SHOW PRIMARY ARROW
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPositionStudies.showPrimaryArrow}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPositionStudies.toggleShowPrimaryArrow()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
+                    SHOW ALL ARROWS
+                </h5>
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPositionStudies.showAllArrow}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPositionStudies.toggleShowAllArrow()">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <h5>
                     PEAK LINE
                 </h5>
                 <div class="switch"
@@ -107,6 +147,17 @@
                 </div>
                 <h5>
                     TREND IMPULSE FACTOR (TIF)
+                </h5>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tag-channel">
+                <div class="switch"
+                     ng-class="{checked:vm.pChartTgpsService.tradersGPSPositionStudies.tidVisibility}"
+                     ng-click="vm.pChartTgpsService.tradersGPSPositionStudies.toggleTidVisibility()">
+
+                </div>
+                <h5>
+                    TREND IMPULSE DETECTOR (TID)
                 </h5>
                 <div class="clearfix"></div>
             </div>

@@ -35,6 +35,9 @@
                 isWarrants: isWarrants
             });
 
+            pProductPageService.waitTillProductDetailLoaded().then(function () {
+                vm.TradeVenueLoc = pProductPageService.currentProduct.TradeVenueLoc;
+            });
         })
     .defineDirectiveForE('agmp-product-sidebar-menu', [],
         function () {

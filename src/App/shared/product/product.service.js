@@ -3,6 +3,12 @@
         var marketInfoPath = '/marketinfoapi/v1/ProductDetail';
         var marketInfoTickPath = '/marketinfoapi/v1/TickSize';
         var productPath = '/productapi/v1/Product';
+        var ratingPath = '/ratingapi/v1/Rating';
+        var retailActivityPath = '/ratingapi/v1/RetailActivity';
+        var newsPath = '/newsapi/v1/News';
+        var targetPricePath = '/ratingapi/v1/TargetPrice';
+        var fundamentalPath = '/fundamentalapi/v1/Fundamental';
+        var riskAnalysisPath = '/riskazapi/v1';
 
         var $window = dep.$window,
             coreConfigService = dep.coreConfigService,
@@ -44,6 +50,23 @@
                     return '';
             }
         }
+        
+        function translateTradeVenueToName(tradeVenueLoc) {
+            switch (tradeVenueLoc) {
+                case 'SG':
+                    return 'Singapore';
+                case 'US':
+                    return 'UnitedStates';
+                case 'HK':
+                    return 'Hongkong';
+                case 'MY':
+                    return 'Malaysia';
+                case 'CHN':
+                    return 'China';
+                default:
+                    return 'Singapore';
+            }
+        }
 
         function createGoogleFinanceUrl(product) {
             return "//www.google.com/finance?q=" + translateTradeVenue(product.TradeVenueLoc) + product.Symbol;
@@ -66,6 +89,133 @@
             goToProduct: goToProduct,            
             updateProductTickSizeValueIfBelongToGroup: updateProductTickSizeValueIfBelongToGroup,
 
+            SriskComputePost: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/sriskCompute'),
+
+            PriskCompute: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/priskCompute'),
+
+            MomentumCompute: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/momentumCompute'),
+            
+            SizingComputePost: coreServerCommunicationService.genPostFunction(riskAnalysisPath + '/sizingCompute'),
+
+            GetSector: coreServerCommunicationService.genGetFunctionWithNVar(productPath + '/GetSectorSelections', function (args) {
+                return {
+                    venue: translateTradeVenueToName(args[0]),
+                };
+            }),
+            
+            GetIndustry: coreServerCommunicationService.genGetFunctionWithNVar(productPath + '/GetIndustrySelections', function (args) {
+                return {
+                    venue: translateTradeVenueToName(args[0]),
+                };
+            }),
+            
+            GetLatestAnalystRating: coreServerCommunicationService.genGetFunctionWithNVar(ratingPath + '/GetLatestAnalystRating', function (args) {
+                return {
+                    productId: args[0],
+                    venue: translateTradeVenueToName(args[1]),
+                };
+            }),
+            
+            GetNewsSentiment: coreServerCommunicationService.genGetFunctionWithNVar(newsPath + '/GetNewsSentiment', function (args) {
+                return {
+                    productId: args[0],
+                    market: args[1],
+                };
+            }),
+            
+            GetRetailActivity: coreServerCommunicationService.genGetFunctionWithNVar(retailActivityPath + '/GetActivity', function (args) {
+                return {
+                    productId: args[0],
+                    venue: translateTradeVenueToName(args[1]),
+                    period: args[2],
+                };
+            }),
+
+            GetRetailSentiment: coreServerCommunicationService.genGetFunctionWithNVar(retailActivityPath + '/GetSentiment', function (args) {
+                return {
+                    productId: args[0],
+                    venue: translateTradeVenueToName(args[1]),
+                    period: args[2],
+                };
+            }),
+            
+            GetAnalystTargetPrice: coreServerCommunicationService.genGetFunctionWithNVar(targetPricePath + '/GetTargetPrice', function (args) {
+                return {
+                    productId: args[0],
+                    venue: translateTradeVenueToName(args[1]),
+                };
+            }),
+            
+            GetFundamentalQuarterlyPageMetrics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyPageMetrics', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetFundamentalAnnualPageMetrics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualPageMetrics', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetAnnualIncomeStatement: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualIncomeStatement', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetQuarterlyIncomeStatement: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyIncomeStatement', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetAnnualBalanceSheet: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualBalanceSheet', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetQuarterlyBalanceSheet: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyBalanceSheet', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+           
+            GetAnnualCashFlow: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualCashFlow', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetQuarterlyCashFlow: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyCashFlow', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetAnnualStatistics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetAnnualStatistics', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
+            GetQuarterlyStatistics: coreServerCommunicationService.genGetFunctionWithNVar(fundamentalPath + '/GetQuarterlyStatistics', function (args) {
+                return {
+                    productId: args[0],
+                    venue: args[1]
+                };
+            }),
+            
             GetProductDetail: coreServerCommunicationService.genGetFunctionWithNVar(marketInfoPath + '/GetProductDetail', function (args) {
                 return {
                     productId: args[0]

@@ -1,8 +1,6 @@
 ﻿agmNgModuleWrapper('agms.positions')
-    .defineController("s.positions.ActiveTableController", ['sProductService'],
+    .defineController("s.positions.ActiveTableController", [],
         function (vm, dep, tool) {
-
-            var sProductService = dep.sProductService;
             var coreConfigService = dep.coreConfigService;
 
             function viewPositionDetailFunc(position) {
@@ -56,7 +54,6 @@
                     increasePosition: increasePosition,
                     decreasePosition: decreasePosition,
                     viewPositionDetailFunc: viewPositionDetailFunc,
-                    goToProduct: sProductService.goToProduct,
                     showEditBracket: showEditBracket,
                     showAddBracket: showAddBracket
                 });
