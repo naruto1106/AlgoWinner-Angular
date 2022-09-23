@@ -4,6 +4,10 @@
         <div class="col-md-2">
             <div class="scoring-boxes">
                 <div class="scoring">
+                    <h3>Sector</h3>
+                    <h1 ng-if="vm.productDetail.Product.Sector.SectorName" class="smaller">{{vm.breakBySlash(vm.productDetail.Product.Sector.SectorName)}}</h1>
+                </div>
+                <div class="scoring">
                     <h3>Industry</h3>
                     <h1 ng-if="vm.productDetail.Product.Industry.IndustryName" class="smaller">{{vm.breakBySlash(vm.productDetail.Product.Industry.IndustryName)}}</h1>
                 </div>
@@ -20,12 +24,12 @@
                 <div class="scoring">
                     <h3>Market Cap</h3>
                     <h1 ng-if="!vm.productDetail.CompanyOverview.MarketCapitalization" class="special-text">N/A</h1>
-                    <h1 class="special-text" ng-if="vm.productDetail.CompanyOverview.MarketCapitalization">{{vm.productDetail.Product.Currency | currencySymbol}} {{vm.productDetail.CompanyOverview.MarketCapitalization * 1000000 | largeAmountValue:2}}</h1>
+                    <h1 class="special-text" ng-if="vm.productDetail.CompanyOverview.MarketCapitalization">{{vm.productDetail.Product.Currency | currencySymbol}} {{vm.productDetail.CompanyOverview.MarketCapitalization | largeAmountValue:2}}</h1>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="white-box" ng-if="vm.productDetail.CompanyOverview.Description">
+            <div class="description-box" ng-if="vm.productDetail.CompanyOverview.Description">
                 <p>
                     {{vm.productDetail.CompanyOverview.Description}}
                 </p>

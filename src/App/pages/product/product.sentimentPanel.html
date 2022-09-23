@@ -1,14 +1,14 @@
 ﻿<section class="sentiment-panel">
     <h1 class="title-section">SENTIMENT</h1>
-    <div class="row-md-2 gap-20px">
+    <div class="row-md-4 gap-20px">
         <div class="col-md-1">
-            <div class="white-box">
+            <div class="news-box">
                 <h1>News Sentiment</h1>
                 <table border="1" class="sentiment-table">
                     <tr>
                         <td>&nbsp;</td>
-                        <td>News Sentiment Score</td>
-                        <td>News Volume</td>
+                        <td>Score</td>
+                        <td>Volume</td>
                     </tr>
                     <tr ng-repeat="newsSentimentObj in vm.newsSentiment">
                         <td>{{newsSentimentObj.NewsSentimentType}}</td>
@@ -22,8 +22,23 @@
                     </tr>
                 </table>
             </div>
+            <div class="tp-box" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US' && vm.analystTargetPrice && vm.analystTargetPrice.AnalystTargetPrice">
+                <h1>Analyst Target Price</h1>
+                <hr>
+                <div class="row-md-2">
+                    <div class="col-md-1">
+                        <div class="title">Target Price</div>
+                        <div class="price">{{vm.productDetail.Product.Currency + " " + vm.analystTargetPrice.AnalystTargetPrice}}</div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="title">Current Price</div>
+                        <div class="price">{{vm.productDetail.Product.Currency + " " + vm.analystTargetPrice.CurrentPrice}}</div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
         </div>
-        <div class="col-md-1" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
+        <div class="col-md-2" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
             <div class="white-box">
                 <uib-tabset>
                     <uib-tab heading="Retail Interest" ng-click="vm.changeRetailActivityChartPeriod()">
@@ -50,22 +65,6 @@
                 <h1>Analyst Rating</h1>
                 <div class="h-30px"></div>
                 <div id="analyst_rating"></div>
-            </div>
-        </div>
-        <div class="col-md-1"
-            ng-if="vm.productDetail.Product.TradeVenueLoc === 'US' && vm.analystTargetPrice && vm.analystTargetPrice.AnalystTargetPrice">
-            <div class="white-box">
-                <h1>Analyst Target Price</h1>
-                <table border="1" class="sentiment-table">
-                    <tr>
-                        <td>Target Price</td>
-                        <td>{{vm.productDetail.Product.Currency + " " + vm.analystTargetPrice.AnalystTargetPrice}}</td>
-                    </tr>
-                    <tr>
-                        <td>Current Price</td>
-                        <td>{{vm.productDetail.Product.Currency + " " + vm.analystTargetPrice.CurrentPrice}}</td>
-                    </tr>
-                </table>
             </div>
         </div>
         <div class="clearfix"></div>
