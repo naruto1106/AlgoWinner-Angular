@@ -540,34 +540,6 @@ agmNgModuleWrapperUtils = {
             return returnedArr;
         }
 
-        tool.inheritVmController = function (controllerName, mapping, copyAll) {
-            if (!mapping) {
-                mapping = {
-                    $scope: dep.$scope
-                };
-                if (dep.$uibModalInstance) {
-                    mapping.$uibModalInstance = dep.$uibModalInstance;
-                }
-            }
-
-            if (copyAll) {
-                for (var name in dep) {
-                    mapping[name] = dep[name];
-                }
-            }
-
-            if (!vm.__parentControllerNames) {
-                vm.__parentControllerNames = [];
-            }
-            if (mapping.$scope) {
-                mapping.$scope.__getInheritedController = function () {
-                    return vm;
-                };
-            }
-
-            dep.$controller(controllerName, mapping);
-        }
-
         tool.initialize = function (func) {
             func();
         };
