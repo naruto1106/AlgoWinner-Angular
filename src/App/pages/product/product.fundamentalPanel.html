@@ -1,4 +1,4 @@
-﻿<section class="fundamental-panel">
+﻿﻿<section class="fundamental-panel">
     <h1 class="title-section">FUNDAMENTALS</h1>
     <div class="row-md-2 gap-20px">
         <div class="col-md-1" ng-repeat="barChartObj in vm.barChartsArr">
@@ -76,7 +76,7 @@
                     <td ng-if="incomeStatementTableName !== 'StatementDate'">{{vm.getFullNameFromKey(incomeStatementTableName)}}</td>                    
                     <td ng-if="incomeStatementTableName !== 'StatementDate'" ng-repeat="incomeStatementTableData in vm.incomeStatementTableData.data track by $index">
                         <div>{{incomeStatementTableData[incomeStatementTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="incomeStatementTableData.StatementDate !== null && $index !== 0" ng-class="{'green-profit' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) <= 0}">
+                        <div ng-if="incomeStatementTableData.StatementDate !== null && $index !== 0 && vm.incomeStatementTableData.data[$index-1][incomeStatementTableName] !== 0" ng-class="{'green-profit' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) <= 0}">
                             {{((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2)}}%
                         </div>
                     </td>
@@ -95,7 +95,7 @@
                     <td ng-if="balanceSheetTableName !== 'StatementDate'">{{vm.getFullNameFromKey(balanceSheetTableName)}}</td>
                     <td ng-if="balanceSheetTableName !== 'StatementDate'" ng-repeat="balanceSheetTableData in vm.balanceSheetTableData.data track by $index">
                         <div>{{balanceSheetTableData[balanceSheetTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="balanceSheetTableData.StatementDate !== null && $index !== 0" ng-class="{'green-profit' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) <= 0}">
+                        <div ng-if="balanceSheetTableData.StatementDate !== null && $index !== 0 && vm.balanceSheetTableData.data[$index-1][balanceSheetTableName] !== 0" ng-class="{'green-profit' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) <= 0}">
                             {{((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2)}}%
                         </div>
                     </td>
@@ -116,7 +116,7 @@
                     <td ng-if="cashFlowTableName !== 'StatementDate'">{{vm.getFullNameFromKey(cashFlowTableName)}}</td>
                     <td ng-if="cashFlowTableName !== 'StatementDate'" ng-repeat="cashFlowTableData in vm.cashFlowTableData.data track by $index">
                         <div>{{cashFlowTableData[cashFlowTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="cashFlowTableData.StatementDate !== null && $index !== 0" ng-class="{'green-profit' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) <= 0}">
+                        <div ng-if="cashFlowTableData.StatementDate !== null && $index !== 0 && vm.cashFlowTableData.data[$index-1][cashFlowTableName] !== 0" ng-class="{'green-profit' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) <= 0}">
                             {{((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2)}}%
                         </div>
                     </td>

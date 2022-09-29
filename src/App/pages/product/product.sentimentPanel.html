@@ -8,12 +8,12 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td>Score</td>
-                        <td>Volume</td>
+                        <td>Count</td>
                     </tr>
                     <tr ng-repeat="newsSentimentObj in vm.newsSentiment">
                         <td>{{newsSentimentObj.NewsSentimentType}}</td>
                         <td>{{newsSentimentObj.SentimentScore|number:2}}</td>
-                        <td>{{newsSentimentObj.Volume|number:2}}
+                        <td>{{newsSentimentObj.Volume|number:0}}
                             <span ng-if="newsSentimentObj.IsVolumeBreakout" class="volume-icon" agmc-svg-loader
                                 svg-src="'/App/assets/icons/product/information.svg'" uib-tooltip="A Spike of Interest"
                                 tooltip-placement="top">
