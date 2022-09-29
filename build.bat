@@ -31,6 +31,8 @@ if %errorlevel% neq 0 (
 
 "nuget\NuGet.exe" "Install" "FAKE" "-OutputDirectory" "packages" "-Version" "3.26.7" "-ExcludeVersion"
 
+"nuget\NuGet.exe" "Install" "OctopusTools" "-OutputDirectory" "packages" "-Version" "2.6.1.52"
+
 IF NOT [%1]==[] (
 	SET TARGET="%1"
 	ECHO Running target !TARGET!
