@@ -133,7 +133,7 @@ Target "CreateRelease" (fun _->
 // Dependencies
 
 "RunGulp"
-      =?> ("JSTest",runJSTest)
+      //=?> ("JSTest",runJSTest)
       ==> "Clean"
       ==> "RestorePackage"
       ==> "CompileApp"      
