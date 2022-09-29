@@ -1,21 +1,4 @@
 ﻿agmNgModuleWrapper('agmp.subscription')
-    .defineFilter('brokerDisplay', function () {
-        return function (brokerageInfo) {
-            if (brokerageInfo.BrokerageType === 'None') {
-                return brokerageInfo.BrokerageType;
-            } else {
-                return brokerageInfo.BrokerageType + '(' + brokerageInfo.AccountNumber + ')';
-            }
-        };
-    })
-    .defineFilter('subDuration', function () {
-        return function (duration) {
-            if (duration.Length !== 1) {
-                return duration.Length + ' ' + duration.DurationType + 's';
-            }
-            return duration.Length + ' ' + duration.DurationType;
-        };
-    })
     .defineController('p.subscription.ManageController', [
         'sSubscriptionBundleService', 'commonLocationHistoryService',
         'ngCoordinate-lineChart', 'ngCoordinate-scales', 

@@ -16,7 +16,6 @@ try {
 } catch (e) {
 }
 
-
 agmNgModuleWrapperUtils = {
     getModalConfigDefinition: function (name) {
         var def = agmNgModuleMemory.popupDefinitions[name];
@@ -25,16 +24,7 @@ agmNgModuleWrapperUtils = {
         }
         return null;
     },
-    _printUiStates: function () {
-        var str = "";
-        for (var prop in agmNgModuleMemory.uiStates) {
-            str += "\n\r " + prop + "," + agmNgModuleMemory.uiStates[prop].url;
-        };
-
-        console.log(str);
-    },
     defineState: function (state, config) {
-
         if (config.urls && (Array.isArray(state))) {
             var compiledConfigs = [];
 
@@ -56,7 +46,7 @@ agmNgModuleWrapperUtils = {
             agmNgModuleMemory.uiStates[state] = config;
         }
     },
-    generateFinalModalConfig: function (config) {
+    openModal: function (uibModal, config) {
         var finalConfig = {
             templateUrl: config.templateUrl,
             controller: config.controller,
@@ -80,24 +70,9 @@ agmNgModuleWrapperUtils = {
                 resolveQuickObject(propName, config.quickResolvedObjects[propName]);
             }
         }
-        return finalConfig;
-    },
-
-    openModal: function (uibModal, config) {
-        var finalConfig = this.generateFinalModalConfig(config);
         return uibModal.open(finalConfig);
     },
-
     openModalByDefinition: function (uibModal, name, quickResolvedObjects, resolve, overridenConfig) {
-        var config = this.composeModalConfigByName(name, quickResolvedObjects, resolve, overridenConfig);
-        if (config) {
-            return this.openModal(uibModal, config);
-        }
-        return null;
-    },
-
-    composeModalConfigByName: function (name, quickResolvedObjects, resolve, overridenConfig) {
-
         var config = this.getModalConfigDefinition(name);
         if (overridenConfig) {
             angular.merge(config, overridenConfig);
@@ -105,21 +80,17 @@ agmNgModuleWrapperUtils = {
         if (config) {
             config.quickResolvedObjects = quickResolvedObjects;
             config.resolve = resolve;
-            return config;
+            return this.openModal(uibModal, config);
         }
         return null;
     },
-
     assignScopeToTool: function (scope, dep, tool, destroyable) {
-
-
         tool.onDestroy = function (func) {
             tool.on('$destroy', func);
         }
         tool.on = function (name, listener) {
             return scope.$on(name, listener);
         }
-
 
         if (dep.$q) {
             tool.on = function (name, listener) {
@@ -157,50 +128,14 @@ agmNgModuleWrapperUtils = {
                 scope.$emit(name, args);
                 return deferred.promise;
             }
-
-            tool.promisedBroadcast = function (name, args, minResponse) {
-                var deferred = dep.$q.defer();
-                agmNgModuleMemory.promisedEvents[name] = {
-                    name: name,
-                    args: args,
-                    deferred: deferred,
-                    responseCount: 0,
-                    minResponse: minResponse || 1
-                };
-                scope.$broadcast(name, args);
-                return deferred.promise;
-            }
         }
-
-
+        
         if (scope.$eventToObservable && !tool.eventToObservable) {
             tool.eventToObservable = function (name, selector) {
                 return scope.$eventToObservable(name, selector);
             }
         }
-
-        tool.bounceEmit = function (name) {
-            tool.on(name, function (evt, args) {
-                if (!args.__bounced) {
-                    args.__bounced = true;
-                    scope.$broadcast(name, args);
-                }
-            });
-        }
-
-        // run promise to modify, then broadcast after args modification complete
-        tool.bounceEmitPromise = function (name, getPromiseFunc) {
-            tool.on(name, function (evt, args) {
-                if (!args.__bounced) {
-                    args.__bounced = true;
-                    return getPromiseFunc(args).then(function () {
-                        scope.$broadcast(name, args);
-                    });
-                }
-            });
-        }
-
-
+        
         tool.emit = function (name, args) {
             return scope.$emit(name, args);
         }
@@ -213,9 +148,6 @@ agmNgModuleWrapperUtils = {
         tool.apply = function (expr) {
             return scope.$apply(expr);
         }
-        tool.applyAsync = function (expr) {
-            return scope.$applyAsync(expr);
-        }
         tool.watch = function (name, func, deep) {
             var listener = scope.$watch(name, func, deep);
             destroyable.watches.push(listener);
@@ -223,26 +155,6 @@ agmNgModuleWrapperUtils = {
         }
     },
     injectDestroyableToolFunction: function (scope, dep, tool, destroyable) {
-        if (dep.$interval) {
-
-            destroyable.destroyIntervals = function () {
-                destroyable.intervals.forEach(function (interval) {
-                    dep.$interval.cancel(interval);
-                });
-            }
-        }
-        if (dep.coreSignalRNotificationService) {
-            destroyable.destroySignalR = function () {
-                destroyable.signalRs.forEach(function (signalRDestroyFunc) {
-                    signalRDestroyFunc();
-                });
-            }
-        }
-        destroyable.destroyWatches = function () {
-            destroyable.watches.forEach(function (listener) {
-                listener();
-            });
-        }
         if (dep.coreSignalRMarketDataService) {
             tool.signalRMarketData = function (tradeVenue, name, func) {
                 dep.coreSignalRMarketDataService.turnOn(tradeVenue, name, func);
@@ -261,14 +173,18 @@ agmNgModuleWrapperUtils = {
         };
 
         destroyable.destroyAll = function () {
-            if (destroyable.destroyWatches) {
-                destroyable.destroyWatches();
+            destroyable.watches.forEach(function (listener) {
+                listener();
+            });
+            if (dep.coreSignalRNotificationService) {
+                destroyable.signalRs.forEach(function (signalRDestroyFunc) {
+                    signalRDestroyFunc();
+                });
             }
-            if (destroyable.destroySignalR) {
-                destroyable.destroySignalR();
-            }
-            if (destroyable.destroyIntervals) {
-                destroyable.destroyIntervals();
+            if (dep.$interval) {
+                destroyable.intervals.forEach(function (interval) {
+                    dep.$interval.cancel(interval);
+                });
             }
             delete agmModule;
             delete tool;
@@ -294,31 +210,10 @@ agmNgModuleWrapperUtils = {
     },
     injectNonDestroyableToolFunctions: function (dep, tool) {
         tool._locks = {};
-        if (dep.$route) {
-            tool.setUiState = function (state, param, config) {
-                var path = agmNgModuleMemory.uiStates[state].url;
-                dep.$location.path(path);
-            }
-        }
-
-        if (dep.$injector) {
-            tool.getProvider = function (label) {
-                return dep.$injector.get(label);
-            }
-        }
-
-        if (dep.$state) {
-            tool.setUiState = function (state, param, config) {
-                dep.$state.go(state, param, config);
-            }
-        }
-
+        
         if (dep.$window) {
             tool.winAlert = function (msg) {
                 return dep.$window.alert(msg);
-            }
-            tool.winOpen = function (url) {
-                return dep.$window.open(url);
             }
         }
         
@@ -345,16 +240,6 @@ agmNgModuleWrapperUtils = {
             tool.onceAll = function (promises) {
                 return dep.$q.all(promises);
             }
-            tool.onceAny = function (promises) {
-                var deferred = dep.$q.defer();
-                promises.forEach(function (p) {
-                    p.then(function () {
-                        deferred.resolve();
-                        return arguments;
-                    });
-                });
-                return deferred.promise;
-            }
         }
 
         if (dep.$log) {
@@ -364,7 +249,6 @@ agmNgModuleWrapperUtils = {
             tool.logError = function (message) {
                 return dep.$log.error(message);
             };
-
             tool.logInfo = function (message) {
                 return dep.$log.info(message);
             };
@@ -405,9 +289,6 @@ agmNgModuleWrapperUtils = {
         }
         
         if (dep.$timeout) {
-            tool.cancelTimeout = function (t) {
-                dep.$timeout.cancel(t);
-            }
             tool.timeout = function (func, duration) {
                 var t = dep.$timeout(function () {
                     func();
@@ -432,45 +313,19 @@ agmNgModuleWrapperUtils = {
             return tool._locks[lockName];
         }
 
-        if (dep.$timeout && dep.$q) {
-            tool.wait = function (duration) {
-                var deferred = dep.$q.defer();
-                var t = dep.$timeout(function () {
-                    deferred.resolve();
-                    dep.$timeout.cancel(t);
-                }, duration);
-                return deferred.promise;
-            }
-        };
-
         if (dep.$interval) {
             tool.cancelInterval = function (intervalObj) {
                 dep.$interval.cancel(intervalObj);
             }
-            tool.repeatNTimes = function (func, duration, times) {
-
-                var t = dep.$interval(function () {
-                    if (times < 0) {
-                        dep.$interval.cancel(t);
-                        return;
-                    }
-                    func();
-                    times--;
-                }, duration);
-                return t;
-            }
         }
     },
-    generateDestroyable: function () {
-        return {
+    agmDirectiveLinkTool: function (scope, dep) {
+        var tool = {};
+        var destroyable = {
             watches: [],
             intervals: [],
             signalRs: []
         };
-    },
-    agmDirectiveLinkTool: function (scope, dep) {
-        var tool = {};
-        var destroyable = agmNgModuleWrapperUtils.generateDestroyable();
 
         agmNgModuleWrapperUtils.assignScopeToTool(scope, dep, tool, destroyable);
         agmNgModuleWrapperUtils.injectDestroyableToolFunction(scope, dep, tool, destroyable);
@@ -480,7 +335,11 @@ agmNgModuleWrapperUtils = {
     },
     agmServiceTool: function (service, dep) {
         var tool = {};
-        var destroyable = agmNgModuleWrapperUtils.generateDestroyable();
+        var destroyable = {
+            watches: [],
+            intervals: [],
+            signalRs: []
+        };
 
         tool.setServiceObjectProperties = function (props) {
             for (var propName in props) {
@@ -495,7 +354,11 @@ agmNgModuleWrapperUtils = {
     },
     agmFactoryTool: function (dep) {
         var tool = {};
-        var destroyable = agmNgModuleWrapperUtils.generateDestroyable();
+        var destroyable = {
+            watches: [],
+            intervals: [],
+            signalRs: []
+        };
         agmNgModuleWrapperUtils.assignScopeToTool(dep.$rootScope, dep, tool, destroyable);
         agmNgModuleWrapperUtils.injectDestroyableToolFunction(dep.$rootScope, dep, tool, destroyable);
         agmNgModuleWrapperUtils.injectNonDestroyableToolFunctions(dep, tool);
@@ -511,34 +374,6 @@ agmNgModuleWrapperUtils = {
         agmNgModuleWrapperUtils.assignScopeToTool(dep.$scope, dep, tool, destroyable);
         agmNgModuleWrapperUtils.injectDestroyableToolFunction(dep.$scope, dep, tool, destroyable);
         agmNgModuleWrapperUtils.injectNonDestroyableToolFunctions(dep, tool);
-
-        vm._ngClassMethods = {};
-
-        tool.setNgClass = function (name, condition) {
-            vm._ngClassMethods[name] = condition;
-        }
-
-
-        vm.getNgClass = function (names) {
-            var arr = [];
-            if (Array.isArray(names)) {
-                arr = names;
-            } else {
-                arr = [names];
-            }
-            var returnedArr = [];
-            arr.forEach(function (name) {
-                var method = vm._ngClassMethods[name];
-                if (typeof method === 'function') {
-                    if (method()) {
-                        returnedArr.push(name);
-                    }
-                } else if (method) {
-                    returnedArr.push(name);
-                }
-            });
-            return returnedArr;
-        }
 
         tool.initialize = function (func) {
             func();
@@ -577,30 +412,24 @@ agmNgModuleWrapperUtils = {
     }
 };
 
-
 function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
+    var agmModule = {};
 
-    var basicModules = [
-        'ngSanitize',
-        'ui.bootstrap',
-        'agm.common',
-        'agm.core'
-    ];
-
-    function checkModuleExistence() {
-        var exist = false;
-        try {
-            exist = angular.module(appName) != null;
-        } catch (err) {
-        }
-        return exist;
+    // checkModuleExistence
+    var moduleExist = false;
+    try {
+        moduleExist = angular.module(appName) != null;
+    } catch (err) {
     }
 
-    var agmModule = {};
-    var moduleExist = checkModuleExistence();
     if (!moduleExist) {
         appModules = appModules || [];
-        var finalModule = basicModules.concat(appModules).filter(function (u) {
+        var finalModule = [
+            'ngSanitize',
+            'ui.bootstrap',
+            'agm.common',
+            'agm.core'
+        ].concat(appModules).filter(function (u) {
             return u !== appName;
         });
         if (excludeDefaultModule) {
@@ -634,7 +463,24 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
             dep[name] = inputArguments[idx];
         });
     }
-    agmModule.defineTemplatePairing = function (controllerName, templateUrl) {
+    agmModule.defineConstant = function (name, obj) {
+        agmModule.ngApp.constant(name, obj);
+        return agmModule;
+    }
+    agmModule.defineControllerAsPopup = function (controllerName, popupConfig, dependencies, func, excludeDefaultDependencies) {
+        dependencies = dependencies || [];
+        var finalDependencies = dependencies.concat(['$uibModalInstance']);
+        agmModule.defineController(controllerName, finalDependencies, func, excludeDefaultDependencies);
+        popupConfig.controller = controllerName;
+        agmNgModuleMemory.popupDefinitions[controllerName] = {
+            name: controllerName,
+            config: popupConfig
+        }
+        return agmModule;
+    }
+    agmModule.defineControllerAsPage = function (controllerName, templateUrl, dependencies, func, excludeDefaultDependencies) {
+        dependencies = dependencies || [];
+        agmModule.defineController(controllerName, dependencies, func, excludeDefaultDependencies);
         agmNgModuleMemory.templatePairingDefinitions[controllerName] = {
             name: controllerName,
             config: {
@@ -642,51 +488,6 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
                 templateUrl: templateUrl
             }
         }
-    }
-    agmModule.defineFilter = function (filterName, dependencies, func) {
-        var finalArgs = dependencies.concat(['numberFilter']);
-        finalArgs.push(function () {
-            var dep = {};
-            var inputArguments = arguments;
-            resolveDependencies(dep, dependencies, inputArguments);
-            func(dep);
-        });
-        agmModule.ngApp.filter(filterName, finalArgs);
-        return agmModule;
-    }
-    agmModule.defineFilterShort = function (filterName, func) {
-        agmModule.ngApp.filter(filterName, function () {
-            return func;
-        });
-        return agmModule;
-    }
-
-
-    agmModule.defineConstant = function (name, obj) {
-        agmModule.ngApp.constant(name, obj);
-        return agmModule;
-    }
-
-    agmModule.definePopup = function (controllerName, config) {
-        config.controller = controllerName;
-        agmNgModuleMemory.popupDefinitions[controllerName] = {
-            name: controllerName,
-            config: config
-        }
-        return agmModule;
-    }
-    agmModule.defineControllerAsPopup = function (controllerName, popupConfig, dependencies, func, excludeDefaultDependencies) {
-        dependencies = dependencies || [];
-        var finalDependencies = dependencies.concat(['$uibModalInstance']);
-        agmModule.defineController(controllerName, finalDependencies, func, excludeDefaultDependencies);
-        agmModule.definePopup(controllerName, popupConfig);
-        return agmModule;
-    }
-
-    agmModule.defineControllerAsPage = function (controllerName, templateUrl, dependencies, func, excludeDefaultDependencies) {
-        dependencies = dependencies || [];
-        agmModule.defineController(controllerName, dependencies, func, excludeDefaultDependencies);
-        agmModule.defineTemplatePairing(controllerName, templateUrl);
         agmModule.defineState = function (state, config) {
             config.templateUrl = templateUrl;
             config.controller = controllerName;
@@ -697,7 +498,6 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
         }
         return agmModule;
     }
-
     agmModule.defineController = function (controllerName, dependencies, func, excludeDefaultDependencies) {
         var finalDependencies = basicControllerDependencies.concat(dependencies).filter(function (u) {
             return u !== controllerName;
@@ -730,26 +530,16 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
 
             var tool = agmNgModuleWrapperUtils.agmControllerTool(vm, dep);
 
-
             func(vm, dep, tool);
-
-            //storeTestableDescriptor(controllerName, vm, finalDependencies,"controller");
         });
         agmModule.ngApp.controller(controllerName, finalArgs);
 
         return agmModule;
     };
-
-    agmModule.defineServiceNaked = function (serviceName, dependencies, func) {
-        return agmModule.defineService(serviceName, dependencies, func, true);
-    };
-
     agmModule.defineServiceStrict = function (serviceName, dependencies, func) {
         return agmModule.defineService(serviceName, angularDependencies.concat(dependencies), func, true);
     };
-
     agmModule.defineService = function (serviceName, dependencies, func, excludeDefaultDependencies) {
-
         var finalDependencies = basicServiceDependencies.concat(dependencies).filter(function (u) {
             return u !== serviceName;
         });
@@ -757,8 +547,7 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
             finalDependencies = dependencies;
         }
         var finalArgs = finalDependencies.concat([]);
-
-
+        
         agmNgModuleMemory.serviceMapper[serviceName] = {
             name: serviceName,
             moduleName: appName,
@@ -767,7 +556,6 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
         };
 
         finalArgs.push(function () {
-
             var dep = {};
             var inputArguments = arguments;
             resolveDependencies(dep, finalDependencies, inputArguments);
@@ -789,15 +577,10 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
         });
         return agmModule;
     }
-    agmModule.defineFilter = function (name, func) {
-        agmModule.ngApp.filter(name, func);
-        return agmModule;
-    }
     agmModule.defineFactoryStrict = function (factoryName, dependencies, func) {
         return agmModule.defineFactory(factoryName, angularDependencies.concat(dependencies), func, true);
     }
     agmModule.defineFactory = function (factoryName, dependencies, func, excludeDefaultDependencies) {
-
         var finalDependencies = basicServiceDependencies.concat(dependencies).filter(function (u) {
             return u != factoryName;
         });
@@ -823,10 +606,6 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
         agmModule.ngApp.factory(factoryName, finalArgs);
         return agmModule;
     };
-    agmModule.defineDirectiveStrict = function (directiveName, dependencies, func, scopeBinding, linkFunc) {
-        return agmModule.defineDirective(directiveName, angularDependencies.concat(dependencies), func, scopeBinding, linkFunc, true);
-    }
-
     function convertTagNameToDirective(tagName) {
         return tagName.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
     }
@@ -834,12 +613,10 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
         var directiveName = convertTagNameToDirective(tagName);
         return agmModule.defineDirective(directiveName, angularDependencies.concat(dependencies), func, scopeBinding, linkFunc, true);
     }
-
     agmModule.defineDirectiveByTag = function (tagName, dependencies, func, scopeBinding, linkFunc, excludeDefaultDependencies) {
         var directiveName = convertTagNameToDirective(tagName);
         return agmModule.defineDirective(directiveName, dependencies, func, scopeBinding, linkFunc, excludeDefaultDependencies);
     }
-
     agmModule.defineDirectiveForA = function (tagName, dependencies, func, scopeBinding, linkFunc, excludeDefaultDependencies) {
         var directiveName = convertTagNameToDirective(tagName);
         return agmModule.defineDirective(directiveName, dependencies, function (dep, tool) {
@@ -856,7 +633,6 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
             return config;
         }, scopeBinding, linkFunc, excludeDefaultDependencies);
     }
-
     agmModule.defineDirective = function (directiveName, dependencies, func, scopeBinding, linkFunc, excludeDefaultDependencies) {
         var finalDependencies = basicDirectiveDependencies.concat(dependencies).filter(function (u) {
             return u != directiveName;
@@ -879,9 +655,6 @@ function agmNgModuleWrapper(appName, appModules, excludeDefaultModule) {
                 }
                 scope.vm._getDirectiveElement = function () {
                     return element;
-                }
-                scope.vm._getDirectiveAttributes = function () {
-                    return attrs;
                 }
                 var tool = agmNgModuleWrapperUtils.agmDirectiveLinkTool(scope, dep);
                 if (linkFunc) {
