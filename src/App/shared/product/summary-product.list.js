@@ -1,10 +1,10 @@
 ﻿agmNgModuleWrapper('agms.product')
-    .defineDirectiveForE('agms-tgps-product-list', [],
+    .defineDirectiveForE('agms-summary-product-list', [],
         function (dep) {
             return {
                 transclude: true,
-                controller: "s.product.TgpsListController",
-                templateUrl: '/App/shared/product/tgps-product.list.html'
+                controller: "s.product.SummaryListController",
+                templateUrl: '/App/shared/product/summary-product.list.html'
             };
         },
         {
@@ -12,7 +12,7 @@
             options: '=',
             headerOnly: "=?"
         })
-    .defineService('sTgpsProductDefaultColumnService', ["coreUtil"], function (serviceObj, dep, tool) {
+    .defineService('sSummaryProductDefaultColumnService', ["coreUtil"], function (serviceObj, dep, tool) {
         var defaultColumns = {};
         var coreUtil = dep.coreUtil;
 
@@ -25,8 +25,7 @@
                     return coreUtil.sortName(a.ProductModel.ProductName, b.ProductModel.ProductName);
                 }
                 return 0;
-            },
-            sortingDirection: -1
+            }
         };
         defaultColumns.productName = {
             templateId: 'default-product-list/product-name',
@@ -37,8 +36,7 @@
                     return coreUtil.sortName(a.ProductModel.ProductName, b.ProductModel.ProductName);
                 }
                 return 0;
-            },
-            sortingDirection: -1
+            }
         };
         defaultColumns.productSymbol = {
             templateId: 'default-product-list/product-symbol',
@@ -49,8 +47,7 @@
                     return coreUtil.sortName(a.ProductModel.Symbol, b.ProductModel.Symbol);
                 }
                 return 0;
-            },
-            sortingDirection: -1
+            }
         };
         defaultColumns.bidPrice = {
             templateId: 'default-product-list/bid-price',
@@ -143,7 +140,7 @@
 
         serviceObj.defaultColumns = defaultColumns;
     })
-    .defineController('s.product.TgpsListController', ['commonPixelPositioningSystemService'],
+    .defineController('s.product.SummaryListController', ['commonPixelPositioningSystemService'],
         function (vm, dep, tool) {
             var commonPixelPositioningSystemService = dep.commonPixelPositioningSystemService;
             var defaultVisibility = {
@@ -194,9 +191,6 @@
                 vm.options.columns.forEach(function (col) {
                     if (col.defaultSorting) {
                         sortByThisColumn(col, col.defaultSorting);
-                    }
-                    if (col.sortingDirection) {
-                        sortByThisColumn(col, col.sortingDirection);
                     }
                 });
                 if (vm.visibility.enableVirtualization) {
@@ -367,7 +361,8 @@
             };
 
             function getListedStocks() {
-                var newList = preprocessFilterList(vm.productContainerList);                
+                var newList = preprocessFilterList(vm.productContainerList);;
+
                 if (vm.selectedColumnForSort && vm.selectedColumnForSort.sortingFunc && vm.selectedColumnForSort.sortingDirection !== 0) {
                     newList = [].concat(newList);
                     newList.sort(function (a, b) {
@@ -406,17 +401,11 @@
 
             function isSelectedColumnForSortDesc(col) {
                 return col.sortingDirection === -1 && vm.selectedColumnForSort === col;
-                //return col.sortingDirection === -1;
             };
 
             function isSelectedColumnForSortAsc(col) {
                 return col.sortingDirection === 1 && vm.selectedColumnForSort === col;
-                //return col.sortingDirection === 1;
             };
-
-            function activateSorting(col){
-                vm.selectedColumnForSort = col;
-            }
 
             function sortByThisColumn(col, direction) {
 
@@ -450,36 +439,8 @@
                 return _.includes(eodTradeVenues, tradeVenue);
             }
 
-            vm.isVisibleLeftArrow = false;
-            vm.isVisibleRightArrow = true;
-            vm.setScrollNumber = 0;
-            function scrollLeft(){
-                document.querySelector('.table-wrapper').scrollLeft -= 80;
-                if(document.querySelector('.table-wrapper').scrollLeft > 0){
-                    vm.isVisibleLeftArrow = true;
-                    vm.isVisibleRightArrow = true;
-                } else {
-                    vm.isVisibleLeftArrow = false;
-                }
-                if(document.querySelector('.table-wrapper').scrollLeft == 0){
-                    vm.isVisibleRightArrow = true;
-                }
-                vm.setScrollNumber = document.querySelector('.table-wrapper').scrollLeft;
-            }
-                        
-            function scrollRight(){                
-                document.querySelector('.table-wrapper').scrollLeft += 80;
-                if(document.querySelector('.table-wrapper').scrollLeft > 0){
-                    vm.isVisibleLeftArrow = true;
-                } else {
-                    vm.isVisibleLeftArrow = false;
-                }
-                if(vm.setScrollNumber == document.querySelector('.table-wrapper').scrollLeft){
-                    vm.isVisibleRightArrow = false;
-                } else {
-                    vm.isVisibleRightArrow = true;
-                }                
-                vm.setScrollNumber = document.querySelector('.table-wrapper').scrollLeft;
+            function activateSorting(col){
+                vm.selectedColumnForSort = col;
             }
 
             tool.setVmProperties({
@@ -506,8 +467,6 @@
                 showPagination: showPagination,
                 getListedStocks: getListedStocks,
                 isEodTradeVenue: isEodTradeVenue,
-                scrollLeft: scrollLeft,
-                scrollRight: scrollRight,
                 activateSorting: activateSorting
             });
         });

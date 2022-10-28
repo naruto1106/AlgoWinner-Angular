@@ -224,18 +224,15 @@
             });
         });
 
-        var defaultProductListOption = {
-            visibility: {
-                hasNominalPriceChanges: true,
-                showHeader: true
-            },
-            menuList: sMenuRightClickService.watchlistMenuListProvider
-        };
-
         // MaRa: Can't merge this to setVmProperties - somehow delete button no longer responds if merged
         tool.setVmProperties({
             sharedState: sharedState,
-            watchlistProductListOptions: angular.extend({
+            watchlistProductListOptions: {
+                visibility: {
+                    hasNominalPriceChanges: true,
+                    showHeader: true
+                },
+                menuList: sMenuRightClickService.watchlistMenuListProvider,
                 preprocessListFunc: pDashboardPageService.sortProductByCreatedTime,
                 forceSorting: true,
                 columns: [
@@ -254,7 +251,7 @@
                     }
                 ],
                 externalVm: vm.externalVmForWatchlist
-            }, defaultProductListOption)
+            }
         });
 
         sHeaderService.selectMenu("dashboard");

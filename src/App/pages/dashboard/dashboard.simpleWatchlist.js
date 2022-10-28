@@ -132,7 +132,8 @@
                                         return dep.coreUtil.sortName(a.ProductModel.ProductName, b.ProductModel.ProductName);
                                     }
                                     return 0;
-                                }
+                                },
+                                sortingDirection: -1
                             },
                             {
                                 templateId: 'simpleScreener/product-symbol',
@@ -143,7 +144,8 @@
                                         return dep.coreUtil.sortName(a.ProductModel.Symbol, b.ProductModel.Symbol);
                                     }
                                     return 0;
-                                }
+                                },
+                                sortingDirection: -1
                             },
                             {
                                 templateId: 'default-product-list/compact-price-changes',
@@ -156,7 +158,8 @@
                                         return lastTradedPriceA - lastTradedPriceB;
                                     }
                                     return 0;
-                                }
+                                },
+                                sortingDirection: -1
                             },
                             {
                                 templateId: 'default-product-list/trade-volume',
@@ -169,7 +172,8 @@
                                         return volumeA - volumeB;
                                     }
                                     return 0;
-                                }
+                                },
+                                sortingDirection: -1
                             },
                             {
                                 templateId: 'watchlist/simple-watchlist',
