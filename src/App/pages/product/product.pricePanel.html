@@ -1,6 +1,58 @@
 ﻿<section class="price-panel rel">
-    <h1 class="title-section">PRICE</h1>
-    <div class="abs top-35px right-20px">
+    <h1 class="title-section p-0px">Price</h1>
+    <div class="price_boxes_outter d-flex justify-between flex-wrap">
+        <div class="price_boxes_inner last_price">
+            <h4 class="m-0px">Last Price</h4>
+            <div class="price_txt_inner d-flex justify-between align-end p-top-10px">
+                <div class="price_txt_lft">
+                    <h3 class="m-0px">US$ 165.21</h3>
+                    <h5 class="m-0px">Aug 16, 2022 3:00 PM EST</h5>
+                </div>
+                <div class="price_txt_rght">
+                    <img src="/App/shared/image/newimages/line.png">
+                </div>
+            </div>
+        </div>
+        <div class="price_boxes_inner today_range">
+            <h4 class="m-0px">Today's Range</h4>
+            <div class="price_txt_inner p-top-10px">
+                <div class="price_txt_lft">
+                    <h3 class="m-0px">US$ 171.66 - US$ 173.71</h3>
+                    <h5 class="m-0px">Aug 16, 2022 3:00 PM EST</h5>
+                </div>
+             </div>
+        </div>
+        <div class="price_boxes_inner ask_price">
+            <h4 class="m-0px">Ask Price</h4>
+            <div class="price_txt_inner d-flex justify-between align-end p-top-10px">
+                <div class="price_txt_lft">
+                    <h3 class="m-0px">US$ 177.50</h3>
+                    <h5 class="m-0px">Vol: 100.00</h5>
+                </div>
+                <div class="price_txt_rght">
+                    <div class="price_btn buy_btn">
+                        <a href="#">Buy Stock</a>
+                    </div>
+                </div>
+             </div>
+        </div>
+        <div class="price_boxes_inner bid_price">
+            <h4 class="m-0px">Bid Price</h4>
+            <div class="price_txt_inner d-flex justify-between align-end p-top-10px">
+                <div class="price_txt_lft">
+                    <h3 class="m-0px">US$ 165.21</h3>
+                    <h5 class="m-0px">Vol: 300.00</h5>
+                </div>
+                <div class="price_txt_rght">
+                    <div class="price_btn sell_btn">
+                        <a href="#">Sell Stock</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+    <!-- <div class="abs top-35px right-20px">
         <button class="filled-blue pull-right m-left-10px" ng-click="vm.addToWatchlist()">ADD TO WATCHLIST</button>
         <button class="hollow-blue pull-right m-left-10px" ng-if="false">ADD TO PRICE ALERT</button>
         <div class="clearfix"></div>
@@ -8,8 +60,8 @@
                                      on-product-added="vm.onProductAddedToWatchlist(product)"
                                      on-dismissed="vm.dismissAddToWatchlist()"
                                      ng-if="vm.isAddingToWatchlist"></agms-watchlist-add-product>
-    </div>
-    <div class="row-md-17 gap-10px ">
+    </div> -->
+    <!-- <div class="row-md-17 gap-10px ">
         <div class="col-md-4">
             <div agms-image img-src="vm.priceDetail.Product.ProductIconURL" img-fallback-src="vm.getEncodedSectorUrl(vm.priceDetail.Product.Sector.SectorName)" class="logo pull-left"></div>
             <div class="pull-right w-100pct calc-h-minus-80px">
@@ -79,5 +131,5 @@
         </div>
 
         <div class="clearfix"></div>
-    </div>
+    </div> -->
 </section>
