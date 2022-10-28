@@ -48,7 +48,7 @@
 
             function setFilteredWatchlist() {
                 vm.myFilteredWatchlists = vm.myWatchlists.filter(function (wl) {
-                    return !sWatchlistUpdateManagerService.isAnyProductIdInWatchList(wl, vm.product.ProductId);
+                    return !isAnyProductIdInWatchList(wl, vm.product.ProductId);
                 });
                 if (vm.myFilteredWatchlists.length > 0) {
                     vm.selectedWatchlist = vm.myFilteredWatchlists[0];
@@ -66,7 +66,10 @@
             }
 
             function createNewWatchlist() {
-                return sWatchlistUpdateManagerService.addWatchlist().then(function (watchlistId) {
+                var dialog = tool.openModalByDefinition('s.watchlist.AddNewController', {
+                    beforeOpenCallback: null
+                });
+                return dialog.result.then(function (watchlistId) {
                     updateWatchlist().then(function () {
                         coreSignalRNotificationService.invoke('ListenToWatchlist', watchlistId).then(
                             function () {
@@ -77,6 +80,12 @@
                         setFilteredWatchlist(vm.product);
                     });
                 });
+            }
+
+            function isAnyProductIdInWatchList(watchlist, productId) {
+                return watchlist.WatchlistProducts.filter(function (p) {
+                    return productId === p.ProductModel.ProductId;
+                }).length > 0;
             }
 
             tool.setVmProperties({
@@ -133,7 +142,7 @@
 
             function setFilteredWatchlist() {
                 vm.myFilteredWatchlists = vm.myWatchlists.filter(function (wl) {
-                    return !sWatchlistUpdateManagerService.isAnyProductIdInWatchList(wl, vm.product.ProductId);
+                    return !isAnyProductIdInWatchList(wl, vm.product.ProductId);
                 });
                 if (vm.myFilteredWatchlists.length > 0) {
                     vm.selectedWatchlist = vm.myFilteredWatchlists[0];
@@ -155,7 +164,10 @@
             });
 
             function createNewWatchlist() {
-                return sWatchlistUpdateManagerService.addWatchlist().then(function (watchlistId) {
+                var dialog = tool.openModalByDefinition('s.watchlist.AddNewController', {
+                    beforeOpenCallback: null
+                });
+                return dialog.result.then(function (watchlistId) {
                     updateWatchlist().then(function () {
                         coreSignalRNotificationService.invoke('ListenToWatchlist', watchlistId).then(
                             function () {

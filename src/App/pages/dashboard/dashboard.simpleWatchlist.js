@@ -54,7 +54,14 @@
             }
 
             function deleteProductOnWatch(watchlist, product) {
-                return sWatchlistUpdateManagerService.deleteProductOnWatchlist(watchlist, product);
+                var request = {
+                    WatchlistId: watchlist.WatchlistId,
+                    ProductId: product.ProductModel.ProductId
+                };
+                return tool.openModalByDefinition('s.watchlist.DeleteProductPopupController', {
+                    request: request,
+                    beforeOpenCallback: null
+                });
             }
 
             function deleteProductOnWatchlist(item) {
@@ -67,12 +74,11 @@
                 lastWatchlist = sharedState.selectedWatchlist;
             }
 
-            function showProductList() {
-                return sharedState.watchlists.length > 0 && !vm.isLoading && sharedState.selectedWatchlist.WatchlistProducts.length > 0;
-            }
-
             function addWatchlist() {
-                sWatchlistUpdateManagerService.addWatchlist().then(function (watchlistId) {
+                var dialog = tool.openModalByDefinition('s.watchlist.AddNewController', {
+                    beforeOpenCallback: null
+                });
+                dialog.result.then(function (watchlistId) {
                     tool.log("Successfully added watchlist");
                     coreSignalRNotificationService.invoke('ListenToWatchlist', watchlistId).then(
                         function () {
@@ -81,14 +87,6 @@
                             tool.logError("Error invoking listen to watchlist");
                         });
                 });
-            }
-
-            function editWatchlist(watchlist) {
-                return sWatchlistUpdateManagerService.editWatchlist(watchlist);
-            }
-
-            function deleteWatchlist(watchlist) {
-                return sWatchlistUpdateManagerService.deleteWatchlist(watchlist);
             }
 
             function searchProducts(keyword) {
@@ -109,17 +107,14 @@
 
             tool.initialize(function () {
                 tool.setVmProperties({
-                    addingProductFailed: false,
                     addingProductSucceed: false,
                     externalVmForWatchlist: externalVmForWatchlist,
                     searchedProductOnWatchlist: null,
                     searchProducts: searchProducts,
                     onProductSelected: onProductSelected,
-                    deleteWatchlist: deleteWatchlist,
                     addWatchlist: addWatchlist,
-                    editWatchlist: editWatchlist,
                     onWatchlistChanged: onWatchlistChanged,
-                    showProductList: showProductList,
+                    sharedState: sharedState,
                     watchlistProductListOptions: {
                         preprocessListFunc: pDashboardPageService.sortProductByCreatedTime,
                         visibility: {
