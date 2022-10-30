@@ -33,7 +33,6 @@
             }
 
             // TODO: Should refactor to make this cleaner
-            //var functionToCall = (vm.campaignCode === "FBCHARTPREMIUM") ? 'registerNewUserWithoutSendingEmail' : 'registerNewUserWithPassword';
             var functionToCall = "registerNewUserWithPassword";
 
             sGatewayService[functionToCall](vm.newUserRegisterModel).then(function (result) {
