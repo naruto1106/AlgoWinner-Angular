@@ -451,48 +451,51 @@
     /***** Price Css Start *****/
     .price_boxes_outter {
         margin: 0 -8px;
-        .price_boxes_inner {    
-            background: #fff;
+        .price_boxes {
             width: 24%;
-            margin: 0 8px;
-            border-radius: 10px;
-            border: 1px solid #EAECF0;
-            box-shadow: 0 0 2px #0003;
-            padding: 16px 32px 16px 16px;
-            h4 {
-                color: #475467;
-                font-size: 15px;
-                font-weight: 600;
-                line-height: 20px;
-            }
-            .price_txt_lft {
-                    h3 {
-                    color: #184376;
-                    font-size: 24px;
-                    line-height: 32px;
-                    font-weight: 700;
-                }
-                h5 {
-                    color: #667085;
-                    font-size: 11px;
-                    line-height: 15px;
-                    font-weight: 600;
-                }
-            }
-            .price_btn {
-                padding: 10px 15px;
-                border-radius: 6px;
-                &.buy_btn{
-                    background-color: #184376;
-                }
-                &.sell_btn{
-                    background-color: #018C81;
-                }
-                a{
-                    color: #F2F6FC;
+            .price_boxes_inner {    
+                background: #fff;
+                border-radius: 10px;
+                border: 1px solid #EAECF0;
+                box-shadow: 0 0 2px #0003;
+                padding: 16px 32px 16px 16px;
+                height: 100%;
+                h4 {
+                    color: #475467;
                     font-size: 15px;
-                    font-weight: 500;
-                    text-decoration: unset;
+                    font-weight: 600;
+                    line-height: 20px;
+                }
+                .price_txt_lft {
+                        h3 {
+                        color: #184376;
+                        font-size: 24px;
+                        line-height: 32px;
+                        font-weight: 700;
+                    }
+                    h5 {
+                        color: #667085;
+                        font-size: 11px;
+                        line-height: 15px;
+                        font-weight: 600;
+                    }
+                }
+                
+                .price_btn {
+                    padding: 10px 15px;
+                    border-radius: 6px;
+                    &.buy_btn{
+                        background-color: #184376;
+                    }
+                    &.sell_btn{
+                        background-color: #018C81;
+                    }
+                    a{
+                        color: #F2F6FC;
+                        font-size: 15px;
+                        font-weight: 500;
+                        text-decoration: unset;
+                    }
                 }
             }
         }
@@ -571,4 +574,79 @@
     .align-end{
         align-items: flex-end;
     }
+
+
+
+@media(max-width:1500px){
+    
+    .price_txt_rght {
+        img {
+                width: 110px;
+            }
+        }
 }
+
+@media(max-width:1450px){
+    .price_boxes_outter {
+        .price_boxes {
+        .price_boxes_inner{
+                .price_txt_lft{
+                    h3 {
+                        font-size: 22px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media(max-width:1366px){
+    .price_boxes_outter {
+        .price_boxes {
+        .price_boxes_inner{
+                .price_txt_lft{
+                    h3 {
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+    .price_txt_rght {
+        img {
+                width: 94px;
+            }
+    }
+}
+@media(max-width:1200px){
+    .price_txt_rght {
+        img {
+                width: 78px;
+            }
+    }
+    .price_boxes_outter {
+        .price_boxes {
+        .price_boxes_inner{
+                .price_txt_lft{
+                    h3 {
+                        font-size: 18px;
+                    }
+                }
+                .price_btn{
+                    padding: 9px 13px;
+                    a {
+                        color: #F2F6FC;
+                        font-size: 14px;
+                    }
+                }
+            }
+
+        }
+    }
+}
+}
+
+
+
+
+
+
