@@ -12,7 +12,7 @@
             options: '=',
             headerOnly: "=?"
         })
-    .defineService('sTgpsProductDefaultColumnService', ["coreUtil"], function (serviceObj, dep, tool) {
+    .defineService('sProductDefaultColumnService', ["coreUtil"], function (serviceObj, dep, tool) {
         var defaultColumns = {};
         var coreUtil = dep.coreUtil;
 

@@ -118,6 +118,33 @@
                     tool.log("Get product Failed");
                 });
         }
+
+        function isAnyProductIdInWatchList(watchlist, productId) {
+            return watchlist.WatchlistProducts.filter(function (p) {
+                return productId === p.ProductModel.ProductId;
+            }).length > 0;
+        }
+
+        function refineWatchlists(list) {
+            var promiseArray = [];
+            list.forEach(function (watchlist) {
+                var promise = refineSingleWatchlist(watchlist);
+                promiseArray.push(promise);
+            });
+            return tool.onceAll(promiseArray);
+        }
+
+        function refineSingleWatchlist(watchlist) {
+            if (watchlist.WatchlistProducts && watchlist.WatchlistProducts.length > 0) {
+                watchlist.WatchlistProducts.forEach(function (product) {
+                    product.MarketData = {
+                        isLoading: true
+                    };
+                });
+                return resolveListOfWatchlistProduct(watchlist.WatchlistProducts);
+            }
+            return tool.when();
+        }
         
         function handleNewWatchlistProduct(watchlistProduct, isMarketDataObserved, item, resourceOwner) {
             if (!_.includes(item.WatchlistProducts, watchlistProduct)) {
@@ -129,40 +156,57 @@
                     isLoading: true
                 };
 
-                var requestObj = {
-                    ProductId: watchlistProduct.ProductModel.ProductId,
-                    Symbol: watchlistProduct.ProductModel.Symbol,
-                    TradeVenueLoc: watchlistProduct.ProductModel.TradeVenueLoc,
-                    AssetType: watchlistProduct.ProductModel.AssetType,
-                    Currency: watchlistProduct.ProductModel.Currency
-                };
-    
-                tool.onceAll([
-                    tradeDataService.GetBid(requestObj),
-                    tradeDataService.GetAsk(requestObj),
-                    tradeDataService.GetLast(requestObj)
-                ]).then(function (ress) {
-                    watchlistProduct.MarketData.BidPrice = ress[0].data.BidPrice;
-                    watchlistProduct.MarketData.BidSize = ress[0].data.BidSize;
-                    watchlistProduct.MarketData.BidTime = ress[0].data.BidTime;
-                    watchlistProduct.MarketData.AskPrice = ress[1].data.AskPrice;
-                    watchlistProduct.MarketData.AskSize = ress[1].data.AskSize;
-                    watchlistProduct.MarketData.AskTime = ress[1].data.AskTime;
-                    watchlistProduct.MarketData.LastTradedPrice = ress[2].data.LastTradedPrice;
-                    watchlistProduct.MarketData.LastTradedSize = ress[2].data.LastTradedSize;
-                    watchlistProduct.MarketData.LastTradedTime = ress[2].data.Timestamp;
-                    watchlistProduct.MarketData.PrevClose = ress[2].data.PrevClose;                   
-                    watchlistProduct.MarketData.CumulativeVolume = ress[2].data.CumulativeVolume;                   
-    
-                    return tool.onceAll([
-                        sMarketDataService.subscribeMarketData(watchlistProduct.ProductModel, resourceOwner)
-                    ]).finally(function () {
-                        watchlistProduct.MarketData.isLoading = false;
-                    });
-                }, function (ress) {
-                    tool.logError("Error invoking get Market Data for Watchlist Addition");
-                });                
+                return resolveWatchlistProduct(watchlistProduct, resourceOwner);                
             }
+        }
+
+        function resolveWatchlistProduct(watchlistProduct, resourceOwner) {
+            var requestObj = {
+                ProductId: watchlistProduct.ProductModel.ProductId,
+                Symbol: watchlistProduct.ProductModel.Symbol,
+                TradeVenueLoc: watchlistProduct.ProductModel.TradeVenueLoc,
+                AssetType: watchlistProduct.ProductModel.AssetType,
+                Currency: watchlistProduct.ProductModel.Currency
+            };
+
+            tool.onceAll([
+                tradeDataService.GetBid(requestObj),
+                tradeDataService.GetAsk(requestObj),
+                tradeDataService.GetLast(requestObj)
+            ]).then(function (ress) {
+                watchlistProduct.MarketData.BidPrice = ress[0].data.BidPrice;
+                watchlistProduct.MarketData.BidSize = ress[0].data.BidSize;
+                watchlistProduct.MarketData.BidTime = ress[0].data.BidTime;
+                watchlistProduct.MarketData.AskPrice = ress[1].data.AskPrice;
+                watchlistProduct.MarketData.AskSize = ress[1].data.AskSize;
+                watchlistProduct.MarketData.AskTime = ress[1].data.AskTime;
+                watchlistProduct.MarketData.LastTradedPrice = ress[2].data.LastTradedPrice;
+                watchlistProduct.MarketData.LastTradedSize = ress[2].data.LastTradedSize;
+                watchlistProduct.MarketData.LastTradedTime = ress[2].data.Timestamp;
+                watchlistProduct.MarketData.PrevClose = ress[2].data.PrevClose;                   
+                watchlistProduct.MarketData.CumulativeVolume = ress[2].data.CumulativeVolume;                   
+
+                return tool.onceAll([
+                    sMarketDataService.subscribeMarketData(watchlistProduct.ProductModel, resourceOwner)
+                ]).finally(function () {
+                    watchlistProduct.MarketData.isLoading = false;
+                });
+            }, function (ress) {
+                tool.logError("Error invoking get Market Data for Watchlist Addition");
+            });
+        }
+
+        function resolveListOfWatchlistProduct(listOfWatchlistProduct, resourceOwner) {
+            listOfWatchlistProduct.forEach(function(p) {
+                p.MarketData = sMarketDataService.calculateLastTradedPricePct(p.MarketData);
+            });
+
+            return sMarketDataService.subscribeMarketDataMultiple(_.map(listOfWatchlistProduct, 'ProductModel'), resourceOwner)
+                .finally(function () {
+                listOfWatchlistProduct.forEach(function (watchlistProduct) {
+                    watchlistProduct.MarketData.isLoading = false;
+                });
+            });
         }
 
         function observeWatchlist(list, isMarketDataObserved, onCurrentWatchlistChanged) {
@@ -269,20 +313,7 @@
             var promise1 = updateMarketDataForPanel('WATCHLIST', oldWatchlist ? oldWatchlist.WatchlistProducts : [], newWatchlist ? newWatchlist.WatchlistProducts : []);
             var promise2 = tool.when(true);
             if (newWatchlist) {
-                if (watchlist.WatchlistProducts && watchlist.WatchlistProducts.length > 0) {
-                    watchlist.WatchlistProducts.forEach(function (product) {
-                        product.MarketData = sMarketDataService.calculateLastTradedPricePct(product.MarketData);
-                    });
-        
-                    promise2 = sMarketDataService.subscribeMarketDataMultiple(_.map(watchlist.WatchlistProducts, 'ProductModel'))
-                        .finally(function () {
-                            watchlist.WatchlistProducts.forEach(function (watchlistProduct) {
-                            watchlistProduct.MarketData.isLoading = false;
-                        });
-                    });
-                } else {
-                    promise2 = tool.when();
-                }
+                promise2 = refineSingleWatchlist(newWatchlist);
             }
             return tool.onceAll([promise1, promise2]);
         }
@@ -343,6 +374,51 @@
             tool.signalRMarketData("OTC (Oanda)", 'LastMarketDataUpdated', handleMarketDataUpdated);
         }
 
+        function deleteWatchlist(watchlist) {
+            tool.openModalByDefinition('s.watchlist.DeleteController', {
+                watchlistId: watchlist.WatchlistId,
+                beforeOpenCallback: null
+            });
+        }
+
+        function addWatchlist() {
+            var dialog = tool.openModalByDefinition('s.watchlist.AddNewController', {
+                beforeOpenCallback: null
+            });
+            return dialog.result;
+        }
+
+        function addWatchlistAndRedirect() {
+            return addWatchlist().then(function (watchlistId) {
+                $location.search({ watchlistId: watchlistId });
+                tool.log("Successfully added watchlist");
+                coreSignalRNotificationService.invoke('ListenToWatchlist', watchlistId).then(
+                    function (result) {
+                        tool.log("Listening to Watchlist " + watchlistId);
+                    }, function (errorData) {
+                        tool.logError("Error invoking listen to watchlist");
+                    });
+            });
+        }
+
+        function editWatchlist(watchlist) {
+            tool.openModalByDefinition('s.watchlist.EditPopupController', {
+                watchlist: watchlist,
+                beforeOpenCallback: null
+            });
+        }
+
+        function deleteProductOnWatchlist(watchlist, stock) {
+            var request = {
+                WatchlistId: watchlist.WatchlistId,
+                ProductId: stock.ProductModel.ProductId
+            };
+            tool.openModalByDefinition('s.watchlist.DeleteProductPopupController', {
+                request: request,
+                beforeOpenCallback: null
+            });
+        }
+
         function getWatchlists(isMarketDataObserved) {
             if (myWatchLists) {
                 return tool.when(myWatchLists);
@@ -388,10 +464,20 @@
             setMarketDataUpdateHandlerOnListOfWatchlistProducts: setMarketDataUpdateHandlerOnListOfWatchlistProducts,
 
             addProductToWatchlist: addProductToWatchlist,
+            isAnyProductIdInWatchList: isAnyProductIdInWatchList,
             changeWatchlist: changeWatchlist,
+            refineWatchlists: refineWatchlists,
 
+            refineSingleWatchlist: refineSingleWatchlist,            
             observeWatchlist: observeWatchlist,
 
+            resolveWatchlistProduct: resolveWatchlistProduct,
+            resolveListOfWatchlistProduct: resolveListOfWatchlistProduct,
+            deleteWatchlist: deleteWatchlist,
+            addWatchlist: addWatchlist,
+            addWatchlistAndRedirect: addWatchlistAndRedirect,
+            editWatchlist: editWatchlist,
+            deleteProductOnWatchlist: deleteProductOnWatchlist,
             updateMarketDataForPanel: updateMarketDataForPanel
         });
     }

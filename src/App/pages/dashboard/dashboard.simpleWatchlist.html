@@ -47,7 +47,7 @@
         Add a product to get started
     </div>
 
-    <div ng-if="vm.sharedState.watchlists.length > 0 && !vm.isLoading && vm.sharedState.selectedWatchlist.WatchlistProducts.length > 0" class="major-column">
+    <div ng-if="vm.showProductList()" class="major-column">
         <agms-product-list options="vm.watchlistProductListOptions" class="watchlist-product-list" product-container-list="sharedState.selectedWatchlist.WatchlistProducts">
         </agms-product-list>
     </div>

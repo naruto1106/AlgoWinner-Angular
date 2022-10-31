@@ -56,14 +56,7 @@
         }
 
         function deleteProductOnWatch(watchlist, product) {
-            var request = {
-                WatchlistId: watchlist.WatchlistId,
-                ProductId: product.ProductModel.ProductId
-            };
-            return tool.openModalByDefinition('s.watchlist.DeleteProductPopupController', {
-                request: request,
-                beforeOpenCallback: null
-            });
+            return sWatchlistUpdateManagerService.deleteProductOnWatchlist(watchlist, product);
         }
 
         function deleteProductOnWatchlist(item) {
@@ -76,11 +69,12 @@
             lastWatchlist = sharedState.selectedWatchlist;
         }
 
+        function showProductList() {
+            return sharedState.watchlists.length > 0 && !vm.isLoading && sharedState.selectedWatchlist.WatchlistProducts.length > 0;
+        }
+
         function addWatchlist() {
-            var dialog = tool.openModalByDefinition('s.watchlist.AddNewController', {
-                beforeOpenCallback: null
-            });
-            dialog.result.then(function (watchlistId) {
+            sWatchlistUpdateManagerService.addWatchlist().then(function (watchlistId) {
                 tool.log("Successfully added watchlist");
                 coreSignalRNotificationService.invoke('ListenToWatchlist', watchlistId).then(
                     function () {
@@ -92,17 +86,11 @@
         }
 
         function editWatchlist(watchlist) {
-            tool.openModalByDefinition('s.watchlist.EditPopupController', {
-                watchlist: watchlist,
-                beforeOpenCallback: null
-            });
+            return sWatchlistUpdateManagerService.editWatchlist(watchlist);
         }
 
         function deleteWatchlist(watchlist) {
-            tool.openModalByDefinition('s.watchlist.DeleteController', {
-                watchlistId: watchlist.WatchlistId,
-                beforeOpenCallback: null
-            });
+            return sWatchlistUpdateManagerService.deleteWatchlist(watchlist);
         }
 
         function searchProducts(keyword) {
@@ -123,6 +111,7 @@
 
         tool.initialize(function () {
             tool.setVmProperties({
+                addingProductFailed: false,
                 addingProductSucceed: false,
                 externalVmForWatchlist: externalVmForWatchlist,
                 searchedProductOnWatchlist: null,
@@ -132,6 +121,7 @@
                 addWatchlist: addWatchlist,
                 editWatchlist: editWatchlist,
                 onWatchlistChanged: onWatchlistChanged,
+                showProductList: showProductList,
                 watchlistProductListOptions: {
                     preprocessListFunc: pDashboardPageService.sortProductByCreatedTime,
                     visibility: {
@@ -197,7 +187,7 @@
                     menuList: sMenuRightClickService.watchlistMenuListProvider,
                     externalVm: externalVmForWatchlist
                 },
-                isEodTradeVenue: isEodTradeVenue                
+                isEodTradeVenue: isEodTradeVenue
             });
 
             vm.isLoading = true;
@@ -224,15 +214,17 @@
             });
         });
 
-        // MaRa: Can't merge this to setVmProperties - somehow delete button no longer responds if merged
+        var defaultProductListOption = {
+            visibility: {
+                hasNominalPriceChanges: true,
+                showHeader: true
+            },
+            menuList: sMenuRightClickService.watchlistMenuListProvider
+        };
+
         tool.setVmProperties({
             sharedState: sharedState,
-            watchlistProductListOptions: {
-                visibility: {
-                    hasNominalPriceChanges: true,
-                    showHeader: true
-                },
-                menuList: sMenuRightClickService.watchlistMenuListProvider,
+            watchlistProductListOptions: angular.extend({
                 preprocessListFunc: pDashboardPageService.sortProductByCreatedTime,
                 forceSorting: true,
                 columns: [
@@ -251,7 +243,7 @@
                     }
                 ],
                 externalVm: vm.externalVmForWatchlist
-            }
+            }, defaultProductListOption)
         });
 
         sHeaderService.selectMenu("dashboard");

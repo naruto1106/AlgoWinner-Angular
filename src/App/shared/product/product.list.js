@@ -25,8 +25,7 @@
                     return coreUtil.sortName(a.ProductModel.ProductName, b.ProductModel.ProductName);
                 }
                 return 0;
-            },
-            sortingDirection: -1
+            }
         };
         defaultColumns.productName = {
             templateId: 'default-product-list/product-name',
@@ -48,8 +47,7 @@
                     return coreUtil.sortName(a.ProductModel.Symbol, b.ProductModel.Symbol);
                 }
                 return 0;
-            },
-            sortingDirection: -1
+            }
         };
         defaultColumns.bidPrice = {
             templateId: 'default-product-list/bid-price',
@@ -104,8 +102,7 @@
                     return coreUtil.sortValue(a.MarketData.LastTradedPrice, b.MarketData.LastTradedPrice);
                 }
                 return 0;
-            },
-            sortingDirection: -1
+            }
         };
         defaultColumns.priceChanges = {
             templateId: 'default-product-list/price-changes',
@@ -116,8 +113,7 @@
                     return coreUtil.sortValue(a.MarketData.LastTradedPriceDiff, b.MarketData.LastTradedPriceDiff);
                 }
                 return 0;
-            },
-            sortingDirection: -1
+            }
         };
         defaultColumns.compactPriceChanges = {
             templateId: 'default-product-list/compact-price-changes',
@@ -139,8 +135,7 @@
                     return coreUtil.sortValue(a.MarketData.CumulativeVolume, b.MarketData.CumulativeVolume);
                 }
                 return 0;
-            },
-            sortingDirection: -1
+            }
         };
 
         serviceObj.defaultColumns = defaultColumns;
@@ -405,12 +400,10 @@
             }
 
             function isSelectedColumnForSortDesc(col) {
-                console.log(vm.selectedColumnForSort);
                 return col.sortingDirection === -1 && vm.selectedColumnForSort === col;
             };
 
             function isSelectedColumnForSortAsc(col) {
-                console.log(vm.selectedColumnForSort);
                 return col.sortingDirection === 1 && vm.selectedColumnForSort === col;
             };
 
@@ -446,10 +439,6 @@
                 return _.includes(eodTradeVenues, tradeVenue);
             }
 
-            function activateSorting(col){
-                vm.selectedColumnForSort = col;
-            }
-
             tool.setVmProperties({
                 scrollOptions: scrollOptions,
                 getPriceChangesCss: getPriceChangesCss,
@@ -473,7 +462,6 @@
                 pagination: defaultPagination,
                 showPagination: showPagination,
                 getListedStocks: getListedStocks,
-                isEodTradeVenue: isEodTradeVenue,
-                activateSorting: activateSorting
+                isEodTradeVenue: isEodTradeVenue
             });
         });
