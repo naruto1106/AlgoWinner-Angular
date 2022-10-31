@@ -1,5 +1,5 @@
 ﻿<section class="related-company-panel">
-    <h1 class="title-section">RELATED COMPANIES</h1>
+    <h1 class="title-section">Related Companies</h1>
     <div class="row-md-2 gap-20px">
         <div class="col-md-1" ng-repeat="relatedCompany in vm.relatedCompanies">
             <div class="white-box">
@@ -10,20 +10,20 @@
                         <agmc-rating rating-value="3.5" class="pull-left lh-20px"></agmc-rating>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="m-top-10px">
+                    <div class="m-top-10px align-end d-flex">
                         <h3 class="special-text no-margin pull-left m-right-10px" ng-if="!relatedCompany.CurrentPrice">N/A</h3>
                         <h3 class="special-text no-margin pull-left m-right-10px" ng-if="relatedCompany.CurrentPrice">{{relatedCompany.CurrentPrice | correctTickSizeDecimalPlacesWithCurrency:relatedCompany.Product.Currency:relatedCompany.Product.TradeVenueLoc}}</h3>
                         <h4 class="green-profit no-margin pull-left m-top-5px" ng-if="relatedCompany.CurrentPrice && relatedCompany.PercentPriceChange>=0">({{relatedCompany.PercentPriceChange | valuePercentOrDash:2}})</h4>
-                        <h4 class="red-loss no-margin pull-left m-top-5px" ng-if="relatedCompany.CurrentPrice && relatedCompany.PercentPriceChange<0">({{relatedCompany.PercentPriceChange | valuePercentOrDash:2}})</h4>
+                        <h4 class="green-profit no-margin pull-left m-top-5px" ng-if="relatedCompany.CurrentPrice && relatedCompany.PercentPriceChange<0">({{relatedCompany.PercentPriceChange | valuePercentOrDash:2}})</h4>
                         <div class="clearfix"></div>
                     </div>
                     <div class="logo" agms-image img-src="relatedCompany.Product"></div>
                 </div>
                 <div class="company-description">
-                    <div class="wrap-text f-16px" agmc-paragraph-clipper="relatedCompany.Description" max-line-count="5" is-clipping-active="!relatedCompany.isContentExpanded" is-clipping-required="relatedCompany.needClipping"></div>
+                    <div class="wrap-text f-16px paratext" agmc-paragraph-clipper="relatedCompany.Description" max-line-count="5" is-clipping-active="!relatedCompany.isContentExpanded" is-clipping-required="relatedCompany.needClipping"></div>
                     <div ng-if="relatedCompany.needClipping">
-                        <a ng-if="!relatedCompany.isContentExpanded" ng-click="relatedCompany.isContentExpanded=!relatedCompany.isContentExpanded">(Show More ...)</a>
-                        <a ng-if="relatedCompany.isContentExpanded" ng-click="relatedCompany.isContentExpanded=!relatedCompany.isContentExpanded">(Show Less ...)</a>
+                        <a class="paralink" ng-if="!relatedCompany.isContentExpanded" ng-click="relatedCompany.isContentExpanded=!relatedCompany.isContentExpanded">(Show More ...)</a>
+                        <a class="paralink" ng-if="relatedCompany.isContentExpanded" ng-click="relatedCompany.isContentExpanded=!relatedCompany.isContentExpanded">(Show Less ...)</a>
                     </div>
                 </div>
             </div>
