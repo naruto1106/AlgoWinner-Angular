@@ -3,7 +3,7 @@ agmNgModuleWrapper("agms.tgps")
         templateUrl: '/App/shared/tgps/tgps.popup.html',
         windowClass: 'agm-component-tradersgps-popup'
     },
-        ['sTgpsProductDefaultColumnService',
+        ['sProductDefaultColumnService',
             'sWatchlistService',
             'coreDataStorageService',
             'sTgpsScreenerService',
@@ -25,7 +25,7 @@ agmNgModuleWrapper("agms.tgps")
                     sProductService = dep.sProductService,
                     coreConfigService = dep.coreConfigService,
                     sTgpsScreenerService = dep.sTgpsScreenerService,
-                    sTgpsProductDefaultColumnService = dep.sTgpsProductDefaultColumnService,
+                    sProductDefaultColumnService = dep.sProductDefaultColumnService,
                     coreDataStorageService = dep.coreDataStorageService,
                     sWatchlistService = dep.sWatchlistService,
                     pChartService = dep.pChartService,
@@ -908,8 +908,8 @@ agmNgModuleWrapper("agms.tgps")
                     },
                     forceSorting: true,
                     columns: [
-                        sTgpsProductDefaultColumnService.defaultColumns.productName,
-                        sTgpsProductDefaultColumnService.defaultColumns.productSymbol,
+                        sProductDefaultColumnService.defaultColumns.productName,
+                        sProductDefaultColumnService.defaultColumns.productSymbol,
                         {
                             templateId: 'bigscreener/tgps.LastSignal',
                             title: "LAST SIGNAL",
@@ -973,8 +973,8 @@ agmNgModuleWrapper("agms.tgps")
                     },
                     forceSorting: true,
                     columns: [
-                        sTgpsProductDefaultColumnService.defaultColumns.productName,
-                        sTgpsProductDefaultColumnService.defaultColumns.productSymbol,
+                        sProductDefaultColumnService.defaultColumns.productName,
+                        sProductDefaultColumnService.defaultColumns.productSymbol,
                         {
                             templateId: 'bigscreener/tgps.Week',
                             title: "WEEK",
@@ -1137,8 +1137,8 @@ agmNgModuleWrapper("agms.tgps")
                     },
                     forceSorting: true,
                     columns: [
-                        sTgpsProductDefaultColumnService.defaultColumns.productName,
-                        sTgpsProductDefaultColumnService.defaultColumns.productSymbol,
+                        sProductDefaultColumnService.defaultColumns.productName,
+                        sProductDefaultColumnService.defaultColumns.productSymbol,
                         {
                             templateId: 'bigscreener/tgps.Month',
                             title: "MONTH",
@@ -1219,8 +1219,8 @@ agmNgModuleWrapper("agms.tgps")
                     },
                     forceSorting: true,
                     columns: [
-                        sTgpsProductDefaultColumnService.defaultColumns.productName,
-                        sTgpsProductDefaultColumnService.defaultColumns.productSymbol,
+                        sProductDefaultColumnService.defaultColumns.productName,
+                        sProductDefaultColumnService.defaultColumns.productSymbol,
                         //lastPriceColumnDef,
                         volumeColumnDef,
                         {
@@ -1260,8 +1260,8 @@ agmNgModuleWrapper("agms.tgps")
                     },
                     forceSorting: true,
                     columns: [
-                        sTgpsProductDefaultColumnService.defaultColumns.productName,
-                        sTgpsProductDefaultColumnService.defaultColumns.productSymbol,
+                        sProductDefaultColumnService.defaultColumns.productName,
+                        sProductDefaultColumnService.defaultColumns.productSymbol,
                         //{
                         //    templateId: 'bigscreener/tgps.EntryCriteria',
                         //    title: "ENTRY CRITERIA",
