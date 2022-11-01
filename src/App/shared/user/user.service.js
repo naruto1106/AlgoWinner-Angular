@@ -8,7 +8,7 @@
         tool.setServiceObjectProperties({
             GetProfile: coreServerCommunicationService.genGetFunctionWithNVar(userInfoPath + 'GetProfile'),
             GetDefaultTradeSettings: coreServerCommunicationService.genGetFunctionWithNVar(userInfoPath + 'GetDefaultTradeSettings'),
-            UpdateProfile: coreServerCommunicationService.genPostFunction(userInfoPath + "UpdateProfile"),
+            UpdateProfile: coreServerCommunicationService.genPostFunction('/mkapi/v1/Profile/UpdateProfile'),
             UpdateProfilePictureOnly: coreServerCommunicationService.genPostFunction(userInfoPath + "UpdateProfilePictureOnly"),
             ModifyDefaultTradeSettings: coreServerCommunicationService.genPostFunction(userInfoPath + "ModifyDefaultTradeSettings"),
             GetCountries: coreServerCommunicationService.genGetFunctionWithNVar(userInfoPath + 'GetCountries'),
