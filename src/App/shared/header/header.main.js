@@ -320,4 +320,13 @@
                 coreAuthInterceptor.checkOnKickedOut();
             });
         });
+
+
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 50) {
+               $('.main-header').addClass('scrollheader');
+            } else {
+               $('.main-header').removeClass('scrollheader');
+            }
+        });
     });

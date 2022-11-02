@@ -229,20 +229,22 @@
                             name: 'Earnings',
                             data: [],
                             type: 'column',
+                            color: '#86D3CD'
                         }, {
                             name: 'Earnings',
                             data: [],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#86D3CD',
                         }, {
                             name: 'IndustryAverage',
                             data: [],
                             type: 'column',
+                            color: '#184376'
                         }, {
                             name: 'Industry Average',
                             data: [],
                             type: 'line',
-                            color: '#434348',
+                            color: '#184376',
                         }
                     ]
                 },
@@ -258,20 +260,22 @@
                             name: 'Revenue',
                             data: [],
                             type: 'column',
+                            color: '#86D3CD',
                         }, {
                             name: 'Revenue',
                             data: [],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#86D3CD',
                         }, {
                             name: 'IndustryAverage',
                             data: [],
                             type: 'column',
+                            color: '#184376',
                         }, {
                             name: 'Industry Average',
                             data: [],
                             type: 'line',
-                            color: '#434348',
+                            color: '#184376',
                         }
                     ]
                 },
@@ -287,6 +291,7 @@
                             name: 'GrossProfit Margin',
                             data: [],
                             type: 'column',
+                            color: '#86D3CD',
                         }, {
                             name: 'GrossProfit Margin',
                             data: [],
@@ -296,11 +301,12 @@
                             name: 'IndustryAverage',
                             data: [],
                             type: 'column',
+                            color: '#184376',
                         }, {
                             name: 'Industry Average',
                             data: [],
                             type: 'line',
-                            color: '#434348',
+                            color: '#184376',
                         }
                     ]
                 },
@@ -321,15 +327,17 @@
                             data: [],
                             type: 'line',
                             color: '#006AD4',
+                            color: '#86D3CD',
                         }, {
                             name: 'IndustryAverage',
                             data: [],
                             type: 'column',
+                            color: '#184376',
                         }, {
                             name: 'Industry Average',
                             data: [],
                             type: 'line',
-                            color: '#434348',
+                            color: '#184376',
                         }
                     ]
                 },
@@ -345,20 +353,22 @@
                             name: 'PEG Ratio',
                             data: [],
                             type: 'column',
+                            color: '#86D3CD',
                         }, {
                             name: 'PEG Ratio',
                             data: [],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#86D3CD',
                         }, {
                             name: 'IndustryAverage',
                             data: [],
                             type: 'column',
+                            color: '#184376',
                         }, {
                             name: 'Industry Average',
                             data: [],
                             type: 'line',
-                            color: '#434348',
+                            color: '#184376',
                         }
                     ]
                 },
@@ -374,20 +384,22 @@
                             name: 'Debt to Equity Ratio',
                             data: [],
                             type: 'column',
+                            color: '#B2E9E4'
                         }, {
                             name: 'Debt to Equity Ratio',
                             data: [],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#86D3CD',
                         }, {
                             name: 'IndustryAverage',
                             data: [],
                             type: 'column',
+                            color: '#184376',
                         }, {
                             name: 'Industry Average',
                             data: [],
                             type: 'line',
-                            color: '#434348',
+                            color: '#184376'
                         }
                     ]
                 },
@@ -403,20 +415,22 @@
                             name: 'Z Score',
                             data: [],
                             type: 'column',
+                            color: '#86D3CD',
                         }, {
                             name: 'Z Score',
                             data: [],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#86D3CD',
                         }, {
                             name: 'IndustryAverage',
                             data: [],
                             type: 'column',
+                            color: '#184376'
                         }, {
                             name: 'Industry Average',
                             data: [],
                             type: 'line',
-                            color: '#434348',
+                            color: '#184376',
                         }
                     ]
                 },
@@ -432,20 +446,22 @@
                             name: 'Dividend Yield',
                             data: [],
                             type: 'column',
+                            color: '#86D3CD',
                         }, {
                             name: 'Dividend Yield',
                             data: [],
                             type: 'line',
-                            color: '#006AD4',
+                            color: '#86D3CD',
                         }, {
                             name: 'IndustryAverage',
                             data: [],
                             type: 'column',
+                            color: '#184376',
                         }, {
                             name: 'Industry Average',
                             data: [],
                             type: 'line',
-                            color: '#434348',
+                            color: '#184376',
                         }
                     ]
                 },

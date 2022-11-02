@@ -1,5 +1,6 @@
-﻿<section class="agm-component-product rel" ng-class="{'has-header':vm.hasHeader()}" ng-disabled="vm.showErrorMessage()">
-    <agmc-loading is-loading="vm.isLoading()"></agmc-loading>
+﻿
+<section class="test agm-component-product rel" ng-class="{'has-header':vm.hasHeader()}" ng-disabled="vm.showErrorMessage()">
+<agmc-loading is-loading="vm.isLoading()"></agmc-loading>
 
     <div ng-if="!vm.isLoading() && vm.showErrorMessage()" class="invalid-product">
         <h4 class="m-0px p-top-20px">No results found for this product: {{vm.symbol}}</h4>

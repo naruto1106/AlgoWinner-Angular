@@ -1,6 +1,6 @@
-﻿<section class="sentiment-panel">
+﻿<section class="sentiment-panel" id="sentimaental">
     <h1 class="title-section">Sentiment</h1>
-    <div class="row-md-4 gap-20px">
+    <div class="row-md-4 gap-20px sentimentscharts_outter">
         <div class="col-md-1">
             <div class="news-box sentimental">
                 <h1 class="table-chart-heading">News Sentiment</h1>
@@ -12,8 +12,8 @@
                     </tr>
                     <tr ng-repeat="newsSentimentObj in vm.newsSentiment">
                         <td>{{newsSentimentObj.NewsSentimentType}}</td>
-                        <td>{{newsSentimentObj.SentimentScore|number:2}}</td>
-                        <td>{{newsSentimentObj.Volume|number:0}}
+                        <td class="red-profit">{{newsSentimentObj.SentimentScore|number:2}} <span>positive</span></td>
+                        <td class="gray-profit">{{newsSentimentObj.Volume|number:0}}
                             <span ng-if="newsSentimentObj.IsVolumeBreakout" class="volume-icon" agmc-svg-loader
                                 svg-src="'/App/assets/icons/product/information.svg'" uib-tooltip="A Spike of Interest"
                                 tooltip-placement="top">
@@ -23,7 +23,7 @@
                 </table>
             </div>
             <div class="tp-box" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US' && vm.analystTargetPrice && vm.analystTargetPrice.AnalystTargetPrice">
-                <h1 class="table-chart-heading">Analyst Target Price</h1>
+                <h1 class="table-chart-heading">Analyst  Target Price</h1>
                 <div class="d-flex justify-between flex-wrap target_inner">
                     <div class="targrt-txt">
                         <div class="title">Target Price</div>
@@ -34,17 +34,17 @@
                         <div class="price green-price
                         
                         
-                        ">{{vm.productDetail.Product.Currency + " " + vm.analystTargetPrice.CurrentPrice}}</div>
+                        ">{{vm.productDetail.Product.Currency + " " + vm.analystTargetPrice.CurrentPrice}} <img src="/App/shared/image/newimages/arrow_up.svg"></div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
         </div>
-        <div class="col-md-2" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
-            <div class="white-box">
+        <div class="col-md-2 rental_outter" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
+            <div class="white-box m-bottom-25px">
                 <uib-tabset>
                     <uib-tab heading="Retail Interest" ng-click="vm.changeRetailActivityChartPeriod()">
-                        <div style="text-align: right; padding: 5px 5px 0 0;">
+                        <div class="sentimental_select">
                             <select ng-change="vm.changeRetailActivityChartPeriod()"
                                 ng-model="vm.selectedInterestPeriod"
                                 ng-options="m for m in vm.retailInterestPeriods"></select>

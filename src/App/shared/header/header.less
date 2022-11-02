@@ -583,13 +583,50 @@
     // }
     > header{
         box-shadow: 0 0 8px #0003;
-        &.scroll_header{
+        padding-left: 79px;
+        border-bottom: 1px solid #EAECF0;
+        &.scrollheader{
             position: fixed;
             left: 0;
             right: 0;
             width: 100%;
             z-index: 100000;
             background: #fff;
+            padding-bottom:0;
+            .inner_header {
+                padding: 0;
+                .right_header {
+                    padding-right: 30px;
+                }
+                .logo_outter {
+                    padding-left: 30px;
+                }
+            }
+            .header_btn {
+                display: block !important;
+            }
+            .notifiction{
+                display: none;;
+            }
+            .nav_menus {
+                order: 3;
+                width: 100%;
+                background: #184376;
+                margin: 24px 0 0;
+                padding: 0 24px;
+                li {
+                    padding: 12px 12px !important;
+                    &.active_nav{
+                        color:#fff !important;
+                    }
+                    a{
+                        color: #9BAEC6 !important;
+                        &:hover{
+                            color:#fff !important;
+                        }
+                    }
+                }
+            }
         }
         .inner_header {
         display: flex;
@@ -648,6 +685,7 @@
                 .header_btn {
                     padding: 10px 15px;
                     border-radius: 6px;
+                    display: none;
                     &.buy_btn{
                         background-color: #184376;
                     }

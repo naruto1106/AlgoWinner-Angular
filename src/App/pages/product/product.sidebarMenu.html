@@ -4,32 +4,32 @@
     <button class="special" ng-click="vm.toggleHeader()" uib-tooltip="Show/Hide Menu" tooltip-placement="right" ng-disabled="vm.showErrorMessage()">
         <img src="/App/shared/image/sidebar/side-logo.png">
     </button>
-    <button ng-click="vm.gotoSection('price-section')" uib-tooltip="Price" tooltip-placement="right" ng-disabled="vm.showErrorMessage()" class="side_active">
+    <button ng-click="vm.gotoSection('price-section')" uib-tooltip="Price" tooltip-placement="right" ng-disabled="vm.showErrorMessage()" class="side_active fill">
         <span agmc-svg-loader svg-src="'/App/shared/image/sidebar/icon1.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('chart-section')" uib-tooltip="Chart" tooltip-placement="right" ng-disabled="vm.showErrorMessage()">
+    <button ng-click="vm.gotoSection('chart-section')" uib-tooltip="Chart" tooltip-placement="right" ng-disabled="vm.showErrorMessage()" class="fill">
         <span agmc-svg-loader svg-src="'/App/shared/image/sidebar/icon2.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('sentiment-section')" uib-tooltip="Sentiment" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
+    <button ng-click="vm.gotoSection('sentiment-section')" uib-tooltip="Sentiment" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()" class="fill">
         <span agmc-svg-loader svg-src="'/App/shared/image/sidebar/icon3.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('fundamental-section')" uib-tooltip="Fundamentals" tooltip-placement="right" ng-if="vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
+    <button ng-click="vm.gotoSection('fundamental-section')" uib-tooltip="Fundamentals" tooltip-placement="right" ng-if="vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()" class="stroke">
         <span agmc-svg-loader svg-src="'/App/shared/image/sidebar/icon4.svg'"></span>
     </button>    
-    <button ng-click="vm.gotoSection('overview-section')" uib-tooltip="Overview" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
+    <button ng-click="vm.gotoSection('overview-section')" uib-tooltip="Overview" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()" class="stroke">
         <span agmc-svg-loader svg-src="'/App/shared/image/sidebar/icon5.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('prospects-section')" ng-if="false && !vm.isWarrants()" uib-tooltip="Prospect" tooltip-placement="right" ng-disabled="vm.showErrorMessage()">
+    <button ng-click="vm.gotoSection('prospects-section')" ng-if="false && !vm.isWarran ts()" uib-tooltip="Prospect" tooltip-placement="right" ng-disabled="vm.showErrorMessage()" class="stroke">
         <span agmc-svg-loader svg-src="'/App/shared/image/sidebar/icon6.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('competitors-section')" uib-tooltip="Related Companies" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.showRelatedCompanies() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
+    <button ng-click="vm.gotoSection('competitors-section')" uib-tooltip="Related Companies" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.showRelatedCompanies() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()" class="stroke">
         <span agmc-svg-loader svg-src="'/App/shared/image/sidebar/icon7.svg'"></span>
     </button>
     <div class="footer-icons">
-        <button>
+        <button class="fill">
             <span agmc-svg-loader svg-src="'/App/shared/image/sidebar/icon8.svg'"></span>
         </button>
-        <button>
+        <button class="stroke">
             <span agmc-svg-loader svg-src="'/App/shared/image/sidebar/icon9.svg'"></span>
         </button>
         <div class="divider"></div>

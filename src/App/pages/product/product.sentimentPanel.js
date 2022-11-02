@@ -39,7 +39,8 @@
 
                     series: [{
                         name: name,
-                        data: chartData.data
+                        data: chartData.data,
+                        color: '#446791'
                     }],
 
                     responsive: {
@@ -64,6 +65,7 @@
 
                     chart: {
                         type: 'column'
+                        
                     },
 
                     credits: {
@@ -94,7 +96,8 @@
 
                     series: [{
                         name: 'Analyst Rating',
-                        data: chartData.analyst_rating
+                        data: chartData.analyst_rating,
+                        color: '#13365E',
                     }],
 
                     responsive: {
@@ -128,7 +131,7 @@
                         }]
                     }
                 });
-                chart.setSize(null);
+                chart.setSize(null, 400);
             }
 
             function changeRetailActivityChartPeriod() {

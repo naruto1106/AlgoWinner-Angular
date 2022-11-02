@@ -20,18 +20,19 @@
                         Upcoming Earnings
                     </button>
                 </div>
-                <div class="news-content" ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)">
+                <div class="news-content d-flex justify-between align_center" ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)">
                     <div class="news-title">{{news.Title}}</div>
                     <span class="special-text news-date">
                         {{news.PublishedTime | date:'shortTime'}} {{news.PublishedTime | date:'mediumDate'}}
                     </span>
-                    <div class="clearfix"></div>
+                    <!-- <div class="clearfix"></div> -->
                 </div>
                 <div class="divider"></div>
                 <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
-            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
-            first-text="&laquo;" last-text="&raquo;" max-size="10"
-            num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul>
+                    class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="&laquo;" last-text="&raquo;" max-size="10"
+                    num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                </ul>
             </div>
        
         <!-- <div class="news-content" ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)">

@@ -173,14 +173,15 @@
                         {
                             name: "Volume",
                             data: volumes,
-                            color: '#DDD',
+                            color: '#86D3CD',
                             type: 'column',
-                            yAxis: 1
+                            yAxis: 1,
+                            borderRadius: {topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0},
                         },
                         {
                             name: "Price",
                             data: prices,
-                            color: '#006AD4',
+                            color: '#184376',
                             type: 'line',
                             yAxis: 0
                         }
