@@ -122,6 +122,5 @@
             };
         },
         {
-            filterDescription: '=',
             displayedChartSelectedItemInfo: '='
         });
