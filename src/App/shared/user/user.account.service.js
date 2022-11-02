@@ -11,7 +11,7 @@
             ForgotPassword: coreServerCommunicationService.genPostFunction(userInfoAccountPath + "ForgotPassword"),
             ResetPassword: coreServerCommunicationService.genPostFunction(userInfoAccountPath + "ResetPassword"),
             SendConfirmEmailExpiredToken: coreServerCommunicationService.genPostFunction(userInfoAccountPath + "SendConfirmEmailExpiredToken"),
-            ResetUserNameAndPassword: coreServerCommunicationService.genPostFunction(userInfoAccountPath + "ResetUserNameAndPassword"),
+            ResetUserNameAndPassword: coreServerCommunicationService.genPostFunction("/mkapi/v1/Web/ResetUserNameAndPassword"),
             VerifyEmail: coreServerCommunicationService.genGetFunctionWithNVar(userInfoAccountPath + 'VerifyEmail', function (args) {
                 return {
                     email: args[0]
