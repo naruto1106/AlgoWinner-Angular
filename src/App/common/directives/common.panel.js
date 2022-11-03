@@ -15,3 +15,9 @@
         function (vm, dep, tool) {
 
         });
+
+        $('.bar_icon').click(function(){
+            debugger
+            $('.static-sidebar').removeClass('test')
+            $(this).addClass('test');
+        });

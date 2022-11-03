@@ -16,14 +16,18 @@
         <div class="clearfix"></div>
         <div class="p-20px" ng-if="!vm.isWarrants()">
             <div class="row-md-2 gap-20px" ng-if="vm.TradeVenueLoc == 'US'">
-                <div class="col-md-1">
+                <div class="col-md-1 overview_">
                     <agmp-product-company-overview-panel id="overview-section"></agmp-product-company-overview-panel>
-                    <agmp-product-related-company-panel id="competitors-section" ng-if="vm.showRelatedCompanies()"></agmp-product-related-company-panel>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1 news_">
                     <agmp-product-news-panel id="news-section"></agmp-product-news-panel>
                 </div>
+               
+               
                 <div class="clearfix"></div>
+            </div>
+            <div class="test">
+                <agmp-product-related-company-panel id="competitors-section" ng-if="vm.showRelatedCompanies()"></agmp-product-related-company-panel>
             </div>
         </div>
     </div>
