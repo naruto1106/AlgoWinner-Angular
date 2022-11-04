@@ -23,18 +23,18 @@
                 </table>
             </div>
             <div class="tp-box" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US' && vm.analystTargetPrice && vm.analystTargetPrice.AnalystTargetPrice">
-                <h1 class="table-chart-heading">Analyst  Target Price</h1>
+                <h1 class="table-chart-heading">Analyst Target Price</h1>
                 <div class="d-flex justify-between flex-wrap target_inner">
                     <div class="targrt-txt">
                         <div class="title">Target Price</div>
-                        <div class="price">{{vm.productDetail.Product.Currency + " " + vm.analystTargetPrice.AnalystTargetPrice}}</div>
+                        <div class="price">{{vm.productDetail.Product.TradeVenueLoc +"$" + " " + vm.analystTargetPrice.AnalystTargetPrice}}</div>
                     </div>
                     <div class="targrt-txt">
                         <div class="title">Current Price</div>
                         <div class="price green-price
                         
                         
-                        ">{{vm.productDetail.Product.Currency + " " + vm.analystTargetPrice.CurrentPrice}} <img src="/App/shared/image/newimages/arrow_up.svg"></div>
+                        ">{{vm.productDetail.Product.TradeVenueLoc+"$" + " " + vm.analystTargetPrice.CurrentPrice}} <img src="/App/shared/image/newimages/arrow_up.svg"></div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
