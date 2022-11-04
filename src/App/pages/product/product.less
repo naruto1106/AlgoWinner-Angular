@@ -226,7 +226,24 @@
 
     .sentiment-panel {
         margin-bottom: -40px;
-
+         .analystic_heading{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border: 1px solid #EAECF0;
+            h2 {
+                color: #184376;
+                font-size: 20px;
+                font-weight: 700;
+                margin: 0;
+                line-height: 30px;
+            }
+            h1{
+                padding: 0 !important;
+                border: unset !important;
+            }
+        }
         .sentimentscharts_outter {
             margin: 0 -15px;
         }
@@ -1598,13 +1615,11 @@
     
 }
 @media(max-width:1024px){
-    /************************1024 *******************/
-    .agm-component-product .price_boxes_outter .price_boxes {
-        width: 50%;
-        margin: 0 0 20px;
-        padding: 0 10px 0;
-    }
+
+     
     .agm-component-product {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
         .fundamental-panel {
             .income_tabbing_outter {
                 overflow: auto;
@@ -1621,14 +1636,17 @@
                 padding: 7px 10px;
             }
         }
-
+        .price_boxes_outter {
+            .price_boxes {
+                width: 50%;
+                margin: 0 0 20px;
+                padding: 0 10px 0;
+            }
+        }
     }
 }
 @media(max-width:767px) {
-    .agm-component-product{
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
+    
     .agm-component-product .price_boxes_outter .price_boxes {
         width: 1000%;
     }

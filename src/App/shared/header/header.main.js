@@ -329,6 +329,19 @@
                $('.main-header').removeClass('scrollheader');
             }
         });
+        
+$(document).ready(function(){
+
+    $('.bar_icon').click(function (e) {
+    
+      if ($('.agm-component-product').hasClass("sidebar_slide")) {
+        $('.agm-component-product').removeClass("sidebar_slide");
+      }
+      else {
+        $('.agm-component-product').addClass("sidebar_slide");
+      }
+    });
+  });
     });
 
 

@@ -6,14 +6,14 @@
                 <h1 class="table-chart-heading">News Sentiment</h1>
                 <table border="1" class="sentiment-table">
                     <tr>
-                        <th>&nbsp;</th>
+                        <th>Time</th>
                         <th>Score</th>
-                        <th>Count</th>
+                        <th>Volume</th>
                     </tr>
                     <tr ng-repeat="newsSentimentObj in vm.newsSentiment">
                         <td>{{newsSentimentObj.NewsSentimentType}}</td>
                         <td class="red-profit">{{newsSentimentObj.SentimentScore|number:2}} <span>positive</span></td>
-                        <td class="gray-profit">{{newsSentimentObj.Volume|number:0}}
+                        <td class="gray-profit">{{newsSentimentObj.Volume|number:2}}
                             <span ng-if="newsSentimentObj.IsVolumeBreakout" class="volume-icon" agmc-svg-loader
                                 svg-src="'/App/assets/icons/product/information.svg'" uib-tooltip="A Spike of Interest"
                                 tooltip-placement="top">
@@ -64,7 +64,10 @@
         </div>
         <div class="col-md-1 anyalstic_chart" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
             <div class="white-box">
-                <h1 class="table-chart-heading">Analyst Rating</h1>
+                <div class="analystic_heading">
+                    <h1 class="table-chart-heading">Analyst Rating</h1>
+                    <h2>2.3 <img src="/App/shared/image/newimages/star.svg"></h2>
+                </div>
                 <div class="h-30px"></div>
                 <div id="analyst_rating"></div>
             </div>

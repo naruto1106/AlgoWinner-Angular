@@ -33,8 +33,12 @@
                     },
 
                     legend: {
-                        layout: 'horizontal',
-                        align: 'center'
+                        align: 'right',
+                        verticalAlign: 'top',
+                        symbolRadius: 15,
+                        symbolHeight:8,
+                        symbolWidth: 0,
+                        itemStyle: {"color": "#667085", "fontSize": "13px", "fontWeight": "500"}
                     },
 
                     series: [{
@@ -86,7 +90,15 @@
                             x: -10
                         }
                     },
-
+                    legend: {
+                        // align: 'right',
+                        // verticalAlign: 'top',
+                        // layout: 'horizontal',
+                        // symbolRadius: 15,
+                        // symbolHeight:10,
+                        // symbolWidth: 10
+                        enabled: false
+                    },
                     yAxis: {
                         allowDecimals: false,
                         title: {

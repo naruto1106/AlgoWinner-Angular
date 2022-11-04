@@ -581,10 +581,15 @@
 
     // .confirm-email-popup {
     // }
+
     > header{
         box-shadow: 0 0 8px #0003;
         padding-left: 79px;
         border-bottom: 1px solid #EAECF0;
+        .nav_menus {
+            transition: transform 0.5s;
+            transform: translateY(0%);
+        }
         .mobele_version {
             display: none;
         }
@@ -608,18 +613,35 @@
                     padding-left: 30px;
                 }
             }
-            .header_btn {
-                display: block !important;
+            .inner_header{
+                .right_header {
+                    .header_btn {
+                        opacity: 1;
+                        overflow: visible;
+                        visibility: visible;
+                        transform: unset;
+                        width: 98px;
+                        padding: 10px 15px;
+                        transition: transform 0.5s;
+                    }
+                }
             }
             .notifiction{
-                display: none;;
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.5s;
+                transform: translateY(-138%);
+                width: 0;
+                padding: 0;
             }
             .nav_menus {
                 order: 3;
                 width: 100%;
                 background: #184376;
-                margin: 24px 0 0;
+                margin: 0;
                 padding: 0 24px;
+                transition: transform 0.5s;
+                transform: translateY(50%);
                 li {
                     padding: 12px 12px !important;
                     &.active_nav{
@@ -676,7 +698,12 @@
                 .header_btn {
                     padding: 10px 15px;
                     border-radius: 6px;
-                    display: none;
+                    overflow: hidden;
+                    visibility: hidden;
+                    transition: transform 0.5s;
+                    transform: translateY(-160%);
+                    width: 0;
+                    padding: 0;
                     &.buy_btn{
                         background-color: #184376;
                     }
@@ -697,6 +724,7 @@
             border-radius: 6px;
             padding: 11px 12px;
             position: relative;
+            transition: transform 0.5s;
             span {
                 display: block;
                 background: #F04438;
@@ -743,14 +771,14 @@
     
 }
 
-@media(max-width:767px){
+@media(max-width:1024px){
     .agms-header{
         > header{
-        padding-left: 0;
+            padding-left: 0;
         
-        .mobele_version {
-            display: block;
-        }
+            .mobele_version {
+                display: block;
+            }
             .nav_menus {
                 display: none;
             }
@@ -814,8 +842,25 @@
                     display: none;
                 }
             }
+            
         }
     }
+
+        .static-sidebar{
+             transform: translateX(-100%);
+            width: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        .sidebar_slide{
+            .static-sidebar{
+                transition: all 0.5s;
+                opacity: 1;
+                width: 80px;
+                overflow: visible;
+                transform: unset;
+            }
+        }
 
 }
 
