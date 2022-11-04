@@ -1418,9 +1418,6 @@
 
 
 @media(max-with:1280px) {
-    .agm-component-product .price_txt_rght img {
-        width: 69px;
-    }
 
     .agm-component-product .price_boxes_outter .price_boxes .price_boxes_inner .price_txt_lft h3 {
         font-size: 22px;
@@ -1438,55 +1435,13 @@
         padding: 7px 12px;
     }
 
-    .agm-component-product .sentiment-panel .tp-box .target_inner .price {
-        font-size: 16px;
-    }
+
 
     .agm-component-product .price.green-price.ng-binding img {
         width: 16px;
     }
 
-    .agm-component-product .fundamental-panel .inner_box_txt .radio_tab_body table tbody tr td {
-        padding: 37px 9px;
-    }
-
-    .agm-component-product .news-panel li.pagination-first:nth-child(1) a {
-        height: 29px;
-        width: 93px;
-    }
-
-    .agm-component-product .news-panel li.pagination-first:nth-child(1) a:after {
-        content: 'Previous';
-        font-size: 13px;
-        background-position: left 12px top 9px;
-        background-size: 11px;
-    }
-
-    .agm-component-product .news-panel ul li a {
-        height: 29px;
-        width: 29px;
-    }
-
-    .agm-component-product .agm-component-product .news-panel li.pagination-last:last-child a:after {
-        content: 'Next';
-        font-size: 13px;
-        background: url(/App/shared/image/newimages/leftarrow.svg);
-        background-position: right 12px top 8px;
-        background-size: 11px;
-    }
-
-    .agm-component-product .news-panel li.pagination-last:last-child a {
-        height: 32px;
-    }
-
-    .agm-component-product .news-panel .news-content .news-title {
-        font-size: 13px;
-    }
-
-}
-
-@media(max-width:1200px) {
-    .agm-component-product .price_boxes_outter {
+    .agm-component-product {
         .price_boxes {
             .price_boxes_inner {
                 &.today_range {
@@ -1517,34 +1472,130 @@
                 }
             }
         }
+        .news-panel {
+            li{
+                &.pagination-last:last-child {
+                    a {
+                        height: 32px;
+                    }
+                }
+                &.pagination-last:last-child{
+                    a:after {
+                        content: 'Next';
+                        font-size: 13px;
+                        background: url(/App/shared/image/newimages/leftarrow.svg);
+                        background-position: right 12px top 8px;
+                        background-size: 11px;
+                    }
+                }
+                a {
+                    height: 29px;
+                    width: 29px;
+                }
+                &.pagination-first:nth-child(1) a {
+                    height: 29px;
+                    width: 93px;
+                }
+                &.pagination-first:nth-child(1) {
+                    a:after {
+                        content: 'Previous';
+                        font-size: 13px;
+                        background-position: left 12px top 9px;
+                        background-size: 11px;
+                    }
+                }
+            }
+            .news-content {
+                .news-title {
+                    font-size: 13px;
+                }
+            }
+            
+        
+        .fundamental-panel {
+            .inner_box_txt{
+                .radio_tab_body table {
+                    tbody tr td {
+                        padding: 37px 9px;
+                    }
+                }
+            }
+        }
+        .sentiment-panel {
+            .tp-box {
+                .target_inner{
+                    .price {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
     }
-    .agm-component-product .price_boxes_outter .price_boxes .price_boxes_inner.today_range h3 {
-        font-size: 16px !important;
     }
-    .agm-component-product .new_sentitable {
-        width: 100% !important;
+
+}
+
+@media(max-width:1200px) {
+    .agm-component-product {
+        .price_boxes_outter {
+            .price_boxes {
+                .price_boxes_inner {
+                    &.today_range {
+                        h3 {
+                            font-size: 18px !important;
+                        }
+                    }
+
+                    .price_txt_lft {
+                        h3 {
+                            font-size: 18px;
+                        }
+                    }
+
+                    .price_btn {
+                        padding: 7px 11px;
+
+                        a {
+                            color: #F2F6FC;
+                            font-size: 13px;
+                        }
+                    }
+
+                    .price_txt_rght {
+                        img {
+                            width: 78px;
+                        }
+                    }
+                }
+                
+            }
+        }
+        .new_sentitable {
+            width: 100% !important;
+        }
+        .anyalstic_chart {
+            width: 50% !important;
+        }
+        .fundamental-panel {
+            .inner_box_fundamental {
+                width: 100%;
+                margin: 0 0 20px;
+            }
+        }
+        .news_ {
+            width: 100% !important;
+        }
+        .overview_ {
+            width: 100% !important;
+        }
     }
-    .agm-component-product .anyalstic_chart {
-        width: 50% !important;
-    }
-    .agm-component-product .fundamental-panel .inner_box_fundamental {
-        width: 100%;
-         margin: 0 0 20px;
-    }
-    .agm-component-product .news_ {
-        width: 100% !important;
-    }
-    .agm-component-product .overview_ {
-        width: 100% !important;
-    }
+
     body.mode-3 {
-        min-width: unset !important;
-        overflow-x: unset !important;
-    }
-
+            min-width: unset !important;
+            overflow-x: unset !important;
+        }
     
-
-
 }
 @media(max-width:1024px){
     /************************1024 *******************/
@@ -1626,6 +1677,29 @@
             }
         }
          .news-panel{
+            li{
+                
+                &.pagination-first:nth-child(1) {
+                    a{
+                        width: 32px !important;
+                        &:after {
+                            font-size:0;
+                            background-position: left 6px top 6px;
+                            padding-left: 0;
+                        }
+                    }
+                }
+                &.pagination-last:last-child {
+                    a {
+                        width: 32px !important;
+                        &:after {
+                             background-position: right 8px top 7px;
+                            padding-right: 0;
+                            font-size:0;
+                        }
+                    }
+                }
+            }
             .news-content {
                 flex-wrap: wrap;
                     .news-title {
@@ -1685,6 +1759,27 @@
             }
         }
     }
+    .news-panel {
+        ul {
+            li {
+                a{
+                    height: 25px !important;
+                    width: 25px !important;
+                }
+                &.pagination-first:nth-child(1) {
+                    a {
+                        height: 25px !important;
+                    }
+                }
+                &.pagination-last:last-child {
+                    a {
+                        height: 25px !important;
+                       
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media(max-width:414px){
@@ -1707,5 +1802,15 @@
             }
         }
      }   
+    .news-panel {
+            ul{
+                li{
+                    a {
+                        height: 23px !important;
+                        width: 18px !important;
+                    }
+                }
+            }
+    }
 }
 }
