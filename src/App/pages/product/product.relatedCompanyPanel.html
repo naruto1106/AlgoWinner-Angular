@@ -1,7 +1,7 @@
-﻿<section class="related-company-panel">
+﻿<section class="related-company-panel" id="one">
     <h1 class="title-section">Related Companies</h1>
-    <div class="row-md-2 gap-20px">
-        <div class="col-md-1" ng-repeat="relatedCompany in vm.relatedCompanies">
+    <div class="row-md-2 gap-20px related_outter">
+        <div class="col-md-4" ng-repeat="relatedCompany in vm.relatedCompanies">
             <div class="white-box">
                 <div class="company-header rel">
                     <h1 class="ellipsis-nowrap" uib-tooltip="{{relatedCompany.Name}}">{{relatedCompany.Product.Symbol}} ({{relatedCompany.Name}})</h1>

@@ -187,6 +187,15 @@
                         }
                     },
 
+                    legend: {
+                        align: 'right',
+                        verticalAlign: 'top',
+                        symbolRadius: 15,
+                        symbolHeight:8,
+                        symbolWidth: 0,
+                        itemStyle: {"color": "#667085", "fontSize": "13px", "fontWeight": "500"}
+                    },
+
                     yAxis: {
                         allowDecimals: true,
                         title: {
@@ -356,20 +365,20 @@
                     ]
                 },
                 {
-                    name: 'PEG Ratio',
-                    key: 'PegRatio',
+                    name: 'Earnings',
+                    key: 'Earnings',
                     container: 'peg',
                     selectedType: 'annually',
                     categories: [],
                     grothTable: [],
                     seriesArr: [
                         {
-                            name: 'PEG Ratio',
+                            name: 'Earnings',
                             data: [],
                             type: 'column',
                             color: '#86D3CD',
                         }, {
-                            name: 'PEG Ratio',
+                            name: 'Earnings',
                             data: [],
                             type: 'line',
                             color: '#86D3CD',
