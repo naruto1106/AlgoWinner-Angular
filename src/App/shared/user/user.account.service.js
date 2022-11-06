@@ -7,10 +7,10 @@
 
         tool.setServiceObjectProperties({
             SetShowHelpOnInit: coreServerCommunicationService.genPostFunction(userInfoPath + "SetShowHelpOnInit"),
-            PasswordExpiredRenewal: coreServerCommunicationService.genPostFunction(userInfoAccountPath + "PasswordExpiredRenewal"),
-            ForgotPassword: coreServerCommunicationService.genPostFunction(userInfoAccountPath + "ForgotPassword"),
+            PasswordExpiredRenewal: coreServerCommunicationService.genPostFunction("/mkapi/v1/Web/PasswordExpiredRenewal"),
+            ForgotPassword: coreServerCommunicationService.genPostFunction("/mkapi/v1/Web/ForgotPassword"),
             ResetPassword: coreServerCommunicationService.genPostFunction(userInfoAccountPath + "ResetPassword"),
-            SendConfirmEmailExpiredToken: coreServerCommunicationService.genPostFunction(userInfoAccountPath + "SendConfirmEmailExpiredToken"),
+            SendConfirmEmailExpiredToken: coreServerCommunicationService.genPostFunction("/mkapi/v1/Web/SendConfirmEmailExpiredToken"),
             ResetUserNameAndPassword: coreServerCommunicationService.genPostFunction("/mkapi/v1/Web/ResetUserNameAndPassword"),
             VerifyEmail: coreServerCommunicationService.genGetFunctionWithNVar(userInfoAccountPath + 'VerifyEmail', function (args) {
                 return {
