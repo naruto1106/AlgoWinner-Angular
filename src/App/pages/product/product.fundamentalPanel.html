@@ -10,13 +10,13 @@
 
                         <button class="tabing_rt_btn"
                             ng-class="{'mini-filled-blue': barChartObj.selectedType === 'annually', 'mini-hollow-blue': barChartObj.selectedType !== 'annually'}"
-                            style="margin-right: 5px" ng-click="vm.setSelectedType($index, 'annually')"
+                            ng-click="vm.setSelectedType($index, 'annually')"
                             class="mini-filled-blue">
                             Annually
                         </button>
                         <button class="tabing_rt_btn"
                             ng-class="{'mini-filled-blue': barChartObj.selectedType == 'quarter', 'mini-hollow-blue': barChartObj.selectedType !== 'quarter'}"
-                            style="margin-right: 5px" ng-click="vm.setSelectedType($index, 'quarter')"
+                            ng-click="vm.setSelectedType($index, 'quarter')"
                             class="mini-hollow-blue">
                             Quarterly
 
@@ -322,7 +322,7 @@
 
 
 
-        <div ng-if="vm.selectedTable === 'stats'">
+        <div ng-if="vm.selectedTable === 'stats'" class="statics"> 
             <table class="table-large">
                 <thead>
                     <td>Currency: {{vm.productDetail.Product.Currency}}</td>
