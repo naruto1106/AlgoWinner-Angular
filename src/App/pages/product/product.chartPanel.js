@@ -176,7 +176,7 @@
                             color: '#86D3CD',
                             type: 'column',
                             yAxis: 1,
-                            borderRadius: {topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0},
+                            borderRadius: 6,
                         },
                         {
                             name: "Price",
@@ -256,7 +256,7 @@
                                     "</div>";
                             }
                         },
-                    }
+                    },
                 };
             }
 
@@ -295,6 +295,7 @@
                     commonLocationHistoryService.goToNewTab('/Home/Inside#/charts/' + pProductPageService.currentProduct.TradeVenueLoc + "/" + pProductPageService.currentProduct.Symbol);
                 }
             }
+            
 
             tool.initialize(function () {
                 tool.setVmProperties({

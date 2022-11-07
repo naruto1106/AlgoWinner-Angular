@@ -22,23 +22,20 @@
 
                     </div>
                 </div>
-
                 <div class="chart_dropdown">
-                    <select>
-                        <option>5 year growth</option>
-                        <option>1 year growth</option>
-                        <option>3 year growth</option>
+                    <select ng-model="vm.grothTableObDj">
+                        <option ng-repeat="grothTableObj in barChartObj.grothTable" value="{{grothTableObj.avg}}">{{grothTableObj.disYr}}</option>
                     </select>
                     <div class="chart_dropdown_btn">
-                        <a href="#">122% <img src="/App/shared/image/newimages/uparrow.svg"> <span>Avg.10%</span></a>
+                        <a href="#">122% <img src="/App/shared/image/newimages/uparrow.svg"> <span>Avg.{{vm.grothTableObDj}}%</span></a>
                     </div>
                 </div>
 
-                <table border="1" class="bar-chart-table">
+                <!-- <table border="1" class="bar-chart-table">
                     <tr ng-repeat="grothTableObj in barChartObj.grothTable">
                         <td>{{grothTableObj}}</td>
                     </tr>
-                </table>
+                </table> -->
                 <div id={{barChartObj.container}}></div>
             </div>
         </div>
@@ -49,14 +46,16 @@
             <div class="radio_outter inner_box_txt">
                 <h1 class="table-chart-heading">Price to Book Radio</h1>
                 <div class="radio_tabbing">
-                    <button class="tabbibng_btn tabbing_active">
+                    <button class="tabbibng_btn" ng-class="{'tabbing_active': vm.selectedTableChartOne === 'chartview1', 'mini-hollow-blue': vm.selectedTableChartOne != 'chartview1'}"
+                    ng-click="vm.setSelectedChartOne('chartview1')">
                         Chart View
                     </button>
-                    <button class="tabbibng_btn">
+                    <button class="tabbibng_btn"  ng-class="{'tabbing_active': vm.selectedTableChartOne === 'tableveiw1', 'mini-hollow-blue': vm.selectedTableChartOne != 'tableveiw1'}"
+                    ng-click="vm.setSelectedChartOne('tableveiw1')">
                         Table View
                     </button>
                 </div>
-                <div class="radio_tab_body">
+                <div ng-if="vm.selectedTableChartOne === 'chartview1'" class="radio_tab_body">
                     <table>
                         <thead>
                             <tr>
@@ -84,20 +83,52 @@
                         </tbody>
                     </table>
                 </div>
+                <div ng-if="vm.selectedTableChartOne === 'tableveiw1'" class="radio_tab_body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>AAPL (Display<br> stock symbol)</th>
+                                <th>Industry <br> Average</th>
+                                <th>Comparison</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100 year growth</td>
+                                <td>223%</td>
+                                <td>223%</td>
+                                <td class="green-feild">TTT by 111% 
+                                    <img src="/App/shared/image/newimages/plus.svg">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>332 year growth</td>
+                                <td>211%</td>
+                                <td>33%</td>
+                                <td class="red-feild">WWWW by 5% 
+                                    <img src="/App/shared/image/newimages/minus.svg">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="inner_box_fundamental">
             <div class="profit_outter inner_box_txt">
                 <h1 class="table-chart-heading">Net Profit Margin</h1>
                 <div class="radio_tabbing">
-                    <button class="tabbibng_btn tabbing_active">
+                    <button class="tabbibng_btn" ng-class="{'tabbing_active': vm.selectedTableChart === 'chartview', 'mini-hollow-blue': vm.selectedTableChart != 'chartview'}"
+                    ng-click="vm.setSelectedChart('chartview')" >
                         Chart View
                     </button>
-                    <button class="tabbibng_btn">
+                    <button class="tabbibng_btn"  ng-class="{'tabbing_active': vm.selectedTableChart === 'tableveiw', 'mini-hollow-blue': vm.selectedTableChart != 'tableveiw'}"
+                    ng-click="vm.setSelectedChart('tableveiw')">
                         Table View
                     </button>
                 </div>
-                <div class="radio_tab_body">
+                <div ng-if="vm.selectedTableChart === 'chartview'" class="radio_tab_body">
                     <table>
                         <thead>
                             <tr>
@@ -112,15 +143,47 @@
                                 <td>1 year growth</td>
                                 <td>10%</td>
                                 <td>5%</td>
-                                <td class="green-feild">Outperform by 5% <img
-                                        src="/App/shared/image/newimages/plus.svg"></td>
+                                <td class="green-feild">Outperform by 5% 
+                                    <img src="/App/shared/image/newimages/plus.svg">
+                                </td>
                             </tr>
                             <tr>
                                 <td>3 year growth</td>
                                 <td>5%</td>
                                 <td>10%</td>
-                                <td class="red-feild">Underperform by 5% <img
-                                        src="/App/shared/image/newimages/minus.svg"></td>
+                                <td class="red-feild">Underperform by 5% 
+                                    <img src="/App/shared/image/newimages/minus.svg">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-if="vm.selectedTableChart === 'tableveiw'" class="radio_tab_body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>AAPL (Display<br> stock symbol)</th>
+                                <th>Industry <br> Average</th>
+                                <th>Comparison</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>3 year growth</td>
+                                <td>100%</td>
+                                <td>445%</td>
+                                <td class="green-feild">DEEE by 5% 
+                                    <img src="/App/shared/image/newimages/plus.svg">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8 year</td>
+                                <td>35%</td>
+                                <td>222%</td>
+                                <td class="red-feild">WEE by 5% 
+                                    <img src="/App/shared/image/newimages/minus.svg">
+                                </td>
                             </tr>
                         </tbody>
                     </table>
