@@ -52,7 +52,7 @@
                         <div id="retail_interest"></div>
                     </uib-tab>
                     <uib-tab heading="Retail Sentiment" ng-click="vm.changeRetailSentimentChartPeriod()">
-                        <div style="text-align: right; padding: 5px 5px 0 0;">
+                        <div class="sentimental_select">
                             <select ng-change="vm.changeRetailSentimentChartPeriod()"
                                 ng-model="vm.selectedSentimentPeriod"
                                 ng-options="m for m in vm.retailSentimentPeriods"></select>
