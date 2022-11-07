@@ -11,49 +11,41 @@
             class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
             first-text="&laquo;" last-text="&raquo;" max-size="10"
             num-pages="vm.models.numPages" ng-show="vm.showPagination()"></ul> -->
-            <div class="white-box">
-                <div class="radio_tabbing">
-                    <button class="tabbibng_btn tabbing_active">
-                        News
-                    </button>
-                    <button class="tabbibng_btn">
-                        Upcoming Earnings
-                    </button>
-                
-                    
-                      
+        <div class="white-box">
+            <div class="radio_tabbing">
+                <button class="tabbibng_btn " ng-click="vm.setSelectedTab('news')" ng-class="{'tabbing_active': vm.selectedTab === 'news'}">
+                    News
+                </button>
+                <button class="tabbibng_btn " ng-click="vm.setSelectedTab('upcomingEarning')" ng-class="{'tabbing_active': vm.selectedTab === 'upcomingEarning'}">
+                    Upcoming Earnings
+                </button>
+            </div>
+            <div class="news-content d-flex justify-between align_center"
+                ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)"
+                ng-if="vm.selectedTab === 'news'">
+                <div class="news-title">{{news.Title}}</div>
+                <span class="special-text news-date">
+                    {{news.PublishedTime | date:'shortTime'}} {{news.PublishedTime | date:'mediumDate'}}
+                </span>
+                <!-- <div class="clearfix"></div> -->
+            </div>
+            <div class="divider"></div>
+            <ul ng-if="vm.selectedTab === 'news'" uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                last-text="&raquo;" max-size="10" num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+            </ul>
+            <div class="upcoming_event" ng-if="vm.selectedTab === 'upcomingEarning'">
+                <div class="upcoming_event_inner release_date">
+                    <h4>Release Date</h4>
+                    <h2>Aug 31, 2022</h2>
                 </div>
-
-
-
-                <div class="news-content d-flex justify-between align_center" ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)">
-                    <div class="news-title">{{news.Title}}</div>
-                    <span class="special-text news-date">
-                        {{news.PublishedTime | date:'shortTime'}} {{news.PublishedTime | date:'mediumDate'}}
-                    </span>
-                    <!-- <div class="clearfix"></div> -->
-
-                    
-
-                </div>
-                <div class="divider"></div>
-                <ul uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
-                    class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
-                    first-text="&laquo;" last-text="&raquo;" max-size="10"
-                    num-pages="vm.models.numPages" ng-show="vm.showPagination()">
-                </ul>
-                <div class="upcoming_event">
-                    <div class="upcoming_event_inner release_date">
-                        <h4>Release Date</h4>
-                        <h2>Aug 31, 2022</h2>
-                    </div>
-                    <div class="upcoming_event_inner forcast_date">
-                        <h4>Forcast EPS</h4>
-                        <h2>US$ 2.11</h2>
-                    </div>
+                <div class="upcoming_event_inner forcast_date">
+                    <h4>Forcast EPS</h4>
+                    <h2>US$ 2.11</h2>
                 </div>
             </div>
-       
+        </div>
+
         <!-- <div class="news-content" ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)">
             <div class="news-title">{{news.Title}}</div>
             <span class="special-text news-date">
@@ -69,4 +61,3 @@
 
     <div class="clearfix"></div>
 </section>
-

@@ -23,11 +23,12 @@
                     </div>
                 </div>
                 <div class="chart_dropdown">
-                    <select ng-model="vm.grothTableObDj">
+                    <select ng-model="barChartObj.grothTableObDj">
+                        <option value="">Select</option>
                         <option ng-repeat="grothTableObj in barChartObj.grothTable" value="{{grothTableObj.avg}}">{{grothTableObj.disYr}}</option>
                     </select>
                     <div class="chart_dropdown_btn">
-                        <a href="#">122% <img src="/App/shared/image/newimages/uparrow.svg"> <span>Avg.{{vm.grothTableObDj}}%</span></a>
+                        <a href="#">122% <img src="/App/shared/image/newimages/uparrow.svg"> <span>Avg.{{barChartObj.grothTableObDj}}%</span></a>
                     </div>
                 </div>
 

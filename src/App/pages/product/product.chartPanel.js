@@ -196,11 +196,7 @@
                             },
                             gridLineColor: "#EEE",
                             title: {
-                                text: 'Price',
-                                style: {
-                                    fontSize: '16px',
-                                    fontWeight: '800'
-                                }
+                                text: null
                             },
                             min: priceRange.min,
                             max: priceRange.max,
@@ -208,11 +204,7 @@
                         },
                         {
                             title: {
-                                text: 'Volume',
-                                style: {
-                                    fontSize: '16px',
-                                    fontWeight: '800'
-                                }
+                                text: null
                             },
                             labels: {
                                 style: {

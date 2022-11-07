@@ -20,6 +20,10 @@
             dep.$window.open(news.NewsUrl);
         }
 
+        function setSelectedTab(tab) {
+            vm.selectedTab = tab;
+        }
+
         tool.initialize(function () {
             tool.setVmProperties({
                 models: {
@@ -27,7 +31,8 @@
                     numPages: 1
                 },
                 news: [],
-
+                selectedTab: "news",
+                setSelectedTab: setSelectedTab,
                 getTotalItems: getTotalItems,
                 showPagination: showPagination,
                 getPagedNews: getPagedNews,
