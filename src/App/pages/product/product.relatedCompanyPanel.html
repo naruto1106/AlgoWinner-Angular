@@ -13,8 +13,8 @@
                     <div class="m-top-10px align-end d-flex">
                         <h3 class="special-text no-margin pull-left m-right-10px" ng-if="!relatedCompany.CurrentPrice">N/A</h3>
                         <h3 class="special-text no-margin pull-left m-right-10px" ng-if="relatedCompany.CurrentPrice">{{relatedCompany.CurrentPrice | correctTickSizeDecimalPlacesWithCurrency:relatedCompany.Product.Currency:relatedCompany.Product.TradeVenueLoc}}</h3>
-                        <h4 class="green-profit no-margin pull-left m-top-5px" ng-if="relatedCompany.CurrentPrice && relatedCompany.PercentPriceChange>=0">({{relatedCompany.PercentPriceChange | valuePercentOrDash:2}})</h4>
-                        <h4 class="green-profit no-margin pull-left m-top-5px" ng-if="relatedCompany.CurrentPrice && relatedCompany.PercentPriceChange<0">({{relatedCompany.PercentPriceChange | valuePercentOrDash:2}})</h4>
+                        <h4 class="green-profit no-margin pull-left m-top-5px percentage" ng-if="relatedCompany.CurrentPrice && relatedCompany.PercentPriceChange>=0">({{relatedCompany.PercentPriceChange | valuePercentOrDash:2}})</h4>
+                        <h4 class="red-profit no-margin pull-left m-top-5px percentage" ng-if="relatedCompany.CurrentPrice && relatedCompany.PercentPriceChange<0">({{relatedCompany.PercentPriceChange | valuePercentOrDash:2}})</h4>
                         <div class="clearfix"></div>
                     </div>
                     <div class="logo" agms-image img-src="relatedCompany.Product"></div>
