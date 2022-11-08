@@ -7,6 +7,7 @@
             Highcharts.setOptions({lang: {numericSymbols: [ 'k', 'M', 'B' ]}});
 
             function setSelectedTable(table) {
+                vm.isLoading = true;
                 vm.selectedTable = table;
                 setTableValue(vm.selectedTable);
             }
@@ -38,6 +39,8 @@
                             name: incomeStatementTableName,
                             data: incomeStatements,
                         };
+                    }).finally(function () {
+                        vm.isLoading = false;
                     });
                 }
                 if (table === 'balance') {
@@ -53,7 +56,9 @@
                             name: balanceSheetTableName,
                             data: balanceSheets,
                         };
-                    });
+                    }).finally(function () {
+                        vm.isLoading = false;
+                    });;
                 }
                 if (table === 'cash') {
                     pProductPageService.getCashFlow(vm.selectedTableType).then(function () {
@@ -68,7 +73,9 @@
                             name: cashFlowTableName,
                             data: cashFlows,
                         };
-                    });
+                    }).finally(function () {
+                        vm.isLoading = false;
+                    });;
                 }
                 if(table === 'stats'){
                     pProductPageService.getStatistics(vm.selectedTableType).then(function (){
@@ -152,13 +159,15 @@
                             name : statisticsTableName,
                             data : allStatisticsData,
                         }                        
-                    });
+                    }).finally(function () {
+                        vm.isLoading = false;
+                    });;
                 }
                 if (table === 'chartview') {
-                    debugger
+                    //debugger
                 }
                 if (table === 'tableveiw') {
-                    debugger
+                    //debugger
                 }
             }
 

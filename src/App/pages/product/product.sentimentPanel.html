@@ -12,14 +12,16 @@
                     </tr>
                     <tr ng-repeat="newsSentimentObj in vm.newsSentiment">
                         <td>{{newsSentimentObj.NewsSentimentType}}</td>
-                        <td class="red-profit">{{newsSentimentObj.SentimentScore|number:2}} <span>positive</span></td>
+                        <td ng-class="{'red-profit': newsSentimentObj.SentimentScore < 0, 'gray-profit': newsSentimentObj.SentimentScore > 0 && newsSentimentObj.SentimentScore <= 0.5,'green-profit': newsSentimentObj.SentimentScore > 0.5}" >{{newsSentimentObj.SentimentScore|number:2}} 
+                            <span class="green-profit" ng-if="newsSentimentObj.SentimentScore >0.5">positive</span></td>
+                            <span class="red-profit" ng-if="newsSentimentObj.SentimentScore <0">Negative</span>
+                            <span class="gray-profit" ng-if="newsSentimentObj.SentimentScore > 0 && newsSentimentObj.SentimentScore <= 0.5">Neutral</span>
                         <td class="gray-profit">{{newsSentimentObj.Volume|number:2}}
                             <span ng-if="newsSentimentObj.IsVolumeBreakout" class="volume-icon" agmc-svg-loader
                                 svg-src="'/App/assets/icons/product/information.svg'" uib-tooltip="A Spike of Interest"
                                 tooltip-placement="top">
-                               
                             </span>
-                            <div class="tooltip"><img src="/App/shared/image/newimages/not.svg">
+                            <div class="tooltip"><img src="/App/shared/image/newimages/not.svg" ng-if="newsSentimentObj.SentimentScore > 0 && newsSentimentObj.SentimentScore <= 0.5">
                                 <span class="tooltiptext">A Spike of Interest</span>
                               </div>
                         </td>

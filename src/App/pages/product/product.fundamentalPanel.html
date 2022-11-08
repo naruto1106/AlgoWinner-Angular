@@ -27,6 +27,9 @@
                         <option value="">Select {{barChartObj.name}}</option>
                         <option ng-repeat="grothTableObj in barChartObj.grothTable" value="{{grothTableObj.avg}}">{{grothTableObj.disYr}}</option>
                     </select>
+                    <!-- <div class="chart_dropdown_btn" ng-if="barChartObj.grothTableObDj > 0">
+                        <a href="#">122% <img src="/App/shared/image/newimages/uparrow.svg"> <span>Avg.{{barChartObj.grothTableObDj}}%</span></a>
+                    </div> -->
                     <div class="chart_dropdown_btn">
                         <a href="#">122% <img src="/App/shared/image/newimages/uparrow.svg"> <span>Avg.{{barChartObj.grothTableObDj}}%</span></a>
                     </div>
@@ -236,7 +239,10 @@
                 </button>
             </div>
         </div>
-        <div ng-if="vm.selectedTable === 'income'" class="income_tabbing_body">
+        <div class="p-50px text-center" ng-if="vm.isLoading">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div ng-if="vm.selectedTable === 'income' && !vm.isLoading" class="income_tabbing_body">
             <table class="table-large">
                 <thead>
                     <tr>
@@ -267,7 +273,7 @@
         </div>
 
 
-        <div ng-if="vm.selectedTable === 'balance'">
+        <div ng-if="vm.selectedTable === 'balance' && !vm.isLoading" >
             <table class="table-large">
                 <thead>
                     <td>Currency: {{vm.productDetail.Product.Currency}}</td>
@@ -292,7 +298,7 @@
                 </tbody>
             </table>
         </div>
-        <div ng-if="vm.selectedTable === 'cash'">
+        <div ng-if="vm.selectedTable === 'cash' && !vm.isLoading">
             <table class="table-large">
                 <thead>
                     <tr>
@@ -322,7 +328,7 @@
 
 
 
-        <div ng-if="vm.selectedTable === 'stats'" class="statics"> 
+        <div ng-if="vm.selectedTable === 'stats' && !vm.isLoading" class="statics"> 
             <table class="table-large">
                 <thead>
                     <td>Currency: {{vm.productDetail.Product.Currency}}</td>
