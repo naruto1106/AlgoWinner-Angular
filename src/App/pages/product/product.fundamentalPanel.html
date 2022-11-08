@@ -23,18 +23,18 @@
                     </div>
                 </div>
                 <div class="chart_dropdown">
-                    <select ng-model="barChartObj.grothTableObDj">
+                    <select ng-model="barChartObj.grothTablePer">
                         <option value="">Select {{barChartObj.name}}</option>
                         <option ng-repeat="grothTableObj in barChartObj.grothTable" value="{{grothTableObj.avg}}">{{grothTableObj.disYr}}</option>
                     </select>
                     <!-- <div class="chart_dropdown_btn" ng-if="barChartObj.grothTableObDj > 0">
                         <a href="#">122% <img src="/App/shared/image/newimages/uparrow.svg"> <span>Avg.{{barChartObj.grothTableObDj}}%</span></a>
                     </div> -->
-                    <div class="chart_dropdown_btn">
-                        <a href="#">122% <img src="/App/shared/image/newimages/uparrow.svg"> <span>Avg.{{barChartObj.grothTableObDj}}%</span></a>
+                    <div class="chart_dropdown_btn" ng-if="barChartObj.grothTablePer > 0">
+                        <a href="#">{{barChartObj.grothTablePer}}<img src="/App/shared/image/newimages/uparrow.svg"> <span>Avg.{{barChartObj.grothTablePer}}%</span></a>
                     </div>
-                    <div class="chart_dropdown_btn negative_dd_btn">
-                        <a href="#">122% <img src="/App/shared/image/newimages/bottom_arrow.svg"> <span>Avg.{{barChartObj.grothTableObDj}}%</span></a>
+                    <div class="chart_dropdown_btn negative_dd_btn" ng-if="barChartObj.grothTablePer < 0">
+                        <a href="#">{{barChartObj.grothTablePer}}<img src="/App/shared/image/newimages/bottom_arrow.svg"> <span>Avg.{{barChartObj.grothTablePer}}%</span></a>
                     </div>
                 </div>
 
