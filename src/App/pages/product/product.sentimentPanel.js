@@ -8,7 +8,10 @@
                     title: {
                         text: ''
                     },
-
+                    chart: {
+                        height: 355,
+                        
+                    },
                     credits: {
                         enabled: false
                     },
@@ -153,7 +156,7 @@
                         }]
                     }
                 });
-                chart.setSize(null, 400);
+                chart.setSize(null, 325);
             }
 
             function changeRetailActivityChartPeriod() {
