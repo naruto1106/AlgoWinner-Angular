@@ -67,6 +67,7 @@
             function barCharts(container, chartData) {
                 var chart = Highcharts.chart(container, {
 
+                    plotOptions: {column: {colorByPoint: true}},
                     chart: {
                         type: 'column'
                         
@@ -145,7 +146,7 @@
                         }]
                     }
                 });
-                chart.setSize(null, 300);
+                chart.setSize(null, 400);
             }
 
             function changeRetailActivityChartPeriod() {
