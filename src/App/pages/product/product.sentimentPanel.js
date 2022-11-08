@@ -8,7 +8,10 @@
                     title: {
                         text: ''
                     },
-
+                    chart: {
+                        height: 355,
+                        
+                    },
                     credits: {
                         enabled: false
                     },
@@ -68,10 +71,7 @@
                 var chart = Highcharts.chart(container, {
 
                     plotOptions: {column: {colorByPoint: true}},
-                    chart: {
-                        type: 'column'
-                        
-                    },
+                    
 
                     credits: {
                         enabled: false
@@ -146,7 +146,7 @@
                         }]
                     }
                 });
-                chart.setSize(null, 400);
+                chart.setSize(null, 325);
             }
 
             function changeRetailActivityChartPeriod() {
