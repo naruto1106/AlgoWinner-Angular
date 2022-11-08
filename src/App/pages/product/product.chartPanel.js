@@ -236,13 +236,13 @@
                     },                    
                     options: {
                         legend: {
-                            align: 'right',
-                            verticalAlign: 'top',
-                            symbolRadius: 15,
-                            symbolHeight:8,
-                            symbolWidth: 0,
-                            itemStyle: {"color": "#667085", "fontSize": "13px", "fontWeight": "500"}
-                        },
+                        align: 'right',
+                        verticalAlign: 'top',
+                        symbolRadius: 15,
+                        symbolHeight:8,
+                        symbolWidth: 0,
+                        itemStyle: {"color": "#667085", "fontSize": "13px", "fontWeight": "500"}
+                    },
                         chart: {
                             height: 400
                         },

@@ -105,7 +105,7 @@
                             text: null
                         }
                     },
-                    
+
                     series: [
                         {
                             name: 'Analyst Rating',

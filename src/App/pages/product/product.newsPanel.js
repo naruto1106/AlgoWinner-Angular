@@ -13,7 +13,7 @@
         }
 
         function getPagedNews() {
-            return _.take(_.drop(vm.news, (vm.models.currentPage - 1) * 10), 10);
+            return _.take(_.drop(vm.news, (vm.models.currentPage - 1) * 5), 5);
         }
 
         function gotoNews(news) {

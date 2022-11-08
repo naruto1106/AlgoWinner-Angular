@@ -31,8 +31,8 @@
             </div>
             <div class="divider"></div>
             <ul ng-if="vm.selectedTab === 'news'" uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
-                class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
-                last-text="&raquo;" max-size="10" num-pages="vm.models.numPages" ng-show="vm.showPagination()">
+                class="pagination-sm"  first-text="&laquo;"
+                last-text="&raquo;" max-size="5" num-pages="vm.models.numPages" ng-show="vm.showPagination()" boundary-link-numbers="true" rotate="false">
             </ul>
             <div class="upcoming_event" ng-if="vm.selectedTab === 'upcomingEarning'">
                 <div class="upcoming_event_inner release_date">
