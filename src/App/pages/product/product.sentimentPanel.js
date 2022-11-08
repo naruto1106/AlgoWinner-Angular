@@ -105,12 +105,14 @@
                             text: null
                         }
                     },
-
-                    series: [{
-                        name: 'Analyst Rating',
-                        data: chartData.analyst_rating,
-                        color: '#13365E',
-                    }],
+                    
+                    series: [
+                        {
+                            name: 'Analyst Rating',
+                            data: chartData.analyst_rating,
+                            color: '#13365E',
+                        }
+                ],
 
                     responsive: {
                         rules: [{
@@ -143,7 +145,7 @@
                         }]
                     }
                 });
-                chart.setSize(null, 400);
+                chart.setSize(null, 300);
             }
 
             function changeRetailActivityChartPeriod() {

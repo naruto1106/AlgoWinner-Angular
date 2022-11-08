@@ -365,8 +365,8 @@
                     ]
                 },
                 {
-                    name: 'Earnings',
-                    key: 'Earnings',
+                    name: 'PEG Ratio ',
+                    key: 'PegRatio',
                     container: 'peg',
                     selectedType: 'annually',
                     categories: [],

@@ -166,12 +166,10 @@
                         case '5Y':
                             return Math.ceil(history.length / 10) - 1;
                     }
-                
                 }
 
                 vm.chart = {
-                   
-                   series: [
+                    series: [
                         {
                             name: "Volume",
                             data: volumes,
@@ -232,18 +230,19 @@
                             }
                         }
                     },
-                    legend: {
-                        align: 'right',
-                        verticalAlign: 'top',
-                        symbolRadius: 15,
-                        symbolHeight:8,
-                        symbolWidth: 0,
-                        itemStyle: {"color": "#667085", "fontSize": "13px", "fontWeight": "500"}
-                    },
+
                     title: {
                         text: null
-                    },
+                    },                    
                     options: {
+                        legend: {
+                            align: 'right',
+                            verticalAlign: 'top',
+                            symbolRadius: 15,
+                            symbolHeight:8,
+                            symbolWidth: 0,
+                            itemStyle: {"color": "#667085", "fontSize": "13px", "fontWeight": "500"}
+                        },
                         chart: {
                             height: 400
                         },

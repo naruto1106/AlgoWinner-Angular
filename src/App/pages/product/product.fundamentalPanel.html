@@ -24,7 +24,7 @@
                 </div>
                 <div class="chart_dropdown">
                     <select ng-model="barChartObj.grothTableObDj">
-                        <option value="">Select</option>
+                        <option value="">Select {{barChartObj.name}}</option>
                         <option ng-repeat="grothTableObj in barChartObj.grothTable" value="{{grothTableObj.avg}}">{{grothTableObj.disYr}}</option>
                     </select>
                     <div class="chart_dropdown_btn">
