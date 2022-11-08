@@ -71,7 +71,17 @@
                 var chart = Highcharts.chart(container, {
 
                     plotOptions: {column: {colorByPoint: true}},
-                    
+                    colors: [
+                        '#13365E',
+                        '#446791',
+                        '#2DA89E',
+                        '#86D3CD',
+                        '#C9F4F0'
+                    ],
+                    chart: {
+                        type: 'column'
+                        
+                    },
 
                     credits: {
                         enabled: false
