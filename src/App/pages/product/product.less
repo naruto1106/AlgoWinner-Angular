@@ -1358,6 +1358,45 @@
 
 
 
+  
+.tooltip {
+    position: relative;
+    display: inline-block;
+    .tooltiptext {
+        visibility: hidden;
+        width: 136px;
+    background-color: #F97066;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px 5px;
+    font-size: 12px;
+    font-weight: 500;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    margin-bottom: 7px;
+  
+        &:after {
+            content: "";
+            position: absolute;
+            border-top: solid 7px #F97066;
+            border-left: solid 7px transparent;
+            border-right: solid 7px transparent;
+            top: unset;
+            bottom: -7px;
+            left: 40%;
+            margin: 0 auto;
+        }
+      }
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+
 @media(max-width:1600px) {
     .agm-component-product {
         .sentiment-panel {
