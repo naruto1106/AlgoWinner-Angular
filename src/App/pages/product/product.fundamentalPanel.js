@@ -208,7 +208,7 @@
                     yAxis: {
                         allowDecimals: true,
                         title: {
-                            text: itemObj.name
+                            enabled:false
                         }
                     },
 
