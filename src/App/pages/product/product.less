@@ -299,6 +299,7 @@
             box-shadow: 0px 4px 8px -2px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.06);
             border-radius: 8px;
             margin-bottom: 20px;
+            overflow: auto;
 
             h1 {
                 font-weight: 600 !important;
@@ -1497,10 +1498,30 @@
                 width: 110px;
             }
         }
-       
+        .sentiment-panel{
+                .tp-box {
+                    .target_inner {
+                            padding: 21px 16px 34px;
+                        }
+                }
+        }
          
     }
 }
+
+@media(max-width:1440px) {
+    .agm-component-product {
+        .sentiment-panel{
+                .tp-box {
+                    .target_inner {
+                            padding: 18px 16px;
+                        }
+                }
+        }
+         
+    }
+}
+
 @media(max-width:1400px) {
     .agm-component-product{
         .sentiment-panel {
@@ -1528,7 +1549,17 @@
                     }
              }
         } 
+        .sentiment-panel{
+            .tp-box {
+                .target_inner {
+                        padding: 27px 16px;
+                    }
+            }
+        }
     }
+    
+ 
+
 
     
 }
