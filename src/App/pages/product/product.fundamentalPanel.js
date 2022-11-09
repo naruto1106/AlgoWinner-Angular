@@ -4,7 +4,7 @@
             var pProductPageService = dep.pProductPageService;
             var $filter = dep.$filter;
             var chart = {};
-            Highcharts.setOptions({lang: {numericSymbols: [ 'k', 'M', 'B' ]}});
+            Highcharts.setOptions({ lang: { numericSymbols: ['k', 'M', 'B'] } });
 
             function setSelectedTable(table) {
                 vm.isLoading = true;
@@ -19,7 +19,7 @@
                 vm.selectedTableChartOne = tableviewEv;
                 setTableValue(vm.selectedTable);
             }
-            
+
             function setSelectedTableType(type) {
                 vm.selectedTableType = type;
                 setTableValue(vm.selectedTable);
@@ -30,7 +30,7 @@
                     pProductPageService.getIncomeStatement(vm.selectedTableType).then(function () {
                         var incomeStatement = pProductPageService.incomeStatement;
                         var incomeStatementTableHeadings = incomeStatement.map(function (itemObj, itemKey) {
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+(moment(itemObj.StatementDate).format("MM")/3) : '') : 'TTM';
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q' + (moment(itemObj.StatementDate).format("MM") / 3) : '') : 'TTM';
                         });
                         var incomeStatementTableName = Object.keys(incomeStatement[0]);
                         var incomeStatements = incomeStatement;
@@ -47,7 +47,7 @@
                     pProductPageService.getBalanceSheet(vm.selectedTableType).then(function () {
                         var balanceSheet = pProductPageService.balanceSheet;
                         var balanceSheetTableHeadings = balanceSheet.map(function (itemObj, itemKey) {
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+(moment(itemObj.StatementDate).format("MM")/3) : '') : '';
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q' + (moment(itemObj.StatementDate).format("MM") / 3) : '') : '';
                         });
                         var balanceSheetTableName = Object.keys(balanceSheet[0]);
                         var balanceSheets = balanceSheet;
@@ -64,7 +64,7 @@
                     pProductPageService.getCashFlow(vm.selectedTableType).then(function () {
                         var cashFlow = pProductPageService.cashFlow;
                         var cashFlowTableHeadings = cashFlow.map(function (itemObj, itemKey) {
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+(moment(itemObj.StatementDate).format("MM")/3) : '') : 'TTM';
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q' + (moment(itemObj.StatementDate).format("MM") / 3) : '') : 'TTM';
                         });
                         var cashFlowTableName = Object.keys(cashFlow[0]);
                         var cashFlows = cashFlow;
@@ -77,29 +77,29 @@
                         vm.isLoading = false;
                     });;
                 }
-                if(table === 'stats'){
-                    pProductPageService.getStatistics(vm.selectedTableType).then(function (){
+                if (table === 'stats') {
+                    pProductPageService.getStatistics(vm.selectedTableType).then(function () {
                         var statistics = pProductPageService.statistics;
                         var keySatesDataJSON = {
-                            SharesOutstanding : [],
+                            SharesOutstanding: [],
                             // SharesFloating : [],
                             // Employees : [],
                             // Shareholders : [],
                         }
                         var ratiosDataJSON = {
-                            PeRatio : [],
-                            PbRatio : [],
-                            Roa : [],
-                            Roe : [],
-                            GrossMargin : [],
+                            PeRatio: [],
+                            PbRatio: [],
+                            Roa: [],
+                            Roe: [],
+                            GrossMargin: [],
                             // QuickRatio : [],
-                            CurrentRatio : [],
-                            DaRatio : [],
-                            DeRatio : [],
+                            CurrentRatio: [],
+                            DaRatio: [],
+                            DeRatio: [],
                         }
-                        var statisticsTableHeadings = statistics.map(function (itemObj, itemKey){
+                        var statisticsTableHeadings = statistics.map(function (itemObj, itemKey) {
                             // keySates data
-                            if(itemObj.SharesOutstanding !== undefined && itemObj.SharesOutstanding !== null){
+                            if (itemObj.SharesOutstanding !== undefined && itemObj.SharesOutstanding !== null) {
                                 keySatesDataJSON.SharesOutstanding.push(itemObj.SharesOutstanding);
                             }
                             // if(itemObj.SharesFloating !== undefined && itemObj.SharesFloating !== null){
@@ -112,34 +112,34 @@
                             //     keySatesDataJSON.Shareholders.push(itemObj.Shareholders);
                             // }
                             // ratios data
-                            if(itemObj.PeRatio !== undefined && itemObj.PeRatio !== null){
+                            if (itemObj.PeRatio !== undefined && itemObj.PeRatio !== null) {
                                 ratiosDataJSON.PeRatio.push(itemObj.PeRatio);
                             }
-                            if(itemObj.PbRatio !== undefined && itemObj.PbRatio !== null){
+                            if (itemObj.PbRatio !== undefined && itemObj.PbRatio !== null) {
                                 ratiosDataJSON.PbRatio.push(itemObj.PbRatio);
                             }
-                            if(itemObj.Roa !== undefined && itemObj.Roa !== null){
+                            if (itemObj.Roa !== undefined && itemObj.Roa !== null) {
                                 ratiosDataJSON.Roa.push(itemObj.Roa);
                             }
-                            if(itemObj.Roe !== undefined && itemObj.Roe !== null){
+                            if (itemObj.Roe !== undefined && itemObj.Roe !== null) {
                                 ratiosDataJSON.Roe.push(itemObj.Roe);
                             }
-                            if(itemObj.GrossMargin !== undefined && itemObj.GrossMargin !== null){
+                            if (itemObj.GrossMargin !== undefined && itemObj.GrossMargin !== null) {
                                 ratiosDataJSON.GrossMargin.push(itemObj.GrossMargin);
                             }
                             // if(itemObj.QuickRatio !== undefined && itemObj.QuickRatio !== null){
                             //     ratiosDataJSON.QuickRatio.push(itemObj.QuickRatio);
                             // }
-                            if(itemObj.CurrentRatio !== undefined && itemObj.CurrentRatio !== null){
+                            if (itemObj.CurrentRatio !== undefined && itemObj.CurrentRatio !== null) {
                                 ratiosDataJSON.CurrentRatio.push(itemObj.CurrentRatio);
                             }
-                            if(itemObj.DaRatio !== undefined && itemObj.DaRatio !== null){
+                            if (itemObj.DaRatio !== undefined && itemObj.DaRatio !== null) {
                                 ratiosDataJSON.DaRatio.push(itemObj.DaRatio);
                             }
-                            if(itemObj.DeRatio !== undefined && itemObj.DeRatio !== null){
+                            if (itemObj.DeRatio !== undefined && itemObj.DeRatio !== null) {
                                 ratiosDataJSON.DeRatio.push(itemObj.DeRatio);
                             }
-                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q'+(moment(itemObj.StatementDate).format("MM")/3) : '') : 'Current';
+                            return itemObj.StatementDate !== undefined && itemObj.StatementDate !== null && itemObj.StatementDate !== '' ? moment(itemObj.StatementDate).format("YYYY") + (vm.selectedTableType == 'quarterly' ? ' Q' + (moment(itemObj.StatementDate).format("MM") / 3) : '') : 'Current';
                         });
                         var statisticsTableName = Object.keys(statistics[0]);
                         var allStatisticsData = {
@@ -154,11 +154,11 @@
                                 headings: Object.keys(ratiosDataJSON)
                             }
                         }
-                        vm.statisticsTableData =  {
+                        vm.statisticsTableData = {
                             headings: statisticsTableHeadings,
-                            name : statisticsTableName,
-                            data : allStatisticsData,
-                        }                        
+                            name: statisticsTableName,
+                            data: allStatisticsData,
+                        }
                     }).finally(function () {
                         vm.isLoading = false;
                     });;
@@ -200,9 +200,9 @@
                         align: 'right',
                         verticalAlign: 'top',
                         symbolRadius: 15,
-                        symbolHeight:8,
+                        symbolHeight: 8,
                         symbolWidth: 0,
-                        itemStyle: {"color": "#667085", "fontSize": "13px", "fontWeight": "500"}
+                        itemStyle: { "color": "#667085", "fontSize": "13px", "fontWeight": "500" }
                     },
 
                     yAxis: {
@@ -262,7 +262,7 @@
                             data: [],
                             type: 'column',
                             color: '#86D3CD',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Earnings',
                             data: [],
@@ -273,7 +273,7 @@
                             data: [],
                             type: 'column',
                             color: '#184376',
-                            showInLegend: false                        
+                            showInLegend: false
                         }, {
                             name: 'Industry Average',
                             data: [],
@@ -295,7 +295,7 @@
                             data: [],
                             type: 'column',
                             color: '#86D3CD',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Revenue',
                             data: [],
@@ -306,7 +306,7 @@
                             data: [],
                             type: 'column',
                             color: '#184376',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Industry Average',
                             data: [],
@@ -328,7 +328,7 @@
                             data: [],
                             type: 'column',
                             color: '#86D3CD',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'GrossProfit Margin',
                             data: [],
@@ -339,7 +339,7 @@
                             data: [],
                             type: 'column',
                             color: '#184376',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Industry Average',
                             data: [],
@@ -360,7 +360,7 @@
                             name: 'PE Ratio',
                             data: [],
                             type: 'column',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'PE Ratio',
                             data: [],
@@ -372,7 +372,7 @@
                             data: [],
                             type: 'column',
                             color: '#184376',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Industry Average',
                             data: [],
@@ -394,7 +394,7 @@
                             data: [],
                             type: 'column',
                             color: '#86D3CD',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Earnings',
                             data: [],
@@ -405,7 +405,7 @@
                             data: [],
                             type: 'column',
                             color: '#184376',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Industry Average',
                             data: [],
@@ -427,7 +427,7 @@
                             data: [],
                             type: 'column',
                             color: '#B2E9E4',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Debt to Equity Ratio',
                             data: [],
@@ -438,7 +438,7 @@
                             data: [],
                             type: 'column',
                             color: '#184376',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Industry Average',
                             data: [],
@@ -460,7 +460,7 @@
                             data: [],
                             type: 'column',
                             color: '#86D3CD',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Z Score',
                             data: [],
@@ -471,7 +471,7 @@
                             data: [],
                             type: 'column',
                             color: '#184376',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Industry Average',
                             data: [],
@@ -493,7 +493,7 @@
                             data: [],
                             type: 'column',
                             color: '#86D3CD',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Dividend Yield',
                             data: [],
@@ -504,7 +504,7 @@
                             data: [],
                             type: 'column',
                             color: '#184376',
-                            showInLegend: false 
+                            showInLegend: false
                         }, {
                             name: 'Industry Average',
                             data: [],
@@ -522,7 +522,7 @@
             }
 
             function setFundamentalChartValues(chartConfigObj) {
-                pProductPageService.getFundamentalPageMetrics(chartConfigObj.selectedType).then(function (){
+                pProductPageService.getFundamentalPageMetrics(chartConfigObj.selectedType).then(function () {
                     var fundamentalPageMetricsResp = pProductPageService.fundamentalPageMetrics;
                     var IndustryMetricArr = fundamentalPageMetricsResp.IndustryMetric;
                     var MetricArr = fundamentalPageMetricsResp.Metric;
@@ -539,65 +539,65 @@
                     var firstYearAvg = 0;
                     var thirdYearAvg = 0;
                     var fifthYearAvg = 0;
-                    
+
                     var is1Year = false;
                     var is3Year = false;
                     var is5Year = false;
-                    
+
                     //Growth calculation
-                    if(MetricArr[MetricArr.length - 2] !== undefined && MetricArr[MetricArr.length - 2] !== null && MetricArr[MetricArr.length - 2] !== ''){
+                    if (MetricArr[MetricArr.length - 2] !== undefined && MetricArr[MetricArr.length - 2] !== null && MetricArr[MetricArr.length - 2] !== '') {
                         firstYearGrowth = (parseFloat(MetricArr[MetricArr.length - 1][chartConfigObj.key]) - parseFloat(MetricArr[MetricArr.length - 2][chartConfigObj.key])) / parseFloat(MetricArr[MetricArr.length - 2][chartConfigObj.key]);
                         is1Year = true;
                     }
-                    if(MetricArr[MetricArr.length - 4] !== undefined && MetricArr[MetricArr.length - 4] !== null && MetricArr[MetricArr.length - 4] !== ''){
+                    if (MetricArr[MetricArr.length - 4] !== undefined && MetricArr[MetricArr.length - 4] !== null && MetricArr[MetricArr.length - 4] !== '') {
                         thirdYearGrowth = (parseFloat(MetricArr[MetricArr.length - 1][chartConfigObj.key]) - parseFloat(MetricArr[MetricArr.length - 4][chartConfigObj.key])) / parseFloat(MetricArr[MetricArr.length - 4][chartConfigObj.key]);
                         is3Year = true;
                     }
-                    if(MetricArr[MetricArr.length - 6] !== undefined && MetricArr[MetricArr.length - 6] !== null && MetricArr[MetricArr.length - 6] !== ''){
+                    if (MetricArr[MetricArr.length - 6] !== undefined && MetricArr[MetricArr.length - 6] !== null && MetricArr[MetricArr.length - 6] !== '') {
                         fifthYearGrowth = (parseFloat(MetricArr[MetricArr.length - 1][chartConfigObj.key]) - parseFloat(MetricArr[MetricArr.length - 6][chartConfigObj.key])) / parseFloat(MetricArr[MetricArr.length - 6][chartConfigObj.key]);
                         is5Year = true;
                     }
-                    
+
                     //Average calculation
-                    if(IndustryMetricArr[IndustryMetricArr.length - 2] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 2] !== null && IndustryMetricArr[IndustryMetricArr.length - 2] !== ''){
+                    if (IndustryMetricArr[IndustryMetricArr.length - 2] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 2] !== null && IndustryMetricArr[IndustryMetricArr.length - 2] !== '') {
                         firstYearAvg = (parseFloat(IndustryMetricArr[IndustryMetricArr.length - 1][chartConfigObj.key]) - parseFloat(IndustryMetricArr[IndustryMetricArr.length - 2][chartConfigObj.key])) / parseFloat(IndustryMetricArr[IndustryMetricArr.length - 2][chartConfigObj.key]);
                         is1Year = true;
                     }
-                    if(IndustryMetricArr[IndustryMetricArr.length - 4] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 4] !== null && IndustryMetricArr[IndustryMetricArr.length - 4] !== ''){
+                    if (IndustryMetricArr[IndustryMetricArr.length - 4] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 4] !== null && IndustryMetricArr[IndustryMetricArr.length - 4] !== '') {
                         thirdYearAvg = (parseFloat(IndustryMetricArr[IndustryMetricArr.length - 1][chartConfigObj.key]) - parseFloat(IndustryMetricArr[IndustryMetricArr.length - 4][chartConfigObj.key])) / parseFloat(IndustryMetricArr[IndustryMetricArr.length - 4][chartConfigObj.key]);
                         is3Year = true;
                     }
-                    if(IndustryMetricArr[IndustryMetricArr.length - 6] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 6] !== null && IndustryMetricArr[IndustryMetricArr.length - 6] !== ''){
+                    if (IndustryMetricArr[IndustryMetricArr.length - 6] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 6] !== null && IndustryMetricArr[IndustryMetricArr.length - 6] !== '') {
                         fifthYearAvg = (parseFloat(IndustryMetricArr[IndustryMetricArr.length - 1][chartConfigObj.key]) - parseFloat(IndustryMetricArr[IndustryMetricArr.length - 6][chartConfigObj.key])) / parseFloat(IndustryMetricArr[IndustryMetricArr.length - 6][chartConfigObj.key]);
                         is5Year = true;
                     }
-                    
+
                     var oneYearGrowth = (firstYearGrowth) * 100;
                     var threeYearGrowth = (thirdYearGrowth) * 100;
                     var fiveYearGrowth = (fifthYearGrowth) * 100;
-                    
+
                     var oneYearAvg = (firstYearAvg) * 100;
                     var threeYearAvg = (thirdYearAvg) * 100;
                     var fiveYearAvg = (fifthYearAvg) * 100;
-                    
-                    var display1Year = '1 year Growth '+(oneYearGrowth).toFixed(0)+'% (Average '+(oneYearAvg).toFixed(0)+'%)';
-                    var display3Year = '3 years Growth '+(threeYearGrowth).toFixed(0)+'% (Average '+(threeYearAvg).toFixed(0)+'%)';
-                    var display5Year = '5 years Growth '+(fiveYearGrowth).toFixed(0)+'% (Average '+(fiveYearAvg).toFixed(0)+'%)';
 
-                    if(chartConfigObj.selectedType == 'quarter'){
-                        display1Year = '1 quarter Growth '+(oneYearGrowth).toFixed(0)+'% (Average '+(oneYearAvg).toFixed(0)+'%)';
-                        display3Year = '3 quarters Growth '+(threeYearGrowth).toFixed(0)+'% (Average '+(threeYearAvg).toFixed(0)+'%)';
-                        display5Year = '5 quarters Growth '+(fiveYearGrowth).toFixed(0)+'% (Average '+(fiveYearAvg).toFixed(0)+'%)';
+                    var display1Year = '1 year Growth ' + (oneYearGrowth).toFixed(0) + '% (Average ' + (oneYearAvg).toFixed(0) + '%)';
+                    var display3Year = '3 years Growth ' + (threeYearGrowth).toFixed(0) + '% (Average ' + (threeYearAvg).toFixed(0) + '%)';
+                    var display5Year = '5 years Growth ' + (fiveYearGrowth).toFixed(0) + '% (Average ' + (fiveYearAvg).toFixed(0) + '%)';
+
+                    if (chartConfigObj.selectedType == 'quarter') {
+                        display1Year = '1 quarter Growth ' + (oneYearGrowth).toFixed(0) + '% (Average ' + (oneYearAvg).toFixed(0) + '%)';
+                        display3Year = '3 quarters Growth ' + (threeYearGrowth).toFixed(0) + '% (Average ' + (threeYearAvg).toFixed(0) + '%)';
+                        display5Year = '5 quarters Growth ' + (fiveYearGrowth).toFixed(0) + '% (Average ' + (fiveYearAvg).toFixed(0) + '%)';
                     }
-                    
+
                     chartConfigObj.grothTable = [];
-                    if(is1Year){
+                    if (is1Year) {
                         chartConfigObj.grothTable.push(display1Year);
                     }
-                    if(is3Year){
+                    if (is3Year) {
                         chartConfigObj.grothTable.push(display3Year);
                     }
-                    if(is5Year){
+                    if (is5Year) {
                         chartConfigObj.grothTable.push(display5Year);
                     }
 
@@ -617,6 +617,11 @@
                         }
                     });
                     setChart(chartConfigObj);
+                    priceBookRadio = { ...barChartsArr[6], container: 'priceBookRadio' };
+                    setChart(priceBookRadio);
+                    netProfitMargin = { ...barChartsArr[6], container: 'netProfitMargin' };
+                    setChart(netProfitMargin);
+
                 });
             }
 
@@ -671,7 +676,7 @@
                         return 'Cash from operating activities';
                     case "FreeCashFlow":
                         return 'Free cash flow';
-                    
+
                     //Statistics
                     case "SharesOutstanding":
                         return 'Total common shares outstanding';
@@ -698,7 +703,7 @@
                     case "DaRatio":
                         return 'Debt to assets ratio';
                     case "DeRatio":
-                        return 'Debt to equity ratio';                    
+                        return 'Debt to equity ratio';
                     default:
                         return '';
                 }
@@ -709,21 +714,23 @@
                     // temp
                     selectedTableType: "annually",
                     selectedTable: "income",
-                    selectedTableChart:"chartview",
-                    selectedTableChartOne:"chartview1",
+                    selectedTableChart: "chartview",
+                    selectedTableChartOne: "chartview1",
                     setSelectedTableType: setSelectedTableType,
                     setSelectedTable: setSelectedTable,
                     setSelectedChart: setSelectedChart,
                     setSelectedChartOne: setSelectedChartOne,
                     setSelectedType: setSelectedType,
                     barChartsArr: barChartsArr,
+                    priceBookRadio: { ...barChartsArr[6], container: 'priceBookRadio' },
+                    netProfitMargin: { ...barChartsArr[6], container: 'netProfitMargin' },
                     getFullNameFromKey: getFullNameFromKey,
                     annualIncomeStatementTableHeadings: [],
                     annualIncomeStatementTableName: [],
                     annualIncomeStatements: []
                 });
 
-                pProductPageService.waitTillProductDetailLoaded().then(function (){
+                pProductPageService.waitTillProductDetailLoaded().then(function () {
 
                     var productDetail = pProductPageService.productDetail;
                     vm.productDetail = productDetail;
@@ -745,50 +752,50 @@
                             var firstYearAvg = 0;
                             var thirdYearAvg = 0;
                             var fifthYearAvg = 0;
-                            
+
                             var is1Year = false;
                             var is3Year = false;
                             var is5Year = false;
-                            
+
                             //Growth calculation
-                            if(MetricArr[MetricArr.length - 2] !== undefined && MetricArr[MetricArr.length - 2] !== null && MetricArr[MetricArr.length - 2] !== ''){
+                            if (MetricArr[MetricArr.length - 2] !== undefined && MetricArr[MetricArr.length - 2] !== null && MetricArr[MetricArr.length - 2] !== '') {
                                 firstYearGrowth = (parseFloat(MetricArr[MetricArr.length - 1][chartConfigObj.key]) - parseFloat(MetricArr[MetricArr.length - 2][chartConfigObj.key])) / parseFloat(MetricArr[MetricArr.length - 2][chartConfigObj.key]);
                                 is1Year = true;
                             }
-                            if(MetricArr[MetricArr.length - 4] !== undefined && MetricArr[MetricArr.length - 4] !== null && MetricArr[MetricArr.length - 4] !== ''){
+                            if (MetricArr[MetricArr.length - 4] !== undefined && MetricArr[MetricArr.length - 4] !== null && MetricArr[MetricArr.length - 4] !== '') {
                                 thirdYearGrowth = (parseFloat(MetricArr[MetricArr.length - 1][chartConfigObj.key]) - parseFloat(MetricArr[MetricArr.length - 4][chartConfigObj.key])) / parseFloat(MetricArr[MetricArr.length - 4][chartConfigObj.key]);
                                 is3Year = true;
                             }
-                            if(MetricArr[MetricArr.length - 6] !== undefined && MetricArr[MetricArr.length - 6] !== null && MetricArr[MetricArr.length - 6] !== ''){
+                            if (MetricArr[MetricArr.length - 6] !== undefined && MetricArr[MetricArr.length - 6] !== null && MetricArr[MetricArr.length - 6] !== '') {
                                 fifthYearGrowth = (parseFloat(MetricArr[MetricArr.length - 1][chartConfigObj.key]) - parseFloat(MetricArr[MetricArr.length - 6][chartConfigObj.key])) / parseFloat(MetricArr[MetricArr.length - 6][chartConfigObj.key]);
                                 is5Year = true;
                             }
-                            
+
                             //Average calculation
-                            if(IndustryMetricArr[IndustryMetricArr.length - 2] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 2] !== null && IndustryMetricArr[IndustryMetricArr.length - 2] !== ''){
+                            if (IndustryMetricArr[IndustryMetricArr.length - 2] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 2] !== null && IndustryMetricArr[IndustryMetricArr.length - 2] !== '') {
                                 firstYearAvg = (parseFloat(IndustryMetricArr[IndustryMetricArr.length - 1][chartConfigObj.key]) - parseFloat(IndustryMetricArr[IndustryMetricArr.length - 2][chartConfigObj.key])) / parseFloat(IndustryMetricArr[IndustryMetricArr.length - 2][chartConfigObj.key]);
                                 is1Year = true;
                             }
-                            if(IndustryMetricArr[IndustryMetricArr.length - 4] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 4] !== null && IndustryMetricArr[IndustryMetricArr.length - 4] !== ''){
+                            if (IndustryMetricArr[IndustryMetricArr.length - 4] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 4] !== null && IndustryMetricArr[IndustryMetricArr.length - 4] !== '') {
                                 thirdYearAvg = (parseFloat(IndustryMetricArr[IndustryMetricArr.length - 1][chartConfigObj.key]) - parseFloat(IndustryMetricArr[IndustryMetricArr.length - 4][chartConfigObj.key])) / parseFloat(IndustryMetricArr[IndustryMetricArr.length - 4][chartConfigObj.key]);
                                 is3Year = true;
                             }
-                            if(IndustryMetricArr[IndustryMetricArr.length - 6] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 6] !== null && IndustryMetricArr[IndustryMetricArr.length - 6] !== ''){
+                            if (IndustryMetricArr[IndustryMetricArr.length - 6] !== undefined && IndustryMetricArr[IndustryMetricArr.length - 6] !== null && IndustryMetricArr[IndustryMetricArr.length - 6] !== '') {
                                 fifthYearAvg = (parseFloat(IndustryMetricArr[IndustryMetricArr.length - 1][chartConfigObj.key]) - parseFloat(IndustryMetricArr[IndustryMetricArr.length - 6][chartConfigObj.key])) / parseFloat(IndustryMetricArr[IndustryMetricArr.length - 6][chartConfigObj.key]);
                                 is5Year = true;
                             }
-                            
+
                             var oneYearGrowth = (firstYearGrowth) * 100;
                             var threeYearGrowth = (thirdYearGrowth) * 100;
                             var fiveYearGrowth = (fifthYearGrowth) * 100;
-                            
+
                             var oneYearAvg = (firstYearAvg) * 100;
                             var threeYearAvg = (thirdYearAvg) * 100;
                             var fiveYearAvg = (fifthYearAvg) * 100;
-                            
-                            var display1Year = '1 year Growth '+(oneYearGrowth).toFixed(0)+'% (Average '+(oneYearAvg).toFixed(0)+'%)';
-                            var display3Year = '3 years Growth '+(threeYearGrowth).toFixed(0)+'% (Average '+(threeYearAvg).toFixed(0)+'%)';
-                            var display5Year = '5 years Growth '+(fiveYearGrowth).toFixed(0)+'% (Average '+(fiveYearAvg).toFixed(0)+'%)';
+
+                            var display1Year = '1 year Growth ' + (oneYearGrowth).toFixed(0) + '% (Average ' + (oneYearAvg).toFixed(0) + '%)';
+                            var display3Year = '3 years Growth ' + (threeYearGrowth).toFixed(0) + '% (Average ' + (threeYearAvg).toFixed(0) + '%)';
+                            var display5Year = '5 years Growth ' + (fiveYearGrowth).toFixed(0) + '% (Average ' + (fiveYearAvg).toFixed(0) + '%)';
                             let onYear = (oneYearAvg).toFixed(0)
                             let on3Year = (threeYearAvg).toFixed(0)
                             let on5Year = (fiveYearAvg).toFixed(0)
@@ -804,25 +811,25 @@
                                 disYr: display5Year,
                                 avg: on5Year
                             }
-                            
+
                             chartConfigObj.grothTable = [];
-                            if(is1Year){
+                            if (is1Year) {
                                 chartConfigObj.grothTable.push(objdata);
                             }
-                            if(is3Year){
+                            if (is3Year) {
                                 chartConfigObj.grothTable.push(objdata1);
                             }
-                            if(is5Year){
+                            if (is5Year) {
                                 chartConfigObj.grothTable.push(objdata2);
                             }
 
                             IndustryMetricArr.forEach(function (elementObj, elementKey) {
                                 var IndustryMetricObjectKeys = Object.keys(elementObj);
-                                if ((IndustryMetricObjectKeys).includes(chartConfigObj.key)) {                                    
+                                if ((IndustryMetricObjectKeys).includes(chartConfigObj.key)) {
                                     chartConfigObj.categories.push(moment(IndustryMetricArr[elementKey].StatementDate).format("YYYY"));
                                     chartConfigObj.seriesArr[0].data.push(MetricArr[elementKey][chartConfigObj.key]);
-                                    if(chartConfigObj.key == 'GrossProfitMargin'){
-                                        chartConfigObj.seriesArr[1].data.push(MetricArr[elementKey][chartConfigObj.key]+"%");
+                                    if (chartConfigObj.key == 'GrossProfitMargin') {
+                                        chartConfigObj.seriesArr[1].data.push(MetricArr[elementKey][chartConfigObj.key] + "%");
                                     } else {
                                         chartConfigObj.seriesArr[1].data.push(MetricArr[elementKey][chartConfigObj.key]);
                                     }
@@ -832,6 +839,10 @@
                             });
                             setChart(chartConfigObj);
                         });
+                        priceBookRadio = { ...barChartsArr[6], container: 'priceBookRadio' };
+                        setChart(priceBookRadio);
+                        netProfitMargin = { ...barChartsArr[6], container: 'netProfitMargin' };
+                        setChart(netProfitMargin);
                         console.log('barChartsArr => ', barChartsArr);
                     });
                     setTableValue('income');

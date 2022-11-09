@@ -30,9 +30,8 @@
                 <!-- <div class="clearfix"></div> -->
             </div>
             <div class="divider"></div>
-            <ul ng-if="vm.selectedTab === 'news'" uib-pagination boundary-links="true" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
-                class="pagination-sm"  first-text="&laquo;"
-                last-text="&raquo;" max-size="5" num-pages="vm.models.numPages" ng-show="vm.showPagination()" boundary-link-numbers="true" rotate="false">
+            <ul ng-if="vm.selectedTab === 'news'" uib-pagination boundary-links="false" total-items="vm.getTotalItems()" ng-model="vm.models.currentPage"
+                class="pagination-sm" max-size="5" num-pages="vm.models.numPages" ng-show="vm.showPagination()" force-ellipses="true">
             </ul>
             <div class="upcoming_event" ng-if="vm.selectedTab === 'upcomingEarning'">
                 <div class="upcoming_event_inner release_date">
