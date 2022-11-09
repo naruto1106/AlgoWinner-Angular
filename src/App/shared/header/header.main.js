@@ -13,10 +13,12 @@
         'sharedFakeProgressService', 'sGatewaySessionService', 'sDroidHelperService', 'sProductService', 'sUserAccountService',
         'commonHeaderModeService', 'commonLocationHistoryService', 'coreDataStorageService', 'sGatewayTokenRefreshService',
         'sStrategyCommerceService', 'commonScreenResizerService', 'sAccountService', 'sActivityNotificationService', 'sUserService',
-        'sHeaderService', "pAlgoOracleService", "pMobileWebService"],
+        'sHeaderService', "pAlgoOracleService", "pMobileWebService", '$anchorScroll', '$location'],
     function (vm, dep, tool) {
         // as service
         // as part of header
+        $location = dep.$location,
+        $anchorScroll = dep.$anchorScroll;
         var temporaryUserId = null;
         var locationHistory = dep.commonLocationHistoryService.locationHistory;
         var sHeaderService = dep.sHeaderService,
@@ -39,6 +41,11 @@
             coreNotificationService = dep.coreNotificationService,
             $route = dep.$route,
             pAlgoOracleService = dep.pAlgoOracleService;
+
+        function gotoSection(sectionId) {
+            $location.hash(sectionId);
+            $anchorScroll();
+        }
 
         function openHelpWizard() {
             $rootScope.$broadcast("onHelpWizardClicked");
@@ -150,7 +157,8 @@
                 goToAmAuto: sHeaderService.goToAmAuto,
                 goToNewTab: commonLocationHistoryService.goToNewTab,
                 openAcademy: openAcademy,
-                searchProductsInHeader: searchProductsInHeader
+                searchProductsInHeader: searchProductsInHeader,
+                gotoSection: gotoSection,
             });
 
             sGatewayTokenRefreshService.start();
