@@ -53,10 +53,10 @@
                         Table View
                     </button>
                 </div>
-                <div ng-if="vm.selectedTableChartOne === 'chartview1'" class="radio_tab_body">
+                <div  ng-class="{'active_tab_content': vm.selectedTableChartOne === 'chartview1', 'inActive_tab_content': vm.selectedTableChartOne == 'tableveiw1'}" class="radio_tab_body">
                     <div id={{vm.priceBookRadio.container}}></div>
                 </div>
-                <div ng-if="vm.selectedTableChartOne === 'tableveiw1'" class="radio_tab_body">
+                <div ng-class="{'active_tab_content': vm.selectedTableChartOne === 'tableveiw1', 'inActive_tab_content': vm.selectedTableChartOne == 'chartview1'}" class="radio_tab_body">
                     <table>
                         <thead>
                             <tr>
@@ -101,10 +101,10 @@
                         Table View
                     </button>
                 </div>
-                <div ng-if="vm.selectedTableChart === 'chartview'" class="radio_tab_body">
+                <div ng-class="{'active_tab_content': vm.selectedTableChart === 'chartview', 'inActive_tab_content': vm.selectedTableChart == 'tableveiw'}" class="radio_tab_body">
                     <div id={{vm.netProfitMargin.container}}></div>
                 </div>
-                <div ng-if="vm.selectedTableChart === 'tableveiw'" class="radio_tab_body">
+                <div ng-class="{'active_tab_content': vm.selectedTableChart === 'tableveiw', 'inActive_tab_content': vm.selectedTableChart == 'chartview'}" class="radio_tab_body">
                     <table>
                         <thead>
                             <tr>
