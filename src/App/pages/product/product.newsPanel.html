@@ -20,7 +20,7 @@
                     Upcoming Earnings
                 </button>
             </div>
-            <div class="news-content d-flex justify-between align_center"
+            <div class="news-content d-flex justify-between flex-wrap"
                 ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)"
                 ng-if="vm.selectedTab === 'news'">
                 <div class="news-title">{{news.Title}}</div>

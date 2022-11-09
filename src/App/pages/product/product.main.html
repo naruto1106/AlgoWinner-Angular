@@ -6,15 +6,15 @@
         <h4 class="m-0px p-top-20px">No results found for this product: {{vm.symbol}}</h4>
     </div>
     <div ng-if="!vm.showErrorMessage()">
-        <agmp-product-price-panel id="price-section" class="p-20px"></agmp-product-price-panel>
+        <agmp-product-price-panel id="price-section" class="top_bottm_space"></agmp-product-price-panel>
         <div class="clearfix"></div>
-        <agmp-product-chart-panel id="chart-section" class="p-20px"></agmp-product-chart-panel>
+        <agmp-product-chart-panel id="chart-section" class="top_bottm_space"></agmp-product-chart-panel>
         <div class="clearfix"></div>
-        <agmp-product-sentiment-panel id="sentiment-section" class="p-20px" ng-if="vm.TradeVenueLoc == 'US'"></agmp-product-sentiment-panel>
+        <agmp-product-sentiment-panel id="sentiment-section" class="top_bottm_space" ng-if="vm.TradeVenueLoc == 'US'"></agmp-product-sentiment-panel>
         <div class="clearfix"></div>
-        <agmp-product-fundamental-panel id="fundamental-section" class="p-20px" ng-if="vm.TradeVenueLoc == 'US'"></agmp-product-fundamental-panel>
+        <agmp-product-fundamental-panel id="fundamental-section" class="top_bottm_space" ng-if="vm.TradeVenueLoc == 'US'"></agmp-product-fundamental-panel>
         <div class="clearfix"></div>
-        <div class="p-20px" ng-if="!vm.isWarrants()">
+        <div class="top_bottm_space" ng-if="!vm.isWarrants()">
             <div class="row-md-2 gap-20px" ng-if="vm.TradeVenueLoc == 'US'">
                 <div class="col-md-1 overview_">
                     <agmp-product-company-overview-panel id="overview-section"></agmp-product-company-overview-panel>
