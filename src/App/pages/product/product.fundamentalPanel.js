@@ -217,7 +217,7 @@
                     responsive: {
                         rules: [{
                             condition: {
-                                maxWidth: 500
+                                maxWidth: 1900
                             },
                             chartOptions: {
                                 legend: {
@@ -241,7 +241,8 @@
                                 credits: {
                                     enabled: false
                                 }
-                            }
+                            },
+                            
                         }]
                     }
                 });
