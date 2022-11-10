@@ -606,6 +606,7 @@
                         avg: on5Year
                     }
                     chartConfigObj.grothTable = [];
+                    chartConfigObj.grothTablePer =null;
                     if (is1Year) {
                         chartConfigObj.grothTable.push(objdata);
                     }
