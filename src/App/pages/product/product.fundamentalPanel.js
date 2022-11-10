@@ -589,16 +589,30 @@
                         display3Year = '3 quarters Growth ' + (threeYearGrowth).toFixed(0) + '% (Average ' + (threeYearAvg).toFixed(0) + '%)';
                         display5Year = '5 quarters Growth ' + (fiveYearGrowth).toFixed(0) + '% (Average ' + (fiveYearAvg).toFixed(0) + '%)';
                     }
-
+                    let onYear = (oneYearAvg).toFixed(0)
+                    let on3Year = (threeYearAvg).toFixed(0)
+                    let on5Year = (fiveYearAvg).toFixed(0)
+                    let objdata = {
+                        disYr: display1Year,
+                        avg: onYear
+                    }
+                    let objdata1 = {
+                        disYr: display3Year,
+                        avg: on3Year
+                    }
+                    let objdata2 = {
+                        disYr: display5Year,
+                        avg: on5Year
+                    }
                     chartConfigObj.grothTable = [];
                     if (is1Year) {
-                        chartConfigObj.grothTable.push(display1Year);
+                        chartConfigObj.grothTable.push(objdata);
                     }
                     if (is3Year) {
-                        chartConfigObj.grothTable.push(display3Year);
+                        chartConfigObj.grothTable.push(objdata1);
                     }
                     if (is5Year) {
-                        chartConfigObj.grothTable.push(display5Year);
+                        chartConfigObj.grothTable.push(objdata2);
                     }
 
                     IndustryMetricArr.forEach(function (elementObj, elementKey) {
