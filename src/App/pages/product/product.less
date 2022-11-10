@@ -500,6 +500,9 @@
                 }
             }
         }
+        .phone_select {
+            display: none;
+        }
     }
 
     .fundamental-panel {
@@ -1959,6 +1962,22 @@
                 }
         }
         .sentiment-panel {
+            .phone_select {
+                display: block;
+                border: unset;
+                color: #475467;
+                font-size: 14px;
+                padding: 20px 0 20px 20px;
+                font-weight: 600;
+                outline: unset;
+            }
+            li.uib-tab.nav-item{
+                a{
+                    &.nav-link {
+                        display: none;
+                    }
+                }
+            }
             .news-box {
                 .sentiment-table{
                     tr {
@@ -1969,6 +1988,8 @@
                 }
             }
         }
+       
+        
         
     }
 

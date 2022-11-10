@@ -49,6 +49,10 @@
         <div class="col-md-2 rental_outter" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
             <div class="white-box m-bottom-25px">
                 <uib-tabset>
+                    <select class="phone_select">
+                        <option>Retail Interest</option>
+                        <option>Retail Sentiment</option>
+                    </select>
                     <uib-tab heading="Retail Interest" ng-click="vm.changeRetailActivityChartPeriod()">
                         <div class="sentimental_select">
                             <select ng-change="vm.changeRetailActivityChartPeriod()"
@@ -63,6 +67,7 @@
                                 ng-model="vm.selectedSentimentPeriod"
                                 ng-options="m for m in vm.retailSentimentPeriods"></select>
                         </div>
+                       
                         <div id="retail_sentiment"></div>
                     </uib-tab>
                 </uib-tabset>
