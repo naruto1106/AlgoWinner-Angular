@@ -9,7 +9,7 @@
                         text: ''
                     },
                     chart: {
-                        height: 355,
+                        height: 370,
                         
                     },
                     credits: {
@@ -154,7 +154,7 @@
                         }]
                     }
                 });
-                chart.setSize(null, 325);
+                chart.setSize(null, 340);
             }
 
             function changeRetailActivityChartPeriod() {
