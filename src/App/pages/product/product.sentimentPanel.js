@@ -19,7 +19,6 @@
                     subtitle: {
                         text: ''
                     },
-
                     yAxis: {
                         title: {
                             text: null
