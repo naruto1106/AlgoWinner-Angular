@@ -1,0 +1,5 @@
+agmNgModuleWrapper('agmp.tradeview',
+[
+
+   
+   ]);
