@@ -1,4 +1,5 @@
 <div class="body_wrapper">
+
     <header>
         <div class="header_inner xsapce">
             <div class="header_outter d-flex flex-wrap justify-between">
@@ -138,21 +139,21 @@
                             <div class="universe_select">
                                 <h4 class="p300l">Universe</h4>
                                 <div class="select-box">
-                                    <div class="select-box__current" tabindex="1">
+                                    <div class="select-box__current" tabindex="11">
                                         <div class="select-box__value">
-                                            <input class="select-box__input" type="radio" id="0" value="1" name="Ben" checked="checked"/>
+                                            <input class="select-box__input" type="radio" id="011" value="111" name="market" checked="checked"/>
                                             <p class="select-box__input-text">Choose Sector</p>
                                         </div>
                                         <div class="select-box__value">
-                                            <input class="select-box__input" type="radio" id="1" value="2" name="Ben"/>
+                                            <input class="select-box__input" type="radio" id="111" value="211" name="market"/>
                                             <p class="select-box__input-text">Market</p>
                                         </div>
                                         <div class="select-box__value">
-                                            <input class="select-box__input" type="radio" id="2" value="3" name="Ben"/>
+                                            <input class="select-box__input" type="radio" id="211" value="311" name="market"/>
                                             <p class="select-box__input-text">Watchlist</p>
                                         </div>
                                         <div class="select-box__value">
-                                            <input class="select-box__input" type="radio" id="3" value="4" name="Ben"/>
+                                            <input class="select-box__input" type="radio" id="311" value="411" name="market"/>
                                             <p class="select-box__input-text">Index</p>
                                         </div>
                                         
@@ -160,13 +161,13 @@
                                     </div>
                                     <ul class="select-box__list">
                                         <li>
-                                            <label class="select-box__option" for="2" aria-hidden="aria-hidden">Market</label>
+                                            <label class="select-box__option" for="211" aria-hidden="aria-hidden">Market</label>
                                         </li>
                                         <li>
-                                            <label class="select-box__option" for="1" aria-hidden="aria-hidden">Watchlist</label>
+                                            <label class="select-box__option" for="111" aria-hidden="aria-hidden">Watchlist</label>
                                         </li>
                                         <li>
-                                            <label class="select-box__option" for="2" aria-hidden="aria-hidden">Index</label>
+                                            <label class="select-box__option" for="211" aria-hidden="aria-hidden">Index</label>
                                         </li>
                                         
                                     </ul>
@@ -318,7 +319,7 @@
 
 
 
-                            <a href="#" class="border_btns">
+                            <a data-toggle="modal" data-target="#anylsis_modal" class="border_btns">
                                 <img src="/App/shared/image/trade/icon1.svg">
                                 Anylasis Filter
                             </a>
@@ -378,6 +379,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
                                 <tr>
                                     <td>PEPG</td>
                                     <td>PepGen Inc.</td>
@@ -392,9 +394,9 @@
                                         <a href="#" class="border_style table_icons"><img src="/App/shared/image/trade/star.svg"></a>
                                         <a href="#" class="border_style table_icons"><img src="/App/shared/image/trade/bell.svg"></a>
                                         <a href="#" class="border_style table_icons"><img src="/App/shared/image/trade/eye.svg"></a>
-                                        <div class="table_dots custom_dropdown">
-                                            <a href="#" ><img src="/App/shared/image/trade/dots.svg"></a>
-                                            <ul class="dropdown_list">
+                                        <div class="table_dots dropdown custom_dropdown">
+                                            <a class="dropdown-toggle" type="button" data-toggle="dropdown"><img src="/App/shared/image/trade/dots.svg"></a>
+                                            <ul class="dropdown_list dropdown-menu">
                                                 <li><a href="#">Go to Cart</a></li>
                                                 <li><a href="#">Consult Oracle</a></li>
                                                 <li><a href="#">Direct Trade</a></li>
@@ -402,54 +404,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>PEPG</td>
-                                    <td>PepGen Inc.</td>
-                                    <td>Healthcare</td>
-                                    <td>Biotechnology</td>
-                                    <td>25.56M</td>
-                                    <td>10.90</td>
-                                    <td>9.22</td>
-                                    <td class="green_txt">10.93</td>
-                                    <td class="red_txt">110.91%</td>
-                                    <td class="d-flex align-center icons_div">
-                                        <a href="#" class="border_style table_icons"><img src="/App/shared/image/trade/star.svg"></a>
-                                        <a href="#" class="border_style table_icons"><img src="/App/shared/image/trade/bell.svg"></a>
-                                        <a href="#" class="border_style table_icons"><img src="/App/shared/image/trade/eye.svg"></a>
-                                        <div class="table_dots custom_dropdown">
-                                            <a href="#" ><img src="/App/shared/image/trade/dots.svg"></a>
-                                            <ul class="dropdown_list">
-                                                <li><a href="#">Go to Cart</a></li>
-                                                <li><a href="#">Consult Oracle</a></li>
-                                                <li><a href="#">Direct Trade</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>PEPG</td>
-                                    <td>PepGen Inc.</td>
-                                    <td>Healthcare</td>
-                                    <td>Biotechnology</td>
-                                    <td>25.56M</td>
-                                    <td>10.90</td>
-                                    <td>9.22</td>
-                                    <td class="green_txt">10.93</td>
-                                    <td class="red_txt">110.91%</td>
-                                    <td class="d-flex align-center icons_div">
-                                        <a href="#" class="border_style table_icons"><img src="/App/shared/image/trade/star.svg"></a>
-                                        <a href="#" class="border_style table_icons"><img src="/App/shared/image/trade/bell.svg"></a>
-                                        <a href="#" class="border_style table_icons"><img src="/App/shared/image/trade/eye.svg"></a>
-                                        <div class="table_dots custom_dropdown">
-                                            <a href="#" ><img src="/App/shared/image/trade/dots.svg"></a>
-                                            <ul class="dropdown_list">
-                                                <li><a href="#">Go to Cart</a></li>
-                                                <li><a href="#">Consult Oracle</a></li>
-                                                <li><a href="#">Direct Trade</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                              
                             </tbody>
                         </table>
                        
@@ -642,4 +597,488 @@
             </div>
         </section>
     </div>
- </div>
+
+    <div class="modal fade common-modal analyst_modal" id="anylsis_modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="">
+                <div class="moddal_heading_outter">
+                    <h2 class="modal_heading">Analysis Filter</h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="summry_btns d-flex justify-between align-center">
+                    <div class="summery_filer">
+                        <h3>Summary Filter: <span>2</span></h3>
+                    
+                    </div>
+                    <div class="modal_butns">
+                        <a href="#" class="border_btns">
+                            <img src="/App/shared/image/trade/bin.svg">
+                            Clear All
+                        </a>
+                        <a href="#" class="filled_btn">
+                            <img src="/App/shared/image/trade/apply.svg">
+                            Apply
+                        </a>
+                    </div>
+                </div>
+                <div class="modal_tabbing">
+                    <div class="modal_tabs_outter">
+                        <button class="modal_tab active">Technical</button>
+                        <button class="modal_tab">Fundamental</button>
+                        <button class="modal_tab">Sentiment</button>
+                        <button class="modal_tab">Event</button>
+                    </div>
+                    <div class="accordian_outter">
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Trend Analysis
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Breakout
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Momentum
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Divergence
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Consolidation
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Trend Analysis
+                            </div>
+                        </div>
+                        <div class="accordian_inner active">
+                            <div class="accodian_outer_txt">
+                                Risk Measure
+                            </div>
+                            <div class="accordian_show">
+                                <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                    <div class="accordian_grid_inner">
+                                        <div class="accordian_img_inner">   
+                                            <img src="/App/shared/image/trade/correlation.png">
+                                        </div>
+                                        <div class="accorian_inner_txt">
+                                            <h4>Correlation</h4>
+                                            <h5 class="free_txt d-flex justify-between">Free <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="accordian_grid_inner">
+                                        <div class="accordian_img_inner">   
+                                            <img src="/App/shared/image/trade/sharpe_ratio.png">
+                                        </div>
+                                        <div class="accorian_inner_txt">
+                                            <h4>Sharpe Radio</h4>
+                                            <h5 class="free_txt d-flex justify-between">Free <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="accordian_grid_inner">
+                                        <div class="accordian_img_inner">   
+                                            <img src="/App/shared/image/trade/filter.png">
+                                        </div>
+                                        <div class="accorian_inner_txt">
+                                            <h4>Filter 1</h4>
+                                            <h5 class="premium_txt d-flex justify-between">Premium <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="accordian_grid_inner">
+                                        <div class="accordian_img_inner">   
+                                            <img src="/App/shared/image/trade/filter2.png">
+                                        </div>
+                                        <div class="accorian_inner_txt">
+                                            <h4>Filter 2</h4>
+                                            <h5 class="premium_txt d-flex justify-between">Premium <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="analyst_modal analyst_modal2" style="display:none;">
+        <div class="moddal_heading_outter">
+            <h2 class="modal_heading">Analysis Filter</h2>
+        </div>
+       
+            <div class="summry_btns d-flex justify-between align-center">
+                <div class="summery_filer">
+                    <h3>Summary Filter: <span class="secoundry600">2</span></h3>
+                    <div class="summer_rules_outer d-flex align-center">
+                        <h3>Rules:</h3>
+                        <div class="rules_btns">
+                            <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>Correlation</a>
+                            <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>Sharp Radio</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal_butns">
+                    <a href="#" class="border_btns">
+                        <img src="/App/shared/image/trade/bin.svg">
+                        Clear All
+                    </a>
+                    <a href="#" class="filled_btn" style="display:none;">
+                        <img src="/App/shared/image/trade/apply.svg">
+                        Apply
+                    </a>
+                    <a href="#" class="primary400_btn">
+                        <img src="/App/shared/image/trade/refresh.svg">
+                       On Process ...
+                    </a>
+                </div>
+            </div>
+            <div class="modal_left_right-outter d-flex flex-wrap">
+                <div class="modal_tabbing">
+                    <div class="modal_tabs_outter">
+                        <button class="modal_tab active">Technical</button>
+                        <button class="modal_tab">Fundamental</button>
+                        <button class="modal_tab">Sentiment</button>
+                        <button class="modal_tab">Event</button>
+                    </div>
+                    <div class="accordian_outter">
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Trend Analysis
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Breakout
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Momentum
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Divergence
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Consolidation
+                            </div>
+                        </div>
+                        <div class="accordian_inner">
+                            <div class="accodian_outer_txt">
+                                Trend Analysis
+                            </div>
+                        </div>
+                        <div class="accordian_inner active">
+                            <div class="accodian_outer_txt">
+                                Risk Measure
+                            </div>
+                            <div class="accordian_show">
+                                <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                    <div class="accordian_grid_inner">
+                                        <div class="accordian_img_inner">   
+                                            <img src="/App/shared/image/trade/correlation.png">
+                                        </div>
+                                        <div class="accorian_inner_txt">
+                                            <h4>Correlation</h4>
+                                            <h5 class="free_txt d-flex justify-between">Free <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="accordian_grid_inner">
+                                        <div class="accordian_img_inner">   
+                                            <img src="/App/shared/image/trade/sharpe_ratio.png">
+                                        </div>
+                                        <div class="accorian_inner_txt">
+                                            <h4>Sharpe Radio</h4>
+                                            <h5 class="free_txt d-flex justify-between">Free <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="accordian_grid_inner">
+                                        <div class="accordian_img_inner">   
+                                            <img src="/App/shared/image/trade/filter.png">
+                                        </div>
+                                        <div class="accorian_inner_txt">
+                                            <h4>Filter 1</h4>
+                                            <h5 class="premium_txt d-flex justify-between">Premium <a href="#"><img src="/App/shared/image/trade/tick.svg"></a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="accordian_grid_inner">
+                                        <div class="accordian_img_inner">   
+                                            <img src="/App/shared/image/trade/filter2.png">
+                                        </div>
+                                        <div class="accorian_inner_txt">
+                                            <h4>Filter 2</h4>
+                                            <h5 class="premium_txt d-flex justify-between">Premium <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal_right_side">
+                    <div class="modal_right_inner">
+                        <div class="right_heading_outter">
+                            <h2 class="modal_heading">Correlation</h2>
+                        </div>    
+                        <div class="correlation_feilds">
+                            <div class="universe_select">
+                                <h4 class="p300l">Compare to</h4>
+                                <div class="select-box">
+                                    <div class="select-box__current" tabindex="7">
+                                        <div class="select-box__value">
+                                            <input class="select-box__input" type="radio" id="07" value="17" name="Ben" checked="checked">
+                                            <p class="select-box__input-text">S&P 500</p>
+                                        </div>
+                                        <div class="select-box__value">
+                                            <input class="select-box__input" type="radio" id="17" value="27" name="Ben">
+                                            <p class="select-box__input-text">Market</p>
+                                        </div>
+                                        <div class="select-box__value">
+                                            <input class="select-box__input" type="radio" id="27" value="37" name="Ben">
+                                            <p class="select-box__input-text">Watchlist</p>
+                                        </div>
+                                        <div class="select-box__value">
+                                            <input class="select-box__input" type="radio" id="37" value="47" name="Ben">
+                                            <p class="select-box__input-text">Index</p>
+                                        </div>
+                                        
+                                        <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                    </div>
+                                    <ul class="select-box__list">
+                                        <li>
+                                            <label class="select-box__option" for="27" aria-hidden="aria-hidden">Market</label>
+                                        </li>
+                                        <li>
+                                            <label class="select-box__option" for="17" aria-hidden="aria-hidden">Watchlist</label>
+                                        </li>
+                                        <li>
+                                            <label class="select-box__option" for="27" aria-hidden="aria-hidden">Index</label>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="look_back_outer">
+                                <h4 class="p300l">lookback</h4>
+                                <div class="lockback_value d-flex align-center">
+                                    <h4>20</h4>
+                                    <h5>Days</h5>
+                                </div>
+                            </div>
+                            <div class="correlation_range">
+                                <div class="correlation_range_outter d-flex justify-between flex-wrap align-center">
+                                    <h5>is</h5>
+                                    <div class="universe_select green_select_box">
+                                        <div class="select-box">
+                                            <div class="select-box__current" tabindex="8">
+                                                <div class="select-box__value">
+                                                    <input class="select-box__input" type="radio" id="08" value="18" name="between" checked="checked">
+                                                    <p class="select-box__input-text">between</p>
+                                                </div>
+                                                <div class="select-box__value">
+                                                    <input class="select-box__input" type="radio" id="18" value="28" name="between">
+                                                    <p class="select-box__input-text">Market</p>
+                                                </div>
+                                                <div class="select-box__value">
+                                                    <input class="select-box__input" type="radio" id="28" value="38" name="between">
+                                                    <p class="select-box__input-text">Watchlist</p>
+                                                </div>
+                                            
+                                                
+                                                <img class="select-box__icon" src="/App/shared/image/trade/green-arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                            </div>
+                                            <ul class="select-box__list">
+                                                <li>
+                                                    <label class="select-box__option" for="28" aria-hidden="aria-hidden">Market</label>
+                                                </li>
+                                                <li>
+                                                    <label class="select-box__option" for="18" aria-hidden="aria-hidden">Watchlist</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="select-box num_select_box">
+                                        <div class="select-box__current" tabindex="9">
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="09" value="19" name="num" checked="checked">
+                                                <p class="select-box__input-text">0.3</p>
+                                            </div>
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="19" value="29" name="num">
+                                                <p class="select-box__input-text">Market</p>
+                                            </div>
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="29" value="39" name="num">
+                                                <p class="select-box__input-text">Watchlist</p>
+                                            </div>
+                                        
+                                            
+                                            <img class="select-box__icon" src="/App/shared/image/trade/blue_arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                        </div>
+                                        <ul class="select-box__list">
+                                            <li>
+                                                <label class="select-box__option" for="29" aria-hidden="aria-hidden">Market</label>
+                                            </li>
+                                            <li>
+                                                <label class="select-box__option" for="19" aria-hidden="aria-hidden">Watchlist</label>
+                                            </li>
+                                        </ul>
+                                    </div>  
+                                    <h5>and</h5>
+                                    <div class="select-box num_select_box">
+                                        <div class="select-box__current" tabindex="10">
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="010" value="110" name="num2" checked="checked">
+                                                <p class="select-box__input-text">0.5</p>
+                                            </div>
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="110" value="210" name="num2">
+                                                <p class="select-box__input-text">Market</p>
+                                            </div>
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="210" value="310" name="num2">
+                                                <p class="select-box__input-text">Watchlist</p>
+                                            </div>
+                                        
+                                            
+                                            <img class="select-box__icon" src="/App/shared/image/trade/blue_arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                        </div>
+                                        <ul class="select-box__list">
+                                            <li>
+                                                <label class="select-box__option" for="210" aria-hidden="aria-hidden">Market</label>
+                                            </li>
+                                            <li>
+                                                <label class="select-box__option" for="110" aria-hidden="aria-hidden">Watchlist</label>
+                                            </li>
+                                        </ul>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal_right_inner">
+                        <div class="right_heading_outter">
+                            <h2 class="modal_heading">Sharpe Radio</h2>
+                        </div>    
+                        <div class="correlation_feilds">
+                            <div class="look_back_outer">
+                                <h4 class="p300l">lookback</h4>
+                                <div class="lockback_value d-flex align-center">
+                                    <h4>3M</h4>
+                                   
+                                </div>
+                            </div>
+                            <div class="correlation_range">
+                                <div class="correlation_range_outter d-flex justify-between flex-wrap align-center">
+                                    <h5>is</h5>
+                                    <div class="universe_select green_select_box">
+                                        <div class="select-box">
+                                            <div class="select-box__current" tabindex="12">
+                                                <div class="select-box__value">
+                                                    <input class="select-box__input" type="radio" id="012" value="112" name="sharpe1" checked="checked">
+                                                    <p class="select-box__input-text">between</p>
+                                                </div>
+                                                <div class="select-box__value">
+                                                    <input class="select-box__input" type="radio" id="112" value="212" name="sharpe1">
+                                                    <p class="select-box__input-text">Market</p>
+                                                </div>
+                                                <div class="select-box__value">
+                                                    <input class="select-box__input" type="radio" id="212" value="312" name="sharpe1">
+                                                    <p class="select-box__input-text">Watchlist</p>
+                                                </div>
+                                            
+                                                
+                                                <img class="select-box__icon" src="/App/shared/image/trade/green-arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                            </div>
+                                            <ul class="select-box__list">
+                                                <li>
+                                                    <label class="select-box__option" for="212" aria-hidden="aria-hidden">Market</label>
+                                                </li>
+                                                <li>
+                                                    <label class="select-box__option" for="112" aria-hidden="aria-hidden">Watchlist</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="select-box num_select_box">
+                                        <div class="select-box__current" tabindex="13">
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="013" value="113" name="sharpe2" checked="checked">
+                                                <p class="select-box__input-text">0.3</p>
+                                            </div>
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="113" value="213" name="sharpe2">
+                                                <p class="select-box__input-text">Market</p>
+                                            </div>
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="213" value="313" name="sharpe2">
+                                                <p class="select-box__input-text">Watchlist</p>
+                                            </div>
+                                        
+                                            
+                                            <img class="select-box__icon" src="/App/shared/image/trade/blue_arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                        </div>
+                                        <ul class="select-box__list">
+                                            <li>
+                                                <label class="select-box__option" for="213" aria-hidden="aria-hidden">Market</label>
+                                            </li>
+                                            <li>
+                                                <label class="select-box__option" for="113" aria-hidden="aria-hidden">Watchlist</label>
+                                            </li>
+                                        </ul>
+                                    </div>  
+                                    <h5>and</h5>
+                                    <div class="select-box num_select_box">
+                                        <div class="select-box__current" tabindex="14">
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="014" value="114" name="sharpe" checked="checked">
+                                                <p class="select-box__input-text">0.5</p>
+                                            </div>
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="114" value="214" name="sharpe3">
+                                                <p class="select-box__input-text">Market</p>
+                                            </div>
+                                            <div class="select-box__value">
+                                                <input class="select-box__input" type="radio" id="214" value="314" name="sharpe3">
+                                                <p class="select-box__input-text">Watchlist</p>
+                                            </div>
+                                        
+                                            
+                                            <img class="select-box__icon" src="/App/shared/image/trade/blue_arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                        </div>
+                                        <ul class="select-box__list">
+                                            <li>
+                                                <label class="select-box__option" for="214" aria-hidden="aria-hidden">Market</label>
+                                            </li>
+                                            <li>
+                                                <label class="select-box__option" for="114" aria-hidden="aria-hidden">Watchlist</label>
+                                            </li>
+                                        </ul>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
