@@ -24,7 +24,7 @@
                             </span>
                             <div class="spike_tooltip"><img src="/App/shared/image/newimages/not.svg" ng-if="newsSentimentObj.SentimentScore > 0 && newsSentimentObj.SentimentScore <= 0.5">
                                 <span class="tooltiptext">A Spike of Interest</span>
-                              </div>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -54,6 +54,7 @@
                         <option value="retailInterest">Retail Interest</option>
                         <option value="retailSentiment">Retail Sentiment</option>
                     </select>
+                    
                     <uib-tab heading="Retail Interest" ng-click="vm.changeRetailActivityChartPeriod()">
                         <div class="sentimental_select">
                             <select ng-change="vm.changeRetailActivityChartPeriod()"

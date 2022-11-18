@@ -195,7 +195,6 @@
                             x: -10
                         }
                     },
-
                     legend: {
                         align: 'right',
                         verticalAlign: 'top',
@@ -221,7 +220,7 @@
                             },
                             chartOptions: {
                                 legend: {
-                                    align: 'center',
+                                    align: 'left',
                                     verticalAlign: 'bottom',
                                     layout: 'horizontal'
                                 },
@@ -238,6 +237,10 @@
                                 subtitle: {
                                     text: null
                                 },
+                                scrollablePlotArea: {
+                                    maxWidth: 900,
+                                    scrollPositionX: 1
+                                    },
                                 credits: {
                                     enabled: false
                                 }
