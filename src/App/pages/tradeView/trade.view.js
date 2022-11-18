@@ -2,7 +2,7 @@ agmNgModuleWrapper('agmp.tradeview')
     .defineController('p.tradeView.TradeViewController',
         function (vm, dep, tool) {
             
-
+            
         
         }) 
         .defineDirectiveForE('agmp-TradeComponent-simple-screener', [],

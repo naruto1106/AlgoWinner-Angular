@@ -29,6 +29,15 @@
     <link href="//am708403.azureedge.net/images/algofont/styles.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
+        $(window).scroll(function(){
+                if ($(this).scrollTop() > 50) {
+                   $('.tradeheader').addClass('tradescrollheader');
+                } else {
+                   $('.tradeheader').removeClass('tradescrollheader');
+                }
+            });
+    </script>
+    <script>
         Highcharts.setOptions({
             lang: {
                 thousandsSep:","
