@@ -206,15 +206,28 @@
                     lineCharts('retail_sentiment', chartData, 'Retail Sentiment');
                 });
             }
+            
+            function switchRetail() {
+                
+                if(vm.selectedRetail && vm.selectedRetail=="retailInterest") {
+                    
+                    vm.changeRetailActivityChartPeriod();
+                } else {
+                    debugger;
+                    angular.element('#tabSecond').triggerHandler('click');
+                }
+            }
 
             tool.initialize(function () {
                 tool.setVmProperties({
+                    selectedRetail:"retailInterest",
                     selectedInterestPeriod: "1 Month",
                     selectedSentimentPeriod: "1 Month",
                     retailInterestPeriods: ["1 Week", "1 Month", "3 Month", "6 Month", "1 Year"],
                     retailSentimentPeriods: ["1 Week", "1 Month", "3 Month", "6 Month", "1 Year"],
                     changeRetailActivityChartPeriod: changeRetailActivityChartPeriod,
                     changeRetailSentimentChartPeriod: changeRetailSentimentChartPeriod,
+                    switchRetail:switchRetail,
                 });
 
                 var productDetail = pProductPageService.productDetail;
