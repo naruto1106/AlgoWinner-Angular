@@ -13,9 +13,10 @@
                     <tr ng-repeat="newsSentimentObj in vm.newsSentiment">
                         <td>{{newsSentimentObj.NewsSentimentType}}</td>
                         <td ng-class="{'red-profit': newsSentimentObj.SentimentScore < 0, 'gray-profit': newsSentimentObj.SentimentScore >= 0 && newsSentimentObj.SentimentScore <= 0.5,'green-profit': newsSentimentObj.SentimentScore > 0.5}" >{{newsSentimentObj.SentimentScore|number:2}} 
-                            <span class="green-profit" ng-if="newsSentimentObj.SentimentScore >0.5">positive</span></td>
+                            <span class="green-profit" ng-if="newsSentimentObj.SentimentScore >0.5">Positive</span>
                             <span class="red-profit" ng-if="newsSentimentObj.SentimentScore <0">Negative</span>
-                            <span class="gray-profit" ng-if="newsSentimentObj.SentimentScore >= 0 && newsSentimentObj.SentimentScore <= 0.5">Neutral</span>
+                            <span class="gray-profit" ng-if="(newsSentimentObj.SentimentScore >= 0 && newsSentimentObj.SentimentScore <= 0.5)">Neutral</span>
+                        </td>
                         <td class="gray-profit">{{newsSentimentObj.Volume|number:2}}
                             <span ng-if="newsSentimentObj.IsVolumeBreakout" class="volume-icon" agmc-svg-loader
                                 svg-src="'/App/assets/icons/product/information.svg'" uib-tooltip="A Spike of Interest"
@@ -49,9 +50,9 @@
         <div class="col-md-2 rental_outter" ng-if="vm.productDetail.Product.TradeVenueLoc === 'US'">
             <div class="white-box m-bottom-25px">
                 <uib-tabset>
-                    <select class="phone_select">
-                        <option>Retail Interest</option>
-                        <option>Retail Sentiment</option>
+                    <select class="phone_select" ng-change="vm.switchRetail()" ng-model="vm.selectedRetail">
+                        <option value="retailInterest">Retail Interest</option>
+                        <option value="retailSentiment">Retail Sentiment</option>
                     </select>
                     
                     <uib-tab heading="Retail Interest" ng-click="vm.changeRetailActivityChartPeriod()">
@@ -62,7 +63,7 @@
                         </div>
                         <div id="retail_interest"></div>
                     </uib-tab>
-                    <uib-tab heading="Retail Sentiment" ng-click="vm.changeRetailSentimentChartPeriod()">
+                    <uib-tab heading="Retail Sentiment" ng-click="vm.changeRetailSentimentChartPeriod()" id="tabSecond">
                         <div class="sentimental_select">
                             <select ng-change="vm.changeRetailSentimentChartPeriod()"
                                 ng-model="vm.selectedSentimentPeriod"
