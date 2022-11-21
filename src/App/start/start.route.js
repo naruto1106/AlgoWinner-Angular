@@ -33,6 +33,8 @@ var dependencies = [
     "agmp.amAutoPanel",
     'agms.manualFollowFirebase',
     "agmp.backtester",
+    "agmp.tradeIdea"
+
 ];
 
 agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
@@ -216,9 +218,18 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                 }
             })
             .when("/tradeviewPage", {
-                title: "Trade View",
-                controller: "p.tradeView.TradeViewController",
-                templateUrl: "/App/pages/tradeView/trade.view.html",
+                title: "Trade Idea",
+                controller: "p.tradeIdea.TradeIdeaController",
+                templateUrl: "/App/pages/tradeIdea/tradeIdea.view.html",
+                resolve: {
+                    check: checkMobileWeb,
+                    notificationSettings: notificationSetting
+                }
+            })
+            .when("/tradeMain", {
+                title: "Trade Main",
+                controller: "p.tradeIdea.MainController",
+                templateUrl: "/App/pages/tradeIdea/tradeIdea.main.html",
                 resolve: {
                     check: checkMobileWeb,
                     notificationSettings: notificationSetting

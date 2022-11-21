@@ -1,0 +1,4 @@
+agmNgModuleWrapper('agmp.tradeIdea',
+[
+   
+   ]);
