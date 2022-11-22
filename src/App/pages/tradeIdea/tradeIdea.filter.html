@@ -17,11 +17,11 @@
                         </label>
                         <div class="select-box" ng-if="templateType == 'custom'">
                             <div class="select-box__current" tabindex="2">
-                                <select name="customTemplate" >
+                                <!-- <select name="customTemplate" >
                                     <option value="">Choose Template</option>
                                     <option ng-repeat="option in vm.data.Templates" value="{{option.name}}">{{option.name}}</option>
-                                  </select>
-                                <!-- <div class="select-box__value">
+                                  </select> -->
+                                <div class="select-box__value">
                                     <input class="select-box__input" type="radio" id="00" value="01" name="template" checked="checked"/>
                                     <p class="select-box__input-text">Choose Template</p>
                                 </div>
@@ -40,17 +40,22 @@
                                 
                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true"/> -->
                             </div>
-                            <!-- <ul class="select-box__list">
+                            <ul class="select-box__list">
+                                
+                               
                                 <li>
-                                    <label class="select-box__option" for="00" aria-hidden="aria-hidden">User Template 1</label>
+                                    <label class="select-box__option" for="00" aria-hidden="aria-hidden">Choose Template</label>
                                 </li>
                                 <li>
-                                    <label class="select-box__option" for="01" aria-hidden="aria-hidden">User Template 2</label>
+                                    <label class="select-box__option" for="01" aria-hidden="aria-hidden">User Template 1</label>
                                 </li>
                                 <li>
-                                    <label class="select-box__option" for="02" aria-hidden="aria-hidden">User Template 3</label>
+                                    <label class="select-box__option" for="02" aria-hidden="aria-hidden">User Template 2</label>
                                 </li>
-                            </ul> -->
+                                <li>
+                                    <label class="select-box__option" for="03" aria-hidden="aria-hidden">User Template 3</label>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="properietary_outter d-flex align-center flex-wrap">
