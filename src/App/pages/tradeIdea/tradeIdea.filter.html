@@ -16,7 +16,7 @@
                             <span class="checkmark"></span>
                         </label>
                         <div class="select-box" ng-if="templateType == 'custom'">
-                            <div ng-dropdown-multiselect="" options="vm.data.Templates"
+                            <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Templates"
                                 selected-model="vm.customTemplate" extra-settings="vm.dropdownSetting"
                                 translation-texts="vm.customTempText" events="vm.eventsCallback">
                             </div>
@@ -28,7 +28,7 @@
                             <span class="checkmark"></span>
                         </label>
                         <div class="select-box" ng-if="templateType == 'proprietary'">
-                            <div ng-dropdown-multiselect="" options="vm.data.Filters"
+                            <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Filters"
                                 selected-model="vm.proprietaryFilter" extra-settings="vm.dropdownSetting"
                                 translation-texts="vm.proprietaryText">
                             </div>
@@ -48,7 +48,7 @@
                         <div class="universe_select">
                             <h4 class="p300l">Universe</h4>
                             <div class="select-box">
-                                <div ng-dropdown-multiselect="" options="vm.data.uninverse"
+                                <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.uninverse"
                                     selected-model="vm.universeFilter" extra-settings="vm.dropdownSetting"
                                     translation-texts="vm.universeText">
                                 </div>
@@ -57,7 +57,7 @@
                         <div class="universe_select" ng-if="vm.universeFilter.id != undefined">
                             <h4 class="p300l">Country</h4>
                             <div class="select-box">
-                                <div ng-dropdown-multiselect="" options="vm.data.countries"
+                                <div class="cst-dropdown-trade country-select-box" ng-dropdown-multiselect="" options="vm.data.countries"
                                     selected-model="vm.selectedCountry" extra-settings="vm.dropdownSetting"
                                     translation-texts="vm.countryText">
                                 </div>
@@ -66,7 +66,7 @@
                         <div class="universe_select sectorselect" ng-if="vm.selectedCountry.id!= undefined">
                             <h4 class="p300l">Sector</h4>
                             <div class="select-box">
-                                <div ng-dropdown-multiselect="" options="vm.data.sectors"
+                                <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.sectors"
                                     selected-model="vm.selectedSector" extra-settings="vm.dropdownCheckbox"
                                     translation-texts="vm.SelectedText" checkboxes="true"></div>
                             </div>
@@ -74,7 +74,7 @@
                         <div class="universe_select" ng-if="vm.selectedSector.length > 0">
                             <h4 class="p300l">Industry</h4>
                             <div class="select-box">
-                                <div ng-dropdown-multiselect="" options="vm.data.industries"
+                                <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.industries"
                                     selected-model="vm.selectedIndustry" extra-settings="vm.dropdownCheckbox"
                                     checkboxes="true" translation-texts="vm.SelectedText"></div>
                             </div>
