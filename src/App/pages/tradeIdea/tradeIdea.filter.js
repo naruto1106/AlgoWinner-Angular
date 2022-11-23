@@ -2,6 +2,25 @@ agmNgModuleWrapper('agmp.tradeIdea')
     .defineController('p.tradeIdea.FilterController', ['$scope'],
         function ($scope) {
             var vm = this;
+            $scope.customTemplate = {}; 
+            $scope.proprietaryFilter = []; 
+            $scope.universeFilter = []; 
+            $scope.customTempText = {buttonDefaultText: 'Choose Template'};
+            $scope.proprietaryText = {buttonDefaultText: 'Choose Filter'};
+            $scope.eventsCallback = {
+                onItemSelect: function(item) {
+                         console.log("Item Got Selected: ",item);
+                }
+            };
+            $scope.dropdownSetting = { 
+                smartButtonMaxItems: 1, 
+                smartButtonTextConverter: function(itemText, originalItem) { return itemText; },
+                selectionLimit:1,
+                showUncheckAll:false,
+                closeOnSelect:true,
+                scrollable:false,
+                displayProp:'name'
+            };
             $scope.data = {
                 Templates: [
                     { id: '1', name: 'User Template 1' },
@@ -14,9 +33,9 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '3', name: 'Properietary Filter 3' }
                 ],
                 uninverse: [
-                    { id: '1', name: 'Market' },
-                    { id: '2', name: 'Watchlist' },
-                    { id: '3', name: 'Index' }
+                    { id: '111', name: 'Market' },
+                    { id: '112', name: 'Watchlist' },
+                    { id: '113', name: 'Index' }
                 ],
                 countries: 
                 [ 
@@ -299,20 +318,21 @@ agmNgModuleWrapper('agmp.tradeIdea')
             }
 
             function getOption(option, value) {
-
+                console.log(option)
+                console.log(value)
                 switch (option) {
 
                     case 'Universe':
-                        value.selectedUniverse ? $scope.showCountry = true : $scope.showCountry = false;
+                        value ? $scope.showCountry = true : $scope.showCountry = false;
                         break;
 
                     case 'Country':
-                        value.selectedCountry ? $scope.showSector = true : $scope.showSector = false;
+                        value ? $scope.showSector = true : $scope.showSector = false;
                         break;
 
 
                     case 'Sector':
-                        value.selectedSector ? $scope.industryFilter = true : $scope.industryFilter = false;
+                        value ? $scope.industryFilter = true : $scope.industryFilter = false;
                         break;
                     default:
                     // code block
