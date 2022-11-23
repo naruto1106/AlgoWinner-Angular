@@ -16,7 +16,9 @@
                             <span class="checkmark"></span>
                         </label>
                         <div class="select-box" ng-if="templateType == 'custom'">
-                            <div ng-dropdown-multiselect="" options="vm.data.Templates" selected-model="vm.customTemplate" extra-settings="vm.dropdownSetting" translation-texts="vm.customTempText" events="vm.eventsCallback">
+                            <div ng-dropdown-multiselect="" options="vm.data.Templates"
+                                selected-model="vm.customTemplate" extra-settings="vm.dropdownSetting"
+                                translation-texts="vm.customTempText" events="vm.eventsCallback">
                             </div>
                         </div>
                     </div>
@@ -27,7 +29,8 @@
                         </label>
                         <div class="select-box" ng-if="templateType == 'proprietary'">
                             <div ng-dropdown-multiselect="" options="vm.data.Filters"
-                                selected-model="vm.proprietaryFilter" extra-settings="vm.dropdownSetting" translation-texts="vm.proprietaryText">
+                                selected-model="vm.proprietaryFilter" extra-settings="vm.dropdownSetting"
+                                translation-texts="vm.proprietaryText">
                             </div>
                         </div>
                     </div>
@@ -45,188 +48,35 @@
                         <div class="universe_select">
                             <h4 class="p300l">Universe</h4>
                             <div class="select-box">
-                                <div class="select-box__current" tabindex="11">
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="110" name="universe" />
-                                        <p class="select-box__input-text">Choose Universe</p>
-                                    </div>
-                                    <div class="select-box__value" ng-repeat="option in vm.data.uninverse"
-                                        value="{{option.name}}">
-                                        <input class="select-box__input" type="radio" id="{{option.id}}" name="universe"
-                                            ng-model="selectedUniverse" />
-                                        <p class="select-box__input-text">{{option.name}}</p>
-                                    </div>
-                                    <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg"
-                                        alt="Arrow Icon" aria-hidden="true" />
+                                <div ng-dropdown-multiselect="" options="vm.data.uninverse"
+                                    selected-model="vm.universeFilter" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.universeText">
                                 </div>
-                                <ul class="select-box__list">
-                                    <li ng-click="vm.getOption('Universe','')">
-                                        <label class="select-box__option" for="110" aria-hidden="aria-hidden">Choose
-                                            Universe</label>
-                                    </li>
-                                    <li ng-repeat="option in vm.data.uninverse"
-                                        ng-click="vm.getOption('Universe','value')">
-                                        <label class="select-box__option" for="{{option.id}}"
-                                            aria-hidden="aria-hidden">{{option.name}}</label>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
-                        <div class="universe_select" ng-if="vm.showCountry">
+                        <div class="universe_select" ng-if="vm.universeFilter.id != undefined">
                             <h4 class="p300l">Country</h4>
                             <div class="select-box">
-                                <div class="select-box__current" tabindex="4">
-                                    <!-- <select name="countries"  ng-model="selectedCountry"  ng-change="vm.getOption('Country',this)">
-                                        <option value="">Choose Country</option>
-                                        <option ng-repeat="option in vm.data.countries" value="{{option.name}}">{{option.name}}</option>
-                                    </select> -->
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="40" name="country"
-                                            checked="checked" />
-                                        <p class="select-box__input-text">Choose Country</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="41" name="country" />
-                                        <p class="select-box__input-text">India</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="42" name="country" />
-                                        <p class="select-box__input-text">Australia</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="43" name="country" />
-                                        <p class="select-box__input-text">USA</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="44" name="country" />
-                                        <p class="select-box__input-text">Korea</p>
-                                    </div>
-                                    <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg"
-                                        alt="Arrow Icon" aria-hidden="true" />
+                                <div ng-dropdown-multiselect="" options="vm.data.countries"
+                                    selected-model="vm.selectedCountry" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.countryText">
                                 </div>
-                                <ul class="select-box__list">
-                                    <li>
-                                        <label class="select-box__option" for="40" aria-hidden="aria-hidden"
-                                            ng-click="vm.getOption('Country','')">Choose
-                                            Country</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="41" aria-hidden="aria-hidden"
-                                            ng-click="vm.getOption('Country','India')">India</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="42" aria-hidden="aria-hidden"
-                                            ng-click="vm.getOption('Country','Australia')">Australia</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="43" aria-hidden="aria-hidden"
-                                            ng-click="vm.getOption('Country','USA')">USA</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="44" aria-hidden="aria-hidden"
-                                            ng-click="vm.getOption('Country','korea')">Korea</label>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
-                        <div class="universe_select sectorselect" ng-if="vm.showSector">
+                        <div class="universe_select sectorselect" ng-if="vm.selectedCountry.id!= undefined">
                             <h4 class="p300l">Sector</h4>
                             <div class="select-box">
-                                <div class="select-box__current" tabindex="5">
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="50" value="51" name="sector"
-                                            checked="checked" />
-                                        <p class="select-box__input-text">Choose Sector</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="51" value="52"
-                                            name="sector" />
-                                        <p class="select-box__input-text">Healthcare</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="52" value="53"
-                                            name="sector" />
-                                        <p class="select-box__input-text">Energy</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="53" value="54"
-                                            name="sector" />
-                                        <p class="select-box__input-text">Communication</p>
-                                    </div>
-                                    <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg"
-                                        alt="Arrow Icon" aria-hidden="true" />
-                                </div>
-                                <ul class="select-box__list">
-                                    <li>
-                                        <label class="select-box__option" for="50" aria-hidden="aria-hidden"
-                                            ng-click="vm.getOption('Sector','')">Choose Sector</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="51" aria-hidden="aria-hidden"
-                                            ng-click="vm.getOption('Sector','Healthcare')">Healthcare</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="52" aria-hidden="aria-hidden"
-                                            ng-click="vm.getOption('Sector','Energy')">Energy</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="53" aria-hidden="aria-hidden"
-                                            ng-click="vm.getOption('Sector','Communication')">Communication</label>
-                                    </li>
-                                </ul>
+                                <div ng-dropdown-multiselect="" options="vm.data.sectors"
+                                    selected-model="vm.selectedSector" extra-settings="vm.dropdownCheckbox"
+                                    translation-texts="vm.SelectedText" checkboxes="true"></div>
                             </div>
                         </div>
-                        <div class="universe_select" ng-if="vm.industryFilter">
+                        <div class="universe_select" ng-if="vm.selectedSector.length > 0">
                             <h4 class="p300l">Industry</h4>
                             <div class="select-box">
-                                <div class="select-box__current" tabindex="6">
-                                    <!-- <select name="sector" ng-model="selectedIndustry"
-                                        ng-change="vm.getOption('Industry',this)">
-                                        <option value="">Choose Sector</option>
-                                        <option ng-repeat="option in vm.data.industries" value="{{option.name}}">
-                                            {{option.name}}</option>
-                                    </select> -->
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="60" value="61" name="industry"
-                                            checked="checked" />
-                                        <p class="select-box__input-text">Choose Industry</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="61" value="62"
-                                            name="industry" />
-                                        <p class="select-box__input-text">Biotechnology</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="62" value="63"
-                                            name="industry" />
-                                        <p class="select-box__input-text">Software Application</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                        <input class="select-box__input" type="radio" id="63" value="64"
-                                            name="industry" />
-                                        <p class="select-box__input-text">Oil & Gas</p>
-                                    </div>
-                                    <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg"
-                                        alt="Arrow Icon" aria-hidden="true" />
-                                </div>
-                                <ul class="select-box__list">
-                                    <li>
-                                        <label class="select-box__option" for="60" aria-hidden="aria-hidden">Choose
-                                            Industry</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="61"
-                                            aria-hidden="aria-hidden">Biotechnology</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="62" aria-hidden="aria-hidden">Software
-                                            Application</label>
-                                    </li>
-                                    <li>
-                                        <label class="select-box__option" for="63" aria-hidden="aria-hidden">Oil &
-                                            Gas</label>
-                                    </li>
-                                </ul>
+                                <div ng-dropdown-multiselect="" options="vm.data.industries"
+                                    selected-model="vm.selectedIndustry" extra-settings="vm.dropdownCheckbox"
+                                    checkboxes="true" translation-texts="vm.SelectedText"></div>
                             </div>
                         </div>
                         <a data-toggle="modal" data-target="#anylsis_modal" class="border_btns">
@@ -268,17 +118,23 @@
                 <h3>Summary Filter: <span class="secoundry600">7</span></h3>
                 <div class="summer_rules_outer d-flex align-center">
                     <div class="rules_btns">
-                        <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>Market</a>
-                        <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>United States</a>
-                        <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>Healthcare</a>
-                        <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>Biotechnology</a>
-                        <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>Correlation</a>
-                        <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>Sharpe Ratio</a>
+                        <a href="#" class="green_btn"><span><img
+                                    src="/App/shared/image/trade/cross.svg"></span>Market</a>
+                        <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>United
+                            States</a>
+                        <a href="#" class="green_btn"><span><img
+                                    src="/App/shared/image/trade/cross.svg"></span>Healthcare</a>
+                        <a href="#" class="green_btn"><span><img
+                                    src="/App/shared/image/trade/cross.svg"></span>Biotechnology</a>
+                        <a href="#" class="green_btn"><span><img
+                                    src="/App/shared/image/trade/cross.svg"></span>Correlation</a>
+                        <a href="#" class="green_btn"><span><img src="/App/shared/image/trade/cross.svg"></span>Sharpe
+                            Ratio</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section> 
+    </section>
     <section class="table_section">
         <div class="xsapce">
             <div class="table_outter border_shadow">
