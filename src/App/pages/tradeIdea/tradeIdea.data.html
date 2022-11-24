@@ -1,14 +1,14 @@
-<div>
+
     <section class="table_section">
         <div class="xsapce">
             <div class="table_outter border_shadow">
                 <div class="tbale_tabbing">
                     <div class="tabbs_ border_style">
                         <button ng-class="{'active': vm.viewType === 'table'}" class="table_tab"
-                            ng-click="vm.toggleTableView('table')"><img src="/App/shared/image/trade/table.svg">Table
+                            ng-click="vm.toggleTableView('table')"><span agmc-svg-loader svg-src="'/App/shared/image/trade/table.svg'" class="svg_icons"></span>Table
                             </li>
                             <button ng-class="{'active': vm.viewType === 'feed'}" class="table_tab"
-                                ng-click="vm.toggleTableView('feed')"><img src="/App/shared/image/trade/filter.svg">Feed
+                                ng-click="vm.toggleTableView('feed')"><span agmc-svg-loader svg-src="'/App/shared/image/trade/filter.svg'" class="svg_icons"></span>Feed
                                 </li>
     
                     </div>
@@ -21,8 +21,8 @@
                                 <th>Name</th>
                                 <th>Sector</th>
                                 <th>Industry</th>
-                                <th>Market Gap</th>
-                                <th>Last Gap</th>
+                                <th>Market Cap</th>
+                                <th>Last Close</th>
                                 <th>Open</th>
                                 <th>Last</th>
                                 <th>Chg %</th>
@@ -471,4 +471,3 @@
             </div>
         </div>
     </section>
-</div>
