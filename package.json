@@ -39,5 +39,8 @@
     "start-webdriver": "start webdriver-manager start",
     "preprotractor-start": "yarn start-webdriver",
     "protractor-start": "protractor src\\E2ETests\\protractor\\conf.js"
+  },
+  "dependencies": {
+    "angularjs-dropdown-multiselect": "^2.0.0-beta.10"
   }
 }
