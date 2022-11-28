@@ -166,7 +166,8 @@
                <div class="modal_tabbing">
                   <div class="modal_tabs_outter">
                      <uib-tabset>
-                        <uib-tab heading="Technical" ng-click="vm.changeTab('technical')"><!--Technical Tab Start-->
+                        <uib-tab heading="Technical" ng-click="vm.changeTab('technical','basic')">
+                           <!--Technical Tab Start-->
                            <div class="accordian_outter panel-group" id="technical_tab">
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
@@ -176,12 +177,26 @@
                                  <div id="trend" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
+                                          <div class="accordian_grid_inner"
+                                             ng-click="vm.setTabFilter('technicalMarketCap')">
                                              <div class="accordian_img_inner">
                                                 <img src="/App/shared/image/trade/technical-market-cap.svg">
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>Market Cap</h4>
+                                                <h5 class="free_txt d-flex justify-between">Free <a href="#"><img
+                                                         src="/App/shared/image/trade/plus.svg"></a></h5>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                          <div class="accordian_grid_inner"
+                                             ng-click="vm.setTabFilter('technicalBarPattern')">
+                                             <div class="accordian_img_inner">
+                                                <img src="/App/shared/image/trade/technical-bar-pattern.svg">
+                                             </div>
+                                             <div class="accorian_inner_txt">
+                                                <h4>Bar Pattern</h4>
                                                 <h5 class="free_txt d-flex justify-between">Free <a href="#"><img
                                                          src="/App/shared/image/trade/plus.svg"></a></h5>
                                              </div>
@@ -323,66 +338,20 @@
                                     </div>
                                  </div>
                               </div>
-                              
-                              
-                              <!-- <div class="accordian_inner panel panel-default">
-                                 <div class="accodian_outer_txt panel-heading">
-                                    <a data-toggle="collapse" data-parent="#technical_tab" href=""
-                                       data-target="#technical_risk_measure">Risk Measure</a>
-                                 </div>
-                                 <div id="technical_risk_measure" class="panel-collapse collapse in">
-                                    <div class="accordian_show">
-                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                           <div class="accordian_grid_inner">
-                                               <div class="accordian_img_inner">   
-                                                   <img src="/App/shared/image/trade/correlation.png">
-                                               </div>
-                                               <div class="accorian_inner_txt">
-                                                   <h4>Correlation</h4>
-                                                   <h5 class="free_txt d-flex justify-between">Free <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
-                                               </div>
-                                           </div>
-                                           <div class="accordian_grid_inner">
-                                               <div class="accordian_img_inner">   
-                                                   <img src="/App/shared/image/trade/sharpe_ratio.png">
-                                               </div>
-                                               <div class="accorian_inner_txt">
-                                                   <h4>Sharpe Radio</h4>
-                                                   <h5 class="free_txt d-flex justify-between">Free <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
-                                               </div>
-                                           </div>
-                                           <div class="accordian_grid_inner">
-                                               <div class="accordian_img_inner">   
-                                                   <img src="/App/shared/image/trade/filter.png">
-                                               </div>
-                                               <div class="accorian_inner_txt">
-                                                   <h4>Filter 1</h4>
-                                                   <h5 class="premium_txt d-flex justify-between">Premium <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
-                                               </div>
-                                           </div>
-                                           <div class="accordian_grid_inner">
-                                               <div class="accordian_img_inner">   
-                                                   <img src="/App/shared/image/trade/filter2.png">
-                                               </div>
-                                               <div class="accorian_inner_txt">
-                                                   <h4>Filter 2</h4>
-                                                   <h5 class="premium_txt d-flex justify-between">Premium <a href="#"><img src="/App/shared/image/trade/plus.svg"></a></h5>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                 </div>
-                              </div> -->
                            </div>
-                        </uib-tab><!--Technical Tab End-->
-                        <uib-tab heading="Fundamental" ng-click="vm.changeTab('fundamental')"><!--Fundamental Tab Start-->
+                        </uib-tab>
+                        <!--Technical Tab End-->
+                        <uib-tab heading="Fundamental" ng-click="vm.changeTab('fundamental','financial-ratios')">
+                           <!--Fundamental Tab Start-->
                            <div class="accordian_outter panel-group" id="fundamental_tab">
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#fundamental_tab" href=""
-                                       data-target="#fundamental_financial_ratio" ng-click="vm.changeTabAccordion('financialTab',financialRatio)">Financial Ratios</a>
+                                       data-target="#fundamental_financial_ratio"
+                                       ng-click="vm.changeTabAccordion('fundamental_tab','financialRatio')">Financial
+                                       Ratios</a>
                                  </div>
-                                 <div id="fundamental_financial_ratio" class="panel-collapse collapse in">
+                                 <div id="fundamental_financial_ratio" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
@@ -489,8 +458,10 @@
                                  </div>
                               </div>
                            </div>
-                        </uib-tab><!--Fundamental Tab End-->
-                        <uib-tab heading="Sentiment" ng-click="vm.changeTab('sentiment')"><!--Sentiment Tab Start-->
+                        </uib-tab>
+                        <!--Fundamental Tab End-->
+                        <uib-tab heading="Sentiment" ng-click="vm.changeTab('sentiment','sentiment')">
+                           <!--Sentiment Tab Start-->
                            <div class="accordian_show">
                               <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                  <div class="accordian_grid_inner">
@@ -505,8 +476,10 @@
                                  </div>
                               </div>
                            </div>
-                        </uib-tab><!--Sentiment Tab End-->
-                        <uib-tab heading="Event" ng-click="vm.changeTab('event')"><!--Event Tab Start-->
+                        </uib-tab>
+                        <!--Sentiment Tab End-->
+                        <uib-tab heading="Event" ng-click="vm.changeTab('event','sentiment')">
+                           <!--Event Tab Start-->
                            <div class="accordian_show">
                               <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                  <div class="accordian_grid_inner">
@@ -521,12 +494,103 @@
                                  </div>
                               </div>
                            </div>
-                        </uib-tab><!--Event Tab End-->
+                        </uib-tab>
+                        <!--Event Tab End-->
                      </uib-tabset>
                   </div>
                </div>
                <div class="modal_right_side">
-                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical'">
+                  <div class="modal_right_inner" ng-if="vm.selectedFilter =='technicalMarketCap'">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Price</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="universe_select">
+                           <h4 class="p300l">Value 1</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <input type='radio' name="value1"><label>Last</label>
+                              <input type='radio' name="value1"><label>Average of</label>
+                              <input type='text' name="value1">Days
+                           </div>
+                           <h4 class="p300l">Value 2</h4>
+                        </div>
+                        <div class="look_back_outer">
+                           <div class="lockback_value d-flex align-center justify-between range_value">
+                              <input type='text' name="from" ng-value="100">
+                              <h5>-</h5>
+                              <input type='text' name="to" ng-value="400">
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+                  <!-- <div class="modal_right_inner" ng-if="vm.selectedFilter =='technicalBarPattern'"> -->
+                  <div class="modal_right_inner">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Bar Pattern</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="universe_select">
+                           <h4 class="p300l">Period</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.periodTypes"
+                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.periodText"
+                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                           <h4 class="p300l">Value 1</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.barPatternValue1"
+                                    selected-model="vm.techBarValue1" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.periodText"
+                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="look_back_outer">
+                           <div class="lockback_value d-flex align-center justify-between range_value">
+                              <h4>2</h4>
+                              <h5>-</h5>
+                              <h4>8</h4>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="modal_right_inner" style="display: block">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Price To Earning</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="universe_select">
+                           <h4 class="p300l">Period</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.periodText"
+                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 </div>
+                              </div>
+                              <div class="price_date">
+                                 <input type="date" class="input_box">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="look_back_outer">
+                           <div class="lockback_value d-flex align-center justify-between range_value">
+                              <h4>2</h4>
+                              <h5>-</h5>
+                              <h4>8</h4>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="modal_right_inner" >
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Correlation</h2>
                      </div>
@@ -683,7 +747,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical'">
+                  <div class="modal_right_inner" >
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Sharpe Radio</h2>
                      </div>
@@ -804,37 +868,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'fundamental'">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Price To Earning</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="universe_select">
-                           <h4 class="p300l">Period</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                              <div class="price_date">
-                                 <input type="date" class="input_box">
-                              </div>
-                           </div>
-                        </div>
-                        <div class="look_back_outer">
-                           <div class="lockback_value d-flex align-center justify-between range_value">
-                              <h4>2</h4>
-                              <h5>-</h5>
-                              <h4>8</h4>
-                           </div>
-                        </div>
-
-                     </div>
-                  </div>
-                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'fundamental'">
+                  <div class="modal_right_inner" >
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Gross margin</h2>
                      </div>
