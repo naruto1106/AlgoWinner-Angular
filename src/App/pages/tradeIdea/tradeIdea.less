@@ -991,31 +991,76 @@ td {
 }
 
 
-.modal_tab {
-  background: transparent;
-  border: unset;
-  color: #94A0B8;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 12px 12px 12px;
-  &.active{
-    color: #184376;
-    border-bottom: 2px solid #184376;
+
+
+
+
+// .modal_tab {
+//   background: transparent;
+//   border: unset;
+//   color: #94A0B8;
+//   font-size: 14px;
+//   font-weight: 500;
+//   padding: 12px 12px 12px;
+//   &.active{
+//     color: #184376;
+//     border-bottom: 2px solid #184376;
+//   }
+// }
+
+.modal_tabs_outter {
+  border-bottom: 0px solid #E1E6EF;
+  ul {
+    li.nav-item {
+      &.active{
+        color: #184376;
+        border-bottom: 2px solid #184376;
+      }
+      a{
+        background: transparent;
+        border: unset !important;
+        color: #94A0B8;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 12px 12px 12px;
+      }
+    }
   }
 }
 
-.modal_tabs_outter {
-  border-bottom: 1px solid #E1E6EF;
+.accordian_inner{
+    &.panel{
+      &.panel-default {
+      box-shadow: unset;
+      border: unset;
+      border-radius: unset;
+    }
+  }
 }
+
+.panel-body.accordian_show {
+  border-bottom: 1px solid #EAECF0 !important;
+}
+
 .accodian_outer_txt {
   font-size: 12px;
   color: #667085;
   font-weight: 500;
   padding: 16px;
-  border-bottom: 1px solid #EAECF0;
+  border-bottom: 1px solid #EAECF0 !important;
   background-image: url(/App/shared/image/trade/accordian_arrow.svg);
   background-repeat: no-repeat;
   background-position: right 16px center;
+  padding:0 !important;
+  a{
+    text-decoration: underline;
+    letter-spacing: 0;
+    color: #667085;
+    padding: 16px;
+    display: inline-block;
+    width: 100%;
+    line-height: 15px;
+  }
 }
 
 .accordian_img_inner {
@@ -1305,6 +1350,44 @@ td {
     }
   }
 }
+
+
+.text-bold {
+  .dropdown-toggle.ng-binding.btn.btn-default {
+    color: #1D2433;
+  }
+}
+
+.cst-dropdown-trade {
+  .checkbox{
+    label {
+      .checkboxInput {
+        appearance: none;
+        border: 1px solid #000;
+        width: 16px;
+        background-color: #fff;
+        border: 1px solid #D0D5DD;
+        height: 16px;
+        border-radius: 4px;
+        outline:unset;
+      }
+    }
+  }
+}
+.cst-dropdown-trade {
+  .checkbox {
+    label {
+      .checkboxInput[checked] {
+
+        border: 1px solid #184376;
+        background: #F9F5FF url(/App/shared/image/trade/tick2.svg);
+        background-repeat: no-repeat;
+          background-position: center;
+      }
+    }
+  }
+}
+
 
 
 
