@@ -1,4 +1,5 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @paddingX: 0 20px;
 
 @borderColorGrey: #E1E6EF;
@@ -187,6 +188,7 @@ header{
 
 
 .custom_radio {
+
     display: block;
     position: relative;
     padding-left: 23px;
@@ -459,6 +461,9 @@ header{
 }
 
 .universe_select {
+  &.w-30 {
+    width: 30%;
+  }
   .select-box {
     margin: 4px 0 0;
   }
@@ -1064,16 +1069,61 @@ td {
 }
 
 .accordian_img_inner {
-  background: #F8F9FC;
+
   border-radius: 8px;
   text-align: center;
-  padding: 16px 0;
+
 }
 .accordian_grid_inner {
   width: 25%;
   padding: 0 8px;
 }
+.box_input {
+  border: 1px solid #D0D5DD !important;
+  width: 43px !important;
+  height: 36px;
+  border-radius: 8px;
+  text-align: center;
+  color: #1D2433;
+  font-size: 14px;
+  margin: 0 4px;
+}
+input{
+  &.box_input {
+    position: unset;
+    opacity: 1;
+    cursor: unset;
+    &::placeholder{
+      color: #1D2433;
+    }
+  }
 
+}
+
+.double_input{
+  .checkmark {
+    top: 12px;
+  }
+}
+
+.value2_space {
+    margin: 20px 0 0;
+}
+
+.double_input{
+  input {
+    left: -9px;
+    top: 1px;
+    width: 20%;
+    z-index: 1;
+  }
+}
+
+.popup_radio_outter {
+  .custom_radio {
+    font-size: 12px;
+  }
+}
 
 .accorian_inner_txt {
   h4 {
@@ -1141,6 +1191,9 @@ td {
 }
 
 .correlation_feilds {
+  .mt {
+    margin-top: 10px;
+  }
   .select-box__input-text {
     width: 100%;
   }
@@ -1174,10 +1227,25 @@ td {
 }
 
 .look_back_outer {
+ 
   padding: 12px 0 16px;
 }
 
 .lockback_value{
+  &.lookback_value_new {
+    margin-right: 15px;
+    h4 {
+      margin-right: 5px;
+      padding: 9px 19px;
+    }
+  }
+  .no-border {
+    border: none;
+    padding: 0px;
+    text-align: left;
+    height: auto;
+    margin-bottom: 8px;
+  }
   padding:4px 0 0;
   h4 {
     border: 1px solid #D0D5DD;
@@ -1186,7 +1254,7 @@ td {
     font-size: 14px;
     font-weight: 500;
     padding: 9px 30px;
-    margin-right: 8px;
+
   }
   h5{
     color: #94A0B8;
@@ -1196,6 +1264,14 @@ td {
 }
 
 .correlation_range_outter{
+  &.comparator-field {
+    .select-box {
+      .select-box__input-text {
+        margin-left: 11px;
+      }
+    }
+   
+  }
   .select-box{
     width: auto;
     margin: 0;
@@ -1448,3 +1524,6 @@ td {
 }
 }
 
+.padding-0  {
+  padding-left: 0px;
+}

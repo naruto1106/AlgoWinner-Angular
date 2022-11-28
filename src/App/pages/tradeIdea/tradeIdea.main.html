@@ -527,40 +527,265 @@
                   <!-- <div class="modal_right_inner" ng-if="vm.selectedFilter =='technicalBarPattern'"> -->
                   <div class="modal_right_inner">
                      <div class="right_heading_outter">
+                        <h2 class="modal_heading">Price</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="popup_radio_outter">
+                           <h4 class="p300l">Value 1</h4>
+                           
+                              <div class="template_selection d-flex flex-wrap align-center">
+                                 <label class="custom_radio">Last
+                                    <input type="radio" checked="checked" name="radio" ng-model="templateType" ng-value="standard" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                    <span class="checkmark"></span>
+                                 </label>
+                                 <div class="custom_outter d-flex align-center flex-wrap">
+                                    <label class="custom_radio double_input">Average of <input type="text" placeholder="0" class="box_input"> Days
+                                       <input type="radio" name="radio" ng-model="templateType" value="custom" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                       <span class="checkmark"></span>
+                                    </label>
+                                    <!-- ngIf: templateType == 'custom' -->
+                                 </div>
+                              </div>
+                        </div>      
+                        <div class="popup_radio_outter value2_space">
+                           <h4 class="p300l">Value 2</h4>
+                           <div class="look_back_outer">
+                              <div class="lockback_value d-flex align-center justify-between range_value">
+                                 <h4>100</h4>
+                                 <h5>-</h5>
+                                 <h4>400</h4>
+                              </div>
+                           </div>
+                              
+                        </div>   
+                     </div>
+                  </div>
+
+                  <div class="modal_right_inner">
+                     <div class="right_heading_outter">
                         <h2 class="modal_heading">Bar Pattern</h2>
                      </div>
                      <div class="correlation_feilds">
                         <div class="universe_select">
                            <h4 class="p300l">Period</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.periodTypes"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="23">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="023" value="123" name="period" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
                                  </div>
-                              </div>
-                           </div>
-                           <h4 class="p300l">Value 1</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.barPatternValue1"
-                                    selected-model="vm.techBarValue1" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="123" value="232" name="period">
+                                    <p class="select-box__input-text">Days</p>
                                  </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="223" value="332" name="period">
+                                    <p class="select-box__input-text">Week</p>
+                                 </div>
+
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
                               </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="223" aria-hidden="aria-hidden">Days</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="123" aria-hidden="aria-hidden">Week</label>
+                                 </li>
+
+                              </ul>
                            </div>
                         </div>
-                        <div class="look_back_outer">
-                           <div class="lockback_value d-flex align-center justify-between range_value">
-                              <h4>2</h4>
-                              <h5>-</h5>
-                              <h4>8</h4>
+                        <div class="universe_select look_back_outer">
+                           <h4 class="p300l">Value 1</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="24">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="024" value="124" name="value1" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="124" value="224" name="value1">
+                                    <p class="select-box__input-text">Open</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="224" value="324" name="value1">
+                                    <p class="select-box__input-text">High</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="324" value="424" name="value1">
+                                    <p class="select-box__input-text">Low</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="424" value="524" name="value1">
+                                    <p class="select-box__input-text">Close</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="524" value="624" name="value1">
+                                    <p class="select-box__input-text">Volume</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="224" aria-hidden="aria-hidden">Open</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="124" aria-hidden="aria-hidden">High</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="224" aria-hidden="aria-hidden">Low</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="324" aria-hidden="aria-hidden">Close</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="424" aria-hidden="aria-hidden">Volume</label>
+                                 </li>
+                              </ul>
                            </div>
+                        </div>
+                        <div class="popup_radio_outter">
+                           <h4 class="p300l">At</h4>
+                              <div class="template_selection d-flex flex-wrap align-center">
+                                 <label class="custom_radio">Last Bar
+                                    <input type="radio" checked="checked" name="radio" ng-model="barType" ng-value="lastbar" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                    <span class="checkmark"></span>
+                                 </label>
+                                 <div class="custom_outter d-flex align-center flex-wrap">
+                                    <label class="custom_radio double_input"> <input type="text" placeholder="0" class="box_input"> Days ago
+                                       <input type="radio" name="radio" ng-model="barType" value="daysago" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                       <span class="checkmark"></span>
+                                    </label>
+                                 </div>
+                              </div>
+                        </div>
+                        <div class="correlation_range">
+                           <div class="correlation_range_outter d-flex flex-wrap align-center comparator-field">
+                              <h5>Comparator</h5>
+                              <div class="universe_select green_select_box look_back_outer">
+                                 <div class="select-box">
+                                    <div class="select-box__current" tabindex="32">
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="032" value="132" name="Comparator" checked="checked">
+                                          <p class="select-box__input-text">Choose Comparator</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="132" value="232" name="Comparator">
+                                          <p class="select-box__input-text">Greater</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="232" value="332" name="Comparator">
+                                          <p class="select-box__input-text">Smaller</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="332" value="432" name="Comparator">
+                                          <p class="select-box__input-text">Equal</p>
+                                       </div>
+
+                                       <img class="select-box__icon" src="/App/shared/image/trade/green-arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                    </div>
+                                    <ul class="select-box__list">
+                                       <li>
+                                          <label class="select-box__option" for="232" aria-hidden="aria-hidden">Greater</label>
+                                       </li>
+                                       <li>
+                                          <label class="select-box__option" for="132" aria-hidden="aria-hidden">Smaller</label>
+                                       </li>
+                                       <li>
+                                          <label class="select-box__option" for="332" aria-hidden="aria-hidden">Equal</label>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                              
+                              
+                              
+                           </div>
+                           <div class="popup_radio_outter" style="display: none;">
+                              <h4 class="p300l">By</h4>
+                                 <div class="template_selection d-flex flex-wrap align-center">
+                                    <label class="custom_radio">Any
+                                       <input type="radio" checked="checked" name="radio" ng-model="comparatorType" ng-value="at" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                       <span class="checkmark"></span>
+                                    </label>
+                                    <div class="custom_outter d-flex align-center flex-wrap">
+                                       <label class="custom_radio double_input"> <input type="text" placeholder="0" class="box_input"> %
+                                          <input type="radio" name="radio" ng-model="comparatorType" value="by" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                          <span class="checkmark"></span>
+                                       </label>
+                                    </div>
+                                 </div>
+                           </div>
+                        </div>
+
+                        <div class="universe_select look_back_outer">
+                           <h4 class="p300l">Value 2</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="20">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="020" value="120" name="value3" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="120" value="220" name="value3">
+                                    <p class="select-box__input-text">Open</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="220" value="320" name="value3">
+                                    <p class="select-box__input-text">High</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="320" value="420" name="value3">
+                                    <p class="select-box__input-text">Low</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="420" value="520" name="value3">
+                                    <p class="select-box__input-text">close</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="520" value="620" name="value3">
+                                    <p class="select-box__input-text">Volume</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="220" aria-hidden="aria-hidden">Open</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="120" aria-hidden="aria-hidden">High</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="320" aria-hidden="aria-hidden">Low</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="420" aria-hidden="aria-hidden">Close</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="520" aria-hidden="aria-hidden">Volume</label>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="popup_radio_outter">
+                           <h4 class="p300l">At</h4>
+                              <div class="template_selection d-flex flex-wrap align-center">
+                                 <label class="custom_radio">Last Bar
+                                    <input type="radio" checked="checked" name="radio" ng-model="ValueType" ng-value="lastbarvalue" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                    <span class="checkmark"></span>
+                                 </label>
+                                 <div class="custom_outter d-flex align-center flex-wrap">
+                                    <label class="custom_radio double_input"> <input type="text" placeholder="0" class="box_input"> Days ago
+                                       <input type="radio" name="radio" ng-model="ValueType" value="daysagovalue" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                       <span class="checkmark"></span>
+                                    </label>
+                                 </div>
+                              </div>
                         </div>
                      </div>
                   </div>
+
                   <div class="modal_right_inner" style="display: block">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Price To Earning</h2>
@@ -590,6 +815,7 @@
                         </div>
                      </div>
                   </div>
+
                   <div class="modal_right_inner" >
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Correlation</h2>
@@ -747,6 +973,7 @@
                         </div>
                      </div>
                   </div>
+
                   <div class="modal_right_inner" >
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Sharpe Radio</h2>
@@ -868,6 +1095,7 @@
                         </div>
                      </div>
                   </div>
+
                   <div class="modal_right_inner" >
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Gross margin</h2>
@@ -898,6 +1126,861 @@
 
                      </div>
                   </div>
+                  <!-----------------SMA Strategy--------------------->
+                  <div class="modal_right_inner">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">SMA Strategy</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="universe_select">
+                           <h4 class="p300l">Period</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="33">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="033" value="133" name="strategy-period" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="133" value="233" name="strategy-period">
+                                    <p class="select-box__input-text">Days</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="233" value="333" name="strategy-period">
+                                    <p class="select-box__input-text">Week</p>
+                                 </div>
+
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="233" aria-hidden="aria-hidden">Days</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="133" aria-hidden="aria-hidden">Week</label>
+                                 </li>
+
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="universe_select look_back_outer">
+                           <h4 class="p300l">Value Type</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="34">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="034" value="134" name="valueType" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="134" value="234" name="valueType">
+                                    <p class="select-box__input-text">Open</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="234" value="334" name="valueType">
+                                    <p class="select-box__input-text">High</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="334" value="434" name="valueType">
+                                    <p class="select-box__input-text">Low</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="434" value="534" name="valueType">
+                                    <p class="select-box__input-text">Close</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="534" value="634" name="valueType">
+                                    <p class="select-box__input-text">Volume</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="234" aria-hidden="aria-hidden">Open</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="134" aria-hidden="aria-hidden">High</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="234" aria-hidden="aria-hidden">Low</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="334" aria-hidden="aria-hidden">Close</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="434" aria-hidden="aria-hidden">Volume</label>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="d-flex align-center select-box-new">
+                           <div class="universe_select ">
+                              <h4 class="p300l">Value 1</h4>
+                              <div class="select-box">
+                                 <div class="select-box__current" tabindex="25">
+                                    <div class="select-box__value">
+                                       <input class="select-box__input" type="radio" id="025" value="125" name="value2" checked="checked">
+                                       <p class="select-box__input-text">S&amp;P 500</p>
+                                    </div>
+                                    <div class="select-box__value">
+                                       <input class="select-box__input" type="radio" id="125" value="225" name="value2">
+                                       <p class="select-box__input-text">Open</p>
+                                    </div>
+                                    <div class="select-box__value">
+                                       <input class="select-box__input" type="radio" id="225" value="325" name="value2">
+                                       <p class="select-box__input-text">High</p>
+                                    </div>
+                                    <div class="select-box__value">
+                                       <input class="select-box__input" type="radio" id="325" value="425" name="value2">
+                                       <p class="select-box__input-text">Low</p>
+                                    </div>
+                                    <div class="select-box__value">
+                                       <input class="select-box__input" type="radio" id="425" value="525" name="value2">
+                                       <p class="select-box__input-text">close</p>
+                                    </div>
+                                    <div class="select-box__value">
+                                       <input class="select-box__input" type="radio" id="525" value="625" name="value2">
+                                       <p class="select-box__input-text">Volume</p>
+                                    </div>
+                                    <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                 </div>
+                                 <ul class="select-box__list">
+                                    <li>
+                                       <label class="select-box__option" for="225" aria-hidden="aria-hidden">Open</label>
+                                    </li>
+                                    <li>
+                                       <label class="select-box__option" for="125" aria-hidden="aria-hidden">High</label>
+                                    </li>
+                                    <li>
+                                       <label class="select-box__option" for="325" aria-hidden="aria-hidden">Low</label>
+                                    </li>
+                                    <li>
+                                       <label class="select-box__option" for="425" aria-hidden="aria-hidden">Close</label>
+                                    </li>
+                                    <li>
+                                       <label class="select-box__option" for="525" aria-hidden="aria-hidden">Volume</label>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                           <div class="popup_radio_outter">
+                              <h4 class="p300l">Value 1 Period</h4>
+                                 <div class="template_selection d-flex flex-wrap align-center">
+                                    <div class="custom_outter d-flex align-center flex-wrap">
+                                       <label class="custom_radio double_input padding-0"> <input type="text" placeholder="0" class="box_input"> Days ago
+                                       </label>
+                                    </div>
+                                 </div>
+                           </div>
+                        </div>
+                        <div class="correlation_range mt">
+                           <div class="correlation_range_outter d-flex flex-wrap align-center comparator-field">
+                              <h5>Comparator</h5>
+                              <div class="universe_select green_select_box">
+                                 <div class="select-box">
+                                    <div class="select-box__current" tabindex="34">
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="034" value="134" name="Comparator1" checked="checked">
+                                          <p class="select-box__input-text">Choose Comparator</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="134" value="234" name="Comparator1">
+                                          <p class="select-box__input-text">Cross Above</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="234" value="334" name="Comparator1">
+                                          <p class="select-box__input-text">Cross Below</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="334" value="434" name="Comparator1">
+                                          <p class="select-box__input-text">Between</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="434" value="534" name="Comparator1">
+                                          <p class="select-box__input-text">Higher</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="534" value="634" name="Comparator1">
+                                          <p class="select-box__input-text">Low</p>
+                                       </div>
+                                       <img class="select-box__icon" src="/App/shared/image/trade/green-arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                    </div>
+                                    <ul class="select-box__list">
+                                       <li>
+                                          <label class="select-box__option" for="234" aria-hidden="aria-hidden">Cross Above</label>
+                                       </li>
+                                       <li>
+                                          <label class="select-box__option" for="134" aria-hidden="aria-hidden">Cross Below</label>
+                                       </li>
+                                       <li>
+                                          <label class="select-box__option" for="334" aria-hidden="aria-hidden">Between</label>
+                                       </li>
+                                       <li>
+                                          <label class="select-box__option" for="434" aria-hidden="aria-hidden">Higher</label>
+                                       </li>
+                                       <li>
+                                          <label class="select-box__option" for="532" aria-hidden="aria-hidden">Low</label>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="popup_radio_outter mt" style="">
+                              <h4 class="p300l">Between Range</h4>
+                              <div class="look_back_outer">
+                                 <div class="lockback_value d-flex align-center justify-between range_value">
+                                    <h4>20</h4>
+                                    <h5>-</h5>
+                                    <h4>80</h4>
+                                 </div>
+                              </div>
+                           </div>
+                            <div class="popup_radio_outter mt" style="">
+                              <h4 class="p300l">Comparator Value</h4>
+                              <div class="template_selection d-flex flex-wrap align-center">
+                                 <div class="custom_outter d-flex align-center flex-wrap">
+                                    <label class="custom_radio double_input padding-0"> <input type="text" placeholder="0" class="box_input">%
+                                    </label>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="d-flex align-center select-box-new">
+                           <div class="universe_select look_back_outer w-30">
+                              <h4 class="p300l">Value 2</h4>
+                              <label class="custom_radio double_input padding-0">SMA
+                              </label>
+                           </div>
+                           <div class="popup_radio_outter">
+                              <h4 class="p300l">Value 2 Period</h4>
+                                 <div class="template_selection d-flex flex-wrap align-center">
+                                    <div class="custom_outter d-flex align-center flex-wrap">
+                                       <label class="custom_radio double_input padding-0"> <input type="text" placeholder="0" class="box_input"> Days ago
+                                       </label>
+                                    </div>
+                                 </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------SMA Strategy end--------------------->
+                  <!-----------------Relative strength--------------------->
+                  <div class="modal_right_inner">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Relative Strength To Benchmark</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer">
+                           <h4 class="p300l">lookback</h4>
+                           <div class="lockback_value d-flex align-center">
+                              <h4>20</h4>
+                              <h5>Days</h5>
+                           </div>
+                        </div>
+                        <div class="universe_select ">
+                           <h4 class="p300l">Benchmark</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="36">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="036" value="136" name="Benchmark" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="136" value="236" name="Benchmark">
+                                    <p class="select-box__input-text">Days</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="236" value="336" name="Benchmark">
+                                    <p class="select-box__input-text">Week</p>
+                                 </div>
+
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="236" aria-hidden="aria-hidden">Days</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="136" aria-hidden="aria-hidden">Week</label>
+                                 </li>
+
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="popup_radio_outter mt" style="">
+                           <h4 class="p300l">Value 1</h4>
+                           <div class="">
+                              <div class="lockback_value d-flex align-center justify-between range_value">
+                                 <h4>20</h4>
+                                 <h5>-</h5>
+                                 <h4>80</h4>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------Relative strength  end--------------------->
+                  <!-----------------parabolic--------------------->
+                  <div class="modal_right_inner">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Parabolic Sar</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="universe_select ">
+                           <h4 class="p300l">Periods</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="37">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="037" value="137" name="parabolic" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="137" value="237" name="parabolic">
+                                    <p class="select-box__input-text">Days</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="237" value="337" name="parabolic">
+                                    <p class="select-box__input-text">Week</p>
+                                 </div>
+
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="237" aria-hidden="aria-hidden">Days</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="137" aria-hidden="aria-hidden">Week</label>
+                                 </li>
+
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="popup_radio_outter mt">
+                           <h4 class="p300l">Period Value</h4>
+                           
+                              <div class="template_selection d-flex flex-wrap align-center">
+                                 <label class="custom_radio">Last Bar
+                                    <input type="radio" checked="checked" name="radio" ng-model="periodtype" ng-value="standard" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                    <span class="checkmark"></span>
+                                 </label>
+                                 <div class="custom_outter d-flex align-center flex-wrap">
+                                    <label class="custom_radio double_input"> <input type="text" placeholder="0" class="box_input"> Days Ago
+                                       <input type="radio" name="radio" ng-model="periodtype" value="custom" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                       <span class="checkmark"></span>
+                                    </label>
+                                    <!-- ngIf: templateType == 'custom' -->
+                                 </div>
+                              </div>
+                        </div>
+                        <div class="look_back_outer">
+                           <div class="lockback_value d-flex align-center justify-between range_value">
+                              <div class="left">
+                                 <label class="p300l">Step</label>
+                                 <h4>0.02</h4>
+                              </div>
+                             <div class="right">
+                              <label class="p300l no-border">Max Step</label>
+                              <h4>0.2</h4>
+                             </div>
+                        
+                           </div>
+                        </div>
+                           <div class="correlation_range_outter d-flex flex-wrap align-center comparator-field">
+                              <h5>Comparator</h5>
+                              <div class="universe_select green_select_box">
+                                 <div class="select-box">
+                                    <div class="select-box__current" tabindex="37">
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="037" value="137" name="Comparator2" checked="checked">
+                                          <p class="select-box__input-text">Choose Comparator</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="137" value="237" name="Comparator2">
+                                          <p class="select-box__input-text">Bullish</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="237" value="337" name="Comparator2">
+                                          <p class="select-box__input-text">Bearish</p>
+                                       </div>
+                                      
+                                       
+                                       
+                                       <img class="select-box__icon" src="/App/shared/image/trade/green-arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                    </div>
+                                    <ul class="select-box__list">
+                                       <li>
+                                          <label class="select-box__option" for="237" aria-hidden="aria-hidden">Bullish</label>
+                                       </li>
+                                       <li>
+                                          <label class="select-box__option" for="137" aria-hidden="aria-hidden">Bearish</label>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                     </div>
+                  </div>
+                  <!-----------------parabolic end--------------------->
+                  <!-----------------price trend--------------------->
+                  <div class="modal_right_inner">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Price Trend</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Bar Types</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="38">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="038" value="138" name="barTypes" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="138" value="238" name="barTypes">
+                                    <p class="select-box__input-text">Daily</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="238" value="338" name="barTypes">
+                                    <p class="select-box__input-text">Weekly</p>
+                                 </div>
+
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="238" aria-hidden="aria-hidden">Daily</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="138" aria-hidden="aria-hidden">Weekly</label>
+                                 </li>
+
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Value Type</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="39">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="039" value="139" name="valueTypes" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="139" value="239" name="valueTypes">
+                                    <p class="select-box__input-text">Open</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="239" value="339" name="valueTypes">
+                                    <p class="select-box__input-text">High</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="239" value="339" name="valueTypes">
+                                    <p class="select-box__input-text">Low</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="239" value="339" name="valueTypes">
+                                    <p class="select-box__input-text">Close</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="239" aria-hidden="aria-hidden">Open</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="139" aria-hidden="aria-hidden">High</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="139" aria-hidden="aria-hidden">Low</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="139" aria-hidden="aria-hidden">Close</label>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Value 1</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="40">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="040" value="140" name="valueTypes1" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="140" value="240" name="valueTypes1">
+                                    <p class="select-box__input-text">Price</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="240" value="340" name="valueTypes1">
+                                    <p class="select-box__input-text">SMA</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="240" aria-hidden="aria-hidden">Price</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="140" aria-hidden="aria-hidden">SMA</label>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="d-flex">
+                           <div class="look_back_outer">
+                              <h4 class="p300l">SMA Periods</h4>
+                              <div class="lockback_value lookback_value_new d-flex align-center">
+                                 <h4>50</h4>
+                                 <h5>Days</h5>
+                              </div>
+                           </div>
+                           <div class="look_back_outer">
+                              <h4 class="p300l">lookback</h4>
+                              <div class="lockback_value d-flex align-center">
+                                 <h4>20</h4>
+                                 <h5>Days</h5>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Direction</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="41">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="041" value="141" name="Direction" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="141" value="241" name="Direction">
+                                    <p class="select-box__input-text">Uptrend</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="241" value="341" name="Direction">
+                                    <p class="select-box__input-text">Downtrend</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="341" value="441" name="Direction">
+                                    <p class="select-box__input-text">Sideways</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="241" aria-hidden="aria-hidden">Uptrend</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="141" aria-hidden="aria-hidden">Downtrend</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="341" aria-hidden="aria-hidden">Sideways</label>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------price trend end--------------------->
+                  <!-----------------volume trend--------------------->
+                  <div class="modal_right_inner">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Volume Trend</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Bar Types</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="42">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="042" value="142" name="barTypes1" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="142" value="242" name="barTypes1">
+                                    <p class="select-box__input-text">Daily</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="242" value="342" name="barTypes1">
+                                    <p class="select-box__input-text">Weekly</p>
+                                 </div>
+
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="242" aria-hidden="aria-hidden">Daily</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="142" aria-hidden="aria-hidden">Weekly</label>
+                                 </li>
+
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Value Type</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="43">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="043" value="143" name="valueType1s" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="143" value="243" name="valueTypes1">
+                                    <p class="select-box__input-text">Volume</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="243" value="343" name="valueTypes1">
+                                    <p class="select-box__input-text">SMA</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="243" aria-hidden="aria-hidden">Volume</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="143" aria-hidden="aria-hidden">SMA</label>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="d-flex">
+                           <div class="look_back_outer">
+                              <h4 class="p300l">SMA Periods</h4>
+                              <div class="lockback_value lookback_value_new d-flex align-center">
+                                 <h4>50</h4>
+                                 <h5>Days</h5>
+                              </div>
+                           </div>
+                           <div class="look_back_outer">
+                              <h4 class="p300l">lookback</h4>
+                              <div class="lockback_value d-flex align-center">
+                                 <h4>20</h4>
+                                 <h5>Days</h5>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Direction</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="44">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="044" value="144" name="Direction1" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="144" value="244" name="Direction1">
+                                    <p class="select-box__input-text">Uptrend</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="244" value="344" name="Direction1">
+                                    <p class="select-box__input-text">Downtrend</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="344" value="444" name="Direction1">
+                                    <p class="select-box__input-text">Sideways</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="244" aria-hidden="aria-hidden">Uptrend</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="144" aria-hidden="aria-hidden">Downtrend</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="344" aria-hidden="aria-hidden">Sideways</label>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------volume trend end--------------------->
+                   <!-----------------RSI trend--------------------->
+                   <div class="modal_right_inner">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">RSI Trend</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Bar Types</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="46">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="046" value="146" name="barTypes4" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="146" value="246" name="barTypes4">
+                                    <p class="select-box__input-text">Daily</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="246" value="346" name="barTypes4">
+                                    <p class="select-box__input-text">Weekly</p>
+                                 </div>
+
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="246" aria-hidden="aria-hidden">Daily</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="146" aria-hidden="aria-hidden">Weekly</label>
+                                 </li>
+
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="look_back_outer">
+                           <h4 class="p300l">Periods</h4>
+                           <div class="lockback_value lookback_value_new d-flex align-center">
+                              <h4>50</h4>
+                              <h5>Days</h5>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Direction</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="47">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="047" value="147" name="Direction3" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="147" value="247" name="Direction3">
+                                    <p class="select-box__input-text">Uptrend</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="247" value="347" name="Direction3">
+                                    <p class="select-box__input-text">Downtrend</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="347" value="447" name="Direction3">
+                                    <p class="select-box__input-text">Sideways</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="247" aria-hidden="aria-hidden">Uptrend</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="147" aria-hidden="aria-hidden">Downtrend</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="347" aria-hidden="aria-hidden">Sideways</label>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------RSI trend end--------------------->
+                  <!-----------------Triangle pattern--------------------->
+                  <div class="modal_right_inner">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Triangle Pattern </h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer">
+                           <h4 class="p300l">Periods</h4>
+                           <div class="lockback_value lookback_value_new d-flex align-center">
+                              <h4>50</h4>
+                              <h5>Days</h5>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Type</h4>
+                           <div class="select-box">
+                              <div class="select-box__current" tabindex="48">
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="048" value="148" name="Type4" checked="checked">
+                                    <p class="select-box__input-text">S&amp;P 500</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="148" value="248" name="Type4">
+                                    <p class="select-box__input-text">Uptrend</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="248" value="348" name="Type4">
+                                    <p class="select-box__input-text">Downtrend</p>
+                                 </div>
+                                 <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="348" value="448" name="Type4">
+                                    <p class="select-box__input-text">Sideways</p>
+                                 </div>
+                                 <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                              </div>
+                              <ul class="select-box__list">
+                                 <li>
+                                    <label class="select-box__option" for="248" aria-hidden="aria-hidden">Symmetrical</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="148" aria-hidden="aria-hidden">Ascending</label>
+                                 </li>
+                                 <li>
+                                    <label class="select-box__option" for="348" aria-hidden="aria-hidden">Descending</label>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------Triangle pattern end--------------------->
+                        <!-----------------Normalized accumulation--------------------->
+                        <!-- <div class="modal_right_inner">
+                           <div class="right_heading_outter">
+                              <h2 class="modal_heading">Normalized Accumulation & Distribution </h2>
+                           </div>
+                           <div class="correlation_feilds">
+                              <div class="look_back_outer">
+                                 <h4 class="p300l">Periods</h4>
+                                 <div class="lockback_value lookback_value_new d-flex align-center">
+                                    <h4>100</h4>
+                                    <h5>Days</h5>
+                                 </div>
+                              </div>
+                              <div class="look_back_outer universe_select ">
+                                 <h4 class="p300l">Value</h4>
+                                 <div class="select-box">
+                                    <div class="select-box__current" tabindex="50">
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="050" value="150" name="ValueType5" checked="checked">
+                                          <p class="select-box__input-text">S&amp;P 500</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="150" value="250" name="ValueType5">
+                                          <p class="select-box__input-text">Uptrend</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="250" value="350" name="ValueType5">
+                                          <p class="select-box__input-text">Downtrend</p>
+                                       </div>
+                                       <div class="select-box__value">
+                                          <input class="select-box__input" type="radio" id="350" value="450" name="ValueType5">
+                                          <p class="select-box__input-text">Sideways</p>
+                                       </div>
+                                       <img class="select-box__icon" src="/App/shared/image/trade/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                                    </div>
+                                    <ul class="select-box__list">
+                                       <li>
+                                          <label class="select-box__option" for="248" aria-hidden="aria-hidden">Symmetrical</label>
+                                       </li>
+                                       <li>
+                                          <label class="select-box__option" for="148" aria-hidden="aria-hidden">Ascending</label>
+                                       </li>
+                                       <li>
+                                          <label class="select-box__option" for="348" aria-hidden="aria-hidden">Descending</label>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div> -->
+                        <!-----------------Normalized accumulation end--------------------->
                </div>
             </div>
 
