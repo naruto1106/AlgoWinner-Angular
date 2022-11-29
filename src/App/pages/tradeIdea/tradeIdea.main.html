@@ -166,13 +166,13 @@
                <div class="modal_tabbing">
                   <div class="modal_tabs_outter">
                      <uib-tabset>
-                        <uib-tab heading="Technical" ng-click="vm.changeTab('technical','basic')">
+                        <uib-tab heading="Technical" ng-click="vm.changeTab('technical')">
                            <!--Technical Tab Start-->
                            <div class="accordian_outter panel-group" id="technical_tab">
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#technical_tab" href=""
-                                       data-target="#trend">Basic</a>
+                                       data-target="#trend" ng-click="vm.changeTabAccordion('technical_basic_accordion')">Basic</a>
                                  </div>
                                  <div id="trend" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -208,7 +208,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#technical_tab" href=""
-                                       data-target="#trend_identifier">Trend Identifier/Analysis</a>
+                                       data-target="#trend_identifier" ng-click="vm.changeTabAccordion('technical_trend_identifier_accordion')">Trend Identifier/Analysis</a>
                                  </div>
                                  <div id="trend_identifier" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -230,7 +230,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#technical_tab" href=""
-                                       data-target="#consolidation">Consolidation</a>
+                                       data-target="#consolidation" ng-click="vm.changeTabAccordion('technical_Consolidation_accordion')">Consolidation</a>
                                  </div>
                                  <div id="consolidation" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -252,7 +252,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#technical_tab" href=""
-                                       data-target="#technical_divergence">Divergence</a>
+                                       data-target="#technical_divergence" ng-click="vm.changeTabAccordion('technical_divergence_accordion')">Divergence</a>
                                  </div>
                                  <div id="technical_divergence" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -275,7 +275,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#technical_tab" href=""
-                                       data-target="#risk_characteristic_measure">Risk Characteristic/Measure</a>
+                                       data-target="#risk_characteristic_measure" ng-click="vm.changeTabAccordion('technical_risk_characteristic_accordion')">Risk Characteristic/Measure</a>
                                  </div>
                                  <div id="risk_characteristic_measure" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -297,7 +297,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#technical_tab" href=""
-                                       data-target="#technical_Momentum">Momentum</a>
+                                       data-target="#technical_Momentum" ng-click="vm.changeTabAccordion('technical_momentum_accordion')">Momentum</a>
                                  </div>
                                  <div id="technical_Momentum" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -319,7 +319,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#technical_tab" href=""
-                                       data-target="#technical_Breakout">Breakout</a>
+                                       data-target="#technical_Breakout" ng-click="vm.changeTabAccordion('technical_breakout_accordion')">Breakout</a>
                                  </div>
                                  <div id="technical_Breakout" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -341,7 +341,7 @@
                            </div>
                         </uib-tab>
                         <!--Technical Tab End-->
-                        <uib-tab heading="Fundamental" ng-click="vm.changeTab('fundamental','financial-ratios')">
+                        <uib-tab heading="Fundamental" ng-click="vm.changeTab('fundamental')">
                            <!--Fundamental Tab Start-->
                            <div class="accordian_outter panel-group" id="fundamental_tab">
                               <div class="accordian_inner panel panel-default">
@@ -460,7 +460,7 @@
                            </div>
                         </uib-tab>
                         <!--Fundamental Tab End-->
-                        <uib-tab heading="Sentiment" ng-click="vm.changeTab('sentiment','sentiment')">
+                        <uib-tab heading="Sentiment" ng-click="vm.changeTab('sentiment')">
                            <!--Sentiment Tab Start-->
                            <div class="accordian_show">
                               <div class="accordian_grid_outter d-flex justify-between flex-wrap">
@@ -478,7 +478,7 @@
                            </div>
                         </uib-tab>
                         <!--Sentiment Tab End-->
-                        <uib-tab heading="Event" ng-click="vm.changeTab('event','sentiment')">
+                        <uib-tab heading="Event" ng-click="vm.changeTab('event')">
                            <!--Event Tab Start-->
                            <div class="accordian_show">
                               <div class="accordian_grid_outter d-flex justify-between flex-wrap">
@@ -500,7 +500,7 @@
                   </div>
                </div>
                <div class="modal_right_side">
-                  <div class="modal_right_inner" ng-if="vm.selectedFilter =='technicalMarketCap'">
+                  <!-- <div class="modal_right_inner" ng-if="vm.selectedFilter =='technicalMarketCap'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Price</h2>
                      </div>
@@ -523,9 +523,9 @@
                         </div>
 
                      </div>
-                  </div>
+                  </div> -->
                   <!-- <div class="modal_right_inner" ng-if="vm.selectedFilter =='technicalBarPattern'"> -->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_basic_accordion' && vm.selectedFilter=='technicalMarketCap' ">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Price</h2>
                      </div>
@@ -561,7 +561,7 @@
                      </div>
                   </div>
 
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_basic_accordion' && vm.selectedFilter=='technicalBarPattern' ">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Bar Pattern</h2>
                      </div>
