@@ -461,6 +461,34 @@ header{
 }
 
 .universe_select {
+  &.green_select_box {
+    .select-box {
+      .dropdown-toggle.ng-binding.btn.btn-default {
+        color: #018C81;
+        border-bottom: 1px dashed #018C81;
+        border-radius: unset;
+        padding: 8px 11px 10px 0px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-radius: unset;
+      }
+    }
+  }
+  &.universe_select_new_box {
+    .select-box {
+      .dropdown-toggle.ng-binding.btn.btn-default {
+        color: #184376;
+        border-bottom: 1px dashed #184376 !important;
+        border-radius: unset;
+        padding: 0 20px 5px 0 !important;
+        width: 40px;
+      }
+    }
+  }
+  &.universe_select_new {
+    width: 53%;
+  }
   &.w-30 {
     width: 30%;
   }
@@ -1560,7 +1588,15 @@ input{
 .multiselect-parent {
   width: 100%;
     .dropdown-toggle.ng-binding.btn.btn-default {
-      width: 100%;
+      width: 95%;
       text-align: left;
+  }
+}
+.input-small {
+  margin-right: 15px;
+  .input_box {
+    width: 70px;
+    text-align: center;
+    margin-right: 10px;
   }
 }
