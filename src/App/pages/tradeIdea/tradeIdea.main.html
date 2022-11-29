@@ -2214,8 +2214,8 @@
                   </div>
                </div> 
             <!-----------------Correlation end--------------------->
-             <!-----------------Sharpe ratio--------------------->
-             <div class="modal_right_inner">
+         <!-----------------Sharpe ratio--------------------->
+            <div class="modal_right_inner">
                <div class="right_heading_outter">
                   <h2 class="modal_heading">Sharpe Ratio</h2>
                </div>
@@ -2269,13 +2269,6 @@
                         </ul>
                      </div>
                   </div>
-                  <div class="look_back_outer">
-                     <h4 class="p300l">Lookback Period</h4>
-                     <div class="lockback_value lookback_value_new d-flex align-center">
-                        <h4>100</h4>
-                        <h5>Days</h5>
-                     </div>
-                  </div>
                   <div class="popup_radio_outter look_back_outer">
                      <h4 class="p300l">Value</h4>
                      <div class="">
@@ -2289,6 +2282,235 @@
                </div>
             </div> 
          <!-----------------Sharpe ratio end--------------------->
+         <!-----------------MACD--------------------->
+         <div class="modal_right_inner">
+            <div class="right_heading_outter">
+               <h2 class="modal_heading">MACD</h2>
+            </div>
+            <div class="correlation_feilds">
+               <div class="popup_inputs_outter look_back_outer d-flex justify-between">
+                  <div>
+                     <h4 class="p300l">EMA Period</h4>
+                     <div class="d-flex align-center range_value">
+                        <input class="lockback_value" type="text" id="018" value="118" name="EMAPeriod">
+                     </div>
+                  </div>
+                  <div>
+                     <h4 class="p300l">Fast Period</h4>
+                     <div class="d-flex align-center range_value">
+                        <input class="lockback_value" type="text" id="018" value="118" name="EMAPeriod">
+                     </div>
+                  </div>
+                  <div>
+                     <h4 class="p300l">Slow Period</h4>
+                     <div class="d-flex align-center range_value">
+                        <input class="lockback_value" type="text" id="018" value="118" name="EMAPeriod">
+                     </div>
+                  </div>
+               </div>
+               <div class="look_back_outer universe_select ">
+                  <h4 class="p300l">Value 1</h4>
+                  <div class="price_select_outter d-flex justify-between">
+                     <div class="select-box">
+                        <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                           selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                           translation-texts="vm.periodText"
+                           ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div> 
+          <!-----------------MACD end--------------------->
+          <!-----------------RSI--------------------->
+            <div class="modal_right_inner">
+               <div class="right_heading_outter">
+                  <h2 class="modal_heading">RSI</h2>
+               </div>
+               <div class="correlation_feilds">
+                  <div class="look_back_outer">
+                     <h4 class="p300l">Period</h4>
+                     <input type="text" class="input_box text-center" placeholder="0">
+                  </div>
+                  <div class="look_back_outer universe_select ">
+                     <h4 class="p300l">Comparator</h4>
+                     <div class="price_select_outter d-flex justify-between">
+                        <div class="select-box">
+                           <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                              selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                              translation-texts="vm.periodText"
+                              ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="look_back_outer">
+                     <h4 class="p300l">Value 1</h4>
+                     <input type="text" class="input_box text-center" placeholder="0">
+                  </div>
+                  <div class="look_back_outer">
+                     <h4 class="p300l">Value 2</h4>
+                     <input type="text" class="input_box text-center" placeholder="0">
+                  </div>
+               </div>
+            </div> 
+          <!-----------------RSI end--------------------->
+         <!-----------------Stochastic Oscillator--------------------->
+               <div class="modal_right_inner">
+               <div class="right_heading_outter">
+                  <h2 class="modal_heading">Stochastic Oscillator</h2>
+               </div>
+               <div class="correlation_feilds">
+                  <div class="look_back_outer">
+                     <h4 class="p300l">Slow Period</h4>
+                     <input type="text" class="input_box text-center" placeholder="0">
+                  </div>
+                  <div class="look_back_outer">
+                     <h4 class="p300l">Fast Period</h4>
+                     <input type="text" class="input_box text-center" placeholder="0">
+                  </div>
+                  <div class="look_back_outer universe_select ">
+                     <h4 class="p300l">Comparator</h4>
+                     <div class="price_select_outter d-flex justify-between">
+                        <div class="select-box">
+                           <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                              selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                              translation-texts="vm.periodText"
+                              ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="look_back_outer">
+                     <h4 class="p300l">Value 1</h4>
+                     <input type="text" class="input_box text-center" placeholder="0">
+                  </div>
+                  <div class="look_back_outer">
+                     <h4 class="p300l">Value 2</h4>
+                     <input type="text" class="input_box text-center" placeholder="0">
+                  </div>
+               </div>
+               </div> 
+         <!-----------------Stochastic Oscillator end--------------------->
+         <!-----------------Normalized on balance volume--------------------->
+         <div class="modal_right_inner">
+            <div class="right_heading_outter">
+               <h2 class="modal_heading">Normalized On Balance volume</h2>
+            </div>
+            <div class="correlation_feilds">
+               <div class="look_back_outer">
+                  <h4 class="p300l">Period</h4>
+                  <input type="text" class="input_box text-center" placeholder="0">
+               </div>
+               <div class="look_back_outer universe_select ">
+                  <h4 class="p300l">Comparator</h4>
+                  <div class="price_select_outter d-flex justify-between">
+                     <div class="select-box">
+                        <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                           selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                           translation-texts="vm.periodText"
+                           ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="look_back_outer universe_select ">
+                  <h4 class="p300l">Value</h4>
+                  <div class="select-box">
+                     <div class="select-box__current" tabindex="50">
+                        <div class="select-box__value">
+                           <input class="select-box__input" type="radio" id="050" value="150" name="ValueType5" checked="checked">
+                           <p class="select-box__input-text">S&amp;P 500</p>
+                        </div>
+                        <div class="select-box__value">
+                           <input class="select-box__input" type="radio" id="150" value="250" name="ValueType5">
+                           <p class="select-box__input-text">0 Percentile</p>
+                        </div>
+                        <div class="select-box__value">
+                           <input class="select-box__input" type="radio" id="250" value="350" name="ValueType5">
+                           <p class="select-box__input-text">5th Percentile</p>
+                        </div>
+                        <div class="select-box__value">
+                           <input class="select-box__input" type="radio" id="350" value="450" name="ValueType5">
+                           <p class="select-box__input-text">10th Percentile</p>
+                        </div>
+                        <div class="select-box__value">
+                           <input class="select-box__input" type="radio" id="350" value="450" name="ValueType5">
+                           <p class="select-box__input-text">15th Percentile</p>
+                        </div>
+                        <img class="select-box__icon" src="//am708403.blob.core.windows.net/images/tradeidea/arrow.svg" alt="Arrow Icon" aria-hidden="true">
+                     </div>
+                     <ul class="select-box__list">
+                        <li>
+                            <label class="custom_checkbox select-box__option" for="150" aria-hidden="aria-hidden">0 Percentile
+                                <input type="checkbox" checked>
+                                    <span class="checkmark_checkbox"></span>
+                            </label>
+                        </li>
+                        <li>
+                           <label class="custom_checkbox select-box__option" for="250" aria-hidden="aria-hidden">5th Percentile
+                               <input type="checkbox">
+                                   <span class="checkmark_checkbox"></span>
+                           </label>
+                        </li>
+                        <li>
+                           <label class="custom_checkbox select-box__option" for="350" aria-hidden="aria-hidden">10th Percentile
+                              <input type="checkbox">
+                                 <span class="checkmark_checkbox"></span>
+                           </label>
+                        </li>
+                        <li>
+                           <label class="custom_checkbox select-box__option" for="450" aria-hidden="aria-hidden">15th Percentile
+                              <input type="checkbox">
+                                 <span class="checkmark_checkbox"></span>
+                           </label>
+                        </li>
+                        <li>
+                           <label class="custom_checkbox select-box__option" for="550" aria-hidden="aria-hidden">20th Percentile
+                              <input type="checkbox">
+                                 <span class="checkmark_checkbox"></span>
+                           </label>
+                        </li>
+                    </ul>
+                  </div>
+               </div>
+            </div>
+         </div> 
+      <!-----------------Normalized on balance volume end--------------------->
+      <!-----------------Major price breakout--------------------->
+      <div class="modal_right_inner">
+         <div class="right_heading_outter">
+            <h2 class="modal_heading">Normalized On Balance volume</h2>
+         </div>
+         <div class="correlation_feilds">
+            <div class="look_back_outer universe_select ">
+               <h4 class="p300l">Breakout Direction</h4>
+               <div class="price_select_outter d-flex justify-between">
+                  <div class="select-box">
+                     <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                        selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                        translation-texts="vm.periodText"
+                        ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="look_back_outer universe_select ">
+               <h4 class="p300l">Time Period</h4>
+               <div class="price_select_outter d-flex justify-between">
+                  <div class="select-box">
+                     <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                        selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                        translation-texts="vm.periodText"
+                        ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div> 
+      <!-----------------Major price breakout end--------------------->
                </div>
             </div>
 
