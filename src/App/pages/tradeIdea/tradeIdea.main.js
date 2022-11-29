@@ -7,6 +7,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.selectedAccordin ='';
             $scope.techBarValue1 ={'id':'4'};
             $scope.selectedPeriod ={};
+            $scope.lookbackPeriod ={};
             $scope.diverStrategyType ={};
             $scope.diverStrategyIndicator ={};
             $scope.isprocessing = false;
@@ -63,6 +64,13 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '1', name: 'Volume' },
                     { id: '2', name: 'RSI [N] days' },
                     { id: '3', name: 'Accumulation & Distribution'},
+                ],
+                lookbackPeriod: [
+                    { id: '1', name: '3M' },
+                    { id: '2', name: '6M' },
+                    { id: '3', name: '12M'},
+                    { id: '4', name: '2Y'},
+                    { id: '5', name: '3Y'},
                 ],
             }
 
