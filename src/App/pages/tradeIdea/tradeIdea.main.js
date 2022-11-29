@@ -40,6 +40,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.changeTabAccordion=  function (accordion) {
                 console.log("Selected Accordion:",accordion)
                 $scope.selectedAccordin = accordion;
+                $scope.selectedFilter = '';
             }
             $scope.setTabFilter=  function (filter) {
                 console.log("set Filter is:",filter)
