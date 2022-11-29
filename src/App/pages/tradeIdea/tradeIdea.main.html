@@ -293,13 +293,13 @@
                                  <div id="consolidation" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner" ng-click="vm.setTabFilter('technicalConsolidation')">
+                                          <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
                                                 <img src="//am708403.blob.core.windows.net/images/tradeidea/triangle-pattern.svg">
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>Triangle Pattern</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a href="#"><img
+                                                <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('technicalTrianglePattern')"><img
                                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a></h5>
                                              </div>
                                           </div>
@@ -1607,7 +1607,7 @@
                   </div>
                   <!-----------------RSI trend end--------------------->
                   <!-----------------Triangle pattern--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_Consolidation_accordion' && vm.selectedFilter=='technicalTrianglePattern'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Triangle Pattern </h2>
                      </div>
