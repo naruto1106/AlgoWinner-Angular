@@ -8,6 +8,8 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.techBarValue1 ={'id':'4'};
             $scope.selectedPeriod ={};
             $scope.isprocessing = false;
+            $scope.selectedSector = [];
+            $scope.SelectedText = { dynamicButtonTextSuffix:'Selected'}
             $scope.periodText = { buttonDefaultText: 'Choose Period'};
             $scope.loadingFilter=  function () {
                 console.log("set processing True;")
@@ -45,6 +47,12 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '5', name: 'Volume' },
                 ],
             }
+
+            $scope.dropdownCheckbox = {
+                showUncheckAll: false,
+                showCheckAll: false,
+                displayProp: 'name'
+            };
 
             $scope.dropdownSetting = {
                 smartButtonMaxItems: 1,

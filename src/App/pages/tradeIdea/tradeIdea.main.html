@@ -2418,6 +2418,11 @@
                <div class="look_back_outer universe_select ">
                   <h4 class="p300l">Value</h4>
                   <div class="select-box">
+                     <div ng-class="{'text-bold': vm.selectedSector.length > 0 }" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                         selected-model="vm.selectedSector" extra-settings="vm.dropdownCheckbox"
+                         translation-texts="vm.SelectedText" checkboxes="true"></div>
+                 </div>
+                  <!-- <div class="select-box">
                      <div class="select-box__current" tabindex="50">
                         <div class="select-box__value">
                            <input class="select-box__input" type="radio" id="050" value="150" name="ValueType5" checked="checked">
@@ -2473,7 +2478,7 @@
                            </label>
                         </li>
                     </ul>
-                  </div>
+                  </div> -->
                </div>
             </div>
          </div> 
