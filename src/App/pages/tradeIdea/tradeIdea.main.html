@@ -402,15 +402,43 @@
                                  <div id="risk_characteristic_measure" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner"
-                                             ng-click="vm.setTabFilter('technicalRiskCharacteristic')">
+                                          <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
                                                 <img
                                                    src="//am708403.blob.core.windows.net/images/tradeidea/votality.svg">
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>Volatility</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a href="#"><img
+                                                <h5 class="free_txt d-flex justify-between">Free <a 
+                                                   ng-click="vm.setTabFilter('technicalVolatility')"><img
+                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                                </h5>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                          <div class="accordian_grid_inner">
+                                             <div class="accordian_img_inner">
+                                                <img src="//am708403.blob.core.windows.net/images/tradeidea/tech-correlation.svg">
+                                             </div>
+                                             <div class="accorian_inner_txt">
+                                                <h4>Correlation</h4>
+                                                <h5 class="free_txt d-flex justify-between">Premium <a 
+                                                   ng-click="vm.setTabFilter('technicalCorrelation')"><img
+                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                                </h5>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                          <div class="accordian_grid_inner">
+                                             <div class="accordian_img_inner">
+                                                <img src="//am708403.blob.core.windows.net/images/tradeidea/tech-sharpe-ratio.svg">
+                                             </div>
+                                             <div class="accorian_inner_txt">
+                                                <h4>Sharpe Ratio</h4>
+                                                <h5 class="free_txt d-flex justify-between">Premium<a 
+                                                   ng-click="vm.setTabFilter('technicalSharpeRatio')"><img
                                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                                 </h5>
                                              </div>
@@ -1002,7 +1030,7 @@
                      </div>
                   </div>
 
-                  <div class="modal_right_inner" style="display: none">
+                  <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Correlation</h2>
                      </div>
@@ -2028,7 +2056,7 @@
                   </div>
                   <!-----------------Divergence strategy end--------------------->
                   <!-----------------Volatility--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_risk_characteristic_accordion' && vm.selectedFilter=='technicalVolatility'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Volatility</h2>
                      </div>
@@ -2061,7 +2089,7 @@
                   </div>
                   <!-----------------Volatility end--------------------->
                   <!-----------------Correlation--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_risk_characteristic_accordion' && vm.selectedFilter=='technicalCorrelation'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Correlation</h2>
                      </div>
@@ -2100,7 +2128,7 @@
                   </div>
                   <!-----------------Correlation end--------------------->
                   <!-----------------Sharpe ratio--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_risk_characteristic_accordion' && vm.selectedFilter=='technicalSharpeRatio'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Sharpe Ratio</h2>
                      </div>
@@ -2108,8 +2136,8 @@
                         <div class="look_back_outer universe_select ">
                            <h4 class="p300l">Lookback Period</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.lookbackPeriod"
+                                 selected-model="vm.lookbackPeriod" extra-settings="vm.dropdownSetting"
                                  translation-texts="vm.periodText"
                                  ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
                               </div>
