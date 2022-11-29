@@ -4,7 +4,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
             var vm = this;
             $scope.selectedFilter = '';
             $scope.selectedTab = 'technical';
-            $scope.selectedAccordin ='basic';
+            $scope.selectedAccordin ='';
             $scope.techBarValue1 ={'id':'4'};
             $scope.selectedPeriod ={};
             $scope.isprocessing = false;
@@ -15,13 +15,11 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 console.log("set processing True;")
                 $scope.isprocessing = true;
             }
-            $scope.changeTab=  function (tab,accordion) {
+            $scope.changeTab=  function (tab) {
                 console.log("Set Tab:",tab)
-                console.log("Set Accordion:",accordion)
                 $scope.selectedTab=tab;
-                $scope.selectedAccordin = accordion;
             }
-            $scope.changeTabAccordion=  function (tab,accordion) {
+            $scope.changeTabAccordion=  function (accordion) {
                 console.log("Selected Accordion:",accordion)
                 $scope.selectedAccordin = accordion;
             }
