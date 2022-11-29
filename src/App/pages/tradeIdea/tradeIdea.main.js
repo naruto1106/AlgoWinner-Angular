@@ -7,10 +7,14 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.selectedAccordin ='';
             $scope.techBarValue1 ={'id':'4'};
             $scope.selectedPeriod ={};
+            $scope.diverStrategyType ={};
+            $scope.diverStrategyIndicator ={};
             $scope.isprocessing = false;
             $scope.selectedSector = [];
             $scope.SelectedText = { dynamicButtonTextSuffix:'Selected'}
             $scope.periodText = { buttonDefaultText: 'Choose Period'};
+            $scope.StrategyTypeText = { buttonDefaultText: 'Choose Type'};
+            $scope.StrategyIndicatorText = { buttonDefaultText: 'Choose Indicator'};
             $scope.loadingFilter=  function () {
                 console.log("set processing True;")
                 $scope.isprocessing = true;
@@ -43,6 +47,22 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '3', name: 'Low' },
                     { id: '4', name: 'Close' },
                     { id: '5', name: 'Volume' },
+                ],
+                normalizedAccumulation: [
+                    { id: '1', name: '0 Percentile' },
+                    { id: '2', name: '5th Percentile' },
+                    { id: '3', name: '10th Percentile' },
+                    { id: '4', name: '15th Percentile' },
+                    { id: '5', name: '20th Percentile' },
+                ],
+                diverStrategyType: [
+                    { id: '1', name: 'Bullish' },
+                    { id: '2', name: 'Bearish' },
+                ],
+                diverStrategyIndicator: [
+                    { id: '1', name: 'Volume' },
+                    { id: '2', name: 'RSI [N] days' },
+                    { id: '3', name: 'Accumulation & Distribution'},
                 ],
             }
 
