@@ -462,7 +462,7 @@
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>MACD</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a ng-click="vm.setTabFilter('technicalMomentum')"><img
+                                                <h5 class="free_txt d-flex justify-between">Free <a ng-click="vm.setTabFilter('technicalMACD')"><img
                                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                                 </h5>
                                              </div>
@@ -2161,7 +2161,7 @@
                   </div>
                   <!-----------------Sharpe ratio end--------------------->
                   <!-----------------MACD--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_momentum_accordion' && vm.selectedFilter=='technicalMACD'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">MACD</h2>
                      </div>
@@ -2190,9 +2190,9 @@
                            <h4 class="p300l">Value 1</h4>
                            <div class="price_select_outter d-flex justify-between">
                               <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.MACDValue1"
+                                    selected-model="vm.MACDValue1" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.MACDValue1Text"
                                     ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
                                  </div>
                               </div>

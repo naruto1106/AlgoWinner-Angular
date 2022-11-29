@@ -9,13 +9,15 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.selectedPeriod ={};
             $scope.lookbackPeriod ={};
             $scope.diverStrategyType ={};
-            $scope.diverStrategyIndicator ={};
+            $scope.diverStrategyType ={};
+            $scope.MACDValue1 ={};
             $scope.isprocessing = false;
             $scope.selectedSector = [];
             $scope.SelectedText = { dynamicButtonTextSuffix:'Selected'}
             $scope.periodText = { buttonDefaultText: 'Choose Period'};
             $scope.StrategyTypeText = { buttonDefaultText: 'Choose Type'};
             $scope.StrategyIndicatorText = { buttonDefaultText: 'Choose Indicator'};
+            $scope.MACDValue1Text = { buttonDefaultText: 'Choose Value'};
             $scope.loadingFilter=  function () {
                 console.log("set processing True;")
                 $scope.isprocessing = true;
@@ -71,6 +73,12 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '3', name: '12M'},
                     { id: '4', name: '2Y'},
                     { id: '5', name: '3Y'},
+                ],
+                MACDValue1: [
+                    { id: '1', name: 'Turned Positive' },
+                    { id: '2', name: 'Turned Negative' },
+                    { id: '3', name: 'Positive'},
+                    { id: '4', name: 'Negative'},
                 ],
             }
 
