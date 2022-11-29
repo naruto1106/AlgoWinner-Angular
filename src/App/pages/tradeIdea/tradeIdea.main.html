@@ -468,6 +468,45 @@
                                              </div>
                                           </div>
                                        </div>
+                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                          <div class="accordian_grid_inner">
+                                             <div class="accordian_img_inner">
+                                                <img src="//am708403.blob.core.windows.net/images/tradeidea/RSI.svg">
+                                             </div>
+                                             <div class="accorian_inner_txt">
+                                                <h4>RSI</h4>
+                                                <h5 class="free_txt d-flex justify-between">Free <a ng-click="vm.setTabFilter('technicalRSI')"><img
+                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                                </h5>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                          <div class="accordian_grid_inner">
+                                             <div class="accordian_img_inner">
+                                                <img src="//am708403.blob.core.windows.net/images/tradeidea/stochastic-oscillator.svg">
+                                             </div>
+                                             <div class="accorian_inner_txt">
+                                                <h4>Stochastic Oscillator</h4>
+                                                <h5 class="free_txt d-flex justify-between">Free <a ng-click="vm.setTabFilter('technicalStochastic')"><img
+                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                                </h5>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                          <div class="accordian_grid_inner">
+                                             <div class="accordian_img_inner">
+                                                <img src="//am708403.blob.core.windows.net/images/tradeidea/normalized-on-balance-volume.svg">
+                                             </div>
+                                             <div class="accorian_inner_txt">
+                                                <h4>Normalized On Balance Volume</h4>
+                                                <h5 class="free_txt d-flex justify-between">Free <a ng-click="vm.setTabFilter('technicalNormalized')"><img
+                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                                </h5>
+                                             </div>
+                                          </div>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -480,15 +519,40 @@
                                  <div id="technical_Breakout" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner"
-                                             ng-click="vm.setTabFilter('technicalBreakout')">
+                                          <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
                                                 <img
                                                    src="//am708403.blob.core.windows.net/images/tradeidea/major-price-breakout.svg">
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>Major Price Breakout</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium <a href="#"><img
+                                                <h5 class="free_txt d-flex justify-between">Premium <a ng-click="vm.setTabFilter('technicalMajorPrice')"><img
+                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                                </h5>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                          <div class="accordian_grid_inner">
+                                             <div class="accordian_img_inner">
+                                                <img src="//am708403.blob.core.windows.net/images/tradeidea/peak-trough-breakout.svg">
+                                             </div>
+                                             <div class="accorian_inner_txt">
+                                                <h4>Peak-Trough Breakout</h4>
+                                                <h5 class="free_txt d-flex justify-between">Premium <a ng-click="vm.setTabFilter('technicalPeakTrough')"><img
+                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                                </h5>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                          <div class="accordian_grid_inner">
+                                             <div class="accordian_img_inner">
+                                                <img src="//am708403.blob.core.windows.net/images/tradeidea/fibonacci-breakout.svg">
+                                             </div>
+                                             <div class="accorian_inner_txt">
+                                                <h4>Fibonacci Breakout</h4>
+                                                <h5 class="free_txt d-flex justify-between">Premium <a ng-click="vm.setTabFilter('technicalFibonacciBreakout')"><img
                                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                                 </h5>
                                              </div>
@@ -1325,7 +1389,7 @@
                      </div>
                   </div>
                   <!-----------------------Earning growth----------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Earning Growth</h2>
                      </div>
@@ -1359,7 +1423,7 @@
                   </div>
                   <!------------------------Earning growth end------------------>
                    <!-----------------------relative price earning----------------------->
-                   <div class="modal_right_inner">
+                   <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Relative Price To Earning</h2>
                      </div>
@@ -1402,7 +1466,7 @@
                   </div>
                   <!------------------------relative price earning end------------------>
                   <!-----------------------relative earning growth----------------------->
-                    <div class="modal_right_inner">
+                    <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Relative Earning Growth</h2>
                      </div>
@@ -1439,7 +1503,7 @@
                      </div>
                   <!------------------------relative earning growth end------------------>
                    <!-----------------------market cap----------------------->
-                   <div class="modal_right_inner">
+                   <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_trend_identifier_accordion' && vm.selectedFilter=='technicalMarketCap' ">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Market Cap</h2>
                      </div>
@@ -2202,7 +2266,7 @@
                   </div>
                   <!-----------------MACD end--------------------->
                   <!-----------------RSI--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_momentum_accordion' && vm.selectedFilter=='technicalRSI'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">RSI</h2>
                      </div>
@@ -2215,9 +2279,9 @@
                            <h4 class="p300l">Comparator</h4>
                            <div class="price_select_outter d-flex justify-between">
                               <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Comparator"
+                                    selected-model="vm.selectedComparator" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.comparatorText"
                                     ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
                                  </div>
                               </div>
@@ -2227,7 +2291,7 @@
                            <h4 class="p300l">Value 1</h4>
                            <input type="text" class="input_box text-center" placeholder="0">
                         </div>
-                        <div class="look_back_outer">
+                        <div class="look_back_outer" ng-if="vm.selectedComparator.id != undefined && vm.selectedComparator.id=='3'">
                            <h4 class="p300l">Value 2</h4>
                            <input type="text" class="input_box text-center" placeholder="0">
                         </div>
@@ -2235,7 +2299,7 @@
                   </div>
                   <!-----------------RSI end--------------------->
                   <!-----------------Stochastic Oscillator--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_momentum_accordion' && vm.selectedFilter=='technicalStochastic'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Stochastic Oscillator</h2>
                      </div>
@@ -2252,10 +2316,10 @@
                            <h4 class="p300l">Comparator</h4>
                            <div class="price_select_outter d-flex justify-between">
                               <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Comparator"
+                                    selected-model="vm.stochasticComparator" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.comparatorText"
+                                    ng-class="{'text-bold': vm.stochasticComparator.id != undefined}">
                                  </div>
                               </div>
                            </div>
@@ -2264,7 +2328,7 @@
                            <h4 class="p300l">Value 1</h4>
                            <input type="text" class="input_box text-center" placeholder="0">
                         </div>
-                        <div class="look_back_outer">
+                        <div class="look_back_outer" ng-if="vm.stochasticComparator.id != undefined && vm.stochasticComparator.id=='3'">
                            <h4 class="p300l">Value 2</h4>
                            <input type="text" class="input_box text-center" placeholder="0">
                         </div>
@@ -2272,7 +2336,7 @@
                   </div>
                   <!-----------------Stochastic Oscillator end--------------------->
                   <!-----------------Normalized on balance volume--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_momentum_accordion' && vm.selectedFilter=='technicalNormalized'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Normalized On Balance volume</h2>
                      </div>
@@ -2285,9 +2349,9 @@
                            <h4 class="p300l">Comparator</h4>
                            <div class="price_select_outter d-flex justify-between">
                               <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Comparator"
+                                    selected-model="vm.normalizedComparator" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.comparatorText"
                                     ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
                                  </div>
                               </div>
@@ -2297,7 +2361,7 @@
                            <h4 class="p300l">Value</h4>
                            <div class="select-box">
                               <div ng-class="{'text-bold': vm.selectedSector.length > 0 }" class="cst-dropdown-trade"
-                                 ng-dropdown-multiselect="" options="vm.data.Periods" selected-model="vm.selectedSector"
+                                 ng-dropdown-multiselect="" options="vm.data.normalizedAccumulation" selected-model="vm.selectedSector"
                                  extra-settings="vm.dropdownCheckbox" translation-texts="vm.SelectedText"
                                  checkboxes="true"></div>
                            </div>
@@ -2363,7 +2427,7 @@
                   </div>
                   <!-----------------Normalized on balance volume end--------------------->
                   <!-----------------Major price breakout--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_breakout_accordion' && vm.selectedFilter=='technicalMajorPrice'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Major Price Breakout</h2>
                      </div>
@@ -2372,10 +2436,10 @@
                            <h4 class="p300l">Breakout Direction</h4>
                            <div class="price_select_outter d-flex justify-between">
                               <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.breakoutDirection"
+                                    selected-model="vm.selectedbreakoutDirection" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.breakoutText"
+                                    ng-class="{'text-bold': vm.selectedbreakoutDirection.id != undefined}">
                                  </div>
                               </div>
                            </div>
@@ -2396,7 +2460,7 @@
                   </div>
                   <!-------------------major price breakout end--------------->
                    <!-----------------Peak trough breakout --------------------->
-             <div class="modal_right_inner">
+             <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_breakout_accordion' && vm.selectedFilter=='technicalPeakTrough'">
                <div class="right_heading_outter">
                   <h2 class="modal_heading">Peak Trough Breakout</h2>
                </div>
@@ -2405,10 +2469,10 @@
                      <h4 class="p300l">Type</h4>
                      <div class="price_select_outter d-flex justify-between">
                         <div class="select-box">
-                           <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                              selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                              translation-texts="vm.periodText"
-                              ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                           <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.peakTrough"
+                              selected-model="vm.PeakThrough" extra-settings="vm.dropdownSetting"
+                              translation-texts="vm.StrategyTypeText"
+                              ng-class="{'text-bold': vm.PeakThrough.id != undefined}">
                            </div>
                         </div>
                      </div>
@@ -2426,7 +2490,7 @@
             </div>
             <!-----------------Peak trough breakout end--------------------->
             <!-----------------fibonacci breakout--------------------->
-            <div class="modal_right_inner">
+            <div class="modal_right_inner" ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_breakout_accordion' && vm.selectedFilter=='technicalFibonacciBreakout'">
                <div class="right_heading_outter">
                   <h2 class="modal_heading">Fibonacci Breakout</h2>
                </div>
@@ -2444,10 +2508,10 @@
                      <h4 class="p300l">Line</h4>
                      <div class="price_select_outter d-flex justify-between">
                         <div class="select-box">
-                           <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                              selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                              translation-texts="vm.periodText"
-                              ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                           <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.lineBreakout"
+                              selected-model="vm.lineBreakout" extra-settings="vm.dropdownSetting"
+                              translation-texts="vm.lineBreakoutText"
+                              ng-class="{'text-bold': vm.lineBreakout.id != undefined}">
                            </div>
                         </div>
                      </div>
@@ -2456,10 +2520,10 @@
                      <h4 class="p300l">Is Elliot Wave 3</h4>
                      <div class="price_select_outter d-flex justify-between">
                         <div class="select-box">
-                           <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                              selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                              translation-texts="vm.periodText"
-                              ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                           <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.confirmation"
+                              selected-model="vm.isElliotWave" extra-settings="vm.dropdownSetting"
+                              translation-texts="vm.confirmationText"
+                              ng-class="{'text-bold': vm.isElliotWave.id != undefined}">
                            </div>
                         </div>
                      </div>
@@ -2468,7 +2532,7 @@
             </div> 
             <!-----------------fibonacci breakout end--------------------->
             <!-----------------Analyst rating--------------------->
-             <div class="modal_right_inner">
+             <div class="modal_right_inner" style="display: none;">
                <div class="right_heading_outter">
                   <h2 class="modal_heading">Analyst Rating</h2>
                </div>
@@ -2516,7 +2580,7 @@
             </div> 
             <!-----------------Analyst rating end--------------------->
             <!-----------------News based price trigger--------------------->
-               <div class="modal_right_inner">
+               <div class="modal_right_inner" style="display: none;"> 
                   <div class="right_heading_outter">
                      <h2 class="modal_heading">News Based Price Trigger</h2>
                   </div>
@@ -2549,7 +2613,7 @@
                   </div>
                   <!-----------------Major price breakout end--------------------->
                   <!-----------------Peak trough breakout--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Peak-Trough Breakout</h2>
                      </div>
@@ -2579,7 +2643,7 @@
                   </div>
                   <!-----------------Peak trough breakout end--------------------->
                   <!-----------------fibonacci breakout--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Fibonacci Breakout</h2>
                      </div>
@@ -2621,7 +2685,7 @@
                   </div>
                   <!-----------------fibonacci breakout end--------------------->
                   <!-----------------Analyst rating--------------------->
-                  <div class="modal_right_inner">
+                  <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Analyst Rating</h2>
                      </div>
@@ -2647,7 +2711,7 @@
                   </div>
                 <!-----------------Analyst rating end--------------------->
                 <!-----------------News based price trigger--------------------->
-                <div class="modal_right_inner">
+                <div class="modal_right_inner" style="display: none;">
                   <div class="right_heading_outter">
                      <h2 class="modal_heading">News Based Price Trigger</h2>
                   </div>
@@ -2680,7 +2744,7 @@
                </div>
                <!-----------------News based price trigger end--------------------->
                <!-----------------Analyst target price--------------------->
-               <div class="modal_right_inner">
+               <div class="modal_right_inner" style="display: none;">
                   <div class="right_heading_outter">
                      <h2 class="modal_heading">Analyst Target Price</h2>
                   </div>
@@ -2713,7 +2777,7 @@
                </div>
                <!-----------------Analyst target price end--------------------->
                <!-----------------Analyst Action--------------------->
-               <div class="modal_right_inner">
+               <div class="modal_right_inner" style="display: none;">
                   <div class="right_heading_outter">
                      <h2 class="modal_heading">Analyst Action</h2>
                   </div>
@@ -2734,7 +2798,7 @@
                </div>
                <!-----------------Analyst action end--------------------->
                <!-----------------Volume Breakout--------------------->
-               <div class="modal_right_inner">
+               <div class="modal_right_inner" style="display: none;">
                   <div class="right_heading_outter">
                      <h2 class="modal_heading">Volume Breakout</h2>
                   </div>
@@ -2764,7 +2828,7 @@
                </div>
                <!-----------------Volume Breakout end--------------------->
                <!-----------------Unusual Gap--------------------->
-               <div class="modal_right_inner">
+               <div class="modal_right_inner" style="display: none;">
                   <div class="right_heading_outter">
                      <h2 class="modal_heading">Unusual Gap</h2>
                   </div>

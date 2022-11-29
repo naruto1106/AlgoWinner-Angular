@@ -11,6 +11,13 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.diverStrategyType ={};
             $scope.diverStrategyType ={};
             $scope.MACDValue1 ={};
+            $scope.selectedComparator ={};
+            $scope.stochasticComparator ={};
+            $scope.normalizedComparator ={};
+            $scope.selectedbreakoutDirection ={};
+            $scope.PeakThrough ={};
+            $scope.lineBreakout ={};
+            $scope.isElliotWave ={};
             $scope.isprocessing = false;
             $scope.selectedSector = [];
             $scope.SelectedText = { dynamicButtonTextSuffix:'Selected'}
@@ -18,6 +25,10 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.StrategyTypeText = { buttonDefaultText: 'Choose Type'};
             $scope.StrategyIndicatorText = { buttonDefaultText: 'Choose Indicator'};
             $scope.MACDValue1Text = { buttonDefaultText: 'Choose Value'};
+            $scope.comparatorText = { buttonDefaultText: 'Choose Comparator'};
+            $scope.breakoutText = { buttonDefaultText: 'Choose Breakout Direction'};
+            $scope.lineBreakoutText = { buttonDefaultText: 'Choose Line'};
+            $scope.confirmationText = { buttonDefaultText: 'Yes/No'};
             $scope.loadingFilter=  function () {
                 console.log("set processing True;")
                 $scope.isprocessing = true;
@@ -79,6 +90,31 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '2', name: 'Turned Negative' },
                     { id: '3', name: 'Positive'},
                     { id: '4', name: 'Negative'},
+                ],
+                Comparator: [
+                    { id: '1', name: 'Greator' },
+                    { id: '2', name: 'Smaller' },
+                    { id: '3', name: 'Between' },
+                    { id: '4', name: 'Cross Above'},
+                    { id: '5', name: 'Cross Below'},
+                ],
+                breakoutDirection: [
+                    { id: '1', name: 'Break Above' },
+                    { id: '2', name: 'Break Below' },
+                ],
+                peakTrough: [
+                    { id: '1', name: 'Peak' },
+                    { id: '2', name: 'Trough' },
+                ],
+                lineBreakout: [
+                    { id: '1', name: '23.6%' },
+                    { id: '2', name: '38.2%' },
+                    { id: '3', name: '61.8%' },
+                    { id: '4', name: '78.6%'},
+                ],
+                confirmation: [
+                    { id: '1', name: 'Yes' },
+                    { id: '2', name: 'No' },
                 ],
             }
 
