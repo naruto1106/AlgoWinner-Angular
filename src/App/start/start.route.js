@@ -217,7 +217,7 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                     notificationSettings: notificationSetting
                 }
             })
-            .when("/tradeviewPage", {
+            /* .when("/tradeviewPage", {
                 title: "Trade Idea",
                 controller: "p.tradeIdea.TradeIdeaController",
                 templateUrl: "/App/pages/tradeIdea/tradeIdea.view.html",
@@ -225,7 +225,7 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                     check: checkMobileWeb,
                     notificationSettings: notificationSetting
                 }
-            })
+            }) */
             .when("/tradeMain", {
                 title: "Trade Main",
                 controller: "p.tradeIdea.MainController",
