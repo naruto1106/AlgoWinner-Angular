@@ -1364,7 +1364,7 @@
                         <h2 class="modal_heading">Relative Price To Earning</h2>
                      </div>
                      <div class="correlation_feilds">
-                        <div class="checkbox">
+                        <div class="checkbox checkbox_fields">
                            <h4 class="p300l">Compare To</h4>
                            <label class="ng-binding" for="industry">
                               <input class="checkboxInput" id="industry" type="checkbox" checked="checked"> Industry
@@ -1407,7 +1407,7 @@
                         <h2 class="modal_heading">Relative Earning Growth</h2>
                      </div>
                      <div class="correlation_feilds">
-                        <div class="checkbox">
+                        <div class="checkbox checkbox_fields">
                            <h4 class="p300l">Compare To</h4>
                            <label class="ng-binding" for="industry">
                               <input class="checkboxInput" id="industry" type="checkbox" checked="checked"> Industry
@@ -1586,7 +1586,7 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="popup_radio_outter mt" style="">
+                           <div class="popup_radio_outter mt">
                               <h4 class="p300l">Comparator Value</h4>
                               <div class="template_selection d-flex flex-wrap align-center">
                                  <div class="custom_outter d-flex align-center flex-wrap">
@@ -2367,9 +2367,63 @@
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Major Price Breakout</h2>
                      </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Breakout Direction</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.periodText"
+                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Time Period</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.periodText"
+                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-------------------major price breakout end--------------->
+                   <!-----------------Peak trough breakout --------------------->
+             <div class="modal_right_inner">
+               <div class="right_heading_outter">
+                  <h2 class="modal_heading">Peak Trough Breakout</h2>
+               </div>
+               <div class="correlation_feilds">
+                  <div class="look_back_outer universe_select ">
+                     <h4 class="p300l">Type</h4>
+                     <div class="price_select_outter d-flex justify-between">
+                        <div class="select-box">
+                           <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                              selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                              translation-texts="vm.periodText"
+                              ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="look_back_outer">
+                     <h4 class="p300l">Lookback Period</h4>
+                     <div class="lockback_value d-flex">
+                        <div class="input-small d-flex align-center">
+                           <input type="text" class="input_box" placeholder="20">
+                           <h5>Days</h5>
+                        </div>
+                     </div>
                   </div>
                </div>
-            </div> 
+            </div>
             <!-----------------Peak trough breakout end--------------------->
             <!-----------------fibonacci breakout--------------------->
             <div class="modal_right_inner">
@@ -2487,6 +2541,7 @@
                         </div>
                      </div>
                   </div>
+                  </div>
                   <!-----------------Major price breakout end--------------------->
                   <!-----------------Peak trough breakout--------------------->
                   <div class="modal_right_inner">
@@ -2585,146 +2640,148 @@
                         </div>
                      </div>
                   </div>
-                  <!-----------------Analyst rating end--------------------->
-                  <!-----------------News based price trigger--------------------->
-                  <div class="modal_right_inner">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">News Based Price Trigger</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Latest News Sentiment</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
+                <!-----------------Analyst rating end--------------------->
+                <!-----------------News based price trigger--------------------->
+                <div class="modal_right_inner">
+                  <div class="right_heading_outter">
+                     <h2 class="modal_heading">News Based Price Trigger</h2>
+                  </div>
+                  <div class="correlation_feilds">
+                     <div class="look_back_outer universe_select ">
+                        <h4 class="p300l">Latest News Sentiment</h4>
+                        <div class="price_select_outter d-flex justify-between">
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="vm.periodText"
+                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
                               </div>
                            </div>
                         </div>
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Latest News is within</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
+                     </div>
+                     <div class="look_back_outer universe_select ">
+                        <h4 class="p300l">Latest News is within</h4>
+                        <div class="price_select_outter d-flex justify-between">
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="vm.periodText"
+                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
-                  <!-----------------News based price trigger end--------------------->
-                  <!-----------------Analyst target price--------------------->
-                  <div class="modal_right_inner">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Analyst Target Price</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Parameter 1</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Parameter 2</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Analyst target price end--------------------->
-                  <!-----------------Analyst Action--------------------->
-                  <div class="modal_right_inner">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Analyst Action</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Type</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Analyst action end--------------------->
-                  <!-----------------Volume Breakout--------------------->
-                  <div class="modal_right_inner">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Volume Breakout</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer">
-                           <h4 class="p300l">Lookback Period</h4>
-                           <div class="lockback_value d-flex">
-                              <div class="input-small d-flex align-center">
-                                 <input type="text" class="input_box" placeholder="20">
-                                 <h5>Days</h5>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Multiplier</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Volume Breakout end--------------------->
-                  <!-----------------Unusual Gap--------------------->
-                  <div class="modal_right_inner">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Unusual Gap</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Type</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Unusual Gap end--------------------->
                </div>
+               <!-----------------News based price trigger end--------------------->
+               <!-----------------Analyst target price--------------------->
+               <div class="modal_right_inner">
+                  <div class="right_heading_outter">
+                     <h2 class="modal_heading">Analyst Target Price</h2>
+                  </div>
+                  <div class="correlation_feilds">
+                     <div class="look_back_outer universe_select ">
+                        <h4 class="p300l">Parameter 1</h4>
+                        <div class="price_select_outter d-flex justify-between">
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="vm.periodText"
+                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="look_back_outer universe_select ">
+                        <h4 class="p300l">Parameter 2</h4>
+                        <div class="price_select_outter d-flex justify-between">
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="vm.periodText"
+                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-----------------Analyst target price end--------------------->
+               <!-----------------Analyst Action--------------------->
+               <div class="modal_right_inner">
+                  <div class="right_heading_outter">
+                     <h2 class="modal_heading">Analyst Action</h2>
+                  </div>
+                  <div class="correlation_feilds">
+                     <div class="look_back_outer universe_select ">
+                        <h4 class="p300l">Type</h4>
+                        <div class="price_select_outter d-flex justify-between">
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="vm.periodText"
+                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-----------------Analyst action end--------------------->
+               <!-----------------Volume Breakout--------------------->
+               <div class="modal_right_inner">
+                  <div class="right_heading_outter">
+                     <h2 class="modal_heading">Volume Breakout</h2>
+                  </div>
+                  <div class="correlation_feilds">
+                     <div class="look_back_outer">
+                        <h4 class="p300l">Lookback Period</h4>
+                        <div class="lockback_value d-flex">
+                           <div class="input-small d-flex align-center">
+                              <input type="text" class="input_box" placeholder="20">
+                              <h5>Days</h5>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="look_back_outer universe_select ">
+                        <h4 class="p300l">Multiplier</h4>
+                        <div class="price_select_outter d-flex justify-between">
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="vm.periodText"
+                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-----------------Volume Breakout end--------------------->
+               <!-----------------Unusual Gap--------------------->
+               <div class="modal_right_inner">
+                  <div class="right_heading_outter">
+                     <h2 class="modal_heading">Unusual Gap</h2>
+                  </div>
+                  <div class="correlation_feilds">
+                     <div class="look_back_outer universe_select ">
+                        <h4 class="p300l">Type</h4>
+                        <div class="price_select_outter d-flex justify-between">
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="vm.periodText"
+                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-----------------Unusual Gap end--------------------->
+            <!-----------------News based price trigger end--------------------->
+               </div>
+            </div> 
             </div>
 
          </div>
