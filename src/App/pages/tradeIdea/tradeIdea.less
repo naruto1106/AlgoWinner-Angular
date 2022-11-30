@@ -463,15 +463,25 @@ header{
 .universe_select {
   &.green_select_box {
     .select-box {
-      .dropdown-toggle.ng-binding.btn.btn-default {
-        color: #018C81;
-        border-bottom: 1px dashed #018C81;
-        border-radius: unset;
-        padding: 8px 11px 10px 0px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-radius: unset;
+      .cst-dropdown-trade {
+        .dropdown-toggle.ng-binding.btn.btn-default {
+          color: #9aa1a1;
+          border-bottom: 1px dashed #9aa1a1;
+          padding: 0px 4px 4px 0px;
+          width: 100%;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-radius: unset;
+          background-position: right 0px top 5px !important;
+          margin-left: 5px;
+        }
+        &.text-bold {
+          .dropdown-toggle.ng-binding.btn.btn-default {
+            color: #018C81;
+            border-bottom: 1px dashed #018C81;
+          }
+        }
       }
     }
   }
@@ -1266,7 +1276,7 @@ input{
     }
   }
   .mt {
-    margin-top: 10px;
+    margin-top: 15px;
   }
   .select-box__input-text {
     width: 100%;
@@ -1634,4 +1644,7 @@ input{
     color: #184376;
     font-weight: 700;
   }
+}
+button.dropdown-toggle.ng-binding.btn.btn-default {
+    box-shadow: none;
 }
