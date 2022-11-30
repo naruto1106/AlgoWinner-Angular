@@ -814,101 +814,34 @@
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Period</h4>
                            <div class="select-box">
-                              <div class="select-box__current" tabindex="23">
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="023" value="123" name="period"
-                                       checked="checked">
-                                    <p class="select-box__input-text">S&amp;P 500</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="123" value="232" name="period">
-                                    <p class="select-box__input-text">Days</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="223" value="332" name="period">
-                                    <p class="select-box__input-text">Week</p>
-                                 </div>
-
-                                 <img class="select-box__icon"
-                                    src="//am708403.blob.core.windows.net/images/tradeidea/arrow.svg" alt="Arrow Icon"
-                                    aria-hidden="true">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.periodTypes"
+                                 selected-model="vm.barPatternPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Period'}"
+                                 ng-class="{'text-bold': vm.barPatternPeriod.id != undefined}">
                               </div>
-                              <ul class="select-box__list">
-                                 <li>
-                                    <label class="select-box__option" for="223" aria-hidden="aria-hidden">Days</label>
-                                 </li>
-                                 <li>
-                                    <label class="select-box__option" for="123" aria-hidden="aria-hidden">Week</label>
-                                 </li>
-
-                              </ul>
-                           </div>
+                           </div> 
                         </div>
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Value 1</h4>
                            <div class="select-box">
-                              <div class="select-box__current" tabindex="24">
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="024" value="124" name="value1"
-                                       checked="checked">
-                                    <p class="select-box__input-text">S&amp;P 500</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="124" value="224" name="value1">
-                                    <p class="select-box__input-text">Open</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="224" value="324" name="value1">
-                                    <p class="select-box__input-text">High</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="324" value="424" name="value1">
-                                    <p class="select-box__input-text">Low</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="424" value="524" name="value1">
-                                    <p class="select-box__input-text">Close</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="524" value="624" name="value1">
-                                    <p class="select-box__input-text">Volume</p>
-                                 </div>
-                                 <img class="select-box__icon"
-                                    src="//am708403.blob.core.windows.net/images/tradeidea/arrow.svg" alt="Arrow Icon"
-                                    aria-hidden="true">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.barPatternValue1"
+                                 selected-model="vm.barPatternValue1" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value1'}"
+                                 ng-class="{'text-bold': vm.barPatternValue1.id != undefined}">
                               </div>
-                              <ul class="select-box__list">
-                                 <li>
-                                    <label class="select-box__option" for="224" aria-hidden="aria-hidden">Open</label>
-                                 </li>
-                                 <li>
-                                    <label class="select-box__option" for="124" aria-hidden="aria-hidden">High</label>
-                                 </li>
-                                 <li>
-                                    <label class="select-box__option" for="224" aria-hidden="aria-hidden">Low</label>
-                                 </li>
-                                 <li>
-                                    <label class="select-box__option" for="324" aria-hidden="aria-hidden">Close</label>
-                                 </li>
-                                 <li>
-                                    <label class="select-box__option" for="424" aria-hidden="aria-hidden">Volume</label>
-                                 </li>
-                              </ul>
-                           </div>
+                           </div> 
                         </div>
                         <div class="popup_radio_outter look_back_outer">
                            <h4 class="p300l">At</h4>
                            <div class="template_selection d-flex flex-wrap align-center">
                               <label class="custom_radio">Last Bar
-                                 <input type="radio" checked="checked" name="radio" ng-model="barType"
-                                    ng-value="lastbar" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                 <input type="radio" checked="checked" name="barPatternAt" class="ng-pristine ng-untouched ng-valid ng-empty">
                                  <span class="checkmark"></span>
                               </label>
                               <div class="custom_outter d-flex align-center flex-wrap">
-                                 <label class="custom_radio double_input"> <input type="text" placeholder="0"
-                                       class="box_input"> Days ago
-                                    <input type="radio" name="radio" ng-model="barType" value="daysago"
-                                       class="ng-pristine ng-untouched ng-valid ng-empty">
+                                 <label class="custom_radio double_input"> 
+                                    <input type="text" placeholder="0" class="box_input"> Days ago
+                                    <input type="radio" name="barPatternAt" class="ng-pristine ng-untouched ng-valid ng-empty">
                                     <span class="checkmark"></span>
                                  </label>
                               </div>
@@ -919,54 +852,15 @@
                               <h5>Comparator</h5>
                               <div class="universe_select green_select_box">
                                  <div class="select-box">
-                                    <div class="select-box__current" tabindex="32">
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="032" value="132"
-                                             name="Comparator" checked="checked">
-                                          <p class="select-box__input-text">Choose Comparator</p>
-                                       </div>
-
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="232" value="232"
-                                             name="Comparator">
-                                          <p class="select-box__input-text">Greater</p>
-                                       </div>
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="132" value="132"
-                                             name="Comparator">
-                                          <p class="select-box__input-text">Smaller</p>
-                                       </div>
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="332" value="332"
-                                             name="Comparator">
-                                          <p class="select-box__input-text">Equal</p>
-                                       </div>
-
-                                       <img class="select-box__icon"
-                                          src="//am708403.blob.core.windows.net/images/tradeidea/green-arrow.svg"
-                                          alt="Arrow Icon" aria-hidden="true">
+                                    <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.barPatternComparator"
+                                       selected-model="vm.barPatternComparator" extra-settings="vm.dropdownSetting"
+                                       translation-texts="{ buttonDefaultText: 'Choose Comparator'}"
+                                       ng-class="{'text-bold': vm.barPatternComparator.id != undefined}">
                                     </div>
-                                    <ul class="select-box__list">
-                                       <li>
-                                          <label class="select-box__option" for="232"
-                                             aria-hidden="aria-hidden">Greater</label>
-                                       </li>
-                                       <li>
-                                          <label class="select-box__option" for="132"
-                                             aria-hidden="aria-hidden">Smaller</label>
-                                       </li>
-                                       <li>
-                                          <label class="select-box__option" for="332"
-                                             aria-hidden="aria-hidden">Equal</label>
-                                       </li>
-                                    </ul>
-                                 </div>
+                                 </div> 
                               </div>
-
-
-
                            </div>
-                           <div class="popup_radio_outter" style="display: none;">
+                           <div class="popup_radio_outter" ng-if="(vm.barPatternComparator.id != undefined && vm.barPatternComparator.id=='1') || (vm.barPatternComparator.id != undefined && vm.barPatternComparator.id=='2')">
                               <h4 class="p300l">By</h4>
                               <div class="template_selection d-flex flex-wrap align-center">
                                  <label class="custom_radio">Any
@@ -985,72 +879,27 @@
                               </div>
                            </div>
                         </div>
-
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Value 2</h4>
                            <div class="select-box">
-                              <div class="select-box__current" tabindex="20">
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="020" value="120" name="value3"
-                                       checked="checked">
-                                    <p class="select-box__input-text">S&amp;P 500</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="120" value="220" name="value3">
-                                    <p class="select-box__input-text">Open</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="220" value="320" name="value3">
-                                    <p class="select-box__input-text">High</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="320" value="420" name="value3">
-                                    <p class="select-box__input-text">Low</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="420" value="520" name="value3">
-                                    <p class="select-box__input-text">close</p>
-                                 </div>
-                                 <div class="select-box__value">
-                                    <input class="select-box__input" type="radio" id="520" value="620" name="value3">
-                                    <p class="select-box__input-text">Volume</p>
-                                 </div>
-                                 <img class="select-box__icon"
-                                    src="//am708403.blob.core.windows.net/images/tradeidea/arrow.svg" alt="Arrow Icon"
-                                    aria-hidden="true">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.barPatternValue1"
+                                 selected-model="vm.barPatternValue2" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value 2'}"
+                                 ng-class="{'text-bold': vm.barPatternValue2.id != undefined}">
                               </div>
-                              <ul class="select-box__list">
-                                 <li>
-                                    <label class="select-box__option" for="220" aria-hidden="aria-hidden">Open</label>
-                                 </li>
-                                 <li>
-                                    <label class="select-box__option" for="120" aria-hidden="aria-hidden">High</label>
-                                 </li>
-                                 <li>
-                                    <label class="select-box__option" for="320" aria-hidden="aria-hidden">Low</label>
-                                 </li>
-                                 <li>
-                                    <label class="select-box__option" for="420" aria-hidden="aria-hidden">Close</label>
-                                 </li>
-                                 <li>
-                                    <label class="select-box__option" for="520" aria-hidden="aria-hidden">Volume</label>
-                                 </li>
-                              </ul>
-                           </div>
+                           </div> 
                         </div>
                         <div class="popup_radio_outter look_back_outer">
                            <h4 class="p300l">At</h4>
                            <div class="template_selection d-flex flex-wrap align-center">
                               <label class="custom_radio">Last Bar
-                                 <input type="radio" checked="checked" name="radio" ng-model="ValueType"
-                                    ng-value="lastbarvalue" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                 <input type="radio" checked="checked" name="radio" class="ng-pristine ng-untouched ng-valid ng-empty">
                                  <span class="checkmark"></span>
                               </label>
                               <div class="custom_outter d-flex align-center flex-wrap">
-                                 <label class="custom_radio double_input"> <input type="text" placeholder="0"
-                                       class="box_input"> Days ago
-                                    <input type="radio" name="radio" ng-model="ValueType" value="daysagovalue"
-                                       class="ng-pristine ng-untouched ng-valid ng-empty">
+                                 <label class="custom_radio double_input"> 
+                                    <input type="text" placeholder="0" class="box_input"> Days ago
+                                    <input type="radio" name="radio" class="ng-pristine ng-untouched ng-valid ng-empty">
                                     <span class="checkmark"></span>
                                  </label>
                               </div>
@@ -1531,20 +1380,19 @@
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Period</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.periodTypes"
+                                 selected-model="vm.smaPeriodType" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Period'}"
+                                 ng-class="{'text-bold': vm.smaPeriodType.id != undefined}">
                               </div>
                            </div>
                         </div>
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Value Type</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.barPatternValue1"
+                                 selected-model="vm.smaValueType" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value'}" ng-class="{'text-bold': vm.smaValueType.id != undefined}">
                               </div>
                            </div>
                         </div>
@@ -1552,10 +1400,9 @@
                            <div class="universe_select universe_select_new">
                               <h4 class="p300l">Value 1</h4>
                               <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.smaValue1"
+                                    selected-model="vm.smaValue1" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Value'}" ng-class="{'text-bold': vm.smaValue1.id != undefined}">
                                  </div>
                               </div>
                            </div>
@@ -1563,8 +1410,8 @@
                               <h4 class="p300l">Value 1 Period</h4>
                               <div class="template_selection d-flex flex-wrap align-center">
                                  <div class="custom_outter d-flex align-center flex-wrap">
-                                    <label class="custom_radio double_input padding-0"> <input type="text"
-                                          placeholder="0" class="box_input"> Days ago
+                                    <label class="custom_radio double_input padding-0"> 
+                                       <input type="text" placeholder="20" class="box_input"> Days ago
                                     </label>
                                  </div>
                               </div>
@@ -1575,67 +1422,14 @@
                               <h5>Comparator</h5>
                               <div class="universe_select green_select_box">
                                  <div class="select-box">
-                                    <div class="select-box__current" tabindex="19">
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="019" value="119"
-                                             name="Comparator1" checked="checked">
-                                          <p class="select-box__input-text">Choose Comparator</p>
-                                       </div>
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="119" value="219"
-                                             name="Comparator1">
-                                          <p class="select-box__input-text">Cross Above</p>
-                                       </div>
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="219" value="319"
-                                             name="Comparator1">
-                                          <p class="select-box__input-text">Cross Below</p>
-                                       </div>
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="319" value="419"
-                                             name="Comparator1">
-                                          <p class="select-box__input-text">Between</p>
-                                       </div>
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="419" value="519"
-                                             name="Comparator1">
-                                          <p class="select-box__input-text">Higher</p>
-                                       </div>
-                                       <div class="select-box__value">
-                                          <input class="select-box__input" type="radio" id="519" value="619"
-                                             name="Comparator1">
-                                          <p class="select-box__input-text">Low</p>
-                                       </div>
-                                       <img class="select-box__icon"
-                                          src="//am708403.blob.core.windows.net/images/tradeidea/green-arrow.svg"
-                                          alt="Arrow Icon" aria-hidden="true">
+                                    <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.smaComparator"
+                                       selected-model="vm.smaComparator" extra-settings="vm.dropdownSetting"
+                                       translation-texts="{ buttonDefaultText: 'Choose Comparator'}" ng-class="{'text-bold': vm.smaComparator.id != undefined}">
                                     </div>
-                                    <ul class="select-box__list">
-                                       <li>
-                                          <label class="select-box__option" for="119" aria-hidden="aria-hidden">Cross
-                                             Above</label>
-                                       </li>
-                                       <li>
-                                          <label class="select-box__option" for="219" aria-hidden="aria-hidden">Cross
-                                             Below</label>
-                                       </li>
-                                       <li>
-                                          <label class="select-box__option" for="319"
-                                             aria-hidden="aria-hidden">Between</label>
-                                       </li>
-                                       <li>
-                                          <label class="select-box__option" for="419"
-                                             aria-hidden="aria-hidden">Higher</label>
-                                       </li>
-                                       <li>
-                                          <label class="select-box__option" for="519"
-                                             aria-hidden="aria-hidden">Low</label>
-                                       </li>
-                                    </ul>
                                  </div>
                               </div>
                            </div>
-                           <div class="popup_radio_outter mt look_back_outer">
+                           <div class="popup_radio_outter mt look_back_outer" ng-if="vm.smaComparator.id != undefined && vm.smaComparator.id=='3'">
                               <h4 class="p300l">Between Range</h4>
                               <div
                                  class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
@@ -1650,12 +1444,12 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="popup_radio_outter mt">
+                           <div class="popup_radio_outter mt" ng-if="(vm.smaComparator.id != undefined && vm.smaComparator.id=='4') ||vm.smaComparator.id != undefined && vm.smaComparator.id=='5'" >
                               <h4 class="p300l">Comparator Value</h4>
                               <div class="template_selection d-flex flex-wrap align-center">
                                  <div class="custom_outter d-flex align-center flex-wrap">
                                     <label class="custom_radio double_input padding-0"> <input type="text"
-                                          placeholder="0" class="box_input">%
+                                          placeholder="20" class="box_input">%
                                     </label>
                                  </div>
                               </div>
@@ -1672,7 +1466,7 @@
                               <div class="template_selection d-flex flex-wrap align-center">
                                  <div class="custom_outter d-flex align-center flex-wrap">
                                     <label class="custom_radio double_input padding-0"> <input type="text"
-                                          placeholder="0" class="box_input"> Days ago
+                                          placeholder="20" class="box_input"> Days ago
                                     </label>
                                  </div>
                               </div>
@@ -1692,7 +1486,7 @@
                            <h4 class="p300l">lookback</h4>
                            <div class="lockback_value d-flex">
                               <div class="input-small d-flex align-center">
-                                 <input type="text" class="input_box" placeholder="20">
+                                 <input type="text" class="input_box" placeholder="100">
                                  <h5>Days</h5>
                               </div>
                            </div>
@@ -1700,10 +1494,10 @@
                         <div class="universe_select ">
                            <h4 class="p300l">Benchmark</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.benchmark"
+                                 selected-model="vm.benchmark" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Benchmark'}"
+                                 ng-class="{'text-bold': vm.benchmark.id != undefined}">
                               </div>
                            </div>
                         </div>
@@ -1712,13 +1506,13 @@
                            <div
                               class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
                               <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="-20">
                               </div>
                               <div class="d-flex align-center range_value">
                                  <h5>-</h5>
                               </div>
                               <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="80">
                               </div>
                            </div>
                         </div>
@@ -1735,10 +1529,10 @@
                         <div class="universe_select ">
                            <h4 class="p300l">Periods</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.periodTypes"
+                                 selected-model="vm.parabolicSarPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Period'}"
+                                 ng-class="{'text-bold': vm.parabolicSarPeriod.id != undefined}">
                               </div>
                            </div>
                         </div>
@@ -1758,7 +1552,6 @@
                                        class="ng-pristine ng-untouched ng-valid ng-empty">
                                     <span class="checkmark"></span>
                                  </label>
-                                 <!-- ngIf: templateType == 'custom' -->
                               </div>
                            </div>
                         </div>
@@ -1780,41 +1573,11 @@
                         </div>
                         <div class="correlation_range_outter d-flex flex-wrap align-center comparator-field">
                            <h5>Comparator</h5>
-                           <div class="universe_select green_select_box">
-                              <div class="select-box">
-                                 <div class="select-box__current" tabindex="49">
-                                    <div class="select-box__value">
-                                       <input class="select-box__input" type="radio" id="049" value="149"
-                                          name="Comparator2" checked="checked">
-                                       <p class="select-box__input-text">Choose Comparator</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                       <input class="select-box__input" type="radio" id="149" value="249"
-                                          name="Comparator2">
-                                       <p class="select-box__input-text">Bullish</p>
-                                    </div>
-                                    <div class="select-box__value">
-                                       <input class="select-box__input" type="radio" id="249" value="349"
-                                          name="Comparator2">
-                                       <p class="select-box__input-text">Bearish</p>
-                                    </div>
-
-
-
-                                    <img class="select-box__icon"
-                                       src="//am708403.blob.core.windows.net/images/tradeidea/green-arrow.svg"
-                                       alt="Arrow Icon" aria-hidden="true">
-                                 </div>
-                                 <ul class="select-box__list">
-                                    <li>
-                                       <label class="select-box__option" for="149"
-                                          aria-hidden="aria-hidden">Bullish</label>
-                                    </li>
-                                    <li>
-                                       <label class="select-box__option" for="249"
-                                          aria-hidden="aria-hidden">Bearish</label>
-                                    </li>
-                                 </ul>
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.diverStrategyType"
+                                 selected-model="vm.parabolicSarComp" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Comparator'}"
+                                 ng-class="{'text-bold': vm.parabolicSarComp.id != undefined}">
                               </div>
                            </div>
                         </div>
@@ -1831,39 +1594,38 @@
                         <div class="look_back_outer universe_select ">
                            <h4 class="p300l">Bar Types</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.barTypes"
+                                 selected-model="vm.priceTrendbarType" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Bar Type'}"
+                                 ng-class="{'text-bold': vm.priceTrendbarType.id != undefined}">
                               </div>
                            </div>
                         </div>
                         <div class="look_back_outer universe_select ">
                            <h4 class="p300l">Value Type</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.priceTrendValueTypes"
+                                 selected-model="vm.priceTrendValueType" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value'}" ng-class="{'text-bold': vm.priceTrendValueType.id != undefined}">
                               </div>
                            </div>
                         </div>
                         <div class="look_back_outer universe_select ">
                            <h4 class="p300l">Value 1</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.smaValue1"
+                                 selected-model="vm.priceTrendValue1" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value1'}"
+                                 ng-class="{'text-bold': vm.priceTrendValue1.id != undefined}">
                               </div>
                            </div>
                         </div>
                         <div class="d-flex">
-                           <div class="look_back_outer">
+                           <div class="look_back_outer" ng-if="vm.priceTrendValue1.id != undefined && vm.priceTrendValue1.id=='2'">
                               <h4 class="p300l">SMA Periods</h4>
                               <div class="lockback_value d-flex">
                                  <div class="input-small d-flex align-center">
-                                    <input type="text" class="input_box" placeholder="20">
+                                    <input type="text" class="input_box" placeholder="50">
                                     <h5>Days</h5>
                                  </div>
                               </div>
@@ -1872,7 +1634,7 @@
                               <h4 class="p300l">lookback</h4>
                               <div class="lockback_value d-flex">
                                  <div class="input-small d-flex align-center">
-                                    <input type="text" class="input_box" placeholder="20">
+                                    <input type="text" class="input_box" placeholder="100">
                                     <h5>Days</h5>
                                  </div>
                               </div>
@@ -1881,10 +1643,10 @@
                         <div class="look_back_outer universe_select ">
                            <h4 class="p300l">Direction</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.priceTrendDirection"
+                                 selected-model="vm.priceTrendDirection" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value'}"
+                                 ng-class="{'text-bold': vm.priceTrendDirection.id != undefined}">
                               </div>
                            </div>
                         </div>

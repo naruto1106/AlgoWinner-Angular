@@ -6,6 +6,22 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.selectedTab = 'technical';
             $scope.selectedAccordin ='';
             $scope.techBarValue1 ={'id':'4'};
+            $scope.barPatternPeriod ={};
+            $scope.barPatternValue1 ={};
+            $scope.barPatternValue2 ={};
+            $scope.barPatternComparator ={};
+            $scope.smaPeriodType={};
+            $scope.smaValueType={};
+            $scope.smaValue1={};
+            $scope.smaComparator={};
+            $scope.benchmark={};
+            $scope.parabolicSarPeriod={};
+            $scope.parabolicSarComp={};
+            $scope.priceTrendbarType={};
+            $scope.priceTrendValueType={};
+            $scope.priceTrendValue1={};
+            $scope.priceTrendDirection={};
+
             $scope.selectedPeriod ={};
             $scope.lookbackPeriod ={};
             $scope.diverStrategyType ={};
@@ -56,12 +72,26 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '1', name: 'Days' },
                     { id: '2', name: 'Week' },
                 ],
+                barTypes: [
+                    { id: '1', name: 'Daily' },
+                    { id: '2', name: 'Weekly' },
+                ],
+                smaValue1: [
+                    { id: '1', name: 'Price' },
+                    { id: '2', name: 'SMA' },
+                ],
                 barPatternValue1: [
                     { id: '1', name: 'Open' },
                     { id: '2', name: 'High' },
                     { id: '3', name: 'Low' },
                     { id: '4', name: 'Close' },
                     { id: '5', name: 'Volume' },
+                ],
+                priceTrendValueTypes: [
+                    { id: '1', name: 'Open' },
+                    { id: '2', name: 'High' },
+                    { id: '3', name: 'Low' },
+                    { id: '4', name: 'Close' },
                 ],
                 normalizedAccumulation: [
                     { id: '1', name: '0 Percentile' },
@@ -73,6 +103,14 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 diverStrategyType: [
                     { id: '1', name: 'Bullish' },
                     { id: '2', name: 'Bearish' },
+                ],
+                benchmark: [
+                    { id: '1', name: 'SP500' },
+                ],
+                priceTrendDirection: [
+                    { id: '1', name: 'Uptrend' },
+                    { id: '2', name: 'Downtrend' },
+                    { id: '3', name: 'Sideways' },
                 ],
                 diverStrategyIndicator: [
                     { id: '1', name: 'Volume' },
@@ -98,6 +136,18 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '3', name: 'Between' },
                     { id: '4', name: 'Cross Above'},
                     { id: '5', name: 'Cross Below'},
+                ],
+                smaComparator: [
+                    { id: '1', name: 'Cross Above' },
+                    { id: '2', name: 'Cross Below' },
+                    { id: '3', name: 'Between' },
+                    { id: '4', name: 'Higher'},
+                    { id: '5', name: 'Lower'},
+                ],
+                barPatternComparator: [
+                    { id: '1', name: 'Greator' },
+                    { id: '2', name: 'Smaller' },
+                    { id: '3', name: 'Equal' },
                 ],
                 breakoutDirection: [
                     { id: '1', name: 'Break Above' },
