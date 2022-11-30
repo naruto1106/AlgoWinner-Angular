@@ -1663,25 +1663,25 @@
                         <div class="look_back_outer universe_select ">
                            <h4 class="p300l">Bar Types</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.barTypes"
+                                 selected-model="vm.volumeTrendbarType" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Bar Type'}"
+                                 ng-class="{'text-bold': vm.volumeTrendbarType.id != undefined}">
                               </div>
                            </div>
                         </div>
                         <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Value Type</h4>
+                           <h4 class="p300l">Value 1</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.volumeTrendValue1"
+                                 selected-model="vm.volumeTrendValue1" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value'}"
+                                 ng-class="{'text-bold': vm.volumeTrendValue1.id != undefined}">
                               </div>
                            </div>
                         </div>
                         <div class="d-flex">
-                           <div class="look_back_outer">
+                           <div class="look_back_outer" ng-if="vm.volumeTrendValue1.id != undefined && vm.volumeTrendValue1.id=='2'">
                               <h4 class="p300l">SMA Periods</h4>
                               <div class="lockback_value d-flex">
                                  <div class="input-small d-flex align-center">
@@ -1703,10 +1703,10 @@
                         <div class="look_back_outer universe_select ">
                            <h4 class="p300l">Direction</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.priceTrendDirection"
+                                 selected-model="vm.volumeTrendDirec" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value'}"
+                                 ng-class="{'text-bold': vm.volumeTrendDirec.id != undefined}">
                               </div>
                            </div>
                         </div>
@@ -1723,10 +1723,10 @@
                         <div class="look_back_outer universe_select ">
                            <h4 class="p300l">Bar Types</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.barTypes"
+                                 selected-model="vm.RSITrendBarType" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value'}"
+                                 ng-class="{'text-bold': vm.RSITrendBarType.id != undefined}">
                               </div>
                            </div>
                         </div>
@@ -1734,7 +1734,7 @@
                            <h4 class="p300l">Periods</h4>
                            <div class="lockback_value d-flex">
                               <div class="input-small d-flex align-center">
-                                 <input type="text" class="input_box" placeholder="20">
+                                 <input type="text" class="input_box" placeholder="50">
                                  <h5>Days</h5>
                               </div>
                            </div>
@@ -1742,10 +1742,10 @@
                         <div class="look_back_outer universe_select ">
                            <h4 class="p300l">Direction</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.priceTrendDirection"
+                                 selected-model="vm.rsiTrendDirection" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value'}"
+                                 ng-class="{'text-bold': vm.rsiTrendDirection.id != undefined}">
                               </div>
                            </div>
                         </div>

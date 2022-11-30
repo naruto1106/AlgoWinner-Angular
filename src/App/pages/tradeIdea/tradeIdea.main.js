@@ -21,6 +21,11 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.priceTrendValueType={};
             $scope.priceTrendValue1={};
             $scope.priceTrendDirection={};
+            $scope.volumeTrendbarType={};
+            $scope.volumeTrendValue1={};
+            $scope.volumeTrendDirec={};
+            $scope.RSITrendBarType={};
+            $scope.rsiTrendDirection={};
 
             $scope.selectedPeriod ={};
             $scope.lookbackPeriod ={};
@@ -78,6 +83,10 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 ],
                 smaValue1: [
                     { id: '1', name: 'Price' },
+                    { id: '2', name: 'SMA' },
+                ],
+                volumeTrendValue1: [
+                    { id: '1', name: 'Volume' },
                     { id: '2', name: 'SMA' },
                 ],
                 barPatternValue1: [
