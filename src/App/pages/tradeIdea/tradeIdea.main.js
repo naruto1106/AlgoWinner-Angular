@@ -26,6 +26,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.volumeTrendDirec={};
             $scope.RSITrendBarType={};
             $scope.rsiTrendDirection={};
+            $scope.trianglePatternType={};
 
             $scope.selectedPeriod ={};
             $scope.lookbackPeriod ={};
@@ -175,6 +176,11 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 confirmation: [
                     { id: '1', name: 'Yes' },
                     { id: '2', name: 'No' },
+                ],
+                trianglePatternType: [
+                    { id: 1, name: 'Symmetrical' },
+                    { id: 2, name: 'Ascending' },
+                    { id: 3, name: 'Descending' },
                 ],
             }
 

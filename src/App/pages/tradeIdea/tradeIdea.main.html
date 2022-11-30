@@ -1763,18 +1763,18 @@
                            <h4 class="p300l">Periods</h4>
                            <div class="lockback_value d-flex">
                               <div class="input-small d-flex align-center">
-                                 <input type="text" class="input_box" placeholder="20">
+                                 <input type="text" class="input_box" placeholder="50">
                                  <h5>Days</h5>
                               </div>
                            </div>
                         </div>
-                        <div class="look_back_outer universe_select ">
+                        <div class="look_back_outer universe_select">
                            <h4 class="p300l">Type</h4>
                            <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.trianglePatternType"
+                                 selected-model="vm.trianglePatternType" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Type'}"
+                                 ng-class="{'text-bold': vm.trianglePatternType.id != undefined}">
                               </div>
                            </div>
                         </div>
