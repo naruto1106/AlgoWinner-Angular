@@ -27,6 +27,8 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.RSITrendBarType={};
             $scope.rsiTrendDirection={};
             $scope.trianglePatternType={};
+            $scope.normalizedAccumPer=[];
+            $scope.diverStrategyIndicator={};
 
             $scope.selectedPeriod ={};
             $scope.lookbackPeriod ={};

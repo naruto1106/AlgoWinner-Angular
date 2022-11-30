@@ -1803,8 +1803,8 @@
                            <h4 class="p300l">Value</h4>
                            <div class="select-box">
                               <div ng-class="{'text-bold': vm.selectedSector.length > 0 }" class="cst-dropdown-trade"
-                                 ng-dropdown-multiselect="" options="vm.data.normalizedAccumulation" selected-model="vm.selectedSector"
-                                 extra-settings="vm.dropdownCheckbox" translation-texts="vm.SelectedText"
+                                 ng-dropdown-multiselect="" options="vm.data.normalizedAccumulation" selected-model="vm.normalizedAccumPer"
+                                 extra-settings="vm.dropdownCheckbox" translation-texts="{ buttonDefaultText: 'Choose Value(s)',dynamicButtonTextSuffix:'Selected'}"
                                  checkboxes="true"></div>
                            </div>
                         </div>
@@ -1831,13 +1831,13 @@
                            <div
                               class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
                               <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="20">
                               </div>
                               <div class="d-flex align-center range_value">
                                  <h5>-</h5>
                               </div>
                               <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="80">
                               </div>
                            </div>
                         </div>
@@ -1854,7 +1854,7 @@
                            <h4 class="p300l">Lookback Period</h4>
                            <div class="lockback_value d-flex">
                               <div class="input-small d-flex align-center">
-                                 <input type="text" class="input_box" placeholder="20">
+                                 <input type="text" class="input_box" placeholder="100">
                                  <h5>Days</h5>
                               </div>
                            </div>
@@ -1864,8 +1864,8 @@
                            <div class="select-box">
                               <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.diverStrategyType"
                                  selected-model="vm.diverStrategyType" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.StrategyTypeText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 translation-texts="{ buttonDefaultText: 'Choose Type'}"
+                                 ng-class="{'text-bold': vm.diverStrategyType.id != undefined}">
                               </div>
                            </div>
                         </div>
@@ -1874,8 +1874,8 @@
                            <div class="select-box">
                               <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.diverStrategyIndicator"
                                  selected-model="vm.diverStrategyIndicator" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.StrategyIndicatorText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                 translation-texts="{ buttonDefaultText: 'Choose Indicator'}"
+                                 ng-class="{'text-bold': vm.diverStrategyIndicator.id != undefined}">
                               </div>
                            </div>
                         </div>
@@ -1892,7 +1892,7 @@
                            <h4 class="p300l">Lookback Period</h4>
                            <div class="lockback_value d-flex">
                               <div class="input-small d-flex align-center">
-                                 <input type="text" class="input_box" placeholder="20">
+                                 <input type="text" class="input_box" placeholder="100">
                                  <h5>Days</h5>
                               </div>
                            </div>
@@ -1902,13 +1902,13 @@
                            <div
                               class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
                               <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="15">
                               </div>
                               <div class="d-flex align-center range_value">
                                  <h5>-</h5>
                               </div>
                               <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="30">
                               </div>
                            </div>
                         </div>
@@ -1931,7 +1931,7 @@
                            <h4 class="p300l">Lookback Period</h4>
                            <div class="lockback_value d-flex">
                               <div class="input-small d-flex align-center">
-                                 <input type="text" class="input_box" placeholder="20">
+                                 <input type="text" class="input_box" placeholder="100">
                                  <h5>Days</h5>
                               </div>
                            </div>
@@ -1941,13 +1941,13 @@
                            <div
                               class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
                               <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="-0.1">
                               </div>
                               <div class="d-flex align-center range_value">
                                  <h5>-</h5>
                               </div>
                               <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="0.1">
                               </div>
                            </div>
                         </div>
