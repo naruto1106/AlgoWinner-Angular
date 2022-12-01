@@ -29,6 +29,11 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.trianglePatternType={};
             $scope.normalizedAccumPer=[];
             $scope.diverStrategyIndicator={};
+            $scope.RSIComparator={};
+            $scope.normOBValue=[];
+            $scope.normOBValueB={};
+            $scope.majorPriceBrktPrd={};
+            $scope.peakTroughType ={};
 
             $scope.selectedPeriod ={};
             $scope.lookbackPeriod ={};
@@ -39,20 +44,11 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.stochasticComparator ={};
             $scope.normalizedComparator ={};
             $scope.selectedbreakoutDirection ={};
-            $scope.PeakThrough ={};
             $scope.lineBreakout ={};
             $scope.isElliotWave ={};
             $scope.isprocessing = false;
             $scope.selectedSector = [];
-            $scope.SelectedText = { dynamicButtonTextSuffix:'Selected'}
             $scope.periodText = { buttonDefaultText: 'Choose Period'};
-            $scope.StrategyTypeText = { buttonDefaultText: 'Choose Type'};
-            $scope.StrategyIndicatorText = { buttonDefaultText: 'Choose Indicator'};
-            $scope.MACDValue1Text = { buttonDefaultText: 'Choose Value'};
-            $scope.comparatorText = { buttonDefaultText: 'Choose Comparator'};
-            $scope.breakoutText = { buttonDefaultText: 'Choose Breakout Direction'};
-            $scope.lineBreakoutText = { buttonDefaultText: 'Choose Line'};
-            $scope.confirmationText = { buttonDefaultText: 'Yes/No'};
             $scope.loadingFilter=  function () {
                 console.log("set processing True;")
                 $scope.isprocessing = true;
