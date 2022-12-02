@@ -586,7 +586,7 @@
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#fundamental_tab" href=""
                                        data-target="#fundamental_financial_ratio"
-                                       ng-click="vm.changeTabAccordion('fundamental_tab','financialRatio')">Financial
+                                       ng-click="vm.changeTabAccordion('fundamental_financial_ratios')">Financial
                                        Ratios</a>
                                  </div>
                                  <div id="fundamental_financial_ratio" class="panel-collapse collapse">
@@ -599,7 +599,7 @@
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>Price to Earning</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a href="#"><img
+                                                <h5 class="free_txt d-flex justify-between">Free <a ng-click="vm.setTabFilter('fundamentalPriceEarning')"><img
                                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                                 </h5>
                                              </div>
@@ -611,7 +611,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#fundamental_tab" href=""
-                                       data-target="#fundamental_margin_yield">Margin Yield</a>
+                                       data-target="#fundamental_margin_yield" ng-click="vm.changeTabAccordion('fundamental_margin_yield')">Margin Yield</a>
                                  </div>
                                  <div id="fundamental_margin_yield" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -623,7 +623,7 @@
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>Gross Margins</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a href="#"><img
+                                                <h5 class="free_txt d-flex justify-between">Free <a ng-click="vm.setTabFilter('fundamentalGrossMargins')"><img
                                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                                 </h5>
                                              </div>
@@ -635,7 +635,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#fundamental_tab" href=""
-                                       data-target="#fundamental_growth_metric">Growth Metric</a>
+                                       data-target="#fundamental_growth_metric" ng-click="vm.changeTabAccordion('fundamental_growth_metric')">Growth Metric</a>
                                  </div>
                                  <div id="fundamental_growth_metric" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -647,7 +647,7 @@
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>Earning Growth</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a href="#"><img
+                                                <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('fundamentalEarningGrowth')"><img
                                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                                 </h5>
                                              </div>
@@ -659,7 +659,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#fundamental_tab" href=""
-                                       data-target="#fundamental_benchmarking">Benchmarking</a>
+                                       data-target="#fundamental_benchmarking" ng-click="vm.changeTabAccordion('fundamental_benchmarking')">Benchmarking</a>
                                  </div>
                                  <div id="fundamental_benchmarking" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -671,12 +671,24 @@
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>Relative Price to Earning</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a href="#"><img
+                                                <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('fundamentalRelativePrice')"><img
                                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                                 </h5>
                                              </div>
                                           </div>
-
+                                       </div>
+                                       <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                          <div class="accordian_grid_inner">
+                                             <div class="accordian_img_inner">
+                                                <img src="//am708403.blob.core.windows.net/images/tradeidea/relative-earn-growth.svg">
+                                             </div>
+                                             <div class="accorian_inner_txt">
+                                                <h4>Relative Earning Growth</h4>
+                                                <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('fundamentalRelativeEarn')"><img
+                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                                </h5>
+                                             </div>
+                                          </div>
                                        </div>
                                     </div>
                                  </div>
@@ -684,7 +696,7 @@
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#fundamental_tab" href=""
-                                       data-target="#fundamental_categorisation">Categorisation</a>
+                                       data-target="#fundamental_categorisation" ng-click="vm.changeTabAccordion('fundamental_categorisation')">Categorisation</a>
                                  </div>
                                  <div id="fundamental_categorisation" class="panel-collapse collapse">
                                     <div class="panel-body accordian_show">
@@ -696,7 +708,7 @@
                                              </div>
                                              <div class="accorian_inner_txt">
                                                 <h4>Market Cap</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a href="#"><img
+                                                <h5 class="free_txt d-flex justify-between">Free <a ng-click="vm.setTabFilter('fundamentalMarketCap')"><img
                                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                                 </h5>
                                              </div>
@@ -717,8 +729,47 @@
                                        <img src="//am708403.blob.core.windows.net/images/tradeidea/sentimental.svg">
                                     </div>
                                     <div class="accorian_inner_txt">
+                                       <h4>Analyst Rating</h4>
+                                       <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('sentimentAnalystRating')"><img
+                                                src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                       </h5>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                 <div class="accordian_grid_inner">
+                                    <div class="accordian_img_inner">
+                                       <img src="//am708403.blob.core.windows.net/images/tradeidea/news-based-price-trigger.svg">
+                                    </div>
+                                    <div class="accorian_inner_txt">
+                                       <h4>News based Price Trigger</h4>
+                                       <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('sentimentNews')"><img
+                                                src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                       </h5>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                 <div class="accordian_grid_inner">
+                                    <div class="accordian_img_inner">
+                                       <img src="//am708403.blob.core.windows.net/images/tradeidea/analyst-target-price.svg">
+                                    </div>
+                                    <div class="accorian_inner_txt">
+                                       <h4>Analyst Target Price</h4>
+                                       <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('sentimentAnalystTargetPrice')"><img
+                                                src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                       </h5>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                 <div class="accordian_grid_inner">
+                                    <div class="accordian_img_inner">
+                                       <img src="//am708403.blob.core.windows.net/images/tradeidea/analyst-action.svg">
+                                    </div>
+                                    <div class="accorian_inner_txt">
                                        <h4>Analyst Action</h4>
-                                       <h5 class="free_txt d-flex justify-between">Premium<a href="#"><img
+                                       <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('sentimentAnalystAction')"><img
                                                 src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                        </h5>
                                     </div>
@@ -737,7 +788,21 @@
                                     </div>
                                     <div class="accorian_inner_txt">
                                        <h4>Volume Breakout</h4>
-                                       <h5 class="free_txt d-flex justify-between">Premium<a href="#"><img
+                                       <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('eventVolumeBrkOut')"><img
+                                                src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
+                                       </h5>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="accordian_grid_outter d-flex justify-between flex-wrap">
+                                 <div class="accordian_grid_inner">
+                                    <div class="accordian_img_inner">
+                                       <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/unusual-gap.svg"> -->
+                                       <img src="/App/shared/image/trade/unusual-gap.svg">
+                                    </div>
+                                    <div class="accorian_inner_txt">
+                                       <h4>Unusual Gap</h4>
+                                       <h5 class="free_txt d-flex justify-between">Premium<a ng-click="vm.setTabFilter('eventUnusualGap')"><img
                                                 src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
                                        </h5>
                                     </div>
@@ -903,8 +968,8 @@
                         </div>
                      </div>
                   </div>
-
-                  <div class="modal_right_inner" style="display: none">
+                  <!--Fundamental Right Side-->
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'fundamental' && vm.selectedAccordin=='fundamental_financial_ratios' && vm.selectedFilter=='fundamentalPriceEarning'">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Price To Earning</h2>
                      </div>
@@ -914,9 +979,9 @@
                            <div class="price_select_outter d-flex justify-between">
                               <div class="select-box">
                                  <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
+                                    selected-model="vm.fundPeriod" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Period'}"
+                                    ng-class="{'text-bold': vm.fundPeriod.id != undefined}">
                                  </div>
                               </div>
                               <div class="price_date">
@@ -926,18 +991,371 @@
                         </div>
                         <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
                            <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                              <input class="lockback_value" type="text" id="" value="" name="" placeholder="2">
                            </div>
                            <div class="d-flex align-center range_value">
                               <h5>-</h5>
                            </div>
                            <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
+                              <input class="lockback_value" type="text" id="" value="" name="" placeholder="8">
                            </div>
                         </div>
                      </div>
                   </div>
 
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'fundamental' && vm.selectedAccordin=='fundamental_margin_yield' && vm.selectedFilter=='fundamentalGrossMargins'">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Gross Margins</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="universe_select">
+                           <h4 class="p300l">Period</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                    selected-model="vm.fGMPeriod" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Period'}"
+                                    ng-class="{'text-bold': vm.fGMPeriod.id != undefined}">
+                                 </div>
+                              </div>
+                              <div class="price_date">
+                                 <input type="date" class="input_box">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
+                           <div class="d-flex align-center range_value">
+                              <input class="lockback_value" type="text" id="" value="" name="" placeholder="0.1%">
+                           </div>
+                           <div class="d-flex align-center range_value">
+                              <h5>-</h5>
+                           </div>
+                           <div class="d-flex align-center range_value">
+                              <input class="lockback_value" type="text" id="" value="" name="" placeholder="100%">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------------Earning growth----------------------->
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'fundamental' && vm.selectedAccordin=='fundamental_growth_metric' && vm.selectedFilter=='fundamentalEarningGrowth'">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Earning Growth</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="universe_select">
+                           <h4 class="p300l">Period</h4>
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.yearPeriods"
+                                 selected-model="vm.fEGPeriod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Period'}"
+                                 ng-class="{'text-bold': vm.fEGPeriod.id != undefined}">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer">
+                           <h4 class="p300l">Value</h4>
+                           <div class="d-flex justify-between">
+                              <div class="d-flex align-center range_value">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="10%">
+                              </div>
+                              <div class="d-flex align-center range_value">
+                                 <h5>-</h5>
+                              </div>
+                              <div class="d-flex align-center range_value">
+                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="70%">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!------------------------Earning growth end------------------>
+                  <!-----------------------relative price earning----------------------->
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'fundamental' && vm.selectedAccordin=='fundamental_benchmarking' && vm.selectedFilter=='fundamentalRelativePrice'">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Relative Price To Earning</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="checkbox checkbox_fields">
+                           <h4 class="p300l">Compare To</h4>
+                           <label class="ng-binding" for="industry">
+                              <input class="checkboxInput"  type="checkbox" checked="checked" name="bnchRPCMP"> Industry
+                           </label>
+                           <label class="ng-binding" for="sector">
+                              <input class="checkboxInput"  type="checkbox" name="bnchRPCMP">Sector
+                           </label>
+                        </div>
+                        <div class="universe_select look_back_outer">
+                           <h4 class="p300l">Value</h4>
+                           <div class="select-box">
+                              <div ng-class="{'text-bold': vm.benchmarkRPValue.length > 0 }" class="cst-dropdown-trade"
+                                 ng-dropdown-multiselect="" options="vm.data.normalizedAccumulation" selected-model="vm.benchmarkRPValue"
+                                 extra-settings="vm.dropdownCheckbox" translation-texts="{ buttonDefaultText: 'Choose Value(s)',dynamicButtonTextSuffix:'Selected'}"
+                                 checkboxes="true">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="price_select_outter look_back_outer">
+                           <h4 class="p300l">Period</h4>
+                           <div class="d-flex justify-between ">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
+                                    selected-model="vm.benchmarkRPPeriod" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Period'}"
+                                    ng-class="{'text-bold': vm.benchmarkRPPeriod.id != undefined}">
+                                 </div>
+                              </div>
+                              <div class="price_date">
+                                 <input type="date" class="input_box">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!------------------------relative price earning end------------------>
+                  <!-----------------------relative earning growth----------------------->
+                  <div class="modal_right_inner" ng-if="vm.selectedTab == 'fundamental' && vm.selectedAccordin=='fundamental_benchmarking' && vm.selectedFilter=='fundamentalRelativeEarn'">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Relative Earning Growth</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="checkbox checkbox_fields">
+                           <h4 class="p300l">Compare To</h4>
+                           <label class="ng-binding" for="industry">
+                              <input class="checkboxInput" id="industry" type="checkbox" checked="checked"> Industry
+                           </label>
+                           <label class="ng-binding" for="sector">
+                              <input class="checkboxInput" id="sector" type="checkbox" >Sector
+                           </label>
+                        </div>
+                        <div class="universe_select look_back_outer">
+                           <h4 class="p300l">Period</h4>
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.yearPeriods"
+                                 selected-model="vm.benchmarkREarnperiod" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Period'}"
+                                 ng-class="{'text-bold': vm.benchmarkREarnperiod.id != undefined}">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="universe_select look_back_outer">
+                           <h4 class="p300l">Value</h4>
+                           <div class="select-box">
+                              <div ng-class="{'text-bold': vm.benchmarkREarnVal.length > 0 }" class="cst-dropdown-trade"
+                                 ng-dropdown-multiselect="" options="vm.data.normalizedAccumulation" selected-model="vm.benchmarkREarnVal"
+                                 extra-settings="vm.dropdownCheckbox" translation-texts="{ buttonDefaultText: 'Choose Value',dynamicButtonTextSuffix:'Selected'}"
+                                 checkboxes="true">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!------------------------relative earning growth end------------------>
+                  <!-----------------------Market cap----------------------->
+                  <div class="modal_right_inner"
+                     ng-if="vm.selectedTab == 'fundamental' && vm.selectedAccordin=='fundamental_categorisation' && vm.selectedFilter=='fundamentalMarketCap' ">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Market Cap</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="universe_select look_back_outer">
+                           <h4 class="p300l">Value</h4>
+                           <div class="select-box">
+                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.catMarketCapVal"
+                                 selected-model="vm.catMarketCapVal" extra-settings="vm.dropdownSetting"
+                                 translation-texts="{ buttonDefaultText: 'Choose Value'}"
+                                 ng-class="{'text-bold': vm.catMarketCapVal.id != undefined}">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!------------------------Market cap end------------------>
+                  <!-----------------Analyst rating--------------------->
+                  <div class="modal_right_inner" ng-if="(vm.selectedTab == 'sentiment' && vm.selectedFilter=='sentimentAnalystRating')">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Analyst Rating</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Value</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.analystRatingVal"
+                                    selected-model="vm.analystRating" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Value'}"
+                                    ng-class="{'text-bold': vm.analystRating.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="look_back_outer rating_bar_outer">
+                           <div class="rating_bar d-flex align-center">
+                              <span class="rating_stars">
+                                 <a href="/#">
+                                    <img src="/App/shared/image/trade/star_filled.svg">
+                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_filled.svg"> -->
+                                 </a>
+                                 <a href="/#">
+                                    <img src="/App/shared/image/trade/star_half_filled.svg">
+                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_half_filled.svg"> -->
+                                 </a>
+                                 <a href="/#">
+                                    <img src="/App/shared/image/trade/star_unfilled.svg">
+                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_unfilled.svg"> -->
+                                 </a>
+                                 <a href="/#">
+                                    <img src="/App/shared/image/trade/star_unfilled.svg">
+                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_unfilled.svg"> -->
+                                 </a>
+                                 <a href="/#">
+                                    <img src="/App/shared/image/trade/star_unfilled.svg">
+                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_unfilled.svg"> -->
+                                 </a>
+                              </span>
+                              <h5 class="rating_text">Hold</h5>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------Analyst rating end--------------------->
+                  <!-----------------News based price trigger--------------------->
+                  <div class="modal_right_inner" ng-if="(vm.selectedTab == 'sentiment' && vm.selectedFilter=='sentimentNews')">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">News Based Price Trigger</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Latest News Sentiment</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.latestNewsSentiment"
+                                    selected-model="vm.latestNewsSentiment" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Sentiment'}"
+                                    ng-class="{'text-bold': vm.latestNewsSentiment.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Latest News is within</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.latestNewsRange"
+                                    selected-model="vm.latestNewsRange" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose range'}"
+                                    ng-class="{'text-bold': vm.latestNewsRange.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------News based price trigger end--------------------->
+                  <!-----------------Analyst target price--------------------->
+                  <div class="modal_right_inner" ng-if="(vm.selectedTab == 'sentiment' && vm.selectedFilter=='sentimentAnalystTargetPrice')">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Analyst Target Price</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Parameter 1</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.latestNewsSentiment"
+                                    selected-model="vm.analystTargetP1" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Parameter'}"
+                                    ng-class="{'text-bold': vm.analystTargetP1.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Parameter 2</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.analystTargetP2"
+                                    selected-model="vm.analystTargetP2" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Parameter'}"
+                                    ng-class="{'text-bold': vm.analystTargetP2.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------Analyst target price end--------------------->
+                  <!-----------------Analyst Action--------------------->
+                  <div class="modal_right_inner" ng-if="(vm.selectedTab == 'sentiment' && vm.selectedFilter=='sentimentAnalystAction')">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Analyst Action</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Type</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.analystActionType"
+                                    selected-model="vm.analystActionType" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Type'}"
+                                    ng-class="{'text-bold': vm.analystActionType.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------Analyst action end--------------------->
+                  <!-----------------Volume Breakout--------------------->
+                  <div class="modal_right_inner" ng-if="(vm.selectedTab == 'event' && vm.selectedFilter=='eventVolumeBrkOut')">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Volume Breakout</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer">
+                           <h4 class="p300l">Lookback Period</h4>
+                           <div class="lockback_value d-flex">
+                              <div class="input-small d-flex align-center">
+                                 <input type="text" class="input_box" placeholder="5">
+                                 <h5>Days</h5>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Multiplier</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.breakoutMulti"
+                                    selected-model="vm.breakoutMulti" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Multiplier'}"
+                                    ng-class="{'text-bold': vm.breakoutMulti.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------Volume Breakout end--------------------->
+                  <!-----------------Unusual Gap--------------------->
+                  <div class="modal_right_inner" ng-if="(vm.selectedTab == 'event' && vm.selectedFilter=='eventUnusualGap')">
+                     <div class="right_heading_outter">
+                        <h2 class="modal_heading">Unusual Gap</h2>
+                     </div>
+                     <div class="correlation_feilds">
+                        <div class="look_back_outer universe_select ">
+                           <h4 class="p300l">Type</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.diverStrategyType"
+                                    selected-model="vm.unusualGapType" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Type'}"
+                                    ng-class="{'text-bold': vm.unusualGapType.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-----------------Unusual Gap end--------------------->
                   <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
                         <h2 class="modal_heading">Correlation</h2>
@@ -1230,144 +1648,8 @@
                               <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
                            </div>
                         </div>
-
                      </div>
                   </div>
-                  <!-----------------------Earning growth----------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Earning Growth</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="universe_select">
-                           <h4 class="p300l">Period</h4>
-                           <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                              </div>
-                           </div>
-                        </div>
-                        <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer">
-                           <h4 class="p300l">Value</h4>
-                           <div class="d-flex justify-between">
-                              <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
-                              </div>
-                              <div class="d-flex align-center range_value">
-                                 <h5>-</h5>
-                              </div>
-                              <div class="d-flex align-center range_value">
-                                 <input class="lockback_value" type="text" id="" value="" name="" placeholder="100">
-                              </div>
-                           </div>
-                        </div>
-
-                     </div>
-                  </div>
-                  <!------------------------Earning growth end------------------>
-                  <!-----------------------relative price earning----------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Relative Price To Earning</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="checkbox checkbox_fields">
-                           <h4 class="p300l">Compare To</h4>
-                           <label class="ng-binding" for="industry">
-                              <input class="checkboxInput" id="industry" type="checkbox" checked="checked"> Industry
-                           </label>
-                           <label class="ng-binding" for="sector">
-                              <input class="checkboxInput" id="sector" type="checkbox" ng-checked="checked">Sector
-                           </label>
-                        </div>
-                        <div class="universe_select look_back_outer">
-                           <h4 class="p300l">Value</h4>
-                           <div class="select-box">
-                              <div ng-class="{'text-bold': vm.selectedSector.length > 0 }" class="cst-dropdown-trade"
-                                 ng-dropdown-multiselect="" options="vm.data.Periods" selected-model="vm.selectedSector"
-                                 extra-settings="vm.dropdownCheckbox" translation-texts="{ buttonDefaultText: 'Choose Value',dynamicButtonTextSuffix:'Selected'}"
-                                 checkboxes="true">
-                              </div>
-                           </div>
-                        </div>
-                        <div class="price_select_outter look_back_outer">
-                           <h4 class="p300l">Period</h4>
-                           <div class="d-flex justify-between ">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                              <div class="price_date">
-                                 <input type="date" class="input_box">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!------------------------relative price earning end------------------>
-                  <!-----------------------relative earning growth----------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Relative Earning Growth</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="checkbox checkbox_fields">
-                           <h4 class="p300l">Compare To</h4>
-                           <label class="ng-binding" for="industry">
-                              <input class="checkboxInput" id="industry" type="checkbox" checked="checked"> Industry
-                           </label>
-                           <label class="ng-binding" for="sector">
-                              <input class="checkboxInput" id="sector" type="checkbox" ng-checked="checked">Sector
-                           </label>
-                        </div>
-                        <div class="universe_select look_back_outer">
-                           <h4 class="p300l">Period</h4>
-                           <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select look_back_outer">
-                           <h4 class="p300l">Value</h4>
-                           <div class="select-box">
-                              <div ng-class="{'text-bold': vm.selectedSector.length > 0 }" class="cst-dropdown-trade"
-                                 ng-dropdown-multiselect="" options="vm.data.Periods" selected-model="vm.selectedSector"
-                                 extra-settings="vm.dropdownCheckbox" translation-texts="{ buttonDefaultText: 'Choose Value',dynamicButtonTextSuffix:'Selected'}"
-                                 checkboxes="true">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!------------------------relative earning growth end------------------>
-                  <!-----------------------market cap----------------------->
-                  <div class="modal_right_inner"
-                     ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_trend_identifier_accordion' && vm.selectedFilter=='technicalMarketCap' ">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Market Cap</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="universe_select look_back_outer">
-                           <h4 class="p300l">Value</h4>
-                           <div class="select-box">
-                              <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                 selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                 translation-texts="vm.periodText"
-                                 ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!------------------------market cap end------------------>
                   <!-----------------SMA Strategy--------------------->
                   <div class="modal_right_inner"
                      ng-if="vm.selectedTab == 'technical' && vm.selectedAccordin=='technical_trend_identifier_accordion' && vm.selectedFilter=='technicalSMAStrategy' ">
@@ -1947,7 +2229,7 @@
                            <div class="search lockback_value">     
                               <input type="text" name="vm.corrSymbol"  ng-model="vm.corrSymbol" id="vm.corrSymbol" ng-keyup="vm.searchSymbol(vm.corrSymbol)" placeholder="Type Symbol" class="form-control" />  
                               <ul class="list-group" ng-hide="vm.hidethis">
-                                 <li class="list-group-item" ng-repeat="symbol in vm.filterSymbols" ng-click="vm.fillInputBox(symbol)"><span>{{symbol.shorName}}</span>{{symbol.value}}</li>
+                                 <li class="list-group-item" ng-repeat="symbol in vm.filterSymbols" ng-click="vm.fillInputBox(symbol)"><span class="space-right">{{symbol.shorName}}</span>{{symbol.value}}</li>
                               </ul>
                            </div>
                         </div>
@@ -2289,54 +2571,6 @@
                      </div>
                   </div>
                   <!-----------------fibonacci breakout end--------------------->
-                  <!-----------------Analyst rating--------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Analyst Rating</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Value</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="look_back_outer rating_bar_outer">
-                           <div class="rating_bar d-flex align-center">
-                              <span class="rating_stars">
-                                 <a href="/#">
-                                    <img src="/App/shared/image/trade/star_filled.svg">
-                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_filled.svg"> -->
-                                 </a>
-                                 <a href="/#">
-                                    <img src="/App/shared/image/trade/star_half_filled.svg">
-                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_half_filled.svg"> -->
-                                 </a>
-                                 <a href="/#">
-                                    <img src="/App/shared/image/trade/star_unfilled.svg">
-                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_unfilled.svg"> -->
-                                 </a>
-                                 <a href="/#">
-                                    <img src="/App/shared/image/trade/star_unfilled.svg">
-                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_unfilled.svg"> -->
-                                 </a>
-                                 <a href="/#">
-                                    <img src="/App/shared/image/trade/star_unfilled.svg">
-                                    <!-- <img src="//am708403.blob.core.windows.net/images/tradeidea/star_unfilled.svg"> -->
-                                 </a>
-                              </span>
-                              <h5 class="rating_text">Hold</h5>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Analyst rating end--------------------->
                   <!-----------------News based price trigger--------------------->
                   <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
@@ -2369,7 +2603,7 @@
                         </div>
                      </div>
                   </div>
-                  <!-----------------Major price breakout end--------------------->
+                  <!-----------------News based price trigger end--------------------->
                   <!-----------------Peak trough breakout--------------------->
                   <div class="modal_right_inner" style="display: none;">
                      <div class="right_heading_outter">
@@ -2442,171 +2676,6 @@
                      </div>
                   </div>
                   <!-----------------fibonacci breakout end--------------------->
-                  <!-----------------Analyst rating--------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Analyst Rating</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Value</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="look_back_outer rating_outer">
-                           <div class="rating_star">
-                              <h5 class="rating_text">Hold</h5>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Analyst rating end--------------------->
-                  <!-----------------News based price trigger--------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">News Based Price Trigger</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Latest News Sentiment</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Latest News is within</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------News based price trigger end--------------------->
-                  <!-----------------Analyst target price--------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Analyst Target Price</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Parameter 1</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Parameter 2</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Analyst target price end--------------------->
-                  <!-----------------Analyst Action--------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Analyst Action</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Type</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Analyst action end--------------------->
-                  <!-----------------Volume Breakout--------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Volume Breakout</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer">
-                           <h4 class="p300l">Lookback Period</h4>
-                           <div class="lockback_value d-flex">
-                              <div class="input-small d-flex align-center">
-                                 <input type="text" class="input_box" placeholder="20">
-                                 <h5>Days</h5>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Multiplier</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Volume Breakout end--------------------->
-                  <!-----------------Unusual Gap--------------------->
-                  <div class="modal_right_inner" style="display: none;">
-                     <div class="right_heading_outter">
-                        <h2 class="modal_heading">Unusual Gap</h2>
-                     </div>
-                     <div class="correlation_feilds">
-                        <div class="look_back_outer universe_select ">
-                           <h4 class="p300l">Type</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Periods"
-                                    selected-model="vm.selectedPeriod" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.periodText"
-                                    ng-class="{'text-bold': vm.selectedPeriod.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-----------------Unusual Gap end--------------------->
-                  <!-----------------News based price trigger end--------------------->
                </div>
             </div>
          </div>
