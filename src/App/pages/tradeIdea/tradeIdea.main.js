@@ -2,6 +2,30 @@ agmNgModuleWrapper('agmp.tradeIdea')
     .defineController('p.tradeIdea.MainController',['$scope'],
         function ($scope) {
             var vm = this;
+            $scope.corSymbol =[
+                {id:1,shorName:'AA',value:'Alcoa Corporation'},
+                {id:2,shorName:'AAPL',value:'Apple Inc.'},
+                {id:3,shorName:'AAL',value:'American Airlines Group Inc.'},
+                {id:4,shorName:'AABB',value:'Asia Broadband, Inc.'},
+                {id:5,shorName:'AAP',value:'Advance Auto Part, Inc.'},
+            ]
+            
+            $scope.searchSymbol = function(string) {
+                $scope.hidethis = false;
+                var output = [];
+                angular.forEach($scope.corSymbol, function(element) {
+                if (element.value.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                    output.push(element);
+                }
+                });
+                $scope.filterSymbols = output;
+            };
+
+            $scope.fillInputBox = function(string) {
+                $scope.corrSymbol = string.value;
+                $scope.hidethis = true;
+            };
+
             $scope.selectedFilter = '';
             $scope.selectedTab = 'technical';
             $scope.selectedAccordin ='';
