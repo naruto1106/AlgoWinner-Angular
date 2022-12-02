@@ -1947,7 +1947,7 @@
                            <div class="search lockback_value">     
                               <input type="text" name="vm.corrSymbol"  ng-model="vm.corrSymbol" id="vm.corrSymbol" ng-keyup="vm.searchSymbol(vm.corrSymbol)" placeholder="Type Symbol" class="form-control" />  
                               <ul class="list-group" ng-hide="vm.hidethis">
-                                 <li class="list-group-item" ng-repeat="symbol in vm.filterSymbols" ng-click="vm.fillInputBox(symbol)">{{symbol.value}}</li>
+                                 <li class="list-group-item" ng-repeat="symbol in vm.filterSymbols" ng-click="vm.fillInputBox(symbol)"><span>{{symbol.shorName}}</span>{{symbol.value}}</li>
                               </ul>
                            </div>
                         </div>
