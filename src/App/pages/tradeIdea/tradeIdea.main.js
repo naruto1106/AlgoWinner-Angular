@@ -16,7 +16,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 angular.forEach($scope.corSymbol, function(element) {
                 if (element.value.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
                     output.push(element);
-                }
+                } 
                 });
                 $scope.filterSymbols = output;
             };

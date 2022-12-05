@@ -53,6 +53,7 @@ li{
   font-size: @fontSize200L;
   font-weight: @fontWeight500;
   color:@neutral600;
+  margin-bottom: 4px;
   }
   .green_txt{
     color:@sucess600;
@@ -270,6 +271,7 @@ header{
       background-size: 11px !important;
       background-position: right 9px top 14px !important;
       background-repeat: no-repeat !important;
+      z-index: 0;
     }
     ul.dropdown-menu.dropdown-menu-form {
       box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 10%);
@@ -279,7 +281,7 @@ header{
       border-radius: 8px;
       top: 43px;
       z-index: 1;
-      width: 195px;
+      width: auto;
       
         li a.ng-binding {
           display: block;
@@ -308,7 +310,7 @@ header{
     font-weight: @fontWeight600;
     display: inline-block;
     border-radius:@borderRadius8;
-    padding: 9px 14px;
+    padding: 8px 14px;
     text-decoration:unset !important;
     margin: 0 1px;
     img {
@@ -503,7 +505,7 @@ header{
     width: 30%;
   }
   .select-box {
-    margin: 4px 0 0;
+    margin:0;
   }
 }
 
@@ -749,11 +751,11 @@ td {
 }
 
 .cst-dropdown-trade .checkbox label .checkboxInput {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .country-select-box .dropdown-menu {
-  height: 406px !important;
+  // height: 406px !important;
   width: 206px;
 }
 
@@ -1232,12 +1234,13 @@ input{
     &.checkbox_fields {
       label {
         min-height: auto;
-        margin-top: 10px;
+        margin-top: 4px;
         color: #5F6C85;
         margin-right: 20px;
         font-weight: 600;
         .checkboxInput {
           width: 16px;
+          appearance: none;
           background-color: #fff;
           border: 1px solid #D0D5DD;
           height: 16px;
@@ -1272,7 +1275,6 @@ input{
       margin-right: 8px;
       width: 66px;
       text-align: center;
-      margin-top: 5px;
     }
   }
   .mt {
@@ -1334,7 +1336,6 @@ input{
     padding: 0px;
     text-align: left;
     height: auto;
-    margin-bottom: 8px;
   }
   padding:4px 0 0;
   h4 {
@@ -1440,7 +1441,7 @@ input{
   width: 195px;
   padding: 0 13px;
   height: 36px;
-  margin:4px 0 0;
+  margin:0;
 }
 
 .modal_btn {
@@ -1647,4 +1648,34 @@ input{
 }
 button.dropdown-toggle.ng-binding.btn.btn-default {
     box-shadow: none;
+}
+.select-box {
+  .cst-dropdown-trade {
+    width: 95%;
+  }
+}
+.filter-search {
+  position: relative;
+  .list-group {
+    position: absolute;
+    top: 46px;
+    width: 300px;
+    left: -48px;
+    right: 0px;
+    li {
+      color: #1d2433a6;
+      font-size: 14px;
+      font-weight: 500;
+      .space-right  {
+        color: #1D2433;
+      }
+    }
+  }
+}
+.select_new {
+  .multiselect-parent {
+    .dropdown-toggle.ng-binding.btn.btn-default {
+      padding-left: 6px;
+    }
+  }
 }

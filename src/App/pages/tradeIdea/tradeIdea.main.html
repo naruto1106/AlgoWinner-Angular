@@ -1077,10 +1077,10 @@
                         <div class="checkbox checkbox_fields">
                            <h4 class="p300l">Compare To</h4>
                            <label class="ng-binding" for="industry">
-                              <input class="checkboxInput"  type="checkbox" checked="checked" name="bnchRPCMP"> Industry
+                              <input class="checkboxInput"  type="checkbox"> Industry
                            </label>
                            <label class="ng-binding" for="sector">
-                              <input class="checkboxInput"  type="checkbox" name="bnchRPCMP">Sector
+                              <input class="checkboxInput"  type="checkbox">Sector
                            </label>
                         </div>
                         <div class="universe_select look_back_outer">
@@ -1678,7 +1678,7 @@
                            </div>
                         </div>
                         <div class="d-flex align-center select-box-new look_back_outer">
-                           <div class="universe_select universe_select_new">
+                           <div class="universe_select universe_select_new select_new">
                               <h4 class="p300l">Value 1</h4>
                               <div class="select-box">
                                  <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.smaValue1"
@@ -1740,7 +1740,7 @@
                               </div>
                            </div>
                         </div>
-                        <div class="d-flex align-center select-box-new look_back_outer">
+                        <div class="d-flex select-box-new look_back_outer">
                            <div class="universe_select w-30">
                               <h4 class="p300l">Value 2</h4>
                               <label class="custom_radio double_input padding-0">SMA
@@ -2225,10 +2225,10 @@
                      <div class="correlation_feilds">
                         <div class="look_back_outer">
                            <h4 class="p300l">Compare to Symbol</h4>
-                           <div class="search lockback_value">     
+                           <div class="search lockback_value filter-search">     
                               <input type="text" name="vm.corrSymbol"  ng-model="vm.corrSymbol" id="vm.corrSymbol" ng-keyup="vm.searchSymbol(vm.corrSymbol)" placeholder="Type Symbol" class="form-control" />  
                               <ul class="list-group" ng-hide="vm.hidethis">
-                                 <li class="list-group-item" ng-repeat="symbol in vm.filterSymbols" ng-click="vm.fillInputBox(symbol)"><span class="space-right">{{symbol.shorName}}</span>{{symbol.value}}</li>
+                                 <li class="list-group-item d-flex justify-between" ng-repeat="symbol in vm.filterSymbols" ng-click="vm.fillInputBox(symbol)"><span class="space-right">{{symbol.shorName}}</span>{{symbol.value}}</li>
                               </ul>
                            </div>
                         </div>
@@ -2424,9 +2424,9 @@
                            <h4 class="p300l">Period</h4>
                            <input type="text" class="input_box text-center" placeholder="0">
                         </div>
-                        <div class="correlation_range_outter look_back_outer d-flex flex-wrap align-center comparator-field">
-                           <h5>Comparator</h5>
-                           <div class="universe_select green_select_box">
+                        <div class="correlation_range_outter look_back_outer comparator-field">
+                           <h5 class="p300l">Comparator</h5>
+                           <div class="universe_select">
                               <div class="select-box">
                                  <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Comparator"
                                     selected-model="vm.normalizedComparator" extra-settings="vm.dropdownSetting" translation-texts="{ buttonDefaultText: 'Choose Comparator'}"
