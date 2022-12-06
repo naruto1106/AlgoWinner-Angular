@@ -42,11 +42,6 @@
             $route = dep.$route,
             pAlgoOracleService = dep.pAlgoOracleService;
 
-        function gotoSection(sectionId) {
-            $location.hash(sectionId);
-            $anchorScroll();
-        }
-
         function openHelpWizard() {
             $rootScope.$broadcast("onHelpWizardClicked");
         }
@@ -158,7 +153,6 @@
                 goToNewTab: commonLocationHistoryService.goToNewTab,
                 openAcademy: openAcademy,
                 searchProductsInHeader: searchProductsInHeader,
-                gotoSection: gotoSection,
             });
 
             sGatewayTokenRefreshService.start();

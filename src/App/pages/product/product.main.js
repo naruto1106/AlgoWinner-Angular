@@ -1,10 +1,11 @@
 ﻿agmNgModuleWrapper('agmp.product')
     .defineController('p.product.MainController', ['commonHeaderModeService', 'commonScreenResizerService', 'pProductPageService', 'sProductService', 'symbol', 'venue',
-        'sDroidHelperSbsFrameworkService'],
+        'sDroidHelperSbsFrameworkService','$anchorScroll', '$location'],
         function (vm, dep, tool) {
             var pProductPageService = dep.pProductPageService,
                 sDroidHelperSbsFrameworkService = dep.sDroidHelperSbsFrameworkService;
-
+                $location = dep.$location,
+                $anchorScroll = dep.$anchorScroll;
             function hasHeader() {
                 return pProductPageService.hasHeader;
             }
@@ -25,12 +26,18 @@
                 return false;
             }
 
+            function gotoSection(sectionId) {
+                $location.hash(sectionId);
+                $anchorScroll();
+            }
+
             tool.setVmProperties({
                 showErrorMessage: showErrorMessage,
                 hasHeader: hasHeader,
                 showRelatedCompanies: showRelatedCompanies,
                 isLoading: isLoading,
                 isWarrants: isWarrants,
+                gotoSection: gotoSection,
                 symbol: dep.symbol
             });
 
