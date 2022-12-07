@@ -450,6 +450,30 @@
                 };
             })(STX.Market.prototype.newIterator);
 
+            function drawAlgoTrendline(dataset) {
+                // Convert to ChartIQ object
+                var drawingObjects = dataset.map(function(x) {
+                    return {
+                        "name": "channel",
+                        "pnl": "chart",
+                        "col": "auto",
+                        "fc": "#00000000",
+                        "ptrn": "solid",
+                        "lw": 1,
+                        "d0": x.d0 + "000000000",
+                        "d1": x.d1 + "000000000",
+                        "tzo0": -480,
+                        "tzo1": -480,
+                        "v0": x.v0,
+                        "v1": x.v1,
+                        "v2": x.v2
+                    }
+                })
+
+                serviceObj.stxx.reconstructDrawings(drawingObjects);
+                serviceObj.stxx.draw();
+            }
+
             tool.setServiceObjectProperties({
                 isDesktopDrawing: false,
                 appendStackPanel: appendStackPanel,
@@ -480,6 +504,7 @@
 
                 // Market data handling
                 subscribeRealTimeData: subscribeRealTimeData,
+                drawAlgoTrendline: drawAlgoTrendline,
                 init: init
             });
         }

@@ -1,14 +1,21 @@
 ﻿agmNgModuleWrapper('agmp.chart')
     .defineController("p.chart.TemplateManagerController",
-        ['pChartFilterDescriptionService', 'sChartService', 'pChartViewTemplateService', 'sGuideItemManagerService'],
+        ['pChartFilterDescriptionService', 'sChartService', 'pChartViewTemplateService', 'sGuideItemManagerService', 'pChartRenderingUtilsService'],
         function (vm, dep, tool) {
             var pChartViewTemplateService = dep.pChartViewTemplateService,
                 pChartFilterDescriptionService = dep.pChartFilterDescriptionService,
                 sChartService = dep.sChartService,
-                sGuideItemManagerService = dep.sGuideItemManagerService;
+                sGuideItemManagerService = dep.sGuideItemManagerService,
+                pChartRenderingUtilsService = dep.pChartRenderingUtilsService;
             var filterDescription = pChartFilterDescriptionService;
 
             var isCommunityHidden = true;
+
+            function drawAlgoTrendline(symbol) {
+                sChartService.GetAlgoCoordinates(symbol).then(function (res) {
+                    pChartRenderingUtilsService.drawAlgoTrendline(res.data);
+                });
+            }
 
             function downloadImage() {
                 pChartViewTemplateService.getImageBase64().then(function (payload) {
@@ -55,7 +62,8 @@
                 getOrRefreshViewTemplates: getOrRefreshViewTemplates,
                 downloadImage: downloadImage,
                 saveCurrentView: saveCurrentView,
-                loadWorkspace: loadWorkspace
+                loadWorkspace: loadWorkspace,
+                drawAlgoTrendline: drawAlgoTrendline
             });
 
 

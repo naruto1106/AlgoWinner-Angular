@@ -19,6 +19,11 @@
                     strategyId: args[0]
                 };
             });
+            this.GetAlgoCoordinates = coreServerCommunicationService.genGetFunctionWithNVar(path + "GetAlgoCoordinates", function (args) {
+                return {
+                    symbol: args[0]
+                };
+            });
         }
     ]);
 
