@@ -2,6 +2,8 @@ agmNgModuleWrapper('agmp.tradeIdea')
     .defineController('p.tradeIdea.MainController',['$scope'],
         function ($scope) {
             var vm = this;
+            var myEl = angular.element(document.querySelector('body'));
+            myEl.addClass('tradeIdeapageContent');
             $scope.corSymbol =[
                 {id:1,shorName:'AA',value:'Alcoa Corporation'},
                 {id:2,shorName:'AAPL',value:'Apple Inc.'},
