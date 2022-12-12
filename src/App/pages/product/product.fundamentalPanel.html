@@ -1,159 +1,313 @@
-﻿﻿<section class="fundamental-panel">
-    <h1 class="title-section">FUNDAMENTALS</h1>
-    <div class="row-md-2 gap-20px">
+﻿﻿<section class="fundamental-panel income_sec_outter">
+    <h1 class="title-section">Fundamentals</h1>
+    <div class="row-md-2 fundamental_charts_outter">
         <div class="col-md-1" ng-repeat="barChartObj in vm.barChartsArr">
             <div class="white-box">
-                <h1>{{barChartObj.name}}</h1>
-                <div class="row">
-                    <div class="col-100" style="float: right;">
-                        <div>
-                            <button ng-class="{'mini-filled-blue': barChartObj.selectedType === 'annually', 'mini-hollow-blue': barChartObj.selectedType !== 'annually'}" style="margin-right: 5px" ng-click="vm.setSelectedType($index, 'annually')" class="mini-filled-blue">
-                                Annually
-                            </button>
-                            <button ng-class="{'mini-filled-blue': barChartObj.selectedType == 'quarter', 'mini-hollow-blue': barChartObj.selectedType !== 'quarter'}" style="margin-right: 5px" ng-click="vm.setSelectedType($index, 'quarter')" class="mini-hollow-blue">
-                                Quarterly
-                            </button>                    
-                        </div>
+                <div class="d-flex justify-between align_center fundamental_heading">
+                    <h1 class="table-chart-heading">{{barChartObj.name}}</h1>
+
+                    <div class="tabbing_right">
+
+                        <button class="tabing_rt_btn"
+                            ng-class="{'mini-filled-blue': barChartObj.selectedType === 'annually', 'mini-hollow-blue': barChartObj.selectedType !== 'annually'}"
+                            ng-click="vm.setSelectedType($index, 'annually')"
+                            class="mini-filled-blue">
+                            Annually
+                        </button>
+                        <button class="tabing_rt_btn"
+                            ng-class="{'mini-filled-blue': barChartObj.selectedType == 'quarter', 'mini-hollow-blue': barChartObj.selectedType !== 'quarter'}"
+                            ng-click="vm.setSelectedType($index, 'quarter')"
+                            class="mini-hollow-blue">
+                            Quarterly
+
                     </div>
                 </div>
-                <div class="h-30px"></div>
-                <table border="1" class="bar-chart-table">
-                    <tr ng-repeat="grothTableObj in barChartObj.grothTable">
-                        <td>{{grothTableObj}}</td>
-                    </tr>
-                </table>
+                <div class="chart_dropdown">
+                    <select ng-model="barChartObj.grothTablePer">
+                        <option value="">Select {{barChartObj.name}}</option>
+                        <option ng-repeat="grothTableObj in barChartObj.grothTable" value="{{grothTableObj.avg}}">{{grothTableObj.disYr}}</option>
+                    </select>
+                    <div class="chart_dropdown_btn" ng-if="barChartObj.grothTablePer > 0">
+                        <a href="#">{{barChartObj.grothTablePer}}<img src="//am708403.blob.core.windows.net/images/productpage/uparrow.svg"> <span>Avg.{{barChartObj.grothTablePer}}%</span></a>
+                    </div>
+                    <div class="chart_dropdown_btn negative_dd_btn" ng-if="barChartObj.grothTablePer < 0">
+                        <a href="#">{{barChartObj.grothTablePer}}<img src="//am708403.blob.core.windows.net/images/productpage/bottom_arrow.svg"> <span>Avg.{{barChartObj.grothTablePer}}%</span></a>
+                    </div>
+                </div>
                 <div id={{barChartObj.container}}></div>
             </div>
-        </div>        
+        </div>
         <div class="clearfix"></div>
     </div>
-    <div style="margin: 20px 5px; width: 100%; float: left;">
-        <div style="width: 50%; float: left;">
-            <button
-                ng-class="{'mini-filled-blue': vm.selectedTable === 'income', 'mini-hollow-blue': vm.selectedTable != 'income'}"
-                style="margin-right: 5px" ng-click="vm.setSelectedTable('income')">
-                Income statement
-            </button>
-            <button
-                ng-class="{'mini-filled-blue': vm.selectedTable === 'balance', 'mini-hollow-blue': vm.selectedTable != 'balance'}"
-                style="margin-right: 5px" ng-click="vm.setSelectedTable('balance')">
-                Balance sheet
-            </button>
-            <button
-                ng-class="{'mini-filled-blue': vm.selectedTable === 'cash', 'mini-hollow-blue': vm.selectedTable != 'cash'}"
-                style="margin-right: 5px" ng-click="vm.setSelectedTable('cash')">
-                Cash flow
-            </button>
-            <button
-                ng-class="{'mini-filled-blue': vm.selectedTable === 'stats', 'mini-hollow-blue': vm.selectedTable != 'stats'}"
-                style="margin-right: 5px" ng-click="vm.setSelectedTable('stats')">
-                Statistics
-            </button>
+    <div class="outter_box_fundamental d-flex justify-between flex-wrap">
+        <div class="inner_box_fundamental">
+            <div class="radio_outter inner_box_txt">
+                <h1 class="table-chart-heading">Price to Book Ratio</h1>
+                <div class="radio_tabbing">
+                    <button class="tabbibng_btn" ng-class="{'tabbing_active': vm.selectedTableChartOne === 'chartview1', 'mini-hollow-blue': vm.selectedTableChartOne != 'chartview1'}"
+                    ng-click="vm.setSelectedChartOne('chartview1')">
+                        Chart View
+                    </button>
+                    <button class="tabbibng_btn"  ng-class="{'tabbing_active': vm.selectedTableChartOne === 'tableveiw1', 'mini-hollow-blue': vm.selectedTableChartOne != 'tableveiw1'}"
+                    ng-click="vm.setSelectedChartOne('tableveiw1')">
+                        Table View
+                    </button>
+                </div>
+                <div  ng-class="{'active_tab_content': vm.selectedTableChartOne === 'chartview1', 'inActive_tab_content': vm.selectedTableChartOne == 'tableveiw1'}" class="radio_tab_body">
+                    <div id={{vm.priceBookRadio.container}}></div>
+                </div>
+                <div ng-class="{'active_tab_content': vm.selectedTableChartOne === 'tableveiw1', 'inActive_tab_content': vm.selectedTableChartOne == 'chartview1'}" class="radio_tab_body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>AAPL (Display<br> stock symbol)</th>
+                                <th>Industry <br> Average</th>
+                                <th>Comparison</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100 year growth</td>
+                                <td>223%</td>
+                                <td>223%</td>
+                                <td class="green-feild">TTT by 111% 
+                                    <img src="//am708403.blob.core.windows.net/images/productpage/plus.svg">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>332 year growth</td>
+                                <td>211%</td>
+                                <td>33%</td>
+                                <td class="red-feild">WWWW by 5% 
+                                    <img src="//am708403.blob.core.windows.net/images/productpage/minus.svg">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div style="width: 50%; float: right; text-align: right;">
-            <button
-                ng-class="{'mini-filled-blue': vm.selectedTableType === 'annually', 'mini-hollow-blue': vm.selectedTableType != 'annually'}"
-                style="margin-right: 5px" ng-click="vm.setSelectedTableType('annually')">
-                Annually
-            </button>
-            <button
-                ng-class="{'mini-filled-blue': vm.selectedTableType === 'quarterly', 'mini-hollow-blue': vm.selectedTableType != 'quarterly'}"
-                style="margin-right: 5px" ng-click="vm.setSelectedTableType('quarterly')">
-                Quarterly
-            </button>            
+        <div class="inner_box_fundamental">
+            <div class="profit_outter inner_box_txt">
+                <h1 class="table-chart-heading">Net Profit Margin</h1>
+                <div class="radio_tabbing">
+                    <button class="tabbibng_btn" ng-class="{'tabbing_active': vm.selectedTableChart === 'chartview', 'mini-hollow-blue': vm.selectedTableChart != 'chartview'}"
+                    ng-click="vm.setSelectedChart('chartview')" >
+                        Chart View
+                    </button>
+                    <button class="tabbibng_btn"  ng-class="{'tabbing_active': vm.selectedTableChart === 'tableveiw', 'mini-hollow-blue': vm.selectedTableChart != 'tableveiw'}"
+                    ng-click="vm.setSelectedChart('tableveiw')">
+                        Table View
+                    </button>
+                </div>
+                <div ng-class="{'active_tab_content': vm.selectedTableChart === 'chartview', 'inActive_tab_content': vm.selectedTableChart == 'tableveiw'}" class="radio_tab_body">
+                    <div id={{vm.netProfitMargin.container}}></div>
+                </div>
+                <div ng-class="{'active_tab_content': vm.selectedTableChart === 'tableveiw', 'inActive_tab_content': vm.selectedTableChart == 'chartview'}" class="radio_tab_body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>AAPL (Display<br> stock symbol)</th>
+                                <th>Industry <br> Average</th>
+                                <th>Comparison</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>3 year growth</td>
+                                <td>100%</td>
+                                <td>445%</td>
+                                <td class="green-feild">DEEE by 5% 
+                                    <img src="//am708403.blob.core.windows.net/images/productpage/plus.svg">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8 year</td>
+                                <td>35%</td>
+                                <td>222%</td>
+                                <td class="red-feild">WEE by 5% 
+                                    <img src="//am708403.blob.core.windows.net/images/productpage/minus.svg">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    <div ng-if="vm.selectedTable === 'income'">
-        <table class="table-large">
-            <thead>
-                <tr>
+    <div class="income_tabbing_outter m-bottom-30px m-top-20 m-top-15px">
+        <div class="tabbing_heading d-flex justify-between align_center p-right-25px">
+            <div class="tabbibg_left">
+                <button
+                    ng-class="{'mini-filled-blue': vm.selectedTable === 'income', 'mini-hollow-blue': vm.selectedTable != 'income'}"
+                    ng-click="vm.setSelectedTable('income')" class="tabbibng_btn tabbing_active">
+                    Income statement
+                </button>
+                <button
+                    ng-class="{'mini-filled-blue': vm.selectedTable === 'balance', 'mini-hollow-blue': vm.selectedTable != 'balance'}"
+                    ng-click="vm.setSelectedTable('balance')" class="tabbibng_btn">
+                    Balance sheet
+                </button>
+                <button
+                    ng-class="{'mini-filled-blue': vm.selectedTable === 'cash', 'mini-hollow-blue': vm.selectedTable != 'cash'}"
+                    ng-click="vm.setSelectedTable('cash')" class="tabbibng_btn">
+                    Cash flow
+                </button>
+                <button
+                    ng-class="{'mini-filled-blue': vm.selectedTable === 'stats', 'mini-hollow-blue': vm.selectedTable != 'stats'}"
+                    ng-click="vm.setSelectedTable('stats')" class="tabbibng_btn">
+                    Statistics
+                </button>
+                <div class="tabbing-phone">
+                    <select>
+                        <option> Income statement</option>
+                        <option> Balance sheet</option>
+                        <option> Cash flow</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tabbing_right">
+                <button
+                    ng-class="{'mini-filled-blue': vm.selectedTableType === 'annually', 'mini-hollow-blue': vm.selectedTableType != 'annually'}"
+                    ng-click="vm.setSelectedTableType('annually')" class="tabing_rt_btn active_tab">
+                    Annually
+                </button>
+                <button
+                    ng-class="{'mini-filled-blue': vm.selectedTableType === 'quarterly', 'mini-hollow-blue': vm.selectedTableType != 'quarterly'}"
+                    ng-click="vm.setSelectedTableType('quarterly')" class="tabing_rt_btn">
+                    Quarterly
+                </button>
+            </div>
+        </div>
+        <div class="p-50px text-center" ng-if="vm.isLoading">
+            <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+        </div>
+        <div ng-if="vm.selectedTable === 'income' && !vm.isLoading" class="income_tabbing_body">
+            <table class="table-large">
+                <thead>
+                    <tr>
+                        <td>Currency: {{vm.productDetail.Product.Currency}}</td>
+                        <td
+                            ng-repeat="incomeStatementTableHeading in vm.incomeStatementTableData.headings track by $index">
+                            {{incomeStatementTableHeading}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="incomeStatementTableName in vm.incomeStatementTableData.name">
+                        <td ng-if="incomeStatementTableName !== 'StatementDate'">
+                            {{vm.getFullNameFromKey(incomeStatementTableName)}}</td>
+                        <td ng-if="incomeStatementTableName !== 'StatementDate'"
+                            ng-repeat="incomeStatementTableData in vm.incomeStatementTableData.data track by $index">
+                            <div>{{incomeStatementTableData[incomeStatementTableName]|priceNumberFormatter}}</div>
+                            <div ng-if="incomeStatementTableData.StatementDate !== null && $index !== 0 && vm.incomeStatementTableData.data[$index-1][incomeStatementTableName] !== 0"
+                                ng-class="{'green-profit' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) <= 0}">
+                                {{((vm.incomeStatementTableData.data[$index][incomeStatementTableName] -
+                                vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) /
+                                (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) *
+                                100).toFixed(2)}}%
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div ng-if="vm.selectedTable === 'balance' && !vm.isLoading" >
+            <table class="table-large">
+                <thead>
                     <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                    <td ng-repeat="incomeStatementTableHeading in vm.incomeStatementTableData.headings track by $index">{{incomeStatementTableHeading}}</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="incomeStatementTableName in vm.incomeStatementTableData.name">
-                    <td ng-if="incomeStatementTableName !== 'StatementDate'">{{vm.getFullNameFromKey(incomeStatementTableName)}}</td>                    
-                    <td ng-if="incomeStatementTableName !== 'StatementDate'" ng-repeat="incomeStatementTableData in vm.incomeStatementTableData.data track by $index">
-                        <div>{{incomeStatementTableData[incomeStatementTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="incomeStatementTableData.StatementDate !== null && $index !== 0 && vm.incomeStatementTableData.data[$index-1][incomeStatementTableName] !== 0" ng-class="{'green-profit' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2) <= 0}">
-                            {{((vm.incomeStatementTableData.data[$index][incomeStatementTableName] - vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) / (vm.incomeStatementTableData.data[$index-1][incomeStatementTableName]) * 100).toFixed(2)}}%
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div ng-if="vm.selectedTable === 'balance'">
-        <table class="table-large">
-            <thead>
-                <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                <td ng-repeat="balanceSheetTableDataHeading in vm.balanceSheetTableData.headings track by $index">{{balanceSheetTableDataHeading}}</td>
-            </thead>
-            <tbody>
-                <tr ng-repeat="balanceSheetTableName in vm.balanceSheetTableData.name">
-                    <td ng-if="balanceSheetTableName !== 'StatementDate'">{{vm.getFullNameFromKey(balanceSheetTableName)}}</td>
-                    <td ng-if="balanceSheetTableName !== 'StatementDate'" ng-repeat="balanceSheetTableData in vm.balanceSheetTableData.data track by $index">
-                        <div>{{balanceSheetTableData[balanceSheetTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="balanceSheetTableData.StatementDate !== null && $index !== 0 && vm.balanceSheetTableData.data[$index-1][balanceSheetTableName] !== 0" ng-class="{'green-profit' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) <= 0}">
-                            {{((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2)}}%
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div ng-if="vm.selectedTable === 'cash'">
-        <table class="table-large">
-            <thead>
-                <tr>
+                    <td ng-repeat="balanceSheetTableDataHeading in vm.balanceSheetTableData.headings track by $index">
+                        {{balanceSheetTableDataHeading}}</td>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="balanceSheetTableName in vm.balanceSheetTableData.name">
+                        <td ng-if="balanceSheetTableName !== 'StatementDate'">
+                            {{vm.getFullNameFromKey(balanceSheetTableName)}}</td>
+                        <td ng-if="balanceSheetTableName !== 'StatementDate'"
+                            ng-repeat="balanceSheetTableData in vm.balanceSheetTableData.data track by $index">
+                            <div>{{balanceSheetTableData[balanceSheetTableName]|priceNumberFormatter}}</div>
+                            <div ng-if="balanceSheetTableData.StatementDate !== null && $index !== 0 && vm.balanceSheetTableData.data[$index-1][balanceSheetTableName] !== 0"
+                                ng-class="{'green-profit' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.balanceSheetTableData.data[$index][balanceSheetTableName] - vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) / (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2) <= 0}">
+                                {{((vm.balanceSheetTableData.data[$index][balanceSheetTableName] -
+                                vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) /
+                                (vm.balanceSheetTableData.data[$index-1][balanceSheetTableName]) * 100).toFixed(2)}}%
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-if="vm.selectedTable === 'cash' && !vm.isLoading">
+            <table class="table-large">
+                <thead>
+                    <tr>
+                        <td>Currency: {{vm.productDetail.Product.Currency}}</td>
+                        <td ng-repeat="cashFlowTableHeading in vm.cashFlowTableData.headings track by $index">
+                            {{cashFlowTableHeading}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="cashFlowTableName in vm.cashFlowTableData.name">
+                        <td ng-if="cashFlowTableName !== 'StatementDate'">{{vm.getFullNameFromKey(cashFlowTableName)}}
+                        </td>
+                        <td ng-if="cashFlowTableName !== 'StatementDate'"
+                            ng-repeat="cashFlowTableData in vm.cashFlowTableData.data track by $index">
+                            <div>{{cashFlowTableData[cashFlowTableName]|priceNumberFormatter}}</div>
+                            <div ng-if="cashFlowTableData.StatementDate !== null && $index !== 0 && vm.cashFlowTableData.data[$index-1][cashFlowTableName] !== 0"
+                                ng-class="{'green-profit' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) <= 0}">
+                                {{((vm.cashFlowTableData.data[$index][cashFlowTableName] -
+                                vm.cashFlowTableData.data[$index-1][cashFlowTableName]) /
+                                (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2)}}%
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div ng-if="vm.selectedTable === 'stats' && !vm.isLoading" class="statics"> 
+            <table class="table-large">
+                <thead>
                     <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                    <td ng-repeat="cashFlowTableHeading in vm.cashFlowTableData.headings track by $index">{{cashFlowTableHeading}}</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="cashFlowTableName in vm.cashFlowTableData.name">
-                    <td ng-if="cashFlowTableName !== 'StatementDate'">{{vm.getFullNameFromKey(cashFlowTableName)}}</td>
-                    <td ng-if="cashFlowTableName !== 'StatementDate'" ng-repeat="cashFlowTableData in vm.cashFlowTableData.data track by $index">
-                        <div>{{cashFlowTableData[cashFlowTableName]|priceNumberFormatter}}</div>
-                        <div ng-if="cashFlowTableData.StatementDate !== null && $index !== 0 && vm.cashFlowTableData.data[$index-1][cashFlowTableName] !== 0" ng-class="{'green-profit' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) > 0, 'red-loss' : ((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2) <= 0}">
-                            {{((vm.cashFlowTableData.data[$index][cashFlowTableName] - vm.cashFlowTableData.data[$index-1][cashFlowTableName]) / (vm.cashFlowTableData.data[$index-1][cashFlowTableName]) * 100).toFixed(2)}}%
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div ng-if="vm.selectedTable === 'stats'">
-        <table class="table-large">
-            <thead>
-                <td>Currency: {{vm.productDetail.Product.Currency}}</td>
-                <td ng-repeat="statisticsTableHeading in vm.statisticsTableData.headings track by $index">{{statisticsTableHeading}}</td>               
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="{{vm.statisticsTableData.headings.length + 1}}">
-                        <h4><bold>{{vm.statisticsTableData.data.keySates.title}}</bold></h4>
-                    </td>
-                </tr>
-                <tr ng-repeat="statisticsKeyStateTableName in vm.statisticsTableData.data.keySates.data track by $index">
-                    <td>{{vm.getFullNameFromKey(vm.statisticsTableData.data.keySates.headings[$index])}}</td>
-                    <td ng-repeat="statisticsKeyStateValues in statisticsKeyStateTableName track by $index">
-                        <div>{{statisticsKeyStateValues|priceNumberFormatter}}</div>
-                    </td>                 
-                </tr>
-                <tr>
-                    <td colspan="{{vm.statisticsTableData.headings.length + 1}}">
-                        <h4><bold>{{vm.statisticsTableData.data.ratios.title}}</bold></h4>
-                    </td>
-                </tr>
-                <tr ng-repeat="statisticsRatiosTableName in vm.statisticsTableData.data.ratios.data track by $index">
-                    <td>{{vm.getFullNameFromKey(vm.statisticsTableData.data.ratios.headings[$index])}}</td>
-                    <td ng-repeat="statisticsRatiosValues in statisticsRatiosTableName track by $index">
-                        <div>{{statisticsRatiosValues|number:2}}</div>
-                    </td>                 
-                </tr>                
-            </tbody>
-        </table>
+                    <td ng-repeat="statisticsTableHeading in vm.statisticsTableData.headings track by $index">
+                        {{statisticsTableHeading}}</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="{{vm.statisticsTableData.headings.length + 1}}">
+                            <h4>
+                                <bold>{{vm.statisticsTableData.data.keySates.title}}</bold>
+                            </h4>
+                        </td>
+                    </tr>
+                    <tr
+                        ng-repeat="statisticsKeyStateTableName in vm.statisticsTableData.data.keySates.data track by $index">
+                        <td>{{vm.getFullNameFromKey(vm.statisticsTableData.data.keySates.headings[$index])}}</td>
+                        <td ng-repeat="statisticsKeyStateValues in statisticsKeyStateTableName track by $index">
+                            <div>{{statisticsKeyStateValues|priceNumberFormatter}}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="{{vm.statisticsTableData.headings.length + 1}}">
+                            <h4>
+                                <bold>{{vm.statisticsTableData.data.ratios.title}}</bold>
+                            </h4>
+                        </td>
+                    </tr>
+                    <tr
+                        ng-repeat="statisticsRatiosTableName in vm.statisticsTableData.data.ratios.data track by $index">
+                        <td>{{vm.getFullNameFromKey(vm.statisticsTableData.data.ratios.headings[$index])}}</td>
+                        <td ng-repeat="statisticsRatiosValues in statisticsRatiosTableName track by $index">
+                            <div>{{statisticsRatiosValues|number:2}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>

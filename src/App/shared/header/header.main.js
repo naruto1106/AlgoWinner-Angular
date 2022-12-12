@@ -13,10 +13,12 @@
         'sharedFakeProgressService', 'sGatewaySessionService', 'sDroidHelperService', 'sProductService', 'sUserAccountService',
         'commonHeaderModeService', 'commonLocationHistoryService', 'coreDataStorageService', 'sGatewayTokenRefreshService',
         'sStrategyCommerceService', 'commonScreenResizerService', 'sAccountService', 'sActivityNotificationService', 'sUserService',
-        'sHeaderService', "pAlgoOracleService", "pMobileWebService"],
+        'sHeaderService', "pAlgoOracleService", "pMobileWebService", '$anchorScroll', '$location'],
     function (vm, dep, tool) {
         // as service
         // as part of header
+        $location = dep.$location,
+        $anchorScroll = dep.$anchorScroll;
         var temporaryUserId = null;
         var locationHistory = dep.commonLocationHistoryService.locationHistory;
         var sHeaderService = dep.sHeaderService,
@@ -150,7 +152,7 @@
                 goToAmAuto: sHeaderService.goToAmAuto,
                 goToNewTab: commonLocationHistoryService.goToNewTab,
                 openAcademy: openAcademy,
-                searchProductsInHeader: searchProductsInHeader
+                searchProductsInHeader: searchProductsInHeader,
             });
 
             sGatewayTokenRefreshService.start();
@@ -320,4 +322,29 @@
                 coreAuthInterceptor.checkOnKickedOut();
             });
         });
+
+
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 50) {
+               $('.main-header').addClass('scrollheader');
+            } else {
+               $('.main-header').removeClass('scrollheader');
+            }
+        });
+        
+$(document).ready(function(){
+
+    $('.bar_icon').click(function (e) {
+    
+      if ($('.agm-component-product').hasClass("sidebar_slide")) {
+        $('.agm-component-product').removeClass("sidebar_slide");
+      }
+      else {
+        $('.agm-component-product').addClass("sidebar_slide");
+      }
     });
+  });
+    });
+
+
+      

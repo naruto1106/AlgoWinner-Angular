@@ -1,12 +1,14 @@
 ﻿<section class="chart-panel">
-    <h1 class="title-section">CHART</h1>
+    <h1 class="title-section p-0px">Chart</h1>
     <div class="white-box">
-        <div class="btn-group periodsizes pull-left">
-            <button ng-repeat="periodSize in vm.periodSizes" ng-click="vm.setPeriodSize(periodSize)" ng-class="{active:periodSize==vm.selectedPeriodSize}">{{periodSize.display}}</button>
-        </div>
-        <div agms-droid-helper-item="productPage.chartPanel.detailedChart" class="pull-right">
-            <button class="filled-blue" ng-click="vm.viewDetailedChart()"><span class="glyphicon glyphicon glyphicon-resize-full"></span> VIEW DETAILED CHART</button>
-            <div class="clearfix"></div>
+        <div class="chart_btn_outter d-flex justify-between">
+            <div class="btn-group periodsizes pull-left chart_btns">
+                <button ng-repeat="periodSize in vm.periodSizes" ng-click="vm.setPeriodSize(periodSize)" ng-class="{active:periodSize==vm.selectedPeriodSize}">{{periodSize.display}}</button>
+            </div>
+            <div agms-droid-helper-item="productPage.chartPanel.detailedChart" class="pull-right">
+                <button class="view_detail_btn" ng-click="vm.viewDetailedChart()">View Detailed Chart<img src="//am708403.blob.core.windows.net/images/productpage/arrow.svg"></button>
+                <div class="clearfix"></div>
+            </div>
         </div>
         <div agms-droid-helper-item="productPage.chartPanel.highChart">
             <highchart ng-if="vm.chart && vm.data.length>0" class="m-top-20px" config="vm.chart"></highchart>

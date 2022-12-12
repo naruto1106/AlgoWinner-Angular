@@ -1,7 +1,7 @@
 ﻿<div class="company-overview-panel">
-    <h1 class="title-section">OVERVIEW</h1>
-    <div class="row-md-5 gap-20px">
-        <div class="col-md-2">
+    <h1 class="title-section">Overview</h1>
+    <div class="d-flex justify-between flex-wrap m-bottom-40px">
+         <div class="overview_inner">
             <div class="scoring-boxes">
                 <div class="scoring">
                     <h3>Sector</h3>
@@ -28,12 +28,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="description-box" ng-if="vm.productDetail.CompanyOverview.Description">
-                <p>
+        <div class="overview_inner">
+            <div class="description-box">
+                <!-- <p>
                     {{vm.productDetail.CompanyOverview.Description}}
-                </p>
+                </p> -->
+                <p ng-if="vm.productDetail.CompanyOverview.Description" is-clipping-active="!vm.productDetail.CompanyOverview.isContentExpanded" agmc-paragraph-clipper="vm.productDetail.CompanyOverview.Description" is-clipping-required="vm.productDetail.CompanyOverview.needClipping" max-line-count="8"></p>
+                <div ng-if="vm.productDetail.CompanyOverview.needClipping">
+                    <a class="paralink" ng-if="!vm.productDetail.CompanyOverview.isContentExpanded" ng-click="vm.productDetail.CompanyOverview.isContentExpanded=!vm.productDetail.CompanyOverview.isContentExpanded">(Show More ...)</a>
+                    <a class="paralink" ng-if="vm.productDetail.CompanyOverview.isContentExpanded" ng-click="vm.productDetail.CompanyOverview.isContentExpanded=!vm.productDetail.CompanyOverview.isContentExpanded">(Show Less ...)</a>
+                </div>
             </div>
+            
+
         </div>
         <div class="clearfix"> </div>
     </div>

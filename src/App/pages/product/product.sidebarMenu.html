@@ -1,26 +1,42 @@
-﻿<div class="static-sidebar">
-    <button class="special" ng-click="vm.toggleHeader()" uib-tooltip="Show/Hide Menu" tooltip-placement="right" ng-disabled="vm.showErrorMessage()">
-        <span agmc-svg-loader svg-src="'/App/assets/icons/product/menu.svg'"></span>
+﻿
+
+<div class="static-sidebar test">
+    <button class="special">
+        <img src="//am708403.blob.core.windows.net/images/sidebar/side-logo.png">
     </button>
-    <button ng-click="vm.gotoSection('price-section')" uib-tooltip="Price" tooltip-placement="right" ng-disabled="vm.showErrorMessage()">
-        <span agmc-svg-loader svg-src="'/App/assets/icons/product/price.svg'"></span>
+    <button class="side_active stroke">
+        <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon1.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('chart-section')" uib-tooltip="Chart" tooltip-placement="right" ng-disabled="vm.showErrorMessage()">
-        <span agmc-svg-loader svg-src="'/App/assets/icons/product/charts.svg'"></span>
+    <button ng-click="vm.gotoSection('price-section')" uib-tooltip="Price" tooltip-placement="right" ng-disabled="vm.showErrorMessage()" class="fill">
+        <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon2.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('sentiment-section')" uib-tooltip="Sentiment" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
-        <span agmc-svg-loader svg-src="'/App/assets/icons/product/prospect.svg'"></span>
+    <button ng-click="vm.gotoSection('chart-section')" uib-tooltip="Chart" tooltip-placement="right" ng-disabled="vm.showErrorMessage()" class="fill">
+        <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon3.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('fundamental-section')" uib-tooltip="Fundamentals" tooltip-placement="right" ng-if="vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
-        <span agmc-svg-loader svg-src="'/App/assets/icons/product/fundamentals.svg'"></span>
+    <button ng-click="vm.gotoSection('sentiment-section')" uib-tooltip="Sentiment" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()" class="fill">
+        <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon4.svg'"></span>
     </button>    
-    <button ng-click="vm.gotoSection('overview-section')" uib-tooltip="Overview" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
-        <span agmc-svg-loader svg-src="'/App/assets/icons/product/information.svg'"></span>
+    <button ng-click="vm.gotoSection('fundamental-section')" uib-tooltip="Fundamentals" tooltip-placement="right" ng-if="vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()" class="stroke">
+        <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon5.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('prospects-section')" ng-if="false && !vm.isWarrants()" uib-tooltip="Prospect" tooltip-placement="right" ng-disabled="vm.showErrorMessage()">
-        <span agmc-svg-loader svg-src="'/App/assets/icons/product/prospect.svg'"></span>
+    <button ng-click="vm.gotoSection('overview-section')" uib-tooltip="Overview" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()" class="stroke">
+        <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon6.svg'"></span>
     </button>
-    <button ng-click="vm.gotoSection('competitors-section')" uib-tooltip="Related Companies" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.showRelatedCompanies() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()">
-        <span agmc-svg-loader svg-src="'/App/assets/icons/product/competitor.svg'"></span>
+    
+    <button ng-click="vm.gotoSection('news-section')" uib-tooltip="News" tooltip-placement="right" ng-if="!vm.isWarrants() && vm.showRelatedCompanies() && vm.TradeVenueLoc == 'US'" ng-disabled="vm.showErrorMessage()" class="stroke">
+        <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon7.svg'"></span>
     </button>
+    <div class="footer-icons">
+        <button class="fill">
+            <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon8.svg'"></span>
+        </button>
+        <button class="stroke">
+            <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon9.svg'"></span>
+        </button>
+        <div class="divider"></div>
+        <button class="special">
+            <img src="//am708403.blob.core.windows.net/images/sidebar/user-img.png">
+        </button>
+    
+    </div>
 </div>

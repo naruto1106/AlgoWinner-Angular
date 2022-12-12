@@ -1,4 +1,27 @@
-﻿agmNgModuleWrapper('agm.common')
+﻿// import { Directive, HostListener, Input, ElementRef } from '@angular/core';
+// import { ScrollManagerDirective } from './scroll-manager.directive';
+// import { ScrollSectionDirective } from './scroll-section.directive';
+// import { ScrollManagerDirective } from './scroll-manager.directive';
+
+// @Directive({
+//     selector: '[appScrollAnchor]',
+//     selector: '[appScrollManager]',
+//     selector: '[appScrollSection]',
+//   })
+
+
+//   export class ScrollAnchorDirective {
+//     @Input('appScrollAnchor') id: string | number;
+  
+//     constructor(private manager: ScrollManagerDirective) {}
+  
+//     @HostListener('click')
+//     scroll() {
+//       this.manager.scroll(this.id);
+//     }
+//   }
+
+agmNgModuleWrapper('agm.common')
     .defineDirectiveForE('agmc-rating', [],
         function (dep) {
             return {

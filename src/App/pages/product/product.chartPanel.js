@@ -173,14 +173,15 @@
                         {
                             name: "Volume",
                             data: volumes,
-                            color: '#DDD',
+                            color: '#86D3CD',
                             type: 'column',
-                            yAxis: 1
+                            yAxis: 1,
+                            borderRadius: 6,
                         },
                         {
                             name: "Price",
                             data: prices,
-                            color: '#006AD4',
+                            color: '#184376',
                             type: 'line',
                             yAxis: 0
                         }
@@ -195,11 +196,7 @@
                             },
                             gridLineColor: "#EEE",
                             title: {
-                                text: 'Price',
-                                style: {
-                                    fontSize: '16px',
-                                    fontWeight: '800'
-                                }
+                                text: null
                             },
                             min: priceRange.min,
                             max: priceRange.max,
@@ -207,11 +204,7 @@
                         },
                         {
                             title: {
-                                text: 'Volume',
-                                style: {
-                                    fontSize: '16px',
-                                    fontWeight: '800'
-                                }
+                                text: null
                             },
                             labels: {
                                 style: {
@@ -240,8 +233,16 @@
 
                     title: {
                         text: null
-                    },
+                    },                    
                     options: {
+                        legend: {
+                        align: 'right',
+                        verticalAlign: 'top',
+                        symbolRadius: 15,
+                        symbolHeight:8,
+                        symbolWidth: 0,
+                        itemStyle: {"color": "#667085", "fontSize": "13px", "fontWeight": "500"}
+                    },
                         chart: {
                             height: 400
                         },
@@ -255,7 +256,7 @@
                                     "</div>";
                             }
                         },
-                    }
+                    },
                 };
             }
 
@@ -294,6 +295,7 @@
                     commonLocationHistoryService.goToNewTab('/Home/Inside#/charts/' + pProductPageService.currentProduct.TradeVenueLoc + "/" + pProductPageService.currentProduct.Symbol);
                 }
             }
+            
 
             tool.initialize(function () {
                 tool.setVmProperties({

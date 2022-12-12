@@ -1,0 +1,138 @@
+<div class="testaksdk">
+    <section class="select_template">
+        <div class="xsapce select_template_inner">
+            <div class="inner_border border_shadow">
+                <div class="template_heading">
+                    <h4 class="p300l">Select Template</h4>
+                </div>
+                <div class="template_selection d-flex flex-wrap align-center">
+                    <label class="custom_radio">Standard
+                        <input type="radio" checked="checked" name="radio" ng-model="templateType" ng-value="standard">
+                        <span class="checkmark"></span>
+                    </label>
+                    <div class="custom_outter d-flex align-center flex-wrap">
+                        <label class="custom_radio">Custom
+                            <input type="radio" name="radio" ng-model="templateType" value="custom">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="select-box" ng-if="templateType == 'custom'">
+                            <div  ng-class="{'text-bold': vm.customTemplate.id != undefined}"
+                                class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Templates"
+                                selected-model="vm.customTemplate" extra-settings="vm.dropdownSetting"
+                                translation-texts="vm.customTempText" events="vm.eventsCallback" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="properietary_outter d-flex align-center flex-wrap">
+                        <label class="custom_radio">Proprietary Filter
+                            <input type="radio" name="radio" ng-model="templateType" value="proprietary">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="select-box" ng-if="templateType == 'proprietary'">
+                            <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Filters"
+                                selected-model="vm.proprietaryFilter" extra-settings="vm.dropdownSetting"
+                                translation-texts="vm.proprietaryText" ng-class="{'text-bold': vm.proprietaryFilter.id != undefined}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="select_template universe-outter">
+        <div class="xsapce select_template_inner">
+            <div class="inner_border border_shadow">
+
+                <div class="usniverse_inner d-flex flex-wrap justify-between align-end">
+                    <div class="universe_left d-flex align-end">
+                        <div class="universe_select">
+                            <h4 class="p300l">Universe</h4>
+                            <div class="select-box">
+                                <div ng-class="{'text-bold': vm.universeFilter.id != undefined}" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.uninverse"
+                                    selected-model="vm.universeFilter" extra-settings="vm.dropdownSetting"
+                                    translation-texts="vm.universeText">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="universe_select" ng-if="vm.universeFilter.id != undefined">
+                            <h4 class="p300l">Country</h4>
+                            <div class="select-box">
+                                <div ng-class="{'text-bold': vm.selectedCountry.id != undefined}" class="cst-dropdown-trade country-select-box" ng-dropdown-multiselect=""
+                                    options="vm.data.countries" selected-model="vm.selectedCountry"
+                                    extra-settings="vm.dropdownSetting" translation-texts="vm.countryText">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="universe_select sectorselect" ng-if="vm.selectedCountry.id!= undefined">
+                            <h4 class="p300l">Sector</h4>
+                            <div class="select-box">
+                                <div ng-class="{'text-bold': vm.selectedSector.length > 0 }" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.sectors"
+                                    selected-model="vm.selectedSector" extra-settings="vm.dropdownCheckbox"
+                                    translation-texts="vm.SelectedText" checkboxes="true"></div>
+                            </div>
+                        </div>
+                        <div class="universe_select" ng-if="vm.selectedSector.length > 0">
+                            <h4 class="p300l">Industry</h4>
+                            <div class="select-box">
+                                <div ng-class="{'text-bold': vm.selectedIndustry.length > 0 }" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.industries"
+                                    selected-model="vm.selectedIndustry" extra-settings="vm.dropdownCheckbox"
+                                    checkboxes="true" translation-texts="vm.SelectedText"></div>
+                            </div>
+                        </div>
+                        <a data-toggle="modal" data-target="#analysis_modal" class="border_btns">
+                            <img src="//am708403.blob.core.windows.net/images/tradeidea/icon1.svg">
+                            Analysis Filter
+                        </a>
+                    </div>
+                    <div class="universe-right">
+                        <a  class="border_btns" data-toggle="modal" data-target="#backtest_modal">
+                            <img src="//am708403.blob.core.windows.net/images/tradeidea/icon2.svg">
+                            BackTest
+                        </a>
+                        <a href="#" class="border_btns">
+                            <img src="//am708403.blob.core.windows.net/images/tradeidea/icon3.svg">
+                            Edit Column
+                        </a>
+                        <a href="#" class="border_btns">
+                            <img src="//am708403.blob.core.windows.net/images/tradeidea/icon4.svg">
+                            Clear Filter
+                        </a>
+                        <a href="#" class="border_btns">
+                            <img src="//am708403.blob.core.windows.net/images/tradeidea/icon5.svg">
+                            Save as Template
+                        </a>
+                        <a href="#" class="filled_btn filter-btn">
+                            <img src="//am708403.blob.core.windows.net/images/tradeidea/icon6.svg">
+                            Filter
+                            <span>0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="summer_section">
+        <div class="xsapce">
+            <div class="summery_filer">
+                <h3>Summary Filter: <span class="secoundry600">7</span></h3>
+                <div class="summer_rules_outer d-flex align-center">
+                    <div class="rules_btns">
+                        <a href="#" class="green_btn"><span><img
+                                    src="//am708403.blob.core.windows.net/images/tradeidea/cross.svg"></span>Market</a>
+                        <a href="#" class="green_btn"><span><img src="//am708403.blob.core.windows.net/images/tradeidea/cross.svg"></span>United
+                            States</a>
+                        <a href="#" class="green_btn"><span><img
+                                    src="//am708403.blob.core.windows.net/images/tradeidea/cross.svg"></span>Healthcare</a>
+                        <a href="#" class="green_btn"><span><img
+                                    src="//am708403.blob.core.windows.net/images/tradeidea/cross.svg"></span>Biotechnology</a>
+                        <a href="#" class="green_btn"><span><img
+                                    src="//am708403.blob.core.windows.net/images/tradeidea/cross.svg"></span>Correlation</a>
+                        <a href="#" class="green_btn"><span><img src="//am708403.blob.core.windows.net/images/tradeidea/cross.svg"></span>Sharpe
+                            Ratio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  
+</div>

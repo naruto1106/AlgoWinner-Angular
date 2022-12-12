@@ -8,7 +8,10 @@
                     title: {
                         text: ''
                     },
-
+                    chart: {
+                        height: 370,
+                        
+                    },
                     credits: {
                         enabled: false
                     },
@@ -16,7 +19,6 @@
                     subtitle: {
                         text: ''
                     },
-
                     yAxis: {
                         title: {
                             text: null
@@ -33,13 +35,18 @@
                     },
 
                     legend: {
-                        layout: 'horizontal',
-                        align: 'center'
+                        align: 'right',
+                        verticalAlign: 'top',
+                        symbolRadius: 15,
+                        symbolHeight:8,
+                        symbolWidth: 0,
+                        itemStyle: {"color": "#667085", "fontSize": "13px", "fontWeight": "500"}
                     },
 
                     series: [{
                         name: name,
-                        data: chartData.data
+                        data: chartData.data,
+                        color: '#446791'
                     }],
 
                     responsive: {
@@ -62,10 +69,17 @@
             function barCharts(container, chartData) {
                 var chart = Highcharts.chart(container, {
 
+                    plotOptions: {column: {colorByPoint: true}},
                     chart: {
                         type: 'column'
                     },
-
+                    colors: [
+                        '#13365E',
+                        '#446791',
+                        '#2DA89E',
+                        '#86D3CD',
+                        '#C9F4F0'
+                    ],
                     credits: {
                         enabled: false
                     },
@@ -84,7 +98,15 @@
                             x: -10
                         }
                     },
-
+                    legend: {
+                        // align: 'right',
+                        // verticalAlign: 'top',
+                        // layout: 'horizontal',
+                        // symbolRadius: 15,
+                        // symbolHeight:10,
+                        // symbolWidth: 10
+                        enabled: false
+                    },
                     yAxis: {
                         allowDecimals: false,
                         title: {
@@ -92,10 +114,13 @@
                         }
                     },
 
-                    series: [{
-                        name: 'Analyst Rating',
-                        data: chartData.analyst_rating
-                    }],
+                    series: [
+                        {
+                            name: 'Analyst Rating',
+                            data: chartData.analyst_rating,
+                            color: '#13365E',
+                        }
+                ],
 
                     responsive: {
                         rules: [{
@@ -128,7 +153,7 @@
                         }]
                     }
                 });
-                chart.setSize(null);
+                chart.setSize(null, 340);
             }
 
             function changeRetailActivityChartPeriod() {
@@ -180,15 +205,28 @@
                     lineCharts('retail_sentiment', chartData, 'Retail Sentiment');
                 });
             }
+            
+            function switchRetail() {
+                
+                if(vm.selectedRetail && vm.selectedRetail=="retailInterest") {
+                    
+                    vm.changeRetailActivityChartPeriod();
+                } else {
+                    debugger;
+                    angular.element('#tabSecond').triggerHandler('click');
+                }
+            }
 
             tool.initialize(function () {
                 tool.setVmProperties({
+                    selectedRetail:"retailInterest",
                     selectedInterestPeriod: "1 Month",
                     selectedSentimentPeriod: "1 Month",
                     retailInterestPeriods: ["1 Week", "1 Month", "3 Month", "6 Month", "1 Year"],
                     retailSentimentPeriods: ["1 Week", "1 Month", "3 Month", "6 Month", "1 Year"],
                     changeRetailActivityChartPeriod: changeRetailActivityChartPeriod,
                     changeRetailSentimentChartPeriod: changeRetailSentimentChartPeriod,
+                    switchRetail:switchRetail,
                 });
 
                 var productDetail = pProductPageService.productDetail;

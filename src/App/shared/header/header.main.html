@@ -11,7 +11,7 @@
         </div>
     </section>
 
-    <header class="main-header"
+   <header class="main-header common-header" 
             ng-class="{'no-header':vm.headerMode.hasNoHeader(),
                        'fixed-floating':vm.headerMode.hasFixedFloatingHeader(),
                        'email-not-confirmed': vm.showConfirmEmailBox()}"
@@ -168,6 +168,13 @@
                     <div class="menu-title">News</div>
                 </a>
             </li>
+            <li 
+                analytics-on="click" analytics-category="TopMenu" analytics-event="Charts" agmc-analytics-timestamp>
+                <a href="#/tradeMain" target="_blank">
+                    <div class="algoicon algoicons-chart"></div>
+                    <div class="menu-title">Trade Idea</div>
+                </a>
+            </li>
         </ul>
         <div class="user-icon-wrapper dropdown hover-to-open" uib-dropdown>
             <button class="user-icon" agms-image img-src="vm.coreUserStateService.user.ProfileImageUrl" img-fallback-src="'//am708403.azureedge.net/images/profilePicture/defaultavatar.jpg?'">
@@ -263,7 +270,6 @@
                        analytics-on="change" analytics-category="TopMenu" analytics-event="SearchProduct" agmc-analytics-timestamp>
             </div>
         </form>
-    </header>
-
+    </header> 
     <agmp-mobile-menu></agmp-mobile-menu>
 </div>

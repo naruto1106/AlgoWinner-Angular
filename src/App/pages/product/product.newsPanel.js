@@ -13,11 +13,15 @@
         }
 
         function getPagedNews() {
-            return _.take(_.drop(vm.news, (vm.models.currentPage - 1) * 10), 10);
+            return _.take(_.drop(vm.news, (vm.models.currentPage - 1) * 6), 6);
         }
 
         function gotoNews(news) {
             dep.$window.open(news.NewsUrl);
+        }
+
+        function setSelectedTab(tab) {
+            vm.selectedTab = tab;
         }
 
         tool.initialize(function () {
@@ -27,7 +31,8 @@
                     numPages: 1
                 },
                 news: [],
-
+                selectedTab: "news",
+                setSelectedTab: setSelectedTab,
                 getTotalItems: getTotalItems,
                 showPagination: showPagination,
                 getPagedNews: getPagedNews,
