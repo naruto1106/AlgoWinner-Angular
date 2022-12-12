@@ -1,0 +1,475 @@
+.agm-component-livetrades {
+    max-width: 1280px;
+    margin: 0 auto;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.625;
+    color: #666;
+    min-height: 40vh;
+
+    .loading-icon {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .text-blue2 {
+        color: #00339A !important;
+    }
+
+    .icon-blue {
+        color: #08A4BC;
+        font-size: 12px;
+    }
+
+    h3 {
+        font-weight: 700;
+    }
+
+    .broker-logo {
+        width: 30px;
+    }
+
+    .account-code {
+        display: inline-block;
+        position: relative;
+        font-size: 16px;
+        top: 3px;
+    }
+
+    .product-logo {
+        max-width: 40px;
+        float: left;
+    }
+
+    .product-info {
+        float: left;
+        margin-left: 0.8em;
+        max-width: 12em;
+
+        .product-name {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .product-symbol {
+            color: @darkGray1;
+        }
+    }
+
+    .dropdown-menu {
+        width: 225px;
+    }
+
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent
+    }
+
+    .table-positions {
+        border-radius: 10px;
+        box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+
+        thead tr, tbody tr {
+            background: white;
+            border-bottom: 1px;
+        }
+
+        thead tr {
+            th {
+                border-bottom: 1px solid #ddd;
+                padding: 0.8rem;
+                font-weight: 600;
+            }
+        }
+
+        tbody tr {
+            td {
+                padding: 0.7rem 0.8rem;
+            }
+        }
+
+        td {
+            font-weight: normal;
+
+            &.green-profit {
+                color: @seafoam;
+            }
+
+            &.red-loss {
+                color: @berry;
+            }
+        }
+    }
+
+    .au-performance {
+        box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        background: #fff;
+        padding-top: 5px;
+        padding-left: 30px;
+        padding-right: 5px;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    .au-content {
+        padding-bottom: 20px;
+        padding-top: 10px;
+    }
+
+    @media (max-width: 991px) {
+        font-size: 12px;
+
+        .au-breadcrumb {
+            height: 80px;
+        }
+    }
+
+    &.mobile, .mobile-view {
+        .dropdown-menu {
+            padding: 0;
+            left: 20%;
+        }
+
+        .dropdown-toggle::after {
+            margin-top: 10px;
+        }
+
+        .broker-logo {
+            width: 25px;
+        }
+
+        .account-dropwdown, .account-dropdown-choice {
+            cursor: pointer;
+
+            .broker-logo {
+                margin-right: 0;
+            }
+        }
+
+        .account-dropwdown, {
+            width: 80%;
+            margin: 0 auto;
+            padding: 3px 0;
+        }
+
+        .safety-ratio {
+            margin: 10px auto 0 auto;
+            width: 80%;
+
+            .help-text {
+                font-size: 12px;
+            }
+        }
+
+        .account-dropdown-choice {
+            padding: 8px;
+        }
+
+        .alert-danger .close {
+            font-size: 20px;
+            top: 0;
+            bottom: -16px;
+        }
+
+        .algo-product {
+            .product-logo {
+                max-width: 30px;
+                float: none;
+            }
+
+            .product-info {
+                .product-name {
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .table-positions {
+            thead tr {
+                th {
+                    border-bottom: 1px solid #ddd;
+                    padding: 7px;
+                    font-weight: 600;
+                }
+            }
+
+            tbody tr {
+                td {
+                    padding: 7px;
+                }
+            }
+        }
+
+        .auto-invest-status {
+            margin-top: 5px;
+            margin-bottom: 0;
+        }
+
+        .autoinvest-tab {
+            .nav-tabs > li > a {
+                padding: 10px 5px;
+            }
+        }
+
+        .au-breadcrumb {
+            height: 60px;
+
+            .section__content {
+                top: 55%;
+            }
+        }
+
+        h3 {
+            font-size: 15px !important;
+        }
+    }
+    /* -- LEGACY -- */
+    .broker-label {
+        line-height: 25px;
+        text-align: center;
+        color: @blueDarker3;
+        font-weight: 700;
+        padding: 0 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 16px;
+    }
+
+    .place-order-button {
+        height: 125px;
+        width: 130px;
+        padding: 10px;
+        background: @seafoam;
+        line-height: 20px;
+        font-size: 20px;
+        letter-spacing: 1px;
+        color: white;
+        border: 3px solid @gray1;
+        border-radius: 15px;
+
+        &:hover {
+            background: @mint;
+            color: white;
+        }
+
+        .icon {
+            font-size: 45px;
+            color: white;
+        }
+    }
+
+    .account-box-selection {
+        width: 200px;
+
+        &:hover {
+            background: mix(@blueBasic, transparent, 50);
+        }
+
+        .big-editor {
+            min-height: 50vh;
+        }
+
+        &.active {
+            background: @blueDarker3;
+            color: white;
+        }
+    }
+
+    .minwidth {
+        min-width: 100px;
+        width: auto !important;
+        width: 100px;
+    }
+
+    .rotate9 {
+        transform: rotate(90deg);
+    }
+
+    .rotate-9 {
+        transform: rotate(-90deg);
+    }
+
+    .account-dropdown, .account-dropdown-choice {
+        cursor: pointer;
+
+        .broker-logo {
+            width: 25px;
+            margin-right: 0;
+        }
+
+        .account-code {
+            display: inline-block;
+            font-size: 16px;
+            top: 2px;
+        }
+    }
+
+    .account-dropdown {
+        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 7px 6px 6px 6px;
+    }
+}
+
+&.agm-carousel {
+    .rel;
+    height: 100%;
+
+    .left-button, .right-button {
+        .abs;
+        height: 100%;
+        width: 50px;
+        padding: 5px;
+
+        button {
+            height: 100%;
+            width: 100%;
+
+            span.glyphicon {
+                line-height: 100%;
+                font-size: 30px;
+                font-color: @grayDark3;
+            }
+
+            height: 100%;
+
+            &:hover {
+            }
+        }
+    }
+
+    .left-button, .right-button {
+        button {
+            border: none;
+            background: none;
+
+            &:hover {
+                background: @grayLight3;
+            }
+        }
+    }
+
+    .left-button {
+        left: 0;
+
+        span {
+            margin-left: -3px;
+        }
+    }
+
+    .right-button {
+        right: 0;
+
+        span {
+            margin-left: -7px;
+        }
+    }
+
+    .left-button-small, .right-button-small {
+        .abs;
+        height: 100%;
+        width: 25px;
+        padding: 0px;
+
+        button {
+            height: 100%;
+            width: 100%;
+
+            span.glyphicon {
+                line-height: 100%;
+                font-size: 20px;
+                font-color: @grayDark3;
+            }
+
+            height: 100%;
+
+            &:hover {
+            }
+        }
+    }
+
+    .left-button-small, .right-button-small {
+        button {
+            border: none;
+            background: none;
+
+            &:hover {
+                background: @grayLight3;
+            }
+        }
+    }
+
+    .left-button-small {
+        left: 0;
+
+        span {
+            margin-left: -3px;
+        }
+    }
+
+    .right-button-small {
+        right: 0;
+
+        span {
+            margin-left: -7px;
+        }
+    }
+
+    .swiper-box {
+        padding: 0 50px;
+
+        > .swiper-container {
+            padding: 20px;
+        }
+    }
+
+    .swiper-slide {
+        padding: 0 15px;
+
+        > button {
+            border: none;
+            background: none;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+
+            div.strategy-type1 h1.title {
+                font-size: 14px;
+            }
+
+            .dev-icon {
+                display: none;
+            }
+        }
+
+        &:hover {
+            padding: 0 10px;
+            margin-top: -5px;
+            margin-bottom: -5px;
+
+            > button {
+                border: none;
+                box-shadow: 0 0 0px 5px @sunFlower;
+            }
+        }
+
+        &.selected {
+            padding: 0 0px;
+            margin-top: -10px;
+            margin-bottom: -10px;
+
+            > button {
+                border: none;
+                box-shadow: 0 0 0px 5px @sunFlower, 0 0 10px 7px @sunFlower;
+            }
+        }
+    }
+}

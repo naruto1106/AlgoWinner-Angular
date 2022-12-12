@@ -35,6 +35,13 @@
                     <div class="menu-title">Virtual Portfolio</div>
                 </a>
             </li>
+            <li ng-if="!vm.sHeaderService.hasJoeyOnly && vm.coreConfigService.General.ShowDirectTrade"
+                analytics-on="click" analytics-category="TopMenu" analytics-event="LiveTrade" agmc-analytics-timestamp>
+                <a href="#/livetrade" ng-class="{'selected': vm.sHeaderService.selectedMenu == 'livetrade'}" ng-click="vm.selectMenu('livetrade')">
+                    <div class="algoicon algoicons-trade3"></div>
+                    <div class="menu-title">Live Trade</div>
+                </a>
+            </li>
             <li ng-if="!vm.sHeaderService.hasJoeyOnly" class="momentum"
                 analytics-on="click" analytics-category="TopMenu" analytics-event="Backtester" agmc-analytics-timestamp>
                 <a href="#/backtester" ng-class="{'selected': vm.sHeaderService.selectedMenu == 'backtester'}" ng-click="vm.selectMenu('backtester')">

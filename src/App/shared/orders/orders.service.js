@@ -7,6 +7,7 @@
             var developerTpmsPath = '/mantpmsapi/DeveloperOrder/';
             var developerOmsPath = '/omsapi/DeveloperOrder/';
             var bracketOrderOmsPath = '/omsapi/DeveloperBracketOrder/';
+            var tigerPath = '/tigerapi/v1/';
 
             // GET FUNCTION
             serviceObj.GetDeveloperAllOrdersForTradeReview = coreServerCommunicationService.genPostFunction(developerTpmsPath + "GetOrdersForTradeReview");
@@ -47,7 +48,7 @@
                 return { portfolioId: args[0] };
             });
 
-            serviceObj.GetDeveloperOrder = coreServerCommunicationService.genGetFunctionWithNVar(developerTpmsPath + "GetOrder", function (args) {
+        serviceObj.GetDeveloperOrder = coreServerCommunicationService.genGetFunctionWithNVar(developerTpmsPath + "GetOrder", function (args) {
                 return { orderId: args[0] };
             });
 
@@ -58,6 +59,9 @@
             // POST FUNCTION
             serviceObj.SendDeveloperOrder = developerPostFunction('SendOrder');
             serviceObj.CancelDeveloperOrder = developerPostFunction('CancelOrder');            
+
+            serviceObj.SendLiveOrder = coreServerCommunicationService.genPostFunction(tigerPath + 'PlaceOrder');
+            serviceObj.CancelLiveOrder = coreServerCommunicationService.genPostFunction(tigerPath + 'CancelOrder');
 
             // OMS API
             function developerPostFunction(url) {

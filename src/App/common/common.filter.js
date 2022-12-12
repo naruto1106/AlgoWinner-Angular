@@ -30,6 +30,7 @@
             else if (code === "THB") return "฿";
             else if (code === "TRY") return "₺";
             else if (code === "ILS") return "₪";
+            else if (code === "CNH") return "¥";
             else if (code == null) {
                 return "";
             }

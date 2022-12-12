@@ -6,6 +6,7 @@ var dependencies = [
     "agmp.strategy",
     "agms.watchlist",
     "agmp.trade",
+    "agmp.livetrade",
     "agmp.exchangeRate",
     "agmp.chart",
     "agmp.faq",
@@ -302,6 +303,13 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                 title: "Account Management",
                 controller: "p.account.MainController",
                 templateUrl: "/App/pages/account/account.main.html"
+            })
+            .when("/livetrade", {
+                title: "Live Trade",
+                controller: "p.livetrade.OrdersController",
+                templateUrl: "/App/pages/livetrade/livetrade.orders.html",
+                reloadOnSearch: false,
+                resolve: needsNotificationSettings
             })
             .when("/orderstrades", {
                 title: "Trade",

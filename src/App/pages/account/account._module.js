@@ -4,5 +4,7 @@
     'agms.subscription',
     'agms.misc',
     'agms.product',
-    'agms.account'
+    'agms.account',
+    'agms.liveconnect',
+    'firebase'
 ]);

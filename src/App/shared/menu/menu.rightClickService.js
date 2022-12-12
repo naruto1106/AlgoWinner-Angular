@@ -1,11 +1,13 @@
 ﻿agmNgModuleWrapper('agms.menu')
-    .defineService('sMenuRightClickService', ['sTradingQuickTradeService', 'commonLocationHistoryService', "sHeaderService"],
+    .defineService('sMenuRightClickService', ['sTradingQuickTradeService', 'commonLocationHistoryService', "sHeaderService", "orderPadInitService", 'sLiveConnectService'],
     function (serviceObj, dep, tool) {
 
         var coreNotificationService = dep.coreNotificationService,
             sTradingQuickTradeService = dep.sTradingQuickTradeService,
             commonLocationHistoryService = dep.commonLocationHistoryService,
-            sHeaderService = dep.sHeaderService;
+            sHeaderService = dep.sHeaderService,
+            orderPadInitService = dep.orderPadInitService,
+            sLiveConnectService = dep.sLiveConnectService;
 
         function addToPriceAlert(item) {
             if (!item.PriceAlerts) {
@@ -111,7 +113,57 @@
                             });
                         }
                     }
-                }
+                },
+                // {
+                //     label: "Live Buy",
+                //     action: function (productContainer) {
+                //         if (isEodTradeVenue(productContainer.ProductModel.TradeVenueLoc)) {
+                //             coreNotificationService.notifyError("Not Supported", "Trading is not supported for this product");
+                //         } else {
+                //             sLiveConnectService.getTigerAccountCode().then(function (res) {
+                //                 res.on('value', function (obj) {
+                //                     var snap = obj.val();
+                //                     var firstKey = Object.keys(snap)[0];
+
+                //                     tool.openModalByDefinition('s.orders.PadLivePopupController', {
+                //                         accountId: snap[firstKey],
+                //                         beforeOpenCallback: function () {
+                //                             orderPadInitService.setLiveOrder('Buy', productContainer.ProductModel);
+                //                         }
+                //                     });
+
+                //                     res.off('value'); // Unsubscrible the event if possible
+                //                     console.log('Unsubscribed from Firebase');
+                //                 });
+                //             });
+                //         }
+                //     }
+                // },
+                // {
+                //     label: "Live Sell",
+                //     action: function (productContainer) {
+                //         if (isEodTradeVenue(productContainer.ProductModel.TradeVenueLoc)) {
+                //             coreNotificationService.notifyError("Not Supported", "Trading is not supported for this product");
+                //         } else {
+                //             sLiveConnectService.getTigerAccountCode().then(function (res) {
+                //                 res.on('value', function (obj) {
+                //                     var snap = obj.val();
+                //                     var firstKey = Object.keys(snap)[0];
+
+                //                     tool.openModalByDefinition('s.orders.PadLivePopupController', {
+                //                         accountId: snap[firstKey],
+                //                         beforeOpenCallback: function () {
+                //                             orderPadInitService.setLiveOrder('Sell', productContainer.ProductModel);
+                //                         }
+                //                     });
+
+                //                     res.off('value'); // Unsubscrible the event if possible
+                //                     console.log('Unsubscribed from Firebase');
+                //                 });
+                //             });
+                //         }
+                //     }
+                // },
             ];
 
             if (hasWatchlist) {

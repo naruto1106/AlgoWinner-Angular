@@ -2,5 +2,6 @@
     'agm.common',
     'agms.trading',
     'agmp.dashboard',
-    "agms.header"
+    "agms.header",
+    "agms.liveconnect"
 ]);

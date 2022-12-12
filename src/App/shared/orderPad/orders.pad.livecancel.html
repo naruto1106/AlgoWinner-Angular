@@ -1,0 +1,78 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="vm.uibDismissPanel()">&times;</button>
+    <h4 class="modal-title">Cancel Order</h4>
+</div>
+<div class="agm-component-orderpad modal-body modal-body-orderpad" tabindex="0" id="orderPad">
+    <div class="row-md-3">
+        <div class="col-md-2 left-div order-selection rel">
+            <div class="p-50px text-center" ng-show="vm.isSubmitting">
+                <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
+            </div>
+            <form name="orderpad" ng-show="!vm.isSubmitting">
+                <section class="cancel-box">
+                    <div class="gray-text text-center bigger">
+                        ORDER TO CANCEL
+                    </div>
+                    <div>
+                        <table class="table-large m-bottom-10px m-top-10px">
+                            <tr>
+                                <td><strong>Order ID</strong></td>
+                                <td>{{vm.order.id}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Symbol</strong></td>
+                                <td>{{vm.order.product}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Order Price</strong></td>
+                                <td>{{vm.order.currency | currencySymbol}}{{vm.order.OrderPrice}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quantity</strong></td>
+                                <td>{{vm.order.dealSize}} Units </td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Direction</strong></td>
+                                <td>{{vm.order.OriginalAction}}</td>
+                                <td></td>
+                            </tr>
+                            <!--<tr>
+                                <td><strong>Intention</strong></td>
+                                <td>{{vm.order.Intention}}</td>
+                                <td></td>
+                            </tr>-->
+                            <tr>
+                                <td><strong>Order Type</strong></td>
+                                <td>{{vm.order.type}}</td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>CreatedTime</strong></td>
+                                <td>{{vm.order.orderTime | dateLong}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Latest Status</strong></td>
+                                <td>{{vm.order.orderStatus}}</td>
+                                <td></td>
+                            </tr>
+                        </table>                        
+                    </div>
+                    <div class="clearfix m-bottom-30px"></div>
+                </section>
+                <div class="submit-container m-top-10px separator-top p-top-10px">
+                    <p class="f-16px">Click Confirm to proceed with 'order cancellation' or cancel to go back to previous menu.</p>
+                    <button class="filled-blue m-bottom-10px pull-right m-right-10px" ng-click="vm.submit()">CONFIRM</button>
+                    <button class="hollow-blue m-bottom-10px pull-right m-right-10px" ng-click="vm.uibDismissPanel()">CANCEL</button>
+                </div>
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

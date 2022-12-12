@@ -1,11 +1,12 @@
 ﻿agmNgModuleWrapper('agms.auth')
     .defineService('sAuthService',
-    ['coreApiServerAddress', 'commonFormUrlEncoderConfigFactory', 'coreDataStorageService'],
+    ['coreApiServerAddress', 'commonFormUrlEncoderConfigFactory', 'coreDataStorageService', 'coreServerCommunicationService'],
     function (serviceObj, dep, tool) {
         var $http = dep.$http,
             coreApiServerAddress = dep.coreApiServerAddress,
             commonFormUrlEncoderConfigFactory = dep.commonFormUrlEncoderConfigFactory,
-            coreDataStorageService = dep.coreDataStorageService;
+            coreDataStorageService = dep.coreDataStorageService,
+            coreServerCommunicationService = dep.coreServerCommunicationService;
 
         function doLogin(request) {
             return $http.post(coreApiServerAddress + '/identity/connect/token', request, commonFormUrlEncoderConfigFactory);
@@ -50,6 +51,8 @@
             Logout: logout,
             CheckLoggedIn: checkLoggedIn,
             RefreshToken: refreshToken,
+            GetTigerFirebaseToken: coreServerCommunicationService.genPostFunction("/identityapi/Authentication/CreateTigerStockApiToken"),
+            CreateManualFollowToken: coreServerCommunicationService.genGetFunctionWithNVar("/identityapi/Authentication/CreateManualFollowToken"),
             AuthenticateWithToken: authenticateWithToken
         });
     });

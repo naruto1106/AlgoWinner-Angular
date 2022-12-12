@@ -142,6 +142,42 @@
             return thisOrder;
         }
 
+        function setLiveOrder(action, product) {
+            thisOrder = {
+                CreatedTime: 0,
+                StrategyId: null,
+                Product: product,
+                ProductId: product.ProductId,
+                Action: action,
+                OrderType: "Limit",
+                Quantity: null,
+                MaximumQuantity: 100,
+                Validity: "GTC",
+                TraderRemark: "",
+                LimitPrice: null,
+                StopPrice: null,
+                inputNominalQuantity: null,
+                quantityType: 'Lot',
+                HasBracketOrder: false,
+                HasAttachedTP: false,
+                HasAttachedSL: false,
+                PreviousOrderId: 0,
+                TakeProfitOrder: {
+                    ProductId: null,
+                    LimitPrice: null,
+                    OrderType: "Limit",
+                    Validity: "GTC"
+                },
+                StopLossOrder: {
+                    ProductId: null,
+                    StopPrice: null,
+                    OrderType: "Stop",
+                    Validity: "GTC"
+                },
+                ChildOrderType: "Normal"
+            };
+        }
+
         tool.setServiceObjectProperties({
             getDefaultOrder: getDefaultOrder,
             setDefaultFollowOrder: setDefaultFollowOrder,
@@ -150,6 +186,7 @@
             decreasePosition: decreasePosition,
             createOrderBasedOnDashboardPost: createOrderBasedOnDashboardPost,
             createOrderBasedOnWatchlistProduct: createOrderBasedOnWatchlistProduct,
-            getOrder: getOrder
+            getOrder: getOrder,
+            setLiveOrder: setLiveOrder
         });
     });
