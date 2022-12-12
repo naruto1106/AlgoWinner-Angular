@@ -3,6 +3,159 @@
         <agmp-account-listing my-accounts="vm.myAccounts"
                               my-account-objects="vm.myAccountObjects"
                               view-real="true"></agmp-account-listing>
-
+        <div ng-if="vm.coreConfigService.General.ShowDirectTrade" class="m-top-10px">
+            <div ng-if="!vm.realTigerAccounts && !vm.realFutuAccounts">
+                Currently you do not have any live accounts.
+                <div>
+                    <button class="filled-blue m-top-10px" href="" ng-click="vm.createLiveAccount()" style="">
+                        CREATE LIVE ACCOUNT
+                    </button>
+                </div>
+            </div>
+            <div ng-show="vm.realTigerAccounts">
+                <div ng-repeat="account in vm.realTigerAccounts track by account.accountCode">
+                    <div class="row-md-19 border white-box m-top-10px">
+                        <div class="col-md-2">
+                            <div class="va-mid m-top-5px">
+                                <agms-account-brokerage-selector selected-broker="account.type"
+                                                                 account-type="account.accountType"
+                                                                 class="pull-left cross-border w-60px h-60px"></agms-account-brokerage-selector>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class=" m-left-20px pull-left as-table h-60px w-200px m-top-5px">
+                                <div class="as-table-cell va-mid">
+                                    <h4 class="no-margin">{{account.type}}</h4>
+                                    <h5 class="no-margin lh-25px">({{account.accountCode}})</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pull-left as-table h-60px w-120px m-top-5px">
+                                <div class="as-table-cell va-mid">
+                                    <h5 class="no-margin lh-25px gray-text">Account Type</h5>
+                                    <div>
+                                        <h5 class="no-margin lh-25px">{{account.accountType}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pull-left h-70px separator-left m-right-10px">
+                            </div>
+                            <div class="pull-left h-60px w-40px" ng-init="donutData=vm.generateDonutValues(account)">
+                                <agmc-rainbow-donut class="m-top-15px" data="donutData" colors="['#bbc','#049']" width="30" height="30" thickness="30"></agmc-rainbow-donut>
+                            </div>
+                            <div class="pull-right h-40px m-top-10px">
+                                <table class="table-small table-transparent">
+                                    <tr>
+                                        <td class="gray-text">
+                                            <agmc-bullet color="'transparent'" diameter="6"></agmc-bullet>{{account.info.fund | customCurrencyOrDash:account.currency:2}}
+                                        </td>
+                                        <td>
+                                            ACCOUNT CAPITAL
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="gray-text">
+                                            <agmc-bullet color="'#049'" diameter=" 6"></agmc-bullet>{{account.info.available | customCurrencyOrDash:account.currency:2}}
+                                        </td>
+                                        <td>
+                                            AVAILABLE CAPITAL
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pull-right h-60px">
+                                <a class="account-detail-button" ng-class="{active:vm.getAccountObject(account).showTabs==2}" ng-click="vm.deleteLiveAccount(account)">
+                                    <h4 class="glyphicon glyphicon-trash"></h4>
+                                    <span>DELETE</span>
+                                </a>
+                            </div>
+                            <div class="pull-right h-70px separator-right m-right-10px">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="vm.realFutuAccounts">
+                <div ng-repeat="account in vm.realFutuAccounts">
+                    <div class="row-md-19 border white-box m-top-10px">
+                        <div class="col-md-2">
+                            <div class="va-mid m-top-5px">
+                                <agms-account-brokerage-selector selected-broker="account.type"
+                                                                 account-type="account.accountType"
+                                                                 class="pull-left cross-border w-60px h-60px"></agms-account-brokerage-selector>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class=" m-left-20px pull-left as-table h-60px w-200px m-top-5px">
+                                <div class="as-table-cell va-mid">
+                                    <h4 class="no-margin">{{account.type}}</h4>
+                                    <h5 class="no-margin lh-25px">({{account.accountCode}})</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pull-left as-table h-60px w-120px m-top-5px">
+                                <div class="as-table-cell va-mid">
+                                    <h5 class="no-margin lh-25px gray-text">Account Type</h5>
+                                    <div>
+                                        <h5 class="no-margin lh-25px">{{account.accountType}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pull-left h-70px separator-left m-right-10px">
+                            </div>
+                            <div class="pull-left h-60px w-40px" ng-init="donutData=vm.generateDonutValues(account)">
+                                <agmc-rainbow-donut class="m-top-15px" data="donutData" colors="['#bbc','#049']" width="30" height="30" thickness="30"></agmc-rainbow-donut>
+                            </div>
+                            <div class="pull-right h-40px m-top-10px">
+                                <table class="table-small table-transparent">
+                                    <tr>
+                                        <td class="gray-text">
+                                            <agmc-bullet color="'transparent'" diameter="6"></agmc-bullet>{{account.info.fund | customCurrencyOrDash:account.currency:2}}
+                                        </td>
+                                        <td>
+                                            ACCOUNT CAPITAL
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="gray-text">
+                                            <agmc-bullet color="'#049'" diameter=" 6"></agmc-bullet>{{account.info.available | customCurrencyOrDash:account.currency:2}}
+                                        </td>
+                                        <td>
+                                            AVAILABLE CAPITAL
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pull-right h-60px">
+                                <a class="account-detail-button" ng-class="{active:vm.getAccountObject(account).showTabs==2}" ng-click="vm.deleteLiveAccount(account)">
+                                    <h4 class="glyphicon glyphicon-trash"></h4>
+                                    <span>DELETE</span>
+                                </a>
+                            </div>
+                            <div class="pull-right h-70px separator-right m-right-10px">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </div>
