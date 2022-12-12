@@ -53,7 +53,8 @@
         <span class="algoicon  algoicons-download"></span>
     </button>
 
-    <button ng-click="vm.drawAlgoTrendline(vm.filterDescription.primaryProduct.Symbol)" ng-disabled="!vm.filterDescription.primaryProduct || vm.filterDescription.myProducts.length <= 0"
+    <button ng-if="vm.coreConfigService.General.ShowTrendDrawing"
+        ng-click="vm.drawAlgoTrendline(vm.filterDescription.primaryProduct.Symbol)" ng-disabled="!vm.filterDescription.primaryProduct || vm.filterDescription.myProducts.length <= 0"
         class="btn" uib-tooltip="Draw Algo Trendline" tooltip-placement="bottom-right">
     <span class="algoicon  algoicons-meter"></span>
     </button>

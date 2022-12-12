@@ -168,8 +168,7 @@
                     <div class="menu-title">News</div>
                 </a>
             </li>
-            <li 
-                analytics-on="click" analytics-category="TopMenu" analytics-event="Charts" agmc-analytics-timestamp>
+            <li ng-if="vm.coreConfigService.General.ShowTradeIdea" analytics-on="click" analytics-category="TopMenu" analytics-event="TradeIdea" agmc-analytics-timestamp>
                 <a href="#/tradeMain" target="_blank">
                     <div class="algoicon algoicons-chart"></div>
                     <div class="menu-title">Trade Idea</div>

@@ -7,6 +7,7 @@
                 sChartService = dep.sChartService,
                 sGuideItemManagerService = dep.sGuideItemManagerService,
                 pChartRenderingUtilsService = dep.pChartRenderingUtilsService;
+                coreConfigService = dep.coreConfigService;
             var filterDescription = pChartFilterDescriptionService;
 
             var isCommunityHidden = true;
@@ -50,6 +51,7 @@
                    });
 
             tool.setVmProperties({
+                coreConfigService: coreConfigService,
                 sorting: {
                     "Name": "none",
                     "Products": "none",
