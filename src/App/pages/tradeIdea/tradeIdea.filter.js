@@ -2,18 +2,29 @@ agmNgModuleWrapper('agmp.tradeIdea')
     .defineController('p.tradeIdea.FilterController', ['$scope'],
         function ($scope) {
             var vm = this;
+            $scope.colSelected=[];
+            $scope.tableData.forEach(element => {
+                $scope.colSelected.push({id:element.id});
+            });
             $scope.customTemplate = {};
             $scope.proprietaryFilter = {};
             $scope.universeFilter = {};
-            $scope.customTempText = { buttonDefaultText: 'Choose Template' };
-            $scope.proprietaryText = { buttonDefaultText: 'Choose Filter' };
-            $scope.universeText = { buttonDefaultText: 'Choose Universe' };
-            $scope.countryText = { buttonDefaultText: 'Choose Country' };
-            $scope.sectorText = { buttonDefaultText: 'Choose Sector' };
-            $scope.SelectedText = { dynamicButtonTextSuffix:'Selected'}
             $scope.eventsCallback = {
                 onItemSelect: function (item) {
-                    console.log("Item Got Selected: ", item);
+                    //console.log("Item Got Selected: ", item);
+                }
+            };
+            
+            $scope.displayCol = {
+                onItemSelect: function (item) {
+                    if(item){
+                        $scope.showColumns({id:item.id,isActive:true});
+                    }
+                },
+                onItemDeselect: function (item) {
+                    if(item) {
+                        $scope.showColumns({id:item.id,isActive:false});
+                    }
                 }
             };
             $scope.dropdownSetting = {
@@ -29,6 +40,11 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 showUncheckAll: false,
                 showCheckAll: false,
                 displayProp: 'name'
+            };
+            $scope.editColCheckbox = {
+                showUncheckAll: false,
+                showCheckAll: false,
+                displayProp: 'title'
             };
             $scope.data = {
                 Templates: [
@@ -120,5 +136,6 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     templateUrl: '/App/pages/tradeIdea/tradeIdea.filter.html'
                 };
             },
-            {
+            {   tableData:'<',
+                showColumns:'<'
             });

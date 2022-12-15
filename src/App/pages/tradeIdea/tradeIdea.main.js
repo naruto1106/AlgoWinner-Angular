@@ -4,6 +4,54 @@ agmNgModuleWrapper('agmp.tradeIdea')
             var vm = this;
             var myEl = angular.element(document.querySelector('body'));
             myEl.addClass('tradeIdeapageContent');
+            $scope.backTestProfit = 40
+            $scope.backTestCutLoss=80
+            $scope.getSelectionBarColor = function () {
+                return '#184376';
+            }
+            $scope.getPointerColor = function () {
+                return '#184376';
+            }
+            $scope.disTableCol = function (data) {
+               //console.log("Display Columns:",data);
+               $scope.tableColumns.forEach(element => {
+                       if(element.id == data.id) {
+                            element.isActive = data.isActive;
+                       }
+               });
+            }
+
+            $scope.slider = {
+                options: {
+                  floor: 0,
+                  ceil: 100,
+                }
+            };
+
+            $scope.tableData = [
+                {id:1,title:'Symbol',data:'PEPG'},
+                {id:2,title:'Name',data:'PepGen Inc.'},
+                {id:3,title:'Sector',data:'	Healthcare'},
+                {id:4,title:'Industry',data:'Biotechnology'},
+                {id:5,title:'Market Cap',data:'25.56M'},
+                {id:6,title:'Last Close',data:'10.90'},
+                {id:7,title:'Open',data:'9.22'},
+                {id:8,title:'Last',data:'10.93'},
+                {id:9,title:'Chg %',data:'110.91%'},
+            ]
+
+            $scope.tableColumns=[
+                {id:1,name:'Symbol',isActive:true,symbol:true},
+                {id:2,name:'Name',isActive:true,symbol:false},
+                {id:3,name:'Sector',isActive:true,symbol:false},
+                {id:4,name:'Industry',isActive:true,symbol:false},
+                {id:5,name:'Market Cap',isActive:true,symbol:false},
+                {id:6,name:'Last Close',isActive:true,symbol:false},
+                {id:7,name:'Open',isActive:true,symbol:false},
+                {id:8,name:'Last',isActive:true,symbol:false},
+                {id:9,name:'Chg %',isActive:true,symbol:false},
+            ]
+
             $scope.corSymbol =[
                 {id:1,shorName:'AA',value:'Alcoa Corporation'},
                 {id:2,shorName:'AAPL',value:'Apple Inc.'},
@@ -60,6 +108,9 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.normOBValueB={};
             $scope.majorPriceBrktPrd={};
             $scope.peakTroughType ={};
+            $scope.priceToMinValue=0;
+            $scope.priceToMaxValue=9;
+            $scope.fundOper ={};
             $scope.fundPeriod ={};
             $scope.fGMPeriod ={};
             $scope.fEGPeriod ={};
@@ -113,6 +164,11 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 Periods: [
                     { id: '1', name: 'Annual' },
                     { id: '2', name: 'Quartal' },
+                ],
+                operatorVal: [
+                    { id: 1, name: 'Below' },
+                    { id: 2, name: 'Greater' },
+                    { id: 3, name: 'Between ' },
                 ],
                 yearPeriods: [
                     { id: 1, name: '1Y' },

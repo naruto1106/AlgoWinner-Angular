@@ -1,9 +1,9 @@
 <div class="body_wrapper">
    <div class="tradeheader">
       <agmp-tradeidea-header></agmp-tradeidea-header>
-      <agmp-tradeidea-filter></agmp-tradeidea-filter>
+      <agmp-tradeidea-filter show-columns="vm.disTableCol" table-data="vm.tableData"></agmp-tradeidea-filter>
    </div>
-   <agmp-tradeidea-content></agmp-tradeidea-content>
+   <agmp-tradeidea-content table-data="vm.tableData"  show-colums="vm.tableColumns"></agmp-tradeidea-content>
    <!--Modal First Step-->
    <!-- <div class="modal fade common-modal analyst_modal" id="anylsis_modal" role="dialog">
       <div class="modal-dialog">
@@ -991,6 +991,22 @@
                      </div>
                      <div class="correlation_feilds">
                         <div class="universe_select">
+                           <h4 class="p300l">Operator</h4>
+                           <div class="price_select_outter d-flex justify-between">
+                              <div class="select-box">
+                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.operatorVal"
+                                    selected-model="vm.fundOper" extra-settings="vm.dropdownSetting"
+                                    translation-texts="{ buttonDefaultText: 'Choose Value'}"
+                                    ng-class="{'text-bold': vm.fundOper.id != undefined}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="universe_select">
+                           <h4 class="p300l">Value</h4>
+                           <input class="lockback_value" type="text"  name="" >
+                        </div>
+                        <div class="universe_select">
                            <h4 class="p300l">Period</h4>
                            <div class="price_select_outter d-flex justify-between">
                               <div class="select-box">
@@ -1005,15 +1021,20 @@
                               </div>
                            </div>
                         </div>
+                        <rzslider 
+                           rz-slider-model="vm.priceToMinValue"
+                           rz-slider-high="vm.priceToMaxValue"
+                           rz-slider-options="vm.slider.options">
+                        </rzslider>
                         <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
                            <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" value="" name="" placeholder="2">
+                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
                            </div>
                            <div class="d-flex align-center range_value">
                               <h5>-</h5>
                            </div>
                            <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" value="" name="" placeholder="8">
+                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
                            </div>
                         </div>
                      </div>
@@ -2795,9 +2816,17 @@
                </div>
                <div class="universe_select">
                   <h4 class="p300l">Take Profit (%)</h4>
+                     <rzslider
+                        rz-slider-model="vm.backTestProfit"
+                        rz-slider-options="{floor: 0, ceil: 100,getSelectionBarColor:vm.getSelectionBarColor, getPointerColor:vm.getPointerColor, showSelectionBar: true}">
+                     </rzslider>
                </div>
                <div class="universe_select">
                   <h4 class="p300l">Cut Loss</h4>
+                  <rzslider
+                        rz-slider-model="vm.backTestCutLoss"
+                        rz-slider-options="{floor: 0, ceil: 100,getSelectionBarColor:vm.getSelectionBarColor, getPointerColor:vm.getPointerColor, showSelectionBar: true}">
+                     </rzslider>
                </div>
             </div>
             <div class="universe_left d-flex align-end backtxt_inputs">

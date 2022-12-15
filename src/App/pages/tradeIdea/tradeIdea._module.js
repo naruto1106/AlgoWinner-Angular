@@ -1,4 +1,5 @@
 agmNgModuleWrapper('agmp.tradeIdea',
-['angularjs-dropdown-multiselect'
+['angularjs-dropdown-multiselect',
+   'rzModule'
 
    ]);
