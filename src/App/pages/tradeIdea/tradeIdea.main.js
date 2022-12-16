@@ -2,6 +2,8 @@ agmNgModuleWrapper('agmp.tradeIdea')
     .defineController('p.tradeIdea.MainController',['$scope'],
         function ($scope) {
             var vm = this;
+            $scope.yearListing=[];
+            $scope.normalizedAccumulation=[];
             var myEl = angular.element(document.querySelector('body'));
             myEl.addClass('tradeIdeapageContent');
             $scope.backTestProfit = 40
@@ -13,13 +15,20 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 return '#184376';
             }
             $scope.disTableCol = function (data) {
-               //console.log("Display Columns:",data);
                $scope.tableColumns.forEach(element => {
                        if(element.id == data.id) {
                             element.isActive = data.isActive;
                        }
                });
             }
+            var today = new Date();
+            var currentYear = today.getFullYear();
+            for(let i=1980;i<=currentYear;i++) {
+                 $scope.yearListing.push({id:i,name:i})
+            }
+            var quarter = Math.floor((today.getMonth() + 3) / 3);
+            $scope.priceToEarnQuar={id:quarter};
+            $scope.priceToEarnYear={id:currentYear};
 
             $scope.slider = {
                 options: {
@@ -28,6 +37,19 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 }
             };
 
+            for(let i=0;i<=100;i+=5) {
+                if(i==0) {
+                    $scope.normalizedAccumulation.push({id:0,name:'0 Percentile'})
+                } else {
+                        $scope.normalizedAccumulation.push({id:i,name:i+'thPercentile'})
+                }
+            }
+            $scope.quarterList=[
+                {id:1,name:'Quarter 1'},
+                {id:2,name:'Quarter 2'},
+                {id:3,name:'Quarter 3'},
+                {id:4,name:'Quarter 4'},
+            ]
             $scope.tableData = [
                 {id:1,title:'Symbol',data:'PEPG'},
                 {id:2,title:'Name',data:'PepGen Inc.'},
@@ -112,7 +134,9 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.priceToMaxValue=9;
             $scope.fundOper ={};
             $scope.fundPeriod ={};
-            $scope.fGMPeriod ={};
+            // $scope.priceToEarnYear={};
+            // $scope.priceToEarnQuar={};
+            // $scope.fGMPeriod ={};
             $scope.fEGPeriod ={};
             $scope.benchmarkRPValue =[];
             $scope.benchmarkRPPeriod ={};
@@ -204,13 +228,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '3', name: 'Low' },
                     { id: '4', name: 'Close' },
                 ],
-                normalizedAccumulation: [
-                    { id: '1', name: '0 Percentile' },
-                    { id: '2', name: '5th Percentile' },
-                    { id: '3', name: '10th Percentile' },
-                    { id: '4', name: '15th Percentile' },
-                    { id: '5', name: '20th Percentile' },
-                ],
+                
                 diverStrategyType: [
                     { id: '1', name: 'Bullish' },
                     { id: '2', name: 'Bearish' },

@@ -2,10 +2,11 @@ agmNgModuleWrapper('agmp.tradeIdea')
     .defineController('p.tradeIdea.FilterController', ['$scope'],
         function ($scope) {
             var vm = this;
-            $scope.colSelected=[];
+            $scope.colSelected=[]; 
             $scope.tableData.forEach(element => {
                 $scope.colSelected.push({id:element.id});
             });
+            
             $scope.customTemplate = {};
             $scope.proprietaryFilter = {};
             $scope.universeFilter = {};
