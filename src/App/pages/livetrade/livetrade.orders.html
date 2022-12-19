@@ -208,7 +208,7 @@
                                                 <tr ng-if="vm.selectedAccount.orders.length === 0" style="padding-right: 0">
                                                     <td colspan="6">No Active Order</td>
                                                 </tr>
-                                                <tr ng-repeat="order in vm.selectedAccount.orders | orderBy: '-id' track by order.id ">
+                                                <tr ng-repeat="order in vm.selectedAccount.orders | orderObjectBy: '-id' track by order.id ">
                                                     <td>
                                                         <agmp-simple-product product="order.algoProduct"></agmp-simple-product>
                                                     </td>
