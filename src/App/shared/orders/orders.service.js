@@ -7,7 +7,7 @@
             var developerTpmsPath = '/mantpmsapi/DeveloperOrder/';
             var developerOmsPath = '/omsapi/DeveloperOrder/';
             var bracketOrderOmsPath = '/omsapi/DeveloperBracketOrder/';
-            var tigerPath = '/tigerapi/v1/';
+            var tigerPath = '/tigerstockapi/v1/';
 
             // GET FUNCTION
             serviceObj.GetDeveloperAllOrdersForTradeReview = coreServerCommunicationService.genPostFunction(developerTpmsPath + "GetOrdersForTradeReview");

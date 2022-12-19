@@ -8,7 +8,7 @@
                 "/identityapi/", "/productapi/", "/chartapi/v1/", "/marketinfoapi/v1/", "/nsapi/", "/peapi/v2/", "/acadapi/v1/",
                 "/tgpsapi/v1/", "/tgpsapi/v2/", "/payapi/v1/", "/historicalapi/v1/", "/mkapi/v1/", "/communityapi/v1/", "/bktestapi/v1/",
                 "/marketdataapi/v1/", "/userinfoapi/", "/subapi/v1/", "/stgapi/v1/", "/oracleapi/v1/", "/fundamentalapi/v1/", "/newsapi/v1/",
-                "/corpapi/v1/", "/ratingapi/v1/", "/tigerapi/v1/", "/futuapi/v1/"];
+                "/corpapi/v1/", "/ratingapi/v1/", "/tigerstockapi/v1/", "/futustockapi/v1/"];
 
             function isApiServerEndpoint(url) {
                 return _.any(apiServerEndpoints, function (ep) {

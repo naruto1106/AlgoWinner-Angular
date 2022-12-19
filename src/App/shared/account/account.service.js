@@ -12,14 +12,14 @@
             GetBrokerageAccountsForStrategyLinking: coreServerCommunicationService.genPostFunction(path + 'GetBrokerageAccountsForStrategyLinkingStep'),
             GetBrokerageAccountsSelectionUsedForTrading: coreServerCommunicationService.genGetFunctionWithNVar(path + 'GetBrokerageAccountsSelectionUsedForTrading'),
             GetBrokerageAccountsDetail: coreServerCommunicationService.genGetFunctionWithNVar(path + 'GetBrokerageAccountsDetail'),
-            IsPublicKeyExists: coreServerCommunicationService.genGetFunctionWithNVar('/tigerapi/v1/IsPublicKeyExists'),
-            GenerateTigerPublicKey: coreServerCommunicationService.genPostFunction('/tigerapi/v1/GeneratePublicKey'),
-            UploadTigerBrokerCredentials: coreServerCommunicationService.genPostFunction('/tigerapi/v1/UploadBrokerCredentials'),
-            InitTigerClient: coreServerCommunicationService.genPostFunction('/tigerapi/v1/InitClient'),
-            DeleteAccount: coreServerCommunicationService.genPostFunction('/tigerapi/v1/DeleteAccount'),
-            UploadMoomooBrokerCredentials: coreServerCommunicationService.genPostFunction('/futuapi/v1/Account/UploadBrokerCredentials'),
-            SendMoomooConfirmationToken: coreServerCommunicationService.genPostFunction('/futuapi/v1/Account/SendConfirmationToken'),
-            SendTelnetCommandOnly: coreServerCommunicationService.genPostFunction('/futuapi/v1/Account/SendTelnetCommandOnly'),
-            GetConnectionStatus: coreServerCommunicationService.genGetFunctionWithNVar('/futuapi/v1/Account/GetConnectionStatus')
+            IsPublicKeyExists: coreServerCommunicationService.genGetFunctionWithNVar('/tigerstockapi/v1/IsPublicKeyExists'),
+            GenerateTigerPublicKey: coreServerCommunicationService.genPostFunction('/tigerstockapi/v1/GeneratePublicKey'),
+            UploadTigerBrokerCredentials: coreServerCommunicationService.genPostFunction('/tigerstockapi/v1/UploadBrokerCredentials'),
+            InitTigerClient: coreServerCommunicationService.genPostFunction('/tigerstockapi/v1/InitClient'),
+            DeleteAccount: coreServerCommunicationService.genPostFunction('/tigerstockapi/v1/DeleteAccount'),
+            UploadMoomooBrokerCredentials: coreServerCommunicationService.genPostFunction('/futustockapi/v1/Account/UploadBrokerCredentials'),
+            SendMoomooConfirmationToken: coreServerCommunicationService.genPostFunction('/futustockapi/v1/Account/SendConfirmationToken'),
+            SendTelnetCommandOnly: coreServerCommunicationService.genPostFunction('/futustockapi/v1/Account/SendTelnetCommandOnly'),
+            GetConnectionStatus: coreServerCommunicationService.genGetFunctionWithNVar('/futustockapi/v1/Account/GetConnectionStatus')
         });
     });
