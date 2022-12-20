@@ -3,7 +3,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
         function ($scope) {
             var vm = this;
             $scope.colSelected=[]; 
-            $scope.tableData.forEach(element => {
+            $scope.tableColumns.forEach(element => {
                 $scope.colSelected.push({id:element.id});
             });
             
@@ -45,7 +45,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.editColCheckbox = {
                 showUncheckAll: false,
                 showCheckAll: false,
-                displayProp: 'title'
+                displayProp: 'name'
             };
             $scope.data = {
                 Templates: [
@@ -137,6 +137,6 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     templateUrl: '/App/pages/tradeIdea/tradeIdea.filter.html'
                 };
             },
-            {   tableData:'<',
+            {   tableColumns:'<',
                 showColumns:'<'
             });

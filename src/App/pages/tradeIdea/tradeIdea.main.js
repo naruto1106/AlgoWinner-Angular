@@ -60,7 +60,14 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 {id:7,title:'Open',data:'9.22'},
                 {id:8,title:'Last',data:'10.93'},
                 {id:9,title:'Chg %',data:'110.91%'},
-            ]
+            ] 
+
+            /* $scope.tableData = [
+                {id:1,Symbol:'Symbol',Name:'PEPG',Sector:'Healthcare',Industry:'Biotechnology',Market_Cap:'25.56M',Last_Close:'10.90',Open:'9.22',Last:'10.93',Chg:'110.91%'},
+                {id:2,Symbol:'Symbol',Name:'PEPG',Sector:'Healthcare',Industry:'Biotechnology',Market_Cap:'25.56M',Last_Close:'10.90',Open:'9.22',Last:'10.93',Chg:'110.91%'},
+            ] */
+
+            
 
             $scope.tableColumns=[
                 {id:1,name:'Symbol',isActive:true,symbol:true},
