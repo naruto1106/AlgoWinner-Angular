@@ -92,7 +92,7 @@
                         <a href="javascript:void(0)" class="edit_columns">
                             <img src="//am708403.blob.core.windows.net/images/tradeidea/icon3.svg" ng-click="vm.showColumns(1)">
                             <div class="select-box">
-                                <div ng-class="{'text-bold': vm.colSelected.length > 0 }" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.tableColumns"
+                                <div ng-class="{'text-bold': vm.colSelected.length > 0,'text-bold-not':vm.colSelected.length == 2}" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.tableColumns"
                                     selected-model="vm.colSelected" extra-settings="vm.editColCheckbox" events="vm.displayCol"
                                     translation-texts="{ buttonDefaultText: 'Edit Column',dynamicButtonTextSuffix:'Selected'}" checkboxes="true"></div>
                             </div>

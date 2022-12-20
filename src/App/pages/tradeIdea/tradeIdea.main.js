@@ -3,6 +3,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
         function ($scope) {
             var vm = this;
             $scope.yearListing=[];
+            $scope.tableColumns=[];
             $scope.normalizedAccumulation=[];
             var myEl = angular.element(document.querySelector('body'));
             myEl.addClass('tradeIdeapageContent');
@@ -11,6 +12,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.getSelectionBarColor = function () {
                 return '#184376';
             }
+            
             $scope.getPointerColor = function () {
                 return '#184376';
             }
@@ -50,37 +52,21 @@ agmNgModuleWrapper('agmp.tradeIdea')
                 {id:3,name:'Quarter 3'},
                 {id:4,name:'Quarter 4'},
             ]
-            $scope.tableData = [
-                {id:1,title:'Symbol',data:'PEPG'},
-                {id:2,title:'Name',data:'PepGen Inc.'},
-                {id:3,title:'Sector',data:'	Healthcare'},
-                {id:4,title:'Industry',data:'Biotechnology'},
-                {id:5,title:'Market Cap',data:'25.56M'},
-                {id:6,title:'Last Close',data:'10.90'},
-                {id:7,title:'Open',data:'9.22'},
-                {id:8,title:'Last',data:'10.93'},
-                {id:9,title:'Chg %',data:'110.91%'},
-            ] 
 
-            /* $scope.tableData = [
+            $scope.tableData = [
                 {id:1,Symbol:'Symbol',Name:'PEPG',Sector:'Healthcare',Industry:'Biotechnology',Market_Cap:'25.56M',Last_Close:'10.90',Open:'9.22',Last:'10.93',Chg:'110.91%'},
                 {id:2,Symbol:'Symbol',Name:'PEPG',Sector:'Healthcare',Industry:'Biotechnology',Market_Cap:'25.56M',Last_Close:'10.90',Open:'9.22',Last:'10.93',Chg:'110.91%'},
-            ] */
-
-            
-
-            $scope.tableColumns=[
-                {id:1,name:'Symbol',isActive:true,symbol:true},
-                {id:2,name:'Name',isActive:true,symbol:false},
-                {id:3,name:'Sector',isActive:true,symbol:false},
-                {id:4,name:'Industry',isActive:true,symbol:false},
-                {id:5,name:'Market Cap',isActive:true,symbol:false},
-                {id:6,name:'Last Close',isActive:true,symbol:false},
-                {id:7,name:'Open',isActive:true,symbol:false},
-                {id:8,name:'Last',isActive:true,symbol:false},
-                {id:9,name:'Chg %',isActive:true,symbol:false},
             ]
-
+            
+            if($scope.tableData.length>0) {
+                let x =  Object.keys($scope.tableData[0])
+                x.forEach((element,index)=>{
+                    if(element!='id') {
+                        $scope.tableColumns.push({id:index,name:element,isActive:true, disabled: true })
+                    }
+                })
+            }
+           
             $scope.corSymbol =[
                 {id:1,shorName:'AA',value:'Alcoa Corporation'},
                 {id:2,shorName:'AAPL',value:'Apple Inc.'},
@@ -141,9 +127,6 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.priceToMaxValue=9;
             $scope.fundOper ={};
             $scope.fundPeriod ={};
-            // $scope.priceToEarnYear={};
-            // $scope.priceToEarnQuar={};
-            // $scope.fGMPeriod ={};
             $scope.fEGPeriod ={};
             $scope.benchmarkRPValue =[];
             $scope.benchmarkRPPeriod ={};
@@ -194,7 +177,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.data = {
                 Periods: [
                     { id: '1', name: 'Annual' },
-                    { id: '2', name: 'Quartal' },
+                    { id: '2', name: 'Quarter' },
                 ],
                 operatorVal: [
                     { id: 1, name: 'Below' },

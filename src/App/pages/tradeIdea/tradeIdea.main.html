@@ -4,124 +4,6 @@
       <agmp-tradeidea-filter show-columns="vm.disTableCol" table-columns="vm.tableColumns"></agmp-tradeidea-filter>
    </div>
    <agmp-tradeidea-content table-data="vm.tableData"  show-colums="vm.tableColumns"></agmp-tradeidea-content>
-   <!--Modal First Step-->
-   <!-- <div class="modal fade common-modal analyst_modal" id="anylsis_modal" role="dialog">
-      <div class="modal-dialog">
-         <div class="">
-            <div class="moddal_heading_outter">
-               <h2 class="modal_heading">Analysis Filter</h2>
-               <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="summry_btns d-flex justify-between align-center">
-               <div class="summery_filer">
-                  <h3>Summary Filter: <span>2</span></h3>
-
-               </div>
-               <div class="modal_butns">
-                  <a href="#" class="border_btns">
-                     <img src="//am708403.blob.core.windows.net/images/tradeidea/bin.svg">
-                     Clear All
-                  </a>
-                  <a data-toggle="modal" data-target="#anylsis_modal2" class="filled_btn">
-                     <img src="//am708403.blob.core.windows.net/images/tradeidea/apply.svg">
-                     Apply
-                  </a>
-               </div>
-            </div>
-            <div class="modal_tabbing">
-               <div class="modal_tabs_outter">
-                  <button class="modal_tab active">Technical</button>
-                  <button class="modal_tab">Fundamental</button>
-                  <button class="modal_tab">Sentiment</button>
-                  <button class="modal_tab">Event</button>
-               </div>
-               <div class="accordian_outter">
-                  <div class="accordian_inner">
-                     <div class="accodian_outer_txt">
-                        Trend Analysis
-                     </div>
-                  </div>
-                  <div class="accordian_inner">
-                     <div class="accodian_outer_txt">
-                        Breakout
-
-                     </div>
-                  </div>
-                  <div class="accordian_inner">
-                     <div class="accodian_outer_txt">
-                        Momentum
-                     </div>
-                  </div>
-                  <div class="accordian_inner">
-                     <div class="accodian_outer_txt">
-                        Divergence
-                     </div>
-                  </div>
-                  <div class="accordian_inner">
-                     <div class="accodian_outer_txt">
-                        Consolidation
-                     </div>
-                  </div>
-                  <div class="accordian_inner">
-                     <div class="accodian_outer_txt">
-                        Trend Analysis
-                     </div>
-                  </div>
-                  <div class="accordian_inner active">
-                     <div class="accodian_outer_txt">
-                        Risk Measure
-                     </div>
-                     <div class="accordian_show">
-                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                           <div class="accordian_grid_inner">
-                              <div class="accordian_img_inner">
-                                 <img src="//am708403.blob.core.windows.net/images/tradeidea/correlation.png">
-                              </div>
-                              <div class="accorian_inner_txt">
-                                 <h4>Correlation</h4>
-                                 <h5 class="free_txt d-flex justify-between">Free <a href="#"><img
-                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a></h5>
-                              </div>
-                           </div>
-                           <div class="accordian_grid_inner">
-                              <div class="accordian_img_inner">
-                                 <img src="//am708403.blob.core.windows.net/images/tradeidea/sharpe_ratio.png">
-                              </div>
-                              <div class="accorian_inner_txt">
-                                 <h4>Sharpe Ratio</h4>
-                                 <h5 class="free_txt d-flex justify-between">Free <a href="#"><img
-                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a></h5>
-                              </div>
-                           </div>
-                           <div class="accordian_grid_inner">
-                              <div class="accordian_img_inner">
-                                 <img src="//am708403.blob.core.windows.net/images/tradeidea/filter.png">
-                              </div>
-                              <div class="accorian_inner_txt">
-                                 <h4>Filter 1</h4>
-                                 <h5 class="premium_txt d-flex justify-between">Premium <a href="#"><img
-                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a></h5>
-                              </div>
-                           </div>
-                           <div class="accordian_grid_inner">
-                              <div class="accordian_img_inner">
-                                 <img src="//am708403.blob.core.windows.net/images/tradeidea/filter2.png">
-                              </div>
-                              <div class="accorian_inner_txt">
-                                 <h4>Filter 2</h4>
-                                 <h5 class="premium_txt d-flex justify-between">Premium <a href="#"><img
-                                          src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a></h5>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div> -->
-
    <div class="modal fade common-modal analyst_modal analyst_modal2" id="analysis_modal" role="dialog">
       <div class="modal-dialog modal-lg">
          <div class="">
@@ -166,7 +48,7 @@
                      <uib-tabset>
                         <uib-tab heading="Technical" ng-click="vm.changeTab('technical')">
                            <!--Technical Tab Start-->
-                           <div class="accordian_outter panel-group" id="technical_tab">
+                           <div class="accordian_outter panel-group no-margin" id="technical_tab">
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#technical_tab" href="" data-target="#trend"
@@ -202,21 +84,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/technical-bar-pattern.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Bar Pattern</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a
-                                                      ng-click="vm.setTabFilter('technicalBarPattern')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                     </div>
                                  </div>
                               </div>
@@ -257,21 +124,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/relative-strength-to-benchmark.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Relative Strength to Benchmark</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium <a
-                                                      ng-click="vm.setTabFilter('technicalRelativeStrength')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -300,21 +152,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/price-trend.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Price Trend</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a
-                                                      ng-click="vm.setTabFilter('technicalPriceTrend')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -343,21 +180,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/RSI-trend.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>RSI Trend</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a
-                                                      ng-click="vm.setTabFilter('technicalRSITrend')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                     </div>
                                  </div>
                               </div>
@@ -423,21 +245,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/rate-of-price.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Rate of Price Change</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a
-                                                      ng-click="vm.setTabFilter('technicalRateOfPrice')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -493,21 +300,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/tech-correlation.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Correlation</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium <a
-                                                      ng-click="vm.setTabFilter('technicalCorrelation')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -560,20 +352,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img src="//am708403.blob.core.windows.net/images/tradeidea/RSI.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>RSI</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a
-                                                      ng-click="vm.setTabFilter('technicalRSI')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -602,21 +380,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/normalized-on-balance-volume.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Normalized On Balance Volume</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a
-                                                      ng-click="vm.setTabFilter('technicalNormalized')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                     </div>
                                  </div>
                               </div>
@@ -656,21 +419,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/peak-trough-breakout.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Peak-Trough Breakout</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium <a
-                                                      ng-click="vm.setTabFilter('technicalPeakTrough')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -694,7 +442,7 @@
                         <!--Technical Tab End-->
                         <uib-tab heading="Fundamental" ng-click="vm.changeTab('fundamental')">
                            <!--Fundamental Tab Start-->
-                           <div class="accordian_outter panel-group" id="fundamental_tab">
+                           <div class="accordian_outter panel-group no-margin" id="fundamental_tab">
                               <div class="accordian_inner panel panel-default">
                                  <div class="accodian_outer_txt panel-heading">
                                     <a data-toggle="collapse" data-parent="#fundamental_tab" href=""
@@ -733,22 +481,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/price-to-sales.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Price to Sales</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free<a
-                                                      ng-click="vm.setTabFilter('fundamentalPriceSales')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg">
-                                                      </a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -779,23 +511,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/price-to-book.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Price to Book</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free<a
-                                                      ng-click="vm.setTabFilter('fundamentalPriceToBook')">
-                                                      <img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg">
-                                                      </a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -826,23 +541,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/debt-to-Equity.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Debt to Equity</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free<a
-                                                      ng-click="vm.setTabFilter('fundamentalDebtToEquity')">
-                                                      <img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg">
-                                                      </a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -897,21 +595,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/net-margins.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Net Margins</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a
-                                                      ng-click="vm.setTabFilter('fundamentalNetMargins')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -941,22 +624,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/dividend-yield.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Dividend Yield</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free<a
-                                                      ng-click="vm.setTabFilter('fundamentalDividenYield')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg">
-                                                      </a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                     </div>
                                  </div>
                               </div>
@@ -996,21 +663,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/revenue-growth.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Revenue Growth</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a
-                                                      ng-click="vm.setTabFilter('fundamentalRevenueGrowth')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                     </div>
                                  </div>
                               </div>
@@ -1050,21 +702,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/benchmarking.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Relative Price to Earning Growth</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a
-                                                      ng-click="vm.setTabFilter('fundamentalRelativePriceEarGrowth')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -1093,21 +730,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/relative-price-to-sale.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Relative Price to Sales</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a
-                                                      ng-click="vm.setTabFilter('fundamentalRelativePriceToSales')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -1136,21 +758,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/relative-earning-growth.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Relative Earning Growth</h4>
-                                                <h5 class="free_txt d-flex justify-between">Premium<a
-                                                      ng-click="vm.setTabFilter('fundamentalRelativeEarningGrowth')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -1205,21 +812,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/marketCap.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Sector</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a
-                                                      ng-click="vm.setTabFilter('fundamentalSector')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                        <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                           <div class="accordian_grid_inner">
                                              <div class="accordian_img_inner">
@@ -1248,21 +840,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                          <div class="accordian_grid_inner">
-                                             <div class="accordian_img_inner">
-                                                <img
-                                                   src="//am708403.blob.core.windows.net/images/tradeidea/marketCap.svg">
-                                             </div>
-                                             <div class="accorian_inner_txt">
-                                                <h4>Index</h4>
-                                                <h5 class="free_txt d-flex justify-between">Free <a
-                                                      ng-click="vm.setTabFilter('fundamentalIndex')"><img
-                                                         src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                                </h5>
-                                             </div>
-                                          </div>
-                                       </div> -->
                                     </div>
                                  </div>
                               </div>
@@ -1299,21 +876,6 @@
                                     </div>
                                  </div>
                               </div>
-                              <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                 <div class="accordian_grid_inner">
-                                    <div class="accordian_img_inner">
-                                       <img
-                                          src="//am708403.blob.core.windows.net/images/tradeidea/news-based-price-trigger.svg">
-                                    </div>
-                                    <div class="accorian_inner_txt">
-                                       <h4>News based Price Trigger</h4>
-                                       <h5 class="free_txt d-flex justify-between">Premium<a
-                                             ng-click="vm.setTabFilter('sentimentNews')"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                       </h5>
-                                    </div>
-                                 </div>
-                              </div> -->
                               <div class="accordian_grid_outter d-flex justify-between flex-wrap">
                                  <div class="accordian_grid_inner">
                                     <div class="accordian_img_inner">
@@ -1341,20 +903,6 @@
                                     </div>
                                  </div>
                               </div>
-                              <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                 <div class="accordian_grid_inner">
-                                    <div class="accordian_img_inner">
-                                       <img src="//am708403.blob.core.windows.net/images/tradeidea/analyst-action.svg">
-                                    </div>
-                                    <div class="accorian_inner_txt">
-                                       <h4>Analyst Action</h4>
-                                       <h5 class="free_txt d-flex justify-between">Premium<a
-                                             ng-click="vm.setTabFilter('sentimentAnalystAction')"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                       </h5>
-                                    </div>
-                                 </div>
-                              </div> -->
                            </div>
                         </uib-tab>
                         <!--Sentiment Tab End-->
@@ -1387,20 +935,6 @@
                                     </div>
                                  </div>
                               </div>
-                              <!-- <div class="accordian_grid_outter d-flex justify-between flex-wrap">
-                                 <div class="accordian_grid_inner">
-                                    <div class="accordian_img_inner">
-                                       <img src="//am708403.blob.core.windows.net/images/tradeidea/unusual-gap.svg">
-                                    </div>
-                                    <div class="accorian_inner_txt">
-                                       <h4>Unusual Gap</h4>
-                                       <h5 class="free_txt d-flex justify-between">Premium<a
-                                             ng-click="vm.setTabFilter('eventUnusualGap')"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/plus.svg"></a>
-                                       </h5>
-                                    </div>
-                                 </div>
-                              </div> -->
                            </div>
                         </uib-tab>
                         <!--Event Tab End-->
@@ -1632,17 +1166,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -1684,22 +1207,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Period</h4>
                            <div class="price_select_outter d-flex justify-between">
@@ -1731,17 +1238,7 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
+                       
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -1783,26 +1280,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Value</h4>
-                           <input class="lockback_value" type="text"  name="" >
-                        </div> -->
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Period</h4>
                            <div class="price_select_outter d-flex justify-between">
@@ -1834,29 +1311,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -1896,22 +1350,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Period</h4>
                            <div class="price_select_outter d-flex justify-between">
@@ -1943,29 +1381,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2005,22 +1420,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2060,22 +1459,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Period</h4>
                            <div class="price_select_outter d-flex justify-between">
@@ -2107,29 +1490,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2169,22 +1529,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2224,22 +1568,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Period</h4>
                            <div class="price_select_outter d-flex justify-between">
@@ -2271,29 +1599,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2333,22 +1638,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Period</h4>
                            <div class="price_select_outter d-flex justify-between">
@@ -2380,29 +1669,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2442,22 +1708,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2497,22 +1747,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <rzslider 
-                           rz-slider-model="vm.priceToMinValue"
-                           rz-slider-high="vm.priceToMaxValue"
-                           rz-slider-options="vm.slider.options">
-                        </rzslider> -->
-                        <!-- <div class="popup_inputs_outter popup_inputs_2_outter look_back_outer d-flex justify-between">
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMinValue" name="" >
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <h5>-</h5>
-                           </div>
-                           <div class="d-flex align-center range_value">
-                              <input class="lockback_value" type="text" id="" ng-model="vm.priceToMaxValue" name="" >
-                           </div>
-                        </div> -->
                         <div class="universe_select look_back_outer">
                            <h4 class="p300l">Period</h4>
                            <div class="price_select_outter d-flex justify-between">
@@ -2544,29 +1778,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2736,29 +1947,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2830,29 +2018,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -2924,29 +2089,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -3018,29 +2160,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"
@@ -3112,29 +2231,6 @@
                               </div>
                            </div>
                         </div>
-                        <!-- <div class="universe_select">
-                           <h4 class="p300l">Calendar selection</h4>
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.yearListing"
-                                    selected-model="vm.priceToEarnYear" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose Year'}"
-                                    ng-class="{'text-bold': vm.priceToEarnYear.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="universe_select">
-                           <div class="price_select_outter d-flex justify-between">
-                              <div class="select-box">
-                                 <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.quarterList"
-                                    selected-model="vm.priceToEarnQuar" extra-settings="vm.dropdownSetting"
-                                    translation-texts="{ buttonDefaultText: 'Choose quarter'}"
-                                    ng-class="{'text-bold': vm.priceToEarnQuar.id != undefined}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                   <div class="modal_right_inner"

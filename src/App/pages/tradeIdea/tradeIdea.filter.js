@@ -2,6 +2,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
     .defineController('p.tradeIdea.FilterController', ['$scope'],
         function ($scope) {
             var vm = this;
+            // console.log("table columns:",$scope.tableColumns)
             $scope.colSelected=[]; 
             $scope.tableColumns.forEach(element => {
                 $scope.colSelected.push({id:element.id});
