@@ -56,10 +56,10 @@ li{
   margin-bottom: 4px;
   }
   .green_txt{
-    color:@sucess600;
+    color:@sucess600 !important;
   }
   .red_txt{
-    color:@danger600;
+    color:@danger600 !important;
   }
 ul{
   padding:0;margin:0;
@@ -272,6 +272,7 @@ header{
       background-position: right 9px top 14px !important;
       background-repeat: no-repeat !important;
       z-index: 0;
+      width: 100%;
     }
     ul.dropdown-menu.dropdown-menu-form {
       box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 10%);
@@ -280,8 +281,10 @@ header{
       border: 1px solid #E1E6EF;
       border-radius: 8px;
       top: 43px;
-      z-index: 1;
+      z-index: 9;
       width: auto;
+      max-height: 223px !important;
+      min-width: auto;
       
         li a.ng-binding {
           display: block;
@@ -1099,12 +1102,15 @@ td {
 .accordian_img_inner {
 
   border-radius: 8px;
-  text-align: center;
+  text-align: left;
 
 }
 .accordian_grid_inner {
-  width: 25%;
+  width: 50%;
   padding: 0 8px;
+  .accorian_inner_txt {
+    width: 50%;
+  }
 }
 .box_input {
   border: 1px solid #D0D5DD !important;
@@ -1550,6 +1556,27 @@ input{
 }
 
 }
+.edit_columns {
+  display: inline-block;
+  position: relative;
+ img {
+    position: absolute;
+    top: 10px;
+    z-index: 1;
+    left: 11px;
+}
+}
+
+
+.edit_columns {
+  .multiselect-parent {
+    button.dropdown-toggle.btn.btn-default {
+      border: 1px solid #436691 !important;
+      color: #184376 !important;
+      padding: 10px 30px 10px 36px !important;
+    }
+  }
+}
 
 
 
@@ -1577,6 +1604,9 @@ input{
 .align-center{
     align-items: center;
 }
+
+
+
 
 
 
@@ -1610,7 +1640,7 @@ input{
 }
 
 .padding-0  {
-  padding-left: 0px;
+  padding-left: 0px !important;
 }
 .multiselect-parent {
   width: 100%;
@@ -1667,3 +1697,18 @@ button.dropdown-toggle.ng-binding.btn.btn-default {
     }
   }
 }
+.select-box {
+  &.Operator_fields {
+    .multiselect-parent {
+      width: auto;
+  }
+  }
+}
+.ms-3 {
+  margin-left: 4px;
+}
+.panel-group {
+  &.no-margin {
+    margin-bottom: 0px;
+  }
+} 

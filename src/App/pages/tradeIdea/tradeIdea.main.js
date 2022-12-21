@@ -2,8 +2,71 @@ agmNgModuleWrapper('agmp.tradeIdea')
     .defineController('p.tradeIdea.MainController',['$scope'],
         function ($scope) {
             var vm = this;
+            $scope.yearListing=[];
+            $scope.tableColumns=[];
+            $scope.normalizedAccumulation=[];
             var myEl = angular.element(document.querySelector('body'));
             myEl.addClass('tradeIdeapageContent');
+            $scope.backTestProfit = 40
+            $scope.backTestCutLoss=80
+            $scope.getSelectionBarColor = function () {
+                return '#184376';
+            }
+            
+            $scope.getPointerColor = function () {
+                return '#184376';
+            }
+            $scope.disTableCol = function (data) {
+               $scope.tableColumns.forEach(element => {
+                       if(element.id == data.id) {
+                            element.isActive = data.isActive;
+                       }
+               });
+            }
+            var today = new Date();
+            var currentYear = today.getFullYear();
+            for(let i=1980;i<=currentYear;i++) {
+                 $scope.yearListing.push({id:i,name:i})
+            }
+            var quarter = Math.floor((today.getMonth() + 3) / 3);
+            $scope.priceToEarnQuar={id:quarter};
+            $scope.priceToEarnYear={id:currentYear};
+
+            $scope.slider = {
+                options: {
+                  floor: 0,
+                  ceil: 100,
+                }
+            };
+
+            for(let i=0;i<=100;i+=5) {
+                if(i==0) {
+                    $scope.normalizedAccumulation.push({id:0,name:'0 Percentile'})
+                } else {
+                        $scope.normalizedAccumulation.push({id:i,name:i+'thPercentile'})
+                }
+            }
+            $scope.quarterList=[
+                {id:1,name:'Quarter 1'},
+                {id:2,name:'Quarter 2'},
+                {id:3,name:'Quarter 3'},
+                {id:4,name:'Quarter 4'},
+            ]
+
+            $scope.tableData = [
+                {id:1,Symbol:'Symbol',Name:'PEPG',Sector:'Healthcare',Industry:'Biotechnology',Market_Cap:'25.56M',Last_Close:'10.90',Open:'9.22',Last:'10.93',Chg:'110.91%'},
+                {id:2,Symbol:'Symbol',Name:'PEPG',Sector:'Healthcare',Industry:'Biotechnology',Market_Cap:'25.56M',Last_Close:'10.90',Open:'9.22',Last:'10.93',Chg:'110.91%'},
+            ]
+            
+            if($scope.tableData.length>0) {
+                let x =  Object.keys($scope.tableData[0])
+                x.forEach((element,index)=>{
+                    if(element!='id') {
+                        $scope.tableColumns.push({id:index,name:element,isActive:true, disabled: true })
+                    }
+                })
+            }
+           
             $scope.corSymbol =[
                 {id:1,shorName:'AA',value:'Alcoa Corporation'},
                 {id:2,shorName:'AAPL',value:'Apple Inc.'},
@@ -60,8 +123,10 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.normOBValueB={};
             $scope.majorPriceBrktPrd={};
             $scope.peakTroughType ={};
+            $scope.priceToMinValue=0;
+            $scope.priceToMaxValue=9;
+            $scope.fundOper ={};
             $scope.fundPeriod ={};
-            $scope.fGMPeriod ={};
             $scope.fEGPeriod ={};
             $scope.benchmarkRPValue =[];
             $scope.benchmarkRPPeriod ={};
@@ -112,7 +177,12 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.data = {
                 Periods: [
                     { id: '1', name: 'Annual' },
-                    { id: '2', name: 'Quartal' },
+                    { id: '2', name: 'Quarter' },
+                ],
+                operatorVal: [
+                    { id: 1, name: 'Below' },
+                    { id: 2, name: 'Greater' },
+                    { id: 3, name: 'Between ' },
                 ],
                 yearPeriods: [
                     { id: 1, name: '1Y' },
@@ -148,13 +218,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: '3', name: 'Low' },
                     { id: '4', name: 'Close' },
                 ],
-                normalizedAccumulation: [
-                    { id: '1', name: '0 Percentile' },
-                    { id: '2', name: '5th Percentile' },
-                    { id: '3', name: '10th Percentile' },
-                    { id: '4', name: '15th Percentile' },
-                    { id: '5', name: '20th Percentile' },
-                ],
+                
                 diverStrategyType: [
                     { id: '1', name: 'Bullish' },
                     { id: '2', name: 'Bearish' },

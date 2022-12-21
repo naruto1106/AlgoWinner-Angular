@@ -19,7 +19,7 @@
                             <div  ng-class="{'text-bold': vm.customTemplate.id != undefined}"
                                 class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Templates"
                                 selected-model="vm.customTemplate" extra-settings="vm.dropdownSetting"
-                                translation-texts="vm.customTempText" events="vm.eventsCallback" >
+                                translation-texts="{ buttonDefaultText: 'Choose Template'}" events="vm.eventsCallback" >
                             </div>
                         </div>
                     </div>
@@ -30,8 +30,7 @@
                         </label>
                         <div class="select-box" ng-if="templateType == 'proprietary'">
                             <div class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.Filters"
-                                selected-model="vm.proprietaryFilter" extra-settings="vm.dropdownSetting"
-                                translation-texts="vm.proprietaryText" ng-class="{'text-bold': vm.proprietaryFilter.id != undefined}">
+                                selected-model="vm.proprietaryFilter" extra-settings="vm.dropdownSetting" translation-texts="{ buttonDefaultText: 'Choose Filter'}" ng-class="{'text-bold': vm.proprietaryFilter.id != undefined}">
                             </div>
                         </div>
                     </div>
@@ -51,7 +50,7 @@
                             <div class="select-box">
                                 <div ng-class="{'text-bold': vm.universeFilter.id != undefined}" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.uninverse"
                                     selected-model="vm.universeFilter" extra-settings="vm.dropdownSetting"
-                                    translation-texts="vm.universeText">
+                                    translation-texts="{ buttonDefaultText: 'Choose Universe'}" >
                                 </div>
                             </div>
                         </div>
@@ -60,7 +59,7 @@
                             <div class="select-box">
                                 <div ng-class="{'text-bold': vm.selectedCountry.id != undefined}" class="cst-dropdown-trade country-select-box" ng-dropdown-multiselect=""
                                     options="vm.data.countries" selected-model="vm.selectedCountry"
-                                    extra-settings="vm.dropdownSetting" translation-texts="vm.countryText">
+                                    extra-settings="vm.dropdownSetting" translation-texts="{ buttonDefaultText: 'Choose Country'}">
                                 </div>
                             </div>
                         </div>
@@ -69,7 +68,7 @@
                             <div class="select-box">
                                 <div ng-class="{'text-bold': vm.selectedSector.length > 0 }" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.sectors"
                                     selected-model="vm.selectedSector" extra-settings="vm.dropdownCheckbox"
-                                    translation-texts="vm.SelectedText" checkboxes="true"></div>
+                                    translation-texts="{ buttonDefaultText: 'Choose Sector',dynamicButtonTextSuffix:'Selected'}" checkboxes="true"></div>
                             </div>
                         </div>
                         <div class="universe_select" ng-if="vm.selectedSector.length > 0">
@@ -77,9 +76,9 @@
                             <div class="select-box">
                                 <div ng-class="{'text-bold': vm.selectedIndustry.length > 0 }" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.data.industries"
                                     selected-model="vm.selectedIndustry" extra-settings="vm.dropdownCheckbox"
-                                    checkboxes="true" translation-texts="vm.SelectedText"></div>
+                                    checkboxes="true" translation-texts="{ buttonDefaultText: 'Choose Industry',dynamicButtonTextSuffix:'Selected'}"></div>
                             </div>
-                        </div>
+                        </div>                                                                                                                     
                         <a data-toggle="modal" data-target="#analysis_modal" class="border_btns">
                             <img src="//am708403.blob.core.windows.net/images/tradeidea/icon1.svg">
                             Analysis Filter
@@ -90,9 +89,13 @@
                             <img src="//am708403.blob.core.windows.net/images/tradeidea/icon2.svg">
                             BackTest
                         </a>
-                        <a href="#" class="border_btns">
-                            <img src="//am708403.blob.core.windows.net/images/tradeidea/icon3.svg">
-                            Edit Column
+                        <a href="javascript:void(0)" class="edit_columns">
+                            <img src="//am708403.blob.core.windows.net/images/tradeidea/icon3.svg" ng-click="vm.showColumns(1)">
+                            <div class="select-box">
+                                <div ng-class="{'text-bold': vm.colSelected.length > 0,'text-bold-not':vm.colSelected.length == 2}" class="cst-dropdown-trade" ng-dropdown-multiselect="" options="vm.tableColumns"
+                                    selected-model="vm.colSelected" extra-settings="vm.editColCheckbox" events="vm.displayCol"
+                                    translation-texts="{ buttonDefaultText: 'Edit Column',dynamicButtonTextSuffix:'Selected'}" checkboxes="true"></div>
+                            </div>
                         </a>
                         <a href="#" class="border_btns">
                             <img src="//am708403.blob.core.windows.net/images/tradeidea/icon4.svg">

@@ -17,5 +17,6 @@ agmNgModuleWrapper('agmp.tradeIdea')
             };
         },
         {
-
+            tableData: '<',
+            showColums:'<'
         });

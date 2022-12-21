@@ -17,30 +17,16 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Symbol <img src="//am708403.blob.core.windows.net/images/tradeidea/bottom-arrow.svg"></th>
-                                <th>Name</th>
-                                <th>Sector</th>
-                                <th>Industry</th>
-                                <th>Market Cap</th>
-                                <th>Last Close</th>
-                                <th>Open</th>
-                                <th>Last</th>
-                                <th>Chg %</th>
-                                <th></th>
+                                <th ng-repeat="column in vm.showColums track by $index" ng-if="column.isActive == true">
+                                    {{column.name}}
+                                    <img src="//am708403.blob.core.windows.net/images/tradeidea/bottom-arrow.svg" ng-if="$index == 0">
+                                </th>
+                                <th ng-if="vm.showColums.length>0"></th>
                             </tr>
                         </thead>
                         <tbody>
-    
-                            <tr>
-                                <td>PEPG</td>
-                                <td>PepGen Inc.</td>
-                                <td>Healthcare</td>
-                                <td>Biotechnology</td>
-                                <td>25.56M</td>
-                                <td>10.90</td>
-                                <td>9.22</td>
-                                <td class="green_txt">10.93</td>
-                                <td class="red_txt">110.91%</td>
+                            <tr ng-if="vm.tableData && vm.tableData.length > 0" ng-repeat="value in vm.tableData track by $index">
+                                <td ng-repeat="column in vm.showColums" ng-if="column.isActive == true" ng-class="{'red_txt': column.name == 'Chg'}">{{value[column.name]}}</td>
                                 <td class="d-flex align-center icons_div">
                                     <a href="#" class="border_style table_icons"><img
                                             src="//am708403.blob.core.windows.net/images/tradeidea/star.svg"></a>
@@ -59,206 +45,8 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>PEPG</td>
-                                <td>PepGen Inc.</td>
-                                <td>Healthcare</td>
-                                <td>Biotechnology</td>
-                                <td>25.56M</td>
-                                <td>10.90</td>
-                                <td>9.22</td>
-                                <td class="green_txt">10.93</td>
-                                <td class="red_txt">110.91%</td>
-                                <td class="d-flex align-center icons_div">
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/star.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/bell.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/eye.svg"></a>
-                                    <div class="table_dots dropdown custom_dropdown">
-                                        <a class="dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/dots.svg"></a>
-                                        <ul class="dropdown_list dropdown-menu">
-                                            <li><a href="#">Go to Chart</a></li>
-                                            <li><a href="#">Consult Oracle</a></li>
-                                            <li><a href="#">Direct Trade</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>PEPG</td>
-                                <td>PepGen Inc.</td>
-                                <td>Healthcare</td>
-                                <td>Biotechnology</td>
-                                <td>25.56M</td>
-                                <td>10.90</td>
-                                <td>9.22</td>
-                                <td class="green_txt">10.93</td>
-                                <td class="red_txt">110.91%</td>
-                                <td class="d-flex align-center icons_div">
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/star.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/bell.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/eye.svg"></a>
-                                    <div class="table_dots dropdown custom_dropdown">
-                                        <a class="dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/dots.svg"></a>
-                                        <ul class="dropdown_list dropdown-menu">
-                                            <li><a href="#">Go to Chart</a></li>
-                                            <li><a href="#">Consult Oracle</a></li>
-                                            <li><a href="#">Direct Trade</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>PEPG</td>
-                                <td>PepGen Inc.</td>
-                                <td>Healthcare</td>
-                                <td>Biotechnology</td>
-                                <td>25.56M</td>
-                                <td>10.90</td>
-                                <td>9.22</td>
-                                <td class="green_txt">10.93</td>
-                                <td class="red_txt">110.91%</td>
-                                <td class="d-flex align-center icons_div">
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/star.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/bell.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/eye.svg"></a>
-                                    <div class="table_dots dropdown custom_dropdown">
-                                        <a class="dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/dots.svg"></a>
-                                        <ul class="dropdown_list dropdown-menu">
-                                            <li><a href="#">Go to Chart</a></li>
-                                            <li><a href="#">Consult Oracle</a></li>
-                                            <li><a href="#">Direct Trade</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>PEPG</td>
-                                <td>PepGen Inc.</td>
-                                <td>Healthcare</td>
-                                <td>Biotechnology</td>
-                                <td>25.56M</td>
-                                <td>10.90</td>
-                                <td>9.22</td>
-                                <td class="green_txt">10.93</td>
-                                <td class="red_txt">110.91%</td>
-                                <td class="d-flex align-center icons_div">
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/star.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/bell.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/eye.svg"></a>
-                                    <div class="table_dots dropdown custom_dropdown">
-                                        <a class="dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/dots.svg"></a>
-                                        <ul class="dropdown_list dropdown-menu">
-                                            <li><a href="#">Go to Chart</a></li>
-                                            <li><a href="#">Consult Oracle</a></li>
-                                            <li><a href="#">Direct Trade</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>PEPG</td>
-                                <td>PepGen Inc.</td>
-                                <td>Healthcare</td>
-                                <td>Biotechnology</td>
-                                <td>25.56M</td>
-                                <td>10.90</td>
-                                <td>9.22</td>
-                                <td class="green_txt">10.93</td>
-                                <td class="red_txt">110.91%</td>
-                                <td class="d-flex align-center icons_div">
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/star.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/bell.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/eye.svg"></a>
-                                    <div class="table_dots dropdown custom_dropdown">
-                                        <a class="dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/dots.svg"></a>
-                                        <ul class="dropdown_list dropdown-menu">
-                                            <li><a href="#">Go to Chart</a></li>
-                                            <li><a href="#">Consult Oracle</a></li>
-                                            <li><a href="#">Direct Trade</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>PEPG</td>
-                                <td>PepGen Inc.</td>
-                                <td>Healthcare</td>
-                                <td>Biotechnology</td>
-                                <td>25.56M</td>
-                                <td>10.90</td>
-                                <td>9.22</td>
-                                <td class="green_txt">10.93</td>
-                                <td class="red_txt">110.91%</td>
-                                <td class="d-flex align-center icons_div">
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/star.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/bell.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/eye.svg"></a>
-                                    <div class="table_dots dropdown custom_dropdown">
-                                        <a class="dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/dots.svg"></a>
-                                        <ul class="dropdown_list dropdown-menu">
-                                            <li><a href="#">Go to Chart</a></li>
-                                            <li><a href="#">Consult Oracle</a></li>
-                                            <li><a href="#">Direct Trade</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>PEPG</td>
-                                <td>PepGen Inc.</td>
-                                <td>Healthcare</td>
-                                <td>Biotechnology</td>
-                                <td>25.56M</td>
-                                <td>10.90</td>
-                                <td>9.22</td>
-                                <td class="green_txt">10.93</td>
-                                <td class="red_txt">110.91%</td>
-                                <td class="d-flex align-center icons_div">
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/star.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/bell.svg"></a>
-                                    <a href="#" class="border_style table_icons"><img
-                                            src="//am708403.blob.core.windows.net/images/tradeidea/eye.svg"></a>
-                                    <div class="table_dots dropdown custom_dropdown">
-                                        <a class="dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                                src="//am708403.blob.core.windows.net/images/tradeidea/dots.svg"></a>
-                                        <ul class="dropdown_list dropdown-menu">
-                                            <li><a href="#">Go to Chart</a></li>
-                                            <li><a href="#">Consult Oracle</a></li>
-                                            <li><a href="#">Direct Trade</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-    
                         </tbody>
                     </table>
-    
                 </div>
                 <div class="pagination_otter" ng-if="vm.viewType === 'table'">
                     <div class="pagination-inner d-flex flex-wrap justify-between align-center">
