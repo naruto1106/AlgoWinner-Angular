@@ -5,8 +5,8 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.yearListing=[];
             $scope.tableColumns=[];
             $scope.normalizedAccumulation=[];
-            var myEl = angular.element(document.querySelector('body'));
-            myEl.addClass('tradeIdeapageContent');
+            // var myEl = angular.element(document.querySelector('body'));
+            // myEl.addClass('tradeIdeapageContent');
             $scope.backTestProfit = 40
             $scope.backTestCutLoss=80
             $scope.getSelectionBarColor = function () {
