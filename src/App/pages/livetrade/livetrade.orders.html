@@ -164,7 +164,7 @@
                                                     <th></th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody ng-if="vm.selectedAccount.type =='tiger'">
                                                 <tr ng-if="vm.selectedAccount.positions.length === 0">
                                                     <td colspan="6">No Open Position</td>
                                                 </tr>
@@ -172,11 +172,35 @@
                                                     <td style="padding-right: 0">
                                                         <agmp-simple-product product="position.algoProduct"></agmp-simple-product>
                                                     </td>
+                                                    
                                                     <td class="text-right">{{position.direction === 'BUY' ? 'LONG' : 'SHORT'}}</td>
                                                     <td class="text-right">{{position.dealSize}}</td>
                                                     <td class="text-right"> {{position.openingPrice | correctTickSizeDecimalPlacesWithCurrency:position.algoProduct.Currency:position.algoProduct.TradeVenueLoc}}</td>
                                                     <td class="text-right" ng-class="position.unrealizedPNL >=0 ? ['green-profit'] : ['red-loss']">
                                                         {{position.unrealizedPNL | customCurrencyOrDash:position.algoProduct.Currency:2}}
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <button ng-click="vm.decreasePosition(position)"
+                                                                class="mini-filled-red close-button super-compact-button"
+                                                                analytics-on="click" analytics-category="Trade" analytics-event="ClosePosition" analytics-label="OpenPositions" agmc-analytics-timestamp>
+                                                            CLOSE
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody ng-if="vm.selectedAccount.type =='futu'">
+                                                <tr ng-if="vm.selectedAccount.positions.length === 0">
+                                                    <td colspan="6">No Open Position</td>
+                                                </tr>
+                                                <tr ng-repeat="position in vm.selectedAccount.positions">
+                                                    <td>
+                                                        <agmp-simple-product product="position.algoProduct"></agmp-simple-product>
+                                                    </td>                                                  
+                                                    <td class="text-right">{{position.CanSellQty < 1? "SHORT" : "LONG"}}</td>
+                                                    <td class="text-right">{{position.Qty}}</td>
+                                                    <td class="text-right"> {{position.Price | correctTickSizeDecimalPlacesWithCurrency:position.algoProduct.Currency:position.algoProduct.TradeVenueLoc}}</td>
+                                                    <td class="text-right" ng-class="position.UnrealizedPL >=0 ? ['green-profit'] : ['red-loss']">
+                                                        {{position.PlVal | customCurrencyOrDash:position.algoProduct.Currency:2}}
                                                     </td>
                                                     <td class="text-right">
                                                         <button ng-click="vm.decreasePosition(position)"

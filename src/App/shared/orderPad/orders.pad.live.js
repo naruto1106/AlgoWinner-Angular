@@ -8,7 +8,7 @@ agmNgModuleWrapper('agms.orders', [])
         'sProductService', "sOrdersBracketService", 
         'orderService', 'orderPadInitService', 
         'beforeOpenCallback', 'coreNotificationService', 'sOrdersPadHelperService', "sOrdersDetailService",
-        'orderProcessing', 'sUserService', 'commonItemUpdateService', "pMobileWebService", 'accountId'
+        'orderProcessing', 'sUserService', 'commonItemUpdateService', "pMobileWebService", 'accountId', 'brokerType'
     ],
     function (vm, dep, tool) {
         // --- DEPENDENCY RESOLVER
@@ -26,6 +26,8 @@ agmNgModuleWrapper('agms.orders', [])
             sOrdersDetailService = dep.sOrdersDetailService,
             sOrdersBracketService = dep.sOrdersBracketService,
             accountId = dep.accountId;
+            brokerType = dep.brokerType;
+            
 
         // --- LOCAL VAR DECLARATION
         var enterIntentions = ["New", "Increase"];
@@ -450,6 +452,7 @@ agmNgModuleWrapper('agms.orders', [])
                     Action: vm.order.Action,
                     OrderType: vm.order.OrderType,
                     Product: {
+                        ProductId : vm.order.ProductId,
                         AssetType: vm.order.Product.AssetType,
                         Symbol: vm.order.Product.Symbol,
                         Currency: vm.order.Product.Currency,
@@ -460,8 +463,9 @@ agmNgModuleWrapper('agms.orders', [])
                     LimitPrice: vm.order.LimitPrice,
                     StopPrice: vm.order.StopPrice
                 };
-
-                return orderService.SendLiveOrder(orderRequest)
+                let service = "SendLiveOrder";
+                if(vm.brokerType == 'futu') service = 'FutuSendLiveOrder'
+                return orderService[service](orderRequest)
                     .then(function (res) {
                         vm.order.OrderId = res.data.id;
                         coreNotificationService.notifySuccess("Send Order", "Your order has been successfully sent");
@@ -471,6 +475,7 @@ agmNgModuleWrapper('agms.orders', [])
                         });
                     }, function (res) {
                         if (res.status === 400) {
+                            console.log(JSON.stringify(res))
                             coreNotificationService.notifyError("Send Order", res.data);
                         } else {
                             coreNotificationService.notifyError("Send Order", "There was an error trying to approve this request. Please check your connection or try again later.");
@@ -536,6 +541,7 @@ agmNgModuleWrapper('agms.orders', [])
                 currentActiveOrder: null,
                 isActiveOrderPendingCancellation: isActiveOrderPendingCancellation,
                 orderTypes: ["Limit", "Market", "Stop"],
+                brokerType : brokerType,
                 transactionInfo: {
                     CapitalUsed: null,
                     Leverage: null,

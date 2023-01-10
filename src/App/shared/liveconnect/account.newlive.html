@@ -13,103 +13,143 @@
             Add New Broker
         </div>
         <div class="panel-body box">
-            <div ng-repeat="brokerageType in vm.brokerageTypes" class="new-account col-md-6 p-10px" ng-model="vm.selectedBroker" uib-btn-radio="brokerageType">
+            <div ng-repeat="brokerageType in vm.brokerageTypes" class="new-account col-md-6 p-10px"
+                ng-model="vm.selectedBroker" uib-btn-radio="brokerageType">
                 <div class="border white-box">
                     <div class="pull-right  p-10px">
                         <input type="radio" ng-model="vm.selectedBroker" ng-value="brokerageType" class="w-20px h-20px">
                     </div>
-                    <agms-account-brokerage-selector selected-broker="brokerageType"
-                                                     disable-watermark="true"
-                                                     class="w-50px h-50px m-right-10px pull-left"></agms-account-brokerage-selector>
+                    <agms-account-brokerage-selector selected-broker="brokerageType" disable-watermark="true"
+                        class="w-50px h-50px m-right-10px pull-left"></agms-account-brokerage-selector>
                     <h3 class="pull-left no-padding no-margin lh-50px">{{brokerageType}}</h3>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
         <div class="separator-top m-top-20px h-10px"></div>
-            <button class="pull-right filled-blue m-left-10px" ng-click="vm.setViewName('linkBroker')" type="button">NEXT</button>
+        <button class="pull-right filled-blue m-left-10px" ng-click="vm.setViewName('linkBroker')"
+            type="button">NEXT</button>
         <div class="clearfix"></div>
     </div>
     <form novalidate name="createLiveAccountForm" ng-show="!vm.isSubmitting">
         <div ng-if="vm.selectedBroker==='Tiger' && vm.currentViewName==='linkBroker'">
-            <agms-droid-helper-step-by-step-flow current-step-name="vm.currentStepName" last-step-name="vm.getProgressStepState()">
-                <agms-droid-helper-single-step title="Link Tiger Account" name="step1" show-navigator="false" class="p-20px">
-                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step by step guide below
+            <agms-droid-helper-step-by-step-flow current-step-name="vm.currentStepName"
+                last-step-name="vm.getProgressStepState()">
+                <agms-droid-helper-single-step title="Link Tiger Account" name="step1" show-navigator="false"
+                    class="p-20px">
+                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step
+                    by step guide below
                     <div class="instruction-border">
-                        1. Go to Tiger Developer Page by clicking this button. Once you logged-in, please go back to this page and click <strong>GO TO TIGER DEVELOPER PAGE</strong> button again. Then, return to this page and click <strong>NEXT</strong>
+                        1. Go to Tiger Developer Page by clicking this button. Once you logged-in, please go back to
+                        this page and click <strong>GO TO TIGER DEVELOPER PAGE</strong> button again. Then, return to
+                        this page and click <strong>NEXT</strong>
                         <div class="m-top-10px">
-                            <a class="btn btn-primary" target="_blank" href="https://www.tigersecurities.com/login?invite=QUANT&next=https://quant.itigerup.com/developer#developer">Go to Tiger Developer Page<span class="glyphicon glyphicon-new-window"></span></a>
+                            <a class="btn btn-primary" target="_blank"
+                                href="https://www.tigersecurities.com/login?invite=QUANT&next=https://quant.itigerup.com/developer#developer">Go
+                                to Tiger Developer Page<span class="glyphicon glyphicon-new-window"></span></a>
                         </div>
                     </div>
                     <div class="separator-top m-top-20px h-10px"></div>
-                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step2')" type="button">NEXT</button>
-                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setViewName('addBroker')" type="button">PREVIOUS</button>
+                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step2')"
+                        type="button">NEXT</button>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setViewName('addBroker')"
+                        type="button">PREVIOUS</button>
                     <div class="clearfix"></div>
                 </agms-droid-helper-single-step>
                 <agms-droid-helper-single-step title="API Agreement" name="step2" show-navigator="false" class="p-20px">
-                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step by step guide below
+                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step
+                    by step guide below
                     <div class="instruction-border">
                         2. Read the API Agreement, then click <strong>AGREE</strong> button
-                        <img class="img-step-content" src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/apiagremeent.png" />
+                        <img class="img-step-content"
+                            src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/apiagremeent.png" />
                     </div>
                     <div class="separator-top m-top-20px h-10px"></div>
-                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step3')" type="button">NEXT</button>
-                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step1')" type="button">PREVIOUS</button>
+                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step3')"
+                        type="button">NEXT</button>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step1')"
+                        type="button">PREVIOUS</button>
                     <div class="clearfix"></div>
                 </agms-droid-helper-single-step>
                 <agms-droid-helper-single-step title="Update Info" name="step3" show-navigator="false" class="p-20px">
-                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step by step guide below
+                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step
+                    by step guide below
                     <div class="instruction-border">
                         3. On Developer Information, click <strong>UPDATE</strong> button
-                        <img class="img-step-content" src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/updatedevinfo.png" />
+                        <img class="img-step-content"
+                            src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/updatedevinfo.png" />
                     </div>
                     <div class="separator-top m-top-20px h-10px"></div>
-                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step4')" type="button">NEXT</button>
-                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step2')" type="button">PREVIOUS</button>
+                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step4')"
+                        type="button">NEXT</button>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step2')"
+                        type="button">PREVIOUS</button>
                     <div class="clearfix"></div>
                 </agms-droid-helper-single-step>
                 <agms-droid-helper-single-step title="Generate Key" name="step4" show-navigator="false" class="p-20px">
-                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step by step guide below
+                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step
+                    by step guide below
                     <div class="instruction-border">
-                        4. Click on <strong>Generate Public Key</strong> button, then copy the randomly generated string into the Public Key form on Developer Information. There is no need to remove the extra line and spaces
+                        4. Click on <strong>Generate Public Key</strong> button, then copy the randomly generated string
+                        into the Public Key form on Developer Information. There is no need to remove the extra line and
+                        spaces
                         <div class="m-top-10px">
-                            <button class="filled-blue" type="button" ng-click="vm.generatePublicKey()">Generate Public Key</button>
+                            <button class="filled-blue" type="button" ng-click="vm.generatePublicKey()">Generate Public
+                                Key</button>
                         </div>
                         <div class="m-top-10px">
                             <textarea ng-model="vm.tigerPublicKey" rows="10" cols="64" class="key-area"></textarea>
-                            <button class="filled-blue" type="button" ng-click="vm.copyKey()">Copy <span class="glyphicon glyphicon-copy"></span></button>
+                            <button class="filled-blue" type="button" ng-click="vm.copyKey()">Copy <span
+                                    class="glyphicon glyphicon-copy"></span></button>
                         </div>
-                        <img class="img-step-content" src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/pastekey.png" />
+                        <img class="img-step-content"
+                            src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/pastekey.png" />
                     </div>
                     <div class="separator-top m-top-20px h-10px"></div>
-                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step5')" type="button">NEXT</button>
-                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step3')" type="button">PREVIOUS</button>
+                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step5')"
+                        type="button">NEXT</button>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step3')"
+                        type="button">PREVIOUS</button>
                     <div class="clearfix"></div>
                 </agms-droid-helper-single-step>
-                <agms-droid-helper-single-step title="Verification Code" name="step5" show-navigator="false" class="p-20px">
-                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step by step guide below
+                <agms-droid-helper-single-step title="Verification Code" name="step5" show-navigator="false"
+                    class="p-20px">
+                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step
+                    by step guide below
                     <div class="instruction-border">
-                        5. Click <strong>Get Verification Code</strong>, a 6-digit verfication code will be sent via SMS to your registered mobile phone. Type the 6-digit into Verification code box, then click <strong>CONFIRM</strong> as shown below
-                        <img class="img-step-content" src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/verifycode.png" />
+                        5. Click <strong>Get Verification Code</strong>, a 6-digit verfication code will be sent via SMS
+                        to your registered mobile phone. Type the 6-digit into Verification code box, then click
+                        <strong>CONFIRM</strong> as shown below
+                        <img class="img-step-content"
+                            src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/verifycode.png" />
                     </div>
                     <div class="separator-top m-top-20px h-10px"></div>
-                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step6')" type="button">NEXT</button>
-                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step4')" type="button">PREVIOUS</button>
+                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step6')"
+                        type="button">NEXT</button>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step4')"
+                        type="button">PREVIOUS</button>
                     <div class="clearfix"></div>
                 </agms-droid-helper-single-step>
                 <agms-droid-helper-single-step title="Note Info" name="step6" show-navigator="false" class="p-20px">
-                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step by step guide below
+                    You are linking a Tiger account, please navigate to Tiger Developer Page, login and follow the step
+                    by step guide below
                     <div class="instruction-border">
-                        6. Note down your Tiger ID and Account ID, then click <strong>NEXT</strong> and input both information in next screen
-                        <img class="img-step-content" src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/noteid.png" />
+                        6. Note down your Tiger ID and Account ID, then click <strong>NEXT</strong> and input both
+                        information in next screen
+                        <img class="img-step-content"
+                            src="https://am708403.blob.core.windows.net/images/StepByStepGuide/TigerLink/noteid.png" />
                     </div>
                     <div class="separator-top m-top-20px h-10px"></div>
-                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step7')" type="button">NEXT</button>
-                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step5')" type="button">PREVIOUS</button>
+                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step7')"
+                        type="button">NEXT</button>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setStep('step5')"
+                        type="button">PREVIOUS</button>
                     <div class="clearfix"></div>
                 </agms-droid-helper-single-step>
-                <agms-droid-helper-single-step title="Login and Link" name="step7" show-navigator="false" class="p-20px">
-                    You are linking a Tiger account, please provide following information, then click <strong>LINK ACCOUNT</strong>
+                <agms-droid-helper-single-step title="Login and Link" name="step7" show-navigator="false"
+                    class="p-20px">
+                    You are linking a Tiger account, please provide following information, then click <strong>LINK
+                        ACCOUNT</strong>
                     <div class="instruction-border">
                         <div>Tiger ID</div>
                         <input ng-model="vm.tigerId" type="text" />
@@ -117,29 +157,42 @@
                         <input ng-model="vm.accountId" type="text" />
                     </div>
                     <div class="separator-top m-top-20px h-10px"></div>
-                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.submitTiger()" type="submit">LINK ACCOUNT</button>
-                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step6')" type="button">PREVIOUS</button>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.submitTiger()" type="submit">LINK
+                        ACCOUNT</button>
+                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step6')"
+                        type="button">PREVIOUS</button>
                     <div class="clearfix"></div>
                 </agms-droid-helper-single-step>
             </agms-droid-helper-step-by-step-flow>
         </div>
         <div ng-if="vm.selectedBroker==='Moomoo' && vm.currentViewName==='linkBroker'">
-            <agms-droid-helper-step-by-step-flow current-step-name="vm.currentStepName" last-step-name="vm.getProgressStepState()">
-                <agms-droid-helper-single-step title="Link Moomoo Account" name="step1" show-navigator="false" class="p-20px">
-                    You are linking a Moomoo account, if you have not completed the API questionnaire, click the link, login and follow the step by step guide below
+            <agms-droid-helper-step-by-step-flow current-step-name="vm.currentStepName"
+                last-step-name="vm.getProgressStepState()">
+                <agms-droid-helper-single-step title="Link Moomoo Account" name="step1" show-navigator="false"
+                    class="p-20px">
+                    You are linking a Moomoo account, if you have not completed the API questionnaire, click the
+                    link, login and follow the step by step guide below
                     <div class="instruction-border">
-                        1. Go to API Disclaimer Page by clicking this button. Once you logged-in, please click <strong>GO TO MOOMOO API DISCLAIMER</strong> button. Then, return to this page and click <strong>NEXT</strong>
+                        1. Go to API Disclaimer Page by clicking this button. Once you logged-in, please click
+                        <strong>GO TO MOOMOO API DISCLAIMER</strong> button. Then, return to this page and click
+                        <strong>NEXT</strong>
                         <div class="m-top-10px">
-                            <a class="btn btn-primary" target="_blank" href="https://www.moomoo.com/en-us/about/api-disclaimer">Go to Moomoo API Disclaimer Page<span class="glyphicon glyphicon-new-window"></span></a>
+                            <a class="btn btn-primary" target="_blank"
+                                href="https://www.moomoo.com/en-us/about/api-disclaimer">Go to Moomoo API Disclaimer
+                                Page<span class="glyphicon glyphicon-new-window"></span></a>
                         </div>
                     </div>
                     <div class="separator-top m-top-20px h-10px"></div>
-                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step2')" type="button">NEXT</button>
-                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setViewName('addBroker')" type="button">PREVIOUS</button>
+                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step2')"
+                        type="button">NEXT</button>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.setViewName('addBroker')"
+                        type="button">PREVIOUS</button>
                     <div class="clearfix"></div>
                 </agms-droid-helper-single-step>
-                <agms-droid-helper-single-step title="Login and Link" name="step2" show-navigator="false" class="p-20px">
-                    You are linking a Moomoo account, please provide following information, then click <strong>LINK ACCOUNT</strong>
+                <agms-droid-helper-single-step title="Login and Link" name="step2" show-navigator="false"
+                    class="p-20px">
+                    You are linking a Moomoo account, please provide following information, then click <strong>LINK
+                        ACCOUNT</strong>
                     <div class="instruction-border">
                         <div>Moomoo Account ID</div>
                         <input ng-model="vm.moomooId" type="text" />
@@ -148,16 +201,23 @@
                         <div>6-digit Trading Password</div>
                         <input ng-model="vm.moomooTradingPassword" type="password" />
                     </div>
-                    <div ng-if="vm.showMoomooConfirmation">
+                    <div class="separator-top m-top-20px h-10px"></div>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.submitMoomoo()" type="submit">LINK
+                        ACCOUNT</button>
+                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step1')"
+                        type="button">PREVIOUS</button>
+                    <div class="clearfix"></div>
+                </agms-droid-helper-single-step>
+                <agms-droid-helper-single-step title="Verification code" name="step3" show-navigator="false"
+                    class="p-20px">
+                    Almost there, please input your confirmation code
                         <div class="instruction-border">
                             <div>Enter Moomoo Verification Code</div>
                             <input ng-model="vm.moomooVerificationCode" type="text" />
-                            <button class="pull-right filled-blue m-left-10px" ng-click="vm.submitMoomooVerification()" type="button">VERIFY</button>
                         </div>
-                    </div>
                     <div class="separator-top m-top-20px h-10px"></div>
-                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.submitMoomoo()" type="submit">LINK ACCOUNT</button>
-                    <button class="pull-right filled-blue m-left-10px" ng-click="vm.setStep('step1')" type="button">PREVIOUS</button>
+                    <button class="pull-right hollow-blue m-left-10px" ng-click="vm.submitMoomooVerification()" type="submit">
+                        VERIFY</button>
                     <div class="clearfix"></div>
                 </agms-droid-helper-single-step>
             </agms-droid-helper-step-by-step-flow>

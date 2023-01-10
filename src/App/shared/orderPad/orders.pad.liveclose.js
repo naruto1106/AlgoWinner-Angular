@@ -8,7 +8,7 @@ agmNgModuleWrapper('agms.orders', [])
         'sProductService', "sOrdersBracketService",
         'orderService', 'orderPadInitService', 'sMarketDataService',
         'beforeOpenCallback', 'coreNotificationService', 'sOrdersPadHelperService', "sOrdersDetailService",
-        'orderProcessing', 'sUserService', 'commonItemUpdateService', "pMobileWebService", 'accountId'
+        'orderProcessing', 'sUserService', 'commonItemUpdateService', "pMobileWebService", 'accountId', 'brokerType'
     ],
     function (vm, dep, tool) {
         // --- DEPENDENCY RESOLVER
@@ -27,6 +27,7 @@ agmNgModuleWrapper('agms.orders', [])
             sOrdersDetailService = dep.sOrdersDetailService,
             sOrdersBracketService = dep.sOrdersBracketService,
             accountId = dep.accountId;
+            brokerType = dep.brokerType;
 
         // --- LOCAL VAR DECLARATION
         var enterIntentions = ["New", "Increase"];
@@ -461,7 +462,7 @@ agmNgModuleWrapper('agms.orders', [])
                 vm.Product = null;
                 vm.isSubmitting = true;
 
-                vm.order.ProductId = vm.order.Product.ProductId;
+                //vm.order.ProductId = vm.order.Product.ProductId;
                 sOrdersPadHelperService.updateOrderQuantity(vm.order);
 
                 var orderRequest = {
@@ -479,8 +480,9 @@ agmNgModuleWrapper('agms.orders', [])
                     LimitPrice: vm.order.LimitPrice,
                     StopPrice: vm.order.StopPrice
                 };
-
-                return orderService.SendLiveOrder(orderRequest,
+                let service = "SendLiveOrder";
+                if(vm.brokerType == 'futu') service = 'FutuSendLiveOrder'
+                return orderService[service](orderRequest,
                     function (res) {
                         vm.order.OrderId = res.data.id;
                         coreNotificationService.notifySuccess("Send Order", "Your order has been successfully sent");
@@ -550,6 +552,7 @@ agmNgModuleWrapper('agms.orders', [])
                 detectKeys: detectKeys,
                 submit: submit,
                 accountId: accountId,
+                brokerType : brokerType,
                 isBracketOrderShown: isBracketOrderShown,
                 showMessageForActiveOrderPopup: showMessageForActiveOrderPopup,
                 currentStepName: 'order-detail',
