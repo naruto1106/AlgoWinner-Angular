@@ -436,6 +436,7 @@
                     sChartStudyService.findVChartAndSetVisibility(false);
                 }
 
+                filterDescription.ExtendedChartType = null;
                 pChartRenderingUtilsService.stxx.setChartType('candle');
                 tradersGPSPositionStudies.setShowPrimaryArrow(true);
                 tradersGPSPositionStudies.setShowAllArrow(false);

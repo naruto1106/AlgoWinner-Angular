@@ -234,6 +234,7 @@
                 if (filterDescription.isComparisonMode()) {
                     filterDescription.chartTypeBeforeComparison = stxx.layout.chartType;
                     filterDescription.chartTypeDuringComparisonMode = null;
+                    filterDescription.ExtendedChartType = null;
                     pChartRenderingUtilsService.stxx.setChartType('line');
                 }
             }

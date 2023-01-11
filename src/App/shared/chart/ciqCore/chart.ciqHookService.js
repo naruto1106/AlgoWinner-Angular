@@ -64,6 +64,23 @@
             });
 
             STXChart.prototype.prepend("displayChart", function (chart) {
+                if (filterDescription.ExtendedChartType === 'high_line') {
+                    var parameters={
+                        pattern: "solid",     // options: "solid","dashed","dotted"
+                        lineWidth: 1            // select any with for the line
+                    };
+
+                    for (var i = 1; i < stxx.chart.dataSet.length; i++) {
+                        var prevBar = stxx.chart.dataSet[i-1];
+                        var bar = stxx.chart.dataSet[i];
+                        var x0 = stxx.pixelFromDate(prevBar.Date, stxx.chart);
+                        var x1 = stxx.pixelFromDate(bar.Date, stxx.chart);
+                        var y0 = stxx.pixelFromPrice(prevBar.High, stxx.chart.panel);
+                        var y1 = stxx.pixelFromPrice(bar.High, stxx.chart.panel);
+                        stxx.plotLine(x0, x1, y0, y1, "blue", "segment", stxx.chart.context, false, parameters);                                      
+                    }
+                }
+
                 //if (!filterDescription.primaryProduct.included) {
                 //    return true;
                 //}

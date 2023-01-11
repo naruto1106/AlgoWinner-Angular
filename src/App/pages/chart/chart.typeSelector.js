@@ -8,14 +8,23 @@
                 filterDescription = dep.pChartFilterDescriptionService;
 
             function setChartType(chartType) {
-                pChartRenderingUtilsService.stxx.setChartType(chartType.StxxType);
+                filterDescription.ExtendedChartType = chartType.ExtendedChartType;
+                if (chartType.ExtendedChartType === 'high_line') {                    
+                    pChartRenderingUtilsService.stxx.setChartType(null);
+                } else {
+                    pChartRenderingUtilsService.stxx.setChartType(chartType.StxxType);
+                }
                 if (filterDescription.isComparisonMode()) {
                     filterDescription.chartTypeDuringComparisonMode = chartType.StxxType;
                 }
             }
 
             function getTypeSelectorSvg() {
-                return pChartService.getChartType(pChartRenderingUtilsService.stxx.layout.chartType).Src;
+                if (filterDescription.ExtendedChartType === 'high_line') {
+                    return pChartService.getChartType('line').Src;
+                } else {
+                    return pChartService.getChartType(pChartRenderingUtilsService.stxx.layout.chartType).Src;
+                }
             }
 
             function getTypeSelectorClass() {

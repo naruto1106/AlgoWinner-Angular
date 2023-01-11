@@ -171,7 +171,8 @@
                 if (!filterDescription.isComparisonMode() &&
                     filterDescription.chartTypeBeforeComparison &&
                     !filterDescription.chartTypeDuringComparisonMode) {
-                    pChartRenderingUtilsService.stxx.setChartType(filterDescription.chartTypeBeforeComparison);
+                        filterDescription.ExtendedChartType = null;
+                        pChartRenderingUtilsService.stxx.setChartType(filterDescription.chartTypeBeforeComparison);
                 }
             }
             function isComparisonMode() {

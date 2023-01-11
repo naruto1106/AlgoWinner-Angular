@@ -1,6 +1,8 @@
 ﻿agmNgModuleWrapper('agms.chart')
     .defineService('pChartService', [],
     function (serviceObj, dep, tool) {
+        var showTrendDrawing = dep.coreConfigService.General.ShowTrendDrawing;
+
         var chartTypes = [
             {
                 Name: "Bar Chart",
@@ -43,6 +45,15 @@
                 return i.StxxType === cruType;
             })[0];
             return chartType;
+        }
+
+        if (showTrendDrawing) {
+            chartTypes.push({
+                Name: "Line Chart - High",
+                Src: '/App/assets/icons/chart/linechart.svg',
+                StxxType: 'line',
+                ExtendedChartType: 'high_line'
+            })
         }
 
         tool.setServiceObjectProperties({
