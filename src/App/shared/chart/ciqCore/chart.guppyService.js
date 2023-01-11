@@ -1,12 +1,12 @@
 agmNgModuleWrapper('agms.chart')
     .defineService("pChartGuppyService", [
         'pChartFilterDescriptionService', 'pChartService', 'pChartRenderingUtilsService',
-        'sTgpsService'],
+        'sChartService'],
         function (serviceObj, dep, tool) {
             var pChartService = dep.pChartService,
                 pChartRenderingUtilsService = dep.pChartRenderingUtilsService,
                 pChartFilterDescriptionService = dep.pChartFilterDescriptionService,
-                sTgpsService = dep.sTgpsService;
+                sChartService = dep.sChartService;
 
             var filterDescription = pChartFilterDescriptionService;
             var lastTgpsState = null;
@@ -26,31 +26,18 @@ agmNgModuleWrapper('agms.chart')
             };
 
             function getGuppyTriggers(productid, tradeVenueLoc, barSize) {
-                var barSizeNameValueMapper = {
-                    '1 D': '1 day',
-                    '1 W': '1 week'
-                };
-                var closureObj_GPS = {
-                    '1 day': {},
-                    '1 week': {}
-                };
-                var request = {
-                    ProductId: productid,
-                    BarSize: barSizeNameValueMapper[barSize],
-                    TradeVenue: tradeVenueLoc
-                };
+                var closureObj_GUPPY = {};
 
-                barSize = barSizeNameValueMapper[barSize];
-                if (closureObj_GPS[barSize][productid]) {
-                    return closureObj_GPS[barSize][productid].then(function (res) {
+                if (closureObj_GUPPY[productid]) {
+                    return closureObj_GUPPY[productid].then(function (res) {
                         return res;
                     }, function () {
-                        closureObj_GPS[barSize][productid] = sTgpsService.getTradersGPSPositionTriggerNew(request);
-                        return closureObj_GPS[barSize][productid];
+                        closureObj_GUPPY[productid] = sChartService.GetAlgoTrendEntries(productid);
+                        return closureObj_GUPPY[productid];
                     });
                 }
-                closureObj_GPS[barSize][productid] = sTgpsService.getTradersGPSPositionTriggerNew(request);
-                return closureObj_GPS[barSize][productid];
+                closureObj_GUPPY[productid] = sChartService.GetAlgoTrendEntries(productid);
+                return closureObj_GUPPY[productid];
             }
             
             function guppyChanged() {
@@ -85,8 +72,10 @@ agmNgModuleWrapper('agms.chart')
                         .then(function (data) {
                             guppyMarkers = data.data;
                             for (var i = 0; i < guppyMarkers.length; i++) {
-                                var utcDate = moment.utc(guppyMarkers[i].Timestamp); //should use UTC here
-                                var localDate = new Date(utcDate.get('year'), utcDate.get('month'), utcDate.get('date')); // convert to local timezone
+                                // var utcDate = moment.utc(guppyMarkers[i].date); //should use UTC here
+                                var localDate = new Date(parseInt(guppyMarkers[i].date.slice(0, 4)), 
+                                    parseInt(guppyMarkers[i].date.slice(4, 6)), parseInt(guppyMarkers[i].date.slice(6, 8))); //should use UTC here
+                                // var localDate = new Date(utcDate.get('year'), utcDate.get('month'), utcDate.get('date')); // convert to local timezone
                                 guppyMarkers[i].Ts = localDate;
                             }
                         });
@@ -195,8 +184,8 @@ agmNgModuleWrapper('agms.chart')
                         var x = stxx.pixelFromDate(quote.Date, stxx.chart);
                         var y;
                         if (guppyStudies.showGuppyArrow) {
-                            if (marker.Direction === "Bull") {
-                                price = quote.Low;
+                            if (marker.type === "entry") {
+                                price = marker.Low;
                                 y = stxx.pixelFromPriceTransform(price, panel, yAxis) + 20;
                                 drawUpwardArrow(ctx, x, y);
                             } else {

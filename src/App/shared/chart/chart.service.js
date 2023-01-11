@@ -21,12 +21,12 @@
             });
             this.GetAlgoCoordinates = coreServerCommunicationService.genGetFunctionWithNVar(path + "GetAlgoCoordinates", function (args) {
                 return {
-                    symbol: args[0]
+                    productId: args[0]
                 };
             });
             this.GetAlgoTrendEntries = coreServerCommunicationService.genGetFunctionWithNVar(path + "GetAlgoTrendEntries", function (args) {
                 return {
-                    symbol: args[0]
+                    productId: args[0]
                 };
             });
         }

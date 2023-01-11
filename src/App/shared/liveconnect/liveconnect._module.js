@@ -16,6 +16,15 @@ agmNgModuleWrapper('agms.liveconnect')
 
             var cache = {};
 
+            function loginToSaxo() {
+                return coreServerCommunicationService.genPostFunction(
+                    "/saxoapi/v1/Account/Connect")().then(function (result) {                    
+                    return result;
+                }).catch(function () {
+                    return null;
+                });
+            }
+
             function getProductBySymbolAndVenue(symbol, tradeVenue) {
                 var key = symbol + '_' + tradeVenue;
                 if (cache[key]) {
@@ -152,6 +161,7 @@ agmNgModuleWrapper('agms.liveconnect')
             }
 
             tool.setServiceObjectProperties({
+                loginToSaxo: loginToSaxo,
                 getFutuFb: getFutuFb,
                 loadInfo: loadInfo,
                 formatFirebaseObj: formatFirebaseObjSync,

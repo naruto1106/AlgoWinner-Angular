@@ -49,7 +49,7 @@ agmNgModuleWrapper('agmp.chart')
             }
 
             function renderTrendLine(product) {
-                sChartService.GetAlgoCoordinates(product.Symbol).then(function (res) {
+                sChartService.GetAlgoCoordinates(product.ProductId).then(function (res) {
                     pChartRenderingUtilsService.drawAlgoTrendline(res.data);
                 });
             }
