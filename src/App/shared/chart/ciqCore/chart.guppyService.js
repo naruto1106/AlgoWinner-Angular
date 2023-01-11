@@ -185,7 +185,7 @@ agmNgModuleWrapper('agms.chart')
                         var y;
                         if (guppyStudies.showGuppyArrow) {
                             if (marker.type === "entry") {
-                                price = marker.Low;
+                                price = quote.Low;
                                 y = stxx.pixelFromPriceTransform(price, panel, yAxis) + 20;
                                 drawUpwardArrow(ctx, x, y);
                             } else {
