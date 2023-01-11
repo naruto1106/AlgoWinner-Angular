@@ -24,6 +24,11 @@
                     symbol: args[0]
                 };
             });
+            this.GetAlgoTrendEntries = coreServerCommunicationService.genGetFunctionWithNVar(path + "GetAlgoTrendEntries", function (args) {
+                return {
+                    symbol: args[0]
+                };
+            });
         }
     ]);
 

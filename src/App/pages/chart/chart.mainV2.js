@@ -9,6 +9,7 @@
             'venue',
             'symbol',
             'pChartTgpsService',
+            'pChartGuppyService',
             'presetChartMode',
             'modeParam',
             'pChartService',
@@ -32,6 +33,7 @@
         function (vm, dep, tool) {
             var coreUserStateService = dep.coreUserStateService,
                 pChartTgpsService = dep.pChartTgpsService,
+                pChartGuppyService = dep.pChartGuppyService,
                 pChartViewTemplateService = dep.pChartViewTemplateService,
                 coreConfigService = dep.coreConfigService,
                 pChartFilterDescriptionService = dep.pChartFilterDescriptionService,

@@ -1,7 +1,7 @@
 ﻿agmNgModuleWrapper('agms.chart')
     .defineService("sChartIqHookService", ['pChartRenderingUtilsService', 'pChartPeriodicityService', 'pChartFilterDescriptionService', 
         'pChartThemeService', 'sChartXaxisCustomizer', 'pChartFundamentalHelperService', 'sChartStudyService', 'sTgpsStudyService',
-        'sChartDrawingService', 'sChartSeriesDialogService', 'pChartTgpsService'],
+        'sChartDrawingService', 'sChartSeriesDialogService', 'pChartTgpsService', 'pChartGuppyService'],
     function (serviceObj, dep, tool) {
         var $rootScope = dep.$rootScope;
         var pChartRenderingUtilsService = dep.pChartRenderingUtilsService;
@@ -12,6 +12,7 @@
         var pChartFundamentalHelperService = dep.pChartFundamentalHelperService;
         var sChartStudyService = dep.sChartStudyService;
         var pChartTgpsService = dep.pChartTgpsService;
+        var pChartGuppyService = dep.pChartGuppyService;
         var sTgpsStudyService = dep.sTgpsStudyService;
         var sChartDrawingService = dep.sChartDrawingService;
         var sChartSeriesDialogService = dep.sChartSeriesDialogService;
@@ -227,6 +228,7 @@
                 $rootScope.$broadcast('onStxChartDrawn', null);
                 pChartRenderingUtilsService.drawCrosshairHighlight();
                 pChartTgpsService.appendDraw();
+                pChartGuppyService.appendDraw();
             });
 
             STXChart.prototype.append("mousemove", function (e) {

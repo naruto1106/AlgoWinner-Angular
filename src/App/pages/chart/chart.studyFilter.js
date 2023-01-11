@@ -5,6 +5,7 @@
             'pChartFilterDescriptionService',
             'sChartStudyService',
             "pChartTgpsService",
+            "pChartGuppyService",
             "pChartThemeService"
         ],
         function (vm, dep, tool) {
@@ -13,6 +14,7 @@
 
             vm.pChartRenderingUtilsService = dep.pChartRenderingUtilsService;
             vm.pChartTgpsService = dep.pChartTgpsService;
+            vm.pChartGuppyService = dep.pChartGuppyService;
 
             var filterDescription = pChartFilterDescriptionService;
 

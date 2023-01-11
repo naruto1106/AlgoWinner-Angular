@@ -1,0 +1,11 @@
+<div class="guppy-flag" ng-show="vm.coreConfigService.General.ShowTrendDrawing" ng-class="{'active-toggle':vm.pChartGuppyService.guppyMode}">
+    <input type="checkbox" ng-model="vm.pChartGuppyService.guppyMode" ng-change="vm.toggleGuppy()"
+           analytics-on="click" analytics-category="Chart" analytics-event="GuppyCheckbox" analytics-label="GuppyCheckbox" agmc-analytics-timestamp />
+    &nbsp;
+    <label>TREND</label>
+    &nbsp;
+    <button class="btn-xs btn-success" ng-click="vm.renderTrendLine(vm.filterDescription.primaryProduct)" ng-if="vm.pChartGuppyService.guppyMode"
+            analytics-on="click" analytics-category="Chart" analytics-event="GuppyRender" analytics-label="GuppyRender" agmc-analytics-timestamp>
+        <span>Show Trendline</span>
+    </button>
+</div>

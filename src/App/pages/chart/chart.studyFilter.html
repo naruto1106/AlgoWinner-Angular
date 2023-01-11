@@ -235,4 +235,16 @@
             </div>
         </div>
     </div>
+    <div ng-if="vm.pChartGuppyService.guppyMode">
+        <div class="tag-channel">
+            <h5>
+                SHOW ENTRY / EXIT ARROW
+            </h5>
+            <div class="switch"
+                 ng-class="{checked:vm.pChartGuppyService.guppyStudies.showGuppyArrow}"
+                 ng-click="vm.pChartGuppyService.guppyStudies.toggleShowGuppyArrow()">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
 </div>

@@ -37,7 +37,7 @@
 
 .agm-component-chart {
 
-    .btn, .btn-group, .traders-gps-flag {
+    .btn, .btn-group, .traders-gps-flag, .guppy-flag {
         &.active-toggle {
             background: @caramel;
             box-shadow: 0 2px 5px mix(black,transparent,10) inset;
@@ -1110,6 +1110,27 @@
     & .traders-gps-flag {
         line-height: 29px;
         padding: 0 10px;
+
+        input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            position: relative;
+            top: 3px;
+            margin-left: 0;
+        }
+
+        label {
+            margin: 0;
+        }
+
+        select {
+            min-width: 80px;
+        }
+    }
+
+    & .guppy-flag {
+        line-height: 29px;
+        padding: 0 5px;
 
         input[type="checkbox"] {
             width: 15px;
