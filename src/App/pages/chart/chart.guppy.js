@@ -49,9 +49,13 @@ agmNgModuleWrapper('agmp.chart')
             }
 
             function renderTrendLine(product) {
-                sChartService.GetAlgoCoordinates(product.ProductId).then(function (res) {
-                    pChartRenderingUtilsService.drawAlgoTrendline(res.data);
+                tool.openModalByDefinition('p.chart.GuppyPopupController', {
+                    product: product
                 });
+
+                // sChartService.GetAlgoCoordinates(product.ProductId).then(function (res) {
+                //     pChartRenderingUtilsService.drawAlgoTrendline(res.data);
+                // });
             }
 
             tool.setVmProperties({

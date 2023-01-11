@@ -1,0 +1,28 @@
+<div class="agm-component-chart compare-panel">
+    <div class="modal-header">
+        <h4 class="modal-title">Render Trendline on {{vm.product.symbol}}</h4>
+        <button class="close" ng-click="vm.uibDismissPanel()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <div>Select date: </div>
+        <div class="date-picker input-group">
+            <input type="text" class="input-date" uib-datepicker-popup="mediumDate"
+                   ng-model="vm.selectedDate"
+                   is-open="vm.selectedDateOpened"
+                   datepicker-options="vm.dateOptions"
+                   ng-required="true" close-text="Close" />
+            <button type="button" class="date-button" ng-click="vm.openDatePicker($event)">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="modal-footer">
+        <div class="btn btn-primary pull-right" ng-click="vm.renderTrendLine()">
+            APPLY
+        </div>
+        <div class="btn btn-outline-primary pull-right" ng-click="vm.uibDismissPanel()">
+            CANCEL
+        </div>
+    </div>
+</div>
