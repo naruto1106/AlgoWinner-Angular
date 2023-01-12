@@ -74,7 +74,7 @@ agmNgModuleWrapper('agms.chart')
                             for (var i = 0; i < guppyMarkers.length; i++) {
                                 // var utcDate = moment.utc(guppyMarkers[i].date); //should use UTC here
                                 var localDate = new Date(parseInt(guppyMarkers[i].date.slice(0, 4)), 
-                                    parseInt(guppyMarkers[i].date.slice(4, 6)), parseInt(guppyMarkers[i].date.slice(6, 8))); //should use UTC here
+                                    parseInt(guppyMarkers[i].date.slice(4, 6)) - 1, parseInt(guppyMarkers[i].date.slice(6, 8))); //should use UTC here
                                 // var localDate = new Date(utcDate.get('year'), utcDate.get('month'), utcDate.get('date')); // convert to local timezone
                                 guppyMarkers[i].Ts = localDate;
                             }
