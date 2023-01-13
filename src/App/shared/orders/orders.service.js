@@ -65,6 +65,7 @@
             serviceObj.CancelLiveOrder = coreServerCommunicationService.genPostFunction(tigerPath + 'CancelOrder');
             serviceObj.FutuSendLiveOrder = coreServerCommunicationService.genPostFunction(futuPath + 'order/PlaceOrder');
             serviceObj.FutuCancelLiveOrder = coreServerCommunicationService.genPostFunction(futuPath + 'order/CancelOrder');
+            serviceObj.FutuHistoricalOrder = coreServerCommunicationService.genGetFunctionWithNVar(futuPath + 'order/GetHistoryOrders');
 
             // OMS API
             function developerPostFunction(url) {

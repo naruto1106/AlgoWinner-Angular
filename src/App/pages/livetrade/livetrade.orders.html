@@ -260,12 +260,9 @@
                                         </table>
                                     </div>
                                 </uib-tab>
-                                <uib-tab ng-click="vm.loadRealizedPositions()" index="3" heading="REALIZED POSITIONS">
+                                <uib-tab ng-click="vm.loadRealizedPosition()" index="3" heading="REALIZED POSITION">
                                     <div class="m-top-15px">
-                                        <p ng-if="vm.linkedStrategy">
-                                            This only shows realized positions executed by AutoInvest that follows robot <b>{{vm.linkedStrategy.Name}}</b>
-                                        </p>
-                                        <table class="table-positions table m-t-10">
+                                        <table class="table-positions table">
                                             <thead>
                                                 <tr>
                                                     <th>Product</th>
@@ -283,45 +280,89 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-if="vm.linkedStrategy && vm.positionLoading">
-                                                    <td colspan="7">
+                                                <tr ng-if="vm.realizedPositionsLoading">
+                                                    <td colspan="6">
                                                         <img width="30" src="//am708403.azureedge.net/images/am-auto/loader.gif" />
-                                                        <span> Loading Realized Positions</span>
+                                                        <span> Loading Realized Position</span>
                                                     </td>
                                                 </tr>
-                                                <tr ng-if="!vm.linkedStrategy || (!vm.positionLoading && vm.realizedPositions.length === 0)">
-                                                    <td colspan="7">No Realized Position</td>
+                                                <tr ng-if="vm.selectedAccount.realizedPositions.length === 0" style="padding-right: 0">
+                                                    <td colspan="6">No Realized Position</td>
                                                 </tr>
-                                                <tr ng-if="!vm.positionLoading && vm.realizedPositions.length > 0"
-                                                    ng-repeat="position in vm.realizedPositions">
-                                                    <td style="padding-right: 0">
-                                                        <agmp-simple-product product="position.Product"></agmp-simple-product>
+                                                <tr ng-repeat="position in vm.selectedAccount.realizedPositions">
+                                                    <td>
+                                                        <!-- <agmp-simple-product product="order.algoProduct"></agmp-simple-product> -->
+                                                        Test
                                                     </td>
-                                                    <td>{{position.Position | uppercase}} <br /> {{position.Quantity}}</td>
+                                                    <td>{{position.position | uppercase}} <br /> {{position.quantity}}</td>
                                                     <td class="text-right">
-                                                        <b>Price:</b> {{position.AverageEntryPrice | correctTickSizeDecimalPlacesWithCurrency:position.Product.Currency:position.Product.TradeVenueLoc}}
+                                                        <b>Price:</b> {{position.exit | correctTickSizeDecimalPlacesWithCurrency:position.Product.Currency:position.Product.TradeVenueLoc}}
                                                         <i ng-if="position.Backfill === 'Enter'"
                                                            class="glyphicon glyphicon-info-sign icon-blue"
                                                            tooltip-append-to-body="true"
                                                            uib-tooltip="Entry price, realized and unrealized P/L is estimated based on robot price, because the entry was done manually by user">
                                                         </i> <br />
-                                                        <b>Time:</b> {{position.EnterDate | date:'shortDate'}}
+                                                        <b>Time:</b> {{position.entryTime | date:'shortDate'}}
                                                     </td>
                                                     <td class="text-right">
-                                                        <b>Price:</b> {{position.AverageExitPrice | correctTickSizeDecimalPlacesWithCurrency:position.Product.Currency:position.Product.TradeVenueLoc}}
+                                                        <b>Price:</b> {{position.entry | correctTickSizeDecimalPlacesWithCurrency:position.Product.Currency:position.Product.TradeVenueLoc}}
                                                         <i ng-if="position.Backfill === 'Exit'"
                                                            class="glyphicon glyphicon-info-sign icon-blue"
                                                            tooltip-append-to-body="true"
                                                            uib-tooltip="Exit price, realized and unrealized P/L is estimated based on robot price, because the exit was done manually by user">
                                                         </i> <br />
-                                                        <b>Time:</b> {{position.ExitDate | date:'shortDate'}}
+                                                        <b>Time:</b> {{position.exitTime | date:'shortDate'}}
                                                     </td>
                                                     <td class="text-right" ng-class="position.RealizedPL >=0 ? ['green-profit'] : ['red-loss']">
-                                                        {{position.RealizedPL | customCurrencyOrDash:position.Product.Currency:2}}
+                                                        {{position.realizedPL | customCurrencyOrDash:position.Product.Currency:2}}
                                                     </td>
                                                     <td class="text-right" ng-class="position.NetPL >=0 ? ['green-profit'] : ['red-loss']">
-                                                        {{position.NetPL | customCurrencyOrDash:position.Product.Currency:2}}
+                                                        {{position.netPL | customCurrencyOrDash:position.Product.Currency:2}}
                                                     </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </uib-tab>
+                                <uib-tab ng-click="vm.loadHistoricalOrders()" index="4" heading="HISTORICAL ORDER">
+                                    <div class="m-top-15px">
+                                        <table class="table-positions table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th class="text-right">Position</th>
+                                                    <th class="text-right">Quantity</th>
+                                                    <th class="text-right">Order Price</th>
+                                                    <th class="text-right">Type</th>
+                                                    <th class="text-right">Order Status</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="vm.historicalOrederLoading">
+                                                    <td colspan="6">
+                                                        <img width="30" src="//am708403.azureedge.net/images/am-auto/loader.gif" />
+                                                        <span> Loading Active Order</span>
+                                                    </td>
+                                                </tr>
+                                                <tr ng-if="vm.selectedAccount.historicalOrders.length === 0" style="padding-right: 0">
+                                                    <td colspan="6">No Historical Order</td>
+                                                </tr>
+                                                <tr ng-repeat="order in vm.selectedAccount.historicalOrders">
+                                                    <!-- <td>
+                                                        <agmp-simple-product product="order.algoProduct"></agmp-simple-product>
+                                                    </td> -->
+                                                    <td>{{order.product}}</td>
+                                                    <td class="text-right">{{order.direction === 'BUY' ? 'LONG' : 'SHORT'}}</td>
+                                                    <td class="text-right">{{order.dealSize}}</td>
+                                                    <td class="text-right">
+                                                        <span ng-if="order.type === 'STOP'">
+                                                            {{order.stopPrice | correctTickSizeDecimalPlacesWithCurrency:order.algoProduct.Currency:order.algoProduct.TradeVenueLoc}}
+                                                        </span>
+                                                        <span ng-if="order.type === 'LIMIT'">
+                                                            {{order.limitPrice | correctTickSizeDecimalPlacesWithCurrency:order.algoProduct.Currency:order.algoProduct.TradeVenueLoc}}
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-right">{{order.type}} {{order.validity}}</td>
+                                                    <td class="text-right">{{order.orderStatus}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -4,7 +4,7 @@
         'commonLocationHistoryService',
         'sTradingItemService', 'strategyId', 'coreConfigService',
         'commonItemUpdateService', 'orderPadInitService', "sHeaderService", "pMobileWebService", "sLiveConnectService",
-        'coreSignalRMarketDataService', 'sProductService'],
+        'coreSignalRMarketDataService', 'sProductService', 'orderService', 'portfolioService'],
         function (vm, dep, tool) {
             var sOrdersClientService = dep.sOrdersClientService,
                 sTradingClientPortfolioService = dep.sTradingClientPortfolioService,
@@ -17,6 +17,8 @@
                 orderPadInitService = dep.orderPadInitService,
                 sLiveConnectService = dep.sLiveConnectService,
                 sProductService = dep.sProductService,
+                orderService = dep.orderService,
+                portfolioService = dep.portfolioService,
                 $scope = dep.$scope;
 
             var tigerDbRef = null;
@@ -74,7 +76,6 @@
                         position.Product = position.algoProduct;
                         position.QuantityOnHold = position.dealSize;
                         position.PositionType = position.direction === "BUY" ? "Long" : position.direction === "SELL" ? "Short" : "";
-                        console.log(JSON.stringify(position))
                         orderPadInitService.decreasePosition(position);
                     }
                 });
@@ -91,6 +92,7 @@
             }
 
             function cancelOrder(order) {
+                
                 return handleCancelOrderInt(order).result.then(function () {
                     return true;
                 });
@@ -316,7 +318,6 @@
                     vm.selectedAccount = obj.accounts[firstKey];
                     vm.selectedAccount.orders = (obj.activeOrders && obj.activeOrders.hasOwnProperty(firstKey)) ? obj.activeOrders[firstKey] : [];
                     vm.selectedAccount.positions = (obj.openPositions && obj.openPositions.hasOwnProperty(firstKey)) ? obj.openPositions[firstKey] : [];
-                    console.log(JSON.stringify(vm.selectedAccount.positions))
                     sLiveConnectService.formatFirebaseObj(vm.selectedAccount)
                         .then(function (info) {
                             if (vm.isLoadingData) {
@@ -357,6 +358,7 @@
                     if (obj.activeOrders != null) {
                         let activeOrders = obj.activeOrders[firstKey]
                         vm.selectedAccount.orders = Object.keys(activeOrders).map(function (key) {
+                            activeOrders[key]['id'] = activeOrders[key]['orderId']
                             return activeOrders[key];
                         });
                     }
@@ -365,8 +367,8 @@
                     vm.selectedAccount.positions = Object.keys(positions).map(function (key) {
                         let obj = positions[key];
                         obj['product'] = obj.Code;
-                        obj['tradeVenue'] = obj.TrdMarket == 1 ? "US" : "HK";
-                        obj['currency'] = obj.TrdMarket == 1 ?  "USD" :"HKD";
+                        obj['tradeVenue'] = obj.SecMarket == 1 ? "HK" : "US";
+                        obj['currency'] = obj.SecMarket == 1 ? "HKD" : "USD";
                         obj['broker'] = "futu"
                         return obj;
                     });
@@ -385,7 +387,6 @@
                             }
                         });
                 }
-                console.log(vm.selectedAccount)
                 vm.isLoadingData = false;
 
                 // Otherwise the digest won't trigger on throttle
@@ -394,6 +395,27 @@
 
             function createLiveAccount() {
                 return tool.openModalByDefinition('s.account.NewLiveController', {});
+            }
+            function loadRealizedPosition() {
+                vm.realizedPositionsLoading = true;
+                return portfolioService.FutuGetRealizedPositon()
+                .then(function (res) {
+                    console.log('Response :' + JSON.stringify(res))
+                    vm.selectedAccount.realizedPositions = res.data;
+                }).finally(function () {
+                    vm.realizedPositionsLoading = false;
+                });
+            }
+            function loadHistoricalOrders() {
+                vm.historicalOrederLoading = true;
+
+                return orderService.FutuHistoricalOrder()
+                    .then(function (res) {
+                        console.log('Response :' + JSON.stringify(res))
+                        vm.selectedAccount.historicalOrders = res.data;
+                    }).finally(function () {
+                        vm.historicalOrederLoading = false;
+                    });
             }
 
             function switchAccount(account) {
@@ -422,6 +444,8 @@
                     isLoadingData: true,
                     tradingLayout: 0,
                     strategiesType: 0,
+                    positionRealizedLoading: true,
+                    historicalOrederLoading: true,
 
                     switchAccount: switchAccount,
                     coreUserStateService: coreUserStateService,
@@ -435,7 +459,9 @@
                     closeReduceNotification: closeReduceNotification,
                     pMobileWebService: dep.pMobileWebService,
                     strategySelectedFromScrolling: strategySelectedFromScrolling,
-                    createLiveAccount: createLiveAccount
+                    createLiveAccount: createLiveAccount,
+                    loadRealizedPosition: loadRealizedPosition,
+                    loadHistoricalOrders: loadHistoricalOrders
                 });
 
                 dep.sHeaderService.selectMenu("livetrade");
@@ -450,7 +476,6 @@
                     var uid = dep.coreDataStorageService.get("userId");
                     tigerDbRef = firebase.database().ref().child('users/' + uid);
                     futuDbRef = sLiveConnectService.getFutuFb().database().ref().child('users/' + uid);
-                    console.log(futuDbRef)
 
                     var throttledTigerCallback = _.throttle(refreshTigerFunction, 1000);
                     tigerDbRef.on('value', throttledTigerCallback);
