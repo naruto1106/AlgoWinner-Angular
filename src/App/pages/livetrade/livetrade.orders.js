@@ -92,7 +92,7 @@
             }
 
             function cancelOrder(order) {
-                
+
                 return handleCancelOrderInt(order).result.then(function () {
                     return true;
                 });
@@ -399,20 +399,36 @@
             function loadRealizedPosition() {
                 vm.realizedPositionsLoading = true;
                 return portfolioService.FutuGetRealizedPositon()
-                .then(function (res) {
-                    console.log('Response :' + JSON.stringify(res))
-                    vm.selectedAccount.realizedPositions = res.data;
-                }).finally(function () {
-                    vm.realizedPositionsLoading = false;
-                });
+                    .then(function (res) {
+                        var data = res.data.map(function (position) {
+                            position.tradeVenue = position.tradeMarket;
+                            position.currency = position.tradeMarket == 'HK' ? "HKD" : "USD";
+                            position.product = position.code;
+                            position.broker = 'futu'
+                            return position;
+                        });
+                        var request = angular.copy(vm.selectedAccount);
+                        request.positions = data;
+                        sLiveConnectService.formatFirebaseObj(request)
+                            .then(function (result) {
+                                vm.selectedAccount.realizedPositions = result.positions;
+                            });
+
+                    }).finally(function () {
+                        vm.realizedPositionsLoading = false;
+                    });
             }
             function loadHistoricalOrders() {
                 vm.historicalOrederLoading = true;
 
                 return orderService.FutuHistoricalOrder()
                     .then(function (res) {
-                        console.log('Response :' + JSON.stringify(res))
-                        vm.selectedAccount.historicalOrders = res.data;
+                        var request = angular.copy(vm.selectedAccount);
+                        request.orders = res.data;
+                        sLiveConnectService.formatFirebaseObj(request)
+                            .then(function (result) {
+                                vm.selectedAccount.historicalOrders = result.orders;
+                            });
                     }).finally(function () {
                         vm.historicalOrederLoading = false;
                     });
