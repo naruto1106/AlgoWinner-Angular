@@ -388,7 +388,7 @@
                         });
                 }
                 vm.isLoadingData = false;
-
+                console.log(JSON.stringify(vm.selectedAccount.orders))
                 // Otherwise the digest won't trigger on throttle
                 $scope.$digest();
             }

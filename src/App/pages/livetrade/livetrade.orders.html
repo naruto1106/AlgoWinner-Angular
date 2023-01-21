@@ -278,7 +278,8 @@
                                                             {{order.stopPrice |
                                                             correctTickSizeDecimalPlacesWithCurrency:order.algoProduct.Currency:order.algoProduct.TradeVenueLoc}}
                                                         </span>
-                                                        <span ng-if="order.type === 'LIMIT'">
+                                                        <span
+                                                            ng-if="order.type === 'LIMIT'||order.type === 'STOPLIMIT'">
                                                             {{order.limitPrice |
                                                             correctTickSizeDecimalPlacesWithCurrency:order.algoProduct.Currency:order.algoProduct.TradeVenueLoc}}
                                                         </span>
@@ -381,6 +382,7 @@
                                                     <th class="text-right">Position</th>
                                                     <th class="text-right">Quantity</th>
                                                     <th class="text-right">Order Price</th>
+                                                    <th class="text-right">Stop Price</th>
                                                     <th class="text-right">Type</th>
                                                     <th class="text-right">Order Time</th>
                                                     <th class="text-right">Last Update Time</th>
@@ -408,14 +410,12 @@
                                                         'SHORT'}}</td>
                                                     <td class="text-right">{{order.dealSize}}</td>
                                                     <td class="text-right">
-                                                        <span ng-if="order.type === 'STOP'">
-                                                            {{order.stopPrice |
-                                                            correctTickSizeDecimalPlacesWithCurrency:order.currency:order.tradeVenue}}
-                                                        </span>
-                                                        <span ng-if="order.type === 'LIMIT'">
-                                                            {{order.limitPrice |
-                                                            correctTickSizeDecimalPlacesWithCurrency:order.currency:order.tradeVenue}}
-                                                        </span>
+                                                        {{order.limitPrice |
+                                                        correctTickSizeDecimalPlacesWithCurrency:order.currency:order.tradeVenue}}
+                                                    </td>
+                                                    <td>
+                                                        {{order.stopPrice |
+                                                        correctTickSizeDecimalPlacesWithCurrency:order.currency:order.tradeVenue}}
                                                     </td>
                                                     <td class="text-right">{{order.type}} {{order.validity}}</td>
                                                     <td class="text-right">{{order.orderTime | date:'short'}}</td>

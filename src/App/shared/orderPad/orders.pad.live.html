@@ -3,7 +3,8 @@
     <h4 class="modal-title">Place Order</h4>
 </div>
 
-<div class="agm-component-orderpad modal-body modal-body-orderpad" tabindex="0" ng-keydown="vm.detectKeys($event)" id="orderPad">
+<div class="agm-component-orderpad modal-body modal-body-orderpad" tabindex="0" ng-keydown="vm.detectKeys($event)"
+    id="orderPad">
     <agms-droid-helper-step-by-step-flow current-step-name="vm.currentStepName" last-step-name="vm.getProgressState()">
         <agms-droid-helper-single-step title="Order Detail" name="order-detail" show-navigator="false">
             <div class="row-md-3">
@@ -35,74 +36,117 @@
                         <section class="m-top-10px separator-top p-top-10px h-400px">
                             <div>
                                 <fieldset ng-disabled="vm.accountId == null"
-                                          ng-class="{'disabled-opacity':vm.accountId == null}">
+                                    ng-class="{'disabled-opacity':vm.accountId == null}">
                                     <dl class="dl-horizontal-100px order-details">
                                         <dt>Action</dt>
                                         <dd>
-                                            <select ng-disabled="vm.isLoadingPrice" ng-model="vm.order.Action" ng-options="action for action in vm.actionTypes" ng-change="vm.onActionChanged()" class="w-150px"></select>
+                                            <select ng-disabled="vm.isLoadingPrice" ng-model="vm.order.Action"
+                                                ng-options="action for action in vm.actionTypes"
+                                                ng-change="vm.onActionChanged()" class="w-150px"></select>
                                         </dd>
                                     </dl>
                                     <dl class="dl-horizontal-100px order-details">
                                         <dt>Product</dt>
                                         <dd>
-                                            <agms-product-search model="vm.order.Product" listen-on-resolve="vm.listenOnProductResolve"
-                                                                 search-products="vm.searchProducts" auto-select-on-single-search-result="true"
-                                                                 on-product-selected="vm.onProductSelected">
+                                            <agms-product-search model="vm.order.Product"
+                                                listen-on-resolve="vm.listenOnProductResolve"
+                                                search-products="vm.searchProducts"
+                                                auto-select-on-single-search-result="true"
+                                                on-product-selected="vm.onProductSelected">
                                             </agms-product-search>
                                         </dd>
                                     </dl>
                                     <dl class="dl-horizontal-100px order-details">
                                         <dt>Quantity</dt>
                                         <dd>
-                                            <input ng-model="vm.order.inputNominalQuantity" type="number" min="0" ng-model-options="{debounce: 200}" ng-change="vm.updateOrderQuantity()" class="w-90px m-right-5px" />
-                                            <select ng-disabled="!vm.order.Product || !vm.order.Product.ProductId" ng-model="vm.order.quantityType" ng-options="quantityType for quantityType in vm.quantityTypes" ng-change="vm.updateOrderQuantity()" class="select-type"></select>
-                                            <i class="strong m-left-5px" ng-if="vm.order.quantityType=='Lot' && vm.order.Product"><br />(1 Lot = {{vm.order.Product.LotSize}} units)</i>
-                                            <i class="strong m-left-5px" ng-if="vm.order.quantityType=='K Lot' && vm.order.Product"><br />(1 K Lot = 1000 units)</i>
+                                            <input ng-model="vm.order.inputNominalQuantity" type="number" min="0"
+                                                ng-model-options="{debounce: 200}" ng-change="vm.updateOrderQuantity()"
+                                                class="w-90px m-right-5px" />
+                                            <select ng-disabled="!vm.order.Product || !vm.order.Product.ProductId"
+                                                ng-model="vm.order.quantityType"
+                                                ng-options="quantityType for quantityType in vm.quantityTypes"
+                                                ng-change="vm.updateOrderQuantity()" class="select-type"></select>
+                                            <i class="strong m-left-5px"
+                                                ng-if="vm.order.quantityType=='Lot' && vm.order.Product"><br />(1 Lot =
+                                                {{vm.order.Product.LotSize}} units)</i>
+                                            <i class="strong m-left-5px"
+                                                ng-if="vm.order.quantityType=='K Lot' && vm.order.Product"><br />(1 K
+                                                Lot = 1000 units)</i>
                                         </dd>
                                     </dl>
                                     <dl class="dl-horizontal-100px order-details">
                                         <dt>Type</dt>
                                         <dd>
-                                            <select ng-model="vm.order.OrderType" ng-options="orderType as orderType for orderType in vm.orderTypes" ng-change="vm.onOrderTypeChanged()"></select>
+                                            <select ng-model="vm.order.OrderType"
+                                                ng-options="orderType as orderType for orderType in vm.orderTypes"
+                                                ng-change="vm.onOrderTypeChanged()"></select>
                                         </dd>
                                     </dl>
 
-                                    <fieldset ng-disabled="!vm.order.Product || !vm.order.Product.ProductId">
+                                    <fieldset ng-disabled="!vm.order.Product || !vm.order.Product.ProductId"
+                                        ng-show="vm.order.OrderType==='Limit' || vm.order.OrderType==='Stop Limit'">
                                         <dl class="dl-horizontal-100px order-details">
-                                            <dt ng-show="vm.order.OrderType==='Limit'">Limit Price</dt>
-                                            <dd ng-show="vm.order.OrderType==='Limit'">
-                                                <span class="pull-left m-right-10px" ng-if="vm.order.Product != null">{{vm.order.Product.Currency | currencySymbol}}</span>
-                                                <input ng-model-options="{debounce: 200}" type="number" step="0.0001" class="pull-left w-100px" ng-model="vm.order.LimitPrice" ng-change="vm.onPriceChanges()" />
+                                            <dt>Limit Price</dt>
+                                            <dd>
+                                                <span class="pull-left m-right-10px"
+                                                    ng-if="vm.order.Product != null">{{vm.order.Product.Currency |
+                                                    currencySymbol}}</span>
+                                                <input ng-model-options="{debounce: 200}" type="number" step="0.0001"
+                                                    class="pull-left w-100px" ng-model="vm.order.LimitPrice"
+                                                    ng-change="vm.onPriceChanges()" />
                                                 <div class="up-down-buttons pull-left">
-                                                    <button ng-click="vm.decreaseLimitPrice()" ng-disabled="!vm.order.Product || !vm.order.LimitPrice" class="mini-filled-red"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                                                    <button ng-click="vm.increaseLimitPrice()" ng-disabled="!vm.order.Product || !vm.order.LimitPrice" class="mini-filled-green"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </dd>
-                                        </dl>
-                                        <dl class="dl-horizontal-100px order-details">
-                                            <dt ng-show="vm.order.OrderType==='Stop'">Stop Price</dt>
-                                            <dd ng-show="vm.order.OrderType==='Stop'">
-                                                <span class="lh-30px pull-left m-right-10px">{{vm.order.Product.Currency | currencySymbol}}</span>
-                                                <input ng-model-options="{debounce: 200}" type="number" step="0.0001" class="pull-left w-100px" ng-model="vm.order.StopPrice" ng-change="vm.onPriceChanges()" />
-                                                <div class="up-down-buttons pull-left">
-                                                    <button ng-click="vm.decreaseStopPrice()" ng-disabled="!vm.order.Product || !vm.order.StopPrice" class="mini-filled-red"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                                                    <button ng-click="vm.increaseStopPrice()" ng-disabled="!vm.order.Product || !vm.order.StopPrice" class="mini-filled-green"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                                                    <button ng-click="vm.decreaseLimitPrice()"
+                                                        ng-disabled="!vm.order.Product || !vm.order.LimitPrice"
+                                                        class="mini-filled-red"><span
+                                                            class="glyphicon glyphicon-arrow-down"></span></button>
+                                                    <button ng-click="vm.increaseLimitPrice()"
+                                                        ng-disabled="!vm.order.Product || !vm.order.LimitPrice"
+                                                        class="mini-filled-green"><span
+                                                            class="glyphicon glyphicon-arrow-up"></span></button>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </dd>
                                         </dl>
                                     </fieldset>
+                                    <fieldset
+                                        ng-show="(vm.order.OrderType==='Stop Limit'||vm.order.OrderType==='Stop')"
+                                        ng-disabled="!vm.order.Product || !vm.order.Product.ProductId">
+                                        <dl class="dl-horizontal-100px order-details">
+                                            <dt>Stop Price</dt>
+                                            <dd>
+                                                <span class="lh-30px pull-left m-right-10px">{{vm.order.Product.Currency
+                                                    | currencySymbol}}</span>
+                                                <input ng-model-options="{debounce: 200}" type="number" step="0.0001"
+                                                    class="pull-left w-100px" ng-model="vm.order.StopPrice"
+                                                    ng-change="vm.onPriceChanges()" />
+                                                <div class="up-down-buttons pull-left">
+                                                    <button ng-click="vm.decreaseStopPrice()"
+                                                        ng-disabled="!vm.order.Product || !vm.order.StopPrice"
+                                                        class="mini-filled-red"><span
+                                                            class="glyphicon glyphicon-arrow-down"></span></button>
+                                                    <button ng-click="vm.increaseStopPrice()"
+                                                        ng-disabled="!vm.order.Product || !vm.order.StopPrice"
+                                                        class="mini-filled-green"><span
+                                                            class="glyphicon glyphicon-arrow-up"></span></button>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </dd>
+                                        </dl>
+
+                                    </fieldset>
                                     <dl class="dl-horizontal-100px order-details">
                                         <dt>Validity</dt>
                                         <dd>
-                                            <label><input type="radio" ng-model="vm.order.Validity" value="GTC" class="validity" />GTC</label>
-                                            <label><input type="radio" ng-model="vm.order.Validity" value="Day" />Day</label>
+                                            <label><input type="radio" ng-model="vm.order.Validity" value="GTC"
+                                                    class="validity" />GTC</label>
+                                            <label><input type="radio" ng-model="vm.order.Validity"
+                                                    value="Day" />Day</label>
                                         </dd>
                                     </dl>
                                     <dl class="dl-horizontal-100px order-details" ng-if="vm.isBracketOrderShown()">
                                         <div class="bracket-order">
-                                            <input type="checkbox" ng-model="vm.order.HasBracketOrder" ng-change="vm.onHasBracketOrderChanged(vm.order)" class="no-margin">
+                                            <input type="checkbox" ng-model="vm.order.HasBracketOrder"
+                                                ng-change="vm.onHasBracketOrderChanged(vm.order)" class="no-margin">
                                             <span>Attach Bracket Order</span>
                                         </div>
                                     </dl>
@@ -110,7 +154,8 @@
                                     <section class="bracket" ng-show="vm.order.HasBracketOrder">
                                         <dl>
                                             <dt>
-                                                <input type="checkbox" ng-model="vm.order.HasAttachedTP" ng-change="vm.onAttachedBracketOrderChanged()" />
+                                                <input type="checkbox" ng-model="vm.order.HasAttachedTP"
+                                                    ng-change="vm.onAttachedBracketOrderChanged()" />
                                                 <span>Take Profit</span>
                                             </dt>
                                             <dd ng-if="vm.order.HasAttachedTP">
@@ -119,19 +164,32 @@
                                                     <span class="currency">
                                                         {{vm.order.Product.Currency | currencySymbol}}
                                                     </span>
-                                                    <input ng-model-options="{debounce: 200}" class="price" ng-model="vm.order.TakeProfitOrder.LimitPrice" type="number" placeholder="Price" step="0.0001" />
+                                                    <input ng-model-options="{debounce: 200}" class="price"
+                                                        ng-model="vm.order.TakeProfitOrder.LimitPrice" type="number"
+                                                        placeholder="Price" step="0.0001" />
                                                 </div>
                                                 <div class="up-down-buttons pull-left">
-                                                    <button ng-click="vm.decreaseTakeProfitPrice(vm.order)" ng-disabled="!vm.order.HasAttachedTP" class="mini-filled-red"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                                                    <button ng-click="vm.increaseTakeProfitPrice(vm.order)" ng-disabled="!vm.order.HasAttachedTP" class="mini-filled-green"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                                                    <button ng-click="vm.decreaseTakeProfitPrice(vm.order)"
+                                                        ng-disabled="!vm.order.HasAttachedTP"
+                                                        class="mini-filled-red"><span
+                                                            class="glyphicon glyphicon-arrow-down"></span></button>
+                                                    <button ng-click="vm.increaseTakeProfitPrice(vm.order)"
+                                                        ng-disabled="!vm.order.HasAttachedTP"
+                                                        class="mini-filled-green"><span
+                                                            class="glyphicon glyphicon-arrow-up"></span></button>
                                                 </div>
-                                                <span class="percentage green-profit" ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) >= 0">{{vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) | toPercentAllowingZero}} Gain</span>
-                                                <span class="percentage red-loss" ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) < 0">{{vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) | toPercentAllowingZero}} Loss</span>
+                                                <span class="percentage green-profit"
+                                                    ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) >= 0">{{vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice)
+                                                    | toPercentAllowingZero}} Gain</span>
+                                                <span class="percentage red-loss"
+                                                    ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice) < 0">{{vm.computeBracketOrderPercentage(vm.order,vm.order.TakeProfitOrder.LimitPrice)
+                                                    | toPercentAllowingZero}} Loss</span>
                                             </dd>
                                         </dl>
                                         <dl>
                                             <dt>
-                                                <input type="checkbox" ng-model="vm.order.HasAttachedSL" ng-change="vm.onAttachedBracketOrderChanged()" />
+                                                <input type="checkbox" ng-model="vm.order.HasAttachedSL"
+                                                    ng-change="vm.onAttachedBracketOrderChanged()" />
                                                 <span>Stop Loss</span>
                                             </dt>
                                             <dd ng-if="vm.order.HasAttachedSL">
@@ -140,38 +198,47 @@
                                                     <span class="currency">
                                                         {{vm.order.Product.Currency | currencySymbol}}
                                                     </span>
-                                                    <input ng-model-options="{debounce: 200}" class="price" ng-model="vm.order.StopLossOrder.StopPrice" type="number" placeholder="Price" step="0.0001" />
+                                                    <input ng-model-options="{debounce: 200}" class="price"
+                                                        ng-model="vm.order.StopLossOrder.StopPrice" type="number"
+                                                        placeholder="Price" step="0.0001" />
                                                 </div>
                                                 <div class="up-down-buttons pull-left">
-                                                    <button ng-click="vm.decreaseCutLossPrice(vm.order)" ng-disabled="!vm.order.HasAttachedSL" class="mini-filled-red"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                                                    <button ng-click="vm.increaseCutLossPrice(vm.order)" ng-disabled="!vm.order.HasAttachedSL" class="mini-filled-green"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                                                    <button ng-click="vm.decreaseCutLossPrice(vm.order)"
+                                                        ng-disabled="!vm.order.HasAttachedSL"
+                                                        class="mini-filled-red"><span
+                                                            class="glyphicon glyphicon-arrow-down"></span></button>
+                                                    <button ng-click="vm.increaseCutLossPrice(vm.order)"
+                                                        ng-disabled="!vm.order.HasAttachedSL"
+                                                        class="mini-filled-green"><span
+                                                            class="glyphicon glyphicon-arrow-up"></span></button>
                                                 </div>
-                                                <span class="percentage green-profit" ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) >= 0">{{vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) | toPercentAllowingZero}} Gain</span>
-                                                <span class="percentage red-loss" ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) < 0">{{vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) | toPercentAllowingZero}} Loss</span>
+                                                <span class="percentage green-profit"
+                                                    ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) >= 0">{{vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice)
+                                                    | toPercentAllowingZero}} Gain</span>
+                                                <span class="percentage red-loss"
+                                                    ng-if="vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice) < 0">{{vm.computeBracketOrderPercentage(vm.order,vm.order.StopLossOrder.StopPrice)
+                                                    | toPercentAllowingZero}} Loss</span>
                                             </dd>
                                         </dl>
                                     </section>
 
                                     <div class="lh-30px text-right error-message p-right-20px"
-                                         ng-if="vm.isCapitalMightExceed()">
+                                        ng-if="vm.isCapitalMightExceed()">
                                         Capital used will likely exceed trading capital. Your order may be rejected.
                                     </div>
-                                    <div class="text-right error-message p-right-20px" ng-if="vm.validationMessage">{{vm.validationMessage}}</div>
+                                    <div class="text-right error-message p-right-20px" ng-if="vm.validationMessage">
+                                        {{vm.validationMessage}}</div>
                                 </fieldset>
                             </div>
                         </section>
                         <div class="submit-container m-top-10px separator-top p-top-10px">
-                            <button class="hollow-blue pull-left"
-                                    ng-click="vm.clear(); vm.clearTransactionInfo();">
+                            <button class="hollow-blue pull-left" ng-click="vm.clear(); vm.clearTransactionInfo();">
                                 CLEAR
                             </button>
 
-                            <button class="filled-blue pull-right"
-                                    ng-disabled="vm.disableConfirm()"
-                                    ng-click="vm.confirm();"
-                                    analytics-on analytics-category="Trade"
-                                    analytics-event="ConfirmOrder"
-                                    agmc-analytics-timestamp>
+                            <button class="filled-blue pull-right" ng-disabled="vm.disableConfirm()"
+                                ng-click="vm.confirm();" analytics-on analytics-category="Trade"
+                                analytics-event="ConfirmOrder" agmc-analytics-timestamp>
                                 CONFIRM
                             </button>
                         </div>
@@ -185,7 +252,8 @@
             <div class="p-50px text-center" ng-if="vm.isSubmitting">
                 <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
             </div>
-            <agms-orders-confirm go-back="vm.goBack" ng-if="!vm.isSubmitting" confirmed-order="vm.confirmedOrder" quantity-type="vm.order.quantityType" submit="vm.submit" is-follow-order="false"></agms-orders-confirm>
+            <agms-orders-confirm go-back="vm.goBack" ng-if="!vm.isSubmitting" confirmed-order="vm.confirmedOrder"
+                quantity-type="vm.order.quantityType" submit="vm.submit" is-follow-order="false"></agms-orders-confirm>
         </agms-droid-helper-single-step>
     </agms-droid-helper-step-by-step-flow>
 </div>

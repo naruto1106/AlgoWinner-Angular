@@ -106,7 +106,7 @@ agmNgModuleWrapper('agms.orders', [])
             if (!(vm.order.Quantity > 0)) {
                 return "Please enter a valid quantity";
             }
-            if ((!vm.order.LimitPrice || vm.order.LimitPrice <= 0) && vm.order.OrderType === "Limit" && !vm.isLoadingPrice) {
+            if ((!vm.order.LimitPrice || vm.order.LimitPrice <= 0) && (vm.order.OrderType === "Limit" || vm.order.OrderType === "Stop Limit") && !vm.isLoadingPrice) {
                 return "Please enter a valid limit price";
             }
             if ((!vm.order.StopPrice || vm.order.StopPrice <= 0) && vm.order.OrderType === "Stop" && !vm.isLoadingPrice) {
@@ -468,7 +468,7 @@ agmNgModuleWrapper('agms.orders', [])
                 var orderRequest = {
                     AccountId: accountId,
                     Action: vm.order.Action,
-                    OrderType: vm.order.OrderType,
+                    OrderType: vm.order.OrderType.replace(' ',''),
                     Product: {
                         AssetType: vm.order.Product.AssetType,
                         Symbol: vm.order.Product.Symbol,
@@ -482,29 +482,22 @@ agmNgModuleWrapper('agms.orders', [])
                 };
                 let service = "SendLiveOrder";
                 if(vm.brokerType == 'futu') service = 'FutuSendLiveOrder'
-                return orderService[service](orderRequest,
-                    function (res) {
-                        vm.order.OrderId = res.data.id;
-                        coreNotificationService.notifySuccess("Send Order", "Your order has been successfully sent");
-                        vm.uibClosePanel({
-                            order: vm.order,
-                            selectedStrategy: vm.selectedStrategy
-                        });
-                    },
-                    function (res) {
-                        if (res.status === 400) {
-                            coreNotificationService.notifyError("Send Order", res.data);
-                        } else {
-                            coreNotificationService.notifyError("Send Order", "There was an error trying to approve this request. Please check your connection or try again later.");
-                        }
-                    },
-                    function () {
-                        vm.isSubmitting = false;
-                        vm.uibClosePanel({
-                            order: vm.order,
-                            accountId: accountId
-                        });
-                    }).finally(function () {
+                return orderService[service](orderRequest)
+                .then(function (res) {
+                    vm.order.OrderId = res.data.id;
+                    coreNotificationService.notifySuccess("Send Order", "Your order has been successfully sent");
+                    vm.uibClosePanel({
+                        order: vm.order,
+                        accountId: accountId
+                    });
+                }, function (res) {
+                    if (res.status === 400) {
+                        console.log(JSON.stringify(res))
+                        coreNotificationService.notifyError("Send Order", res.data);
+                    } else {
+                        coreNotificationService.notifyError("Send Order", "There was an error trying to approve this request. Please check your connection or try again later.");
+                    }
+                }).finally(function () {
                     vm.isSubmitting = false;
                 });
             }
@@ -564,7 +557,7 @@ agmNgModuleWrapper('agms.orders', [])
                 listenOnProductResolve: {},
                 currentActiveOrder: null,
                 isActiveOrderPendingCancellation: isActiveOrderPendingCancellation,
-                orderTypes: ["Limit", "Market", "Stop"],
+                orderTypes: ["Limit", "Market", "Stop", "Stop Limit"],
                 transactionInfo: {
                     CapitalUsed: null,
                     Leverage: null,
