@@ -2,7 +2,7 @@
     .ngApp
     .service('portfolioService', ['coreServerCommunicationService', function (coreServerCommunicationService) {
         var developerPath = '/mantpmsapi/DeveloperPortfolio/';
-        
+        var futuPath = '/futuapi/v1/'
         this.GetActivePortfolio = coreServerCommunicationService.genPostFunction(developerPath + 'GetActivePortfolios');
         this.GetHistoricalPortfolio = coreServerCommunicationService.genGetFunctionWithNVar(developerPath + "GetHistoricalPortfolio", function (args) {
             return {
@@ -18,4 +18,5 @@
                 productId: args[1]
             };
         })
+        this.FutuGetRealizedPositon = coreServerCommunicationService.genGetFunctionWithNVar(futuPath + 'order/GetHistoryPositions');
     }]);
