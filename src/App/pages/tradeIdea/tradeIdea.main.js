@@ -5,8 +5,8 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.yearListing=[];
             $scope.tableColumns=[];
             $scope.normalizedAccumulation=[];
-            var myEl = angular.element(document.querySelector('body'));
-            myEl.addClass('tradeIdeapageContent');
+            // var myEl = angular.element(document.querySelector('body'));
+            // myEl.addClass('tradeIdeapageContent');
             $scope.backTestProfit = 40
             $scope.backTestCutLoss=80
             $scope.getSelectionBarColor = function () {
@@ -141,6 +141,7 @@ agmNgModuleWrapper('agmp.tradeIdea')
             $scope.analystActionType ={};
             $scope.breakoutMulti ={};
             $scope.unusualGapType ={};
+            $scope.eventNewsTrigger ={};
 
             $scope.selectedPeriod ={};
             $scope.lookbackPeriod ={};
@@ -328,11 +329,20 @@ agmNgModuleWrapper('agmp.tradeIdea')
                     { id: 3, name: 'Upgrade Earning Forecast' },
                     { id: 4, name: 'Downgrade Earning Forecast' }
                 ],
+                targetPriceP1: [
+                    { id: 1, name: 'Above Current Price' },
+                    { id: 2, name: 'Below Current Price' }
+                ],
                 breakoutMulti: [
                     { id: 1, name: '< 25%' },
                     { id: 2, name: '< 50%' },
                     { id: 3, name: '50% to 75%' },
                     { id: 4, name: '>100%' }
+                ],
+                newsTrigger: [
+                    { id: 1, name: 'Mentioned in Headline within the past 24 hours' },
+                    { id: 2, name: 'Price moves more than usual'},
+                    { id: 3, name: 'Headline has either Positive or Negative Headline'}
                 ],
             }
 
