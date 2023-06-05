@@ -21,12 +21,12 @@
                 <td><label>Order Type: </label></td>
                 <td><span>{{vm.confirmedOrder.OrderType}}</span></td>
             </tr>
-            <tr ng-if="vm.confirmedOrder.OrderType === 'Limit' || vm.confirmedOrder.OrderType === 'Stop Limit'">
+            <tr ng-if="vm.confirmedOrder.OrderType === 'Limit'">
                 <td><label>Limit Price: </label></td>
                 <td><span>{{vm.confirmedOrder.Product.Currency | currencySymbol}} {{vm.confirmedOrder.LimitPrice}}</span></td>
             </tr>
-            <tr ng-if="vm.confirmedOrder.OrderType === 'Stop' || vm.confirmedOrder.OrderType === 'Stop Limit'">
-                <td><label>Stop Price: </label></td>
+            <tr ng-if="vm.confirmedOrder.OrderType === 'Stop'">
+                <td><label>Limit Price: </label></td>
                 <td><span>{{vm.confirmedOrder.Product.Currency | currencySymbol}} {{vm.confirmedOrder.StopPrice}}</span></td>
             </tr>
             <tr>

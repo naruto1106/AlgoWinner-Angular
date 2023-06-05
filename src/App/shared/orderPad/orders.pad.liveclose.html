@@ -13,7 +13,7 @@
                     </div>
                     <div class="clearfix m-bottom-10px"></div>
                     <form name="orderpad" ng-show="!vm.isSubmitting">
-                        <section class="m-top-10px separator-top ">
+                        <section class="m-top-10px separator-top order-form">
                             <div>
                                 <fieldset ng-disabled="vm.accountId == null"
                                           ng-class="{'disabled-opacity':vm.accountId == null}">
@@ -43,56 +43,31 @@
                                         </dd>
                                     </dl>
 
-                                    <fieldset ng-disabled="!vm.order.Product || !vm.order.Product.ProductId"
-                                        ng-show="vm.order.OrderType==='Limit' || vm.order.OrderType==='Stop Limit'">
+                                    <fieldset ng-disabled="!vm.order.Product || !vm.order.Product.ProductId">
                                         <dl class="dl-horizontal-100px order-details">
-                                            <dt>Limit Price</dt>
-                                            <dd>
-                                                <span class="pull-left m-right-10px"
-                                                    ng-if="vm.order.Product != null">{{vm.order.Product.Currency |
-                                                    currencySymbol}}</span>
-                                                <input ng-model-options="{debounce: 200}" type="number" step="0.0001"
-                                                    class="pull-left w-100px" ng-model="vm.order.LimitPrice"
-                                                    ng-change="vm.onPriceChanges()" />
+                                            <dt ng-show="vm.order.OrderType==='Limit'">Limit Price</dt>
+                                            <dd ng-show="vm.order.OrderType==='Limit'">
+                                                <span class="pull-left m-right-10px" ng-if="vm.order.Product != null">{{vm.order.Product.Currency | currencySymbol}}</span>
+                                                <input ng-model-options="{debounce: 200}" type="number" step="0.0001" class="pull-left w-100px" ng-model="vm.order.LimitPrice" ng-change="vm.onPriceChanges()" />
                                                 <div class="up-down-buttons pull-left">
-                                                    <button ng-click="vm.decreaseLimitPrice()"
-                                                        ng-disabled="!vm.order.Product || !vm.order.LimitPrice"
-                                                        class="mini-filled-red"><span
-                                                            class="glyphicon glyphicon-arrow-down"></span></button>
-                                                    <button ng-click="vm.increaseLimitPrice()"
-                                                        ng-disabled="!vm.order.Product || !vm.order.LimitPrice"
-                                                        class="mini-filled-green"><span
-                                                            class="glyphicon glyphicon-arrow-up"></span></button>
+                                                    <button ng-click="vm.decreaseLimitPrice()" ng-disabled="!vm.order.Product || !vm.order.LimitPrice" class="mini-filled-red"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                                                    <button ng-click="vm.increaseLimitPrice()" ng-disabled="!vm.order.Product || !vm.order.LimitPrice" class="mini-filled-green"><span class="glyphicon glyphicon-arrow-up"></span></button>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </dd>
                                         </dl>
-                                    </fieldset>
-                                    <fieldset
-                                        ng-show="(vm.order.OrderType==='Stop Limit'||vm.order.OrderType==='Stop')"
-                                        ng-disabled="!vm.order.Product || !vm.order.Product.ProductId">
                                         <dl class="dl-horizontal-100px order-details">
-                                            <dt>Stop Price</dt>
-                                            <dd>
-                                                <span class="lh-30px pull-left m-right-10px">{{vm.order.Product.Currency
-                                                    | currencySymbol}}</span>
-                                                <input ng-model-options="{debounce: 200}" type="number" step="0.0001"
-                                                    class="pull-left w-100px" ng-model="vm.order.StopPrice"
-                                                    ng-change="vm.onPriceChanges()" />
+                                            <dt ng-show="vm.order.OrderType==='Stop'">Stop Price</dt>
+                                            <dd ng-show="vm.order.OrderType==='Stop'">
+                                                <span class="lh-30px pull-left m-right-10px">{{vm.order.Product.Currency | currencySymbol}}</span>
+                                                <input ng-model-options="{debounce: 200}" type="number" step="0.0001" class="pull-left w-100px" ng-model="vm.order.StopPrice" ng-change="vm.onPriceChanges()" />
                                                 <div class="up-down-buttons pull-left">
-                                                    <button ng-click="vm.decreaseStopPrice()"
-                                                        ng-disabled="!vm.order.Product || !vm.order.StopPrice"
-                                                        class="mini-filled-red"><span
-                                                            class="glyphicon glyphicon-arrow-down"></span></button>
-                                                    <button ng-click="vm.increaseStopPrice()"
-                                                        ng-disabled="!vm.order.Product || !vm.order.StopPrice"
-                                                        class="mini-filled-green"><span
-                                                            class="glyphicon glyphicon-arrow-up"></span></button>
+                                                    <button ng-click="vm.decreaseStopPrice()" ng-disabled="!vm.order.Product || !vm.order.StopPrice" class="mini-filled-red"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                                                    <button ng-click="vm.increaseStopPrice()" ng-disabled="!vm.order.Product || !vm.order.StopPrice" class="mini-filled-green"><span class="glyphicon glyphicon-arrow-up"></span></button>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </dd>
                                         </dl>
-
                                     </fieldset>
                                     <dl class="dl-horizontal-100px order-details">
                                         <dt>Validity</dt>

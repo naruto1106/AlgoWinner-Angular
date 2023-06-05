@@ -8,7 +8,6 @@
             var developerOmsPath = '/omsapi/DeveloperOrder/';
             var bracketOrderOmsPath = '/omsapi/DeveloperBracketOrder/';
             var tigerPath = '/tigerstockapi/v1/';
-            var futuPath = '/futustockapi/v1/'
 
             // GET FUNCTION
             serviceObj.GetDeveloperAllOrdersForTradeReview = coreServerCommunicationService.genPostFunction(developerTpmsPath + "GetOrdersForTradeReview");
@@ -63,9 +62,6 @@
 
             serviceObj.SendLiveOrder = coreServerCommunicationService.genPostFunction(tigerPath + 'PlaceOrder');
             serviceObj.CancelLiveOrder = coreServerCommunicationService.genPostFunction(tigerPath + 'CancelOrder');
-            serviceObj.FutuSendLiveOrder = coreServerCommunicationService.genPostFunction(futuPath + 'order/PlaceOrder');
-            serviceObj.FutuCancelLiveOrder = coreServerCommunicationService.genPostFunction(futuPath + 'order/CancelOrder');
-            serviceObj.FutuHistoricalOrder = coreServerCommunicationService.genGetFunctionWithNVar(futuPath + 'order/GetHistoryOrders');
 
             // OMS API
             function developerPostFunction(url) {

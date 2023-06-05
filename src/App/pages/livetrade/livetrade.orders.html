@@ -29,8 +29,7 @@
                                             Broker Account
                                             <div class="m-top-5px" ng-if="vm.accounts.length === 1">
                                                 <img class="img-cir broker-logo"
-                                                    ng-src="//am708403.azureedge.net/images/broker/{{vm.selectedAccount.type}}.png"
-                                                    alt="" />
+                                                     ng-src="//am708403.azureedge.net/images/broker/{{vm.selectedAccount.type}}.png" alt="" />
                                                 <h3 class="account-code text-blue2">
                                                     {{vm.selectedAccount.accountCode}}
                                                 </h3>
@@ -38,23 +37,18 @@
                                             <div class="m-top-10px" ng-if="vm.accounts.length > 1">
                                                 <div uib-dropdown class="m-bottom-5px">
                                                     <div uib-dropdown-toggle class="toggle account-dropdown"
-                                                        analytics-on="click" analytics-category="Dashboard"
-                                                        analytics-event="ToggleBrokerAccount"
-                                                        analytics-label="{{vm.user.RealName}}" agmc-analytics-timestamp>
+                                                         analytics-on="click" analytics-category="Dashboard" analytics-event="ToggleBrokerAccount" analytics-label="{{vm.user.RealName}}" agmc-analytics-timestamp>
                                                         <img class="img-cir mr-1 broker-logo"
-                                                            ng-src="//am708403.azureedge.net/images/broker/{{vm.selectedAccount.type}}.png"
-                                                            alt="" />
+                                                             ng-src="//am708403.azureedge.net/images/broker/{{vm.selectedAccount.type}}.png" alt="" />
                                                         <h3 class="account-code text-blue2">
                                                             {{vm.selectedAccount.accountCode}}
                                                         </h3>
                                                     </div>
                                                     <div uib-dropdown-menu role="menu">
                                                         <div ng-repeat="account in vm.accounts">
-                                                            <div class="account-dropdown-choice"
-                                                                ng-click="vm.switchAccount(account)">
+                                                            <div class="account-dropdown-choice" ng-click="vm.switchAccount(account)">
                                                                 <img class="img-cir mr-2 broker-logo"
-                                                                    ng-src="//am708403.azureedge.net/images/broker/{{account.type}}.png"
-                                                                    alt="" />
+                                                                     ng-src="//am708403.azureedge.net/images/broker/{{account.type}}.png" alt="" />
                                                                 <h3 class="account-code text-blue2">
                                                                     {{account.accountCode}}
                                                                 </h3>
@@ -70,74 +64,68 @@
                                             <span style="margin-right: -3px">
                                                 Trading Limit
                                                 <i class="glyphicon glyphicon-info-sign icon-blue"
-                                                    tooltip-append-to-body="true" uib-tooltip="The Trading Limit">
+                                                   tooltip-append-to-body="true"
+                                                   uib-tooltip="The Trading Limit">
                                                 </i>
                                             </span>
                                             <br>
-                                            <h3 class="text-blue2">{{vm.selectedAccount.info.tradingLimit |
-                                                customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
+                                            <h3 class="text-blue2">{{vm.selectedAccount.info.tradingLimit | customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
                                         </div>
                                         <div class="text-right col-6 col-md-4 col-xl-4">
                                             <span style="margin-right: -3px">
                                                 Equity
                                                 <i class="glyphicon glyphicon-info-sign icon-blue"
-                                                    tooltip-append-to-body="true"
-                                                    uib-tooltip="The basis for determining the price of the assets in your account. Total cash value + stock value + options value + bond value">
+                                                   tooltip-append-to-body="true"
+                                                   uib-tooltip="The basis for determining the price of the assets in your account. Total cash value + stock value + options value + bond value">
                                                 </i>
                                             </span>
                                             <br>
-                                            <h3 class="text-blue2">{{vm.selectedAccount.info.equity |
-                                                customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
+                                            <h3 class="text-blue2">{{vm.selectedAccount.info.equity | customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
                                         </div>
                                         <div class="text-right col-6 col-md-4 col-xl-4">
                                             <span style="margin-right: -3px">
                                                 Fund
                                                 <i class="glyphicon glyphicon-info-sign icon-blue"
-                                                    tooltip-append-to-body="true"
-                                                    uib-tooltip="This value tells what you have available for trading">
+                                                   tooltip-append-to-body="true"
+                                                   uib-tooltip="This value tells what you have available for trading">
                                                 </i>
                                             </span>
                                             <br>
-                                            <h3 class="text-blue2">{{vm.selectedAccount.info.fund |
-                                                customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
+                                            <h3 class="text-blue2">{{vm.selectedAccount.info.fund | customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
                                         </div>
-                                        <div style="margin: 6px 0; border-top: 1px solid #dee2e6" class="col-xs-12">
-                                        </div>
+                                        <div style="margin: 6px 0; border-top: 1px solid #dee2e6" class="col-xs-12"></div>
                                         <div class="text-right col-6 col-md-4 col-xl-4">
                                             <span style="margin-right: -3px">
                                                 Unrealized P/L
                                                 <i class="glyphicon glyphicon-info-sign icon-blue"
-                                                    tooltip-append-to-body="true"
-                                                    uib-tooltip="Unrealized profit / loss">
+                                                   tooltip-append-to-body="true"
+                                                   uib-tooltip="Unrealized profit / loss">
                                                 </i>
                                             </span>
                                             <br>
-                                            <h3 class="text-blue2">{{vm.selectedAccount.info.unrealizedPL |
-                                                customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
+                                            <h3 class="text-blue2">{{vm.selectedAccount.info.unrealizedPL | customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
                                         </div>
                                         <div class="text-right col-6 col-md-4 col-xl-4">
                                             <span style="margin-right: -3px">
                                                 Margin
                                                 <i class="glyphicon glyphicon-info-sign icon-blue"
-                                                    tooltip-append-to-body="true"
-                                                    uib-tooltip="Maintenance Margin requirement of whole portfolio">
+                                                   tooltip-append-to-body="true"
+                                                   uib-tooltip="Maintenance Margin requirement of whole portfolio">
                                                 </i>
                                             </span>
                                             <br>
-                                            <h3 class="text-blue2">{{vm.selectedAccount.info.margin |
-                                                customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
+                                            <h3 class="text-blue2">{{vm.selectedAccount.info.margin | customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
                                         </div>
                                         <div class="text-right col-6 col-md-4 col-xl-4">
                                             <span style="margin-right: -3px">
                                                 Available to deal
                                                 <i class="glyphicon glyphicon-info-sign icon-blue"
-                                                    tooltip-append-to-body="true"
-                                                    uib-tooltip="Measurement of the dollar value of securities that one may purchase in a securities account without depositing additional funds">
+                                                   tooltip-append-to-body="true"
+                                                   uib-tooltip="Measurement of the dollar value of securities that one may purchase in a securities account without depositing additional funds">
                                                 </i>
                                             </span>
                                             <br>
-                                            <h3 class="text-blue2">{{vm.selectedAccount.info.available |
-                                                customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
+                                            <h3 class="text-blue2">{{vm.selectedAccount.info.available | customCurrencyOrDashMinMax:vm.selectedAccount.info.currency:0:2}}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -145,9 +133,7 @@
 
                             <div class="col-md-2">
                                 <div class="p-10px text-center ">
-                                    <button class="place-order-button btn-3d-bumpy-xtra" ng-click="vm.placeOrder()"
-                                        ng-disabled="vm.isPlacingOrder" analytics-on analytics-category="Trade"
-                                        analytics-event="PlaceOrder" agmc-analytics-timestamp>
+                                    <button class="place-order-button btn-3d-bumpy-xtra" ng-click="vm.placeOrder()" ng-disabled="vm.isPlacingOrder" analytics-on analytics-category="Trade" analytics-event="PlaceOrder" agmc-analytics-timestamp>
                                         <div class="text-center w-100pct">
                                             <span class="glyphicon glyphicon-list-alt icon"></span>
                                         </div>
@@ -178,65 +164,24 @@
                                                     <th></th>
                                                 </tr>
                                             </thead>
-                                            <tbody ng-if="vm.selectedAccount.type =='tiger'">
+                                            <tbody>
                                                 <tr ng-if="vm.selectedAccount.positions.length === 0">
                                                     <td colspan="6">No Open Position</td>
                                                 </tr>
-                                                <tr
-                                                    ng-repeat="position in vm.selectedAccount.positions track by position.product">
+                                                <tr ng-repeat="position in vm.selectedAccount.positions track by position.product">
                                                     <td style="padding-right: 0">
-                                                        <agmp-simple-product
-                                                            product="position.algoProduct"></agmp-simple-product>
+                                                        <agmp-simple-product product="position.algoProduct"></agmp-simple-product>
                                                     </td>
-
-                                                    <td class="text-right">{{position.direction === 'BUY' ? 'LONG' :
-                                                        'SHORT'}}</td>
+                                                    <td class="text-right">{{position.direction === 'BUY' ? 'LONG' : 'SHORT'}}</td>
                                                     <td class="text-right">{{position.dealSize}}</td>
-                                                    <td class="text-right"> {{position.openingPrice |
-                                                        correctTickSizeDecimalPlacesWithCurrency:position.algoProduct.Currency:position.algoProduct.TradeVenueLoc}}
-                                                    </td>
-                                                    <td class="text-right"
-                                                        ng-class="position.unrealizedPNL >=0 ? ['green-profit'] : ['red-loss']">
-                                                        {{position.unrealizedPNL |
-                                                        customCurrencyOrDash:position.algoProduct.Currency:2}}
+                                                    <td class="text-right"> {{position.openingPrice | correctTickSizeDecimalPlacesWithCurrency:position.algoProduct.Currency:position.algoProduct.TradeVenueLoc}}</td>
+                                                    <td class="text-right" ng-class="position.unrealizedPNL >=0 ? ['green-profit'] : ['red-loss']">
+                                                        {{position.unrealizedPNL | customCurrencyOrDash:position.algoProduct.Currency:2}}
                                                     </td>
                                                     <td class="text-right">
                                                         <button ng-click="vm.decreasePosition(position)"
-                                                            class="mini-filled-red close-button super-compact-button"
-                                                            analytics-on="click" analytics-category="Trade"
-                                                            analytics-event="ClosePosition"
-                                                            analytics-label="OpenPositions" agmc-analytics-timestamp>
-                                                            CLOSE
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody ng-if="vm.selectedAccount.type =='futu'">
-                                                <tr ng-if="vm.selectedAccount.positions.length === 0">
-                                                    <td colspan="6">No Open Position</td>
-                                                </tr>
-                                                <tr ng-repeat="position in vm.selectedAccount.positions">
-                                                    <td>
-                                                        <agmp-simple-product
-                                                            product="position.algoProduct"></agmp-simple-product>
-                                                    </td>
-                                                    <td class="text-right">{{position.CanSellQty < 1? "SHORT" : "LONG"
-                                                            }}</td>
-                                                    <td class="text-right">{{position.Qty}}</td>
-                                                    <td class="text-right"> {{position.Price |
-                                                        correctTickSizeDecimalPlacesWithCurrency:position.algoProduct.Currency:position.algoProduct.TradeVenueLoc}}
-                                                    </td>
-                                                    <td class="text-right"
-                                                        ng-class="position.UnrealizedPL >=0 ? ['green-profit'] : ['red-loss']">
-                                                        {{position.PlVal |
-                                                        customCurrencyOrDash:position.algoProduct.Currency:2}}
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <button ng-click="vm.decreasePosition(position)"
-                                                            class="mini-filled-red close-button super-compact-button"
-                                                            analytics-on="click" analytics-category="Trade"
-                                                            analytics-event="ClosePosition"
-                                                            analytics-label="OpenPositions" agmc-analytics-timestamp>
+                                                                class="mini-filled-red close-button super-compact-button"
+                                                                analytics-on="click" analytics-category="Trade" analytics-event="ClosePosition" analytics-label="OpenPositions" agmc-analytics-timestamp>
                                                             CLOSE
                                                         </button>
                                                     </td>
@@ -260,38 +205,29 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-if="vm.selectedAccount.orders.length === 0"
-                                                    style="padding-right: 0">
+                                                <tr ng-if="vm.selectedAccount.orders.length === 0" style="padding-right: 0">
                                                     <td colspan="6">No Active Order</td>
                                                 </tr>
-                                                <tr
-                                                    ng-repeat="order in vm.selectedAccount.orders | orderBy: '-id' track by order.id ">
+                                                <tr ng-repeat="order in vm.selectedAccount.orders | orderObjectBy: '-id' track by order.id ">
                                                     <td>
-                                                        <agmp-simple-product
-                                                            product="order.algoProduct"></agmp-simple-product>
+                                                        <agmp-simple-product product="order.algoProduct"></agmp-simple-product>
                                                     </td>
-                                                    <td class="text-right">{{order.direction === 'BUY' ? 'LONG' :
-                                                        'SHORT'}}</td>
+                                                    <td class="text-right">{{order.direction === 'BUY' ? 'LONG' : 'SHORT'}}</td>
                                                     <td class="text-right">{{order.dealSize}}</td>
                                                     <td class="text-right">
                                                         <span ng-if="order.type === 'STOP'">
-                                                            {{order.stopPrice |
-                                                            correctTickSizeDecimalPlacesWithCurrency:order.algoProduct.Currency:order.algoProduct.TradeVenueLoc}}
+                                                            {{order.stopPrice | correctTickSizeDecimalPlacesWithCurrency:order.algoProduct.Currency:order.algoProduct.TradeVenueLoc}}
                                                         </span>
-                                                        <span
-                                                            ng-if="order.type === 'LIMIT'||order.type === 'STOPLIMIT'">
-                                                            {{order.limitPrice |
-                                                            correctTickSizeDecimalPlacesWithCurrency:order.algoProduct.Currency:order.algoProduct.TradeVenueLoc}}
+                                                        <span ng-if="order.type === 'LIMIT'">
+                                                            {{order.limitPrice | correctTickSizeDecimalPlacesWithCurrency:order.algoProduct.Currency:order.algoProduct.TradeVenueLoc}}
                                                         </span>
                                                     </td>
                                                     <td class="text-right">{{order.type}} {{order.validity}}</td>
                                                     <td class="text-right">{{order.orderStatus}}</td>
                                                     <td class="text-right">
-                                                        <button
-                                                            class="pull-right mini-filled-red w-90px m-top-15px m-5px"
-                                                            ng-click="vm.cancelOrder(order)" analytics-on="click"
-                                                            analytics-category="Trade" analytics-event="CancelOrder"
-                                                            agmc-analytics-timestamp>
+                                                        <button class="pull-right mini-filled-red w-90px m-top-15px m-5px"
+                                                                ng-click="vm.cancelOrder(order)"
+                                                                analytics-on="click" analytics-category="Trade" analytics-event="CancelOrder" agmc-analytics-timestamp>
                                                             CANCEL
                                                         </button>
                                                     </td>
@@ -300,9 +236,12 @@
                                         </table>
                                     </div>
                                 </uib-tab>
-                                <uib-tab ng-click="vm.loadRealizedPosition()" index="3" heading="REALIZED POSITION">
+                                <uib-tab ng-click="vm.loadRealizedPositions()" index="3" heading="REALIZED POSITIONS">
                                     <div class="m-top-15px">
-                                        <table class="table-positions table">
+                                        <p ng-if="vm.linkedStrategy">
+                                            This only shows realized positions executed by AutoInvest that follows robot <b>{{vm.linkedStrategy.Name}}</b>
+                                        </p>
+                                        <table class="table-positions table m-t-10">
                                             <thead>
                                                 <tr>
                                                     <th>Product</th>
@@ -314,120 +253,51 @@
                                                         <span>
                                                             Net P/L
                                                             <i class="glyphicon glyphicon-info-sign icon-blue"
-                                                                uib-tooltip="Net P/L = Realized P/L - Brokerage Cost"></i>
+                                                               uib-tooltip="Net P/L = Realized P/L - Brokerage Cost"></i>
                                                         </span>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-if="vm.realizedPositionsLoading">
-                                                    <td colspan="6">
-                                                        <img width="30"
-                                                            src="//am708403.azureedge.net/images/am-auto/loader.gif" />
-                                                        <span> Loading Realized Position</span>
+                                                <tr ng-if="vm.linkedStrategy && vm.positionLoading">
+                                                    <td colspan="7">
+                                                        <img width="30" src="//am708403.azureedge.net/images/am-auto/loader.gif" />
+                                                        <span> Loading Realized Positions</span>
                                                     </td>
                                                 </tr>
-                                                <tr ng-if="vm.selectedAccount.realizedPositions.length === 0"
-                                                    style="padding-right: 0">
-                                                    <td colspan="6">No Realized Position</td>
+                                                <tr ng-if="!vm.linkedStrategy || (!vm.positionLoading && vm.realizedPositions.length === 0)">
+                                                    <td colspan="7">No Realized Position</td>
                                                 </tr>
-                                                <tr ng-repeat="position in vm.selectedAccount.realizedPositions">
-                                                    <td>
-                                                        <agmp-simple-product
-                                                            product="position.algoProduct"></agmp-simple-product>
+                                                <tr ng-if="!vm.positionLoading && vm.realizedPositions.length > 0"
+                                                    ng-repeat="position in vm.realizedPositions">
+                                                    <td style="padding-right: 0">
+                                                        <agmp-simple-product product="position.Product"></agmp-simple-product>
                                                     </td>
-                                                    <td>{{position.position | uppercase}} <br /> {{position.quantity}}
+                                                    <td>{{position.Position | uppercase}} <br /> {{position.Quantity}}</td>
+                                                    <td class="text-right">
+                                                        <b>Price:</b> {{position.AverageEntryPrice | correctTickSizeDecimalPlacesWithCurrency:position.Product.Currency:position.Product.TradeVenueLoc}}
+                                                        <i ng-if="position.Backfill === 'Enter'"
+                                                           class="glyphicon glyphicon-info-sign icon-blue"
+                                                           tooltip-append-to-body="true"
+                                                           uib-tooltip="Entry price, realized and unrealized P/L is estimated based on robot price, because the entry was done manually by user">
+                                                        </i> <br />
+                                                        <b>Time:</b> {{position.EnterDate | date:'shortDate'}}
                                                     </td>
                                                     <td class="text-right">
-                                                        <b>Price:</b> {{position.exit |
-                                                        correctTickSizeDecimalPlacesWithCurrency:position.currency:position.tradeVenue}}
-                                                        <!-- <i ng-if="position.Backfill === 'Enter'"
-                                                            class="glyphicon glyphicon-info-sign icon-blue"
-                                                            tooltip-append-to-body="true"
-                                                            uib-tooltip="Entry price, realized and unrealized P/L is estimated based on robot price, because the entry was done manually by user">
-                                                        </i>--> <br />
-                                                        <b>Time:</b> {{position.entryTime | date:'short'}}
+                                                        <b>Price:</b> {{position.AverageExitPrice | correctTickSizeDecimalPlacesWithCurrency:position.Product.Currency:position.Product.TradeVenueLoc}}
+                                                        <i ng-if="position.Backfill === 'Exit'"
+                                                           class="glyphicon glyphicon-info-sign icon-blue"
+                                                           tooltip-append-to-body="true"
+                                                           uib-tooltip="Exit price, realized and unrealized P/L is estimated based on robot price, because the exit was done manually by user">
+                                                        </i> <br />
+                                                        <b>Time:</b> {{position.ExitDate | date:'shortDate'}}
                                                     </td>
-                                                    <td class="text-right">
-                                                        <b>Price:</b> {{position.entry |
-                                                        correctTickSizeDecimalPlacesWithCurrency:position.currency:position.tradeVenue}}
-                                                        <!-- <i ng-if="position.Backfill === 'Exit'"
-                                                            class="glyphicon glyphicon-info-sign icon-blue"
-                                                            tooltip-append-to-body="true"
-                                                            uib-tooltip="Exit price, realized and unrealized P/L is estimated based on robot price, because the exit was done manually by user">
-                                                        </i>--> <br />
-                                                        <b>Time:</b> {{position.exitTime | date:'short'}}
+                                                    <td class="text-right" ng-class="position.RealizedPL >=0 ? ['green-profit'] : ['red-loss']">
+                                                        {{position.RealizedPL | customCurrencyOrDash:position.Product.Currency:2}}
                                                     </td>
-                                                    <td class="text-right"
-                                                        ng-class="position.realizedPL >=0 ? ['green-profit'] : ['red-loss']">
-                                                        {{position.realizedPL |
-                                                        customCurrencyOrDash:position.currency:2}}
+                                                    <td class="text-right" ng-class="position.NetPL >=0 ? ['green-profit'] : ['red-loss']">
+                                                        {{position.NetPL | customCurrencyOrDash:position.Product.Currency:2}}
                                                     </td>
-                                                    <td class="text-right"
-                                                        ng-class="position.netPL >=0 ? ['green-profit'] : ['red-loss']">
-                                                        {{position.netPL |
-                                                        customCurrencyOrDash:position.currency:2}}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </uib-tab>
-                                <uib-tab ng-click="vm.loadHistoricalOrders()" index="4" heading="HISTORICAL ORDER">
-                                    <div class="m-top-15px">
-                                        <table class="table-positions table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th class="text-right">Position</th>
-                                                    <th class="text-right">Quantity</th>
-                                                    <th class="text-right">Order Price</th>
-                                                    <th class="text-right">Stop Price</th>
-                                                    <th class="text-right">Type</th>
-                                                    <th class="text-right">Order Time</th>
-                                                    <th class="text-right">Last Update Time</th>
-                                                    <th class="text-right">Order Status</th>
-                                                    <th class="text-right">Filled Avg Price</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-if="vm.historicalOrederLoading">
-                                                    <td colspan="6">
-                                                        <img width="30"
-                                                            src="//am708403.azureedge.net/images/am-auto/loader.gif" />
-                                                        <span> Loading Active Order</span>
-                                                    </td>
-                                                </tr>
-                                                <tr ng-if="vm.selectedAccount.historicalOrders.length === 0"
-                                                    style="padding-right: 0">
-                                                    <td colspan="6">No Historical Order</td>
-                                                </tr>
-                                                <tr ng-repeat="order in vm.selectedAccount.historicalOrders">
-                                                    <td>
-                                                        <agmp-simple-product
-                                                            product="order.algoProduct"></agmp-simple-product>
-                                                    </td>
-                                                    <td class="text-right">{{order.direction === 'BUY' ? 'LONG' :
-                                                        'SHORT'}}</td>
-                                                    <td class="text-right">{{order.dealSize}}</td>
-                                                    <td class="text-right">
-                                                        {{order.limitPrice |
-                                                        correctTickSizeDecimalPlacesWithCurrency:order.currency:order.tradeVenue}}
-                                                    </td>
-                                                    <td>
-                                                        {{order.stopPrice |
-                                                        correctTickSizeDecimalPlacesWithCurrency:order.currency:order.tradeVenue}}
-                                                    </td>
-                                                    <td class="text-right">{{order.type}} {{order.validity}}</td>
-                                                    <td class="text-right">{{order.orderTime | date:'short'}}</td>
-                                                    <td class="text-right">{{order.updateTime | date:'short'}}</td>
-                                                    <td class="text-right"
-                                                        ng-class="order.orderStatus == 'FILLED' ? ['green-profit']:['red-loss']">
-                                                        {{order.orderStatus}}</td>
-                                                    <td class="text-right">
-                                                        <span ng-if="order.openingPrice > 1">
-                                                            {{order.openingPrice |
-                                                            correctTickSizeDecimalPlacesWithCurrency:order.currency:order.tradeVenue}}
-                                                        </span>
                                                 </tr>
                                             </tbody>
                                         </table>
