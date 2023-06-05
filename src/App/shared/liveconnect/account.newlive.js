@@ -34,6 +34,7 @@ agmNgModuleWrapper('agms.liveconnect')
                 return nextStepName;
             }
 
+
             function setStep(currentStepName) {
                 vm.currentStepName = currentStepName;
             }
@@ -45,10 +46,10 @@ agmNgModuleWrapper('agms.liveconnect')
                 };
                 sAccountService.UploadTigerBrokerCredentials(request).then(function (res) {
                     sAccountService.InitTigerClient(request).then(function(res2) {
-                        return coreNotificationService.notifySuccess("Success", "Tiger Account Linked Successfully").result
+                        return coreNotificationService.notifySuccess("Success", "You will receive OTP code in a moment").result
                             .then(
                                 function () {
-                                    vm.uibClosePanel();
+                                    vm.showMoomooConfirmation = true;
                                 });
                     });
                 }, function () {
@@ -61,6 +62,7 @@ agmNgModuleWrapper('agms.liveconnect')
             }
 
             function submitMoomoo() {
+                vm.isLoadingData = true;
                 var request = {
                     FutuId: vm.moomooId,
                     FutuPwd: vm.moomooPassword,
@@ -79,7 +81,7 @@ agmNgModuleWrapper('agms.liveconnect')
                                     .notifySuccess("Success", "Moomoo Account Linked Successfully").result
                                     .then(
                                         function() {
-                                            vm.uibClosePanel();
+                                            vm.setStep("step3");
                                         });
                             } else {
                                 return coreNotificationService.notifyError("Linking Failed",
@@ -104,6 +106,7 @@ agmNgModuleWrapper('agms.liveconnect')
                                 });
                     });
                 }
+                vm.isLoadingData = false;
             }
 
             function generatePublicKey() {

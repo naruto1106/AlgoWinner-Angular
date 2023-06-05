@@ -5,18 +5,18 @@ agmNgModuleWrapper('agms.orders', [])
         windowClass: 'smaller-modal'
     },
     [
-        'listOfCancellableOrders', 'orderService', 'accountId'
+        'listOfCancellableOrders', 'orderService', 'accountId', 'brokerType'
     ],
     function (vm, dep, tool) {
         // --- DEPENDENCY RESOLVER
         var orderService = dep.orderService,
             accountId = dep.accountId,
             coreNotificationService = dep.coreNotificationService;
+            brokerType = dep.brokerType;
 
 
         // --- LOCAL VAR DECLARATION
         var listOfCancellableOrders = dep.listOfCancellableOrders;
-
 
         // --- SCOPE FUNC
         function submit() {
@@ -29,7 +29,9 @@ agmNgModuleWrapper('agms.orders', [])
                 };
 
                 // TODO: MaRa IMPLEMENT LOGIN POPUP FORM FOR UNAUTHORIZED
-                return orderService.CancelLiveOrder(cancelRequest)
+                let service = "CancelLiveOrder";
+                if(vm.brokerType == 'futu') service = 'FutuCancelLiveOrder'
+                return orderService[service](cancelRequest)
                     .then(function (data) {
                         vm.order.id = data.id;
                         vm.uibClosePanel({
@@ -51,7 +53,8 @@ agmNgModuleWrapper('agms.orders', [])
             tool.setVmProperties({
                 submit: submit,
                 isSubmitting: false,
-                order: null
+                order: null,
+                brokerType: 'tiger'
             });
 
             if (listOfCancellableOrders && listOfCancellableOrders.length > 0) {
@@ -59,6 +62,7 @@ agmNgModuleWrapper('agms.orders', [])
                 vm.order.inputNominalQuantity = vm.order.dealSize;
                 vm.order.OriginalAction = vm.order.direction;
                 vm.order.Action = "Cancel";
+                vm.brokerType =  brokerType;
             }
         });
     });

@@ -76,30 +76,60 @@
         }
 
         function decreasePosition(position) {
-            thisOrder = {
-                Product: position.Product,
-                ProductId: position.Product.ProductId,
-                Quantity: position.QuantityOnHold,
-                inputNominalQuantity: position.QuantityOnHold,
-                quantityType: 'Unit',
-                Action: position.PositionType === 'Long' && 'Sell' || 'Buy',
-                OrderType: "Limit",
-                Validity: "GTC",
-                HasBracketOrder: false,
-                ChildOrderType: "Normal",
-                TakeProfitOrder: {
-                    ProductId: null,
-                    LimitPrice: null,
+            if (position.broker == 'futu') {
+                thisOrder = {
+                    Product: position.Product,
+                    //ProductId: position.Product.ProductId,
+                    Quantity: Math.abs(position.Qty),
+                    inputNominalQuantity: Math.abs(position.Qty),
+                    quantityType: 'Unit',
+                    Action: position.Qty <1? "Buy":"Sell",
                     OrderType: "Limit",
-                    Validity: "GTC"
-                },
-                StopLossOrder: {
-                    ProductId: null,
-                    StopPrice: null,
-                    OrderType: "Stop",
-                    Validity: "GTC"
-                }
-            };
+                    Validity: "GTC",
+                    HasBracketOrder: false,
+                    ChildOrderType: "Normal",
+                    TakeProfitOrder: {
+                        ProductId: null,
+                        LimitPrice: null,
+                        OrderType: "Limit",
+                        Validity: "GTC"
+                    },
+                    StopLossOrder: {
+                        ProductId: null,
+                        StopPrice: null,
+                        OrderType: "Stop",
+                        Validity: "GTC"
+                    }
+                };
+            }
+            else {
+                thisOrder = {
+                    Product: position.Product,
+                    ProductId: position.Product.ProductId,
+                    Quantity: position.QuantityOnHold,
+                    inputNominalQuantity: position.QuantityOnHold,
+                    quantityType: 'Unit',
+                    Action: position.PositionType === 'Long' && 'Sell' || 'Buy',
+                    OrderType: "Limit",
+                    Validity: "GTC",
+                    HasBracketOrder: false,
+                    ChildOrderType: "Normal",
+                    TakeProfitOrder: {
+                        ProductId: null,
+                        LimitPrice: null,
+                        OrderType: "Limit",
+                        Validity: "GTC"
+                    },
+                    StopLossOrder: {
+                        ProductId: null,
+                        StopPrice: null,
+                        OrderType: "Stop",
+                        Validity: "GTC"
+                    }
+                };
+            }
+
+
         }
 
         function createOrderBasedOnDashboardPost(post) {
