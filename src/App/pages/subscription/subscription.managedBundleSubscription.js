@@ -110,7 +110,7 @@
         }
 
         function isJoeyBundle() {
-            return _.includes([245, 246, 312], vm.managedBundleSubscription.BundlePricingPlanId);
+            return _.includes([245, 246, 312, 423, 424], vm.managedBundleSubscription.BundlePricingPlanId);
         }
 
         tool.initialize(function () {

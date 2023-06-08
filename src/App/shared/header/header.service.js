@@ -51,7 +51,7 @@
                         });
                     });
 
-                    if (serviceObj.subscriptions && serviceObj.subscriptions.length === 1 && _.includes([245, 246, 312], serviceObj.subscriptions[0].BundlePricingPlanId)) {
+                    if (serviceObj.subscriptions && serviceObj.subscriptions.length === 1 && _.includes([245, 246, 312, 423, 424], serviceObj.subscriptions[0].BundlePricingPlanId)) {
                         serviceObj.hasJoeyOnly = true;
                     } else {
                         serviceObj.hasJoeyOnly = false;
