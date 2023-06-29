@@ -1,4 +1,10 @@
 ﻿<div>
+    <!-- MaRa: maintenance -->
+    <div class="connection-status-amber lh-50px" ng-if="!vm.hideDisconnectedNotification">
+        Maintenance notice
+        <div class="clearfix"></div>
+    </div>
+
     <div class="connection-status-amber  lh-50px" ng-if="vm.connectionStatus === 0">Establishing Connection...</div>
     <div class="connection-status-amber  lh-50px" ng-if="vm.connectionStatus === 2 || vm.connectionStatus === 3">
         Network Interruption Detected. Attempting to Reconnect ...

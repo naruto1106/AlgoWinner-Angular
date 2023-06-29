@@ -9,6 +9,10 @@
         <div ng-if="vm.coreUserStateService.hasPendingLogoutConfirmation" class="alert alert-info m-bottom-10px">
             You need to log in to view this page
         </div>
+        <!-- MaRa: maintenance -->
+        <div class="alert alert-info m-bottom-10px">
+            This is a maintenance notice
+        </div>
         <div ng-switch="vm.state">
             <span ng-switch-when="1" class="gray-text">Authenticating...</span>
             <span ng-switch-when="2" class="green-profit">Login Successful</span>
