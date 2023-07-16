@@ -3,6 +3,8 @@
         <div ng-style="vm.progressBarStyle()" class="transition-superfast page-progress-bar"></div>
     </div>
 
+    <agms-header-confirm-email ng-show="vm.showConfirmEmailBox()"></agms-header-confirm-email>
+
     <section class="container padless">
         <div>
             <agms-header-network-connection></agms-header-network-connection>
