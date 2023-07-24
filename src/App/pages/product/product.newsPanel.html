@@ -1,5 +1,5 @@
 ﻿<section class="news-panel">
-    <h1 class="title-section">News & Upcoming Earnings</h1>
+    <h1 class="title-section">News</h1>
     <div class="p-50px text-center" ng-if="vm.isLoadingNews">
         <img class="w-50px h-50px" src="//am708403.azureedge.net/images/static/loading.gif?" />
     </div>
@@ -16,9 +16,9 @@
                 <button class="tabbibng_btn " ng-click="vm.setSelectedTab('news')" ng-class="{'tabbing_active': vm.selectedTab === 'news'}">
                     News
                 </button>
-                <button class="tabbibng_btn " ng-click="vm.setSelectedTab('upcomingEarning')" ng-class="{'tabbing_active': vm.selectedTab === 'upcomingEarning'}">
+                <!-- <button class="tabbibng_btn " ng-click="vm.setSelectedTab('upcomingEarning')" ng-class="{'tabbing_active': vm.selectedTab === 'upcomingEarning'}">
                     Upcoming Earnings
-                </button>
+                </button> -->
             </div>
             <div class="news-content d-flex justify-between flex-wrap"
                 ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)"

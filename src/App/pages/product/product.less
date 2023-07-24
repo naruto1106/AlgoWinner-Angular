@@ -604,7 +604,7 @@
             left: 0;
             right: 0;
             width: 100%;
-            z-index: 100000;
+            z-index: 1000;
             background: #fff;
             padding-bottom:0;
             .inner_header {
@@ -1327,6 +1327,9 @@ body.mode-1 .custom-charrt-header {
                     &.green-price {
                         color: #12B76A !important;
                     }
+                    &.red-price {
+                        color: #F04438 !important;
+                    }
                 }
             }
         }
@@ -1381,7 +1384,7 @@ body.mode-1 .custom-charrt-header {
                             }
                         }
 
-                        &.red-profit {
+                        &.red-loss {
                             color: #F04438;
                             font-weight: 700;
 
@@ -1884,7 +1887,7 @@ body.mode-1 .custom-charrt-header {
             &.green-profit{
                 color: #009A7F;
             }
-            &.red-profit{
+            &.red-loss{
                 color: #F97066;
 
             }
@@ -2423,7 +2426,7 @@ body.mode-1 .custom-charrt-header {
             }
         }
     }
-    .red-profit {
+    .red-loss {
         color: #F04438 !important;
     }
     .top_bottm_space{

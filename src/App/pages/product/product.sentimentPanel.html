@@ -12,9 +12,9 @@
                     </tr>
                     <tr ng-repeat="newsSentimentObj in vm.newsSentiment">
                         <td>{{newsSentimentObj.NewsSentimentType}}</td>
-                        <td ng-class="{'red-profit': newsSentimentObj.SentimentScore < 0, 'gray-profit': newsSentimentObj.SentimentScore >= 0 && newsSentimentObj.SentimentScore <= 0.5,'green-profit': newsSentimentObj.SentimentScore > 0.5}" >{{newsSentimentObj.SentimentScore|number:2}} 
+                        <td ng-class="{'red-loss': newsSentimentObj.SentimentScore < 0, 'gray-profit': newsSentimentObj.SentimentScore >= 0 && newsSentimentObj.SentimentScore <= 0.5,'green-profit': newsSentimentObj.SentimentScore > 0.5}" >{{newsSentimentObj.SentimentScore|number:2}} 
                             <span class="green-profit" ng-if="newsSentimentObj.SentimentScore >0.5">Positive</span>
-                            <span class="red-profit" ng-if="newsSentimentObj.SentimentScore <0">Negative</span>
+                            <span class="red-loss" ng-if="newsSentimentObj.SentimentScore <0">Negative</span>
                             <span class="gray-profit" ng-if="(newsSentimentObj.SentimentScore >= 0 && newsSentimentObj.SentimentScore <= 0.5)">Neutral</span>
                         </td>
                         <td class="gray-profit">{{newsSentimentObj.Volume|number:2}}
@@ -38,10 +38,11 @@
                     </div>
                     <div class="targrt-txt">
                         <div class="title">Current Price</div>
-                        <div class="price green-price
-                        
-                        
-                        ">{{vm.productDetail.Product.TradeVenueLoc+"$" + " " + vm.analystTargetPrice.CurrentPrice}} <img src="//am708403.blob.core.windows.net/images/productpage/arrow_up.svg"></div>
+                        <div ng-class="{'price green-price': vm.analystTargetPrice.CurrentPrice < vm.analystTargetPrice.AnalystTargetPrice, 'price red-price': vm.analystTargetPrice.CurrentPrice > vm.analystTargetPrice.AnalystTargetPrice}">
+                            {{vm.productDetail.Product.TradeVenueLoc+"$" + " " + vm.analystTargetPrice.CurrentPrice}} 
+                            <img ng-if="vm.analystTargetPrice.CurrentPrice < vm.analystTargetPrice.AnalystTargetPrice" src="//am708403.blob.core.windows.net/images/productpage/arrow_up.svg">
+                            <img ng-if="vm.analystTargetPrice.CurrentPrice > vm.analystTargetPrice.AnalystTargetPrice" src="//am708403.blob.core.windows.net/images/productpage/bottom_arrow.svg">
+                        </div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -79,7 +80,7 @@
             <div class="white-box">
                 <div class="analystic_heading">
                     <h1 class="table-chart-heading">Analyst Rating</h1>
-                    <h2>2.3 <img src="//am708403.blob.core.windows.net/images/productpage/star.svg"></h2>
+                    <h2>{{vm.ratingMeanRecom | number:2}} <img src="//am708403.blob.core.windows.net/images/productpage/star.svg"></h2>
                 </div>
                 <div class="h-30px"></div>
                 <div id="analyst_rating"></div>

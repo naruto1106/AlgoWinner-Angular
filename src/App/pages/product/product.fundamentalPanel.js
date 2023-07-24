@@ -364,12 +364,12 @@
                             name: 'PE Ratio',
                             data: [],
                             type: 'column',
+                            color: '#86D3CD',
                             showInLegend: false
                         }, {
                             name: 'PE Ratio',
                             data: [],
                             type: 'line',
-                            color: '#006AD4',
                             color: '#86D3CD',
                         }, {
                             name: 'IndustryAverage',

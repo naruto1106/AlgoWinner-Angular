@@ -31,6 +31,13 @@
                 $anchorScroll();
             }
 
+            function addToWatchlist() {
+                tool.openModalByDefinition('s.watchlist.AddProductPopupController', {
+                    product: pProductPageService.currentProduct
+                }).result.then(function () {
+                });
+            }
+
             tool.setVmProperties({
                 showErrorMessage: showErrorMessage,
                 hasHeader: hasHeader,
@@ -38,12 +45,15 @@
                 isLoading: isLoading,
                 isWarrants: isWarrants,
                 gotoSection: gotoSection,
+                addToWatchlist: addToWatchlist,
                 symbol: dep.symbol
             });
 
             pProductPageService.loadProductWithParam(dep.venue, dep.symbol).then(function () {
                 vm.TradeVenueLoc = pProductPageService.currentProduct.TradeVenueLoc;
                 document.title = pProductPageService.currentProduct.ProductName + ' (' + vm.symbol + ') - ' + dep.venue + ' Product';
+                vm.ProductName = pProductPageService.currentProduct.ProductName;
+                vm.ProductIconUrl = pProductPageService.currentProduct.ProductIconURL;
             });
 
             sDroidHelperSbsFrameworkService.defineFlow('ProductPage')

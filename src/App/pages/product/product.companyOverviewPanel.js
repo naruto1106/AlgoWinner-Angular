@@ -18,10 +18,8 @@
                 });
 
                 pProductPageService.waitTillProductDetailLoaded().then(function () {
-                    debugger
                     pProductPageService.productDetail.CompanyOverview.needClipping = true
                     vm.productDetail = pProductPageService.productDetail;
-                    debugger
                 });
             });
         })

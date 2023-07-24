@@ -17,12 +17,14 @@
         <div class="inner_header p-left-30px p-right-30px">
             <div class="logo_outter">
                 <div class="logo_img">
-                    <img src="//am708403.blob.core.windows.net/images/productpage/logo-img.png">
+                    <img ng-src="{{vm.ProductIconUrl}}" height="50px" width="50px">
                 </div>
                 <div class="logo_tx">
-                    <h3>Appl-Us <a href="#" class="phone_icon"><img
+                    <h3>{{vm.symbol}}-{{vm.TradeVenueLoc}} <a href="#" class="phone_icon"><img
                                 src="//am708403.blob.core.windows.net/images/productpage/icon.svg"></a></h3>
-                    <h4>Apple Inc <span></span>NASDAQ</h4>
+                    <h4>{{vm.ProductName}} 
+                        <!-- <span></span>NASDAQ -->
+                    </h4>
                 </div>
             </div>
             <div class="nav_menus">
@@ -40,20 +42,20 @@
                 </ul>
             </div>
             <div class="right_header">
-                <div class="wishlist m-right-10px">
-                    <h3 class="m-0px"><img src="//am708403.blob.core.windows.net/images/productpage/icon.svg"
-                            class="m-right-10px">Add to Watchlist</h3>
+                <div class="m-right-10px">
+                    <button class="m-0px hollow-blue" ng-click="vm.addToWatchlist()"><img src="//am708403.blob.core.windows.net/images/productpage/icon.svg"
+                            class="m-right-10px">Add to Watchlist</button>
                 </div>
-                <div class="notifiction">
+                <!-- <div class="notifiction">
                     <img src="//am708403.blob.core.windows.net/images/productpage/notification.svg">
                     <span></span>
-                </div>
-                <div class="header_btn buy_btn m-right-10px">
+                </div> -->
+                <!-- <div class="header_btn buy_btn m-right-10px">
                     <a href="#">Buy <span>Stock</span></a>
                 </div>
                 <div class="header_btn sell_btn">
                     <a href="#">Sell <span>Stock</span></a>
-                </div>
+                </div> -->
             </div>
         </div>
     </header>

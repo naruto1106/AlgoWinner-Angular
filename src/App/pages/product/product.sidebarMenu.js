@@ -1,7 +1,8 @@
 ﻿agmNgModuleWrapper('agmp.product')
-    .defineController('p.product.SidebarMenuController', ['pProductPageService', '$anchorScroll', '$location'],
+    .defineController('p.product.SidebarMenuController', ['pProductPageService', 'coreUserStateService', '$anchorScroll', '$location'],
         function (vm, dep, tool) {
             var pProductPageService = dep.pProductPageService,
+                coreUserStateService = dep.coreUserStateService;
                 $location = dep.$location,
                 $anchorScroll = dep.$anchorScroll;
 
@@ -37,6 +38,11 @@
 
             pProductPageService.waitTillProductDetailLoaded().then(function () {
                 vm.TradeVenueLoc = pProductPageService.currentProduct.TradeVenueLoc;
+
+                coreUserStateService.loadUser();
+                coreUserStateService.userInfoLoaded.then(function (res) {
+                    vm.ProfileImageUrl = coreUserStateService.user.ProfileImageUrl;
+                });
             });
         })
     .defineDirectiveForE('agmp-product-sidebar-menu', [],

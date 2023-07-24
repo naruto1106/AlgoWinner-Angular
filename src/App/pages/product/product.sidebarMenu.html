@@ -2,7 +2,9 @@
 
 <div class="static-sidebar test">
     <button class="special">
-        <img src="//am708403.blob.core.windows.net/images/sidebar/side-logo.png">
+        <a href="#/overview">
+            <img src="//am708403.blob.core.windows.net/images/sidebar/side-logo.png">
+        </a>
     </button>
     <button class="side_active stroke">
         <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon1.svg'"></span>
@@ -27,15 +29,15 @@
         <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon7.svg'"></span>
     </button>
     <div class="footer-icons">
-        <button class="fill">
+        <!-- <button class="fill">
             <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon8.svg'"></span>
         </button>
         <button class="stroke">
             <span agmc-svg-loader svg-src="'//am708403.blob.core.windows.net/images/sidebar/icon9.svg'"></span>
-        </button>
+        </button> -->
         <div class="divider"></div>
         <button class="special">
-            <img src="//am708403.blob.core.windows.net/images/sidebar/user-img.png">
+            <img class="img-circle" ng-src="vm.ProfileImageUrl" agms-image-fallback="//am708403.azureedge.net/images/profilePicture/defaultavatar.jpg?" height="50" width="50">
         </button>
     
     </div>

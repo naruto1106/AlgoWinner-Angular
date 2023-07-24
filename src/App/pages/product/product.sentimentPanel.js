@@ -212,7 +212,6 @@
                     
                     vm.changeRetailActivityChartPeriod();
                 } else {
-                    debugger;
                     angular.element('#tabSecond').triggerHandler('click');
                 }
             }
@@ -227,6 +226,7 @@
                     changeRetailActivityChartPeriod: changeRetailActivityChartPeriod,
                     changeRetailSentimentChartPeriod: changeRetailSentimentChartPeriod,
                     switchRetail:switchRetail,
+                    ratingMeanRecom: 0
                 });
 
                 var productDetail = pProductPageService.productDetail;
@@ -273,6 +273,7 @@
                                     latestAnalystRating.CountStrongSell
                                 ]
                             };
+                            vm.ratingMeanRecom = pProductPageService.latestAnalystRating.RatingMeanRecom;
                             barCharts('analyst_rating', chartData);
                         });
 
