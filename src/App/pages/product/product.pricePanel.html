@@ -6,8 +6,12 @@
                 <h4 class="m-0px">Last Price</h4>
                 <div class="price_txt_inner d-flex justify-between align-end p-top-10px">
                     <div ng-if="!vm.isLoadingPrice()" class="price_txt_lft">
-                        <h3 ng-if="vm.priceDetail.MarketData.LastTradedPrice" class="m-0px">{{vm.priceDetail.MarketData.LastTradedPrice  | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}</h3>
-                        <h5 class="m-0px">{{vm.priceDetail.MarketData.LastTradedTime | dateLongWithTimeZone: vm.getMarketTimeZone()}}</h5>
+                        <h3 ng-if="vm.priceDetail.MarketData.LastTradedPrice" class="m-0px">
+                            {{vm.priceDetail.MarketData.LastTradedPrice |
+                            correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}
+                        </h3>
+                        <h5 class="m-0px">{{vm.priceDetail.MarketData.LastTradedTime | dateLongWithTimeZone:
+                            vm.getMarketTimeZone()}}</h5>
                     </div>
                     <div class="price_txt_rght">
                         <img src="//am708403.blob.core.windows.net/images/productpage/line.png">
@@ -20,20 +24,31 @@
                 <h4 class="m-0px">Today's Range</h4>
                 <div class="price_txt_inner p-top-10px" ng-if="!vm.isLoadingPrice()">
                     <div class="price_txt_lft">
-                        <h3 ng-if="vm.priceDetail.MarketData.Low && vm.priceDetail.MarketData.High" class="m-0px">{{vm.priceDetail.MarketData.Low   | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}} - {{vm.priceDetail.MarketData.High   | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}</h3>
-                        <h3 ng-if="!vm.priceDetail.MarketData.Low || !vm.priceDetail.MarketData.High" class="m-0px">N/A</h3>
-                        <h5 class="m-0px">Aug 16, 2022 3:00 PM EST</h5>
+                        <h3 ng-if="vm.priceDetail.MarketData.Low && vm.priceDetail.MarketData.High" class="m-0px">
+                            {{vm.priceDetail.MarketData.Low |
+                            correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}
+                            - {{vm.priceDetail.MarketData.High |
+                            correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}
+                        </h3>
+                        <h3 ng-if="!vm.priceDetail.MarketData.Low || !vm.priceDetail.MarketData.High" class="m-0px">N/A
+                        </h3>
+                        <h5 class="m-0px">{{vm.priceDetail.MarketData.LastTradedTime | dateLongWithTimeZone:
+                            vm.getMarketTimeZone()}}</h5>
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>
         <div class="price_boxes">
             <div class="price_boxes_inner ask_price">
                 <h4 class="m-0px">Ask Price</h4>
                 <div class="price_txt_inner d-flex justify-between align-end p-top-10px">
                     <div class="price_txt_lft">
-                        <h3 class="m-0px">US$ 177.50</h3>
-                        <h5 class="m-0px">Vol:100.00</h5>
+                        <h3 ng-if="vm.priceDetail.MarketData.BidPrice" class="m-0px">
+                            {{vm.priceDetail.MarketData.AskPrice |
+                            correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}
+                        </h3>
+                        <h3 ng-if="!vm.priceDetail.MarketData.BidPrice" class="m-0px">N/A</h3>
+                        <h5 class="m-0px">Vol: {{vm.priceDetail.MarketData.AskSize | largeAmountValue:2:true}}</h5>
                         <!-- <h3 ng-if="vm.priceDetail.MarketData.AskPrice" class="m-0px"> {{vm.priceDetail.MarketData.AskPrice  | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}</h3>
                         <h3 ng-if="!vm.priceDetail.MarketData.AskPrice" class="m-0px">N/A</h3>
                         <h5 class="m-0px">Vol: {{vm.priceDetail.MarketData.AskSize | largeAmountValue:2:true}}</h5> -->
@@ -52,7 +67,10 @@
                 <div class="price_txt_inner d-flex justify-between align-end p-top-10px">
                     <div class="price_txt_lft" ng-if="!vm.isLoadingPrice()">
                         <!-- <h3 class="m-0px">US$ 165.21</h3> -->
-                        <h3 ng-if="vm.priceDetail.MarketData.BidPrice" class="m-0px"> {{vm.priceDetail.MarketData.BidPrice  | correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}</h3>
+                        <h3 ng-if="vm.priceDetail.MarketData.BidPrice" class="m-0px">
+                            {{vm.priceDetail.MarketData.BidPrice |
+                            correctTickSizeDecimalPlacesWithCurrency:vm.priceDetail.Product.Currency:vm.priceDetail.Product.TradeVenueLoc}}
+                        </h3>
                         <h3 ng-if="!vm.priceDetail.MarketData.BidPrice" class="m-0px">N/A</h3>
                         <h5 class="m-0px">Vol: {{vm.priceDetail.MarketData.BidSize | largeAmountValue:2:true}}</h5>
                     </div>
@@ -64,7 +82,7 @@
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
 
     <!-- <div class="abs top-35px right-20px">
         <button class="filled-blue pull-right m-left-10px" ng-click="vm.addToWatchlist()">ADD TO WATCHLIST</button>

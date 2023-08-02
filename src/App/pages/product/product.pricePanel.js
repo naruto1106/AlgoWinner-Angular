@@ -50,6 +50,8 @@
 
                 pProductPageService.waitTillPricelLoaded().then(function () {
                     vm.priceDetail = pProductPageService.productDetail;
+                    console.log(vm.priceDetail);
+                    
                 });
 
                 pProductPageService.waitTillProductDetailLoaded().then(function () {
