@@ -36,11 +36,13 @@
             <div class="upcoming_event" ng-if="vm.selectedTab === 'upcomingEarning'">
                 <div class="upcoming_event_inner release_date">
                     <h4>Release Date</h4>
-                    <h2>{{vm.earningData.EarningDate}}</h2>
+                    <h2 ng-if="vm.earningData.EarningDate">{{vm.earningData.EarningDate}}</h2>
+                    <h2 ng-if="!vm.earningData.EarningDate">N/A</h2>
                 </div>
                 <div class="upcoming_event_inner forcast_date">
                     <h4>Forcast EPS</h4>
-                    <h2>US$ {{vm.earningData.EpsForecast}}</h2>
+                    <h2 ng-if="vm.earningData.EpsForecast">US$ {{vm.earningData.EpsForecast}}</h2>
+                    <h2 ng-if="!vm.earningData.EpsForecast">N/A</h2>
                 </div>
             </div>
         </div>
