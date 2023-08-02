@@ -44,8 +44,12 @@
                 vm.product = pProductPageService.currentProduct;
                 sNewsService.GetNewsForProductPage(vm.product.ProductId, vm.product.TradeVenueLoc).then(function (res) {
                     vm.news = res.data;
-                }).finally(function () {
-                    vm.isLoadingNews = false;
+                }).then(function () {
+                    sNewsService.GetNextEarningDate(vm.product.Symbol).then(function (res) {
+                        vm.earningData = res.data;
+                    }).finally(function () {
+                        vm.isLoadingNews = false;
+                    });
                 });
             });
         });

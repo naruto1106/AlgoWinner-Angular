@@ -16,9 +16,9 @@
                 <button class="tabbibng_btn " ng-click="vm.setSelectedTab('news')" ng-class="{'tabbing_active': vm.selectedTab === 'news'}">
                     News
                 </button>
-                <!-- <button class="tabbibng_btn " ng-click="vm.setSelectedTab('upcomingEarning')" ng-class="{'tabbing_active': vm.selectedTab === 'upcomingEarning'}">
+                <button class="tabbibng_btn " ng-click="vm.setSelectedTab('upcomingEarning')" ng-class="{'tabbing_active': vm.selectedTab === 'upcomingEarning'}">
                     Upcoming Earnings
-                </button> -->
+                </button>
             </div>
             <div class="news-content d-flex justify-between flex-wrap"
                 ng-repeat="news in vm.getPagedNews() track by $index" ng-click="vm.gotoNews(news)"
@@ -36,11 +36,11 @@
             <div class="upcoming_event" ng-if="vm.selectedTab === 'upcomingEarning'">
                 <div class="upcoming_event_inner release_date">
                     <h4>Release Date</h4>
-                    <h2>Aug 31, 2022</h2>
+                    <h2>{{vm.earningData.EarningDate}}</h2>
                 </div>
                 <div class="upcoming_event_inner forcast_date">
                     <h4>Forcast EPS</h4>
-                    <h2>US$ 2.11</h2>
+                    <h2>US$ {{vm.earningData.EpsForecast}}</h2>
                 </div>
             </div>
         </div>
