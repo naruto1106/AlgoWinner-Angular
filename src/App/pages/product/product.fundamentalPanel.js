@@ -394,13 +394,13 @@
                     grothTable: [],
                     seriesArr: [
                         {
-                            name: 'Earnings',
+                            name: 'PEG Ratio',
                             data: [],
                             type: 'column',
                             color: '#86D3CD',
                             showInLegend: false
                         }, {
-                            name: 'Earnings',
+                            name: 'PEG Ratio',
                             data: [],
                             type: 'line',
                             color: '#86D3CD',
