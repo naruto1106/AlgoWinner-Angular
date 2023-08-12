@@ -259,6 +259,18 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                     symbol: symbol
                 }
             })
+            .when("/product/:venue/:symbol", {
+                title: "Product",
+                controller: "p.product.MainController",
+                templateUrl: "/App/pages/product/product.optionpi.html",
+                hasNoFooter: true,
+                headerMode: 3,
+                reloadOnSearch: false,
+                resolve: {
+                    venue: venue,
+                    symbol: symbol
+                }
+            })
             .when("/overview", {
                 title: "Home",
                 controller: "p.dashboard.MainController",
@@ -382,6 +394,20 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                     symbol: nullFunc,
                     presetChartMode: nullFunc,
                     modeParam: nullFunc
+                }
+            })
+            .when("/charts/:venue", {
+                title: "Charts",
+                templateUrl: "/App/pages/chart/chartoptionpi.mainV2.html",
+                controller: "p.chart.MainV2Controller",
+                hasNoFooter: true,
+                headerMode: 3,
+                resolve: {
+                    venue: venue,
+                    symbol: nullFunc,
+                    presetChartMode: nullFunc,
+                    modeParam: nullFunc,
+                     
                 }
             })
             .when("/charts/:venue/:symbol", {

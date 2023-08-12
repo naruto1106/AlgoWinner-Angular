@@ -11,6 +11,8 @@
                 pChartService = dep.pChartService,
                 coreUserStateService = dep.coreUserStateService,
                 pChartProductLoaderService = dep.pChartProductLoaderService;
+                Duplicate_location = dep.$location.$$absUrl;
+
             var filterDescription = pChartFilterDescriptionService;
 
             function loadTradersGps() {
@@ -24,6 +26,14 @@
                     mode: vm.pChartTgpsService.tradersgps_swing.mode,
                     mode: vm.pChartTgpsService.tradersgps_swing.mode,
                 });
+            }
+            function Duplicate_hidden(){
+                value =Duplicate_location.search('optionpi#/charts') ;
+                if( value > 0){
+                    return false;
+                } else{
+                    return true;
+                }
             }
 
             function toggleTradersGps() {
@@ -65,7 +75,9 @@
                 pChartTgpsService: pChartTgpsService,
                 toggleTradersGps: toggleTradersGps,
                 loadTradersGps: loadTradersGps,
-                loadRiskAnalyzer: loadRiskAnalyzer
+                loadRiskAnalyzer: loadRiskAnalyzer,
+                Duplicate_hidden: Duplicate_hidden,
+
             });
         })
     .defineDirectiveForE('agmp-chart-tgps',

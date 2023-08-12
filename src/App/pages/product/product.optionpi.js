@@ -6,6 +6,8 @@
                 sDroidHelperSbsFrameworkService = dep.sDroidHelperSbsFrameworkService;
                 $location = dep.$location,
                 $anchorScroll = dep.$anchorScroll;
+                Duplicate_location = $location.$$absUrl;
+
                 // console.log($location,'location');
             function hasHeader() {
                 return pProductPageService.hasHeader;
@@ -31,6 +33,14 @@
                 $location.hash(sectionId);
                 $anchorScroll();
             }
+            function Duplicate_hidden(){
+                value =Duplicate_location.search('optionpi#/product/US/AAPL') ;
+                if( value > 0){
+                    return false;
+                } else{
+                    return true;
+                }
+            }
 
             function addToWatchlist() {
                 tool.openModalByDefinition('s.watchlist.AddProductPopupController', {
@@ -47,6 +57,7 @@
                 isWarrants: isWarrants,
                 gotoSection: gotoSection,
                 addToWatchlist: addToWatchlist,
+                Duplicate_hidden: Duplicate_hidden,
                 symbol: dep.symbol
             });
 
@@ -61,7 +72,7 @@
                 .havingStep('1', function (flowControl) {
                     flowControl.highlightAndCommentItems([
                         {
-                            itemId: 'productPage.sidebarMenu',
+                            itemId: 'productPage.sidebarMenuoptionpi',
                             cssClassForBox: '    '
                         }
                     ]);

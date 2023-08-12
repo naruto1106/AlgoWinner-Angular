@@ -223,8 +223,8 @@
                 toggleSidebar();
 
                 sChartXaxisCustomizer.filterDescription = vm.filterDescription;
-                // console.log(dep.venue,'venue123456');
-                // console.log(dep,'dep123456789');
+                console.log(dep.venue,'venue123456');
+                console.log(dep,'dep123456789');
                 pChartService.initialProductRequest = {
                     venue: dep.venue,
                     symbol: dep.symbol,

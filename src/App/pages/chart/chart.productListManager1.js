@@ -16,12 +16,12 @@ agmNgModuleWrapper('agmp.chart')
             serviceObj.element = element;
         }
     })
-    .defineController('p.chart.ProductListManagerController',
+    .defineController('p.chart.ProductListManagerController1',
         ['pChartProductLoaderService', 'pChartProductSearchLocatorService', 'pChartFilterDescriptionService',
             'sProductService',
             'pChartService', 'pChartTgpsService',
             'pChartFundamentalHelperService',
-            'commonTimeZoneService', 'sMarketEntitlementService', 'tradeDataService', 'sMarketDataService'],
+            'commonTimeZoneService', 'sMarketEntitlementService', 'tradeDataService', 'sMarketDataService',],
         function (vm, dep, tool) {
             var pChartProductSearchLocatorService = dep.pChartProductSearchLocatorService,
                 pChartFilterDescriptionService = dep.pChartFilterDescriptionService;
@@ -34,12 +34,12 @@ agmNgModuleWrapper('agmp.chart')
                 pChartService = dep.pChartService,
                 tradeDataService = dep.tradeDataService,
                 sMarketDataService = dep.sMarketDataService;
-                // venue = dep.$routeParams.venue;
-                // vm.selectedProduct = venue ;
-                // console.log(venue,'venue123')
-                // console.log(dep,'dep111')
+                venue = dep.$routeParams.venue;
+                vm.selectedProduct = venue ;
+                console.log(venue,'venue123')
+                console.log(dep,'dep111')
             function searchProducts(keyword) {
-                console.log('searchProducts');
+                console.log("searchProducts111")
                 vm.keyword = keyword;
                 vm.temporaryList = [];
                 return sProductService.SearchPlottableProduct(keyword).then(function (res) {
@@ -48,16 +48,16 @@ agmNgModuleWrapper('agmp.chart')
                     vm.temporaryList = result.filter(function (product) {
                         return product.AssetType !== "Index Futures" && product.AssetType !== "Index Futures CFD";
                     });
+                    console.log(vm.temporaryList,'vm.temporayList');
                     return vm.temporaryList;
                 });
             };
-            
+
             function addToWatchlist(product) {
                 tool.openModalByDefinition('s.watchlist.AddProductPopupController', {
                     product: product
                 });
             }
-
 
             function removePrimaryProduct() {
                 pChartProductLoaderService.removeFromProducts(filterDescription.primaryProduct);
@@ -136,14 +136,14 @@ agmNgModuleWrapper('agmp.chart')
 
 
             function unfocusField() {
-                console.log("unfocusField")
+                console.log("unfocusField");
                 if (vm.temporaryList && vm.temporaryList.length == 1) {
                     vm.selectedProduct = vm.temporaryList[0];
                     onItemSelected()
                 }
             }
             function onItemSelected() {
-                console.log('onItemSelected')
+                console.log("onItemSelected");
                 vm.temporaryList = [];
                 vm.setPrimaryProduct(vm.selectedProduct);
             }
@@ -161,15 +161,21 @@ agmNgModuleWrapper('agmp.chart')
                 goToProductPage: sProductService.goToProduct,
                 isProductPageAllowed: isProductPageAllowed,
                 unfocusField: unfocusField,
-                onItemSelected: onItemSelected,
-               
+                onItemSelected: onItemSelected
             });
-            
+            function autoSelectFirstProduct() {
+                if (vm.temporaryList.length > 0) {
+                    vm.selectedProduct = vm.temporaryList[0];
+                    vm.setPrimaryProduct(vm.selectedProduct);
+                }
+            }
             tool.initialize(function () {
-                console.log('initialize1111111111')
+                // searchProducts(vm.selectedProduct);
+                searchProducts(vm.selectedProduct).then(autoSelectFirstProduct);
+                // onItemSelected()
+                console.log("initialize11111111");
                 tool.on('onPrimaryProductChanged', function (e, product) {
-                    console.log('222222222222222');
-                    // vm.selectedProduct = venue;//filterDescription.primaryProduct;
+                    console.log("initialize2222222");
                     vm.selectedProduct = null;//filterDescription.primaryProduct;
                     $(document).ready(function () {
                         if (filterDescription.primaryProduct) {
@@ -344,11 +350,11 @@ agmNgModuleWrapper('agmp.chart')
                 onItemSelected: onItemSelected
             });
         })
-    .defineDirectiveForE('agmp-chart-product-list-manager', [],
+    .defineDirectiveForE('agmp-chart-product-list-manager1', [],
         function () {
             return {
-                controller: "p.chart.ProductListManagerController",
-                templateUrl: '/App/pages/chart/chart.productListManager.html'
+                controller: "p.chart.ProductListManagerController1",
+                templateUrl: '/App/pages/chart/chart.productListManager1.html'
             };
         }, {
 

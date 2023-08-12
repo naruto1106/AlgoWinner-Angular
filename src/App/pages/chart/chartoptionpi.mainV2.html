@@ -5,7 +5,7 @@
                 <agmp-chart-selected-security class="minor-column" ng-if="vm.filterDescription.primaryProduct"></agmp-chart-selected-security>
                 <ul class="nav nav-tabs nav-justified sidebar-nav minor-column">
                     <li class="nav-item" ng-class="{selected:vm.isSidebarMode('productList')}">
-                        <a class="nav-link" ng-click="vm.setSidebarMode('productList')">Product</a>
+                        <a class="nav-link" ng-click="vm.setSidebarMode('productList')">Product1</a>
                     </li>
                     <li class="nav-item dark" ng-class="{selected:vm.isSidebarMode('filter')}">
                         <a class="nav-link " ng-click="vm.setSidebarMode('filter')">Analyze</a>
@@ -148,7 +148,7 @@
     </div>
     <div class="header">
         <div class="top-level-1">
-            <agmp-chart-product-list-manager class="pull-left"></agmp-chart-product-list-manager>
+            <agmp-chart-product-list-manager1 class="pull-left"></agmp-chart-product-list-manager1>
             <agmp-chart-ohlc class="pull-left" ohlc-data="vm.displayedChartSelectedItemInfo.price.data"></agmp-chart-ohlc>
             <agmp-chart-vol class="pull-left" vol-date-data="vm.displayedChartSelectedItemInfo.price.data"></agmp-chart-vol>
             <!-- <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-if="vm.sHeaderService.chartMenuType == 'DropDown'"

@@ -1,0 +1,103 @@
+﻿<div class="agms-header">
+    <header class="p-top-20px p-bottom-20px main-header product-header custom-charrt-header">
+        <div class="mobele_version">
+            <div class="s_logo">
+                <img src="//am708403.blob.core.windows.net/images/productpage/slogo.png">
+            </div>
+            <div class="mobile_right">
+                <div class="notifiction">
+                    <img src="//am708403.blob.core.windows.net/images/productpage/notification.svg">
+                    <span></span>
+                </div>
+                <div class="bar_icon notifiction">
+                    <img src="//am708403.blob.core.windows.net/images/productpage/bar.svg">
+                </div>
+            </div>
+        </div>
+        <div class="inner_header p-left-30px p-right-30px">
+            <div class="logo_outter">
+                <div class="logo_img">
+                    <img ng-src="{{vm.ProductIconUrl}}" height="50px" width="50px">
+                </div>
+                <div class="logo_tx">
+                    <h3>{{vm.symbol}}-{{vm.TradeVenueLoc}} <a href="#" class="phone_icon"><img
+                                src="//am708403.blob.core.windows.net/images/productpage/icon.svg"></a></h3>
+                    <h4>{{vm.ProductName}} 
+                        <!-- <span></span>NASDAQ -->
+                    </h4>
+                </div>
+            </div>
+            <div class="nav_menus">
+                <ul class="p-0px m-0px d-flex">
+                    <li class="active_nav"><a href="javascript:void(0)"
+                            ng-click="vm.gotoSection('price-section')">Price</a></li>
+                    <li><a href="javascript:void(0)" ng-click="vm.gotoSection('chart-section')">Chart</a></li>
+                    <li><a href="javascript:void(0)" ng-click="vm.gotoSection('sentiment-section')">Sentiment</a></li>
+                    <li><a href="javascript:void(0)" ng-click="vm.gotoSection('fundamental-section')">Fundamentals</a>
+                    </li>
+                    <li><a href="javascript:void(0)" ng-click="vm.gotoSection('overview-section')">Overview</a></li>
+                    <li><a href="javascript:void(0)" ng-click="vm.gotoSection('news-section')">News</a></li>
+                    <li><a href="javascript:void(0)" ng-click="vm.gotoSection('competitors-section')">Related
+                            Company</a></li>
+                </ul>
+            </div>
+            <div class="right_header">
+                <div ng-if="vm.Duplicate_hidden()" class="m-right-10px">
+                    <button class="m-0px hollow-blue" ng-click="vm.addToWatchlist()"><img src="//am708403.blob.core.windows.net/images/productpage/icon.svg"
+                            class="m-right-10px">Add to Watchlist</button>
+                </div>
+                <!-- <div class="notifiction">
+                    <img src="//am708403.blob.core.windows.net/images/productpage/notification.svg">
+                    <span></span>
+                </div> -->
+                <!-- <div class="header_btn buy_btn m-right-10px">
+                    <a href="#">Buy <span>Stock</span></a>
+                </div>
+                <div class="header_btn sell_btn">
+                    <a href="#">Sell <span>Stock</span></a>
+                </div> -->
+            </div>
+        </div>
+    </header>
+</div>
+<section class="test agm-component-product rel" ng-class="{'has-header':vm.hasHeader()}"
+    ng-disabled="vm.showErrorMessage()">
+    <agmc-loading is-loading="vm.isLoading()"></agmc-loading>
+
+    <div ng-if="!vm.isLoading() && vm.showErrorMessage()" class="invalid-product">
+        <h4 class="m-0px p-top-20px">No results found for this product: {{vm.symbol}}</h4>
+    </div>
+    <div ng-if="!vm.showErrorMessage()">
+        <agmp-product-price-panel id="price-section" class="top_bottm_space"></agmp-product-price-panel>
+        <div class="clearfix"></div>
+        <agmp-product-chart-panel id="chart-section" class="top_bottm_space"></agmp-product-chart-panel>
+        <div class="clearfix"></div>
+        <agmp-product-sentiment-panel id="sentiment-section" class="top_bottm_space" ng-if="vm.TradeVenueLoc == 'US'">
+        </agmp-product-sentiment-panel>
+        <div class="clearfix"></div>
+        <agmp-product-fundamental-panel id="fundamental-section" class="top_bottm_space"
+            ng-if="vm.TradeVenueLoc == 'US'"></agmp-product-fundamental-panel>
+        <div class="clearfix"></div>
+        <div class="top_bottm_space" ng-if="!vm.isWarrants()">
+            <div class="row-md-2 gap-20px" ng-if="vm.TradeVenueLoc == 'US'">
+                <div class="col-md-1 overview_">
+                    <agmp-product-company-overview-panel id="overview-section"></agmp-product-company-overview-panel>
+                </div>
+                <div class="col-md-1 news_">
+                    <agmp-product-news-panel id="news-section"></agmp-product-news-panel>
+                </div>
+
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="test">
+                <agmp-product-related-company-panel id="competitors-section" ng-if="vm.showRelatedCompanies()">
+                </agmp-product-related-company-panel>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <agmp-product-sidebar-menu></agmp-product-sidebar-menu>
+    </div>
+</section>

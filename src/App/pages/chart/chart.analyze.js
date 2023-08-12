@@ -11,6 +11,7 @@
             pChartFilterDescriptionService = dep.pChartFilterDescriptionService,
             pChartService = dep.pChartService,
             pChartDatamartService = dep.pChartDatamartService;
+            Duplicate_location = dep.$location.$$absUrl;
 
         var filterDescription = pChartFilterDescriptionService;
 
@@ -56,6 +57,14 @@
             $event.stopPropagation();
             tool.broadcast('isTemplateDropdownOpenChanged');
         }
+        function Duplicate_hidden(){
+            value =Duplicate_location.search('optionpi#/charts') ;
+            if( value > 0){
+                return false;
+            } else{
+                return true;
+            }
+        }
 
         tool.initialize(function () {
 
@@ -67,7 +76,9 @@
                 filterDescription: filterDescription,
                 treeChanged: treeChanged,
                 saveCurrentView: pChartViewTemplateService.saveCurrentView,
-                isInvalidDatamartEvent: isInvalidDatamartEvent
+                isInvalidDatamartEvent: isInvalidDatamartEvent,
+                Duplicate_hidden: Duplicate_hidden,
+
             });
 
             tool.on("onBarSizeChanges", function () {

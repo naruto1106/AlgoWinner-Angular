@@ -12,9 +12,17 @@
                 sWatchlistUpdateManagerService = dep.sWatchlistUpdateManagerService,
                 coreSignalRNotificationService = dep.coreSignalRNotificationService,
                 sChartService = dep.sChartService;
+                Duplicate_location = dep.$location.$$absUrl;
 
             var filterDescription = pChartFilterDescriptionService;
-            
+            function Duplicate_hidden(){
+                value =Duplicate_location.search('optionpi#/charts') ;
+                if( value > 0){
+                    return false;
+                } else{
+                    return true;
+                }
+            }
             tool.setVmProperties({
                 loadProductsFromWatchlist: loadProductsFromWatchlist,
                 loadProductsFromMarket: loadProductsFromMarket,
@@ -31,6 +39,7 @@
                 getDisplayedProduct: getDisplayedProduct,
                 currentMarketProducts: [],
                 loadRecentTempList: loadRecentTempList,
+                Duplicate_hidden: Duplicate_hidden,
                 markets: [
                     {
                         label: "US Market",
@@ -78,6 +87,17 @@
                         asset: 5,
                         hasAlphabet: false,
                     }
+                ],
+                markets1: [
+                    {
+                        label: "US Market",
+                        venue: 1,
+                        asset: 1,
+                        hasAlphabet: true,
+                        TradeVenueLoc: 'US',
+                        startingAlphabet: "0-9"
+                    }
+                     
                 ],
                 alphabets: [
                     '0-9',

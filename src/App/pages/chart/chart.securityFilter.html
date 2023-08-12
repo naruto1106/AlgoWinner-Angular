@@ -1,7 +1,8 @@
 ﻿<div class="security-filter">
     <div class="panel full-area">
         <div class="panel-heading">
-            <h4>MARKET / WATCHLIST</h4>
+            <h4 ng-if="vm.Duplicate_hidden()">MARKET / WATCHLIST</h4>
+            <h4 ng-if="!vm.Duplicate_hidden()">MARKET</h4>
         </div>
         <div class="panel-body full">
             <agmp-chart-complex-product-selector on-product-set="vm.setPrimaryProduct(product)">
