@@ -182,7 +182,12 @@
                 vm.isSelectingWatchlist = false;
                 vm.displayedProducts = [];
                 vm.hasAlphabet = market.hasAlphabet;
-                vm.displayedLabel = market.label;
+                value =Duplicate_location.search('optionpi#/charts') ;
+                if( value > 0){
+                    vm.displayedLabel = 'US MARKET';
+                } else{
+                    vm.displayedLabel = market.label;
+                }
                 vm.searchedKeyword = null;
 
                 getProductInMarketPromise(market).then(function (res) {
@@ -331,7 +336,7 @@
                         }
                     });
                 });
-
+                
                 getProductInMarketPromise(vm.markets[0]);
                 getProductInMarketPromise(vm.markets[2]);
                 loadProductsFromMarket(vm.markets[1]);

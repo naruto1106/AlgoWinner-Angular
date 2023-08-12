@@ -5,7 +5,7 @@
                 <agmp-chart-selected-security class="minor-column" ng-if="vm.filterDescription.primaryProduct"></agmp-chart-selected-security>
                 <ul class="nav nav-tabs nav-justified sidebar-nav minor-column">
                     <li class="nav-item" ng-class="{selected:vm.isSidebarMode('productList')}">
-                        <a class="nav-link" ng-click="vm.setSidebarMode('productList')">Product1</a>
+                        <a class="nav-link" ng-click="vm.setSidebarMode('productList')">Product</a>
                     </li>
                     <li class="nav-item dark" ng-class="{selected:vm.isSidebarMode('filter')}">
                         <a class="nav-link " ng-click="vm.setSidebarMode('filter')">Analyze</a>
@@ -133,7 +133,7 @@
                     </div>
                     <agmp-chart-compare class="pull-left"></agmp-chart-compare>
                     <agmp-chart-template-manager class="laptop-screen-above pull-left"></agmp-chart-template-manager>
-                    <agmp-chart-tgps  ng-if="!vm.Duplicate_hidden()" class="pull-left"></agmp-chart-tgps>
+                    <!-- <agmp-chart-tgps  ng-if="!vm.Duplicate_hidden()" class="pull-left"></agmp-chart-tgps> -->
                     <agmp-chart-guppy ng-if="vm.Duplicate_hidden()" class="pull-left"></agmp-chart-guppy>
                     <div class="historical-data-flag pull-left">
                         <input type="checkbox" ng-model="vm.filterDescription.showUnadjusted" ng-change="vm.updateHistoricalData()"
@@ -153,7 +153,7 @@
             <agmp-chart-vol class="pull-left" vol-date-data="vm.displayedChartSelectedItemInfo.price.data"></agmp-chart-vol>
             <!-- <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-if="vm.sHeaderService.chartMenuType == 'DropDown'"
                     ng-click="vm.goToPartnerChart()"> -->
-            <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-if="!vm.Duplicate_hidden()"
+            <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-if="vm.Duplicate_hidden()"
                 ng-click="vm.goToPartnerChart()">
                 <!-- Go to {{vm.sHeaderService.partnerChartName}} -->
                 Go to 1GT/1ET
