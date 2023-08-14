@@ -182,14 +182,16 @@
                 vm.isSelectingWatchlist = false;
                 vm.displayedProducts = [];
                 vm.hasAlphabet = market.hasAlphabet;
-                value =Duplicate_location.search('optionpi#/charts') ;
-                if( value > 0){
-                    console.log(value,'chart-complexProductSelector0');
-                    vm.displayedLabel = 'US MARKET';
-                } else{
-                    vm.displayedLabel = market.label;
-                    console.log(value,'chart-complexProductSelector1');
-                }
+                // value =Duplicate_location.search('optionpi#/charts') ;
+                // if( value > 0){
+                //     console.log(value,'chart-complexProductSelector0');
+                //     vm.displayedLabel = 'US MARKET';
+                // } else{
+                //     vm.displayedLabel = market.label;
+                //     console.log(value,'chart-complexProductSelector1');
+                // }
+                vm.displayedLabel = market.label;
+
                 vm.searchedKeyword = null;
 
                 getProductInMarketPromise(market).then(function (res) {
@@ -341,7 +343,12 @@
                 
                 getProductInMarketPromise(vm.markets[0]);
                 getProductInMarketPromise(vm.markets[2]);
-                loadProductsFromMarket(vm.markets[1]);
+                 value =Duplicate_location.search('optionpi#/charts') ;
+                if( value > 0){
+                    loadProductsFromMarket(vm.markets[0]);
+                } else{
+                    loadProductsFromMarket(vm.markets[1]);
+                }
 
                 tool.on('onPrimaryProductChanged', function (e, product) {
                     var list = coreDataStorageService.getListInSession('chart-recently_added_stocks');

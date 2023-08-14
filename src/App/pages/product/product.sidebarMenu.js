@@ -29,7 +29,7 @@
                 return pProductPageService.isWarrants;
             }
             function Duplicate_hidden(){
-                value =Duplicate_location.search('optionpi#/product/US/AAPL') ;
+                value =Duplicate_location.search('optionpi#/product/US/') ;
                 if( value > 0){
                     return false;
                 } else{
