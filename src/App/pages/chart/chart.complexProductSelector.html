@@ -55,34 +55,7 @@
                         {{::market.label}}
                     </a>
                 </li>
-                <li ng-if="vm.watchlists.length>0"
-                    role="separator" class="divider"></li>
-               
-                <li ng-if="vm.pChartStrategyOrderService.myStrategies.length>0"
-                    role="separator" class="divider"></li>
-                <li ng-if="vm.pChartStrategyOrderService.myStrategies.length>0"
-                    class="dropdown-header">My Trade Portfolios</li>
-                <li ng-repeat="strategy in vm.pChartStrategyOrderService.myStrategies">
-                    <a ng-click="vm.loadProductsInStrategy(strategy)">
-                        {{strategy.DisplayInfo | strategyName}}
-                    </a>
-                </li>
-                <li ng-if="vm.pChartStrategyOrderService.mySubscriptions.length>0"
-                    role="separator" class="divider"></li>
-                <li ng-if="vm.pChartStrategyOrderService.mySubscriptions.length>0"
-                    class="dropdown-header">Subscribed Strategies</li>
-                <li ng-repeat="strategy in vm.pChartStrategyOrderService.mySubscriptions">
-                    <a ng-click="vm.loadProductsInStrategy(strategy)">
-                        {{strategy.DisplayInfo | strategyName}}
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Recently updated</li>
-                <li>
-                    <a ng-click="vm.loadRecentTempList()">
-                        Recent 10 Stocks
-                    </a>
-                </li>
+                
             </ul>
         </div>
         <div uib-dropdown ng-if="vm.hasAlphabet">

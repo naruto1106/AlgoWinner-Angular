@@ -184,9 +184,11 @@
                 vm.hasAlphabet = market.hasAlphabet;
                 value =Duplicate_location.search('optionpi#/charts') ;
                 if( value > 0){
+                    console.log(value,'chart-complexProductSelector0');
                     vm.displayedLabel = 'US MARKET';
                 } else{
                     vm.displayedLabel = market.label;
+                    console.log(value,'chart-complexProductSelector1');
                 }
                 vm.searchedKeyword = null;
 
