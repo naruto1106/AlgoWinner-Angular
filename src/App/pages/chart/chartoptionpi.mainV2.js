@@ -173,6 +173,21 @@
             }
 
             tool.initialize(function () {
+                console.log("initialize-first");
+                const url = window.location.href;
+                const token_pos = url.search('data=');
+                if(token_pos>0){
+                    const token = url.slice(token_pos + 5);
+                    localStorage.setItem('token', token);
+                    console.log(token,'new-token1245')
+                     var urlWithoutParameters = url.split('?')[0];
+                    if (url != urlWithoutParameters) {
+                        window.location.href = urlWithoutParameters;
+                    }
+                    console.log("initial-third");
+                }
+                console.log("initialize-second");
+                filterDescription.initialize();
                 filterDescription.initialize();
 
                 tool.on('onUibModalOpened', function () {
@@ -223,8 +238,8 @@
                 toggleSidebar();
 
                 sChartXaxisCustomizer.filterDescription = vm.filterDescription;
-                console.log(dep.venue,'venue123456');
-                console.log(dep,'dep123456789');
+                console.log(dep.venue,'venue123456000');
+                console.log(dep,'dep123456789000');
                 pChartService.initialProductRequest = {
                     venue: dep.venue,
                     symbol: dep.symbol,
