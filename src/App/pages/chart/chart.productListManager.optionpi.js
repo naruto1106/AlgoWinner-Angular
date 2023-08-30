@@ -145,16 +145,7 @@ agmNgModuleWrapper('agmp.chart')
                 unfocusField: unfocusField,
                 onItemSelected: onItemSelected
             });
-            function autoSelectFirstProduct() {
-                if (vm.temporaryList.length > 0) {
-                    vm.selectedProduct = vm.temporaryList[0];
-                    vm.setPrimaryProduct(vm.selectedProduct);
-                }
-            }
             tool.initialize(function () {
-                // searchProducts(vm.selectedProduct);
-                searchProducts(vm.selectedProduct).then(autoSelectFirstProduct);
-                // onItemSelected()
                 tool.on('onPrimaryProductChanged', function (e, product) {
                     vm.selectedProduct = null;//filterDescription.primaryProduct;
                     $(document).ready(function () {
