@@ -34,10 +34,7 @@ agmNgModuleWrapper('agmp.chart')
                 pChartService = dep.pChartService,
                 tradeDataService = dep.tradeDataService,
                 sMarketDataService = dep.sMarketDataService;
-                // venue = dep.$routeParams.venue;
-                // vm.selectedProduct = venue ;
-                // console.log(venue,'venue123')
-                // console.log(dep,'dep111')
+
             function searchProducts(keyword) {
                 console.log('searchProducts');
                 vm.keyword = keyword;
@@ -57,7 +54,6 @@ agmNgModuleWrapper('agmp.chart')
                     product: product
                 });
             }
-
 
             function removePrimaryProduct() {
                 pChartProductLoaderService.removeFromProducts(filterDescription.primaryProduct);
@@ -136,14 +132,12 @@ agmNgModuleWrapper('agmp.chart')
 
 
             function unfocusField() {
-                console.log("unfocusField")
                 if (vm.temporaryList && vm.temporaryList.length == 1) {
                     vm.selectedProduct = vm.temporaryList[0];
                     onItemSelected()
                 }
             }
             function onItemSelected() {
-                console.log('onItemSelected')
                 vm.temporaryList = [];
                 vm.setPrimaryProduct(vm.selectedProduct);
             }
@@ -166,10 +160,7 @@ agmNgModuleWrapper('agmp.chart')
             });
             
             tool.initialize(function () {
-                console.log('initialize1111111111')
                 tool.on('onPrimaryProductChanged', function (e, product) {
-                    console.log('222222222222222');
-                    // vm.selectedProduct = venue;//filterDescription.primaryProduct;
                     vm.selectedProduct = null;//filterDescription.primaryProduct;
                     $(document).ready(function () {
                         if (filterDescription.primaryProduct) {

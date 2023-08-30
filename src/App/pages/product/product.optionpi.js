@@ -1,14 +1,12 @@
 ﻿agmNgModuleWrapper('agmp.product')
-    .defineController('p.product.MainController', ['commonHeaderModeService', 'commonScreenResizerService', 'pProductPageService', 'sProductService', 'symbol', 'venue',
+    .defineController('p.product.OptionPiController', ['commonHeaderModeService', 'commonScreenResizerService', 'pProductPageService', 'sProductService', 'symbol', 'venue',
         'sDroidHelperSbsFrameworkService','$anchorScroll', '$location'],
         function (vm, dep, tool) {
             var pProductPageService = dep.pProductPageService,
                 sDroidHelperSbsFrameworkService = dep.sDroidHelperSbsFrameworkService;
                 $location = dep.$location,
-                $anchorScroll = dep.$anchorScroll;
-                Duplicate_location = $location.$$absUrl;
+                $anchorScroll = dep.$anchorScroll;;
 
-                // console.log($location,'location');
             function hasHeader() {
                 return pProductPageService.hasHeader;
             }
@@ -32,14 +30,6 @@
             function gotoSection(sectionId) {
                 $location.hash(sectionId);
                 $anchorScroll();
-            }
-            function Duplicate_hidden(){
-                value =Duplicate_location.search('optionpi#/product/US/') ;
-                if( value > 0){
-                    return false;
-                } else{
-                    return true;
-                }
             }
 
             console.log("initialize-first");
@@ -72,7 +62,6 @@
                 isWarrants: isWarrants,
                 gotoSection: gotoSection,
                 addToWatchlist: addToWatchlist,
-                Duplicate_hidden: Duplicate_hidden,
                 symbol: dep.symbol
             });
 

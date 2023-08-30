@@ -13,7 +13,6 @@
                 pChartService = dep.pChartService,
                 tradeDataService = dep.tradeDataService,
                 sMarketDataService = dep.sMarketDataService;
-                Duplicate_location = dep.$location.$$absUrl;
             var filterDescription = pChartFilterDescriptionService;
 
             function searchProducts(keyword) {
@@ -102,14 +101,6 @@
                     || product.TradeVenueLoc === "CHN"
                     || product.AssetType === "Indices");
             }
-            function Duplicate_hidden(){
-                value =Duplicate_location.search('optionpi#/charts') ;
-                if( value > 0){
-                    return false;
-                } else{
-                    return true;
-                }
-            }
 
             tool.setVmProperties({
 
@@ -123,9 +114,7 @@
                 addProductToPriceAlert: addProductToPriceAlert,
                 addToWatchlist: addToWatchlist,
                 goToProductPage: sProductService.goToProduct,
-                isProductPageAllowed: isProductPageAllowed,
-                Duplicate_hidden: Duplicate_hidden,
-
+                isProductPageAllowed: isProductPageAllowed
             });
         }
     )

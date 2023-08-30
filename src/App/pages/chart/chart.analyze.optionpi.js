@@ -1,5 +1,5 @@
-﻿agmNgModuleWrapper('agmp.chart')
-    .defineController('p.chart.AnalyzeController',
+agmNgModuleWrapper('agmp.chart')
+    .defineController('p.chart.AnalyzeOptionPiController',
     ['coreConfigService',
         'pChartService',
         'pChartFilterDescriptionService',
@@ -58,7 +58,6 @@
         }
 
         tool.initialize(function () {
-
             tool.setVmProperties({
                 hasAlgoChartBundle: hasAlgoChartBundle,
                 loadTemplateList: loadTemplateList,
@@ -78,10 +77,10 @@
             });
         });
     })
-    .defineDirectiveForE('agmp-chart-analyze', [], function () {
+    .defineDirectiveForE('agmp-chart-analyze-optionpi', [], function () {
         return {
-            templateUrl: '/App/pages/chart/chart.analyze.html',
-            controller: 'p.chart.AnalyzeController'
+            templateUrl: '/App/pages/chart/chart.analyze.optionpi.html',
+            controller: 'p.chart.AnalyzeOptionPiController'
         }
     }, {
 

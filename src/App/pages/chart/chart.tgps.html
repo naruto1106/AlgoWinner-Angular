@@ -1,5 +1,4 @@
-﻿<div class="traders-gps-flag"  ng-class="{'active-toggle':vm.pChartTgpsService.tradersGpsMode}">
-    <!-- <div class="traders-gps-flag" ng-show="vm.coreConfigService.TradersGPS.Enabled" ng-class="{'active-toggle':vm.pChartTgpsService.tradersGpsMode}"> -->
+﻿<div class="traders-gps-flag" ng-show="vm.coreConfigService.TradersGPS.Enabled" ng-class="{'active-toggle':vm.pChartTgpsService.tradersGpsMode}">
     <input type="checkbox" ng-model="vm.pChartTgpsService.tradersGpsMode" ng-change="vm.toggleTradersGps()"
            analytics-on="click" analytics-category="Chart" analytics-event="TGPS" analytics-label="TGPSCheckbox" agmc-analytics-timestamp />
     &nbsp;

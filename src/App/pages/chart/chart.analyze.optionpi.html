@@ -1,0 +1,15 @@
+<div class="chart-analyze flex-v">
+    <div class="major-column">
+        <div agmc-custom-scrollbar class="scroll-box column-container">
+            <uib-accordion close-others="false">
+                <div uib-accordion-group is-open="vm.pChartService.isStudyAccordionOpen">
+                    <uib-accordion-heading analytics-on="click" agmc-analytics-timestamp>
+                        STUDIES
+                        <span class="glyphicon accordion-chevron" ng-class="{'glyphicon-chevron-up':$parent.isOpen, 'glyphicon-chevron-down':!$parent.isOpen}"></span>
+                    </uib-accordion-heading>
+                    <agmp-chart-study-filter></agmp-chart-study-filter>
+                </div>
+            </uib-accordion>
+        </div>
+    </div>
+</div>

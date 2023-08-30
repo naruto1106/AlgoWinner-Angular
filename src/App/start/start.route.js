@@ -259,9 +259,9 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                     symbol: symbol
                 }
             })
-            .when("/product/:venue/:symbol", {
+            .when("/optionpi-product/:venue/:symbol", {
                 title: "Product",
-                controller: "p.product.MainController",
+                controller: "p.product.OptionPiController",
                 templateUrl: "/App/pages/product/product.optionpi.html",
                 hasNoFooter: true,
                 headerMode: 3,
@@ -396,18 +396,17 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                     modeParam: nullFunc
                 }
             })
-            .when("/charts/:venue", {
+            .when("/optionpi-charts/:venue/:symbol", {
                 title: "Charts",
                 templateUrl: "/App/pages/chart/chartoptionpi.mainV2.html",
-                controller: "p.chart.MainV2Controller",
+                controller: "p.chart.OptionPiController",
                 hasNoFooter: true,
                 headerMode: 3,
                 resolve: {
                     venue: venue,
-                    symbol: nullFunc,
+                    symbol: symbol,
                     presetChartMode: nullFunc,
-                    modeParam: nullFunc,
-                     
+                    modeParam: nullFunc,                     
                 }
             })
             .when("/charts/:venue/:symbol", {

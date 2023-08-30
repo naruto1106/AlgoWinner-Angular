@@ -2,7 +2,7 @@
     <div class="main-scene">
         <div class="sidebar transition-fast" ng-class="{hidden: !vm.pChartService.isSidebarShown}">
             <div class="inner-sidebar flex-v">
-                <agmp-chart-selected-security class="minor-column" ng-if="vm.filterDescription.primaryProduct"></agmp-chart-selected-security>
+                <agmp-chart-selected-security-optionpi class="minor-column" ng-if="vm.filterDescription.primaryProduct"></agmp-chart-selected-security-optionpi>
                 <ul class="nav nav-tabs nav-justified sidebar-nav minor-column">
                     <li class="nav-item" ng-class="{selected:vm.isSidebarMode('productList')}">
                         <a class="nav-link" ng-click="vm.setSidebarMode('productList')">Product</a>
@@ -12,13 +12,13 @@
                     </li>
                 </ul>
                 <div class="full-panel  major-column" ng-if="vm.isSidebarMode('productList')">
-                    <agmp-chart-security-filter class="column-container">
-                    </agmp-chart-security-filter>
+                    <agmp-chart-security-filter-optionpi class="column-container">
+                    </agmp-chart-security-filter-optionpi>
                 </div>
                 <!--this tab is not an ng-if because the data mart events need to be loaded from URL -->
                 <div class="full-panel dark  major-column" ng-show="vm.isSidebarMode('filter')">
-                    <agmp-chart-analyze class="column-container">
-                    </agmp-chart-analyze>
+                    <agmp-chart-analyze-optionpi class="column-container">
+                    </agmp-chart-analyze-optionpi>
                 </div>
             </div>
         </div>
@@ -133,8 +133,6 @@
                     </div>
                     <agmp-chart-compare class="pull-left"></agmp-chart-compare>
                     <agmp-chart-template-manager class="laptop-screen-above pull-left"></agmp-chart-template-manager>
-                    <!-- <agmp-chart-tgps  ng-if="!vm.Duplicate_hidden()" class="pull-left"></agmp-chart-tgps> -->
-                    <agmp-chart-guppy ng-if="vm.Duplicate_hidden()" class="pull-left"></agmp-chart-guppy>
                     <div class="historical-data-flag pull-left">
                         <input type="checkbox" ng-model="vm.filterDescription.showUnadjusted" ng-change="vm.updateHistoricalData()"
                                analytics-on="click" analytics-category="Chart" analytics-event="UnadjustData" analytics-label="CheckUnadjustData" agmc-analytics-timestamp />
@@ -148,18 +146,12 @@
     </div>
     <div class="header">
         <div class="top-level-1">
-            <agmp-chart-product-list-manager1 class="pull-left"></agmp-chart-product-list-manager1>
+            <agmp-chart-product-list-manager-optionpi class="pull-left"></agmp-chart-product-list-manager-optionpi>
             <agmp-chart-ohlc class="pull-left" ohlc-data="vm.displayedChartSelectedItemInfo.price.data"></agmp-chart-ohlc>
             <agmp-chart-vol class="pull-left" vol-date-data="vm.displayedChartSelectedItemInfo.price.data"></agmp-chart-vol>
             <!-- <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-if="vm.sHeaderService.chartMenuType == 'DropDown'"
                     ng-click="vm.goToPartnerChart()"> -->
-            <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-if="vm.Duplicate_hidden()"
-                ng-click="vm.goToPartnerChart()">
-                <!-- Go to {{vm.sHeaderService.partnerChartName}} -->
-                Go to 1GT/1ET
-            </button>
             <div class="clearfix"></div>
-            <agmp-chart-product-first-dialog ng-if="false"></agmp-chart-product-first-dialog>
         </div>
     </div>
 </section>

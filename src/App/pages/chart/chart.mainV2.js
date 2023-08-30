@@ -57,7 +57,6 @@
                 pChartQuoteFeedService = dep.pChartQuoteFeedService,
                 sChartStudyService = dep.sChartStudyService,
                 $location = dep.$location;
-                Duplicate_location = $location.$$absUrl;
 
             var filterDescription = pChartFilterDescriptionService;
             var isMessageClosed;
@@ -163,14 +162,6 @@
             function updateHistoricalData() {
                 pChartRenderingUtilsService.refreshChart(true);
             }
-            function Duplicate_hidden(){
-                value =Duplicate_location.search('optionpi#/charts') ;
-                if( value > 0){
-                    return false;
-                } else{
-                    return true;
-                }
-            }
 
             tool.initialize(function () {
                 filterDescription.initialize();
@@ -210,10 +201,7 @@
                     pChartPopupService: pChartPopupService,
                     tradeBorderTopColor: pChartPopupService.tradeBorderTopColor,
                     goToPartnerChart: goToPartnerChart,
-                    updateHistoricalData: updateHistoricalData,
-                    Duplicate_hidden: Duplicate_hidden,
-
-
+                    updateHistoricalData: updateHistoricalData
                 });
 
                 dep.sDroidHelperService.isChartPage = true;
@@ -223,8 +211,6 @@
                 toggleSidebar();
 
                 sChartXaxisCustomizer.filterDescription = vm.filterDescription;
-                // console.log(dep.venue,'venue123456');
-                // console.log(dep,'dep123456789');
                 pChartService.initialProductRequest = {
                     venue: dep.venue,
                     symbol: dep.symbol,

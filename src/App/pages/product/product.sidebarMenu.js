@@ -5,8 +5,7 @@
                 coreUserStateService = dep.coreUserStateService;
                 $location = dep.$location,
                 $anchorScroll = dep.$anchorScroll;
-                Duplicate_location = $location.$$absUrl;
-                console.log($location.$$absUrl,'$location');
+
             function gotoSection(sectionId) {
                 $location.hash(sectionId);
                 $anchorScroll();
@@ -28,22 +27,13 @@
             function isWarrants() {
                 return pProductPageService.isWarrants;
             }
-            function Duplicate_hidden(){
-                value =Duplicate_location.search('optionpi#/product/US/') ;
-                if( value > 0){
-                    return false;
-                } else{
-                    return true;
-                }
-            }
 
             tool.setVmProperties({
                 toggleHeader: toggleHeader,
                 gotoSection: gotoSection,
                 showRelatedCompanies: showRelatedCompanies,
                 showErrorMessage: showErrorMessage,
-                isWarrants: isWarrants,
-                Duplicate_hidden: Duplicate_hidden
+                isWarrants: isWarrants
             });
 
             pProductPageService.waitTillProductDetailLoaded().then(function () {

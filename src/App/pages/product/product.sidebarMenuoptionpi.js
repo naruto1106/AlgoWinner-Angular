@@ -1,5 +1,5 @@
 ﻿agmNgModuleWrapper('agmp.product')
-    .defineController('p.product.SidebarMenuController123', ['pProductPageService', 'coreUserStateService', '$anchorScroll', '$location'],
+    .defineController('p.product.SidebarMenuOptionPiController', ['pProductPageService', 'coreUserStateService', '$anchorScroll', '$location'],
         function (vm, dep, tool) {
             var pProductPageService = dep.pProductPageService,
                 coreUserStateService = dep.coreUserStateService;
@@ -48,7 +48,7 @@
     .defineDirectiveForE('agmp-product-sidebar-menuoptionpi', [],
         function () {
             return {
-                controller: "p.product.SidebarMenuController123",
+                controller: "p.product.SidebarMenuOptionPiController",
                 templateUrl: '/App/pages/product/product.sidebarMenuoptionpi.html'
             };
         },

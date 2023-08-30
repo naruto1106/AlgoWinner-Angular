@@ -1,4 +1,4 @@
-﻿agmNgModuleWrapper('agmp.chart')
+agmNgModuleWrapper('agmp.chart')
     .defineController("p.chart.ComplexProductSelectorController",
     ['sWatchlistService', 'pChartStrategyOrderService',
             'sWatchlistUpdateManagerService', 'pChartFilterDescriptionService',
@@ -38,38 +38,6 @@
                         hasAlphabet: true,
                         TradeVenueLoc: 'US',
                         startingAlphabet: "0-9"
-                    },
-                    {
-                        label: "SG Market",
-                        venue: 2,
-                        asset: 1,
-                        hasAlphabet: true,
-                        TradeVenueLoc: 'SG',
-                        startingAlphabet: "A"
-                    },
-                    {
-                        label: "HK Market",
-                        venue: 6,
-                        asset: 1,
-                        hasAlphabet: true,
-                        TradeVenueLoc: 'HK',
-                        startingAlphabet: "A"
-                    },
-                    {
-                        label: "MY Market",
-                        venue: 8,
-                        asset: 1,
-                        hasAlphabet: true,
-                        TradeVenueLoc: 'MY',
-                        startingAlphabet: "A"
-                    },
-                    {
-                        label: "CN Market",
-                        venue: 7,
-                        asset: 1,
-                        hasAlphabet: true,
-                        TradeVenueLoc: 'CHN',
-                        startingAlphabet: "A"
                     },
                     {
                         label: "Global Indices",
@@ -313,7 +281,7 @@
                 
                 getProductInMarketPromise(vm.markets[0]);
                 getProductInMarketPromise(vm.markets[2]);
-                loadProductsFromMarket(vm.markets[1]);
+                loadProductsFromMarket(vm.markets[0]);
 
                 tool.on('onPrimaryProductChanged', function (e, product) {
                     var list = coreDataStorageService.getListInSession('chart-recently_added_stocks');
@@ -324,7 +292,7 @@
                 });
             });
         })
-    .defineDirectiveForE('agmp-chart-complex-product-selector', [],
+    .defineDirectiveForE('agmp-chart-complex-product-selector-optionpi', [],
         function () {
             return {
                 controller: "p.chart.ComplexProductSelectorController",

@@ -1,4 +1,4 @@
-﻿<div class="complex-selector form">
+<div class="complex-selector form">
     <div class="dropdowns">
         <div uib-dropdown>
             <button class="btn btn-block" type="button" uib-dropdown-toggle>
@@ -6,47 +6,13 @@
                 <span class="caret"></span>
             </button>
 
-            <ul uib-dropdown-menu class="dropdown-menu">
+            <ul ng-if="!vm.Duplicate_hidden()" uib-dropdown-menu class="dropdown-menu">
                 <li class="dropdown-header">Markets</li>
                 <li ng-repeat="market in vm.markets">
                     <a ng-click="vm.loadProductsFromMarket(market)">
                         {{::market.label}}
                     </a>
-                </li>
-                <li ng-if="vm.watchlists.length>0"
-                    role="separator" class="divider"></li>
-                <li ng-if="vm.watchlists.length>0"
-                    class="dropdown-header">Watchlists</li>
-                <li ng-repeat="watchlist in vm.watchlists">
-                    <a ng-click="vm.loadProductsFromWatchlist(watchlist)">
-                        {{watchlist.WatchlistName}}
-                    </a>
-                </li>
-                <li ng-if="vm.pChartStrategyOrderService.myStrategies.length>0"
-                    role="separator" class="divider"></li>
-                <li ng-if="vm.pChartStrategyOrderService.myStrategies.length>0"
-                    class="dropdown-header">My Trade Portfolios</li>
-                <li ng-repeat="strategy in vm.pChartStrategyOrderService.myStrategies">
-                    <a ng-click="vm.loadProductsInStrategy(strategy)">
-                        {{strategy.DisplayInfo | strategyName}}
-                    </a>
-                </li>
-                <li ng-if="vm.pChartStrategyOrderService.mySubscriptions.length>0"
-                    role="separator" class="divider"></li>
-                <li ng-if="vm.pChartStrategyOrderService.mySubscriptions.length>0"
-                    class="dropdown-header">Subscribed Strategies</li>
-                <li ng-repeat="strategy in vm.pChartStrategyOrderService.mySubscriptions">
-                    <a ng-click="vm.loadProductsInStrategy(strategy)">
-                        {{strategy.DisplayInfo | strategyName}}
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Recently updated</li>
-                <li>
-                    <a ng-click="vm.loadRecentTempList()">
-                        Recent 10 Stocks
-                    </a>
-                </li>
+                </li>                
             </ul>
         </div>
         <div uib-dropdown ng-if="vm.hasAlphabet">
