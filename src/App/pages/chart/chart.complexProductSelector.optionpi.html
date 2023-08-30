@@ -6,7 +6,7 @@
                 <span class="caret"></span>
             </button>
 
-            <ul ng-if="!vm.Duplicate_hidden()" uib-dropdown-menu class="dropdown-menu">
+            <ul uib-dropdown-menu class="dropdown-menu">
                 <li class="dropdown-header">Markets</li>
                 <li ng-repeat="market in vm.markets">
                     <a ng-click="vm.loadProductsFromMarket(market)">

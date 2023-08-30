@@ -295,7 +295,7 @@ agmNgModuleWrapper('agmp.chart')
         function () {
             return {
                 controller: "p.chart.ComplexProductSelectorOptionPiController",
-                templateUrl: '/App/pages/chart/chart.complexProductSelector.html'
+                templateUrl: '/App/pages/chart/chart.complexProductSelector.optionpi.html'
             };
         }, {
             onProductSet: '&'
