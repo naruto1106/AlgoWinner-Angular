@@ -1,5 +1,5 @@
 agmNgModuleWrapper('agmp.chart')
-    .defineController("p.chart.ComplexProductSelectorController",
+    .defineController("p.chart.ComplexProductSelectorOptionPiController",
     ['sWatchlistService', 'pChartStrategyOrderService',
             'sWatchlistUpdateManagerService', 'pChartFilterDescriptionService',
             'coreSignalRNotificationService', 'sChartService'],
@@ -295,7 +295,7 @@ agmNgModuleWrapper('agmp.chart')
     .defineDirectiveForE('agmp-chart-complex-product-selector-optionpi', [],
         function () {
             return {
-                controller: "p.chart.ComplexProductSelectorController",
+                controller: "p.chart.ComplexProductSelectorOptionPiController",
                 templateUrl: '/App/pages/chart/chart.complexProductSelector.html'
             };
         }, {

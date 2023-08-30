@@ -133,7 +133,7 @@
                     </div>
                     <agmp-chart-compare class="pull-left"></agmp-chart-compare>
                     <agmp-chart-template-manager class="laptop-screen-above pull-left"></agmp-chart-template-manager>
-                    <agmp-chart-tgps  class="pull-left"></agmp-chart-tgps>
+                    <agmp-chart-tgps class="pull-left"></agmp-chart-tgps>
                     <agmp-chart-guppy class="pull-left"></agmp-chart-guppy>
                     <div class="historical-data-flag pull-left">
                         <input type="checkbox" ng-model="vm.filterDescription.showUnadjusted" ng-change="vm.updateHistoricalData()"
@@ -151,11 +151,9 @@
             <agmp-chart-product-list-manager class="pull-left"></agmp-chart-product-list-manager>
             <agmp-chart-ohlc class="pull-left" ohlc-data="vm.displayedChartSelectedItemInfo.price.data"></agmp-chart-ohlc>
             <agmp-chart-vol class="pull-left" vol-date-data="vm.displayedChartSelectedItemInfo.price.data"></agmp-chart-vol>
-            <!-- <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-if="vm.sHeaderService.chartMenuType == 'DropDown'"
-                    ng-click="vm.goToPartnerChart()"> -->
-            <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-click="vm.goToPartnerChart()">
-                <!-- Go to {{vm.sHeaderService.partnerChartName}} -->
-                Go to 1GT/1ET
+            <button class="hollow-blue m-top-5px pull-right m-right-10px" ng-if="vm.sHeaderService.chartMenuType == 'DropDown'"
+                    ng-click="vm.goToPartnerChart()">
+                Go to {{vm.sHeaderService.partnerChartName}}
             </button>
             <div class="clearfix"></div>
             <agmp-chart-product-first-dialog ng-if="false"></agmp-chart-product-first-dialog>
