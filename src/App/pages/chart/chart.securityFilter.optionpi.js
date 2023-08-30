@@ -245,7 +245,7 @@ agmNgModuleWrapper('agmp.chart')
             });
         }
     )
-    .defineDirectiveForE('agmp-chart-selected-security', [],
+    .defineDirectiveForE('agmp-chart-selected-security-optionpi', [],
         function () {
             return {
                 controller: "p.chart.SelectedSecurityOptionPiController",
