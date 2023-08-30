@@ -280,7 +280,6 @@ agmNgModuleWrapper('agmp.chart')
                 });
                 
                 getProductInMarketPromise(vm.markets[0]);
-                getProductInMarketPromise(vm.markets[2]);
                 loadProductsFromMarket(vm.markets[0]);
 
                 tool.on('onPrimaryProductChanged', function (e, product) {

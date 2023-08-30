@@ -383,17 +383,17 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                 controller: "p.strategy.PerformancesController",
                 templateUrl: "/App/pages/strategy/strategy.performances.html"
             })
-            .when("/charts", {
+            .when("/optionpi-charts", {
                 title: "Charts",
-                templateUrl: "/App/pages/chart/chart.mainV2.html",
-                controller: "p.chart.MainV2Controller",
+                templateUrl: "/App/pages/chart/chartoptionpi.mainV2.html",
+                controller: "p.chart.OptionPiController",
                 hasNoFooter: true,
                 headerMode: 3,
                 resolve: {
-                    venue: nullFunc,
-                    symbol: nullFunc,
+                    venue: venue,
+                    symbol: symbol,
                     presetChartMode: nullFunc,
-                    modeParam: nullFunc
+                    modeParam: nullFunc,                     
                 }
             })
             .when("/optionpi-charts/:venue/:symbol", {
@@ -407,6 +407,19 @@ agmNgModuleWrapper("agmp.start.route", dependencies).ngApp.config([
                     symbol: symbol,
                     presetChartMode: nullFunc,
                     modeParam: nullFunc,                     
+                }
+            })
+            .when("/charts", {
+                title: "Charts",
+                templateUrl: "/App/pages/chart/chart.mainV2.html",
+                controller: "p.chart.MainV2Controller",
+                hasNoFooter: true,
+                headerMode: 3,
+                resolve: {
+                    venue: nullFunc,
+                    symbol: nullFunc,
+                    presetChartMode: nullFunc,
+                    modeParam: nullFunc
                 }
             })
             .when("/charts/:venue/:symbol", {
