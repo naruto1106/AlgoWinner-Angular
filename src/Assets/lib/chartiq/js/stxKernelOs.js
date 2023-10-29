@@ -5,7 +5,7 @@
 
 /* Copyright 2014-2019 ChartIQ LLC */
 (function () {
-    var trialExpiration = "2023/10/31";
+    var trialExpiration = "2023/12/31";
     if (trialExpiration != "undefined") {
         var expiration = new Date(trialExpiration);
         var now = new Date();
